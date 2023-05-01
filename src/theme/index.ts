@@ -1,4 +1,5 @@
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react';
+import { checkboxStyle } from './checkbox';
 
 export const theme: Record<string, any> = extendTheme({
   colors: {
@@ -17,5 +18,8 @@ export const theme: Record<string, any> = extendTheme({
   },
   breakpoints: {
     sm: '1080px',
+  },
+  components: {
+    Checkbox: checkboxStyle,
   },
 });
