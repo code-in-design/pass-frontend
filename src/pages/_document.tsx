@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Z-ONE</title>
         <meta name="description" content="체대입시, 체육 진로 원스탑 플랫폼" />
 
         <link rel="manifest" href="/manifest.json"></link>

@@ -1,7 +1,23 @@
 import { Box, Button, Checkbox, Divider, Flex, Text, Image, UnorderedList, ListItem, HStack, Tooltip } from '@chakra-ui/react';
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const SignUp = () => {
+  const [checkList, setCheckList] = useState<string[]>([]);
+  const [next, setNext] = useState<boolean>(false);
+  const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
+    e.target.checked ? setCheckList(['terms', 'age', 'privacy', 'marketing', 'event']) : setCheckList([]);
+  };
+  const check = (e: ChangeEvent<HTMLInputElement>) => {
+    e.target.checked ? setCheckList([...checkList, e.target.name]) : setCheckList(checkList.filter(el => el !== e.target.name));
+  };
+
+  useEffect(() => {
+    if (checkList.includes('age') && checkList.includes('terms') && checkList.includes('privacy')) {
+      setNext(true);
+    } else {
+      setNext(false);
+    }
+  }, [checkList]);
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -23,7 +39,7 @@ const SignUp = () => {
         </Text>
         <Box border="1px solid #e4e6f0" borderRadius="16px" padding="32px 24px">
           <HStack spacing="8px" marginBottom="24px" alignItems="flex-end">
-            <Checkbox fontWeight={500} spacing="4px" size="lg">
+            <Checkbox fontWeight={500} spacing="4px" size="lg" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
               전체 동의
             </Checkbox>
             <Text fontSize="12px" fontWeight="500" lineHeight="16px" letterSpacing="=0.02px" color="#626474">
@@ -34,7 +50,7 @@ const SignUp = () => {
           <UnorderedList listStyleType="none" marginLeft="0" marginTop="24px" spacing="16px">
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md">
+                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="age" isChecked={checkList.includes('age') ? true : false}>
                   만 14세 이상입니다.
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -44,7 +60,7 @@ const SignUp = () => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md">
+                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="terms" isChecked={checkList.includes('terms') ? true : false}>
                   이용약관 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -55,7 +71,7 @@ const SignUp = () => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" fontSize="14px">
+                <Checkbox fontWeight={500} spacing="4px" size="md" fontSize="14px" onChange={check} name="privacy" isChecked={checkList.includes('privacy') ? true : false}>
                   개인정보 수집 및 이용 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -66,7 +82,7 @@ const SignUp = () => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md">
+                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="marketing" isChecked={checkList.includes('marketing') ? true : false}>
                   개인정보 마케팅 활용 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#9395A6" marginLeft="8px">
@@ -77,7 +93,7 @@ const SignUp = () => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md">
+                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="event" isChecked={checkList.includes('event') ? true : false}>
                   이벤트 알림 메일 및 SMS등 수신 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#9395A6" marginLeft="8px">
@@ -87,7 +103,7 @@ const SignUp = () => {
             </ListItem>
           </UnorderedList>
         </Box>
-        <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto">
+        <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next}>
           다음단계로
         </Button>
       </Box>
