@@ -1,7 +1,10 @@
 import { Box, Button, Checkbox, Divider, Flex, Text, Image, UnorderedList, ListItem, HStack, Tooltip } from '@chakra-ui/react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-
-const SignUp = () => {
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+const SignUp: React.FC<Props> = props => {
   const [checkList, setCheckList] = useState<string[]>([]);
   const [next, setNext] = useState<boolean>(false);
   const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +13,6 @@ const SignUp = () => {
   const check = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.checked ? setCheckList([...checkList, e.target.name]) : setCheckList(checkList.filter(el => el !== e.target.name));
   };
-
   useEffect(() => {
     if (checkList.includes('age') && checkList.includes('terms') && checkList.includes('privacy')) {
       setNext(true);
@@ -103,7 +105,7 @@ const SignUp = () => {
             </ListItem>
           </UnorderedList>
         </Box>
-        <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next}>
+        <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next} onClick={() => props.setStep(2)}>
           다음단계로
         </Button>
       </Box>

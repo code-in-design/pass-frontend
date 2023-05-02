@@ -12,7 +12,10 @@ const grade = [
   { value: '3', label: '고3' },
   { value: '4', label: '재수 이상' },
 ];
-
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
 const StyledSelect = styled(Select)`
   &.react-select {
     &-container {
@@ -74,7 +77,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const SignUp5 = () => {
+const SignUp5: React.FC<Props> = props => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -117,10 +120,10 @@ const SignUp5 = () => {
           <Image src="/images/icons/lock.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(4)}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(6)}>
             다음
           </Button>
         </Flex>

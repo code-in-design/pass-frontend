@@ -1,6 +1,9 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-
-const SignUp6 = () => {
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+const SignUp6: React.FC<Props> = props => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -34,11 +37,11 @@ const SignUp6 = () => {
           </Text>
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(5)}>
             이전
           </Button>
           <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
-            다음
+            완료
           </Button>
         </Flex>
       </Box>

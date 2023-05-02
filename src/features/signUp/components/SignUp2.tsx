@@ -1,9 +1,11 @@
 import { Box, Button, Flex, Text, Image, Tooltip } from '@chakra-ui/react';
 import { useState } from 'react';
-
-const SignUp2 = () => {
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+const SignUp2: React.FC<Props> = props => {
   const [active, setActive] = useState([false, false, false]);
-
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -100,10 +102,10 @@ const SignUp2 = () => {
           현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(1)}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(3)}>
             다음
           </Button>
         </Flex>
