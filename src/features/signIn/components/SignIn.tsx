@@ -26,7 +26,7 @@ const SignIn = () => {
     <ChakraProvider theme={theme}>
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px">
-          <Text>LOGO</Text>
+          <Image src="/images/logos/logo.svg" alt="Z-ONE" w="150px" h="60px" margin="0 auto" />
           <VStack margin="80px 0 24px">
             <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#ffe812" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
               <Image src="/images/icons/kakaoIcon.svg" alt="kakaoIcon" marginRight="10px" />

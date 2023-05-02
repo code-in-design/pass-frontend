@@ -24,20 +24,20 @@ const SignUp6 = () => {
           추천코드 입력
         </Text>
         <Box position="relative">
+          <Input variant="base" placeholder="추천코드를 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} />
           <Image src="/images/icons/enterArrow.svg" alt="person" position="absolute" top="18px" left="24px" />
-          <Input placeholder="추천코드를 입력해주세요" borderRadius="16px" border="1px solid #e4e6f0" padding="18px 0 18px 56px" height="56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
         </Box>
-        <Box display="flex" alignItems="center" marginTop="16px">
+        <Box display="flex" alignItems="flex-end" marginTop="16px">
           <Image src="/images/icons/tips.svg" alt="tip" marginRight="4px" />
           <Text fontSize="16px" lineHeight="16px" fontWeight={600} color="#60cbde">
             추천코드는 회원가입 이후에도 입력할 수 있어요!
           </Text>
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             이전
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             다음
           </Button>
         </Flex>

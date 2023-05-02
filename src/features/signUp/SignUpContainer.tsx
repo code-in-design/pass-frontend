@@ -8,12 +8,12 @@ import SignUp6 from './components/SignUp6';
 const SignUpContainer = () => {
   return (
     <>
-      <SignUp />
-      <SignUp2 />
-      <SignUp3 />
-      <SignUp4 />
+      {/* <SignUp /> */}
+      {/* <SignUp2 /> */}
+      {/* <SignUp3 /> */}
+      {/* <SignUp4 /> */}
       <SignUp5 />
-      <SignUp6 />
+      {/* <SignUp6 /> */}
     </>
   );
 };

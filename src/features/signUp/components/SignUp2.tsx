@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Image, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Tooltip, background } from '@chakra-ui/react';
 
 const SignUp2 = () => {
   return (
@@ -33,14 +33,14 @@ const SignUp2 = () => {
           학생을 관리하는 교육자입니다
         </Box>
         <Box borderRadius="16px" padding="12px 16px" fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" backgroundColor="rgba(96, 200, 222, 0.1)" display="flex" justifyContent="center" alignItems="center">
-          <Image src="/images/icons/info.svg" alt="info" marginRight="10px" />
+          <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="16.67px" h="16.67px" />
           현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             이전
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             다음
           </Button>
         </Flex>

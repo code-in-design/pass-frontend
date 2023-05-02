@@ -38,14 +38,14 @@ const SignUp = () => {
           약관동의
         </Text>
         <Box border="1px solid #e4e6f0" borderRadius="16px" padding="32px 24px">
-          <HStack spacing="8px" marginBottom="24px" alignItems="flex-end">
-            <Checkbox fontWeight={500} spacing="4px" size="lg" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
+          <Flex marginBottom="24px" alignItems="center">
+            <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
               전체 동의
             </Checkbox>
-            <Text fontSize="12px" fontWeight="500" lineHeight="16px" letterSpacing="=0.02px" color="#626474">
+            <Text fontSize="12px" fontWeight="500" lineHeight="16px" letterSpacing="=0.02px" color="#626474" marginLeft="8px">
               선택 항목 포함
             </Text>
-          </HStack>
+          </Flex>
           <Divider color="#e4e6f0" opacity="1" />
           <UnorderedList listStyleType="none" marginLeft="0" marginTop="24px" spacing="16px">
             <ListItem>
@@ -103,7 +103,7 @@ const SignUp = () => {
             </ListItem>
           </UnorderedList>
         </Box>
-        <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next}>
+        <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next}>
           다음단계로
         </Button>
       </Box>

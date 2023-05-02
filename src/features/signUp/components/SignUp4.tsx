@@ -24,24 +24,24 @@ const SignUp4 = () => {
           이메일 주소
         </Text>
         <Box position="relative">
+          <Input variant="base" placeholder="example@naver.com" padding="18px 0 18px 56px" height="56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
           <Image src="/images/icons/email.svg" alt="person" position="absolute" top="18px" left="24px" />
-          <Input placeholder="example@naver.com" borderRadius="16px" border="1px solid #e4e6f0" padding="18px 0 18px 56px" height="56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
         </Box>
         <Text margin="24px 0 12px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#626474">
           거주 지역
         </Text>
         <Flex gap="12px" marginBottom="12px" position="relative">
+          <Input variant="base" disabled placeholder="지역을 선택해주세요" borderRadius="16px" width="306px" height="56px" padding="18px 0 18px 56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
           <Image src="/images/icons/cottage.svg" alt="call" position="absolute" top="18px" left="24px" />
-          <Input disabled placeholder="지역을 선택해주세요" borderRadius="16px" width="306px" height="56px" padding="18px 0 18px 56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
-          <Button borderRadius="16px" bgColor="#626474" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700}>
+          <Button colorScheme="darkGray" height="56px" padding="18px 28px" fontSize="16px" lineHeight="20px" fontWeight={700}>
             지역 선택
           </Button>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             이전
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             다음
           </Button>
         </Flex>

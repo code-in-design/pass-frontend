@@ -1,4 +1,77 @@
-import { Box, Button, Flex, Text, Image, Tooltip, Input, Select } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import Select from 'react-select';
+import styled from '@emotion/styled';
+const gender = [
+  { value: 'male', label: '남성' },
+  { value: 'female', label: '여성' },
+];
+const grade = [
+  { value: '1', label: '고1' },
+  { value: '2', label: '고2' },
+  { value: '3', label: '고3' },
+  { value: '4', label: '재수 이상' },
+];
+
+const StyledSelect = styled(Select)`
+  &.react-select {
+    &-container {
+      font-size: 16px;
+      font-weight: 600;
+      color: #626474;
+      .react-select__control {
+        height: 56px;
+        border-radius: 16px;
+        color: #e4e6f0;
+        border: 1px solid #e4e6f0;
+        box-shadow: 0 0 0 1px #e4e6f0;
+        .react-select__value-container {
+          padding: 0;
+          margin: 0;
+          padding-left: 24px;
+        }
+      }
+      .react-select__control--menu-is-open {
+        border-radius: 16px 16px 0 0;
+      }
+
+      .react-select__indicators {
+        padding-right: 16px;
+        .react-select__indicator-separator {
+          display: none;
+        }
+      }
+      .react-select__menu {
+        border-radius: 0 0 16px 16px;
+        margin: 0;
+        &-list {
+          padding: 0;
+          .react-select__option {
+            padding: 18px 24px;
+            height: 56px;
+            &--is-selected {
+              background-color: #f8f8fc;
+              color: #353644;
+              font-weight: 700;
+            }
+            &--is-focused {
+              /* background-color: #f8f8fc; */
+              /* color: #353644; */
+              /* font-weight: 700; */
+            }
+            &:last-child {
+              border-radius: 0 0 16px 16px;
+            }
+          }
+        }
+      }
+    }
+
+    &__value-container {
+      color: #353644;
+      font-weight: 700;
+    }
+  }
+`;
 
 const SignUp5 = () => {
   return (
@@ -25,35 +98,28 @@ const SignUp5 = () => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               성별
             </Text>
-            <Select placeholder="성별 선택" border="1px solid #e4e6f0" borderRadius="16px" color="#9395A6" height="56px" fontSize="16px" fontWeight={600} lineHeight="20px">
-              <option>남성</option>
-              <option>여성</option>
-            </Select>
+            <StyledSelect className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" />
           </Box>
           <Box width="100%">
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            <Select placeholder="학년 선택" border="1px solid #e4e6f0" borderRadius="16px" color="#9395A6" height="56px" fontSize="16px" fontWeight={600} lineHeight="20px">
-              <option>고1</option>
-              <option>고2</option>
-              <option>고3</option>
-              <option>재수 이상</option>
-            </Select>
+            {/* <Select options={grade} placeholder="학년 선택" styles={customStyles} /> */}
+            <StyledSelect className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" />
           </Box>
         </Flex>
         <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474" marginTop="24px">
           비밀번호 입력
         </Text>
         <Box position="relative">
+          <Input variant="base" type="password" placeholder="8자 이상으로 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} />
           <Image src="/images/icons/lock.svg" alt="person" position="absolute" top="18px" left="24px" />
-          <Input type="password" placeholder="8자 이상으로 입력해주세요" borderRadius="16px" border="1px solid #e4e6f0" padding="18px 0 18px 56px" height="56px" color="#9395A6" fontSize="16px" lineHeight="20px" fontWeight={700} />
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             이전
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
             다음
           </Button>
         </Flex>
