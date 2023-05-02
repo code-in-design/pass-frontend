@@ -5,6 +5,7 @@ const gender = [
   { value: 'male', label: '남성' },
   { value: 'female', label: '여성' },
 ];
+
 const grade = [
   { value: '1', label: '고1' },
   { value: '2', label: '고2' },
