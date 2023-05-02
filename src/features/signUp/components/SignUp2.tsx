@@ -1,6 +1,9 @@
-import { Box, Button, Flex, Text, Image, Tooltip, background } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Tooltip } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const SignUp2 = () => {
+  const [active, setActive] = useState([false, false, false]);
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -20,18 +23,78 @@ const SignUp2 = () => {
         <Text fontSize="20px" lineHeight="24px" fontWeight={600} letterSpacing="-0.02px" marginBottom="24px" color="#353644">
           귀하의 신분을 선택해주세요
         </Text>
-        <Box border="1px solid #e4e6f0" borderRadius="16px" padding="12px 16px" marginBottom="12px" fontSize="20px" fontWeight={600} lineHeight="20px" color="#626474" display="flex" justifyContent="center" alignItems="center">
+        <Button
+          border="1px solid #e4e6f0"
+          borderRadius="16px"
+          padding="12px 16px"
+          height="72px"
+          marginBottom="12px"
+          fontSize="20px"
+          fontWeight={600}
+          lineHeight="20px"
+          color="#626474"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          bgColor="#fff"
+          _hover={{ bgColor: '#F8F8FC' }}
+          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+          isActive={active[0]}
+          onClick={() => {
+            setActive([true, false, false]);
+          }}
+        >
           <Image src="/images/icons/student.svg" alt="student" marginRight="12px" />
           학생입니다
-        </Box>
-        <Box border="1px solid #e4e6f0" borderRadius="16px" padding="12px 16px" marginBottom="12px" fontSize="20px" fontWeight={600} lineHeight="20px" color="#626474" display="flex" justifyContent="center" alignItems="center">
+        </Button>
+        <Button
+          border="1px solid #e4e6f0"
+          borderRadius="16px"
+          height="72px"
+          padding="12px 16px"
+          marginBottom="12px"
+          fontSize="20px"
+          fontWeight={600}
+          lineHeight="20px"
+          color="#626474"
+          bgColor="#fff"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          _hover={{ bgColor: '#F8F8FC' }}
+          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+          isActive={active[1]}
+          onClick={() => {
+            setActive([false, true, false]);
+          }}
+        >
           <Image src="/images/icons/parent.svg" alt="Parent" marginRight="12px" />
           학부모입니다
-        </Box>
-        <Box border="1px solid #e4e6f0" borderRadius="16px" padding="12px 16px" marginBottom="12px" fontSize="20px" fontWeight={600} lineHeight="20px" color="#626474" display="flex" justifyContent="center" alignItems="center">
+        </Button>
+        <Button
+          border="1px solid #e4e6f0"
+          borderRadius="16px"
+          padding="12px 16px"
+          height="72px"
+          marginBottom="12px"
+          fontSize="20px"
+          fontWeight={600}
+          lineHeight="20px"
+          color="#626474"
+          bgColor="#fff"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          _hover={{ bgColor: '#F8F8FC' }}
+          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+          isActive={active[2]}
+          onClick={() => {
+            setActive([false, false, true]);
+          }}
+        >
           <Image src="/images/icons/teacher.svg" alt="Teacher" marginRight="12px" />
           학생을 관리하는 교육자입니다
-        </Box>
+        </Button>
         <Box borderRadius="16px" padding="12px 16px" fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" backgroundColor="rgba(96, 200, 222, 0.1)" display="flex" justifyContent="center" alignItems="center">
           <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="16.67px" h="16.67px" />
           현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
