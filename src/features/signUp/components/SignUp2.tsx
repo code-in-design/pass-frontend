@@ -95,12 +95,19 @@ const SignUp2: React.FC<Props> = props => {
           }}
         >
           <Image src="/images/icons/teacher.svg" alt="Teacher" marginRight="12px" />
-          학생을 관리하는 교육자입니다
+          <Box textAlign="left">
+            <Text fontSize="12px" fontWeight={600} color="#9395A6">
+              학생을 관리하는
+            </Text>
+            교육자입니다
+          </Box>
         </Button>
-        <Box borderRadius="16px" padding="12px 16px" fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" backgroundColor="rgba(96, 200, 222, 0.1)" display="flex" justifyContent="center" alignItems="center">
+        <Flex borderRadius="16px" padding="12px 17px" backgroundColor="rgba(96, 200, 222, 0.1)" justifyContent="center" alignItems="center" w="100%">
           <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="16.67px" h="16.67px" />
-          현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
-        </Box>
+          <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" letterSpacing="-0.02px">
+            현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
+          </Text>
+        </Flex>
         <Flex gap="12px" marginTop="auto">
           <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(1)}>
             이전
