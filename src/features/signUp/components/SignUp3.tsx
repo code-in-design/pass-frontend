@@ -1,8 +1,9 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-type Props = {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-};
+
+interface Props {
+  onClick: (value: number) => void;
+}
+
 const SignUp3: React.FC<Props> = props => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -48,11 +49,11 @@ const SignUp3: React.FC<Props> = props => {
           </Text>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(2)}>
-            이전
+          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onClick(-1)}>
+            이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(4)}>
-            다음
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onClick(+1)}>
+            다음
           </Button>
         </Flex>
       </Box>

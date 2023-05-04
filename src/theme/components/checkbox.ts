@@ -26,6 +26,17 @@ const sizes = {
       color: '#626474',
     }),
   }),
+  mdGray: definePartsStyle({
+    control: defineStyle({
+      boxSize: '14.17px',
+      borderColor: '#9395A6',
+      margin: '2.5px',
+    }),
+    label: defineStyle({
+      fontSize: '16px',
+      color: '#9395A6',
+    }),
+  }),
 };
 
 export const checkboxStyle = defineMultiStyleConfig({ sizes });

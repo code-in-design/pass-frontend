@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import Select from 'react-select';
 import styled from '@emotion/styled';
+
 const gender = [
   { value: 'male', label: '남성' },
   { value: 'female', label: '여성' },
@@ -12,10 +13,11 @@ const grade = [
   { value: '3', label: '고3' },
   { value: '4', label: '재수 이상' },
 ];
-type Props = {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-};
+
+interface Props {
+  onClick: (value: number) => void;
+}
+
 const StyledSelect = styled(Select)`
   &.react-select {
     &-container {
@@ -108,7 +110,6 @@ const SignUp5: React.FC<Props> = props => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            {/* <Select options={grade} placeholder="학년 선택" styles={customStyles} /> */}
             <StyledSelect className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" />
           </Box>
         </Flex>
@@ -120,11 +121,11 @@ const SignUp5: React.FC<Props> = props => {
           <Image src="/images/icons/lock.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(4)}>
-            이전
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onClick(-1)}>
+            이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.setStep(6)}>
-            다음
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onClick(+1)}>
+            다음
           </Button>
         </Flex>
       </Box>

@@ -1,10 +1,13 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
+  const title = 'Z-ONE';
+  const description = '체대입시, 체육 진로 원스탑 플랫폼';
+  const url = 'https://z-one.kr';
   return (
     <Html lang="en">
       <Head>
-        <meta name="description" content="체대입시, 체육 진로 원스탑 플랫폼" />
+        <meta name="description" content={description} />
 
         <link rel="manifest" href="/manifest.json"></link>
 
@@ -35,9 +38,9 @@ export default function Document() {
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Z-ONE" />
-        <meta property="og:url" content="https://z-one.kr" />
-        <meta property="og:description" content="체대입시, 체육 진로 원스탑 플랫폼" />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={url} />
+        <meta property="og:description" content={description} />
         {/* <meta property="og:image" content="" key="ogimage" /> */}
       </Head>
       <body>
