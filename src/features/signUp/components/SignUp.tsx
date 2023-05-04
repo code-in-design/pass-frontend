@@ -1,13 +1,15 @@
-import { Box, Button, Checkbox, Divider, Flex, Text, Image, UnorderedList, ListItem, HStack, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Divider, Flex, Text, Image, UnorderedList, ListItem, HStack, Tooltip, FormControl } from '@chakra-ui/react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Props {
-  onClick: (value: number) => void;
+  onNextButtonClick: () => void;
 }
 
 const SignUp: React.FC<Props> = props => {
   const [checkList, setCheckList] = useState<string[]>([]);
   const [next, setNext] = useState<boolean>(false);
+  const { register, handleSubmit } = useForm();
 
   const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.checked ? setCheckList(['terms', 'age', 'privacy', 'marketing', 'event']) : setCheckList([]);
@@ -44,9 +46,12 @@ const SignUp: React.FC<Props> = props => {
         <Text fontSize="20px" lineHeight="24px" fontWeight={600} letterSpacing="-0.02px" marginBottom="24px" color="#353644">
           약관동의
         </Text>
-        <Box border="1px solid #e4e6f0" borderRadius="16px" padding="32px 24px">
+        <FormControl>
           <Flex marginBottom="24px" alignItems="center">
-            <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
+            {/* <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
+              전체 동의
+            </Checkbox> */}
+            <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all">
               전체 동의
             </Checkbox>
             <Text fontSize="12px" fontWeight="500" lineHeight="16px" letterSpacing="=0.02px" color="#626474" marginLeft="8px">
@@ -57,7 +62,18 @@ const SignUp: React.FC<Props> = props => {
           <UnorderedList listStyleType="none" marginLeft="0" marginTop="24px" spacing="16px">
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="age" isChecked={checkList.includes('age') ? true : false}>
+                <Checkbox
+                  fontWeight={500}
+                  spacing="4px"
+                  size="md"
+                  // onChange={check}
+                  // name="age"
+                  // isChecked={checkList.includes('age') ? true : false}
+                  {...register('age', {
+                    required: true,
+                    maxLength: 20,
+                  })}
+                >
                   만 14세 이상입니다.
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -67,7 +83,18 @@ const SignUp: React.FC<Props> = props => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="terms" isChecked={checkList.includes('terms') ? true : false}>
+                <Checkbox
+                  fontWeight={500}
+                  spacing="4px"
+                  size="md"
+                  // onChange={check}
+                  // name="terms"
+                  // isChecked={checkList.includes('terms') ? true : false}
+                  {...register('terms', {
+                    required: true,
+                    maxLength: 20,
+                  })}
+                >
                   이용약관 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -78,7 +105,19 @@ const SignUp: React.FC<Props> = props => {
             </ListItem>
             <ListItem>
               <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" fontSize="14px" onChange={check} name="privacy" isChecked={checkList.includes('privacy') ? true : false}>
+                <Checkbox
+                  fontWeight={500}
+                  spacing="4px"
+                  size="md"
+                  fontSize="14px"
+                  // onChange={check}
+                  // name="privacy"
+                  // isChecked={checkList.includes('privacy') ? true : false}
+                  {...register('privacy', {
+                    required: true,
+                    maxLength: 20,
+                  })}
+                >
                   개인정보 수집 및 이용 동의
                 </Checkbox>
                 <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
@@ -109,8 +148,22 @@ const SignUp: React.FC<Props> = props => {
               </Flex>
             </ListItem>
           </UnorderedList>
-        </Box>
-        <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="auto" isActive={next} onClick={() => props.onClick(1)}>
+        </FormControl>
+        <Button
+          colorScheme="blue"
+          w="100%"
+          h="56px"
+          borderRadius="16px"
+          fontSize="16px"
+          bgColor="#6B77F8"
+          color="#fff"
+          fontWeight={700}
+          lineHeight="20px"
+          letterSpacing="-0.02px"
+          marginTop="auto"
+          isActive={next}
+          onClick={() => props.onNextButtonClick()}
+        >
           다음단계로
         </Button>
       </Box>
