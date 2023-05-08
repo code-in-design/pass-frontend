@@ -8,11 +8,12 @@ interface LayoutProps extends HTMLProps<HTMLElement> {}
 
 const Layout = (props: LayoutProps) => {
   return (
-    <Flex direction="column" flex="1">
-      {/* <Header /> */}
-      {/* <Navbar /> */}
-      {props.children}
-      {/* <Footer /> */}
+    <Flex>
+      <Navbar />
+      <div>
+        <Header />
+        {props.children}
+      </div>
     </Flex>
   );
 };
