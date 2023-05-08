@@ -1,31 +1,120 @@
-import { Box, Button, Checkbox, Divider, Flex, Text, Image, UnorderedList, ListItem, HStack, Tooltip, FormControl } from '@chakra-ui/react';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Box, Flex, Text, Tooltip } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import styled from '@emotion/styled';
 
 interface Props {
   onNextButtonClick: () => void;
 }
 
+const FormWrapper = styled.form`
+  width: 432px;
+`;
+const Form = styled.div`
+  height: 296px;
+  border-radius: 16px;
+  padding: 32px 24px;
+  border: 1px solid #e4e6f0;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+const HeaderCheckbox = styled.input`
+  width: 15px;
+  height: 15px;
+  color: #353644;
+  border: 1px solid #353644;
+  padding: 2.5px;
+  margin-right: 4px;
+  margin-bottom: 2.5px;
+`;
+const HeaderLabel = styled.label`
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #353644;
+  margin-right: 8px;
+`;
+const HeaderOption = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #626474;
+`;
+const Divider = styled.hr`
+  color: #e4e6f0;
+  margin: 24px 0;
+`;
+const Body = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+const BodyCheckbox = styled.input`
+  width: 14.17px;
+  height: 14.17px;
+  color: #626474;
+  border: 1px solid #626474;
+  padding: 2.5px;
+  margin-right: 4px;
+  margin-bottom: 2.5px;
+`;
+const BodyLabel = styled.label`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #626474;
+  margin-right: 8px;
+`;
+const BodyOption = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: ${props => props.color || '#9395A6'};
+`;
+const BodyArrowRight = styled.img`
+  padding: 5.35px 7.02px;
+  margin-left: auto;
+`;
+const NextButton = styled.button`
+  margin-top: 110px;
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  padding: 16px 10px;
+  background-color: #6b77f8;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+`;
+
 const SignUp: React.FC<Props> = props => {
-  const [checkList, setCheckList] = useState<string[]>([]);
-  const [next, setNext] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
-  const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.checked ? setCheckList(['terms', 'age', 'privacy', 'marketing', 'event']) : setCheckList([]);
-  };
+  // useEffect(() => {
+  //   const subscription = watch(value => {
+  //     console.log(value);
+  //   });
+  //   return () => subscription.unsubscribe();
+  // }, [watch]);
 
-  const check = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.checked ? setCheckList([...checkList, e.target.name]) : setCheckList(checkList.filter(el => el !== e.target.name));
-  };
+  const checkbox = useWatch({
+    control,
+    name: ['age', 'terms', 'privacy', 'marketing', 'event'],
+  });
+  const selectAll = useWatch({
+    control,
+    name: 'selectAll',
+  });
+  console.log(selectAll, checkbox);
 
-  useEffect(() => {
-    if (checkList.includes('age') && checkList.includes('terms') && checkList.includes('privacy')) {
-      setNext(true);
-    } else {
-      setNext(false);
-    }
-  }, [checkList]);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -46,126 +135,50 @@ const SignUp: React.FC<Props> = props => {
         <Text fontSize="20px" lineHeight="24px" fontWeight={600} letterSpacing="-0.02px" marginBottom="24px" color="#353644">
           약관동의
         </Text>
-        <FormControl>
-          <Flex marginBottom="24px" alignItems="center">
-            {/* <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all" onChange={checkAll} isChecked={checkList.length === 5 ? true : false}>
-              전체 동의
-            </Checkbox> */}
-            <Checkbox fontWeight={700} spacing="4px" size="lg" lineHeight="20px" name="all">
-              전체 동의
-            </Checkbox>
-            <Text fontSize="12px" fontWeight="500" lineHeight="16px" letterSpacing="=0.02px" color="#626474" marginLeft="8px">
-              선택 항목 포함
-            </Text>
-          </Flex>
-          <Divider color="#e4e6f0" opacity="1" />
-          <UnorderedList listStyleType="none" marginLeft="0" marginTop="24px" spacing="16px">
-            <ListItem>
-              <Flex alignItems="flex-end">
-                <Checkbox
-                  fontWeight={500}
-                  spacing="4px"
-                  size="md"
-                  // onChange={check}
-                  // name="age"
-                  // isChecked={checkList.includes('age') ? true : false}
-                  {...register('age', {
-                    required: true,
-                    maxLength: 20,
-                  })}
-                >
-                  만 14세 이상입니다.
-                </Checkbox>
-                <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
-                  (필수)
-                </Text>
-              </Flex>
-            </ListItem>
-            <ListItem>
-              <Flex alignItems="flex-end">
-                <Checkbox
-                  fontWeight={500}
-                  spacing="4px"
-                  size="md"
-                  // onChange={check}
-                  // name="terms"
-                  // isChecked={checkList.includes('terms') ? true : false}
-                  {...register('terms', {
-                    required: true,
-                    maxLength: 20,
-                  })}
-                >
-                  이용약관 동의
-                </Checkbox>
-                <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
-                  (필수)
-                </Text>
-                <Image src="/images/icons/arrowRight.svg" alt="more" padding="5.35px 7.52px" marginLeft="auto" />
-              </Flex>
-            </ListItem>
-            <ListItem>
-              <Flex alignItems="flex-end">
-                <Checkbox
-                  fontWeight={500}
-                  spacing="4px"
-                  size="md"
-                  fontSize="14px"
-                  // onChange={check}
-                  // name="privacy"
-                  // isChecked={checkList.includes('privacy') ? true : false}
-                  {...register('privacy', {
-                    required: true,
-                    maxLength: 20,
-                  })}
-                >
-                  개인정보 수집 및 이용 동의
-                </Checkbox>
-                <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#6b77f8" marginLeft="8px">
-                  (필수)
-                </Text>
-                <Image src="/images/icons/arrowRight.svg" alt="more" padding="5.35px 7.52px" marginLeft="auto" />
-              </Flex>
-            </ListItem>
-            <ListItem>
-              <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="marketing" isChecked={checkList.includes('marketing') ? true : false}>
-                  개인정보 마케팅 활용 동의
-                </Checkbox>
-                <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#9395A6" marginLeft="8px">
-                  (선택)
-                </Text>
-                <Image src="/images/icons/arrowRight.svg" alt="more" padding="5.35px 7.52px" marginLeft="auto" />
-              </Flex>
-            </ListItem>
-            <ListItem>
-              <Flex alignItems="flex-end">
-                <Checkbox fontWeight={500} spacing="4px" size="md" onChange={check} name="event" isChecked={checkList.includes('event') ? true : false}>
-                  이벤트 알림 메일 및 SMS등 수신 동의
-                </Checkbox>
-                <Text fontSize="12px" fontWeight={500} lineHeight="16px" color="#9395A6" marginLeft="8px">
-                  (선택)
-                </Text>
-              </Flex>
-            </ListItem>
-          </UnorderedList>
-        </FormControl>
-        <Button
-          colorScheme="blue"
-          w="100%"
-          h="56px"
-          borderRadius="16px"
-          fontSize="16px"
-          bgColor="#6B77F8"
-          color="#fff"
-          fontWeight={700}
-          lineHeight="20px"
-          letterSpacing="-0.02px"
-          marginTop="auto"
-          isActive={next}
-          onClick={() => props.onNextButtonClick()}
-        >
-          다음단계로
-        </Button>
+        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+          <Form>
+            <Header>
+              <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll')} />
+              <HeaderLabel htmlFor="selectAll">전체 동의</HeaderLabel>
+              <HeaderOption>선택 항목 포함</HeaderOption>
+            </Header>
+            <Divider />
+            <Body>
+              <BodyCheckbox type="checkbox" id="age" {...register('age', { required: true })} checked={selectAll} />
+              <BodyLabel htmlFor="age">만 14세 이상입니다.</BodyLabel>
+              <BodyOption color="#6B77F8">(필수)</BodyOption>
+            </Body>
+            <Body>
+              <BodyCheckbox type="checkbox" {...register('terms', { required: true })} id="terms" checked={selectAll} />
+              <BodyLabel htmlFor="terms">이용약관 동의</BodyLabel>
+              <BodyOption color="#6B77F8">(필수)</BodyOption>
+              <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" />
+            </Body>
+            <Body>
+              <BodyCheckbox type="checkbox" {...register('privacy', { required: true })} id="privacy" checked={selectAll} />
+              <BodyLabel htmlFor="privacy">개인정보 수집 및 이용 동의</BodyLabel>
+              <BodyOption color="#6B77F8">(필수)</BodyOption>
+              <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" />
+            </Body>
+            <Body>
+              <BodyCheckbox type="checkbox" {...register('marketing')} id="marketing" checked={selectAll} />
+              <BodyLabel htmlFor="marketing">개인정보 마케팅 활용 동의</BodyLabel>
+              <BodyOption>(선택)</BodyOption>
+              <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" />
+            </Body>
+            <Body>
+              <BodyCheckbox type="checkbox" {...register('event')} id="event" checked={selectAll} />
+              <BodyLabel htmlFor="event">이벤트 알림 메일 및 SMS등 수신 동의</BodyLabel>
+              <BodyOption>(선택)</BodyOption>
+            </Body>
+          </Form>
+          <NextButton
+            type="submit"
+            // onClick={() => props.onNextButtonClick()}
+          >
+            다음단계로
+          </NextButton>
+        </FormWrapper>
       </Box>
     </Box>
   );
