@@ -8,6 +8,7 @@
     "react/display-name": 0,
     "no-empty-pattern": 0,
     "react/prop-types": 0,
-    "react/no-children-prop": 0
+    "react/no-children-prop": 0,
+    "react-hooks/exhaustive-deps": 0
   }
 }
