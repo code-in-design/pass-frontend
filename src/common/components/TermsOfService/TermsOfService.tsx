@@ -4,21 +4,11 @@ import styled from '@emotion/styled';
 
 const TermsOfService: React.FC = props => {
   const { register, handleSubmit, control, setValue } = useForm();
+  const checkboxItems = ['age', 'terms', 'privacy', 'marketing', 'event'];
 
-  // useEffect(() => {
-  //   const subscription = watch(value => {
-  //     console.log(value);
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
   const checkbox = useWatch({
     control,
-    name: ['age', 'terms', 'privacy', 'marketing', 'event'],
-  });
-
-  const selectAll = useWatch({
-    control,
-    name: 'selectAll',
+    name: checkboxItems,
   });
 
   useEffect(() => {
@@ -26,33 +16,20 @@ const TermsOfService: React.FC = props => {
     setValue('selectAll', length === 5);
   }, [checkbox]);
 
-  useEffect(() => {
-    // selectAll가 true이면
-    if (selectAll) {
-      // TODO: 전체를 체크 하면 됨 (setValue활용)
-      setValue('age', true);
-      setValue('terms', true);
-      setValue('privacy', true);
-      setValue('marketing', true);
-      setValue('event', true);
-    } else {
-      // selectAll가 false이면
-      // TODO: 전체를 체크해제 하면 됨 (setValue활용)
-      setValue('age', false);
-      setValue('terms', false);
-      setValue('privacy', false);
-      setValue('marketing', false);
-      setValue('event', false);
-    }
-  }, [selectAll]);
-
   const onSubmit = (data: any) => console.log(data);
 
+  const selectAllCheckbox = e => {
+    if (e.target.checked) {
+      checkboxItems.map(item => setValue(item, true));
+    } else {
+      checkboxItems.map(item => setValue(item, false));
+    }
+  };
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
       <Form>
         <Header>
-          <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll')} />
+          <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll', { onChange: selectAllCheckbox })} />
           <HeaderLabel htmlFor="selectAll">전체 동의</HeaderLabel>
           <HeaderOption>선택 항목 포함</HeaderOption>
         </Header>
