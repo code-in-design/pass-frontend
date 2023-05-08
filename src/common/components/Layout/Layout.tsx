@@ -10,10 +10,10 @@ const Layout = (props: LayoutProps) => {
   return (
     <Flex>
       <Navbar />
-      <div>
+      <>
         <Header />
         {props.children}
-      </div>
+      </>
     </Flex>
   );
 };

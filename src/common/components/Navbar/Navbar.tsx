@@ -41,7 +41,7 @@ export const Navbar = () => {
   );
 };
 
-const NavWrapper = styled.div`
+const NavWrapper = styled.nav`
   width: 288px;
   height: 100vh;
   padding: 34px 32px 40px;
