@@ -1,7 +1,7 @@
-import { Box, Flex, Text, Tooltip } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import { Box, Divider, Flex, Text, Tooltip } from '@chakra-ui/react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import styled from '@emotion/styled';
+import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton } from './SignUp.styles';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -16,20 +16,27 @@ const SignUp: React.FC<Props> = (props: Props) => {
     name: checkboxItems,
   });
 
-  useEffect(() => {
-    const length = checkbox.filter(x => x).length;
-    setValue('selectAll', length === 5);
-  }, [checkbox]);
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
-  const onSubmit = (data: any) => console.log(data);
-
-  const selectAllCheckbox = e => {
+  const toggleAllCheckbox = (e: any) => {
     if (e.target.checked) {
       checkboxItems.map(item => setValue(item, true));
     } else {
       checkboxItems.map(item => setValue(item, false));
     }
   };
+
+  // 전체 체크박스가 모두 active상태이면 전체체크를 active한다.
+  const 함수명 = useCallback(() => {
+    const length = checkbox.filter(x => x).length;
+    setValue('selectAll', length === 5);
+  }, []);
+
+  useEffect(() => {
+    함수명();
+  }, [checkbox, 함수명]);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -53,13 +60,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <Form>
             <Header>
-              <HeaderCheckbox
-                type="checkbox"
-                id="selectAll"
-                {...register('selectAll', {
-                  onChange: selectAllCheckbox,
-                })}
-              />
+              <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll', { onChange: toggleAllCheckbox })} />
               <HeaderLabel htmlFor="selectAll">전체 동의</HeaderLabel>
               <HeaderOption>선택 항목 포함</HeaderOption>
             </Header>
@@ -103,90 +104,3 @@ const SignUp: React.FC<Props> = (props: Props) => {
 };
 
 export default SignUp;
-
-const FormWrapper = styled.form`
-  width: 432px;
-`;
-const Form = styled.div`
-  height: 296px;
-  border-radius: 16px;
-  padding: 32px 24px;
-  border: 1px solid #e4e6f0;
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-const HeaderCheckbox = styled.input`
-  width: 15px;
-  height: 15px;
-  color: #353644;
-  border: 1px solid #353644;
-  padding: 2.5px;
-  margin-right: 4px;
-  margin-bottom: 2.5px;
-`;
-const HeaderLabel = styled.label`
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  color: #353644;
-  margin-right: 8px;
-`;
-const HeaderOption = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  color: #626474;
-`;
-const Divider = styled.hr`
-  color: #e4e6f0;
-  margin: 24px 0;
-`;
-const Body = styled.div`
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 16px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-const BodyCheckbox = styled.input`
-  width: 14.17px;
-  height: 14.17px;
-  color: #626474;
-  border: 1px solid #626474;
-  padding: 2.5px;
-  margin-right: 4px;
-  margin-bottom: 2.5px;
-`;
-const BodyLabel = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
-  color: #626474;
-  margin-right: 8px;
-`;
-const BodyOption = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  color: ${props => props.color || '#9395A6'};
-`;
-const BodyArrowRight = styled.img`
-  padding: 5.35px 7.02px;
-  margin-left: auto;
-`;
-const NextButton = styled.button`
-  margin-top: 110px;
-  width: 100%;
-  height: 56px;
-  border-radius: 16px;
-  padding: 16px 10px;
-  background-color: #6b77f8;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-`;

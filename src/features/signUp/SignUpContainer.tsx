@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import SignUp from './components/SignUp';
+import SignUp from './components/SignUp/SignUp';
 import SignUp2 from './components/SignUp2';
 import SignUp3 from './components/SignUp3';
 import SignUp4 from './components/SignUp4';
