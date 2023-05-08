@@ -9,22 +9,11 @@ interface Props {
 
 const SignUp: React.FC<Props> = (props: Props) => {
   const { register, handleSubmit, control, setValue } = useForm();
-
-  // useEffect(() => {
-  //   const subscription = watch(value => {
-  //     console.log(value);
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
+  const checkboxItems = ['age', 'terms', 'privacy', 'marketing', 'event'];
 
   const checkbox = useWatch({
     control,
-    name: ['age', 'terms', 'privacy', 'marketing', 'event'],
-  });
-
-  const selectAll = useWatch({
-    control,
-    name: 'selectAll',
+    name: checkboxItems,
   });
 
   useEffect(() => {
@@ -32,16 +21,15 @@ const SignUp: React.FC<Props> = (props: Props) => {
     setValue('selectAll', length === 5);
   }, [checkbox]);
 
-  useEffect(() => {
-    // selectAll가 true이면
-    // TODO: 전체를 체크 하면 됨 (setValue활용)
-    // selectAll가 false이면
-    // TODO: 전체를 체크해제 하면 됨 (setValue활용)
-  }, [selectAll]);
-
-  console.log(222, selectAll);
-
   const onSubmit = (data: any) => console.log(data);
+
+  const selectAllCheckbox = e => {
+    if (e.target.checked) {
+      checkboxItems.map(item => setValue(item, true));
+    } else {
+      checkboxItems.map(item => setValue(item, false));
+    }
+  };
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -65,7 +53,13 @@ const SignUp: React.FC<Props> = (props: Props) => {
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <Form>
             <Header>
-              <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll')} />
+              <HeaderCheckbox
+                type="checkbox"
+                id="selectAll"
+                {...register('selectAll', {
+                  onChange: selectAllCheckbox,
+                })}
+              />
               <HeaderLabel htmlFor="selectAll">전체 동의</HeaderLabel>
               <HeaderOption>선택 항목 포함</HeaderOption>
             </Header>
@@ -99,10 +93,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
               <BodyOption>(선택)</BodyOption>
             </Body>
           </Form>
-          <NextButton
-            type="submit"
-            // onClick={() => props.onNextButtonClick()}
-          >
+          <NextButton type="submit" onClick={props.onNextButtonClick}>
             다음단계로
           </NextButton>
         </FormWrapper>

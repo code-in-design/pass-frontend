@@ -43,10 +43,10 @@ const SignUp4: React.FC<Props> = props => {
           </Button>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onPrevButtonClick()}>
+          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={() => props.onNextButtonClick()}>
+          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onNextButtonClick}>
             다음
           </Button>
         </Flex>
