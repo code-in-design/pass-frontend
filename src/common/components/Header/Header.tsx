@@ -25,11 +25,10 @@ const Header: React.FC = props => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  width: calc(100% - 288px);
   display: flex;
   justify-content: flex-end;
   height: 112px;
-  padding: 28px 92px;
+  padding: 28px 60px;
   background-color: #fff;
 `;
 
