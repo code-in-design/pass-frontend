@@ -24,12 +24,13 @@ const LayoutWrapper = styled.div`
 `;
 
 const BodyWrapper = styled.div`
+  width: 100%;
   padding-bottom: 32px;
   padding-right: 32px;
 `;
 
 const ChildrenWrapper = styled.div`
-  width: 1120px;
+  width: 100%;
   height: 880px;
   border-radius: 24px;
   background-color: #f3f4fa;
