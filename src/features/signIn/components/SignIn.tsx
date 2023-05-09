@@ -6,7 +6,7 @@ const SignIn = () => {
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px">
         <Image src="/images/logos/logo.svg" alt="Z-ONE" w="150px" h="60px" margin="0 auto" />
         <VStack margin="80px 0 24px">
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#ffe812" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px">
+          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#ffe812" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" color="#000000">
             <Image src="/images/icons/kakaoIcon.svg" alt="kakaoIcon" marginRight="10px" />
             카카오로 시작하기
           </Button>
@@ -44,7 +44,7 @@ const SignIn = () => {
             </Text>
           </Checkbox>
           <Spacer />
-          <Text fontSize="12px" lineHeight="16px" letterSpacing="-0.02px" color="#FE7575">
+          <Text fontSize="12px" lineHeight="16px" letterSpacing="-0.02px" color="#FE7575" fontWeight={600}>
             비밀번호가 올바르지 않습니다
           </Text>
         </Flex>

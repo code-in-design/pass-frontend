@@ -1,7 +1,7 @@
-import { Box, Divider, Flex, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Flex, Text, Tooltip } from '@chakra-ui/react';
 import React, { useCallback, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton } from './SignUp.styles';
+import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton, Divider } from './SignUp.styles';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -29,14 +29,14 @@ const SignUp: React.FC<Props> = (props: Props) => {
   };
 
   // 전체 체크박스가 모두 active상태이면 전체체크를 active한다.
-  const 함수명 = useCallback(() => {
+  const selectCheckbox = useCallback(() => {
     const length = checkbox.filter(x => x).length;
     setValue('selectAll', length === 5);
-  }, []);
+  }, [checkbox]);
 
   useEffect(() => {
-    함수명();
-  }, [checkbox, 함수명]);
+    selectCheckbox();
+  }, [checkbox]);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -45,7 +45,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
           회원가입
         </Text>
         <Flex gap="8px" marginBottom="66px">
-          <Tooltip label="1/6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px">
+          <Tooltip label="1 / 6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px" shadow="none">
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#60c8de" />
           </Tooltip>
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
@@ -62,7 +62,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
             <Header>
               <HeaderCheckbox type="checkbox" id="selectAll" {...register('selectAll', { onChange: toggleAllCheckbox })} />
               <HeaderLabel htmlFor="selectAll">전체 동의</HeaderLabel>
-              <HeaderOption>선택 항목 포함</HeaderOption>
+              <HeaderOption>선택 항목에 대한 동의 포함</HeaderOption>
             </Header>
             <Divider />
             <Body>

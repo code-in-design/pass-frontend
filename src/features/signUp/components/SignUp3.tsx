@@ -15,7 +15,7 @@ const SignUp3: React.FC<Props> = props => {
         <Flex gap="8px" marginBottom="66px">
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#6B77F8" />
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#6B77F8" />
-          <Tooltip label="3/6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px">
+          <Tooltip label="3 / 6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px" shadow="none">
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#60c8de" />
           </Tooltip>
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
@@ -50,7 +50,7 @@ const SignUp3: React.FC<Props> = props => {
           </Text>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onPrevButtonClick}>
+          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
           <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onNextButtonClick}>

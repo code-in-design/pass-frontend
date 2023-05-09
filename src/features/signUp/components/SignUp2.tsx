@@ -17,7 +17,7 @@ const SignUp2: React.FC<Props> = props => {
         </Text>
         <Flex gap="8px" marginBottom="66px">
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#6B77F8" />
-          <Tooltip label="2/6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px">
+          <Tooltip label="2 / 6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px" shadow="none">
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#60c8de" />
           </Tooltip>
           <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
@@ -105,14 +105,14 @@ const SignUp2: React.FC<Props> = props => {
             교육자입니다
           </Box>
         </Button>
-        <Flex borderRadius="16px" padding="12px 17px" backgroundColor="rgba(96, 200, 222, 0.1)" justifyContent="center" alignItems="center" w="100%">
-          <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="16.67px" h="16.67px" />
-          <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" letterSpacing="-0.02px">
+        <Flex borderRadius="16px" padding="12px 0 12px 16px" backgroundColor="rgba(96, 200, 222, 0.1)" alignItems="center" w="100%">
+          <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="20px" h="20px" />
+          <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" letterSpacing="-0.02em">
             현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
           </Text>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" color="#626474" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onPrevButtonClick}>
+          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
           <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" onClick={props.onNextButtonClick}>
