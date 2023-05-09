@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Hello: React.FC = () => {
+const WelcomeSection: React.FC = () => {
   return (
     <Container>
       <MainTitle>
@@ -23,7 +23,7 @@ const Hello: React.FC = () => {
   );
 };
 
-export default Hello;
+export default WelcomeSection;
 
 const Container = styled.div``;
 

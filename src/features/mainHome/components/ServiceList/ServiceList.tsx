@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import GoServiceItem from './GoServiceItem';
+import ServiceListItem from './ServiceListItem';
 
 const menuList = [
   {
@@ -20,20 +20,20 @@ const menuList = [
   },
 ];
 
-const GoService: React.FC = () => {
+const ServiceList: React.FC = () => {
   return (
     <Container>
       <Title>서비스 바로가기</Title>
       <MenuList>
         {menuList.map(item => (
-          <GoServiceItem key={`goService-${item.img}`} img={item.img} text={item.text} />
+          <ServiceListItem key={`goService-${item.img}`} img={item.img} text={item.text} />
         ))}
       </MenuList>
     </Container>
   );
 };
 
-export default GoService;
+export default ServiceList;
 
 const Container = styled.div`
   font-size: 16px;

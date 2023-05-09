@@ -5,9 +5,9 @@ export const DefaultButton = styled.button`
   height: 56px;
   border-radius: 16px;
   padding: 16px 10px;
-  background-color: #e4e6f0;
+  background-color: #6b77f8;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.color};
 `;

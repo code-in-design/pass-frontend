@@ -1,12 +1,18 @@
-import GoService from './components/GoService/GoService';
-import Hello from './components/Hello';
+import GoService from './components/ServiceList/ServiceList';
+import Hello from './components/WelcomeSection';
 import Probability from './components/Probability/Probability';
+import University from './components/University/University';
 
 const MainHomeContainer: React.FC = () => {
   return (
-    <>
-      <Hello /> <GoService /> <Probability />
-    </>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div>
+        <Hello /> <GoService /> <Probability />
+      </div>
+      <div>
+        <University />
+      </div>
+    </div>
   );
 };
 

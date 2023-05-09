@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ProbabilityRightItem from './ProbabilityRightItem';
+import ProbabilityItem from './ProbabilityItem';
 
 const rightMenu = [
   {
@@ -34,7 +34,7 @@ const Probability: React.FC = () => {
         </ContentsLeft>
         <ContentsRight>
           {rightMenu.map(item => (
-            <ProbabilityRightItem img={item.img} name={item.name} title={item.title} />
+            <ProbabilityItem img={item.img} name={item.name} title={item.title} />
           ))}
         </ContentsRight>
       </Contents>

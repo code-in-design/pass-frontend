@@ -5,7 +5,7 @@ interface Props {
   text: string;
 }
 
-const GoServiceItem: React.FC<Props> = props => {
+const ServiceListItem: React.FC<Props> = props => {
   return (
     <MenuListItem>
       <MenuImg src={`/images/icons/${props.img}.svg`} />
@@ -14,7 +14,7 @@ const GoServiceItem: React.FC<Props> = props => {
   );
 };
 
-export default GoServiceItem;
+export default ServiceListItem;
 
 const MenuListItem = styled.li`
   width: 239.5px;

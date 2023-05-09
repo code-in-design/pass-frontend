@@ -73,6 +73,7 @@ export const BodyOption = styled.span`
 export const BodyArrowRight = styled.img`
   padding: 5.35px 7.02px;
   margin-left: auto;
+  cursor: pointer;
 `;
 export const NextButton = styled.button`
   margin-top: 110px;
