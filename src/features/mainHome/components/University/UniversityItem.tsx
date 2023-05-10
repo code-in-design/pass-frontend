@@ -10,19 +10,23 @@ interface Props {
 const UniversityItem: React.FC<Props> = props => {
   return (
     <ItemWrapper>
-      <UnivLogo src={`/images/icons/univ/${props.logo}.svg`} alt={props.logo} />
-      <UnivNameWrapper>
-        <UnivName>{props.name}</UnivName>
-        <UnivMajorName>{props.majorName}</UnivMajorName>
-      </UnivNameWrapper>
+      <UnivWrapper>
+        <UnivLogo src={`/images/icons/univ/${props.logo}.svg`} alt={props.logo} />
+        <UnivNameWrapper>
+          <UnivName>{props.name}</UnivName>
+          <UnivMajorName>{props.majorName}</UnivMajorName>
+        </UnivNameWrapper>
+      </UnivWrapper>
       <ScoreWrapper>
         <ScoreName>수능 환산 점수</ScoreName>
         <Score>{props.score}</Score>
       </ScoreWrapper>
-      <Result>{props.result}</Result>
-      <MoreWrpper>
-        <More src="/images/icons/more.svg" alt="more" />
-      </MoreWrpper>
+      <Wrapper>
+        <Result>{props.result}</Result>
+        <MoreWrpper>
+          <More src="/images/icons/more.svg" alt="more" />
+        </MoreWrpper>
+      </Wrapper>
     </ItemWrapper>
   );
 };
@@ -42,6 +46,11 @@ const ItemWrapper = styled.div`
   }
 `;
 
+const UnivWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const UnivLogo = styled.img`
   width: 48px;
   height: 45px;
@@ -50,7 +59,9 @@ const UnivLogo = styled.img`
   display: block;
 `;
 
-const UnivNameWrapper = styled.div``;
+const UnivNameWrapper = styled.div`
+  width: 122px;
+`;
 
 const UnivName = styled.div`
   font-size: 16px;
@@ -70,15 +81,16 @@ const UnivMajorName = styled.div`
 `;
 
 const ScoreWrapper = styled.div`
-  width: 79px;
-  margin: 0 45px;
+  /* width: 79px; */
+  width: 67px;
+  margin: 0 auto;
 `;
 
 const ScoreName = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
-  letter-spacing: -0.02em;
+  letter-spacing: -1.7px;
   color: #9395a6;
   margin-bottom: 4px;
 `;
@@ -91,30 +103,40 @@ const Score = styled.div`
   color: #353644;
   text-align: center;
 `;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+`;
 
 const Result = styled.div`
   width: 68px;
   height: 32px;
   border-radius: 8px;
   padding: 8px 12px;
-  background: rgba(255, 131, 62, 0.2);
+  background: #1ecb9733;
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
   letter-spacing: -0.02em;
-  color: #f66513;
+  color: #00a070;
   text-align: center;
+  margin-right: 12px;
 `;
 
 const MoreWrpper = styled.div`
   width: 20px;
   height: 20px;
   position: relative;
-  margin-left: 20.33px;
+  cursor: pointer;
 `;
 
 const More = styled.img`
   width: 3.33px;
   height: 13.33px;
   display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
 `;

@@ -1,10 +1,50 @@
 import styled from '@emotion/styled';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper';
+import PopularItem from './PopularItem';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+// import './popular.module.css';
+
+const defaultProps = [
+  {
+    img: 'hanyang',
+    name: '한양대학교',
+    major: '스포츠사이언스학과',
+  },
+  {
+    img: 'hanyang',
+    name: '한양대학교',
+    major: '스포츠사이언스학과',
+  },
+  {
+    img: 'hanyang',
+    name: '한양대학교',
+    major: '스포츠사이언스학과',
+  },
+  {
+    img: 'hanyang',
+    name: '한양대학교',
+    major: '스포츠사이언스학과',
+  },
+  {
+    img: 'hanyang',
+    name: '한양대학교',
+    major: '스포츠사이언스학과',
+  },
+];
 
 const PopularUniversity = () => {
   return (
     <Container>
       <Title>실시간 인기 대학 · 학과</Title>
-      <ContentWrapper></ContentWrapper>
+      <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
+        {defaultProps.map(item => (
+          <SwiperSlide key={`pupularUniv-${item.name}`}>
+            <PopularItem img={item.img} name={item.name} major={item.major} />
+          </SwiperSlide>
+        ))}
+      </CustomSwiper>
     </Container>
   );
 };
@@ -25,9 +65,19 @@ const Title = styled.div`
   margin-bottom: 12px;
 `;
 
-const ContentWrapper = styled.div`
+const CustomSwiper = styled(Swiper)`
+  width: 492px;
   height: 152px;
   padding: 13px 16px 16px;
   background-color: #fff;
   border-radius: 16px;
+  .swiper {
+    position: relative !important;
+  }
+  .swiper-wrapper {
+    width: 520px !important;
+  }
+  .swiper-wrapper .swiper-slide {
+    width: calc(100% / 5) !important;
+  }
 `;
