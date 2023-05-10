@@ -53,6 +53,7 @@ const MenuList = styled.div`
 `;
 
 const MenuListItem = styled.div`
+  display: flex;
   width: 240px;
   height: 132px;
   border-radius: 16px;
@@ -60,8 +61,14 @@ const MenuListItem = styled.div`
   box-shadow: 4px 14px 24px -16px #6b77f8;
   padding: 20px;
   margin-right: 12px;
+  background-image: url('/images/icons/findSchool.svg');
+  background-repeat: no-repeat;
+  background-position: bottom 5px right 12px;
   &:last-child {
     margin-right: 0;
+    background-color: #60c8de;
+    box-shadow: 4px 14px 24px -16px #60c8de;
+    background-image: url('/images/icons/passAnalysis.svg');
   }
 `;
 

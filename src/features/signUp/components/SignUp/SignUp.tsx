@@ -51,13 +51,22 @@ const SignUp: React.FC<Props> = (props: Props) => {
     [openTerm],
   );
 
+  const closeModal = useCallback(
+    (index: number) => {
+      const newArr = [...openTerm];
+      newArr[index] = false;
+      setOpenTerm(newArr);
+    },
+    [openTerm],
+  );
+
   useEffect(() => {
     selectCheckbox();
   }, [checkbox]);
 
   return (
     <>
-      {openTerm[0] && <Modal props={<TermsDetail />}></Modal>}
+      {openTerm[0] && <Modal props={<TermsDetail onCloseClick={closeModal} />}></Modal>}
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
           <Text fontSize="24px" lineHeight="32px" fontWeight={700} letterSpacing="-0.02px" marginBottom="16px">

@@ -30,7 +30,7 @@ const Probability: React.FC = () => {
             합격 확률 안내
           </ContentsLeftTitle>
           <ContentsLeftName>김민중 선생님</ContentsLeftName>
-          <ContentsLeftImg />
+          <ContentsLeftImg src="/images/icons/probabilityTeacher.svg" alt="teacherImg" />
         </ContentsLeft>
         <ContentsRight>
           {rightMenu.map(item => (
@@ -70,6 +70,7 @@ const ContentsLeft = styled.div`
   background-color: #dadcff;
   box-shadow: 4px 8px 32px -8px rgba(233, 235, 255, 0.12);
   padding: 20px;
+  position: relative;
 `;
 const ContentsLeftTitle = styled.div`
   font-size: 20px;
@@ -88,7 +89,11 @@ const ContentsLeftName = styled.div`
   color: #191e25;
 `;
 
-const ContentsLeftImg = styled.img``;
+const ContentsLeftImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
 
 const ContentsRight = styled.div`
   width: calc(479px / 2);

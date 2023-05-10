@@ -9,5 +9,5 @@ export const DefaultButton = styled.button`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: ${props => props.color};
+  color: ${props => (props.color ? props.color : '#E4E6F0')};
 `;
