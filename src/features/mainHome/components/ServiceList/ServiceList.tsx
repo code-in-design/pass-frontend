@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ServiceListItem from './ServiceListItem';
 import { useCallback, useState } from 'react';
-import ThumbUpModal from './thumbUpModal';
+import ThumbUpModal from './ThumbUpModal';
 
 const menuList = [
   {
