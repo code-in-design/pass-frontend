@@ -8,6 +8,12 @@ import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, B
 const TermsDetail = dynamic(import('./TermsDetail'), {
   ssr: false,
 });
+const PrivercyDetail = dynamic(import('./PrivercyDetail'), {
+  ssr: false,
+});
+const MarketingDetail = dynamic(import('./MarketingDetail'), {
+  ssr: false,
+});
 
 interface Props {
   onNextButtonClick: () => void;
@@ -67,6 +73,8 @@ const SignUp: React.FC<Props> = (props: Props) => {
   return (
     <>
       {openTerm[0] && <Modal props={<TermsDetail onCloseClick={closeModal} />}></Modal>}
+      {openTerm[1] && <Modal props={<PrivercyDetail onCloseClick={closeModal} />}></Modal>}
+      {openTerm[2] && <Modal props={<MarketingDetail onCloseClick={closeModal} />}></Modal>}
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
           <Text fontSize="24px" lineHeight="32px" fontWeight={700} letterSpacing="-0.02px" marginBottom="16px">

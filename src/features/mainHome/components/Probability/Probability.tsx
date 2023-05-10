@@ -34,7 +34,7 @@ const Probability: React.FC = () => {
         </ContentsLeft>
         <ContentsRight>
           {rightMenu.map(item => (
-            <ProbabilityItem img={item.img} name={item.name} title={item.title} />
+            <ProbabilityItem key={`probability-${item.img}`} img={item.img} name={item.name} title={item.title} />
           ))}
         </ContentsRight>
       </Contents>

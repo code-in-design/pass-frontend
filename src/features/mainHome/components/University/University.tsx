@@ -27,7 +27,7 @@ const University: React.FC = () => {
         <Description>합격 분석 메뉴에서 나의 관심 대학을 설정해주세요!</Description>
       </DescriptionWrapper>
       {defaultProps.map(props => (
-        <UniversityItem logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
+        <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
       ))}
     </Container>
   );
