@@ -36,7 +36,6 @@ const ModalWrapper = styled.div`
   width: 100%;
   height: 100vh;
   z-index: 10;
-  animation: fadeIn 0.4s;
 `;
 
 const ModalOutside = styled.div`

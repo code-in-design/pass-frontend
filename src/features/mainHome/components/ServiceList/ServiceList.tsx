@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import ServiceListItem from './ServiceListItem';
+import { useCallback, useState } from 'react';
+import ThumbUpModal from './thumbUpModal';
 
 const menuList = [
   {
@@ -21,15 +23,32 @@ const menuList = [
 ];
 
 const ServiceList: React.FC = () => {
+  const [service, setService] = useState('');
+
+  const openModal = useCallback(
+    (text: string) => {
+      setService(text);
+    },
+    [service],
+  );
+
+  const closeModal = useCallback(() => {
+    setService('');
+    console.log('service:', service);
+  }, [service]);
+
   return (
-    <Container>
-      <Title>서비스 바로가기</Title>
-      <MenuList>
-        {menuList.map(item => (
-          <ServiceListItem key={`goService-${item.img}`} img={item.img} text={item.text} />
-        ))}
-      </MenuList>
-    </Container>
+    <>
+      <Container>
+        <Title>서비스 바로가기</Title>
+        <MenuList>
+          {menuList.map(item => (
+            <ServiceListItem key={`goService-${item.img}`} img={item.img} text={item.text} onClickService={openModal} />
+          ))}
+        </MenuList>
+      </Container>
+      {menuList[3].text === service && <ThumbUpModal onClickClose={closeModal} />}
+    </>
   );
 };
 

@@ -3,11 +3,12 @@ import styled from '@emotion/styled';
 interface Props {
   img: string;
   text: string;
+  onClickService: (text: string) => void;
 }
 
 const ServiceListItem: React.FC<Props> = props => {
   return (
-    <MenuListItem>
+    <MenuListItem onClick={() => props.onClickService(props.text)}>
       <MenuImg src={`/images/icons/${props.img}.svg`} />
       <MenuTitle>{props.text}</MenuTitle>
     </MenuListItem>
@@ -25,6 +26,7 @@ const MenuListItem = styled.li`
   border-radius: 16px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const MenuImg = styled.img`
