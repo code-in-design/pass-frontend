@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import Select from 'react-select';
-import styled from '@emotion/styled';
+import { StyledSelect } from '@/common/components/Select/Select';
 
 const gender = [
   { value: 'male', label: '남성' },
@@ -74,63 +73,3 @@ const SignUp5: React.FC<Props> = props => {
 };
 
 export default SignUp5;
-const StyledSelect = styled(Select)`
-  &.react-select {
-    &-container {
-      font-size: 16px;
-      font-weight: 600;
-      color: #626474;
-      .react-select__control {
-        height: 56px;
-        border-radius: 16px;
-        color: #e4e6f0;
-        border: 1px solid #e4e6f0;
-        box-shadow: 0 0 0 1px #e4e6f0;
-        .react-select__value-container {
-          padding: 0;
-          margin: 0;
-          padding-left: 24px;
-        }
-      }
-      .react-select__control--menu-is-open {
-        border-radius: 16px 16px 0 0;
-      }
-
-      .react-select__indicators {
-        padding-right: 16px;
-        .react-select__indicator-separator {
-          display: none;
-        }
-      }
-      .react-select__menu {
-        border-radius: 0 0 16px 16px;
-        margin: 0;
-        &-list {
-          padding: 0;
-          .react-select__option {
-            padding: 18px 24px;
-            height: 56px;
-            &--is-selected {
-              background-color: #f8f8fc;
-              color: #353644;
-              font-weight: 700;
-            }
-            &--is-focused {
-              /* background-color: #f8f8fc; */
-              /* color: #353644; */
-              /* font-weight: 700; */
-            }
-            &:last-child {
-              border-radius: 0 0 16px 16px;
-            }
-          }
-        }
-      }
-    }
-
-    &__value-container {
-      color: #353644;
-      font-weight: 700;
-    }
-  }
-`;

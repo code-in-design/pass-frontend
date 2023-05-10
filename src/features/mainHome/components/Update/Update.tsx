@@ -1,22 +1,29 @@
 import styled from '@emotion/styled';
 import UpdateItem from './UpdateItem';
+import { StyledSelectSmall } from '@/common/components/Select/Select';
 
-const defaultProps = [{ content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }];
+const defaultProps = [{ content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }];
+const update = [
+  { value: 'v1', label: '2023/05/10-13:32' },
+  { value: 'v2', label: '2023/06/20-13:32' },
+];
 
 const Update = () => {
   return (
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <SelectUpdate name="update"></SelectUpdate>
+        <StyledSelectSmall className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} />
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
-        <Content>
-          {defaultProps.map((item, index) => (
-            <UpdateItem key={`updateComment-${index}`} content={item.content} />
-          ))}
-        </Content>
+        <FakeContent>
+          <Content>
+            {defaultProps.map((item, index) => (
+              <UpdateItem key={`updateComment-${index}`} content={item.content} />
+            ))}
+          </Content>
+        </FakeContent>
       </ContentWrapper>
     </Container>
   );
@@ -49,11 +56,9 @@ const SelectUpdate = styled.select`
   height: 28px;
   border-radius: 8px;
   padding: 4px 12px;
-  background-color: #fff;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #626474;
 `;
 
 const ContentWrapper = styled.div`
@@ -73,10 +78,26 @@ const Avatar = styled.img`
   background-color: #353644;
 `;
 
-const Content = styled.ul`
+const FakeContent = styled.div`
   width: 100%;
   height: 224px;
   border-radius: 16px;
-  padding: 16px;
   border: 1px solid #e4e6f0;
+  overflow-y: hidden;
+  padding: 16px 4px 16px 16px;
+`;
+
+const Content = styled.ul`
+  width: 100%;
+  height: 192px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    border-radius: 36px;
+    background-color: #626474;
+  }
 `;
