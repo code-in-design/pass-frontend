@@ -1,4 +1,4 @@
-import { DefaultButton } from '@/common/components/Button/Button';
+import { DefaultButton } from '@/common/components/Button';
 import styled from '@emotion/styled';
 
 interface Props {
