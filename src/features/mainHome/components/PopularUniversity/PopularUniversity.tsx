@@ -11,26 +11,31 @@ const defaultProps = [
     img: 'hanyang',
     name: '한양대학교',
     major: '스포츠사이언스학과',
+    number: 1,
   },
   {
     img: 'hanyang',
     name: '한양대학교',
     major: '스포츠사이언스학과',
+    number: 2,
   },
   {
     img: 'hanyang',
     name: '한양대학교',
     major: '스포츠사이언스학과',
+    number: 3,
   },
   {
     img: 'hanyang',
     name: '한양대학교',
     major: '스포츠사이언스학과',
+    number: 4,
   },
   {
     img: 'hanyang',
     name: '한양대학교',
     major: '스포츠사이언스학과',
+    number: 5,
   },
 ];
 
@@ -40,8 +45,8 @@ const PopularUniversity = () => {
       <Title>실시간 인기 대학 · 학과</Title>
       <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
         {defaultProps.map(item => (
-          <SwiperSlide key={`pupularUniv-${item.name}`}>
-            <PopularItem img={item.img} name={item.name} major={item.major} />
+          <SwiperSlide key={`pupularUniv-${item.number}`}>
+            <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} />
           </SwiperSlide>
         ))}
       </CustomSwiper>

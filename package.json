@@ -34,6 +34,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
     "@types/react-redux": "^7.1.25",
     "@types/styled-components": "^5.1.26"
   }

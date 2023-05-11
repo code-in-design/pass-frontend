@@ -1,14 +1,17 @@
 import styled from '@emotion/styled';
 import UpdateItem from './UpdateItem';
-import { StyledSelectSmall } from '@/common/components/Select/Select';
+import { StyledSelectSmall } from '@/common/components/Select/Select.styles';
 
-const defaultProps = [{ content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }, { content: '체육 대학 합격은 패스입니다.' }];
 const update = [
   { value: 'v1', label: '2023/05/10-13:32' },
   { value: 'v2', label: '2023/06/20-13:32' },
 ];
 
-const Update = () => {
+interface Props {
+  data: Array<{ content: string }>;
+}
+
+const Update = (props: Props) => {
   return (
     <Container>
       <TitleWrapper>
@@ -19,9 +22,9 @@ const Update = () => {
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
         <FakeContent>
           <Content>
-            {defaultProps.map((item, index) => (
-              <UpdateItem key={`updateComment-${index}`} content={item.content} />
-            ))}
+            {/* {props.data.map((item) => (
+              <UpdateItem key={`updateComment-${item.id}`} content={item.content} />
+            ))} */}
           </Content>
         </FakeContent>
       </ContentWrapper>
@@ -29,6 +32,13 @@ const Update = () => {
   );
 };
 
+Update.defaultProps = [
+  { content: '체육 대학 합격은 패스입니다.', id: 1 },
+  { content: '체육 대학 합격은 패스입니다.', id: 2 },
+  { content: '체육 대학 합격은 패스입니다.', id: 3 },
+  { content: '체육 대학 합격은 패스입니다.', id: 4 },
+  { content: '체육 대학 합격은 패스입니다.', id: 5 },
+];
 export default Update;
 
 const Container = styled.div`

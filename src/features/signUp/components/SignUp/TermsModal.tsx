@@ -15,7 +15,7 @@ const TermsDetail: React.FC<Props> = props => {
       <ModalOutside onClick={() => props.onCloseClick(index)} />
       <Container>
         <Close src="/images/icons/close.svg" alt="close" onClick={() => props.onCloseClick(index)} />
-        <Title>이용약관 동의</Title>
+        <Title>{props.title}</Title>
         <Context>
           <Markdown markdown={props.markdown} />
         </Context>

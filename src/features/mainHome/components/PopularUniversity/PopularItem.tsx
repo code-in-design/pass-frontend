@@ -4,12 +4,16 @@ interface Props {
   img: string;
   name: string;
   major: string;
+  number: number;
 }
 
 const PopularItem: React.FC<Props> = props => {
   return (
     <Container>
-      <PopularImg src="/images/icons/popular.svg" alt="popularIcon" />
+      <ImageWrapper>
+        {props.number === 1 ? <PopularImg src="/images/icons/popularMain.svg" alt="popularIcon" /> : <PopularImg src="/images/icons/popular.svg" alt="popularIcon" />}
+        {props.number === 1 ? <PupularIdx color="#fff">{props.number}</PupularIdx> : <PupularIdx>{props.number}</PupularIdx>}
+      </ImageWrapper>
       <PopularLogo src={`/images/icons/univ/${props.img}.svg`} alt={props.img} />
       <PopularName>{props.name}</PopularName>
       <PopularMajor>{props.major}</PopularMajor>
@@ -29,10 +33,28 @@ const Container = styled.div`
   padding: 17px 0 16px;
 `;
 
-const PopularImg = styled.img`
+const ImageWrapper = styled.div`
   position: absolute;
-  top: 0px;
   left: 7.75px;
+  top: 0px;
+`;
+
+const PopularImg = styled.img`
+  width: 23.24px;
+  height: 25.34px;
+`;
+
+const PupularIdx = styled.div`
+  position: absolute;
+  width: 8px;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  /* color: #626474; */
+  color: ${props => props.color};
 `;
 
 const PopularLogo = styled.img`

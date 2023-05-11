@@ -13,10 +13,16 @@ const WelcomeSection: React.FC = () => {
         <MenuListItem>
           <MenuTitle>대학 찾기</MenuTitle>
           <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
+          <RectangleTop />
+          <RectangleBottom />
+          <SchoolIcon src="/images/icons/findSchool.svg" alt="icon" />
         </MenuListItem>
         <MenuListItem>
           <MenuTitle>합격 분석</MenuTitle>
           <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
+          <RectangleTop />
+          <RectangleBottom />
+          <ChartIcon src="/images/icons/passAnalysis.svg" alt="icon" />
         </MenuListItem>
       </MenuList>
     </Container>
@@ -61,15 +67,30 @@ const MenuListItem = styled.div`
   box-shadow: 4px 14px 24px -16px #6b77f8;
   padding: 20px;
   margin-right: 12px;
-  background-image: url('/images/icons/findSchool.svg');
   background-repeat: no-repeat;
   background-position: bottom 5px right 12px;
+  position: relative;
   &:last-child {
     margin-right: 0;
     background-color: #60c8de;
     box-shadow: 4px 14px 24px -16px #60c8de;
-    background-image: url('/images/icons/passAnalysis.svg');
   }
+`;
+
+const SchoolIcon = styled.img`
+  width: 129px;
+  height: 109px;
+  position: absolute;
+  top: 18px;
+  right: 12px;
+`;
+
+const ChartIcon = styled.img`
+  width: 112px;
+  height: 99px;
+  position: absolute;
+  top: 22px;
+  right: 12px;
 `;
 
 const MenuTitle = styled.span`
@@ -85,4 +106,26 @@ const MenuArrow = styled.img`
   width: 20px;
   height: 20px;
   margin-left: 8px;
+`;
+
+const RectangleBottom = styled.div`
+  width: 177.21px;
+  height: 34px;
+  position: absolute;
+  left: 111.37px;
+  top: 75px;
+  background: #ffffff;
+  opacity: 0.1;
+  transform: rotate(-40.56deg);
+`;
+
+const RectangleTop = styled.div`
+  width: 144px;
+  height: 34px;
+  position: absolute;
+  left: 147px;
+  top: 20px;
+  background: #ffffff;
+  opacity: 0.05;
+  transform: rotate(-127.25deg);
 `;

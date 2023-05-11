@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { StyledSelect } from '@/common/components/Select/Select';
+import { StyledSelect } from '@/common/components/Select/Select.styles';
 
 const gender = [
   { value: 'male', label: '남성' },

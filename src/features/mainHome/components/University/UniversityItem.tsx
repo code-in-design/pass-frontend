@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+
 interface Props {
   logo: string;
   name: string;
@@ -22,7 +24,7 @@ const UniversityItem: React.FC<Props> = props => {
         <Score>{props.score}</Score>
       </ScoreWrapper>
       <Wrapper>
-        <Result>{props.result}</Result>
+        {props.result === '적정' ? <Result color="primary">{props.result}</Result> : props.result === '소신' ? <Result color="danger">{props.result}</Result> : <Result>{props.result}</Result>}
         <MoreWrpper>
           <More src="/images/icons/more.svg" alt="more" />
         </MoreWrpper>
@@ -109,19 +111,32 @@ const Wrapper = styled.div`
   margin-left: auto;
 `;
 
+const defaultResult = css`
+  color: #00a070;
+  background-color: rgba(30, 203, 151, 0.2);
+`;
+const dangerResult = css`
+  color: #f66513;
+  background-color: rgba(255, 131, 62, 0.2);
+`;
+const stableResult = css`
+  color: #4f8afc;
+  background-color: rgba(79, 138, 252, 0.2);
+`;
+
 const Result = styled.div`
   width: 68px;
   height: 32px;
   border-radius: 8px;
   padding: 8px 12px;
-  background: #1ecb9733;
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
   letter-spacing: -0.02em;
-  color: #00a070;
   text-align: center;
   margin-right: 12px;
+  color: ${props => (props.color === 'primary' ? '#00a070' : props.color === 'danger' ? '#f66513' : '#4f8afc')};
+  background-color: ${props => (props.color === 'primary' ? 'rgba(30, 203, 151, 0.2)' : props.color === 'danger' ? 'rgba(255, 131, 62, 0.2)' : 'rgba(79, 138, 252, 0.2)')};
 `;
 
 const MoreWrpper = styled.div`
