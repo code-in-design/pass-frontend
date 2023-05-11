@@ -4,14 +4,9 @@ import { useForm, useWatch } from 'react-hook-form';
 import dynamic from 'next/dynamic';
 import { Modal } from '@/common/components/Modal/Modal';
 import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton, Divider } from './SignUp.styles';
+import { terms, privercy, marketing } from './terms';
 
-const TermsDetail = dynamic(import('./TermsDetail'), {
-  ssr: false,
-});
-const PrivercyDetail = dynamic(import('./PrivercyDetail'), {
-  ssr: false,
-});
-const MarketingDetail = dynamic(import('./MarketingDetail'), {
+const TermsModal = dynamic(import('./TermsModal'), {
   ssr: false,
 });
 
@@ -72,16 +67,16 @@ const SignUp: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      {openTerm[0] && <Modal props={<TermsDetail onCloseClick={closeModal} />}></Modal>}
-      {openTerm[1] && <Modal props={<PrivercyDetail onCloseClick={closeModal} />}></Modal>}
-      {openTerm[2] && <Modal props={<MarketingDetail onCloseClick={closeModal} />}></Modal>}
+      {openTerm[0] && <Modal props={<TermsModal onCloseClick={closeModal} index={0} markdown={terms} title={'이용약관 동의'} />}></Modal>}
+      {openTerm[1] && <Modal props={<TermsModal onCloseClick={closeModal} index={1} markdown={privercy} title={'개인정보 수집 및 이용 동의'} />}></Modal>}
+      {openTerm[2] && <Modal props={<TermsModal onCloseClick={closeModal} index={2} markdown={marketing} title={'개인정보 마케팅 활용 동의'} />}></Modal>}
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
           <Text fontSize="24px" lineHeight="32px" fontWeight={700} letterSpacing="-0.02px" marginBottom="16px">
             회원가입
           </Text>
           <Flex gap="8px" marginBottom="66px">
-            <Tooltip label="1 / 6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px" shadow="none">
+            <Tooltip label="1 / 6" isOpen hasArrow placement="bottom" bg="#60C8DE" fontSize="14px" fontWeight={700} borderRadius="8px" marginTop="6px" padding="4px 12px" shadow="none" zIndex={1}>
               <Box width="100%" height="8px" borderRadius="4px" bgColor="#60c8de" />
             </Tooltip>
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
