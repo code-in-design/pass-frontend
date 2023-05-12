@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 import ServiceListItem from './ServiceListItem';
 import { useCallback, useState } from 'react';
-import ThumbUpModal from './ThumbUpModal';
+import dynamic from 'next/dynamic';
+
+const ThumbUpModal = dynamic(import('./ThumbUpModal'), { ssr: false });
+const MembershipModal = dynamic(import('./MembershipModal'), { ssr: false });
 
 const menuList = [
   {
@@ -34,7 +37,6 @@ const ServiceList: React.FC = () => {
 
   const closeModal = useCallback(() => {
     setService('');
-    console.log('service:', service);
   }, [service]);
 
   return (
@@ -47,6 +49,7 @@ const ServiceList: React.FC = () => {
           ))}
         </MenuList>
       </Container>
+      {menuList[1].text === service && <MembershipModal onClickClose={closeModal} />}
       {menuList[3].text === service && <ThumbUpModal onClickClose={closeModal} />}
     </>
   );

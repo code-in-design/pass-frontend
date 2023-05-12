@@ -1,3 +1,4 @@
+import ModalLayout from '@/common/components/Modal/ModalLayout';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -6,78 +7,37 @@ interface Props {
 
 const ThumbUpModal: React.FC<Props> = props => {
   return (
-    <ModalWrapper>
-      <ModalOutside onClick={() => console.log('click')}></ModalOutside>
-      <Container>
-        <Close src="/images/icons/close.svg" alt="close" onClick={() => props.onClickClose()} />
-        <Title>내 초대 코드</Title>
-        <CodeWrapper>
-          <Code>ABCD10</Code>
-          <CodeCopy>
-            <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
-            <CodeCopyText>코드복사</CodeCopyText>
-          </CodeCopy>
-        </CodeWrapper>
-        <Description>
-          추천 코드를 입력할 경우,
-          <br />
-          친구와 내 계정 모두 합격 분석 1회 열람권이 추가됩니다.
-        </Description>
-        <Info>
-          <InfoImg src="/images/icons/info.svg" alt="info" />
-          <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
-        </Info>
-        <ShareButton>공유하기</ShareButton>
-        <Divider />
-        <SecondTitle>추천 코드 입력하기</SecondTitle>
-        <InputCodeWrapper>
-          <InputCode />
-          <EnterButton>확인</EnterButton>
-        </InputCodeWrapper>
-      </Container>
-    </ModalWrapper>
+    <ModalLayout onCloseClick={props.onClickClose}>
+      <Title>내 초대 코드</Title>
+      <CodeWrapper>
+        <Code>ABCD10</Code>
+        <CodeCopy>
+          <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
+          <CodeCopyText>코드복사</CodeCopyText>
+        </CodeCopy>
+      </CodeWrapper>
+      <Description>
+        추천 코드를 입력할 경우,
+        <br />
+        친구와 내 계정 모두 합격 분석 1회 열람권이 추가됩니다.
+      </Description>
+      <Info>
+        <InfoImg src="/images/icons/info.svg" alt="info" />
+        <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
+      </Info>
+      <ShareButton>공유하기</ShareButton>
+      <Divider />
+      <SecondTitle>추천 코드 입력하기</SecondTitle>
+      <InputCodeWrapper>
+        <InputCode type="input" placeholder="추천 코드를 입력해주세요" />
+        <InputImg src="/images/icons/recommendation.svg" alt="recommendation" />
+        <EnterButton>확인</EnterButton>
+      </InputCodeWrapper>
+    </ModalLayout>
   );
 };
 
 export default ThumbUpModal;
-
-const ModalWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-`;
-
-const ModalOutside = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-`;
-
-const Container = styled.div`
-  width: 496px;
-  padding: 32px;
-  height: 464px;
-  background-color: #fff;
-  border-radius: 24px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-`;
-
-const Close = styled.img`
-  padding: 5.43px;
-  cursor: pointer;
-  position: absolute;
-  top: 32px;
-  right: 32px;
-`;
 
 const Title = styled.div`
   font-size: 20px;
@@ -105,6 +65,8 @@ const CodeCopy = styled.button`
   background-color: #f3f4fa;
   border-radius: 8px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CodeCopyImg = styled.img`
@@ -185,10 +147,11 @@ const InputCode = styled.input`
   width: 306px;
   height: 56px;
   border-radius: 16px;
-  padding: 56px 18px 0 18px;
+  padding: 18px 0 18px 56px;
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
+  border: 1px solid #e4e6f0;
   &::placeholder {
     color: #9395a6;
   }

@@ -17,10 +17,12 @@ const University = (props: Props) => {
   return (
     <Container>
       <Title>나의관심대학</Title>
-      <DescriptionWrapper>
-        <DescriptionImg src="/images/icons/stars.svg" alt="star" />
-        <Description>합격 분석 메뉴에서 나의 관심 대학을 설정해주세요!</Description>
-      </DescriptionWrapper>
+      {props.data.length < 3 && (
+        <DescriptionWrapper>
+          <DescriptionImg src="/images/icons/stars.svg" alt="star" />
+          <Description>합격 분석 메뉴에서 나의 관심 대학을 설정해주세요!</Description>
+        </DescriptionWrapper>
+      )}
       {props.data.map(props => (
         <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
       ))}

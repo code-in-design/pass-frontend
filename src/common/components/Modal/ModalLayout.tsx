@@ -1,27 +1,18 @@
-import { DefaultButton } from '@/common/components/Button';
 import styled from '@emotion/styled';
+import { ReactNode } from 'react';
 
 interface Props {
   onCloseClick: (index?: number) => void;
-  title: string;
-  content: string;
+  children: ReactNode;
 }
 
-const ModalLayout: React.FC<Props> = props => {
+const ModalLayout = (props: Props) => {
   return (
     <ModalWrapper>
       <ModalOutside onClick={() => props.onCloseClick()} />
       <Container>
         <Close src="/images/icons/close.svg" alt="close" onClick={() => props.onCloseClick()} />
-        <Title>{props.title}</Title>
-        <Context>{props.content}</Context>
-        <ButtonWrapper>
-          <CheckWrapper>
-            <Check type="checkbox" name="agree" id="agree" />
-            <CheckText htmlFor="agree">이용약관을 모두 확인하였으며, 이에 동의함</CheckText>
-          </CheckWrapper>
-          <DefaultButton color="#fff">확인</DefaultButton>
-        </ButtonWrapper>
+        {props.children}
       </Container>
     </ModalWrapper>
   );
@@ -48,9 +39,11 @@ const ModalOutside = styled.div`
 `;
 
 const Container = styled.div`
-  width: 611px;
+  width: auto;
   padding: 32px;
-  height: 480px;
+  height: auto;
+  max-height: 816px;
+  overflow-y: auto;
   background-color: #fff;
   border-radius: 24px;
   position: absolute;
@@ -65,57 +58,4 @@ const Close = styled.img`
   position: absolute;
   top: 32px;
   right: 32px;
-`;
-
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  color: #191e25;
-  margin-bottom: 24px;
-`;
-
-const Context = styled.div`
-  width: 534px;
-  height: 252px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  color: #626474;
-  overflow-y: auto;
-`;
-
-const ContextTitle = styled.div`
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 700;
-  color: #353644;
-`;
-
-const ButtonWrapper = styled.div`
-  margin-top: 24px;
-`;
-
-const CheckWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-`;
-
-const Check = styled.input`
-  margin-right: 6.5px;
-  width: 15px;
-  height: 15px;
-  position: relative;
-  &:checked {
-    accent-color: #60c8de;
-  }
-`;
-
-const CheckText = styled.label`
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 16px;
-  color: #353644;
 `;

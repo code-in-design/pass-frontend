@@ -111,19 +111,6 @@ const Wrapper = styled.div`
   margin-left: auto;
 `;
 
-const defaultResult = css`
-  color: #00a070;
-  background-color: rgba(30, 203, 151, 0.2);
-`;
-const dangerResult = css`
-  color: #f66513;
-  background-color: rgba(255, 131, 62, 0.2);
-`;
-const stableResult = css`
-  color: #4f8afc;
-  background-color: rgba(79, 138, 252, 0.2);
-`;
-
 const Result = styled.div`
   width: 68px;
   height: 32px;
