@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { StyledSelect } from '@/common/components/Select/Select.styles';
+import Select from '@/common/components/Select/Select';
 
 const gender = [
   { value: 'male', label: '남성' },
@@ -43,13 +43,15 @@ const SignUp5: React.FC<Props> = props => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               성별
             </Text>
-            <StyledSelect className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" />
+            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" /> */}
+            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" />
           </Box>
           <Box width="100%">
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            <StyledSelect className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" />
+            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" /> */}
+            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" />
           </Box>
         </Flex>
         <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474" marginTop="24px">

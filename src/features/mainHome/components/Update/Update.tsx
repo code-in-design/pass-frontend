@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import UpdateItem from './UpdateItem';
-import { StyledSelectSmall } from '@/common/components/Select/Select.styles';
+import Select from '@/common/components/Select/Select';
 
 const update = [
   { value: 'v1', label: '2023/05/10-13:32' },
@@ -20,7 +20,8 @@ const Update = (props: Props) => {
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <StyledSelectSmall className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} />
+        <Select size="sm" className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} />
+        {/* <StyledSelectSmall className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} /> */}
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />

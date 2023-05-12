@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import ModalLayout from '@/common/components/Modal/ModalLayout';
-import { StyledSelect } from '@/common/components/Select/Select.styles';
+import Select from '@/common/components/Select/Select';
 
 interface Props {
   onClickClose: () => void;
@@ -18,18 +18,21 @@ const FinalUnivModal = (props: Props) => {
           <InfoText>실기 기록 변경 횟수는 제한되어 있습니다.</InfoText>
         </Info>
         <SelectSection>
-          <Select>
+          <SelectWrapper>
             <SelectText>가군 지원대학</SelectText>
-            <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" />
-          </Select>
-          <Select>
+            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
+            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+          </SelectWrapper>
+          <SelectWrapper>
             <SelectText>나군 지원대학</SelectText>
-            <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" />
-          </Select>
-          <Select>
+            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
+            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+          </SelectWrapper>
+          <SelectWrapper>
             <SelectText>다군 지원대학</SelectText>
-            <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" />
-          </Select>
+            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
+            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+          </SelectWrapper>
         </SelectSection>
         <Button>선택 완료</Button>
       </Container>
@@ -87,7 +90,7 @@ const SelectSection = styled.div`
   margin-bottom: 24px;
 `;
 
-const Select = styled.div`
+const SelectWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -101,6 +104,7 @@ const SelectText = styled.div`
   font-weight: 700;
   color: #626474;
   margin-right: 32px;
+  letter-spacing: -0.02em;
 `;
 
 const Button = styled.button`
