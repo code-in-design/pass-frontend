@@ -70,6 +70,7 @@ const MenuListItem = styled.div`
   background-repeat: no-repeat;
   background-position: bottom 5px right 12px;
   position: relative;
+  overflow: hidden;
   cursor: pointer;
   &:last-of-type {
     margin-right: 0;
