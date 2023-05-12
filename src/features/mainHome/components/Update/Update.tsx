@@ -7,8 +7,12 @@ const update = [
   { value: 'v2', label: '2023/06/20-13:32' },
 ];
 
+interface ContentProps {
+  content: string;
+  id: number;
+}
 interface Props {
-  data: Array<{ content: string }>;
+  data: Array<ContentProps>;
 }
 
 const Update = (props: Props) => {
@@ -22,9 +26,9 @@ const Update = (props: Props) => {
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
         <FakeContent>
           <Content>
-            {/* {props.data.map((item) => (
+            {props.data.map(item => (
               <UpdateItem key={`updateComment-${item.id}`} content={item.content} />
-            ))} */}
+            ))}
           </Content>
         </FakeContent>
       </ContentWrapper>
@@ -32,13 +36,15 @@ const Update = (props: Props) => {
   );
 };
 
-Update.defaultProps = [
-  { content: '체육 대학 합격은 패스입니다.', id: 1 },
-  { content: '체육 대학 합격은 패스입니다.', id: 2 },
-  { content: '체육 대학 합격은 패스입니다.', id: 3 },
-  { content: '체육 대학 합격은 패스입니다.', id: 4 },
-  { content: '체육 대학 합격은 패스입니다.', id: 5 },
-];
+Update.defaultProps = {
+  data: [
+    { content: '체육 대학 합격은 패스입니다.', id: 1 },
+    { content: '체육 대학 합격은 패스입니다.', id: 2 },
+    { content: '체육 대학 합격은 패스입니다.', id: 3 },
+    { content: '체육 대학 합격은 패스입니다.', id: 4 },
+    { content: '체육 대학 합격은 패스입니다.', id: 5 },
+  ],
+};
 export default Update;
 
 const Container = styled.div`

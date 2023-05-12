@@ -1,24 +1,19 @@
 import styled from '@emotion/styled';
 import UniversityItem from './UniversityItem';
 
-const defaultProps = [
-  {
-    logo: 'hanyang',
-    name: '한양대학교',
-    majorName: '스포츠사이언스 전공',
-    score: 246.34,
-    result: '소신',
-  },
-  {
-    logo: 'hanyang',
-    name: '대구가톨릭대',
-    majorName: '스포츠매니지먼트 전공',
-    score: 246.34,
-    result: '안정',
-  },
-];
+interface UniverProps {
+  logo: string;
+  name: string;
+  majorName: string;
+  score: number;
+  result: string;
+}
 
-const University: React.FC = () => {
+interface Props {
+  data: Array<UniverProps>;
+}
+
+const University = (props: Props) => {
   return (
     <Container>
       <Title>나의관심대학</Title>
@@ -26,7 +21,7 @@ const University: React.FC = () => {
         <DescriptionImg src="/images/icons/stars.svg" alt="star" />
         <Description>합격 분석 메뉴에서 나의 관심 대학을 설정해주세요!</Description>
       </DescriptionWrapper>
-      {defaultProps.map(props => (
+      {props.data.map(props => (
         <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
       ))}
     </Container>
@@ -34,6 +29,25 @@ const University: React.FC = () => {
 };
 
 export default University;
+
+University.defaultProps = {
+  data: [
+    {
+      logo: 'hanyang',
+      name: '한양대학교',
+      majorName: '스포츠사이언스 전공',
+      score: 246.34,
+      result: '소신',
+    },
+    {
+      logo: 'hanyang',
+      name: '대구가톨릭대',
+      majorName: '스포츠매니지먼트 전공',
+      score: 246.34,
+      result: '안정',
+    },
+  ],
+};
 
 const Container = styled.div`
   width: 492px;

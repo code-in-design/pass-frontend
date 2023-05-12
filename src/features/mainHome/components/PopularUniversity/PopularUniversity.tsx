@@ -4,47 +4,24 @@ import { Scrollbar } from 'swiper';
 import PopularItem from './PopularItem';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
-// import './popular.module.css';
 
-const defaultProps = [
-  {
-    img: 'hanyang',
-    name: '한양대학교',
-    major: '스포츠사이언스학과',
-    number: 1,
-  },
-  {
-    img: 'hanyang',
-    name: '한양대학교',
-    major: '스포츠사이언스학과',
-    number: 2,
-  },
-  {
-    img: 'hanyang',
-    name: '한양대학교',
-    major: '스포츠사이언스학과',
-    number: 3,
-  },
-  {
-    img: 'hanyang',
-    name: '한양대학교',
-    major: '스포츠사이언스학과',
-    number: 4,
-  },
-  {
-    img: 'hanyang',
-    name: '한양대학교',
-    major: '스포츠사이언스학과',
-    number: 5,
-  },
-];
+interface PopularlProps {
+  img: string;
+  name: string;
+  major: string;
+  number: number;
+}
 
-const PopularUniversity = () => {
+interface Props {
+  data: Array<PopularlProps>;
+}
+
+const PopularUniversity = (props: Props) => {
   return (
     <Container>
       <Title>실시간 인기 대학 · 학과</Title>
       <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
-        {defaultProps.map(item => (
+        {props.data.map(item => (
           <SwiperSlide key={`pupularUniv-${item.number}`}>
             <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} />
           </SwiperSlide>
@@ -55,6 +32,41 @@ const PopularUniversity = () => {
 };
 
 export default PopularUniversity;
+
+PopularUniversity.defaultProps = {
+  data: [
+    {
+      img: 'hanyang',
+      name: '한양대학교',
+      major: '스포츠사이언스학과',
+      number: 1,
+    },
+    {
+      img: 'hanyang',
+      name: '한양대학교',
+      major: '스포츠사이언스학과',
+      number: 2,
+    },
+    {
+      img: 'hanyang',
+      name: '한양대학교',
+      major: '스포츠사이언스학과',
+      number: 3,
+    },
+    {
+      img: 'hanyang',
+      name: '한양대학교',
+      major: '스포츠사이언스학과',
+      number: 4,
+    },
+    {
+      img: 'hanyang',
+      name: '한양대학교',
+      major: '스포츠사이언스학과',
+      number: 5,
+    },
+  ],
+};
 
 const Container = styled.div`
   width: 492px;
