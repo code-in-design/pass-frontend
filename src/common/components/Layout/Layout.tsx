@@ -25,13 +25,16 @@ const LayoutWrapper = styled.div`
 
 const BodyWrapper = styled.div`
   width: 100%;
+  height: 100vh;
   padding-bottom: 32px;
   padding-right: 32px;
 `;
 
 const ChildrenWrapper = styled.div`
   width: 100%;
-  height: 880px;
+  height: calc(100vh - 144px);
+  overflow-y: auto;
+  /* height: 880px; */
   border-radius: 24px;
   background-color: #f3f4fa;
   padding: 40px;

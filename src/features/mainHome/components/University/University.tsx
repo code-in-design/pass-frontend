@@ -52,7 +52,8 @@ University.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 492px;
+  min-width: 492px;
+  width: 100%;
 `;
 
 const Title = styled.div`
@@ -90,5 +91,3 @@ const Description = styled.span`
   letter-spacing: -0.02em;
   color: #6b77f8;
 `;
-
-const UniversityList = styled.ul``;

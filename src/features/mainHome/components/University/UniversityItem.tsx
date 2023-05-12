@@ -36,6 +36,7 @@ const UniversityItem: React.FC<Props> = props => {
 export default UniversityItem;
 
 const ItemWrapper = styled.div`
+  width: 100%;
   height: 68px;
   border-radius: 16px;
   padding: 10px 16px;
@@ -95,6 +96,7 @@ const ScoreName = styled.div`
   letter-spacing: -1.7px;
   color: #9395a6;
   margin-bottom: 4px;
+  text-align: center;
 `;
 
 const Score = styled.div`

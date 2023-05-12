@@ -21,7 +21,6 @@ const Update = (props: Props) => {
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
         <Select size="sm" className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} />
-        {/* <StyledSelectSmall className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} /> */}
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
@@ -49,7 +48,8 @@ Update.defaultProps = {
 export default Update;
 
 const Container = styled.div`
-  width: 492px;
+  min-width: 492px;
+  width: 100%;
   margin-top: 32px;
 `;
 

@@ -69,7 +69,8 @@ PopularUniversity.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 492px;
+  min-width: 492px;
+  width: 100%;
   margin-top: 32px;
 `;
 
@@ -83,7 +84,8 @@ const Title = styled.div`
 `;
 
 const CustomSwiper = styled(Swiper)`
-  width: 492px;
+  min-width: 492px;
+  width: 100%;
   height: 152px;
   padding: 13px 16px 16px;
   background-color: #fff;

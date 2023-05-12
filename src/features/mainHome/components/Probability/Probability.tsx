@@ -58,13 +58,14 @@ const Title = styled.div`
 
 const Contents = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 492px;
+  gap: 0 13px;
+  min-width: 492px;
+  width: 100%;
   height: 256px;
 `;
 
 const ContentsLeft = styled.div`
-  width: calc(479px / 2);
+  width: 50%;
   height: 100%;
   border-radius: 16px;
   background-color: #dadcff;
@@ -96,6 +97,6 @@ const ContentsLeftImg = styled.img`
 `;
 
 const ContentsRight = styled.div`
-  width: calc(479px / 2);
+  width: 50%;
   height: 100%;
 `;

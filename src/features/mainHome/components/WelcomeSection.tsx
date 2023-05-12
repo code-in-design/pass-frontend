@@ -55,25 +55,25 @@ const SubTitle = styled.span`
 const MenuList = styled.div`
   display: flex;
   margin-top: 24px;
-  width: 492px;
+  width: 100%;
+  gap: 0 12px;
 `;
 
 const MenuListItem = styled.div`
   display: flex;
-  width: 240px;
+  min-width: 240px;
+  width: 50%;
   height: 132px;
   border-radius: 16px;
   background-color: #6b77f8;
   box-shadow: 4px 14px 24px -16px #6b77f8;
   padding: 20px;
-  margin-right: 12px;
   background-repeat: no-repeat;
   background-position: bottom 5px right 12px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
   &:last-of-type {
-    margin-right: 0;
     background-color: #60c8de;
     box-shadow: 4px 14px 24px -16px #60c8de;
   }
@@ -114,8 +114,8 @@ const RectangleBottom = styled.div`
   width: 177.21px;
   height: 34px;
   position: absolute;
-  left: 111.37px;
-  top: 75px;
+  right: -50px;
+  bottom: 29px;
   background: #ffffff;
   opacity: 0.1;
   transform: rotate(-40.56deg);
@@ -125,8 +125,8 @@ const RectangleTop = styled.div`
   width: 144px;
   height: 34px;
   position: absolute;
-  left: 147px;
-  top: 20px;
+  right: -50px;
+  bottom: 80px;
   background: #ffffff;
   opacity: 0.05;
   transform: rotate(-127.25deg);

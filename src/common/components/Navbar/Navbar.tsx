@@ -31,7 +31,7 @@ export const Navbar = () => {
 
 const NavWrapper = styled.nav`
   width: 288px;
-  height: auto;
+  height: 100vh;
   padding: 34px 32px 40px;
   background-color: #fff;
   display: flex;

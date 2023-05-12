@@ -73,7 +73,8 @@ const Title = styled.div`
 `;
 
 const MenuList = styled.ul`
-  width: 492px;
+  min-width: 492px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 8px;

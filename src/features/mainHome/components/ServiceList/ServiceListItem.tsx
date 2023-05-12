@@ -18,7 +18,8 @@ const ServiceListItem: React.FC<Props> = props => {
 export default ServiceListItem;
 
 const MenuListItem = styled.li`
-  width: 239.5px;
+  min-width: 239.5px;
+  width: 100%;
   height: 54px;
   background-color: #fff;
   border: 1px solid #fff;
