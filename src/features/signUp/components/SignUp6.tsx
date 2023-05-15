@@ -4,7 +4,7 @@ interface Props {
   onPrevButtonClick: () => void;
 }
 
-const SignUp6: React.FC<Props> = props => {
+const SignUp6 = (props: Props) => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -28,7 +28,7 @@ const SignUp6: React.FC<Props> = props => {
           추천코드 입력
         </Text>
         <Box position="relative">
-          <Input variant="base" placeholder="추천코드를 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} />
+          <Input variant="base" placeholder="추천코드를 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" />
           <Image src="/images/icons/enterArrow.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Box display="flex" alignItems="flex-end" marginTop="16px">

@@ -6,7 +6,7 @@ export const StyledSelect = styled(Select)`
     &-container {
       font-size: 16px;
       font-weight: 600;
-      color: #626474;
+      color: #353644;
       .react-select__control {
         height: 56px;
         border-radius: 16px;
@@ -67,7 +67,7 @@ export const StyledSelectMiddle = styled(Select)`
     &-container {
       font-size: 14px;
       font-weight: 600;
-      color: #626474;
+      color: #353644;
       line-height: 16px;
       .react-select-middle__control {
         width: 315px;
@@ -131,7 +131,7 @@ export const StyledSelectSmall = styled(Select)`
       font-size: 12px;
       font-weight: 500;
       line-height: 16px;
-      color: #626474;
+      color: #353644;
       .react-select-small__control {
         height: 28px;
         border-radius: 8px;

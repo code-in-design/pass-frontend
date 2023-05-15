@@ -18,7 +18,6 @@ const SignUpContainer = () => {
 
   return (
     <>
-      {/* {step === 1 && <SignUp onNextButtonClick={goNextStep} />} */}
       {step === 1 && <SignUp onNextButtonClick={goNextStep} />}
       {step === 2 && <SignUp2 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
       {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}

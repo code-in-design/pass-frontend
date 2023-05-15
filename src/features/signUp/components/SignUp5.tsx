@@ -1,24 +1,14 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import Select from '@/common/components/Select/Select';
 
-const gender = [
-  { value: 'male', label: '남성' },
-  { value: 'female', label: '여성' },
-];
-
-const grade = [
-  { value: '1', label: '고1' },
-  { value: '2', label: '고2' },
-  { value: '3', label: '고3' },
-  { value: '4', label: '재수 이상' },
-];
-
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
+  gender: { value: string; label: string }[];
+  grade: { value: string; label: string }[];
 }
 
-const SignUp5: React.FC<Props> = props => {
+const SignUp5 = (props: Props) => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -43,22 +33,20 @@ const SignUp5: React.FC<Props> = props => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               성별
             </Text>
-            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" /> */}
-            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={gender} placeholder="성별 선택" />
+            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={props.gender} placeholder="성별 선택" />
           </Box>
           <Box width="100%">
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" /> */}
-            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={grade} placeholder="학년 선택" />
+            <Select size="lg" className="react-select-container" classNamePrefix="react-select" options={props.grade} placeholder="학년 선택" />
           </Box>
         </Flex>
         <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474" marginTop="24px">
           비밀번호 입력
         </Text>
         <Box position="relative">
-          <Input variant="base" type="password" placeholder="8자 이상으로 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} />
+          <Input variant="base" type="password" placeholder="8자 이상으로 입력해주세요" padding="18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" />
           <Image src="/images/icons/lock.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Flex gap="12px" marginTop="auto">
@@ -75,3 +63,16 @@ const SignUp5: React.FC<Props> = props => {
 };
 
 export default SignUp5;
+
+SignUp5.defaultProps = {
+  gender: [
+    { value: 'male', label: '남성' },
+    { value: 'female', label: '여성' },
+  ],
+  grade: [
+    { value: '1', label: '1학년' },
+    { value: '2', label: '2학년' },
+    { value: '3', label: '3학년' },
+    { value: '4', label: '재수 이상' },
+  ],
+};

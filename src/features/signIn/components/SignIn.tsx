@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, createMultiStyleConfigHelpers, ChakraProvider, Image, Spacer, defineStyle, extendTheme } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
 
 const SignIn = () => {
   return (

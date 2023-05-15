@@ -6,7 +6,7 @@ interface Props {
   onPrevButtonClick: () => void;
 }
 
-const SignUp2: React.FC<Props> = props => {
+const SignUp2 = (props: Props) => {
   const [active, setActive] = useState([false, false, false]);
 
   return (
@@ -105,7 +105,7 @@ const SignUp2: React.FC<Props> = props => {
             교육자입니다
           </Box>
         </Button>
-        <Flex borderRadius="16px" padding="12px 0 12px 16px" backgroundColor="rgba(96, 200, 222, 0.1)" alignItems="center" w="100%">
+        <Flex borderRadius="16px" padding="12px 0 12px 16px" backgroundColor="rgba(96, 200, 222, 0.1)" alignItems="center" w="100%" fontSize="14px">
           <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="20px" h="20px" />
           <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE" letterSpacing="-0.02em">
             현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
