@@ -6,10 +6,10 @@ interface Props {
   title: string;
 }
 
-const ProbabilityItem: React.FC<Props> = props => {
+const ProbabilityItem = (props: Props) => {
   return (
     <ProbabilityItemContainer>
-      <ProbabilityItemImg src={`/images/icons/${props.img}.svg`} alt={props.img} />
+      <ProbabilityItemImg src={props.img} alt={props.title} />
       <ProbabilityItemTexts>
         <ProbabilityItemName>{props.name}</ProbabilityItemName>
         <ProbabilityItemTitle>{props.title}</ProbabilityItemTitle>

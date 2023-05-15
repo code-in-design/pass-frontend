@@ -1,25 +1,11 @@
 import styled from '@emotion/styled';
 import ProbabilityItem from './ProbabilityItem';
 
-const rightMenu = [
-  {
-    img: 'probability1',
-    name: '민중쌤의',
-    title: '지원 가능성 comment',
-  },
-  {
-    img: 'probability2',
-    name: '민중쌤의',
-    title: '합격 가능성 comment',
-  },
-  {
-    img: 'probability3',
-    name: '김민중 선생님',
-    title: '프로필 바로가기',
-  },
-];
+interface Props {
+  probabilityMenu: { img: string; name: string; title: string }[];
+}
 
-const Probability: React.FC = () => {
+const Probability = (props: Props) => {
   return (
     <Container>
       <Title>지원가능성 & 합격 확률</Title>
@@ -33,7 +19,7 @@ const Probability: React.FC = () => {
           <ContentsLeftImg src="/images/icons/probabilityTeacher.svg" alt="teacherImg" />
         </ContentsLeft>
         <ContentsRight>
-          {rightMenu.map(item => (
+          {props.probabilityMenu.map(item => (
             <ProbabilityItem key={`probability-${item.img}`} img={item.img} name={item.name} title={item.title} />
           ))}
         </ContentsRight>
@@ -43,6 +29,26 @@ const Probability: React.FC = () => {
 };
 
 export default Probability;
+
+Probability.defaultProps = {
+  probabilityMenu: [
+    {
+      img: '/images/icons/probability1.svg',
+      name: '민중쌤의',
+      title: '지원 가능성 comment',
+    },
+    {
+      img: '/images/icons/probability2.svg',
+      name: '민중쌤의',
+      title: '합격 가능성 comment',
+    },
+    {
+      img: '/images/icons/probability3.svg',
+      name: '김민중 선생님',
+      title: '프로필 바로가기',
+    },
+  ],
+};
 
 const Container = styled.div`
   margin-top: 32px;
@@ -91,6 +97,7 @@ const ContentsLeftName = styled.div`
 `;
 
 const ContentsLeftImg = styled.img`
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;

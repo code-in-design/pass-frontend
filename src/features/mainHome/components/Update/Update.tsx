@@ -2,17 +2,13 @@ import styled from '@emotion/styled';
 import UpdateItem from './UpdateItem';
 import Select from '@/common/components/Select/Select';
 
-const update = [
-  { value: 'v1', label: '2023/05/10-13:32' },
-  { value: 'v2', label: '2023/06/20-13:32' },
-];
-
 interface ContentProps {
   content: string;
   id: number;
 }
 interface Props {
   data: Array<ContentProps>;
+  upgrade: { value: string; label: string }[];
 }
 
 const Update = (props: Props) => {
@@ -20,7 +16,7 @@ const Update = (props: Props) => {
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <Select size="sm" className="react-select-small-container" classNamePrefix="react-select-small" options={update} defaultValue={update[0]} />
+        <Select size="sm" options={props.upgrade} defaultValue={props.upgrade[0]} />
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
@@ -43,6 +39,10 @@ Update.defaultProps = {
     { content: '체육 대학 합격은 패스입니다.', id: 3 },
     { content: '체육 대학 합격은 패스입니다.', id: 4 },
     { content: '체육 대학 합격은 패스입니다.', id: 5 },
+  ],
+  upgrade: [
+    { value: 'v1', label: '2023/05/10-13:32' },
+    { value: 'v2', label: '2023/06/20-13:32' },
   ],
 };
 export default Update;

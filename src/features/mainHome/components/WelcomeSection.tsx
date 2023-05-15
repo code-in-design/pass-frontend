@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const WelcomeSection: React.FC = () => {
+const WelcomeSection = () => {
   return (
     <Container>
       <MainTitle>

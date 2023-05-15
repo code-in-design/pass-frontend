@@ -34,6 +34,7 @@ const MembershipModal = (props: Props) => {
 };
 
 export default MembershipModal;
+
 MembershipModal.defaultProps = {
   data: [
     {
@@ -43,7 +44,7 @@ MembershipModal.defaultProps = {
       text: '를 무제한 합격 예측 할 수 있습니다.',
       button: '평생 무료',
       descriptions: ['대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 '],
-      img: 'basicIcon',
+      img: '/images/icons/basicIcon.svg',
     },
     {
       name: 'Light',
@@ -52,7 +53,7 @@ MembershipModal.defaultProps = {
       text: '를 무제한 합격 예측 할 수 있습니다.',
       button: '지금 시작하기',
       descriptions: ['대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 '],
-      img: 'lightIcon',
+      img: '/images/icons/lightIcon.svg',
     },
     {
       name: 'Premium',
@@ -61,7 +62,7 @@ MembershipModal.defaultProps = {
       text: '를 무제한 합격 예측 할 수 있습니다.',
       button: '지금 시작하기',
       descriptions: ['대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 ', '대학 찾기 · 세부 필터링 '],
-      img: 'premiumIcon',
+      img: '/images/icons/premiumIcon.svg',
     },
   ],
 };

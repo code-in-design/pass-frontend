@@ -4,7 +4,7 @@ interface Props {
   content: string;
 }
 
-const UpdateItem: React.FC<Props> = props => {
+const UpdateItem = (props: Props) => {
   return (
     <UpdateItemWrapper>
       <Dot />

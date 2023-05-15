@@ -7,57 +7,63 @@ import FinalUnivModal from '../FinalUnivModal/FinalUnivModal';
 const ThumbUpModal = dynamic(import('./ServiceModal/ThumbUpModal'), { ssr: false });
 const MembershipModal = dynamic(import('./ServiceModal/Membership/MembershipModal'), { ssr: false });
 
-const menuList = [
-  {
-    img: 'help',
-    text: '서비스 소개',
-  },
-  {
-    img: 'badge',
-    text: '멤버십 안내',
-  },
-  {
-    img: 'panelSettings',
-    text: '개인정보 보호 안내',
-  },
-  {
-    img: 'thumbUp',
-    text: '추천하기 / 받기',
-  },
-];
+interface Props {
+  list: { img: string; text: string }[];
+}
 
-const ServiceList: React.FC = () => {
-  const [service, setService] = useState('');
+const ServiceList = (props: Props) => {
+  const [currentMenu, setCurrentMenu] = useState('');
 
   const openModal = useCallback(
     (text: string) => {
-      setService(text);
+      setCurrentMenu(text);
     },
-    [service],
+    [currentMenu],
   );
 
   const closeModal = useCallback(() => {
-    setService('');
-  }, [service]);
+    setCurrentMenu('');
+  }, [currentMenu]);
 
   return (
     <>
       <Container>
         <Title>서비스 바로가기</Title>
         <MenuList>
-          {menuList.map(item => (
+          {props.list.map(item => (
             <ServiceListItem key={`goService-${item.img}`} img={item.img} text={item.text} onClickService={openModal} />
           ))}
         </MenuList>
       </Container>
-      {menuList[0].text === service && <FinalUnivModal onClickClose={closeModal} />}
-      {menuList[1].text === service && <MembershipModal onClickClose={closeModal} />}
-      {menuList[3].text === service && <ThumbUpModal onClickClose={closeModal} />}
+      {props.list[0].text === currentMenu && <FinalUnivModal onClickClose={closeModal} />}
+      {props.list[1].text === currentMenu && <MembershipModal onClickClose={closeModal} />}
+      {props.list[3].text === currentMenu && <ThumbUpModal onClickClose={closeModal} />}
     </>
   );
 };
 
 export default ServiceList;
+
+ServiceList.defaultProps = {
+  list: [
+    {
+      img: '/images/icons/help.svg',
+      text: '서비스 소개',
+    },
+    {
+      img: '/images/icons/badge.svg',
+      text: '멤버십 안내',
+    },
+    {
+      img: '/images/icons/panelSettings.svg',
+      text: '개인정보 보호 안내',
+    },
+    {
+      img: '/images/icons/thumbUp.svg',
+      text: '추천하기 / 받기',
+    },
+  ],
+};
 
 const Container = styled.div`
   font-size: 16px;

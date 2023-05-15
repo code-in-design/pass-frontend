@@ -20,18 +20,15 @@ const FinalUnivModal = (props: Props) => {
         <SelectSection>
           <SelectWrapper>
             <SelectText>가군 지원대학</SelectText>
-            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
-            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+            <Select size="md" options={[]} placeholder="대학·학과 선택" />
           </SelectWrapper>
           <SelectWrapper>
             <SelectText>나군 지원대학</SelectText>
-            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
-            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+            <Select size="md" options={[]} placeholder="대학·학과 선택" />
           </SelectWrapper>
           <SelectWrapper>
             <SelectText>다군 지원대학</SelectText>
-            <Select size="md" className="react-select-middle-container" classNamePrefix="react-select-middle" options={[]} placeholder="대학·학과 선택" />
-            {/* <StyledSelect className="react-select-container" classNamePrefix="react-select" placeholder="대학·학과 선택" /> */}
+            <Select size="md" options={[]} placeholder="대학·학과 선택" />
           </SelectWrapper>
         </SelectSection>
         <Button>선택 완료</Button>

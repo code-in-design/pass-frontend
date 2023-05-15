@@ -6,10 +6,12 @@ type Props = {
   title: string;
 };
 
-const NavbarItem: React.FC<Props> = props => {
+const NavbarItem = (props: Props) => {
   return (
     <MenuListItem>
-      <MenuImg src={`/images/icons/${props.img}.svg`} alt={props.img} />
+      <ImageWrapper>
+        <MenuImg src={props.img} alt={props.img} />
+      </ImageWrapper>
       <MenuTitle>{props.title}</MenuTitle>
     </MenuListItem>
   );
@@ -36,12 +38,15 @@ const MenuListItem = styled.li`
   }
 `;
 
-const MenuImg = styled.img`
+const ImageWrapper = styled.div`
   width: 24px;
   height: 24px;
   display: block;
+  fill: '#737C89';
   margin-right: 8px;
 `;
+
+const MenuImg = styled.img``;
 
 const MenuTitle = styled.span`
   font-size: 16px;

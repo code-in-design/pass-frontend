@@ -7,14 +7,14 @@ interface Props {
   number: number;
 }
 
-const PopularItem: React.FC<Props> = props => {
+const PopularItem = (props: Props) => {
   return (
     <Container>
       <ImageWrapper>
         {props.number === 1 ? <PopularImg src="/images/icons/popularMain.svg" alt="popularIcon" /> : <PopularImg src="/images/icons/popular.svg" alt="popularIcon" />}
         {props.number === 1 ? <PupularIdx color="#fff">{props.number}</PupularIdx> : <PupularIdx>{props.number}</PupularIdx>}
       </ImageWrapper>
-      <PopularLogo src={`/images/icons/univ/${props.img}.svg`} alt={props.img} />
+      <PopularLogo src={props.img} alt={props.img} />
       <PopularName>{props.name}</PopularName>
       <PopularMajor>{props.major}</PopularMajor>
     </Container>

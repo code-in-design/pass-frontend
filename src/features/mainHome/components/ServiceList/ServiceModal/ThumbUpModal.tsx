@@ -5,7 +5,7 @@ interface Props {
   onClickClose: () => void;
 }
 
-const ThumbUpModal: React.FC<Props> = props => {
+const ThumbUpModal = (props: Props) => {
   return (
     <ModalLayout onCloseClick={props.onClickClose}>
       <Title>내 초대 코드</Title>

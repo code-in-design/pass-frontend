@@ -4,7 +4,7 @@ import { CardProps } from './MembershipModal';
 const Card = (props: CardProps) => {
   return (
     <CardWrapper color={props.name}>
-      <CardIcon src={`/images/icons/${props.img}.svg`} alt={props.img} />
+      <CardIcon src={props.img} alt={props.img} />
       <MembershipName>{props.name}</MembershipName>
       <MembershipPrice>
         <PriceIcon>&#x20a9;</PriceIcon>

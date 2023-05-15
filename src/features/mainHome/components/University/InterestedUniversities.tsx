@@ -13,7 +13,7 @@ interface Props {
   data: Array<UniverProps>;
 }
 
-const University = (props: Props) => {
+const InterestedUniversities = (props: Props) => {
   return (
     <Container>
       <Title>나의관심대학</Title>
@@ -30,9 +30,9 @@ const University = (props: Props) => {
   );
 };
 
-export default University;
+export default InterestedUniversities;
 
-University.defaultProps = {
+InterestedUniversities.defaultProps = {
   data: [
     {
       logo: 'hanyang',

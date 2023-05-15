@@ -2,22 +2,18 @@ import NavbarItem from './NavbarItem';
 import { useNavbar } from './useNavbar';
 import styled from '@emotion/styled';
 
-const menuList = [
-  { img: 'home', title: '메인홈' },
-  { img: 'editSquare', title: '내 점수 입력하기' },
-  { img: 'school', title: '대학찾기' },
-  { img: 'analytics', title: '합격분석' },
-  { img: 'settings', title: '환경설정' },
-];
+interface Props {
+  menuList: { img: string; title: string }[];
+}
 
-export const Navbar = () => {
+export const Navbar = (props: Props) => {
   const { rootProps } = useNavbar();
 
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" />
       <MenuList>
-        {menuList.map(item => (
+        {props.menuList.map(item => (
           <NavbarItem key={`nav-${item.img}`} img={item.img} title={item.title} />
         ))}
       </MenuList>
@@ -27,6 +23,16 @@ export const Navbar = () => {
       </LogOut>
     </NavWrapper>
   );
+};
+
+Navbar.defaultProps = {
+  menuList: [
+    { img: '/images/icons/home.svg', title: '메인홈' },
+    { img: '/images/icons/editSquare.svg', title: '내 점수 입력하기' },
+    { img: '/images/icons/school.svg', title: '대학찾기' },
+    { img: '/images/icons/analytics.svg', title: '합격분석' },
+    { img: '/images/icons/settings.svg', title: '환경설정' },
+  ],
 };
 
 const NavWrapper = styled.nav`

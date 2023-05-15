@@ -6,10 +6,10 @@ interface Props {
   onClickService: (text: string) => void;
 }
 
-const ServiceListItem: React.FC<Props> = props => {
+const ServiceListItem = (props: Props) => {
   return (
     <MenuListItem onClick={() => props.onClickService(props.text)}>
-      <MenuImg src={`/images/icons/${props.img}.svg`} />
+      <MenuImg src={props.img} />
       <MenuTitle>{props.text}</MenuTitle>
     </MenuListItem>
   );

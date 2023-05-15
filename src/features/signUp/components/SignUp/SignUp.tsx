@@ -14,7 +14,7 @@ interface Props {
   onNextButtonClick: () => void;
 }
 
-const SignUp: React.FC<Props> = (props: Props) => {
+const SignUp = (props: Props) => {
   const { register, handleSubmit, control, setValue } = useForm();
   const checkboxItems = ['age', 'terms', 'privacy', 'marketing', 'event'];
   const [openTerm, setOpenTerm] = useState([false, false, false]);

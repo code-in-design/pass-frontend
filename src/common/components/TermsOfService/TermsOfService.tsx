@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 import styled from '@emotion/styled';
 
-const TermsOfService: React.FC = props => {
+const TermsOfService = props => {
   const { register, handleSubmit, control, setValue } = useForm();
   const checkboxItems = ['age', 'terms', 'privacy', 'marketing', 'event'];
 

@@ -9,7 +9,7 @@ interface Props {
   result: string;
 }
 
-const UniversityItem: React.FC<Props> = props => {
+const UniversityItem = (props: Props) => {
   return (
     <ItemWrapper>
       <UnivWrapper>
