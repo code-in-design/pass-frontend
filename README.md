@@ -8,7 +8,7 @@
 
 # 폴더링 구조
 
-- `/src`
+<!-- - `/src`
   - `index.tsx`: 메인페이지
   - `/app`: 프로젝트에 글로벌한 영향을 미치는 것들
     - `store.ts`: redux store 설정
@@ -19,7 +19,20 @@
       - `/components`: 컴포넌트는 여러개의 작은 컴포넌트로 나뉠 수 있어서 한번 더 폴더링함
         - `Posts.tsx`: Dumb Component (단순 UI를 보여주는 역할만함, 비즈니스 로직이 포함되면 안됨)
       - `PostsContainer.tsx`: 컨테이너 컴포넌트는 비즈니스 로직을 다루며, API Fetch, 조건에 따른 UI 렌더링 분기 등을 처리한다.
-      - `postsApi.ts`: 서버 데이터 비동기 처리를 위한 API 파일 (RTK Query)
+      - `postsApi.ts`: 서버 데이터 비동기 처리를 위한 API 파일 (RTK Query) -->
+
+- `/src`
+  - `/components` : 공통적으로 사용되는 것들(종속적이지 않은 것들)
+    - `/Header/index.tsx`
+    - `/Navbar/index.tsx`
+  - `features` : 종속적인것들 끼리 묶어 기능별로 폴더링
+    - `/auth` : 하나의 기능 폴더 (auth와 관련된것들을 묶는다.)
+      - `/components` : 컴포넌트는 여러개의 작은 컴포넌트로 나뉠 수 있어서 한번 더 폴더링함
+      - `/containers` : 컨테이너 컴포넌트는 비즈니스 로직을 다루며, API Fetch, 조건에 따른 UI 렌더링 분기 등을 처리한다.
+  - `models` : 서버 데이터를 정의한다.
+    - `UserModel.ts`
+  - `pages` : nextjs에서 라우팅으로 사용되는 pages폴더가 아닌, 페이지를 보여주는 역할
+    - `/signIn/index.tsx`
 
 # 네이밍
 

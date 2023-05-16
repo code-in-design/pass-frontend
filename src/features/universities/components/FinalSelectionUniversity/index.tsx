@@ -1,15 +1,27 @@
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
-import Select from '@/components/Select/Select';
+import Select from '@/components/Select';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { useState } from 'react';
 
 interface Props {
   onClickClose: () => void;
+  first: { value: string; label: string }[];
+  second: { value: string; label: string }[];
+  third: { value: string; label: string }[];
 }
 
 const FinalSelectionUniversity = (props: Props) => {
+  const { handleSubmit, register, getValues } = useForm();
+  const [applyUniversity, setApplyUniversity] = useState([]);
+
+  const onSubmit = (data: any) => {
+    // console.log(data);
+  };
+
   return (
     <ModalLayout onCloseClick={props.onClickClose}>
-      <Container>
+      <Container onClick={handleSubmit(onSubmit)}>
         <Title>최종 지원 대학 선정</Title>
 
         <SubTitle>최종적으로 지원한 대학을 선택하고 실기 기록에 따른 합격 확률을 계속 살펴볼 수 있어요!</SubTitle>
@@ -20,15 +32,32 @@ const FinalSelectionUniversity = (props: Props) => {
         <SelectSection>
           <SelectWrapper>
             <SelectText>가군 지원대학</SelectText>
-            <Select size="md" options={[]} placeholder="대학·학과 선택" />
+            <Select
+              size="md"
+              options={props.first}
+              placeholder="대학·학과 선택"
+              {...register('first')}
+              onChange={e => {
+                // console.log(e.target.value);
+              }}
+            />
+            {/* <Select {...register('first')}>
+              {props.first.map(value => (
+                <option key={value.value} value={value.value}>
+                  {value.label}
+                </option>
+              ))} */}
+            {/* </Select> */}
           </SelectWrapper>
           <SelectWrapper>
             <SelectText>나군 지원대학</SelectText>
-            <Select size="md" options={[]} placeholder="대학·학과 선택" />
+            {/* <Select size="md" options={props.second} placeholder="대학·학과 선택" /> */}
+            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('second')} /> */}
           </SelectWrapper>
           <SelectWrapper>
             <SelectText>다군 지원대학</SelectText>
-            <Select size="md" options={[]} placeholder="대학·학과 선택" />
+            {/* <Select size="md" options={props.third} placeholder="대학·학과 선택" /> */}
+            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('third')} /> */}
           </SelectWrapper>
         </SelectSection>
         <Button>선택 완료</Button>
@@ -39,7 +68,40 @@ const FinalSelectionUniversity = (props: Props) => {
 
 export default FinalSelectionUniversity;
 
-const Container = styled.div`
+FinalSelectionUniversity.defaultProps = {
+  first: [
+    {
+      value: '한양대학교 스포츠 사이언스 전공',
+      label: '한양대학교 스포츠 사이언스 전공',
+    },
+    {
+      value: '서울대학교 스포츠 사이언스 전공',
+      label: '서울대학교 스포츠 사이언스 전공',
+    },
+  ],
+  second: [
+    {
+      value: '한양대학교 스포츠 사이언스 전공',
+      label: '한양대학교 스포츠 사이언스 전공',
+    },
+    {
+      value: '서울대학교 스포츠 사이언스 전공',
+      label: '서울대학교 스포츠 사이언스 전공',
+    },
+  ],
+  third: [
+    {
+      value: '한양대학교 스포츠 사이언스 전공',
+      label: '한양대학교 스포츠 사이언스 전공',
+    },
+    {
+      value: '서울대학교 스포츠 사이언스 전공',
+      label: '서울대학교 스포츠 사이언스 전공',
+    },
+  ],
+};
+
+const Container = styled.form`
   width: 432px;
 `;
 
@@ -90,6 +152,7 @@ const SelectSection = styled.div`
 const SelectWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 8px;
   &:last-of-type {
     margin-bottom: 0;
@@ -100,7 +163,6 @@ const SelectText = styled.div`
   line-height: 20px;
   font-weight: 700;
   color: #626474;
-  margin-right: 32px;
   letter-spacing: -0.02em;
 `;
 
@@ -115,3 +177,5 @@ const Button = styled.button`
   font-weight: 700;
   line-height: 20px;
 `;
+
+// const Select = styled.select``;

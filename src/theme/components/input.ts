@@ -1,4 +1,3 @@
-import { Placeholder } from './../../common/components/Placeholder/Placeholder';
 import { inputAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system';
 

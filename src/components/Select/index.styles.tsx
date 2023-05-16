@@ -1,40 +1,40 @@
 import Select from 'react-select';
 import styled from '@emotion/styled';
 
-export const StyledSelect = styled(Select)`
-  &.react-select {
+export const StyledSelectLarge = styled(Select)`
+  &.react-select-large {
     &-container {
       font-size: 16px;
       font-weight: 600;
       color: #353644;
-      .react-select__control {
+      .react-select-large__control {
         height: 56px;
         border-radius: 16px;
         color: #e4e6f0;
         border: 1px solid #e4e6f0;
         box-shadow: 0 0 0 1px #e4e6f0;
-        .react-select__value-container {
+        .react-select-large__value-container {
           padding: 0;
           margin: 0;
           padding-left: 24px;
         }
       }
-      .react-select__control--menu-is-open {
+      .react-select-large__control--menu-is-open {
         border-radius: 16px 16px 0 0;
       }
 
-      .react-select__indicators {
+      .react-select-large__indicators {
         padding-right: 16px;
         .react-select__indicator-separator {
           display: none;
         }
       }
-      .react-select__menu {
+      .react-select-large__menu {
         border-radius: 0 0 16px 16px;
         margin: 0;
         &-list {
           padding: 0;
-          .react-select__option {
+          .react-select-large__option {
             padding: 18px 24px;
             height: 56px;
             &--is-selected {
@@ -62,7 +62,7 @@ export const StyledSelect = styled(Select)`
   }
 `;
 
-export const StyledSelectMiddle = styled(Select)`
+export const StyledSelectMedium = styled(Select)`
   &.react-select-middle {
     &-container {
       font-size: 14px;

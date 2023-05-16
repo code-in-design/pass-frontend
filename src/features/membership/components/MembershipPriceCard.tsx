@@ -18,7 +18,7 @@ const MembershipPriceCard = (props: CardProps) => {
       <CardDescription>
         <DescriptionTitle>{props.name}의 기본 기능 +</DescriptionTitle>
         {props.descriptions.map(item => (
-          <DescriptionItem>
+          <DescriptionItem key={`membership-price-card-${props.name}`}>
             <DescriptionItemIcon color={props.name}>&#x2713;</DescriptionItemIcon>
             <DescriptionText>{item}</DescriptionText>
           </DescriptionItem>

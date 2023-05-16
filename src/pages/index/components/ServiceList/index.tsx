@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import ServiceListItem from './ServiceListItem';
 import { useCallback, useState } from 'react';
-import dynamic from 'next/dynamic';
 import FinalSelectionUniversity from '../../../../features/universities/components/FinalSelectionUniversity';
-
-const ThumbUpModal = dynamic(import('../../../../features/recommendations/components/RecommendationModal'), { ssr: false });
-const MembershipModal = dynamic(import('../../../../features/membership/components/MembershipModal'), { ssr: false });
+import MembershipModal from '@/features/membership/components/MembershipModal';
+import RecommendationModal from '@/features/recommendations/components/RecommendationModal';
 
 interface Props {
   list: { img: string; text: string }[];
@@ -31,13 +29,13 @@ const ServiceList = (props: Props) => {
         <Title>서비스 바로가기</Title>
         <MenuList>
           {props?.list?.map(item => (
-            <ServiceListItem key={`goService-${item.img}`} img={item.img} text={item.text} onClickService={openModal} />
+            <ServiceListItem key={`serviceList-${item.text}`} img={item.img} text={item.text} onClickService={openModal} />
           ))}
         </MenuList>
       </Container>
       {props?.list?.[0]?.text === currentMenu && <FinalSelectionUniversity onClickClose={closeModal} />}
       {props?.list?.[1]?.text === currentMenu && <MembershipModal onClickClose={closeModal} />}
-      {props?.list?.[3]?.text === currentMenu && <ThumbUpModal onClickClose={closeModal} />}
+      {props?.list?.[3]?.text === currentMenu && <RecommendationModal onClickClose={closeModal} />}
     </>
   );
 };

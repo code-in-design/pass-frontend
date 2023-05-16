@@ -1,14 +1,10 @@
 import { Box, Flex, Text, Tooltip } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import dynamic from 'next/dynamic';
-import { Modal } from '@/components/Modal/Modal';
+import { Portal } from '@/components/Modal/Portal';
 import { FormWrapper, Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton, Divider } from './index.styles';
 import { terms, privercy, marketing } from './terms';
-
-const TermsModal = dynamic(import('./TermsModal'), {
-  ssr: false,
-});
+import TermsModal from './TermsModal';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -67,9 +63,9 @@ const SignUp1 = (props: Props) => {
 
   return (
     <>
-      {openTerm[0] && <Modal props={<TermsModal onCloseClick={closeModal} index={0} markdown={terms} title={'이용약관 동의'} />}></Modal>}
-      {openTerm[1] && <Modal props={<TermsModal onCloseClick={closeModal} index={1} markdown={privercy} title={'개인정보 수집 및 이용 동의'} />}></Modal>}
-      {openTerm[2] && <Modal props={<TermsModal onCloseClick={closeModal} index={2} markdown={marketing} title={'개인정보 마케팅 활용 동의'} />}></Modal>}
+      {openTerm[0] && <Portal props={<TermsModal onCloseClick={closeModal} index={0} markdown={terms} title={'이용약관 동의'} />}></Portal>}
+      {openTerm[1] && <Portal props={<TermsModal onCloseClick={closeModal} index={1} markdown={privercy} title={'개인정보 수집 및 이용 동의'} />}></Portal>}
+      {openTerm[2] && <Portal props={<TermsModal onCloseClick={closeModal} index={2} markdown={marketing} title={'개인정보 마케팅 활용 동의'} />}></Portal>}
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
           <Text fontSize="24px" lineHeight="32px" fontWeight={700} letterSpacing="-0.02px" marginBottom="16px">

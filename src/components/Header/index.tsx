@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const Header = props => {
+interface Props {
+  userName: string;
+  userAvatar: string;
+  membership: string;
+  userEmail: string;
+}
+
+const Header = (props: Props) => {
   return (
     <HeaderWrapper>
       <AlertWrapper>
@@ -9,13 +16,13 @@ const Header = props => {
         <AlertDot />
       </AlertWrapper>
       <UserWrapper>
-        <UserImage src="/images/user/user.png" alt="user" />
+        <UserImage src={props.userAvatar} alt="user" />
         <UserInfo>
           <UserNameWrapper>
-            <UserName>한치훈</UserName>
-            <UserLevel>Basic</UserLevel>
+            <UserName>{props.userName}</UserName>
+            <UserMembership>{props.membership}</UserMembership>
           </UserNameWrapper>
-          <UserEmail>gks3628@naver.com</UserEmail>
+          <UserEmail>{props.userEmail}</UserEmail>
         </UserInfo>
       </UserWrapper>
     </HeaderWrapper>
@@ -23,6 +30,13 @@ const Header = props => {
 };
 
 export default Header;
+
+Header.defaultProps = {
+  userName: '한치훈',
+  userAvatar: '/images/user/user.png',
+  membership: 'basic',
+  userEmail: 'gks3628@naver.com',
+};
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -83,7 +97,7 @@ const UserName = styled.span`
   color: #3b4555;
 `;
 
-const UserLevel = styled.div`
+const UserMembership = styled.div`
   margin-left: 8px;
   width: 45px;
   height: 20px;

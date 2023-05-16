@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 interface Props {
   img: string;
@@ -9,7 +10,9 @@ interface Props {
 const ProbabilityItem = (props: Props) => {
   return (
     <ProbabilityItemContainer>
-      <ProbabilityItemImg src={props.img} alt={props.title} />
+      <ProbabilityItemImg>
+        <Image src={props.img} alt={props.title} fill />
+      </ProbabilityItemImg>
       <ProbabilityItemTexts>
         <ProbabilityItemName>{props.name}</ProbabilityItemName>
         <ProbabilityItemTitle>{props.title}</ProbabilityItemTitle>
@@ -33,11 +36,11 @@ const ProbabilityItemContainer = styled.div`
   margin-bottom: 6px;
 `;
 
-const ProbabilityItemImg = styled.img`
+const ProbabilityItemImg = styled.div`
+  position: relative;
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  display: block;
 `;
 
 const ProbabilityItemTexts = styled.div`

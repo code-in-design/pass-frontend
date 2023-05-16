@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export const Modal = ({ props }) => {
+export const Portal = ({ props }) => {
   const [isCSR, setIsCSR] = useState<boolean>(false);
 
   useEffect(() => {

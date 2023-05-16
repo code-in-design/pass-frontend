@@ -12,6 +12,7 @@ const NavbarItem = (props: Props) => {
       <ImageWrapper>
         <MenuImg src={props.img} alt={props.img} />
       </ImageWrapper>
+
       <MenuTitle>{props.title}</MenuTitle>
     </MenuListItem>
   );
@@ -42,11 +43,17 @@ const ImageWrapper = styled.div`
   width: 24px;
   height: 24px;
   display: block;
-  fill: '#737C89';
   margin-right: 8px;
 `;
 
-const MenuImg = styled.img``;
+const MenuImg = styled.img`
+  & > path {
+    fill: #737c89;
+    & :hover {
+      fill: white;
+    }
+  }
+`;
 
 const MenuTitle = styled.span`
   font-size: 16px;

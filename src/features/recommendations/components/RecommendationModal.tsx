@@ -1,20 +1,26 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import styled from '@emotion/styled';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 interface Props {
   onClickClose: () => void;
 }
 
 const RecommendationModal = (props: Props) => {
+  const [myCode, setMyCode] = useState('ABCD10');
+
   return (
     <ModalLayout onCloseClick={props.onClickClose}>
       <Title>내 초대 코드</Title>
       <CodeWrapper>
-        <Code>ABCD10</Code>
-        <CodeCopy>
-          <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
-          <CodeCopyText>코드복사</CodeCopyText>
-        </CodeCopy>
+        <Code>{myCode}</Code>
+        <CopyToClipboard text={myCode}>
+          <CodeCopy>
+            <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
+            <CodeCopyText>코드복사</CodeCopyText>
+          </CodeCopy>
+        </CopyToClipboard>
       </CodeWrapper>
       <Description>
         추천 코드를 입력할 경우,

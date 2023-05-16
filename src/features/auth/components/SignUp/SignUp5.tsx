@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import Select from '@/components/Select/Select';
+import Select from '@/components/Select';
 
 interface Props {
   onNextButtonClick: () => void;

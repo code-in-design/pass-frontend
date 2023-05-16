@@ -1,6 +1,6 @@
 import React, { HTMLProps } from 'react';
-import { Navbar } from '../Navbar/Navbar';
-import Header from '../Header/Header';
+import { Navbar } from '../Navbar';
+import Header from '../Header';
 import styled from '@emotion/styled';
 
 interface LayoutProps extends HTMLProps<HTMLElement> {}

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 interface Props {
   logo: string;
@@ -24,7 +23,9 @@ const UniversityItem = (props: Props) => {
         <Score>{props.score}</Score>
       </ScoreWrapper>
       <Wrapper>
-        {props.result === '적정' ? <Result color="primary">{props.result}</Result> : props.result === '소신' ? <Result color="danger">{props.result}</Result> : <Result>{props.result}</Result>}
+        {props.result === '적정' && <Result color="primary">{props.result}</Result>}
+        {props.result === '소신' && <Result color="danger">{props.result}</Result>}
+        {props.result === '안정' && <Result>{props.result}</Result>}
         <MoreWrpper>
           <More src="/images/icons/more.svg" alt="more" />
         </MoreWrpper>
@@ -37,6 +38,7 @@ export default UniversityItem;
 
 const ItemWrapper = styled.div`
   width: 100%;
+  min-width: 492px;
   height: 68px;
   border-radius: 16px;
   padding: 10px 16px;
@@ -52,6 +54,7 @@ const ItemWrapper = styled.div`
 const UnivWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-grow: 1;
 `;
 
 const UnivLogo = styled.img`
@@ -87,6 +90,7 @@ const ScoreWrapper = styled.div`
   /* width: 79px; */
   width: 67px;
   margin: 0 auto;
+  flex-grow: 1;
 `;
 
 const ScoreName = styled.div`
@@ -109,8 +113,10 @@ const Score = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   margin-left: auto;
+  flex-grow: 1;
 `;
 
 const Result = styled.div`

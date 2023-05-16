@@ -9,7 +9,7 @@ interface Props {
 const ServiceListItem = (props: Props) => {
   return (
     <MenuListItem onClick={() => props.onClickService(props.text)}>
-      <MenuImg src={props.img} />
+      <MenuImg src={props.img} alt={props.text} />
       <MenuTitle>{props.text}</MenuTitle>
     </MenuListItem>
   );
