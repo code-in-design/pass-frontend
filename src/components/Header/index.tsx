@@ -1,14 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { UserModel } from '@/models/UserModel';
 
-interface Props {
-  userName: string;
-  userAvatar: string;
-  membership: string;
-  userEmail: string;
-}
-
-const Header = (props: Props) => {
+const Header = (props: UserModel) => {
   return (
     <HeaderWrapper>
       <AlertWrapper>

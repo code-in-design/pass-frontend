@@ -1,16 +1,9 @@
 import styled from '@emotion/styled';
 import UniversityItem from './UniversityItem';
-
-interface UniverProps {
-  logo: string;
-  name: string;
-  majorName: string;
-  score: number;
-  result: string;
-}
+import { UniversitiesModel } from '@/models/UniversitiesModel';
 
 interface Props {
-  data: Array<UniverProps>;
+  data: Array<UniversitiesModel>;
 }
 
 const InterestedUniversities = (props: Props) => {

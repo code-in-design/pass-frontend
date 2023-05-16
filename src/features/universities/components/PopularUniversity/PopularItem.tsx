@@ -1,18 +1,22 @@
 import styled from '@emotion/styled';
+import PopularImg from '../../../../../public/images/icons/popularIcon.svg';
 
 interface Props {
   img: string;
   name: string;
   major: string;
   number: number;
+  index: number;
 }
 
 const PopularItem = (props: Props) => {
   return (
     <Container>
       <ImageWrapper>
-        {props.number === 1 ? <PopularImg src="/images/icons/popularMain.svg" alt="popularIcon" /> : <PopularImg src="/images/icons/popular.svg" alt="popularIcon" />}
-        {props.number === 1 ? <PupularIdx color="#fff">{props.number}</PupularIdx> : <PupularIdx>{props.number}</PupularIdx>}
+        <PopularImgWrapper color={String(props.index)}>
+          <PopularImg />
+        </PopularImgWrapper>
+        <PupularIdx color={String(props.index)}>{props.index}</PupularIdx>
       </ImageWrapper>
       <PopularLogo src={props.img} alt={props.img} />
       <PopularName>{props.name}</PopularName>
@@ -39,9 +43,10 @@ const ImageWrapper = styled.div`
   top: 0px;
 `;
 
-const PopularImg = styled.img`
+const PopularImgWrapper = styled.div`
   width: 23.24px;
   height: 25.34px;
+  color: ${props => (props.color === '1' ? '#6B77F8' : '#D9DBED')};
 `;
 
 const PupularIdx = styled.div`
@@ -53,8 +58,7 @@ const PupularIdx = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
-  /* color: #626474; */
-  color: ${props => props.color};
+  color: ${props => (props.color === '1' ? '#fff' : '#626474')};
 `;
 
 const PopularLogo = styled.img`

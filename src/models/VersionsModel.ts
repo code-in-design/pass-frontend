@@ -1,6 +1,5 @@
 interface DataProps {
   content: string;
-  id: number;
 }
 
 interface OptionsProps {
@@ -9,8 +8,11 @@ interface OptionsProps {
 }
 
 export class VersionsModel {
-  //   data: Array<DataProps>;
-  //   options: Array<OptionsProps>
+  data: Array<DataProps>;
+  options: Array<OptionsProps>;
 
-  constructor(data) {}
+  constructor(data: [], options: []) {
+    this.data = data;
+    this.options = options;
+  }
 }

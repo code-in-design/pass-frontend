@@ -21,9 +21,9 @@ const PopularUniversity = (props: Props) => {
     <Container>
       <Title>실시간 인기 대학 · 학과</Title>
       <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
-        {props.data.map(item => (
+        {props.data.map((item, index) => (
           <SwiperSlide key={`pupularUniv-${item.number}`}>
-            <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} />
+            <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} index={index + 1} />
           </SwiperSlide>
         ))}
       </CustomSwiper>

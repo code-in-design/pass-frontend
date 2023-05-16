@@ -24,8 +24,8 @@ const MembershipModal = (props: Props) => {
       <Title>합격할 준비 되었나요?</Title>
       <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
       <Container>
-        {props.data?.map(item => (
-          <Card key={`membership-${item.name}`} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
+        {props.data?.map((item, index) => (
+          <Card key={index} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
         ))}
       </Container>
       <Table />

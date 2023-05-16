@@ -1,9 +1,15 @@
 import NavbarItem from './NavbarItem';
 import { useNavbar } from './useNavbar';
+import { ReactNode } from 'react';
 import styled from '@emotion/styled';
+import Home from '../../../public/images/icons/home.svg';
+import EditSquare from '../../../public/images/icons/editSquare.svg';
+import School from '../../../public/images/icons/school.svg';
+import Analytics from '../../../public/images/icons/analytics.svg';
+import Settings from '../../../public/images/icons/settings.svg';
 
 interface Props {
-  menuList: { img: string; title: string }[];
+  menuList: { icon: ReactNode; title: string }[];
 }
 
 export const Navbar = (props: Props) => {
@@ -13,8 +19,8 @@ export const Navbar = (props: Props) => {
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" />
       <MenuList>
-        {props?.menuList?.map(item => (
-          <NavbarItem key={`nav-${item.img}`} img={item.img} title={item.title} />
+        {props?.menuList?.map((item, index) => (
+          <NavbarItem key={index} icon={item.icon} title={item.title} />
         ))}
       </MenuList>
       <LogOut>
@@ -27,11 +33,11 @@ export const Navbar = (props: Props) => {
 
 Navbar.defaultProps = {
   menuList: [
-    { img: '/images/icons/home.svg', title: '메인홈' },
-    { img: '/images/icons/editSquare.svg', title: '내 점수 입력하기' },
-    { img: '/images/icons/school.svg', title: '대학찾기' },
-    { img: '/images/icons/analytics.svg', title: '합격분석' },
-    { img: '/images/icons/settings.svg', title: '환경설정' },
+    { icon: <Home />, title: '메인홈' },
+    { icon: <EditSquare />, title: '내 점수 입력하기' },
+    { icon: <School />, title: '대학찾기' },
+    { icon: <Analytics />, title: '합격분석' },
+    { icon: <Settings />, title: '환경설정' },
   ],
 };
 

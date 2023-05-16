@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Select from '@/components/Select';
-import { Controller, useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useState } from 'react';
 
 interface Props {
@@ -12,11 +12,18 @@ interface Props {
 }
 
 const FinalSelectionUniversity = (props: Props) => {
-  const { handleSubmit, register, getValues } = useForm();
-  const [applyUniversity, setApplyUniversity] = useState([]);
+  const { handleSubmit, register, control } = useForm();
+  const universities = ['first'];
+  // const [universities, setUniversities] = useState<string[]>();
 
-  const onSubmit = (data: any) => {
+  const selectUniversities = useWatch({
+    control,
+    name: universities,
+  });
+
+  const onSubmit = data => {
     // console.log(data);
+    console.log(selectUniversities);
   };
 
   return (
@@ -32,31 +39,21 @@ const FinalSelectionUniversity = (props: Props) => {
         <SelectSection>
           <SelectWrapper>
             <SelectText>가군 지원대학</SelectText>
-            <Select
-              size="md"
-              options={props.first}
-              placeholder="대학·학과 선택"
-              {...register('first')}
-              onChange={e => {
-                // console.log(e.target.value);
-              }}
-            />
-            {/* <Select {...register('first')}>
-              {props.first.map(value => (
-                <option key={value.value} value={value.value}>
-                  {value.label}
-                </option>
-              ))} */}
-            {/* </Select> */}
+            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('first')} /> */}
           </SelectWrapper>
+          <Select2 {...register('first')}>
+            {props.first.map(value => (
+              <option key={value.value} value={value.value}>
+                {value.label}
+              </option>
+            ))}
+          </Select2>
           <SelectWrapper>
             <SelectText>나군 지원대학</SelectText>
-            {/* <Select size="md" options={props.second} placeholder="대학·학과 선택" /> */}
-            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('second')} /> */}
+            <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('second')} />
           </SelectWrapper>
           <SelectWrapper>
             <SelectText>다군 지원대학</SelectText>
-            {/* <Select size="md" options={props.third} placeholder="대학·학과 선택" /> */}
             {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('third')} /> */}
           </SelectWrapper>
         </SelectSection>
@@ -178,4 +175,4 @@ const Button = styled.button`
   line-height: 20px;
 `;
 
-// const Select = styled.select``;
+const Select2 = styled.select``;

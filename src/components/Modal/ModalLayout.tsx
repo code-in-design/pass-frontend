@@ -9,9 +9,9 @@ interface Props {
 const ModalLayout = (props: Props) => {
   return (
     <ModalWrapper>
-      <ModalOutside onClick={() => props.onCloseClick()} />
+      <ModalOutside />
       <Container>
-        <Close src="/images/icons/close.svg" alt="close" onClick={() => props.onCloseClick()} />
+        <Close src="/images/icons/close.svg" alt="close" />
         {props.children}
       </Container>
     </ModalWrapper>

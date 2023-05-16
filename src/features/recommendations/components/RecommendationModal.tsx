@@ -9,6 +9,7 @@ interface Props {
 
 const RecommendationModal = (props: Props) => {
   const [myCode, setMyCode] = useState('ABCD10');
+  const share = `Z-ONE을 쓰는 친구가 초대했어요! 친구도 나도 합격분석권 1개 받기 내 초대코드 :${myCode} wwww.z-one.kr`;
 
   return (
     <ModalLayout onCloseClick={props.onClickClose}>
@@ -31,13 +32,16 @@ const RecommendationModal = (props: Props) => {
         <InfoImg src="/images/icons/info.svg" alt="info" />
         <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
       </Info>
-      <ShareButton>공유하기</ShareButton>
+      <CopyToClipboard text={share}>
+        <ShareButton>공유하기</ShareButton>
+      </CopyToClipboard>
       <Divider />
       <SecondTitle>추천 코드 입력하기</SecondTitle>
       <InputCodeWrapper>
         <InputCode type="input" placeholder="추천 코드를 입력해주세요" />
         <InputImg src="/images/icons/recommendation.svg" alt="recommendation" />
-        <EnterButton>확인</EnterButton>
+        <EnterButton disabled>확인</EnterButton>
+        {/* <ButtonElement variant="disabled">확인</ButtonElement> */}
       </InputCodeWrapper>
     </ModalLayout>
   );
@@ -182,4 +186,9 @@ const EnterButton = styled.button`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  :disabled {
+    background-color: rgba(228, 230, 240, 0.4);
+    color: #b7b9c9;
+    cursor: not-allowed;
+  }
 `;

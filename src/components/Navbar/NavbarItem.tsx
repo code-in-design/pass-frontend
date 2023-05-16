@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 type Props = {
-  img: string;
   title: string;
+  icon: ReactNode;
 };
 
 const NavbarItem = (props: Props) => {
   return (
     <MenuListItem>
-      <ImageWrapper>
-        <MenuImg src={props.img} alt={props.img} />
-      </ImageWrapper>
-
+      <ImageWrapper>{props.icon}</ImageWrapper>
       <MenuTitle>{props.title}</MenuTitle>
     </MenuListItem>
   );
@@ -44,15 +41,6 @@ const ImageWrapper = styled.div`
   height: 24px;
   display: block;
   margin-right: 8px;
-`;
-
-const MenuImg = styled.img`
-  & > path {
-    fill: #737c89;
-    & :hover {
-      fill: white;
-    }
-  }
 `;
 
 const MenuTitle = styled.span`
