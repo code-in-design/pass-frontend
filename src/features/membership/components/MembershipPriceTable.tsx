@@ -22,8 +22,8 @@ const MembershipPriceTable = ({ data }: Props) => {
         </THeadTr>
       </THead>
       <TBody>
-        {data.map(item => (
-          <TableItem key={`membershipTable-${item.title}`} title={item.title} items={item.items} />
+        {data.map((item, index) => (
+          <TableItem key={index} title={item.title} items={item.items} />
         ))}
       </TBody>
     </TableContainer>

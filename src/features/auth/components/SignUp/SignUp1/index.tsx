@@ -68,7 +68,7 @@ const SignUp1 = (props: Props) => {
       {openTerm[2] && <Portal props={<TermsModal onCloseClick={closeModal} index={2} markdown={marketing} title={'개인정보 마케팅 활용 동의'} />}></Portal>}
       <Box backgroundColor="#f3f4fa" padding="132px 0">
         <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
-          <Text fontSize="24px" lineHeight="32px" fontWeight={700} letterSpacing="-0.02px" marginBottom="16px">
+          <Text fontSize="24px" lineHeight="32px" fontWeight={700} marginBottom="16px">
             회원가입
           </Text>
           <Flex gap="8px" marginBottom="66px">
@@ -81,7 +81,7 @@ const SignUp1 = (props: Props) => {
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
             <Box width="100%" height="8px" borderRadius="4px" bgColor="#F3F4FA" />
           </Flex>
-          <Text fontSize="20px" lineHeight="24px" fontWeight={600} letterSpacing="-0.02px" marginBottom="24px" color="#353644">
+          <Text fontSize="20px" lineHeight="24px" fontWeight={600} marginBottom="24px" color="#353644">
             약관동의
           </Text>
           <FormWrapper onSubmit={handleSubmit(onSubmit)}>

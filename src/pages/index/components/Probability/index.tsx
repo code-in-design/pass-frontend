@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import ProbabilityItem from './ProbabilityItem';
+import SupportabilityModal from './SupportabilityModal';
+import PassingProbabilityModal from './PassingProbabilityModal';
+import ProfileModal from './ProfileModal';
 
 interface Props {
   probabilityMenu: { img: string; name: string; title: string }[];
@@ -19,9 +22,9 @@ const Probability = (props: Props) => {
           <ContentsLeftImg src="/images/icons/probabilityTeacher.svg" alt="teacherImg" />
         </ContentsLeft>
         <ContentsRight>
-          {props.probabilityMenu.map(item => (
-            <ProbabilityItem key={`probability-${item.img}`} img={item.img} name={item.name} title={item.title} />
-          ))}
+          <SupportabilityModal />
+          <PassingProbabilityModal />
+          <ProfileModal />
         </ContentsRight>
       </Contents>
     </Container>
@@ -29,26 +32,6 @@ const Probability = (props: Props) => {
 };
 
 export default Probability;
-
-Probability.defaultProps = {
-  probabilityMenu: [
-    {
-      img: '/images/icons/probability1.svg',
-      name: '민중쌤의',
-      title: '지원 가능성 comment',
-    },
-    {
-      img: '/images/icons/probability2.svg',
-      name: '민중쌤의',
-      title: '합격 가능성 comment',
-    },
-    {
-      img: '/images/icons/probability3.svg',
-      name: '김민중 선생님',
-      title: '프로필 바로가기',
-    },
-  ],
-};
 
 const Container = styled.div`
   margin-top: 32px;
@@ -83,7 +66,6 @@ const ContentsLeftTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: -0.02em;
   color: #353644;
   margin-bottom: 8px;
 `;
@@ -92,7 +74,6 @@ const ContentsLeftName = styled.div`
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  letter-spacing: -0.02em;
   color: #191e25;
 `;
 

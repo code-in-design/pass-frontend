@@ -141,6 +141,7 @@ export const StyledSelectSmall = styled(Select)`
           padding: 0;
           margin: 0;
           padding-left: 12px;
+          letter-spacing: -0.02em;
           .react-select-small__input-container {
             padding: 0;
             margin: 0;

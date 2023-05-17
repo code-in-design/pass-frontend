@@ -38,7 +38,6 @@ const MainTitle = styled.div`
   font-weight: 700;
   line-height: 52px;
   color: #191e25;
-  letter-spacing: -0.02em;
   margin-bottom: 8px;
 `;
 const Name = styled.span`
@@ -99,7 +98,6 @@ const MenuTitle = styled.span`
   font-size: 20px;
   font-weight: 600;
   line-height: 20px;
-  letter-spacing: -0.02em;
   color: #fff;
 `;
 

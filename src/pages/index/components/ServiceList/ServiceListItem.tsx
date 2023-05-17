@@ -3,12 +3,12 @@ import styled from '@emotion/styled';
 interface Props {
   img: string;
   text: string;
-  onClickService: (text: string) => void;
+  onClick: () => void;
 }
 
 const ServiceListItem = (props: Props) => {
   return (
-    <MenuListItem onClick={() => props.onClickService(props.text)}>
+    <MenuListItem onClick={props.onClick}>
       <MenuImg src={props.img} alt={props.text} />
       <MenuTitle>{props.text}</MenuTitle>
     </MenuListItem>
@@ -40,5 +40,4 @@ const MenuImg = styled.img`
 const MenuTitle = styled.span`
   font-weight: 600;
   line-height: 20px;
-  letter-spacing: -0.02em;
 `;

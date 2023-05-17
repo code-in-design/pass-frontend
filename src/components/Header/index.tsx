@@ -28,7 +28,7 @@ export default Header;
 Header.defaultProps = {
   userName: '한치훈',
   userAvatar: '/images/user/user.png',
-  membership: 'basic',
+  membership: 'Basic',
   userEmail: 'gks3628@naver.com',
 };
 
@@ -102,6 +102,7 @@ const UserMembership = styled.div`
   font-weight: 600;
   line-height: 12px;
   padding: 4px 8px;
+  text-align: center;
 `;
 
 const UserEmail = styled.span`

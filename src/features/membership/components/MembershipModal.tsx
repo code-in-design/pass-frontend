@@ -2,6 +2,8 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import styled from '@emotion/styled';
 import Card from './MembershipPriceCard';
 import Table from './MembershipPriceTable';
+import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
+import { useState, useCallback } from 'react';
 
 export interface CardProps {
   name: string;
@@ -14,22 +16,36 @@ export interface CardProps {
 }
 
 interface Props {
-  onClickClose: () => void;
   data?: Array<CardProps>;
 }
 
 const MembershipModal = (props: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+  }, [isOpen]);
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, [isOpen]);
+
   return (
-    <ModalLayout onCloseClick={props.onClickClose}>
-      <Title>합격할 준비 되었나요?</Title>
-      <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
-      <Container>
-        {props.data?.map((item, index) => (
-          <Card key={index} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
-        ))}
-      </Container>
-      <Table />
-    </ModalLayout>
+    <>
+      <ServiceListItem img="/images/icons/badge.svg" text="멤버십 안내" onClick={openModal} />
+      {isOpen && (
+        <ModalLayout isOpen={isOpen} onClose={closeModal}>
+          <Title>합격할 준비 되었나요?</Title>
+          <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
+          <Container>
+            {props.data?.map((item, index) => (
+              <Card key={index} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
+            ))}
+          </Container>
+          <Table />
+        </ModalLayout>
+      )}
+    </>
   );
 };
 

@@ -1,49 +1,62 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
+import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-interface Props {
-  onClickClose: () => void;
-}
+interface Props {}
 
 const RecommendationModal = (props: Props) => {
   const [myCode, setMyCode] = useState('ABCD10');
+  const [isOpen, setIsOpen] = useState(false);
   const share = `Z-ONE을 쓰는 친구가 초대했어요! 친구도 나도 합격분석권 1개 받기 내 초대코드 :${myCode} wwww.z-one.kr`;
 
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+  }, [isOpen]);
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, [isOpen]);
+
   return (
-    <ModalLayout onCloseClick={props.onClickClose}>
-      <Title>내 초대 코드</Title>
-      <CodeWrapper>
-        <Code>{myCode}</Code>
-        <CopyToClipboard text={myCode}>
-          <CodeCopy>
-            <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
-            <CodeCopyText>코드복사</CodeCopyText>
-          </CodeCopy>
-        </CopyToClipboard>
-      </CodeWrapper>
-      <Description>
-        추천 코드를 입력할 경우,
-        <br />
-        친구와 내 계정 모두 합격 분석 1회 열람권이 추가됩니다.
-      </Description>
-      <Info>
-        <InfoImg src="/images/icons/info.svg" alt="info" />
-        <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
-      </Info>
-      <CopyToClipboard text={share}>
-        <ShareButton>공유하기</ShareButton>
-      </CopyToClipboard>
-      <Divider />
-      <SecondTitle>추천 코드 입력하기</SecondTitle>
-      <InputCodeWrapper>
-        <InputCode type="input" placeholder="추천 코드를 입력해주세요" />
-        <InputImg src="/images/icons/recommendation.svg" alt="recommendation" />
-        <EnterButton disabled>확인</EnterButton>
-        {/* <ButtonElement variant="disabled">확인</ButtonElement> */}
-      </InputCodeWrapper>
-    </ModalLayout>
+    <>
+      <ServiceListItem img="/images/icons/thumbUp.svg" text="추천하기 / 받기" onClick={openModal} />
+      {isOpen && (
+        <ModalLayout isOpen={isOpen} onClose={closeModal}>
+          <Title>내 초대 코드</Title>
+          <CodeWrapper>
+            <Code>{myCode}</Code>
+            <CopyToClipboard text={myCode}>
+              <CodeCopy>
+                <CodeCopyImg src="/images/icons/fileCopy.svg" alt="fileCopy" />
+                <CodeCopyText>코드복사</CodeCopyText>
+              </CodeCopy>
+            </CopyToClipboard>
+          </CodeWrapper>
+          <Description>
+            추천 코드를 입력할 경우,
+            <br />
+            친구와 내 계정 모두 합격 분석 1회 열람권이 추가됩니다.
+          </Description>
+          <Info>
+            <InfoImg src="/images/icons/info.svg" alt="info" />
+            <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
+          </Info>
+          <CopyToClipboard text={share}>
+            <ShareButton>공유하기</ShareButton>
+          </CopyToClipboard>
+          <Divider />
+          <SecondTitle>추천 코드 입력하기</SecondTitle>
+          <InputCodeWrapper>
+            <InputCode type="input" placeholder="추천 코드를 입력해주세요" />
+            <InputImg src="/images/icons/recommendation.svg" alt="recommendation" />
+            <EnterButton disabled>확인</EnterButton>
+            {/* <ButtonElement variant="disabled">확인</ButtonElement> */}
+          </InputCodeWrapper>
+        </ModalLayout>
+      )}
+    </>
   );
 };
 

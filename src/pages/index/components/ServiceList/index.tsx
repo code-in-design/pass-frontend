@@ -1,41 +1,23 @@
 import styled from '@emotion/styled';
-import ServiceListItem from './ServiceListItem';
-import { useCallback, useState } from 'react';
 import FinalSelectionUniversity from '../../../../features/universities/components/FinalSelectionUniversity';
 import MembershipModal from '@/features/membership/components/MembershipModal';
 import RecommendationModal from '@/features/recommendations/components/RecommendationModal';
+import PrivacyModal from './PrivacyModal';
 
-interface Props {
-  list: { img: string; text: string }[];
-}
+interface Props {}
 
 const ServiceList = (props: Props) => {
-  const [currentMenu, setCurrentMenu] = useState('');
-
-  const openModal = useCallback(
-    (text: string) => {
-      setCurrentMenu(text);
-    },
-    [currentMenu],
-  );
-
-  const closeModal = useCallback(() => {
-    setCurrentMenu('');
-  }, [currentMenu]);
-
   return (
     <>
       <Container>
         <Title>서비스 바로가기</Title>
         <MenuList>
-          {props?.list?.map(item => (
-            <ServiceListItem key={`serviceList-${item.text}`} img={item.img} text={item.text} onClickService={openModal} />
-          ))}
+          <FinalSelectionUniversity />
+          <MembershipModal />
+          <PrivacyModal />
+          <RecommendationModal />
         </MenuList>
       </Container>
-      {props?.list?.[0]?.text === currentMenu && <FinalSelectionUniversity onClickClose={closeModal} />}
-      {props?.list?.[1]?.text === currentMenu && <MembershipModal onClickClose={closeModal} />}
-      {props?.list?.[3]?.text === currentMenu && <RecommendationModal onClickClose={closeModal} />}
     </>
   );
 };
@@ -45,20 +27,8 @@ export default ServiceList;
 ServiceList.defaultProps = {
   list: [
     {
-      img: '/images/icons/help.svg',
-      text: '서비스 소개',
-    },
-    {
-      img: '/images/icons/badge.svg',
-      text: '멤버십 안내',
-    },
-    {
       img: '/images/icons/panelSettings.svg',
       text: '개인정보 보호 안내',
-    },
-    {
-      img: '/images/icons/thumbUp.svg',
-      text: '추천하기 / 받기',
     },
   ],
 };

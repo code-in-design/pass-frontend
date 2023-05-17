@@ -1,65 +1,64 @@
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Select from '@/components/Select';
-import { useForm, useWatch } from 'react-hook-form';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
+import { useCallback, useState } from 'react';
 
 interface Props {
-  onClickClose: () => void;
   first: { value: string; label: string }[];
   second: { value: string; label: string }[];
   third: { value: string; label: string }[];
 }
 
 const FinalSelectionUniversity = (props: Props) => {
-  const { handleSubmit, register, control } = useForm();
-  const universities = ['first'];
-  // const [universities, setUniversities] = useState<string[]>();
-
-  const selectUniversities = useWatch({
-    control,
-    name: universities,
-  });
+  const { handleSubmit, setValue } = useForm();
+  const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = data => {
-    // console.log(data);
-    console.log(selectUniversities);
+    console.log(data);
   };
 
-  return (
-    <ModalLayout onCloseClick={props.onClickClose}>
-      <Container onClick={handleSubmit(onSubmit)}>
-        <Title>최종 지원 대학 선정</Title>
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+  }, [isOpen]);
 
-        <SubTitle>최종적으로 지원한 대학을 선택하고 실기 기록에 따른 합격 확률을 계속 살펴볼 수 있어요!</SubTitle>
-        <Info>
-          <InfoImg src="/images/icons/infoBlue.svg" alt="info" />
-          <InfoText>실기 기록 변경 횟수는 제한되어 있습니다.</InfoText>
-        </Info>
-        <SelectSection>
-          <SelectWrapper>
-            <SelectText>가군 지원대학</SelectText>
-            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('first')} /> */}
-          </SelectWrapper>
-          <Select2 {...register('first')}>
-            {props.first.map(value => (
-              <option key={value.value} value={value.value}>
-                {value.label}
-              </option>
-            ))}
-          </Select2>
-          <SelectWrapper>
-            <SelectText>나군 지원대학</SelectText>
-            <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('second')} />
-          </SelectWrapper>
-          <SelectWrapper>
-            <SelectText>다군 지원대학</SelectText>
-            {/* <Select size="md" options={props.first} placeholder="대학·학과 선택" {...register('third')} /> */}
-          </SelectWrapper>
-        </SelectSection>
-        <Button>선택 완료</Button>
-      </Container>
-    </ModalLayout>
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, [isOpen]);
+
+  return (
+    <>
+      <ServiceListItem img="/images/icons/help.svg" text="서비스 소개" onClick={openModal} />
+      {isOpen && (
+        <ModalLayout isOpen={isOpen} onClose={closeModal}>
+          <Container onSubmit={handleSubmit(onSubmit)}>
+            <Title>최종 지원 대학 선정</Title>
+
+            <SubTitle>최종적으로 지원한 대학을 선택하고 실기 기록에 따른 합격 확률을 계속 살펴볼 수 있어요!</SubTitle>
+            <Info>
+              <InfoImg src="/images/icons/infoBlue.svg" alt="info" />
+              <InfoText>실기 기록 변경 횟수는 제한되어 있습니다.</InfoText>
+            </Info>
+            <SelectSection>
+              <SelectWrapper>
+                <SelectText>가군 지원대학</SelectText>
+                <Select name="first" size="md" options={props.first} placeholder="대학·학과 선택" setValue={setValue} />
+              </SelectWrapper>
+              <SelectWrapper>
+                <SelectText>나군 지원대학</SelectText>
+                <Select name="second" size="md" options={props.second} placeholder="대학·학과 선택" setValue={setValue} />
+              </SelectWrapper>
+              <SelectWrapper>
+                <SelectText>다군 지원대학</SelectText>
+                <Select name="third" size="md" options={props.third} placeholder="대학·학과 선택" setValue={setValue} />
+              </SelectWrapper>
+            </SelectSection>
+            <Button type="submit">선택 완료</Button>
+          </Container>
+        </ModalLayout>
+      )}
+    </>
   );
 };
 
@@ -160,7 +159,6 @@ const SelectText = styled.div`
   line-height: 20px;
   font-weight: 700;
   color: #626474;
-  letter-spacing: -0.02em;
 `;
 
 const Button = styled.button`

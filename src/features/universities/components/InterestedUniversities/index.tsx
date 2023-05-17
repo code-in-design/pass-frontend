@@ -9,7 +9,7 @@ interface Props {
 const InterestedUniversities = (props: Props) => {
   return (
     <Container>
-      <Title>나의관심대학</Title>
+      <Title>나의 관심 대학</Title>
       {props.data.length < 3 && (
         <DescriptionWrapper>
           <DescriptionImg src="/images/icons/stars.svg" alt="star" />
@@ -81,6 +81,5 @@ const Description = styled.span`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  letter-spacing: -0.02em;
   color: #6b77f8;
 `;

@@ -2,13 +2,19 @@ import styled from '@emotion/styled';
 import UpdateItem from './UpdateHistoryItem';
 import Select from '@/components/Select';
 import { VersionsModel } from '@/models/VersionsModel';
+import { useForm } from 'react-hook-form';
 
 const Update = (props: VersionsModel) => {
+  const { handleSubmit, setValue } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
   return (
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <Select size="sm" options={props.options} defaultValue={props.options?.[0]} />
+        <Select size="sm" options={props.options} defaultValue={props.options?.[0]} name="version" setValue={setValue} />
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
@@ -101,6 +107,6 @@ const Content = styled.ul`
   &::-webkit-scrollbar-thumb {
     width: 4px;
     border-radius: 36px;
-    background-color: #626474;
+    background-color: rgba(98, 100, 116, 0.2);
   }
 `;

@@ -73,7 +73,6 @@ const UnivName = styled.div`
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
-  letter-spacing: -0.02em;
   color: #262d37;
   margin-bottom: 4px;
 `;
@@ -82,7 +81,6 @@ const UnivMajorName = styled.div`
   font-size: 12px;
   font-weight: 700;
   line-height: 16px;
-  letter-spacing: -0.02em;
   color: #737c89;
 `;
 
@@ -107,7 +105,6 @@ const Score = styled.div`
   font-size: 20px;
   line-height: 24px;
   font-weight: 600;
-  letter-spacing: -0.02em;
   color: #353644;
   text-align: center;
 `;
@@ -127,7 +124,6 @@ const Result = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
-  letter-spacing: -0.02em;
   text-align: center;
   margin-right: 12px;
   color: ${props => (props.color === 'primary' ? '#00a070' : props.color === 'danger' ? '#f66513' : '#4f8afc')};

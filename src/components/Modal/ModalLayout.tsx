@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 interface Props {
-  onCloseClick: (index?: number) => void;
   children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const ModalLayout = (props: Props) => {
   return (
     <ModalWrapper>
-      <ModalOutside />
+      <ModalOutside onClick={props.onClose} />
       <Container>
-        <Close src="/images/icons/close.svg" alt="close" />
+        <Close src="/images/icons/close.svg" alt="close" onClick={props.onClose} />
         {props.children}
       </Container>
     </ModalWrapper>

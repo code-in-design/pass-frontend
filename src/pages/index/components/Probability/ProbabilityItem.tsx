@@ -5,11 +5,12 @@ interface Props {
   img: string;
   name: string;
   title: string;
+  onClick: () => void;
 }
 
 const ProbabilityItem = (props: Props) => {
   return (
-    <ProbabilityItemContainer>
+    <ProbabilityItemContainer onClick={props.onClick}>
       <ProbabilityItemImg>
         <Image src={props.img} alt={props.title} fill />
       </ProbabilityItemImg>
@@ -43,19 +44,20 @@ const ProbabilityItemImg = styled.div`
   margin-right: 8px;
 `;
 
-const ProbabilityItemTexts = styled.div`
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.02em;
-  color: #191e25;
-`;
+const ProbabilityItemTexts = styled.div``;
 
 const ProbabilityItemName = styled.div`
   font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #191e25;
 `;
 
 const ProbabilityItemTitle = styled.div`
   font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #191e25;
 `;
 
 const ProbabilityItemArrowWrapper = styled.div`
