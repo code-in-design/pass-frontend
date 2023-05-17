@@ -4,9 +4,7 @@ import SupportabilityModal from './SupportabilityModal';
 import PassingProbabilityModal from './PassingProbabilityModal';
 import ProfileModal from './ProfileModal';
 
-interface Props {
-  probabilityMenu: { img: string; name: string; title: string }[];
-}
+interface Props {}
 
 const Probability = (props: Props) => {
   return (
