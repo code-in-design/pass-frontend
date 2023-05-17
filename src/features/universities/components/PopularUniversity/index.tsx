@@ -20,13 +20,15 @@ const PopularUniversity = (props: Props) => {
   return (
     <Container>
       <Title>실시간 인기 대학 · 학과</Title>
-      <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
-        {props.data.map((item, index) => (
-          <SwiperSlide key={`pupularUniv-${item.number}`}>
-            <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} index={index + 1} />
-          </SwiperSlide>
-        ))}
-      </CustomSwiper>
+      <SwiperWrapper>
+        <CustomSwiper slidesPerView={'auto'} scrollbar={{ draggable: true }} spaceBetween={8} modules={[Scrollbar]}>
+          {props.data.map((item, index) => (
+            <SwiperSlide key={`pupularUniv-${item.number}`}>
+              <PopularItem img={item.img} name={item.name} major={item.major} number={item.number} index={index + 1} />
+            </SwiperSlide>
+          ))}
+        </CustomSwiper>
+      </SwiperWrapper>
     </Container>
   );
 };
@@ -83,13 +85,17 @@ const Title = styled.div`
   margin-bottom: 12px;
 `;
 
+const SwiperWrapper = styled.div`
+  padding: 13px 16px 6px;
+  background-color: #fff;
+  border-radius: 16px;
+  height: 152px;
+`;
+
 const CustomSwiper = styled(Swiper)`
   min-width: 492px;
   width: 100%;
-  height: 152px;
-  padding: 13px 16px 16px;
-  background-color: #fff;
-  border-radius: 16px;
+  height: 100%;
   .swiper {
     position: relative !important;
   }
@@ -98,5 +104,14 @@ const CustomSwiper = styled(Swiper)`
   }
   .swiper-wrapper .swiper-slide {
     width: calc(100% / 5) !important;
+    height: 123px !important;
+  }
+  .swiper-scrollbar {
+    position: absolute !important;
+    bottom: 0 !important;
+    background: transparent !important;
+  }
+  .swiper-scrollbar-drag {
+    background: rgba(98, 100, 116, 0.2) !important;
   }
 `;

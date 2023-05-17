@@ -18,9 +18,11 @@ const PopularItem = (props: Props) => {
         </PopularImgWrapper>
         <PupularIdx color={String(props.index)}>{props.index}</PupularIdx>
       </ImageWrapper>
-      <PopularLogo src={props.img} alt={props.img} />
-      <PopularName>{props.name}</PopularName>
-      <PopularMajor>{props.major}</PopularMajor>
+      <Content>
+        <PopularLogo src={props.img} alt={props.img} />
+        <PopularName>{props.name}</PopularName>
+        <PopularMajor>{props.major}</PopularMajor>
+      </Content>
     </Container>
   );
 };
@@ -29,12 +31,11 @@ export default PopularItem;
 
 const Container = styled.div`
   width: 97.6px;
-  height: 120px;
-  border-radius: 8px;
-  border: 1px solid #fff;
-  background-color: #f3f4fa;
+  height: 123px;
   position: relative;
-  padding: 17px 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const ImageWrapper = styled.div`
@@ -59,6 +60,14 @@ const PupularIdx = styled.div`
   line-height: 16px;
   font-weight: 700;
   color: ${props => (props.color === '1' ? '#fff' : '#626474')};
+`;
+
+const Content = styled.div`
+  height: 120px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background-color: #f3f4fa;
+  padding: 17px 0 16px;
 `;
 
 const PopularLogo = styled.img`

@@ -100,6 +100,7 @@ const Content = styled.ul`
   width: 100%;
   height: 192px;
   overflow-y: auto;
+  padding-right: 16px;
   &::-webkit-scrollbar {
     width: 4px;
     background-color: #fff;
