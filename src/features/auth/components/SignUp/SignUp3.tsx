@@ -1,11 +1,21 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import { ChangeEvent, useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
 }
 
-const SignUp3 = (props: Props) => {
+const SignUp3: React.FC<Props> = props => {
+  const { register, setValue, watch } = useForm();
+  const watchFields = watch(['name', 'phone']);
+  console.log('name:', watchFields[0], '/ phone:', watchFields[1]);
+
+  const getValue = (name: string, value: ChangeEvent) => {
+    setValue(name, value);
+  };
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -29,14 +39,34 @@ const SignUp3 = (props: Props) => {
           이름
         </Text>
         <Box position="relative">
-          <Input variant="base" placeholder="이름을 입력해주세요" padding="18px 250px 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} maxLength={10} />
+          <Input
+            {...register('name', { required: true, onChange: e => getValue('name', e.target.value) })}
+            variant="base"
+            placeholder="이름을 입력해주세요"
+            padding="18px 0 18px 56px"
+            height="56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/person.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Text margin="24px 0 12px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" _placeholder={{ color: '#9395a6' }}>
           연락처
         </Text>
         <Flex gap="12px" marginBottom="12px" position="relative">
-          <Input variant="base" type="tel" placeholder='"-"를 제외하고 작성해주세요' width="306px" height="56px" padding="18px 72px 18px 56px" fontSize="16px" lineHeight="20px" fontWeight={700} maxLength={11} />
+          <Input
+            {...register('phone', { required: true, onChange: e => getValue('phone', e.target.value) })}
+            variant="base"
+            type="tel"
+            placeholder='"-"를 제외하고 작성해주세요'
+            width="306px"
+            height="56px"
+            padding="18px 0 18px 56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/call.svg" alt="call" position="absolute" top="18px" left="24px" />
           <Button colorScheme="darkGray" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700}>
             인증요청

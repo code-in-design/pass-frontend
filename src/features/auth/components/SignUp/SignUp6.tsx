@@ -1,10 +1,18 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import { ChangeEvent } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Props {
   onPrevButtonClick: () => void;
 }
 
-const SignUp6 = (props: Props) => {
+const SignUp6: React.FC<Props> = props => {
+  const { register, setValue, watch } = useForm();
+  const watchFields = watch('referral_code');
+  const getValue = (name: string, value: ChangeEvent) => {
+    setValue(name, value);
+  };
+  console.log(watchFields);
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -28,7 +36,16 @@ const SignUp6 = (props: Props) => {
           추천코드 입력
         </Text>
         <Box position="relative">
-          <Input variant="base" placeholder="추천코드를 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" />
+          <Input
+            {...register('referral_code', { required: true, onChange: e => getValue('referral_code', e.target.value) })}
+            variant="base"
+            placeholder="추천코드를 입력해주세요"
+            padding="18px 0 18px 56px"
+            height="56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/enterArrow.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Box display="flex" alignItems="flex-end" marginTop="16px">

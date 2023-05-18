@@ -12,7 +12,7 @@ interface Props {
 
 const SignUp1 = (props: Props) => {
   const { register, handleSubmit, control, setValue } = useForm();
-  const checkboxItems = ['age', 'terms', 'privacy', 'marketing', 'event'];
+  const checkboxItems = ['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy', 'agree_flag_marketing', 'agree_flag_event'];
   const [openTerm, setOpenTerm] = useState([false, false, false]);
 
   const checkbox = useWatch({
@@ -93,30 +93,30 @@ const SignUp1 = (props: Props) => {
               </Header>
               <Divider />
               <Body>
-                <BodyCheckbox type="checkbox" id="age" {...register('age', { required: true })} />
+                <BodyCheckbox type="checkbox" id="age" {...register('agree_flag_14_age', { required: true })} />
                 <BodyLabel htmlFor="age">만 14세 이상입니다.</BodyLabel>
                 <BodyOption color="#6B77F8">(필수)</BodyOption>
               </Body>
               <Body>
-                <BodyCheckbox type="checkbox" {...register('terms', { required: true })} id="terms" />
+                <BodyCheckbox type="checkbox" {...register('agree_flag_terms', { required: true })} id="terms" />
                 <BodyLabel htmlFor="terms">이용약관 동의</BodyLabel>
                 <BodyOption color="#6B77F8">(필수)</BodyOption>
                 <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" onClick={() => openModal(0)} />
               </Body>
               <Body>
-                <BodyCheckbox type="checkbox" {...register('privacy', { required: true })} id="privacy" />
+                <BodyCheckbox type="checkbox" {...register('agree_flag_privacy', { required: true })} id="privacy" />
                 <BodyLabel htmlFor="privacy">개인정보 수집 및 이용 동의</BodyLabel>
                 <BodyOption color="#6B77F8">(필수)</BodyOption>
                 <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" onClick={() => openModal(1)} />
               </Body>
               <Body>
-                <BodyCheckbox type="checkbox" {...register('marketing')} id="marketing" />
+                <BodyCheckbox type="checkbox" {...register('agree_flag_marketing')} id="marketing" />
                 <BodyLabel htmlFor="marketing">개인정보 마케팅 활용 동의</BodyLabel>
                 <BodyOption>(선택)</BodyOption>
                 <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" onClick={() => openModal(2)} />
               </Body>
               <Body>
-                <BodyCheckbox type="checkbox" {...register('event')} id="event" />
+                <BodyCheckbox type="checkbox" {...register('agree_flag_event')} id="event" />
                 <BodyLabel htmlFor="event">이벤트 알림 메일 및 SMS등 수신 동의</BodyLabel>
                 <BodyOption>(선택)</BodyOption>
               </Body>

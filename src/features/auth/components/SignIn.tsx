@@ -1,6 +1,12 @@
 import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
+import { useLazyGetNaverQuery } from '@/features/signIn/authApi';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
+  const router = useRouter();
+  const [triggerNaver, { data }] = useLazyGetNaverQuery();
+  // const [triggerKakao, { data }] = useLazyGetKakaoQuery();
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px">
@@ -10,7 +16,7 @@ const SignIn = () => {
             <Image src="/images/icons/kakaoIcon.svg" alt="kakaoIcon" marginRight="10px" />
             카카오로 시작하기
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#03C75A" color="#fff" fontWeight={700} lineHeight="20px" marginTop="12px">
+          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#03C75A" color="#fff" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="12px" onClick={() => triggerNaver()}>
             <Image src="/images/icons/naverIcon.svg" alt="naverIcon" marginRight="10.83px" />
             네이버로 시작하기
           </Button>
@@ -39,7 +45,7 @@ const SignIn = () => {
           <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px">
             로그인
           </Button>
-          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#fff" border="1px solid #6b77f8" color="#6b77f8" fontWeight={700} lineHeight="20px" marginTop="12px">
+          <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#fff" border="1px solid #6b77f8" color="#6b77f8" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="12px" onClick={() => router.push('/signUp')}>
             일반 회원가입하기
           </Button>
         </VStack>

@@ -22,7 +22,7 @@ const SignUpContainer = () => {
       {step === 2 && <SignUp2 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
       {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
       {step === 4 && <SignUp4 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
-      {step === 5 && <SignUp5 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
+      {step === 5 && <SignUp5 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} gender={[]} grade={[]} />}
       {step === 6 && <SignUp6 onPrevButtonClick={goPrevStep} />}
     </>
   );

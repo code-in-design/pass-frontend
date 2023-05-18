@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Text, Image, Tooltip } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -8,6 +9,9 @@ interface Props {
 
 const SignUp2 = (props: Props) => {
   const [active, setActive] = useState([false, false, false]);
+  const { register, setValue, watch } = useForm();
+  const watchFields = watch(['type']);
+  console.log('type:', watchFields);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -45,8 +49,10 @@ const SignUp2 = (props: Props) => {
           _hover={{ bgColor: '#F8F8FC' }}
           _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
           isActive={active[0]}
+          {...register('type')}
           onClick={() => {
             setActive([true, false, false]);
+            setValue('type', 'student');
           }}
         >
           <Image src="/images/icons/student.svg" alt="student" marginRight="12px" />
@@ -71,6 +77,7 @@ const SignUp2 = (props: Props) => {
           isActive={active[1]}
           onClick={() => {
             setActive([false, true, false]);
+            setValue('type', 'parents');
           }}
         >
           <Image src="/images/icons/parent.svg" alt="Parent" marginRight="12px" />
@@ -95,6 +102,7 @@ const SignUp2 = (props: Props) => {
           isActive={active[2]}
           onClick={() => {
             setActive([false, false, true]);
+            setValue('type', 'teacher');
           }}
         >
           <Image src="/images/icons/teacher.svg" alt="Teacher" marginRight="12px" />

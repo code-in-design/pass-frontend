@@ -1,5 +1,6 @@
-import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import Select from '@/components/Select';
+import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import { ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface Props {
@@ -9,12 +10,13 @@ interface Props {
   grade: { value: string; label: string }[];
 }
 
-const SignUp5 = (props: Props) => {
-  const { handleSubmit, setValue } = useForm();
-
-  const onSubmit = data => {
-    console.log(data);
+const SignUp5: React.FC<Props> = props => {
+  const { register, setValue, watch } = useForm();
+  const watchFields = watch(['gender', 'grade', 'password']);
+  const getValue = (name: string, value: ChangeEvent) => {
+    setValue(name, value);
   };
+  console.log(watchFields);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -53,7 +55,17 @@ const SignUp5 = (props: Props) => {
           비밀번호 입력
         </Text>
         <Box position="relative">
-          <Input variant="base" type="password" placeholder="8자 이상으로 입력해주세요" padding="18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" />
+          <Input
+            {...register('password', { required: true, minLength: 8, onChange: e => getValue('password', e.target.value) })}
+            variant="base"
+            type="password"
+            placeholder="8자 이상으로 입력해주세요"
+            padding="18px 0 18px 56px"
+            height="56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/lock.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Flex gap="12px" marginTop="auto">
