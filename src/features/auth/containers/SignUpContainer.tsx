@@ -12,13 +12,7 @@ const SignUpContainer = () => {
   const [step, setStep] = useState(1);
   const mutation = useSetSignInMutation();
   const setSignIn = mutation[0];
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    trigger,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, setValue, trigger, getValues } = useForm();
 
   const onsubmit = data => {
     console.log(data);
@@ -29,31 +23,57 @@ const SignUpContainer = () => {
     setStep(prev => prev - 1);
   }, [step]);
 
+  getValues('password');
+  getValues('gender');
+  getValues('grade');
+
   const goNextStep = useCallback(async () => {
     if (step === 1) {
       const result = await trigger(['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy']);
       if (result) {
         setStep(prev => prev + 1);
+      } else {
+        alert('필수항목을 선택해주세요.');
       }
     } else if (step === 2) {
       const result = await trigger('type');
       if (result) {
         setStep(prev => prev + 1);
+      } else {
+        alert('신분을 선택해주세요.');
       }
     } else if (step === 3) {
       const result = await trigger(['name', 'phone']);
       if (result) {
         setStep(prev => prev + 1);
+      } else {
+        if (getValues('name')) {
+          alert('연락처를 입력해주세요.');
+        } else if (getValues('phone')) {
+          alert('이름을 입력해주세요.');
+        } else {
+          alert('이름과 연락처를 입력해주세요.');
+        }
       }
     } else if (step === 4) {
       const result = await trigger(['email', 'address', 'zonecode']);
       if (result) {
         setStep(prev => prev + 1);
+      } else {
+        if (getValues('email')) {
+          alert('주소를 입력해주세요.');
+        } else if (getValues('address')) {
+          alert('이메일을 입력해주세요.');
+        } else {
+          alert('이메일과 지역을 입력해주세요.');
+        }
       }
     } else if (step === 5) {
       const result = await trigger(['password', 'gender', 'grade']);
       if (result) {
         setStep(prev => prev + 1);
+      } else {
+        alert('추가정보를 입력해주세요.');
       }
     }
   }, [step]);

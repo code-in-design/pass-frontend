@@ -14,7 +14,7 @@ const Update = (props: VersionsModel) => {
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <Select size="sm" options={props.options} defaultValue={props.options?.[0]} name="version" setValue={setValue} />
+        <Select size="sm" options={props.options} defaultValue={props.options?.[0]} name="version" setValue={setValue} register={props.register} />
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />

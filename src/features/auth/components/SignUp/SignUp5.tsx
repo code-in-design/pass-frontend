@@ -38,13 +38,13 @@ const SignUp5 = (props: Props) => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               성별
             </Text>
-            <Select size="lg" options={props.gender} placeholder="성별 선택" name="gender" setValue={props.setValue} />
+            <Select size="lg" options={props.gender} placeholder="성별 선택" name="gender" setValue={props.setValue} register={props.register} />
           </Box>
           <Box width="100%">
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            <Select size="lg" options={props.grade} placeholder="학년 선택" name="grade" setValue={props.setValue} />
+            <Select size="lg" options={props.grade} placeholder="학년 선택" name="grade" setValue={props.setValue} register={props.register} />
           </Box>
         </Flex>
         <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474" marginTop="24px">

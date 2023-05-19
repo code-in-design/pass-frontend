@@ -103,6 +103,9 @@ const SignUp4 = (props: Props) => {
             fontSize="16px"
             lineHeight="20px"
             fontWeight={700}
+            {...props.register('address', {
+              required: true,
+            })}
           />
           <Image src="/images/icons/cottage.svg" alt="call" position="absolute" top="18px" left="24px" />
           <Button onClick={handleClick} colorScheme="darkGray" height="56px" padding="18px 28px" fontSize="16px" lineHeight="20px" fontWeight={700}>

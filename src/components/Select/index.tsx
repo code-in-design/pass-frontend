@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { StyledSelectLarge, StyledSelectSmall, StyledSelectMedium } from './index.styles';
-import { FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormRegisterReturn, UseFormReturn, useForm } from 'react-hook-form';
 import { ActionMeta } from 'react-select';
 
 export interface SelectProps {
@@ -10,6 +10,7 @@ export interface SelectProps {
   placeholder?: string;
   name: string;
   setValue: UseFormReturn['setValue'];
+  register: UseFormRegister<FieldValues>;
 }
 
 const Select = (props: SelectProps) => {
@@ -26,30 +27,8 @@ const Select = (props: SelectProps) => {
   return (
     <>
       {props.size === 'sm' && <StyledSelectSmall {...selectProps} onChange={handleChange} className="react-select-small-container" classNamePrefix="react-select-small" instanceId="react-select-small" />}
-      {props.size === 'md' && (
-        <StyledSelectMedium
-          {...selectProps}
-          onChange={handleChange}
-          className="react-select-middle-container"
-          classNamePrefix="react-select-middle"
-          instanceId="react-select-middle"
-          options={props.options}
-          defaultValue={props.defaultValue}
-          placeholder={props.placeholder}
-        />
-      )}
-      {props.size === 'lg' && (
-        <StyledSelectLarge
-          {...selectProps}
-          onChange={handleChange}
-          options={props.options}
-          defaultValue={props.defaultValue}
-          placeholder={props.placeholder}
-          className="react-select-large-container"
-          classNamePrefix="react-select-large"
-          instanceId="react-select-large"
-        />
-      )}
+      {props.size === 'md' && <StyledSelectMedium {...selectProps} onChange={handleChange} className="react-select-middle-container" classNamePrefix="react-select-middle" instanceId="react-select-middle" />}
+      {props.size === 'lg' && <StyledSelectLarge {...selectProps} {...props.register(name, { required: true })} onChange={handleChange} className="react-select-large-container" classNamePrefix="react-select-large" instanceId="react-select-large" />}
     </>
   );
 };

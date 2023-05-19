@@ -53,10 +53,6 @@ const SignUp1 = (props: Props) => {
     [openTerm],
   );
 
-  const onAlert = data => {
-    alert('필수 선택');
-  };
-
   useEffect(() => {
     selectCheckbox();
   }, [checkbox]);
@@ -88,7 +84,7 @@ const SignUp1 = (props: Props) => {
             </Header>
             <Divider />
             <Body>
-              <BodyCheckbox type="checkbox" id="age" {...props.register('agree_flag_14_age', { required: true })} />
+              <BodyCheckbox type="checkbox" id="age" {...props.register('agree_flag_14_age', { required: '필수항목을 선택해주세요.' })} />
               <BodyLabel htmlFor="age">만 14세 이상입니다.</BodyLabel>
               <BodyOption color="#6B77F8">(필수)</BodyOption>
             </Body>
