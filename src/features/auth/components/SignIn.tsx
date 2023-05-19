@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
-import { useLazyGetNaverQuery } from '@/features/signIn/authApi';
+import { useLazyGetNaverQuery } from '@/features/auth/authApi';
 import { useRouter } from 'next/router';
 
 const SignIn = () => {

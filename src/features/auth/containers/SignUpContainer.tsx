@@ -1,30 +1,72 @@
 import { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import SignUp from '../components/SignUp/SignUp1';
 import SignUp2 from '../components/SignUp/SignUp2';
 import SignUp3 from '../components/SignUp/SignUp3';
 import SignUp4 from '../components/SignUp/SignUp4';
 import SignUp5 from '../components/SignUp/SignUp5';
 import SignUp6 from '../components/SignUp/SignUp6';
+import { useSetSignInMutation } from '../authApi';
 
 const SignUpContainer = () => {
   const [step, setStep] = useState(1);
+  const mutation = useSetSignInMutation();
+  const setSignIn = mutation[0];
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    trigger,
+    formState: { errors },
+  } = useForm();
+
+  const onsubmit = data => {
+    console.log(data);
+    // setSignIn(data);
+  };
 
   const goPrevStep = useCallback(() => {
     setStep(prev => prev - 1);
-  }, []);
-  const goNextStep = useCallback(() => {
-    setStep(prev => prev + 1);
-  }, []);
+  }, [step]);
+
+  const goNextStep = useCallback(async () => {
+    if (step === 1) {
+      const result = await trigger(['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy']);
+      if (result) {
+        setStep(prev => prev + 1);
+      }
+    } else if (step === 2) {
+      const result = await trigger('type');
+      if (result) {
+        setStep(prev => prev + 1);
+      }
+    } else if (step === 3) {
+      const result = await trigger(['name', 'phone']);
+      if (result) {
+        setStep(prev => prev + 1);
+      }
+    } else if (step === 4) {
+      const result = await trigger(['email', 'address', 'zonecode']);
+      if (result) {
+        setStep(prev => prev + 1);
+      }
+    } else if (step === 5) {
+      const result = await trigger(['password', 'gender', 'grade']);
+      if (result) {
+        setStep(prev => prev + 1);
+      }
+    }
+  }, [step]);
 
   return (
-    <>
-      {step === 1 && <SignUp onNextButtonClick={goNextStep} />}
-      {step === 2 && <SignUp2 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
-      {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
-      {step === 4 && <SignUp4 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} />}
-      {step === 5 && <SignUp5 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} gender={[]} grade={[]} />}
-      {step === 6 && <SignUp6 onPrevButtonClick={goPrevStep} />}
-    </>
+    <form onSubmit={handleSubmit(onsubmit)}>
+      {step === 1 && <SignUp onNextButtonClick={goNextStep} register={register} />}
+      {step === 2 && <SignUp2 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} />}
+      {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} />}
+      {step === 4 && <SignUp4 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} />}
+      {step === 5 && <SignUp5 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} />}
+      {step === 6 && <SignUp6 onPrevButtonClick={goPrevStep} register={register} />}
+    </form>
   );
 };
 

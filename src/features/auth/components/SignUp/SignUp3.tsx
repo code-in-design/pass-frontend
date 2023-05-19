@@ -1,20 +1,15 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import { ChangeEvent, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
 }
 
-const SignUp3: React.FC<Props> = props => {
-  const { register, setValue, watch } = useForm();
-  const watchFields = watch(['name', 'phone']);
-  console.log('name:', watchFields[0], '/ phone:', watchFields[1]);
-
-  const getValue = (name: string, value: ChangeEvent) => {
-    setValue(name, value);
-  };
+const SignUp3 = (props: Props) => {
+  const { setValue } = useForm();
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -40,7 +35,7 @@ const SignUp3: React.FC<Props> = props => {
         </Text>
         <Box position="relative">
           <Input
-            {...register('name', { required: true, onChange: e => getValue('name', e.target.value) })}
+            {...props.register('name', { required: true, onChange: e => setValue('name', e.target.value) })}
             variant="base"
             placeholder="이름을 입력해주세요"
             padding="18px 0 18px 56px"
@@ -56,7 +51,7 @@ const SignUp3: React.FC<Props> = props => {
         </Text>
         <Flex gap="12px" marginBottom="12px" position="relative">
           <Input
-            {...register('phone', { required: true, onChange: e => getValue('phone', e.target.value) })}
+            {...props.register('phone', { required: true, onChange: e => setValue('phone', e.target.value) })}
             variant="base"
             type="tel"
             placeholder='"-"를 제외하고 작성해주세요'

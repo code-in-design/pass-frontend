@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { StyledSelectLarge, StyledSelectSmall, StyledSelectMedium } from './index.styles';
-import { UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 import { ActionMeta } from 'react-select';
 
 export interface SelectProps {
   size: 'sm' | 'md' | 'lg';
-  options: Array<any>;
+  options?: Array<any>;
   defaultValue?: object;
   placeholder?: string;
   name: string;
@@ -28,6 +28,7 @@ const Select = (props: SelectProps) => {
       {props.size === 'sm' && <StyledSelectSmall {...selectProps} onChange={handleChange} className="react-select-small-container" classNamePrefix="react-select-small" instanceId="react-select-small" />}
       {props.size === 'md' && (
         <StyledSelectMedium
+          {...selectProps}
           onChange={handleChange}
           className="react-select-middle-container"
           classNamePrefix="react-select-middle"
@@ -39,6 +40,7 @@ const Select = (props: SelectProps) => {
       )}
       {props.size === 'lg' && (
         <StyledSelectLarge
+          {...selectProps}
           onChange={handleChange}
           options={props.options}
           defaultValue={props.defaultValue}

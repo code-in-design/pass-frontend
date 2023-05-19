@@ -1,18 +1,14 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
 }
 
-const SignUp6: React.FC<Props> = props => {
-  const { register, setValue, watch } = useForm();
-  const watchFields = watch('referral_code');
-  const getValue = (name: string, value: ChangeEvent) => {
-    setValue(name, value);
-  };
-  console.log(watchFields);
+const SignUp6 = (props: Props) => {
+  const { setValue } = useForm();
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -37,7 +33,7 @@ const SignUp6: React.FC<Props> = props => {
         </Text>
         <Box position="relative">
           <Input
-            {...register('referral_code', { required: true, onChange: e => getValue('referral_code', e.target.value) })}
+            {...props.register('referral_code', { onChange: e => setValue('referral_code', e.target.value) })}
             variant="base"
             placeholder="추천코드를 입력해주세요"
             padding="18px 0 18px 56px"
@@ -58,7 +54,7 @@ const SignUp6: React.FC<Props> = props => {
           <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px">
+          <Button type="submit" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px">
             완료
           </Button>
         </Flex>

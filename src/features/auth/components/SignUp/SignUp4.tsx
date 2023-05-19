@@ -1,25 +1,21 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { ChangeEvent, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormReturn['setValue'];
 }
 
-const SignUp4: React.FC<Props> = props => {
+const SignUp4 = (props: Props) => {
   const [address, setAddress] = useState('');
-  const { register, setValue, watch } = useForm();
-  const watchFields = watch(['email', 'address', 'zonecode']);
-  const getValue = (name: string, value: ChangeEvent) => {
-    setValue(name, value);
-  };
-  console.log(watchFields);
+  const { setValue } = useForm();
   const open = useDaumPostcodePopup();
 
   const handleComplete = data => {
-    console.log(data);
     let fullAddress = data.address;
     let zoneCode = data.zonecode;
     let extraAddress = '';
@@ -33,18 +29,17 @@ const SignUp4: React.FC<Props> = props => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-
-    console.log(zoneCode, fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    setValue('address', fullAddress);
-    setValue('zonecode', zoneCode);
     setAddress(fullAddress);
+    props.setValue('address', fullAddress);
+    props.setValue('zonecode', zoneCode);
   };
 
   const handleClick = () => {
     open({
       onComplete: handleComplete,
       top: '300',
-      left: '500',
+      left: '300',
+      popupKey: 'address',
     });
   };
 
@@ -72,7 +67,12 @@ const SignUp4: React.FC<Props> = props => {
         </Text>
         <Box position="relative">
           <Input
-            {...register('email', { required: true, onChange: e => getValue('email', e.target.value) })}
+            {...props.register('email', {
+              required: true,
+              onChange: e => {
+                setValue('email', e.target.value);
+              },
+            })}
             variant="base"
             placeholder="example@naver.com"
             padding="18px 0 18px 56px"
@@ -97,7 +97,7 @@ const SignUp4: React.FC<Props> = props => {
             borderRadius="16px"
             width="306px"
             height="56px"
-            padding="18px 0 18px 56px"
+            padding="18px 18px 18px 56px"
             color="#353644"
             _placeholder={{ color: '#9395A6' }}
             fontSize="16px"

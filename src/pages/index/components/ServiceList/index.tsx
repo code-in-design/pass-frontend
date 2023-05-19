@@ -24,15 +24,6 @@ const ServiceList = (props: Props) => {
 
 export default ServiceList;
 
-ServiceList.defaultProps = {
-  list: [
-    {
-      img: '/images/icons/panelSettings.svg',
-      text: '개인정보 보호 안내',
-    },
-  ],
-};
-
 const Container = styled.div`
   font-size: 16px;
   color: #353644;

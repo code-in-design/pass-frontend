@@ -1,22 +1,18 @@
 import Select from '@/components/Select';
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
-  gender: { value: string; label: string }[];
-  grade: { value: string; label: string }[];
+  gender?: { value: string; label: string }[];
+  grade?: { value: string; label: string }[];
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormReturn['setValue'];
 }
 
-const SignUp5: React.FC<Props> = props => {
-  const { register, setValue, watch } = useForm();
-  const watchFields = watch(['gender', 'grade', 'password']);
-  const getValue = (name: string, value: ChangeEvent) => {
-    setValue(name, value);
-  };
-  console.log(watchFields);
+const SignUp5 = (props: Props) => {
+  const { setValue } = useForm();
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -42,13 +38,13 @@ const SignUp5: React.FC<Props> = props => {
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               성별
             </Text>
-            <Select size="lg" options={props.gender} placeholder="성별 선택" name="gender" setValue={setValue} />
+            <Select size="lg" options={props.gender} placeholder="성별 선택" name="gender" setValue={props.setValue} />
           </Box>
           <Box width="100%">
             <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474">
               학년
             </Text>
-            <Select size="lg" options={props.grade} placeholder="학년 선택" name="grade" setValue={setValue} />
+            <Select size="lg" options={props.grade} placeholder="학년 선택" name="grade" setValue={props.setValue} />
           </Box>
         </Flex>
         <Text fontSize="16px" lineHeight="20px" fontWeight={700} marginBottom="12px" color="#626474" marginTop="24px">
@@ -56,7 +52,7 @@ const SignUp5: React.FC<Props> = props => {
         </Text>
         <Box position="relative">
           <Input
-            {...register('password', { required: true, minLength: 8, onChange: e => getValue('password', e.target.value) })}
+            {...props.register('password', { required: true, minLength: 8, onChange: e => setValue('password', e.target.value) })}
             variant="base"
             type="password"
             placeholder="8자 이상으로 입력해주세요"
@@ -89,9 +85,9 @@ SignUp5.defaultProps = {
     { value: 'female', label: '여성' },
   ],
   grade: [
-    { value: '1', label: '1학년' },
-    { value: '2', label: '2학년' },
-    { value: '3', label: '3학년' },
-    { value: '4', label: '재수 이상' },
+    { value: 'high1', label: '1학년' },
+    { value: 'high2', label: '2학년' },
+    { value: 'high3', label: '3학년' },
+    { value: 'high4', label: '재수 이상' },
   ],
 };
