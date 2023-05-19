@@ -11,16 +11,19 @@ export const authApi = createApi({
       query: () => 'auth/kakao',
     }),
 
-    setSignUp: builder.mutation({
-      query: ({ value }) => {
+    setSignIn: builder.mutation({
+      query: data => {
         return {
-          url: `auth/signup`,
+          url: `auth/email`,
           method: 'POST',
-          body: { value },
+          body: {
+            email: data.email,
+            password: data.password,
+          },
         };
       },
     }),
-    setSignIn: builder.mutation({
+    setSignUp: builder.mutation({
       query: data => {
         return {
           url: `auth/signup`,
@@ -50,4 +53,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLazyGetNaverQuery, useLazyGetKakaoQuery, useSetSignInMutation } = authApi;
+export const { useLazyGetNaverQuery, useLazyGetKakaoQuery, useSetSignUpMutation, useSetSignInMutation } = authApi;
