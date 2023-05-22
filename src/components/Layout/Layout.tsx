@@ -2,6 +2,7 @@ import React, { HTMLProps } from 'react';
 import { Navbar } from '../Navbar';
 import Header from '../Header';
 import styled from '@emotion/styled';
+import HeaderContainer from '../Header/HeaderContainer';
 
 interface LayoutProps extends HTMLProps<HTMLElement> {}
 
@@ -10,7 +11,7 @@ const Layout = (props: LayoutProps) => {
     <LayoutWrapper>
       <Navbar />
       <BodyWrapper>
-        <Header />
+        <HeaderContainer />
         <ChildrenWrapper>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>

@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '@/features/auth/authApi';
+import { newAccessToken } from './api';
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
+    [newAccessToken.reducerPath]: newAccessToken.reducer,
   },
   // 캐싱, 요청 취소, 폴링 등등 유용한 rtk-query의 기능들을 위한 api 미들웨어 추가
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware).concat(newAccessToken.middleware),
 });
 
 // 옵셔널, refetchOnFocus/refetchOnReconnect 기능을 위해 필요함

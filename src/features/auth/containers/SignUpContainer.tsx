@@ -22,7 +22,6 @@ const SignUpContainer = () => {
   });
 
   const onsubmit = data => {
-    console.log(data);
     setSignUp(data);
     router.push('/signIn');
   };
