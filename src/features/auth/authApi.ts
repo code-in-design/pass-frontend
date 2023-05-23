@@ -1,38 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fakeBaseQuery, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { headers } from '../../app/api';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://dev-api.z-one.kr/',
+    baseUrl: 'https://dev-api.z-one.kr/auth',
     prepareHeaders: headers,
   }),
 
   endpoints: builder => ({
-    //네이버 로그인
-    // getNaver: builder.query<any, void>({
-    //   query: () => 'auth/naver?redirect_uri=127.0.0.1:3000/signIn',
-    // }),
     //네이버 인가코드
     getNaverVerify: builder.query<any, void>({
       query: () => {
         const codeParams = new URLSearchParams(window.location.search);
         const code = codeParams.get('code');
-        return `auth/naver/verify?code=${code}`;
+        return `/naver/verify?code=${code}`;
       },
     }),
-
-    // 카카오톡 인가코드
-    // getKakao: builder.query<any, string>({
-    //   query: redirecstUri => `auth/kakao?redirect_uri=`,
-    // }),
 
     // 카카오톡 인가코드
     getKakaoVerify: builder.query<any, void>({
       query: () => {
         const codeParams = new URLSearchParams(window.location.search);
         const code = codeParams.get('code');
-        return `auth/kakao/verify?code=${code}&redirect_uri=http://localhost:3000/OAuth/kakao/kakaoVerifyPage`;
+        return `https://dev-api.z-one.kr/auth/kakao/verify?code=${code}&redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerifyPage`;
       },
     }),
 
@@ -40,7 +31,7 @@ export const authApi = createApi({
     setSignIn: builder.mutation({
       query: data => {
         return {
-          url: `auth/email`,
+          url: `/email`,
           method: 'POST',
           body: {
             email: data.email,
@@ -55,7 +46,7 @@ export const authApi = createApi({
         const naverId = window.localStorage.getItem('naverId');
         const kakaoId = window.localStorage.getItem('kakaoId');
         return {
-          url: `auth/signup`,
+          url: `/signup`,
           method: 'POST',
           body: {
             type: data.type,
@@ -81,9 +72,9 @@ export const authApi = createApi({
     }),
     // 유저 정보 가져오기
     getMe: builder.query<any, void>({
-      query: () => 'auth/me',
+      query: () => '/me',
     }),
   }),
 });
 
-export const { useLazyGetNaverVerifyQuery, useLazyGetKakaoVerifyQuery, useSetSignUpMutation, useSetSignInMutation, useGetMeQuery } = authApi;
+export const { useLazyGetNaverVerifyQuery, useLazyGetKakaoVerifyQuery, useGetKakaoVerifyQuery, useSetSignUpMutation, useSetSignInMutation, useGetMeQuery } = authApi;

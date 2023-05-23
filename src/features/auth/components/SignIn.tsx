@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
-import { useLazyGetKakaoVerifyQuery, useLazyGetNaverVerifyQuery, useSetSignInMutation } from '@/features/auth/authApi';
+import { useSetSignInMutation } from '@/features/auth/authApi';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
@@ -7,8 +7,6 @@ import { useEffect, useState } from 'react';
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
-  const [naverVerify, naverData] = useLazyGetNaverVerifyQuery();
-  const [triggerKakao, kakaoData] = useLazyGetKakaoVerifyQuery();
   const [setSignIn, { data, error }] = useSetSignInMutation();
 
   const onClickSignIn = data => {
@@ -30,7 +28,7 @@ const SignIn = () => {
         <VStack margin="80px 0 24px">
           <Button
             onClick={() => {
-              location.href = 'https://dev-api.z-one.kr/auth/kakao?redirect_uri=http://localhost:3000/OAuth/kakao/kakaoVerifyPage';
+              location.href = 'https://dev-api.z-one.kr/auth/kakao?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerifyPage';
             }}
             w="100%"
             h="56px"
@@ -46,7 +44,7 @@ const SignIn = () => {
           </Button>
           <Button
             onClick={() => {
-              location.href = 'https://dev-api.z-one.kr/auth/naver?redirect_uri=http://localhost:3000/OAuth/naver/naverVerifyPage';
+              location.href = 'https://dev-api.z-one.kr/auth/naver?redirect_uri=http://localhost:3000/oauth/naver/naverVerifyPage';
             }}
             w="100%"
             h="56px"
