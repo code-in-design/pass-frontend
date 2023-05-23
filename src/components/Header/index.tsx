@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 interface HeaderProps {
-  avatar: string;
+  avatar?: string;
   name: string;
-  membership: string;
+  membership: ReactNode;
   email: string;
 }
 
@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
         <UserInfo>
           <UserNameWrapper>
             <UserName>{props.name}</UserName>
-            <UserMembership>{props.membership}</UserMembership>
+            {props.membership}
           </UserNameWrapper>
           <UserEmail>{props.email}</UserEmail>
         </UserInfo>

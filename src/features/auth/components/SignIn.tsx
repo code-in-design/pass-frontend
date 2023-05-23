@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
-  const [setSignIn, { data, error }] = useSetSignInMutation();
+  const [setSignIn, { data, isError, isSuccess }] = useSetSignInMutation();
 
   const onClickSignIn = data => {
     setSignIn(data);
@@ -15,9 +15,12 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess) {
       window.localStorage.setItem('accessToken', data.access_token);
       window.localStorage.setItem('refreshToken', data.refresh_token);
+    }
+    if (isError) {
+      console.log(data);
     }
   }, [data]);
 
@@ -102,7 +105,7 @@ const SignIn = () => {
               </Text>
             </Checkbox>
             <Spacer />
-            {error ? (
+            {isError ? (
               <Text fontSize="12px" lineHeight="16px" color="#FE7575" fontWeight={600}>
                 회원 정보가 없거나 비밀번호가 일치하지 않습니다.
               </Text>

@@ -1,5 +1,3 @@
-import { useGetMeQuery } from '@/features/auth/authApi';
-
 export class UserModel {
   userName: string;
   userAvatar?: string;
