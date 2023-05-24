@@ -11,7 +11,7 @@ export interface SelectProps {
   name: string;
   setValue: UseFormReturn['setValue'];
   register: UseFormRegister<FieldValues>;
-  required: string;
+  required?: string;
 }
 
 const Select = (props: SelectProps) => {

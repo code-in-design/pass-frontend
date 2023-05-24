@@ -46,10 +46,12 @@ const SignUpContainer = () => {
   };
 
   const triggerAndCheck = async fields => {
+    console.log(fields);
     const result = await trigger(fields);
+    console.log('result', result);
     if (!result) {
       showError();
-      return false;
+      return result;
     }
     return setStep(prev => prev + 1);
   };
