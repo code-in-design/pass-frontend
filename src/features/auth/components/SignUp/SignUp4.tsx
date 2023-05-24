@@ -68,7 +68,7 @@ const SignUp4 = (props: Props) => {
         <Box position="relative">
           <Input
             {...props.register('email', {
-              required: true,
+              required: '이메일을 입력해주세요',
               onChange: e => {
                 setValue('email', e.target.value);
               },
@@ -104,7 +104,7 @@ const SignUp4 = (props: Props) => {
             lineHeight="20px"
             fontWeight={700}
             {...props.register('address', {
-              required: true,
+              required: '지역을선택해주세요',
             })}
           />
           <Image src="/images/icons/cottage.svg" alt="call" position="absolute" top="18px" left="24px" />
@@ -113,10 +113,10 @@ const SignUp4 = (props: Props) => {
           </Button>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+          <Button type="button" colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
+          <Button type="button" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
             다음
           </Button>
         </Flex>

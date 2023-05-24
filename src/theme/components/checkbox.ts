@@ -36,6 +36,9 @@ const sizes = {
       fontSize: '16px',
       color: '#9395A6',
     }),
+    icon: defineStyle({
+      strokeWidth: '1.2 !important',
+    }),
   }),
 };
 

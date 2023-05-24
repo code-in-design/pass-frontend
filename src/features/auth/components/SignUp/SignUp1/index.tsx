@@ -1,6 +1,6 @@
 import { Box, Flex, Text, Tooltip, Portal } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { FieldValues, UseFormGetValues, UseFormRegister, UseFormReturn } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormGetValues, UseFormRegister, UseFormReturn, UseFormSetError } from 'react-hook-form';
 import { Form, Header, HeaderCheckbox, HeaderLabel, HeaderOption, Body, BodyCheckbox, BodyLabel, BodyOption, BodyArrowRight, NextButton, Divider } from './index.styles';
 import { terms, privercy, marketing } from './terms';
 import TermsModal from './TermsModal';
@@ -16,7 +16,6 @@ interface Props {
 const SignUp1 = (props: Props) => {
   const checkboxItems = ['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy', 'agree_flag_marketing', 'agree_flag_event'];
   const [openTerm, setOpenTerm] = useState([false, false, false]);
-
   // 전체 체크박스를 선택하면 나머지 항목이 같이 toggle된다.
   const toggleAllCheckbox = (e: any) => {
     if (e.target.checked) {
@@ -88,13 +87,13 @@ const SignUp1 = (props: Props) => {
               <BodyOption color="#6B77F8">(필수)</BodyOption>
             </Body>
             <Body>
-              <BodyCheckbox type="checkbox" {...props.register('agree_flag_terms', { required: true })} id="agree_flag_terms" />
+              <BodyCheckbox type="checkbox" {...props.register('agree_flag_terms', { required: '필수항목을 선택해주세요.' })} id="agree_flag_terms" />
               <BodyLabel htmlFor="agree_flag_terms">이용약관 동의</BodyLabel>
               <BodyOption color="#6B77F8">(필수)</BodyOption>
               <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" onClick={() => openModal(0)} />
             </Body>
             <Body>
-              <BodyCheckbox type="checkbox" {...props.register('agree_flag_privacy', { required: true })} id="agree_flag_privacy" />
+              <BodyCheckbox type="checkbox" {...props.register('agree_flag_privacy', { required: '필수항목을 선택해주세요.' })} id="agree_flag_privacy" />
               <BodyLabel htmlFor="agree_flag_privacy">개인정보 수집 및 이용 동의</BodyLabel>
               <BodyOption color="#6B77F8">(필수)</BodyOption>
               <BodyArrowRight src="/images/icons/arrowRight.svg" alt="more" onClick={() => openModal(1)} />
@@ -111,7 +110,9 @@ const SignUp1 = (props: Props) => {
               <BodyOption>(선택)</BodyOption>
             </Body>
           </Form>
-          <NextButton onClick={props.onNextButtonClick}>다음단계로</NextButton>
+          <NextButton type="button" onClick={props.onNextButtonClick}>
+            다음단계로
+          </NextButton>
         </Box>
       </Box>
       {openTerm[0] && (

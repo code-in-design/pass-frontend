@@ -1,29 +1,18 @@
 import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
-import { useSetSignInMutation } from '@/features/auth/authApi';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { authKakao, authNaver, devBaseUrl } from '@/constants/url';
+import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
+import { NextRouter } from 'next/router';
 
-const SignIn = () => {
-  const { register, handleSubmit } = useForm();
-  const router = useRouter();
-  const [setSignIn, { data, isError, isSuccess }] = useSetSignInMutation();
+interface Props {
+  onClickSignIn: (data: any) => void;
+  isError: boolean;
+  router: NextRouter;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormReturn['setValue'];
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+}
 
-  const onClickSignIn = data => {
-    setSignIn(data);
-    router.push('/');
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      window.localStorage.setItem('accessToken', data.access_token);
-      window.localStorage.setItem('refreshToken', data.refresh_token);
-    }
-    if (isError) {
-      console.log(data);
-    }
-  }, [data]);
-
+const SignIn = (props: Props) => {
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px">
@@ -31,7 +20,7 @@ const SignIn = () => {
         <VStack margin="80px 0 24px">
           <Button
             onClick={() => {
-              location.href = 'https://dev-api.z-one.kr/auth/kakao?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerifyPage';
+              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerifyPage`;
             }}
             w="100%"
             h="56px"
@@ -47,7 +36,7 @@ const SignIn = () => {
           </Button>
           <Button
             onClick={() => {
-              location.href = 'https://dev-api.z-one.kr/auth/naver?redirect_uri=http://localhost:3000/oauth/naver/naverVerifyPage';
+              location.href = `${devBaseUrl}${authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerifyPage`;
             }}
             w="100%"
             h="56px"
@@ -71,9 +60,9 @@ const SignIn = () => {
           </Text>
           <Divider color="#B7B9C9" />
         </Flex>
-        <form onSubmit={handleSubmit(onClickSignIn)}>
+        <form onSubmit={props.handleSubmit(props.onClickSignIn)}>
           <Input
-            {...register('email', { required: '이메일이 올바르지 않습니다.' })}
+            {...props.register('email', { required: '이메일이 올바르지 않습니다.' })}
             placeholder="이메일"
             h="56px"
             borderRadius="16px"
@@ -85,7 +74,7 @@ const SignIn = () => {
             lineHeight="20px"
           />
           <Input
-            {...register('password', { required: '비밀번호가 올바르지 않습니다.', minLength: 8 })}
+            {...props.register('password', { required: '비밀번호가 올바르지 않습니다.', minLength: 8 })}
             placeholder="비밀번호"
             type="password"
             marginTop="12px"
@@ -99,13 +88,13 @@ const SignIn = () => {
             lineHeight="20px"
           />
           <Flex marginTop="32px">
-            <Checkbox fontWeight={500} spacing="6.5px" size="mdGray" borderColor="#9395a6">
+            <Checkbox {...props.register('autoLogin')} fontWeight={500} spacing="6.5px" size="mdGray" borderColor="#9395a6" defaultChecked>
               <Text fontSize="14px" lineHeight="16px" color="#9395a6">
                 자동 로그인
               </Text>
             </Checkbox>
             <Spacer />
-            {isError ? (
+            {props.isError ? (
               <Text fontSize="12px" lineHeight="16px" color="#FE7575" fontWeight={600}>
                 회원 정보가 없거나 비밀번호가 일치하지 않습니다.
               </Text>
@@ -117,7 +106,20 @@ const SignIn = () => {
             <Button type="submit" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#6B77F8" color="#fff" fontWeight={700} lineHeight="20px">
               로그인
             </Button>
-            <Button w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#fff" border="1px solid #6b77f8" color="#6b77f8" fontWeight={700} lineHeight="20px" letterSpacing="-0.02px" marginTop="12px" onClick={() => router.push('/signUp')}>
+            <Button
+              w="100%"
+              h="56px"
+              borderRadius="16px"
+              fontSize="16px"
+              bgColor="#fff"
+              border="1px solid #6b77f8"
+              color="#6b77f8"
+              fontWeight={700}
+              lineHeight="20px"
+              letterSpacing="-0.02px"
+              marginTop="12px"
+              onClick={() => props.router.push('/signUp')}
+            >
               일반 회원가입하기
             </Button>
           </VStack>

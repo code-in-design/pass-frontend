@@ -1,7 +1,9 @@
-import KakaoVerify from '@/features/auth/components/OAuth/KakaoVerify';
+import BarLoaderSpinner from '@/components/Spinners/BarLoaderSpinner';
+import { useFetchKakaoVerifyQuery } from '@/features/auth/apis/authApi';
 
-function kakaoVerifyPage() {
-  return <KakaoVerify />;
+function KakaoVerifyPage() {
+  useFetchKakaoVerifyQuery();
+  return <BarLoaderSpinner color="#6B77F8" />;
 }
 
-export default kakaoVerifyPage;
+export default KakaoVerifyPage;

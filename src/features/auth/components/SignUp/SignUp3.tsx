@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import { ChangeEvent, useCallback } from 'react';
-import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -35,7 +35,7 @@ const SignUp3 = (props: Props) => {
         </Text>
         <Box position="relative">
           <Input
-            {...props.register('name', { required: true, onChange: e => setValue('name', e.target.value) })}
+            {...props.register('name', { required: '이름을 입력해주세요', onChange: e => setValue('name', e.target.value) })}
             variant="base"
             placeholder="이름을 입력해주세요"
             padding="18px 0 18px 56px"
@@ -51,7 +51,7 @@ const SignUp3 = (props: Props) => {
         </Text>
         <Flex gap="12px" marginBottom="12px" position="relative">
           <Input
-            {...props.register('phone', { required: true, onChange: e => setValue('phone', e.target.value) })}
+            {...props.register('phone', { required: '연락처를 입력해주세요', onChange: e => setValue('phone', e.target.value) })}
             variant="base"
             type="tel"
             placeholder='"-"를 제외하고 작성해주세요'
@@ -88,10 +88,10 @@ const SignUp3 = (props: Props) => {
           </Text>
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+          <Button type="button" colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
+          <Button type="button" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
             다음
           </Button>
         </Flex>

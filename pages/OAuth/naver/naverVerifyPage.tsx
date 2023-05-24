@@ -1,6 +1,9 @@
-import NaverVerify from '@/features/auth/components/OAuth/NaverVerify';
-import React from 'react';
+import { useFetchNaverVerifyQuery } from '@/features/auth/apis/authApi';
+import BarLoaderSpinner from '@/components/Spinners/BarLoaderSpinner';
+import { useEffect } from 'react';
 
-export default function naverVerifyPage() {
-  return <NaverVerify />;
+export default function NaverVerifyPage() {
+  useFetchNaverVerifyQuery();
+
+  return <BarLoaderSpinner color="#6B77F8" />;
 }

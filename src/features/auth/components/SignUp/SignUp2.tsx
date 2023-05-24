@@ -1,17 +1,17 @@
 import { Box, Button, Flex, Text, Image, Tooltip, FormControl } from '@chakra-ui/react';
 import { useState } from 'react';
-import { FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormReturn['setValue'];
+  errors: FieldErrors<FieldValues>;
 }
 
 const SignUp2 = (props: Props) => {
   const [active, setActive] = useState([false, false, false]);
-  const { setValue } = useForm();
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -51,7 +51,7 @@ const SignUp2 = (props: Props) => {
             _hover={{ bgColor: '#F8F8FC' }}
             _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
             isActive={active[0]}
-            {...props.register('type', { required: true })}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
             onClick={() => {
               setActive([true, false, false]);
               props.setValue('type', 'student');
@@ -78,7 +78,7 @@ const SignUp2 = (props: Props) => {
             _hover={{ bgColor: '#F8F8FC' }}
             _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
             isActive={active[1]}
-            {...props.register('type', { required: true })}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
             onClick={() => {
               setActive([false, true, false]);
               props.setValue('type', 'parents');
@@ -105,7 +105,7 @@ const SignUp2 = (props: Props) => {
             _hover={{ bgColor: '#F8F8FC' }}
             _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
             isActive={active[2]}
-            {...props.register('type', { required: true })}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
             onClick={() => {
               setActive([false, false, true]);
               props.setValue('type', 'teacher');
@@ -126,10 +126,10 @@ const SignUp2 = (props: Props) => {
             </Text>
           </Flex>
           <Flex gap="12px" marginTop="auto">
-            <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+            <Button type="button" colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
               이전
             </Button>
-            <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
+            <Button type="button" colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
               다음
             </Button>
           </Flex>

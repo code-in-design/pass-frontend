@@ -51,7 +51,7 @@ const SignUp6 = (props: Props) => {
           </Text>
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+          <Button type="button" colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
           <Button type="submit" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px">
