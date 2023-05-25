@@ -20,7 +20,7 @@ const SignIn = (props: Props) => {
         <VStack margin="80px 0 24px">
           <Button
             onClick={() => {
-              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerifyPage`;
+              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/KakaoVerifyPage`;
             }}
             w="100%"
             h="56px"

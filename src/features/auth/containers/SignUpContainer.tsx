@@ -46,14 +46,11 @@ const SignUpContainer = () => {
   };
 
   const triggerAndCheck = async fields => {
-    console.log(fields);
     const result = await trigger(fields);
-    console.log('result', result);
     if (!result) {
       showError();
-      return result;
     }
-    return setStep(prev => prev + 1);
+    return result;
   };
 
   const goPrevStep = useCallback(() => {
@@ -61,12 +58,17 @@ const SignUpContainer = () => {
   }, []);
 
   const goNextStep = async () => {
-    const steps = [['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy'], 'type', ['name', 'phone'], ['email', 'address', 'zonecode'], ['password', 'gender', 'grade']];
-    for (let i = 0; i < steps.length; i++) {
-      const result = await triggerAndCheck(steps[i]);
-      if (!result) {
-        return;
-      }
+    const steps = {
+      1: ['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy'],
+      2: 'type',
+      3: ['name', 'phone'],
+      4: ['email', 'address', 'zonecode'],
+      5: ['password', 'gender', 'grade'],
+    };
+    const stepFields = steps[step];
+    const nextStep = await triggerAndCheck(stepFields);
+    if (nextStep) {
+      setStep(prev => prev + 1);
     }
   };
 

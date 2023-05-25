@@ -21,12 +21,12 @@ const badgeProps = {
 };
 
 interface Props {
-  type?: keyof typeof badgeProps;
   membership: string;
 }
 
 function MembershipBadge(props: Props) {
-  return <UserMembership>{props.membership}</UserMembership>;
+  const membershipProps = badgeProps[props.membership] || { text: 'Basic', color: '#B7B9C9' };
+  return <UserMembership color={membershipProps.color}>{membershipProps.text}</UserMembership>;
 }
 
 export default MembershipBadge;
