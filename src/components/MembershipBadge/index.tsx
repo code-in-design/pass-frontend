@@ -39,7 +39,7 @@ const UserMembership = styled.div`
   color: #fff;
   font-size: 12px;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1;
   padding: 4px 8px;
   text-align: center;
 `;

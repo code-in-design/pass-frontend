@@ -1,6 +1,5 @@
 import React, { HTMLProps } from 'react';
 import { Navbar } from '../Navbar';
-import Header from '../Header';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 

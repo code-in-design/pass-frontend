@@ -2,6 +2,8 @@ import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Space
 import { authKakao, authNaver, devBaseUrl } from '@/constants/url';
 import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 import { NextRouter } from 'next/router';
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 interface Props {
   onClickSignIn: (data: any) => void;
@@ -20,7 +22,7 @@ const SignIn = (props: Props) => {
         <VStack margin="80px 0 24px">
           <Button
             onClick={() => {
-              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/KakaoVerifyPage`;
+              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerify`;
             }}
             w="100%"
             h="56px"
@@ -36,7 +38,7 @@ const SignIn = (props: Props) => {
           </Button>
           <Button
             onClick={() => {
-              location.href = `${devBaseUrl}${authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerifyPage`;
+              location.href = `${devBaseUrl}${authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerify`;
             }}
             w="100%"
             h="56px"
@@ -96,7 +98,7 @@ const SignIn = (props: Props) => {
             <Spacer />
             {props.isError ? (
               <Text fontSize="12px" lineHeight="16px" color="#FE7575" fontWeight={600}>
-                회원 정보가 없거나 비밀번호가 일치하지 않습니다.
+                이메일주소 혹은 비밀번호를 확인해주세요.
               </Text>
             ) : (
               ''
