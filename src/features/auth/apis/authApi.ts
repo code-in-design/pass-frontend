@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
 import { devBaseUrl } from '@/constants/url';
-import { getLocalStorage, getSessionStorage, setLocalStorage, setSessionStorage } from '@/utils';
+import { storageUtil } from '@/utils';
 
 export const authApi = createApi({
   reducerPath: 'auth',
@@ -89,18 +89,9 @@ export const authApi = createApi({
         };
       },
       transformResponse: (response: any, meta, arg) => {
-        const isAutoLogin: any = getLocalStorage('autoLogin');
-        const result = JSON.parse(response);
-        if (JSON.parse(isAutoLogin)) {
-          setLocalStorage('accessToken', result.access_token);
-          setLocalStorage('refreshToken', result.refresh_token);
-          window.location.assign('/');
-        }
-        if (!JSON.parse(isAutoLogin)) {
-          setSessionStorage('accessToken', result.access_token);
-          setSessionStorage('refreshToken', result.refresh_token);
-          window.location.assign('/');
-        }
+        const { access_token, refresh_token } = JSON.parse(response);
+        storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
+        window.location.assign('/');
       },
       transformErrorResponse: response => {
         console.log(response);
@@ -109,8 +100,7 @@ export const authApi = createApi({
     // 회원가입
     setSignUp: builder.mutation({
       query: data => {
-        const naverId = window.localStorage.getItem('naverId');
-        const kakaoId = window.localStorage.getItem('kakaoId');
+        const { naverId, kakaoId } = storageUtil.getOAuthProviderIds();
         return {
           url: `/signup`,
           method: 'POST',
