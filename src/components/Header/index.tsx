@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import { UserModel } from '@/models/UserModel';
 
-const Header = (props: UserModel) => {
+interface HeaderProps {
+  avatar?: string;
+  name: string;
+  membership: ReactNode;
+  email: string;
+}
+
+const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
       <AlertWrapper>
@@ -10,13 +16,13 @@ const Header = (props: UserModel) => {
         <AlertDot />
       </AlertWrapper>
       <UserWrapper>
-        <UserImage src={props.userAvatar} alt="user" />
+        <UserImage src={props.avatar} alt="user" />
         <UserInfo>
           <UserNameWrapper>
-            <UserName>{props.userName}</UserName>
-            <UserMembership>{props.membership}</UserMembership>
+            <UserName>{props.name}</UserName>
+            {props.membership}
           </UserNameWrapper>
-          <UserEmail>{props.userEmail}</UserEmail>
+          <UserEmail>{props.email}</UserEmail>
         </UserInfo>
       </UserWrapper>
     </HeaderWrapper>

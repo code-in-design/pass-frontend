@@ -1,11 +1,21 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import { MutationDefinition, BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/dist/query';
+import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { useState } from 'react';
+import { FieldValues, UseFormGetValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
+  requestAuthentication: () => void;
+  completeAuthentication: () => void;
 }
 
 const SignUp3 = (props: Props) => {
+  const { setValue } = useForm();
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -29,21 +39,57 @@ const SignUp3 = (props: Props) => {
           이름
         </Text>
         <Box position="relative">
-          <Input variant="base" placeholder="이름을 입력해주세요" padding="18px 250px 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} maxLength={10} />
+          <Input
+            {...props.register('name', { required: '이름을 입력해주세요', onChange: e => setValue('name', e.target.value) })}
+            variant="base"
+            placeholder="이름을 입력해주세요"
+            padding="18px 0 18px 56px"
+            height="56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/person.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Text margin="24px 0 12px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" _placeholder={{ color: '#9395a6' }}>
           연락처
         </Text>
         <Flex gap="12px" marginBottom="12px" position="relative">
-          <Input variant="base" type="tel" placeholder='"-"를 제외하고 작성해주세요' width="306px" height="56px" padding="18px 72px 18px 56px" fontSize="16px" lineHeight="20px" fontWeight={700} maxLength={11} />
+          <Input
+            {...props.register('phone', { required: '연락처를 입력해주세요', onChange: e => setValue('phone', e.target.value) })}
+            variant="base"
+            type="tel"
+            placeholder='"-"를 제외하고 작성해주세요'
+            width="306px"
+            height="56px"
+            padding="18px 0 18px 56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/call.svg" alt="call" position="absolute" top="18px" left="24px" />
-          <Button colorScheme="darkGray" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700}>
-            인증요청
-          </Button>
+          {!isActive && (
+            <Button
+              onClick={() => {
+                props.requestAuthentication();
+                setIsActive(true);
+              }}
+              colorScheme="darkGray"
+              height="56px"
+              padding="18px 28px"
+              color="#fff"
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight={700}
+              cursor="pointer"
+            >
+              인증요청
+            </Button>
+          )}
         </Flex>
         <Flex gap="12px">
           <Input
+            {...props.register('phoneVerify', { required: '인증번호를 입력해주세요', onChange: e => setValue('phoneVerify', e.target.value) })}
             variant="base"
             placeholder="인증번호를 작성해주세요"
             width="306px"
@@ -56,17 +102,23 @@ const SignUp3 = (props: Props) => {
             border={'none'}
             color="#353644"
             _placeholder={{ color: '#9395a6' }}
+            isDisabled={!isActive}
           />
-          <Text display="flex" alignItems="center" fontSize="16px" fontWeight={500} lineHeight="20px" color="#6B77F8">
+          {isActive && (
+            <Button onClick={props.completeAuthentication} colorScheme="darkGray" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700} cursor="pointer">
+              인증완료
+            </Button>
+          )}
+          {/* <Text display="flex" alignItems="center" fontSize="16px" fontWeight={500} lineHeight="20px" color="#6B77F8">
             <Image src="/images/icons/history.svg" alt="time" marginRight="4px" width="20px" height="20px" />
             03:29 남음
-          </Text>
+          </Text> */}
         </Flex>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+          <Button type="button" colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
+          <Button type="button" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
             다음
           </Button>
         </Flex>

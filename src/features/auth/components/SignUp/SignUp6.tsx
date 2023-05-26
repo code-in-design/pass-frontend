@@ -1,10 +1,14 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
 }
 
 const SignUp6 = (props: Props) => {
+  const { setValue } = useForm();
+
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
       <Box w="560px" h="760px" borderRadius="24px" backgroundColor="#fff" margin="0 auto" padding="64px" display="flex" flexDirection="column">
@@ -28,7 +32,16 @@ const SignUp6 = (props: Props) => {
           추천코드 입력
         </Text>
         <Box position="relative">
-          <Input variant="base" placeholder="추천코드를 입력해주세요" padding="18px 0 18px 56px" height="56px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" />
+          <Input
+            {...props.register('referral_code', { onChange: e => setValue('referral_code', e.target.value) })}
+            variant="base"
+            placeholder="추천코드를 입력해주세요"
+            padding="18px 0 18px 56px"
+            height="56px"
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight={700}
+          />
           <Image src="/images/icons/enterArrow.svg" alt="person" position="absolute" top="18px" left="24px" />
         </Box>
         <Box display="flex" alignItems="flex-end" marginTop="16px">
@@ -38,10 +51,10 @@ const SignUp6 = (props: Props) => {
           </Text>
         </Box>
         <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+          <Button type="button" colorScheme="gray" w="100%" h="56px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
             이전
           </Button>
-          <Button colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px">
+          <Button type="submit" colorScheme="blue" w="100%" h="56px" fontSize="16px" fontWeight={700} lineHeight="20px">
             완료
           </Button>
         </Flex>

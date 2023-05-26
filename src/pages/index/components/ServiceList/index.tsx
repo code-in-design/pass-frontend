@@ -3,16 +3,19 @@ import FinalSelectionUniversity from '../../../../features/universities/componen
 import MembershipModal from '@/features/membership/components/MembershipModal';
 import RecommendationModal from '@/features/recommendations/components/RecommendationModal';
 import PrivacyModal from './PrivacyModal';
+import { useForm } from 'react-hook-form';
 
 interface Props {}
 
 const ServiceList = (props: Props) => {
+  const { register } = useForm();
+
   return (
     <>
       <Container>
         <Title>서비스 바로가기</Title>
         <MenuList>
-          <FinalSelectionUniversity />
+          <FinalSelectionUniversity register={register} />
           <MembershipModal />
           <PrivacyModal />
           <RecommendationModal />
@@ -23,15 +26,6 @@ const ServiceList = (props: Props) => {
 };
 
 export default ServiceList;
-
-ServiceList.defaultProps = {
-  list: [
-    {
-      img: '/images/icons/panelSettings.svg',
-      text: '개인정보 보호 안내',
-    },
-  ],
-};
 
 const Container = styled.div`
   font-size: 16px;

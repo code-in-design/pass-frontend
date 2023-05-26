@@ -7,10 +7,12 @@ import PopularUniversity from '../../features/universities/components/PopularUni
 import InterestedUniversities from '../../features/universities/components/InterestedUniversities';
 import Probability from './components/Probability';
 import ServiceList from './components/ServiceList';
+import { useForm } from 'react-hook-form';
 
 type Props = {};
 
 const MainPage = (props: Props) => {
+  const { register } = useForm();
   return (
     <Layout>
       <MainWrapper>
@@ -18,7 +20,7 @@ const MainPage = (props: Props) => {
           <WelcomeSection /> <ServiceList /> <Probability />
         </MainLeft>
         <MainRight>
-          <InterestedUniversities /> <PopularUniversity /> <UpdateHistory />
+          <InterestedUniversities /> <PopularUniversity /> <UpdateHistory register={register} />
         </MainRight>
       </MainWrapper>
     </Layout>

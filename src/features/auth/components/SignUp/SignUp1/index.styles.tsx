@@ -12,7 +12,7 @@ export const Form = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 `;
 export const HeaderCheckbox = styled.input`
   width: 15px;
@@ -42,7 +42,7 @@ export const Divider = styled.hr`
 `;
 export const Body = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 16px;
   &:last-child {
     margin-bottom: 0;

@@ -1,9 +1,13 @@
-import { Box, Button, Flex, Text, Image, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Tooltip, FormControl } from '@chakra-ui/react';
 import { useState } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormReturn['setValue'];
+  errors: FieldErrors<FieldValues>;
 }
 
 const SignUp2 = (props: Props) => {
@@ -28,97 +32,108 @@ const SignUp2 = (props: Props) => {
         <Text fontSize="20px" lineHeight="24px" fontWeight={600} marginBottom="24px" color="#353644">
           귀하의 신분을 선택해주세요
         </Text>
-        <Button
-          border="1px solid #e4e6f0"
-          borderRadius="16px"
-          padding="12px 16px"
-          height="72px"
-          marginBottom="12px"
-          fontSize="20px"
-          fontWeight={600}
-          lineHeight="20px"
-          color="#626474"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          bgColor="#fff"
-          _hover={{ bgColor: '#F8F8FC' }}
-          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
-          isActive={active[0]}
-          onClick={() => {
-            setActive([true, false, false]);
-          }}
-        >
-          <Image src="/images/icons/student.svg" alt="student" marginRight="12px" />
-          학생입니다
-        </Button>
-        <Button
-          border="1px solid #e4e6f0"
-          borderRadius="16px"
-          height="72px"
-          padding="12px 16px"
-          marginBottom="12px"
-          fontSize="20px"
-          fontWeight={600}
-          lineHeight="20px"
-          color="#626474"
-          bgColor="#fff"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          _hover={{ bgColor: '#F8F8FC' }}
-          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
-          isActive={active[1]}
-          onClick={() => {
-            setActive([false, true, false]);
-          }}
-        >
-          <Image src="/images/icons/parent.svg" alt="Parent" marginRight="12px" />
-          학부모입니다
-        </Button>
-        <Button
-          border="1px solid #e4e6f0"
-          borderRadius="16px"
-          padding="12px 16px"
-          height="72px"
-          marginBottom="12px"
-          fontSize="20px"
-          fontWeight={600}
-          lineHeight="20px"
-          color="#626474"
-          bgColor="#fff"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          _hover={{ bgColor: '#F8F8FC' }}
-          _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
-          isActive={active[2]}
-          onClick={() => {
-            setActive([false, false, true]);
-          }}
-        >
-          <Image src="/images/icons/teacher.svg" alt="Teacher" marginRight="12px" />
-          <Box textAlign="left">
-            <Text fontSize="12px" fontWeight={600} color="#9395A6">
-              학생을 관리하는
+        <FormControl width="100%" h="100%" display="flex" flexDirection="column">
+          <Button
+            border="1px solid #e4e6f0"
+            borderRadius="16px"
+            padding="12px 16px"
+            width="100%"
+            height="72px"
+            marginBottom="12px"
+            fontSize="20px"
+            fontWeight={600}
+            lineHeight="20px"
+            color="#626474"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bgColor="#fff"
+            _hover={{ bgColor: '#F8F8FC' }}
+            _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+            isActive={active[0]}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
+            onClick={() => {
+              setActive([true, false, false]);
+              props.setValue('type', 'student');
+            }}
+          >
+            <Image src="/images/icons/student.svg" alt="student" marginRight="12px" />
+            학생입니다
+          </Button>
+          <Button
+            border="1px solid #e4e6f0"
+            borderRadius="16px"
+            width="100%"
+            height="72px"
+            padding="12px 16px"
+            marginBottom="12px"
+            fontSize="20px"
+            fontWeight={600}
+            lineHeight="20px"
+            color="#626474"
+            bgColor="#fff"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            _hover={{ bgColor: '#F8F8FC' }}
+            _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+            isActive={active[1]}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
+            onClick={() => {
+              setActive([false, true, false]);
+              props.setValue('type', 'parents');
+            }}
+          >
+            <Image src="/images/icons/parent.svg" alt="Parent" marginRight="12px" />
+            학부모입니다
+          </Button>
+          <Button
+            border="1px solid #e4e6f0"
+            borderRadius="16px"
+            padding="12px 16px"
+            width="100%"
+            height="72px"
+            marginBottom="12px"
+            fontSize="20px"
+            fontWeight={600}
+            lineHeight="20px"
+            color="#626474"
+            bgColor="#fff"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            _hover={{ bgColor: '#F8F8FC' }}
+            _active={{ bgColor: 'rgba(107, 119, 248, 0.1)', border: '1px solid #6b77f8' }}
+            isActive={active[2]}
+            {...props.register('type', { required: '신분을 선택해주세요' })}
+            onClick={() => {
+              setActive([false, false, true]);
+              props.setValue('type', 'teacher');
+            }}
+          >
+            <Image src="/images/icons/teacher.svg" alt="Teacher" marginRight="12px" />
+            <Box textAlign="left">
+              <Text fontSize="12px" fontWeight={600} color="#9395A6">
+                학생을 관리하는
+              </Text>
+              교육자입니다
+            </Box>
+          </Button>
+          <Flex borderRadius="16px" padding="12px 0 12px 16px" backgroundColor="rgba(96, 200, 222, 0.1)" alignItems="center" w="100%" fontSize="14px">
+            <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="20px" h="20px" />
+            <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE">
+              현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
             </Text>
-            교육자입니다
-          </Box>
-        </Button>
-        <Flex borderRadius="16px" padding="12px 0 12px 16px" backgroundColor="rgba(96, 200, 222, 0.1)" alignItems="center" w="100%" fontSize="14px">
-          <Image src="/images/icons/info.svg" alt="info" marginRight="10px" w="20px" h="20px" />
-          <Text fontSize="14px" fontWeight={700} lineHeight="20px" color="#60C8DE">
-            현재 교육자 기능은 학생 기능과 동일하며 추후 업데이트 예정입니다.
-          </Text>
-        </Flex>
-        <Flex gap="12px" marginTop="auto">
-          <Button colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
-            이전
-          </Button>
-          <Button colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
-            다음
-          </Button>
-        </Flex>
+          </Flex>
+          <Flex gap="12px" marginTop="auto">
+            <Button type="button" colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>
+              이전
+            </Button>
+            <Button type="button" colorScheme="blue" w="100%" h="56px" borderRadius="16px" fontSize="16px" fontWeight={700} lineHeight="20px" onClick={props.onNextButtonClick}>
+              다음
+            </Button>
+          </Flex>
+        </FormControl>
       </Box>
     </Box>
   );

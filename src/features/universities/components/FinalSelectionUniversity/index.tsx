@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Select from '@/components/Select';
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useCallback, useState } from 'react';
 
@@ -9,6 +9,7 @@ interface Props {
   first: { value: string; label: string }[];
   second: { value: string; label: string }[];
   third: { value: string; label: string }[];
+  register: UseFormRegister<FieldValues>;
 }
 
 const FinalSelectionUniversity = (props: Props) => {
@@ -43,15 +44,15 @@ const FinalSelectionUniversity = (props: Props) => {
             <SelectSection>
               <SelectWrapper>
                 <SelectText>가군 지원대학</SelectText>
-                <Select name="first" size="md" options={props.first} placeholder="대학·학과 선택" setValue={setValue} />
+                <Select name="first" size="md" options={props.first} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
               </SelectWrapper>
               <SelectWrapper>
                 <SelectText>나군 지원대학</SelectText>
-                <Select name="second" size="md" options={props.second} placeholder="대학·학과 선택" setValue={setValue} />
+                <Select name="second" size="md" options={props.second} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
               </SelectWrapper>
               <SelectWrapper>
                 <SelectText>다군 지원대학</SelectText>
-                <Select name="third" size="md" options={props.third} placeholder="대학·학과 선택" setValue={setValue} />
+                <Select name="third" size="md" options={props.third} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
               </SelectWrapper>
             </SelectSection>
             <Button type="submit">선택 완료</Button>
