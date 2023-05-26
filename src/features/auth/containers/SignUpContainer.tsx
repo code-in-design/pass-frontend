@@ -11,10 +11,10 @@ import Router from 'next/router';
 import { isEmpty } from 'lodash';
 
 const SignUpContainer = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const mutation = useSetSignUpMutation();
   const setSignUp = mutation[0];
-  const [fetchOtp, { data, isSuccess }] = useFetchOtpMutation();
+  const [fetchOtp] = useFetchOtpMutation();
   const [fetchOtpVerify] = useFetchOtpVerifyMutation();
   const {
     register,
@@ -25,7 +25,6 @@ const SignUpContainer = () => {
     control,
     formState: { errors },
   } = useForm();
-  const router = Router;
 
   const checkbox = useWatch({
     control,
