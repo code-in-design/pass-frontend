@@ -1,15 +1,16 @@
 import { devBaseUrl } from '@/constants/url';
-import { getLocalStorage, getSessionStorage, setLocalStorage, setSessionStorage } from '@/utils';
+import { storageUtil } from '@/utils';
 import axios from 'axios';
+import { cond } from 'lodash';
 
 // 헤더에 token추가하고 관리
 export const addTokenToHeader = (headers, { getState }) => {
-  const isAutoLogin = getLocalStorage('autoLogin');
+  const isAutoLogin = storageUtil.getItemFromLocalStorage('autoLogin');
   let token;
   if (Boolean(isAutoLogin)) {
-    token = getLocalStorage('accessToken');
+    token = storageUtil.getItemFromLocalStorage('accessToken');
   } else {
-    token = getSessionStorage('accessToken');
+    token = storageUtil.getItemFromSessionStorage('accessToken');
   }
 
   if (token) {
@@ -19,11 +20,8 @@ export const addTokenToHeader = (headers, { getState }) => {
 };
 
 export const fetchAccessToken = async response => {
-  // 자동로그인 체크 여부 확인하기
-  const isAutoLogin = getLocalStorage('autoLogin');
   // 기존의 token이 어디에 저장되어있는지 찾기
-  let accessToken = getSessionStorage('accessToken') || getLocalStorage('accessToken') || null;
-  let refreshToken = getSessionStorage('refreshToken') || getLocalStorage('refreshToken') || null;
+  const { refreshToken } = storageUtil.getTokens();
   // 액세스 토큰이 없거나 만료됬거나 유효하지 않은 경우
   if (response.status === 401) {
     if (refreshToken !== null) {
@@ -33,11 +31,7 @@ export const fetchAccessToken = async response => {
         url: `${devBaseUrl}/auth/token/${refreshToken}`,
       })
         .then(res => {
-          if (isAutoLogin !== null) {
-            setLocalStorage('accessToken', res.data.access_token);
-          } else {
-            setSessionStorage('accessToken', res.data.access_token);
-          }
+          storageUtil.setTokens(res.data.access_token);
         })
         .catch(err => {
           console.log(err);

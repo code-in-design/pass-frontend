@@ -43,14 +43,13 @@ class StorageUtil {
 
   // 자동로그인 여부에 따라 토큰을 세션스토리지 또는 로컬스토리지에 저장함
   setTokens = ({ accessToken, refreshToken }: { accessToken?: string; refreshToken?: string }) => {
-    const isAutoLogin = this.getItemFromLocalStorage(this.autoLoginKey);
+    const isAutoLogin: any = this.getItemFromLocalStorage(this.autoLoginKey);
 
-    if (isAutoLogin) {
+    if (JSON.parse(isAutoLogin)) {
       this.setItemToLocalStorage(this.accessTokenKey, accessToken);
       this.setItemToLocalStorage(this.refreshTokenKey, refreshToken);
     }
-
-    if (!isAutoLogin) {
+    if (!JSON.parse(isAutoLogin)) {
       this.setItemToSessionStorage(this.accessTokenKey, accessToken);
       this.setItemToSessionStorage(this.refreshTokenKey, refreshToken);
     }
@@ -64,9 +63,21 @@ class StorageUtil {
   };
 
   getOAuthProviderIds = () => {
-    const naverId = this.getItemFromSessionStorage(this.naverIdKey) || this.getItemFromSessionStorage(this.naverIdKey);
-    const kakaoId = this.getItemFromSessionStorage(this.kakaoIdKey) || this.getItemFromSessionStorage(this.kakaoIdKey);
+    const naverId = this.getItemFromSessionStorage(this.naverIdKey) || this.getItemFromLocalStorage(this.naverIdKey);
+    const kakaoId = this.getItemFromSessionStorage(this.kakaoIdKey) || this.getItemFromLocalStorage(this.kakaoIdKey);
     return { naverId, kakaoId };
+  };
+
+  setOAuthProviderIds = ({ naverId, kakaoId }: { naverId?: number; kakaoId?: number }) => {
+    const isAutoLogin: any = this.getItemFromLocalStorage(this.autoLoginKey);
+    if (JSON.parse(isAutoLogin)) {
+      this.setItemToLocalStorage(this.naverIdKey, naverId);
+      this.setItemToLocalStorage(this.kakaoIdKey, kakaoId);
+    }
+    if (!JSON.parse(isAutoLogin)) {
+      this.setItemToSessionStorage(this.naverIdKey, naverId);
+      this.setItemToSessionStorage(this.kakaoIdKey, kakaoId);
+    }
   };
 }
 

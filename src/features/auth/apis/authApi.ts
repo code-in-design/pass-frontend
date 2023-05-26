@@ -12,15 +12,6 @@ export const authApi = createApi({
   }),
 
   endpoints: builder => ({
-    //새로운 accessToken 발급받기
-    issuedToken: builder.query<any, void>({
-      query: () => {
-        const refreshToken = window.localStorage.getItem('refreshToken');
-        return {
-          url: `/token/${refreshToken}`,
-        };
-      },
-    }),
     //네이버 인가코드
     fetchNaverVerify: builder.query<any, void>({
       query: () => {
@@ -29,17 +20,18 @@ export const authApi = createApi({
         return `/naver/verify?code=${code}`;
       },
       transformResponse: (response: any, meta, arg) => {
-        const naverId = response.naver_id;
-        // 네이버로 로그인을하고, z-one에 회원가입이 되어있는경우
-        if (!naverId) {
-          window.localStorage.setItem('accessToken', response.access_token);
-          window.localStorage.setItem('refreshToken', response.refresh_token);
-          window.location.assign('/');
-        }
+        const result = JSON.parse(response);
+        const naverId = result.naver_id;
+
         // 네이버로 로그인을하고, z-one에 회원가입이 되어있지 않은경우
         if (naverId) {
-          window.localStorage.setItem('naverId', naverId);
+          storageUtil.setOAuthProviderIds({ naverId: naverId });
           window.location.assign('/signUp');
+        } else {
+          // 네이버로 로그인을하고, z-one에 회원가입이 되어있는경우
+          const { access_token, refresh_token } = result;
+          storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
+          window.location.assign('/');
         }
       },
       transformErrorResponse: response => {
@@ -56,18 +48,24 @@ export const authApi = createApi({
         return `/kakao/verify?code=${code}&redirect_uri=${encodeURIComponent('http://localhost:3000/oauth/kakao/kakaoVerify')}`;
       },
       transformResponse: (response: any, meta, arg) => {
-        const kakaoId = response.kakao_id;
+        const result = JSON.parse(response);
+        const kakaoId = result.kakao_id;
 
-        // 카카오로 로그인을하고, z-one에 회원가입이 되어있는경우
-        if (!kakaoId) {
-          window.localStorage.setItem('accessToken', response.access_token);
-          window.localStorage.setItem('refreshToken', response.refresh_token);
-          window.location.assign('/');
-        }
+        // if (!kakaoId) {
+        //   const { access_token, refresh_token } = result;
+        //   storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
+        //   window.location.assign('/');
+        // }
+
         // 카카오로 로그인을하고, z-one에 회원가입이 되어있지 않은경우
         if (kakaoId) {
-          window.localStorage.setItem('naverId', kakaoId);
+          storageUtil.setOAuthProviderIds({ kakaoId: kakaoId });
           window.location.assign('/signUp');
+        } else {
+          // 카카오로 로그인을하고, z-one에 회원가입이 되어있는경우
+          const { access_token, refresh_token } = result;
+          storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
+          window.location.assign('/');
         }
       },
       transformErrorResponse: response => {
@@ -169,4 +167,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useFetchOtpVerifyMutation, useFetchOtpMutation, useIssuedTokenQuery, useFetchNaverVerifyQuery, useFetchKakaoVerifyQuery, useSetSignUpMutation, useSignInMutation, useFetchMeQuery } = authApi;
+export const { useFetchOtpVerifyMutation, useFetchOtpMutation, useFetchNaverVerifyQuery, useFetchKakaoVerifyQuery, useSetSignUpMutation, useSignInMutation, useFetchMeQuery } = authApi;

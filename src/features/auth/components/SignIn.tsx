@@ -4,6 +4,7 @@ import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useFo
 import { NextRouter } from 'next/router';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { storageUtil } from '@/utils';
 
 interface Props {
   onClickSignIn: (data: any) => void;
@@ -12,6 +13,7 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormReturn['setValue'];
   handleSubmit: UseFormHandleSubmit<FieldValues>;
+  setAutoLoginChecked: () => void;
 }
 
 const SignIn = (props: Props) => {
@@ -22,6 +24,7 @@ const SignIn = (props: Props) => {
         <VStack margin="80px 0 24px">
           <Button
             onClick={() => {
+              props.setAutoLoginChecked();
               location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerify`;
             }}
             w="100%"
@@ -38,6 +41,7 @@ const SignIn = (props: Props) => {
           </Button>
           <Button
             onClick={() => {
+              props.setAutoLoginChecked();
               location.href = `${devBaseUrl}${authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerify`;
             }}
             w="100%"
