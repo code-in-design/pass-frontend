@@ -1,15 +1,20 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { ChangeEvent, useCallback } from 'react';
-import { FieldErrors, FieldValues, UseFormRegister, useForm } from 'react-hook-form';
+import { MutationDefinition, BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/dist/query';
+import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { useState } from 'react';
+import { FieldValues, UseFormGetValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;
   onPrevButtonClick: () => void;
   register: UseFormRegister<FieldValues>;
+  requestAuthentication: () => void;
+  completeAuthentication: () => void;
 }
 
 const SignUp3 = (props: Props) => {
   const { setValue } = useForm();
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <Box backgroundColor="#f3f4fa" padding="132px 0">
@@ -63,12 +68,28 @@ const SignUp3 = (props: Props) => {
             fontWeight={700}
           />
           <Image src="/images/icons/call.svg" alt="call" position="absolute" top="18px" left="24px" />
-          <Button colorScheme="darkGray" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700}>
-            인증요청
-          </Button>
+          {!isActive && (
+            <Button
+              onClick={() => {
+                props.requestAuthentication();
+                setIsActive(true);
+              }}
+              colorScheme="darkGray"
+              height="56px"
+              padding="18px 28px"
+              color="#fff"
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight={700}
+              cursor="pointer"
+            >
+              인증요청
+            </Button>
+          )}
         </Flex>
         <Flex gap="12px">
           <Input
+            {...props.register('phoneVerify', { required: '인증번호를 입력해주세요', onChange: e => setValue('phoneVerify', e.target.value) })}
             variant="base"
             placeholder="인증번호를 작성해주세요"
             width="306px"
@@ -81,11 +102,17 @@ const SignUp3 = (props: Props) => {
             border={'none'}
             color="#353644"
             _placeholder={{ color: '#9395a6' }}
+            isDisabled={!isActive}
           />
-          <Text display="flex" alignItems="center" fontSize="16px" fontWeight={500} lineHeight="20px" color="#6B77F8">
+          {isActive && (
+            <Button onClick={props.completeAuthentication} colorScheme="darkGray" height="56px" padding="18px 28px" color="#fff" fontSize="16px" lineHeight="20px" fontWeight={700} cursor="pointer">
+              인증완료
+            </Button>
+          )}
+          {/* <Text display="flex" alignItems="center" fontSize="16px" fontWeight={500} lineHeight="20px" color="#6B77F8">
             <Image src="/images/icons/history.svg" alt="time" marginRight="4px" width="20px" height="20px" />
             03:29 남음
-          </Text>
+          </Text> */}
         </Flex>
         <Flex gap="12px" marginTop="auto">
           <Button type="button" colorScheme="gray" w="100%" h="56px" borderRadius="16px" fontSize="16px" bgColor="#F3F4FA" color="#9395A6" fontWeight={700} lineHeight="20px" onClick={props.onPrevButtonClick}>

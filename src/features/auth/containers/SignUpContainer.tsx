@@ -6,14 +6,16 @@ import SignUp3 from '../components/SignUp/SignUp3';
 import SignUp4 from '../components/SignUp/SignUp4';
 import SignUp5 from '../components/SignUp/SignUp5';
 import SignUp6 from '../components/SignUp/SignUp6';
-import { useSetSignUpMutation } from '../apis/authApi';
+import { useFetchOtpMutation, useFetchOtpVerifyMutation, useSetSignUpMutation } from '../apis/authApi';
 import Router from 'next/router';
 import { isEmpty } from 'lodash';
 
 const SignUpContainer = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const mutation = useSetSignUpMutation();
   const setSignUp = mutation[0];
+  const [fetchOtp, { data, isSuccess }] = useFetchOtpMutation();
+  const [fetchOtpVerify] = useFetchOtpVerifyMutation();
   const {
     register,
     handleSubmit,
@@ -31,8 +33,9 @@ const SignUpContainer = () => {
   });
 
   const onsubmit = data => {
+    console.log(data);
     setSignUp(data);
-    router.push('/signIn');
+    // router.push('/signIn');
   };
 
   const showError = () => {
@@ -61,7 +64,7 @@ const SignUpContainer = () => {
     const steps = {
       1: ['agree_flag_14_age', 'agree_flag_terms', 'agree_flag_privacy'],
       2: 'type',
-      3: ['name', 'phone'],
+      3: ['name', 'phone', 'phoneVerify'],
       4: ['email', 'address', 'zonecode'],
       5: ['password', 'gender', 'grade'],
     };
@@ -76,11 +79,25 @@ const SignUpContainer = () => {
     showError();
   }, [errors]);
 
+  // 인증요청
+  const requestAuthentication = () => {
+    const phone = getValues('phone');
+    fetchOtp(phone);
+  };
+
+  //인증 완료
+  const completeAuthentication = () => {
+    const phone = getValues('phone');
+    const phoneVerify = getValues('phoneVerify');
+    const code = JSON.parse(phoneVerify);
+    fetchOtpVerify({ phone: phone, code: code });
+  };
+
   return (
     <form onSubmit={handleSubmit(onsubmit)}>
       {step === 1 && <SignUp onNextButtonClick={goNextStep} register={register} setValue={setValue} getValues={getValues} checkbox={checkbox} />}
       {step === 2 && <SignUp2 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} errors={errors} />}
-      {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} />}
+      {step === 3 && <SignUp3 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} requestAuthentication={requestAuthentication} completeAuthentication={completeAuthentication} />}
       {step === 4 && <SignUp4 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} />}
       {step === 5 && <SignUp5 onPrevButtonClick={goPrevStep} onNextButtonClick={goNextStep} register={register} setValue={setValue} />}
       {step === 6 && <SignUp6 onPrevButtonClick={goPrevStep} register={register} />}

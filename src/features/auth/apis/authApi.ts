@@ -136,6 +136,42 @@ export const authApi = createApi({
         };
       },
     }),
+    // SMS인증을 위한 OTP 코드 전송
+    fetchOtp: builder.mutation({
+      query: data => {
+        return {
+          url: '/otp/send',
+          method: 'POST',
+          body: {
+            phone: data,
+          },
+        };
+      },
+      transformErrorResponse: (response: any) => {
+        const result = JSON.parse(response.data).message[0];
+        alert(result);
+      },
+    }),
+    // SMS인증을 위한 OTP 코드 전송
+    fetchOtpVerify: builder.mutation({
+      query: data => {
+        return {
+          url: '/otp/verify',
+          method: 'POST',
+          body: {
+            phone: data.phone,
+            code: data.code,
+          },
+        };
+      },
+      transformResponse: response => {
+        alert('인증에 성공했습니다.');
+      },
+      transformErrorResponse: response => {
+        console.log(response);
+        alert('인증에 실패했습니다.');
+      },
+    }),
     // 유저 정보 가져오기
     fetchMe: builder.query<any, void>({
       query: () => '/me',
@@ -143,4 +179,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useIssuedTokenQuery, useFetchNaverVerifyQuery, useFetchKakaoVerifyQuery, useSetSignUpMutation, useSignInMutation, useFetchMeQuery } = authApi;
+export const { useFetchOtpVerifyMutation, useFetchOtpMutation, useIssuedTokenQuery, useFetchNaverVerifyQuery, useFetchKakaoVerifyQuery, useSetSignUpMutation, useSignInMutation, useFetchMeQuery } = authApi;
