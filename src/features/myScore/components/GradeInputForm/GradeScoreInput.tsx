@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
+import { FieldValues, UseFormRegister, UseFormReturn, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   titleAlign?: string;
@@ -13,6 +14,9 @@ interface Props {
   inputText?: string;
   placeholder?: string;
   placeholderAlign?: string;
+  name: string;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const GradeScoreInput = (props: Props) => {
@@ -21,7 +25,16 @@ const GradeScoreInput = (props: Props) => {
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
       <InputChildren>
         <InputWrapper width={props.width}>
-          <ScoreInput placeholder={props.placeholder && props.placeholder} placeholderAlign={props.placeholderAlign} />
+          <ScoreInput
+            {...props.register(props.name, {
+              required: '점수를 입력해주세요',
+              onChange: e => {
+                props.setValue(props.name, e.target.value);
+              },
+            })}
+            placeholder={props.placeholder && props.placeholder}
+            placeholderAlign={props.placeholderAlign}
+          />
           {props.inputText && <InputText>{props.inputText && props.inputText}</InputText>}
         </InputWrapper>
         {props.children}

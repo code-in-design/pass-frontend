@@ -9,8 +9,6 @@ import InfoIcon from '../../../../public/images/icons/info.svg';
 interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormReturn['setValue'];
 }
 
 const Korean = ['언어와 매체', '화법과 작문'];
