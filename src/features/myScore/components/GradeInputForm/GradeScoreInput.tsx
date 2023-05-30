@@ -68,7 +68,7 @@ const ScoreInput = styled.input<{ placeholderAlign?: string }>`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  width: 100%;
+  flex-grow: 2;
   color: #353644;
   ::placeholder {
     color: #b7b9c9;
