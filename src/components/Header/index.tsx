@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 interface HeaderProps {
   avatar?: string;
   name: string;
-  membership: ReactNode;
   email: string;
+  children: ReactNode;
 }
 
 const Header = (props: HeaderProps) => {
@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
         <UserInfo>
           <UserNameWrapper>
             <UserName>{props.name}</UserName>
-            {props.membership}
+            {props.children}
           </UserNameWrapper>
           <UserEmail>{props.email}</UserEmail>
         </UserInfo>
@@ -33,7 +33,7 @@ export default Header;
 
 Header.defaultProps = {
   userName: '한치훈',
-  userAvatar: '/images/user/user.png',
+  avatar: '/images/user/user.png',
   membership: 'Basic',
   userEmail: 'gks3628@naver.com',
 };
@@ -73,6 +73,7 @@ const AlertDot = styled.div`
 
 const UserWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const UserImage = styled.img`

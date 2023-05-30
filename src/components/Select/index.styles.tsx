@@ -62,7 +62,7 @@ export const StyledSelectLarge = styled(Select)`
   }
 `;
 
-export const StyledSelectMedium = styled(Select)`
+export const StyledSelectMedium = styled(Select)<{ width }>`
   &.react-select-middle {
     &-container {
       font-size: 14px;
@@ -70,7 +70,7 @@ export const StyledSelectMedium = styled(Select)`
       color: #353644;
       line-height: 16px;
       .react-select-middle__control {
-        width: 315px;
+        width: ${props => (props.width ? props.width : '315px')};
         height: 44px;
         border-radius: 16px;
         color: #e4e6f0;

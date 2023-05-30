@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 
 type Props = {
   title: string;
-  icon: ReactNode;
+  children: ReactNode;
+  onClick: () => void;
 };
 
 const NavbarItem = (props: Props) => {
   return (
-    <MenuListItem>
-      <ImageWrapper>{props.icon}</ImageWrapper>
+    <MenuListItem onClick={props.onClick}>
+      <ImageWrapper>{props.children}</ImageWrapper>
       <MenuTitle>{props.title}</MenuTitle>
     </MenuListItem>
   );
