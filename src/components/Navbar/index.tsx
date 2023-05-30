@@ -4,25 +4,27 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../public/images/icons/home.svg';
 import EditSquare from '../../../public/images/icons/editSquare.svg';
-import School from '../../../public/images/icons/school.svg';
+import School from '../../../public/images/icons/navSchool.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 interface Props {
-  menuList: { icon: ReactNode; title: string }[];
+  menuList: { icon: ReactNode; title: string; route: string }[];
 }
 
 export const Navbar = (props: Props) => {
   const { rootProps } = useNavbar();
-  const router = Router;
+  const router = useRouter();
 
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
       <MenuList>
         {props?.menuList?.map((item, index) => (
-          <NavbarItem key={index} icon={item.icon} title={item.title} />
+          <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)}>
+            {item.icon}
+          </NavbarItem>
         ))}
       </MenuList>
       <LogOut>
@@ -35,11 +37,11 @@ export const Navbar = (props: Props) => {
 
 Navbar.defaultProps = {
   menuList: [
-    { icon: <Home />, title: '메인홈' },
-    { icon: <EditSquare />, title: '내 점수 입력하기' },
-    { icon: <School />, title: '대학찾기' },
-    { icon: <Analytics />, title: '합격분석' },
-    { icon: <Settings />, title: '환경설정' },
+    { icon: <Home />, title: '메인홈', route: '/' },
+    { icon: <EditSquare />, title: '내 점수 입력하기', route: '/myScore' },
+    { icon: <School />, title: '대학찾기', route: 'myScore' },
+    { icon: <Analytics />, title: '합격분석', route: 'myScore' },
+    { icon: <Settings />, title: '환경설정', route: 'myScore' },
   ],
 };
 

@@ -4,6 +4,7 @@ import Select from '@/components/Select';
 import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useCallback, useState } from 'react';
+import InfoIcon from '../../../../../public/images/icons/info.svg';
 
 interface Props {
   first: { value: string; label: string }[];
@@ -38,7 +39,9 @@ const FinalSelectionUniversity = (props: Props) => {
 
             <SubTitle>최종적으로 지원한 대학을 선택하고 실기 기록에 따른 합격 확률을 계속 살펴볼 수 있어요!</SubTitle>
             <Info>
-              <InfoImg src="/images/icons/infoBlue.svg" alt="info" />
+              <IconWrapper>
+                <InfoIcon />
+              </IconWrapper>
               <InfoText>실기 기록 변경 횟수는 제한되어 있습니다.</InfoText>
             </Info>
             <SelectSection>
@@ -174,4 +177,7 @@ const Button = styled.button`
   line-height: 20px;
 `;
 
-const Select2 = styled.select``;
+const IconWrapper = styled.div`
+  color: #6b77f8;
+  margin-right: 10px;
+`;

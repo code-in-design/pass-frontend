@@ -20,7 +20,11 @@ function HeaderContainer() {
 
   if (isLoading) return <div>Loading...</div>;
 
-  return <Header name={user.userName} membership={<MembershipBadge membership={user.membership} />} email={user.userEmail} />;
+  return (
+    <Header name={user.userName} email={user.userEmail}>
+      <MembershipBadge membership={user.membership} />
+    </Header>
+  );
 }
 
 export default HeaderContainer;

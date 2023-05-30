@@ -3,6 +3,7 @@ import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListIte
 import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import InfoIcon from '../../../../public/images/icons/info.svg';
 
 interface Props {}
 
@@ -40,7 +41,9 @@ const RecommendationModal = (props: Props) => {
             친구와 내 계정 모두 합격 분석 1회 열람권이 추가됩니다.
           </Description>
           <Info>
-            <InfoImg src="/images/icons/info.svg" alt="info" />
+            <IconWrapper>
+              <InfoIcon />
+            </IconWrapper>
             <InfoText>합격 분석 열람권은 최대 5개까지 추가될 수 있습니다.</InfoText>
           </Info>
           <CopyToClipboard text={share}>
@@ -123,10 +126,8 @@ const Info = styled.div`
   margin-bottom: 24px;
 `;
 
-const InfoImg = styled.img`
-  width: 20px;
-  height: 20px;
-  display: block;
+const IconWrapper = styled.div`
+  color: #60c8de;
   margin-right: 10px;
 `;
 const InfoText = styled.span`
