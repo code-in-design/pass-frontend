@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
-// import SchoolIcon from '../../../../public/images/icons/school.svg';
 import More from '../../../../public/images/icons/moreHoriz.svg';
 import ProceedingModalLayout from '@/components/Modal/ProceedingModalLayout';
 import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
 import MyTooltip from '@/components/Tooltip';
+import ProgressBar from '@ramonak/react-progress-bar';
 
 const UniversityFinderModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,6 @@ const UniversityFinderModal = () => {
       {isOpen && (
         <ProceedingModalLayout isOpen={isOpen} onClose={closeModal}>
           <SchoolIconWrapper>
-            {/* <SchoolIcon /> */}
             <SchoolIcon src="/images/icons/school.jpg" alt="school" />
           </SchoolIconWrapper>
           <TextWrapper>
@@ -42,6 +41,7 @@ const UniversityFinderModal = () => {
               <More />
             </MoreWrpper>
           </TextWrapper>
+          <ProgressBar completed={100} bgColor="#6B77F8" height="24px" width="784px" borderRadius="53px" baseBgColor="#F3F4FA" />
         </ProceedingModalLayout>
       )}
     </>
@@ -78,6 +78,7 @@ const SchoolIcon = styled.img`
 const TextWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const Text = styled.div`

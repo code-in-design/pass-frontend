@@ -26,6 +26,7 @@ export default GradeInputForm;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  height: auto;
 `;
 
 const Title = styled.div`

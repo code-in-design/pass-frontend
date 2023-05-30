@@ -79,58 +79,6 @@ const Horizon = styled.hr`
   border-style: dotted;
 `;
 
-const GradeTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  border-style: hidden;
-  box-shadow: 0 0 0 1px #6b77f8;
-  overflow: hidden;
-`;
-
-const GradeTableThead = styled.thead`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: #6b77f8;
-`;
-
-const GradeTableTheadTr = styled.tr`
-  background-color: rgba(107, 119, 248, 0.1);
-  height: 51.2px;
-  & > td {
-    width: 152px;
-    border: 1px solid #e4e6f0;
-    &:last-of-type {
-      width: 216px;
-    }
-  }
-`;
-
-const GradeTableTbody = styled.tbody`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: #191e25;
-`;
-
-const GradeTableTBodyTr = styled.tr`
-  height: 51.2px;
-  letter-spacing: -0.04em;
-  & > td {
-    width: 152px;
-    border: 1px solid #e4e6f0;
-    :first-of-type {
-      background-color: #f8f8fc;
-      color: #7f86d2;
-    }
-  }
-`;
-
 const Information = styled.div`
   margin-top: 16px;
   display: flex;
@@ -150,7 +98,7 @@ const InfoText = styled.span`
 `;
 
 const Buttons = styled.div`
-  margin-top: auto;
+  margin-top: 198px;
   display: flex;
   justify-content: flex-end;
 `;
