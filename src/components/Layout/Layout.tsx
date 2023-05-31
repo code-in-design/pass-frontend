@@ -3,7 +3,7 @@ import { Navbar } from '../Navbar';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 
-interface LayoutProps extends HTMLProps<HTMLElement> {}
+type LayoutProps = HTMLProps<HTMLElement>;
 
 const Layout = (props: LayoutProps) => {
   return (

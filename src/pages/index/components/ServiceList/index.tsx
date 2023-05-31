@@ -5,9 +5,7 @@ import RecommendationModal from '@/features/recommendations/components/Recommend
 import PrivacyModal from './PrivacyModal';
 import { useForm } from 'react-hook-form';
 
-interface Props {}
-
-const ServiceList = (props: Props) => {
+const ServiceList = props => {
   const { register } = useForm();
 
   return (

@@ -3,9 +3,7 @@ import styled from '@emotion/styled';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useState, useCallback } from 'react';
 
-interface Props {}
-
-const PrivacyModal = (props: Props) => {
+const PrivacyModal = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {

@@ -5,9 +5,7 @@ import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import InfoIcon from '../../../../public/images/icons/info.svg';
 
-interface Props {}
-
-const RecommendationModal = (props: Props) => {
+const RecommendationModal = props => {
   const [myCode, setMyCode] = useState('ABCD10');
   const [isOpen, setIsOpen] = useState(false);
   const share = `Z-ONE을 쓰는 친구가 초대했어요! 친구도 나도 합격분석권 1개 받기 내 초대코드 :${myCode} wwww.z-one.kr`;

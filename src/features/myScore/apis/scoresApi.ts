@@ -13,7 +13,7 @@ export const scoresApi = createApi({
   endpoints: builder => ({
     //성적 확정 전 성적 입력하기
     setPreScores: builder.mutation({
-      query: data => {
+      query: (data: any) => {
         return {
           url: `/pre-scores`,
           method: 'POST',
@@ -68,11 +68,11 @@ export const scoresApi = createApi({
         };
       },
     }),
-    //성적 확정 전 내 성적 확인하기
+    //성적 확정 후 내 성적 확인하기
     fetchScores: builder.query<any, void>({
       query: () => '/scores/me',
     }),
   }),
 });
 
-export const { useFetchPreScoresQuery, useFetchScoresQuery, useSetPreScoresMutation, useSetScoresMutation } = scoresApi;
+export const { useLazyFetchPreScoresQuery, useFetchScoresQuery, useSetPreScoresMutation, useSetScoresMutation } = scoresApi;

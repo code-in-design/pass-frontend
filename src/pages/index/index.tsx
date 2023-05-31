@@ -9,9 +9,7 @@ import Probability from './components/Probability';
 import ServiceList from './components/ServiceList';
 import { useForm } from 'react-hook-form';
 
-interface Props {}
-
-const MainPage = (props: Props) => {
+const MainPage = props => {
   const { register } = useForm();
   return (
     <Layout>

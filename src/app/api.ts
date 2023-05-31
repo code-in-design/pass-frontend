@@ -30,9 +30,8 @@ export const fetchAccessToken = async response => {
         url: `${devBaseUrl}/auth/token/${refreshToken}`,
       })
         .then(res => {
-          console.log(res);
           storageUtil.setTokens(res.data.access_token);
-          debugger;
+          console.log(accessToken);
         })
         .catch(err => {
           console.log(err);

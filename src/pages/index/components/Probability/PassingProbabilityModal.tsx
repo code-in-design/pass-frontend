@@ -3,9 +3,7 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import { useCallback, useState } from 'react';
 import ProbabilityItem from './ProbabilityItem';
 
-interface Props {}
-
-const PassingProbabilityModal = (props: Props) => {
+const PassingProbabilityModal = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {

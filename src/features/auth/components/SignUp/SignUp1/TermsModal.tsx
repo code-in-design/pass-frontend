@@ -9,7 +9,7 @@ interface Props {
   markdown: string;
 }
 const TermsDetail: React.FC<Props> = props => {
-  let index = props.index;
+  const index = props.index;
   return (
     <ModalWrapper>
       <ModalOutside onClick={() => props.onCloseClick(index)} />

@@ -6,7 +6,6 @@ import Table from '@/components/Table';
 interface Props {
   lists: Array<TableProps>;
   onClickEditGrades: () => void;
-  data: any;
 }
 
 interface TableProps {
@@ -16,19 +15,17 @@ interface TableProps {
   history: string;
   korean: string;
   math: string;
-  inquirySubject1: string;
-  inquirySubject2: string;
+  inquiry1: string;
+  inquiry2: string;
 }
 
 const CheckMyScore = (props: Props) => {
-  console.log(JSON.parse(props.data));
-  const data = JSON.parse(props.data);
   return (
     <Container>
       <GradeCard>
         <Title> 2024학년도 대학수학능력시험 성적 통지표</Title>
         <Horizon />
-        <Table lists={data} />
+        <Table lists={props.lists} />
         <Information>
           <InfoIconWrapper>
             <InfoIcon />
@@ -48,10 +45,10 @@ export default CheckMyScore;
 
 CheckMyScore.defaultProps = {
   lists: [
-    { area: '선택과목', history: '-', korean: '화법과작문', math: '확률과통계', english: '-', inquirySubject1: '사회문화', inquirySubject2: '생활과윤리' },
-    { area: '표준점수', history: '-', korean: '128', math: '138', english: '-', inquirySubject1: '62', inquirySubject2: '68' },
-    { area: '백분위', history: '-', korean: '96', math: '98', english: '-', inquirySubject1: '85', inquirySubject2: '96' },
-    { area: '등급', history: '2', korean: '2', math: '1', english: '1', inquirySubject1: '3', inquirySubject2: '1' },
+    { area: '선택과목', history: '-', korean: '화법과작문', math: '확률과통계', english: '-', inquiry1: '사회문화', inquiry2: '생활과윤리' },
+    { area: '표준점수', history: '-', korean: '128', math: '138', english: '-', inquiry1: '62', inquiry2: '68' },
+    { area: '백분위', history: '-', korean: '96', math: '98', english: '-', inquiry1: '85', inquiry2: '96' },
+    { area: '등급', history: '2', korean: '2', math: '1', english: '1', inquiry1: '3', inquiry2: '1' },
   ],
 };
 

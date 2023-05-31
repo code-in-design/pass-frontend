@@ -4,9 +4,7 @@ import SupportabilityModal from './SupportabilityModal';
 import PassingProbabilityModal from './PassingProbabilityModal';
 import ProfileModal from './ProfileModal';
 
-interface Props {}
-
-const Probability = (props: Props) => {
+const Probability = props => {
   return (
     <Container>
       <Title>지원가능성 & 합격 확률</Title>

@@ -3,9 +3,7 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import { useCallback, useState } from 'react';
 import ProbabilityItem from './ProbabilityItem';
 
-interface Props {}
-
-const ProfileModal = (props: Props) => {
+const ProfileModal = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {

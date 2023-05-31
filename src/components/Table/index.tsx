@@ -11,8 +11,8 @@ interface TableProps {
   history: string;
   korean: string;
   math: string;
-  inquirySubject1: string;
-  inquirySubject2: string;
+  inquiry1: string;
+  inquiry2: string;
 }
 
 const Table = (props: Props) => {
@@ -29,17 +29,20 @@ const Table = (props: Props) => {
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.lists.map((list, item) => (
-          <GradeTableTBodyTr key={item}>
-            <td>{list.area}</td>
-            <td>{list.history}</td>
-            <td>{list.korean}</td>
-            <td>{list.math}</td>
-            <td>{list.english}</td>
-            <td>{list.inquirySubject1}</td>
-            <td>{list.inquirySubject2}</td>
-          </GradeTableTBodyTr>
-        ))}
+        {props.lists.map((list, item) => {
+          console.log(list);
+          return (
+            <GradeTableTBodyTr key={item}>
+              <td>{list.area ? list.area : '-'}</td>
+              <td>{list.history ? list.history : '-'}</td>
+              <td>{list.korean ? list.korean : '-'}</td>
+              <td>{list.math ? list.math : '-'}</td>
+              <td>{list.english ? list.english : '-'}</td>
+              <td>{list.inquiry1 ? list.inquiry1 : '-'}</td>
+              <td>{list.inquiry2 ? list.inquiry2 : '-'}</td>
+            </GradeTableTBodyTr>
+          );
+        })}
       </GradeTableTbody>
     </GradeTable>
   );
