@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { theme } from '@/theme';
 import store from '@/app/store';
+import 'code-in-design-system/dist/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
