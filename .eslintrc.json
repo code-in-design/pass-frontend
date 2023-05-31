@@ -1,14 +1,19 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["next/core-web-vitals", "next", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "no-unused-vars": 0,
-    "no-undef": 0,
-    "react/react-in-jsx-scope": 0,
-    "react/jsx-key": 0,
-    "react/display-name": 0,
-    "no-empty-pattern": 0,
-    "react/prop-types": 0,
-    "react/no-children-prop": 0,
-    "react-hooks/exhaustive-deps": 0
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-undef": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-key": "off",
+    "react/display-name": "off",
+    "no-empty-pattern": "off",
+    "react/prop-types": "off",
+    "react/no-children-prop": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-debugger": "warn"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }

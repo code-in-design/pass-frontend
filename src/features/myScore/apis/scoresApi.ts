@@ -19,22 +19,22 @@ export const scoresApi = createApi({
           method: 'POST',
           body: {
             korean_type: data.koreanType,
-            korean_score: data.koreanScore,
-            english_grade: data.englishGrade,
+            korean_score: Number(data.koreanScore),
+            english_grade: Number(data.englishGrade),
             math_type: data.mathType,
-            math_score: data.mathScore,
-            inquiry1_type: data.inquiry1Type,
-            inquiry1_score: data.inquiry1Score,
-            inquiry2_type: data.inquiry2Type,
-            inquiry2_score: data.inquiry2Score,
-            kor_history_grade: data.historyGrade,
-            naesin_grade: data.naesinGrade,
+            math_score: Number(data.mathScore),
+            inquiry1_type: data.inquiry1Type.value,
+            inquiry1_score: Number(data.inquiry1Score),
+            inquiry2_type: data.inquiry2Type.value,
+            inquiry2_score: Number(data.inquiry2Score),
+            kor_history_grade: Number(data.historyGrade),
+            naesin_grade: parseFloat(data.naesinGrade),
           },
         };
       },
     }),
     //성적 확정 전 내 성적 확인하기
-    fetchPreScores: builder.query({
+    fetchPreScores: builder.query<any, void>({
       query: () => '/pre-scores/me',
     }),
 
@@ -69,7 +69,7 @@ export const scoresApi = createApi({
       },
     }),
     //성적 확정 전 내 성적 확인하기
-    fetchScores: builder.query({
+    fetchScores: builder.query<any, void>({
       query: () => '/scores/me',
     }),
   }),

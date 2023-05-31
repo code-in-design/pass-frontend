@@ -1,32 +1,48 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
+  type: string;
   isChoice: string[];
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 interface ItemProps {
   selected: boolean;
   text: string;
+  type: string;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   handleClick: () => void;
 }
 
 const ChoiceItems = (props: ItemProps) => {
-  return props.selected ? <ChoiceItemSelect onClick={props.handleClick}> {props.text}</ChoiceItemSelect> : <ChoiceItem onClick={props.handleClick}> {props.text}</ChoiceItem>;
+  return props.selected ? (
+    <ChoiceItemSelect {...props.register(props.type, { required: '국어,수학과목의 타입을 선택해주세요.' })} onClick={props.handleClick}>
+      {props.text}
+    </ChoiceItemSelect>
+  ) : (
+    <ChoiceItem {...props.register(props.type, { required: '국어,수학과목의 타입을 선택해주세요.' })} onClick={props.handleClick}>
+      {props.text}
+    </ChoiceItem>
+  );
 };
 
-const SubjectSelection = ({ isChoice }: Props) => {
+const SubjectSelection = (props: Props) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleItemClick = item => {
     setSelectedItem(item);
+    props.setValue(props.type, item);
   };
 
   return (
     <Choice>
       <ChoiceTitle>선택</ChoiceTitle>
       <ChoiceContainer>
-        {isChoice.map((item, index) => (
-          <ChoiceItems text={item} key={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} />
+        {props.isChoice.map((item, index) => (
+          <ChoiceItems type={props.type} text={item} key={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} register={props.register} setValue={props.setValue} />
         ))}
       </ChoiceContainer>
     </Choice>

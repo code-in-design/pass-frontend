@@ -1,7 +1,6 @@
 import { devBaseUrl } from '@/constants/url';
 import { storageUtil } from '@/utils';
 import axios from 'axios';
-import { cond } from 'lodash';
 
 // 헤더에 token추가하고 관리
 export const addTokenToHeader = (headers, { getState }) => {
@@ -21,7 +20,7 @@ export const addTokenToHeader = (headers, { getState }) => {
 
 export const fetchAccessToken = async response => {
   // 기존의 token이 어디에 저장되어있는지 찾기
-  const { refreshToken } = storageUtil.getTokens();
+  const { accessToken, refreshToken } = storageUtil.getTokens();
   // 액세스 토큰이 없거나 만료됬거나 유효하지 않은 경우
   if (response.status === 401) {
     if (refreshToken !== null) {
@@ -31,7 +30,9 @@ export const fetchAccessToken = async response => {
         url: `${devBaseUrl}/auth/token/${refreshToken}`,
       })
         .then(res => {
+          console.log(res);
           storageUtil.setTokens(res.data.access_token);
+          debugger;
         })
         .catch(err => {
           console.log(err);

@@ -5,6 +5,8 @@ import Table from '@/components/Table';
 
 interface Props {
   lists: Array<TableProps>;
+  onClickEditGrades: () => void;
+  data: any;
 }
 
 interface TableProps {
@@ -18,13 +20,15 @@ interface TableProps {
   inquirySubject2: string;
 }
 
-const CheckMyScore = ({ lists }: Props) => {
+const CheckMyScore = (props: Props) => {
+  console.log(JSON.parse(props.data));
+  const data = JSON.parse(props.data);
   return (
     <Container>
       <GradeCard>
         <Title> 2024학년도 대학수학능력시험 성적 통지표</Title>
         <Horizon />
-        <Table lists={lists} />
+        <Table lists={data} />
         <Information>
           <InfoIconWrapper>
             <InfoIcon />
@@ -33,7 +37,7 @@ const CheckMyScore = ({ lists }: Props) => {
         </Information>
       </GradeCard>
       <Buttons>
-        <Button>성적 수정하기</Button>
+        <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
         <UniversityFinderModal />
       </Buttons>
     </Container>

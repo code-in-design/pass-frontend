@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import SubjectSelection from './SubjectSelection';
+import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   title: string;
@@ -8,9 +9,18 @@ interface Props {
   isChoice?: string[];
   children: ReactNode;
   marginTop?;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const GradeInputFormItem = (props: Props) => {
+  let type = '';
+  if (props.title === '국어') {
+    type = 'koreanType';
+  }
+  if (props.title === '수학') {
+    type = 'mathType';
+  }
   return (
     <Container>
       <TitleWrapper>
@@ -18,7 +28,7 @@ const GradeInputFormItem = (props: Props) => {
           {props.title}
           {props.isRequire && <Require>*</Require>}
         </Title>
-        {props.isChoice && <SubjectSelection isChoice={props.isChoice} />}
+        {props.isChoice && <SubjectSelection type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} />}
       </TitleWrapper>
       {props.children}
     </Container>

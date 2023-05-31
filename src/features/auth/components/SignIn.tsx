@@ -2,9 +2,6 @@ import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Space
 import { authKakao, authNaver, devBaseUrl } from '@/constants/url';
 import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 import { NextRouter } from 'next/router';
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-import { storageUtil } from '@/utils';
 
 interface Props {
   onClickSignIn: (data: any) => void;

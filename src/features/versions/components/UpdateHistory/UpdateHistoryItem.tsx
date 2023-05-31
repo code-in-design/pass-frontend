@@ -20,7 +20,7 @@ const UpdateItemWrapper = styled.li`
   border-bottom: 1px solid #f3f4fa;
   display: flex;
   align-items: center;
-  &:first-child {
+  &:first-of-type {
     padding: 0 0 16px 0;
   }
 `;
