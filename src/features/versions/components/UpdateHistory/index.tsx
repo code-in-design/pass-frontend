@@ -57,7 +57,7 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
 `;
 
 const SelectUpdate = styled.select`
@@ -73,7 +73,7 @@ const SelectUpdate = styled.select`
 const ContentWrapper = styled.div`
   height: 256px;
   border-radius: 16px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   padding: 16px;
   display: flex;
 `;
@@ -84,14 +84,14 @@ const Avatar = styled.img`
   width: 48px;
   height: 48px;
   margin-right: 16px;
-  background-color: #353644;
+  background-color: ${props => props.theme.colors.grayBlack};
 `;
 
 const FakeContent = styled.div`
   width: 100%;
   height: 224px;
   border-radius: 16px;
-  border: 1px solid #e4e6f0;
+  border: 1px solid ${props => props.theme.colors.gray4};
   overflow-y: hidden;
   padding: 16px 4px 16px 16px;
 `;
@@ -103,7 +103,7 @@ const Content = styled.ul`
   padding-right: 16px;
   &::-webkit-scrollbar {
     width: 4px;
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.white};
   }
   &::-webkit-scrollbar-thumb {
     width: 4px;

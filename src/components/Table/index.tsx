@@ -55,7 +55,7 @@ const GradeTable = styled.table`
   border-collapse: collapse;
   border-radius: 12px;
   border-style: hidden;
-  box-shadow: 0 0 0 1px #6b77f8;
+  box-shadow: 0 0 0 1px ${props => props.theme.colors.blue};
   overflow: hidden;
 `;
 
@@ -65,7 +65,7 @@ const GradeTableThead = styled.thead`
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const GradeTableTheadTr = styled.tr`
@@ -73,7 +73,7 @@ const GradeTableTheadTr = styled.tr`
   height: 51.2px;
   & > td {
     width: 152px;
-    border: 1px solid #e4e6f0;
+    border: 1px solid ${props => props.theme.colors.gray4};
     &:last-of-type {
       width: 216px;
     }
@@ -86,7 +86,7 @@ const GradeTableTbody = styled.tbody`
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const GradeTableTBodyTr = styled.tr`
@@ -94,7 +94,7 @@ const GradeTableTBodyTr = styled.tr`
   letter-spacing: -0.04em;
   & > td {
     width: 152px;
-    border: 1px solid #e4e6f0;
+    border: 1px solid ${props => props.theme.colors.gray4};
     :first-of-type {
       background-color: #f8f8fc;
       color: #7f86d2;

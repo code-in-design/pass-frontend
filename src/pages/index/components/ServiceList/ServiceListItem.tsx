@@ -21,8 +21,8 @@ const MenuListItem = styled.li`
   min-width: 239.5px;
   width: 100%;
   height: 54px;
-  background-color: #fff;
-  border: 1px solid #fff;
+  background-color: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.white};
   padding: 16px 24px;
   border-radius: 16px;
   display: flex;

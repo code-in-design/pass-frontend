@@ -50,7 +50,7 @@ const NavWrapper = styled.nav`
   min-width: 288px;
   height: 100vh;
   padding: 34px 32px 40px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   display: flex;
   flex-direction: column;
 `;
@@ -89,5 +89,5 @@ const LogOutText = styled.span`
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
 `;

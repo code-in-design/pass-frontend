@@ -47,7 +47,7 @@ const ImageWrapper = styled.div`
 const PopularImgWrapper = styled.div`
   width: 23.24px;
   height: 25.34px;
-  color: ${props => (props.color === '1' ? '#6B77F8' : '#D9DBED')};
+  color: ${props => (props.color === '1' ? props.theme.colors.blue : '#D9DBED')};
 `;
 
 const PupularIdx = styled.div`
@@ -59,14 +59,14 @@ const PupularIdx = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
-  color: ${props => (props.color === '1' ? '#fff' : '#626474')};
+  color: ${props => (props.color === '1' ? props.theme.colors.white : props.theme.colors.gray1)};
 `;
 
 const Content = styled.div`
   height: 120px;
   border-radius: 8px;
-  border: 1px solid #fff;
-  background-color: #f3f4fa;
+  border: 1px solid ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.gray5};
   padding: 17px 0 16px;
 `;
 
@@ -74,7 +74,7 @@ const PopularLogo = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   margin: 0 auto;
 `;
 
@@ -84,7 +84,7 @@ const PopularName = styled.div`
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   text-align: center;
 `;
 
@@ -93,7 +93,7 @@ const PopularMajor = styled.div`
   font-weight: 500;
   line-height: 16px;
   margin: 0 auto;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   text-align: center;
   max-width: 72px;
   white-space: normal;

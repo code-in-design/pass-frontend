@@ -54,7 +54,7 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 12px;
 `;
 
@@ -81,5 +81,5 @@ const Description = styled.span`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;

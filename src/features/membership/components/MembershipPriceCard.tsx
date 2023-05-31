@@ -36,7 +36,7 @@ const CardWrapper = styled.div`
   height: 488px;
   padding: 24px;
   border: 1px solid;
-  border-color: ${props => (props.color === 'Basic' ? '#e4e6f0' : props.color === 'Light' ? '#60C8DE' : '#6B77F8')};
+  border-color: ${props => (props.color === 'Basic' ? props => props.theme.colors.gray4 : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
   border-radius: 24px;
   margin-right: 16px;
   &:last-of-type {
@@ -55,7 +55,7 @@ const MembershipName = styled.div`
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 4px;
 `;
 const MembershipPrice = styled.div`
@@ -63,7 +63,7 @@ const MembershipPrice = styled.div`
   font-weight: 700;
   font-size: 28px;
   line-height: 32px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const PriceIcon = styled.span`
@@ -71,32 +71,32 @@ const PriceIcon = styled.span`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #b7b9c9;
+  color: ${props => props.theme.colors.gray3};
   margin-right: 6px;
 `;
 const MembershipText = styled.div`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 24px;
 `;
 const ColorText = styled.span`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: ${props => (props.color === 'Basic' ? '#9395A6' : props.color === 'Light' ? '#60C8DE' : '#6B77F8')};
+  color: ${props => (props.color === 'Basic' ? props.theme.colors.gray2 : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
 `;
 const MembershipButton = styled.button`
   width: 100%;
   height: 48px;
   padding: 16px 10px;
   border-radius: 16px;
-  background-color: ${props => (props.color === 'Basic' ? '#e4e6f0' : props.color === 'Light' ? '#60C8DE' : '#6B77F8')};
+  background-color: ${props => (props.color === 'Basic' ? props => props.theme.colors.gray4 : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: ${props => (props.color === 'Basic' ? '#9395A6' : '#fff')};
+  color: ${props => (props.color === 'Basic' ? props.theme.colors.gray2 : props.theme.colors.white)};
   margin-bottom: 24px;
 `;
 
@@ -110,7 +110,7 @@ const DescriptionTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 14px;
 `;
 const DescriptionItem = styled.div`
@@ -125,12 +125,12 @@ const DescriptionItemIcon = styled.span`
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  color: ${props => (props.color === 'Basic' ? '#9395A6' : props.color === 'Light' ? '#60C8DE' : '#6B77F8')};
+  color: ${props => (props.color === 'Basic' ? '${(props) => props.theme.colors.gray2}' : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
   margin-right: 9.36px;
 `;
 const DescriptionText = styled.span`
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
 `;

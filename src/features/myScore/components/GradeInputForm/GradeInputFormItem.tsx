@@ -42,7 +42,7 @@ GradeInputFormItem.defaultProps = {
 };
 
 const Container = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   width: 100%;
   border-radius: 16px;
   padding: 20px 24px 16px;
@@ -59,7 +59,7 @@ const Title = styled.div<{ marginTop: string }>`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black}
   margin-top: ${props => props.marginTop};
 `;
 
@@ -68,6 +68,6 @@ const Require = styled.span`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
   margin-left: 4px;
 `;

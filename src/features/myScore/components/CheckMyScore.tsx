@@ -60,7 +60,7 @@ const Container = styled.div`
 
 const GradeCard = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 8px;
   margin-top: 24px;
   padding: 32px;
@@ -70,13 +70,13 @@ const Title = styled.div`
   text-align: center;
   font-size: 32px;
   font-weight: 700;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
 `;
 
 const Horizon = styled.hr`
   margin-top: 32px;
   margin-bottom: 48px;
-  color: #b7b9c9;
+  color: ${props => props.theme.colors.gray3};
   border-style: dotted;
 `;
 
@@ -87,7 +87,7 @@ const Information = styled.div`
 `;
 
 const InfoIconWrapper = styled.div`
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
   margin-right: 4px;
 `;
 
@@ -95,7 +95,7 @@ const InfoText = styled.span`
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
 `;
 
 const Buttons = styled.div`
@@ -109,16 +109,16 @@ const Button = styled.div`
   height: 56px;
   border-radius: 16px;
   padding: 18px 10px;
-  color: #fff;
-  background-color: #6b77f8;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.blue};
   text-align: center;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
   cursor: pointer;
   :first-of-type {
-    color: #fff;
-    background-color: #626474;
+    color: ${props => props.theme.colors.white};
+    background-color: ${props => props.theme.colors.gray1};
     margin-right: 12px;
   }
 `;

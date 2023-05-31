@@ -55,8 +55,8 @@ const Button = styled.div`
   height: 56px;
   border-radius: 16px;
   padding: 18px 10px;
-  color: #fff;
-  background-color: #6b77f8;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.blue};
   text-align: center;
   font-size: 16px;
   font-weight: 700;
@@ -85,7 +85,7 @@ const Text = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
 `;
 const MoreWrpper = styled.div`
   width: 24px;
@@ -102,13 +102,13 @@ const TooltipText = styled.div`
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-left: 12px;
   text-align: left;
 `;
 
 const TextEmphasis = styled.span`
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const TooltipContainer = styled.div`

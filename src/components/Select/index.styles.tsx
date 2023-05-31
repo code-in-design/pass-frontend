@@ -6,13 +6,13 @@ export const StyledSelectLarge = styled(Select)`
     &-container {
       font-size: 16px;
       font-weight: 600;
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       .react-select-large__control {
         height: 56px;
         border-radius: 16px;
-        color: #e4e6f0;
-        border: 1px solid #e4e6f0;
-        box-shadow: 0 0 0 1px #e4e6f0;
+        color: ${props => props.theme.colors.gray4};
+        border: 1px solid ${props => props.theme.colors.gray4};
+        box-shadow: 0 0 0 1px ${props => props.theme.colors.gray4};
         .react-select-large__value-container {
           padding: 0;
           margin: 0;
@@ -39,7 +39,7 @@ export const StyledSelectLarge = styled(Select)`
             height: 56px;
             &--is-selected {
               background-color: #f8f8fc;
-              color: #353644;
+              color: ${props => props.theme.colors.grayBlack};
               font-weight: 700;
             }
             &--is-focused {
@@ -56,7 +56,7 @@ export const StyledSelectLarge = styled(Select)`
     }
 
     &__value-container {
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       font-weight: 700;
     }
   }
@@ -67,14 +67,14 @@ export const StyledSelectMedium = styled(Select)<{ width }>`
     &-container {
       font-size: 14px;
       font-weight: 600;
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       line-height: 16px;
       .react-select-middle__control {
         width: ${props => (props.width ? props.width : '315px')};
         height: 44px;
         border-radius: 16px;
-        color: #e4e6f0;
-        border: 1px solid #e4e6f0;
+        color: ${props => props.theme.colors.gray4};
+        border: 1px solid ${props => props.theme.colors.gray4};
         box-shadow: none;
         .react-select-middle__value-container {
           padding: 0;
@@ -102,7 +102,7 @@ export const StyledSelectMedium = styled(Select)<{ width }>`
             height: 56px;
             &--is-selected {
               background-color: #f8f8fc;
-              color: #353644;
+              color: ${props => props.theme.colors.grayBlack};
               font-weight: 700;
             }
             &--is-focused {
@@ -119,7 +119,7 @@ export const StyledSelectMedium = styled(Select)<{ width }>`
     }
 
     &__value-container {
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       font-weight: 700;
     }
   }
@@ -131,11 +131,11 @@ export const StyledSelectSmall = styled(Select)`
       font-size: 12px;
       font-weight: 500;
       line-height: 16px;
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       .react-select-small__control {
         height: 28px;
         border-radius: 8px;
-        color: #e4e6f0;
+        color: ${props => props.theme.colors.gray4};
         border: none;
         .react-select-small__value-container {
           padding: 0;
@@ -146,7 +146,7 @@ export const StyledSelectSmall = styled(Select)`
             padding: 0;
             margin: 0;
             height: 16px;
-            color: #626474;
+            color: ${props => props.theme.colors.gray1};
           }
         }
       }
@@ -165,7 +165,7 @@ export const StyledSelectSmall = styled(Select)`
         }
         .react-select-small__indicator {
           padding: 4px;
-          color: #626474;
+          color: ${props => props.theme.colors.gray1};
         }
       }
       .react-select-small__menu {
@@ -178,7 +178,7 @@ export const StyledSelectSmall = styled(Select)`
             height: 28px;
             &--is-selected {
               background-color: #f8f8fc;
-              color: #353644;
+              color: ${props => props.theme.colors.grayBlack};
               font-weight: 700;
             }
             &--is-focused {
@@ -195,7 +195,7 @@ export const StyledSelectSmall = styled(Select)`
     }
 
     &__value-container {
-      color: #353644;
+      color: ${props => props.theme.colors.grayBlack};
       font-weight: 700;
     }
   }

@@ -67,7 +67,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black}
   margin-bottom: 24px;
 `;
 
@@ -80,13 +80,13 @@ const Code = styled.span`
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 const CodeCopy = styled.button`
   margin-left: 12px;
   width: 79px;
   height: 32px;
-  background-color: #f3f4fa;
+  background-color: ${props => props.theme.colors.gray5};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -104,13 +104,13 @@ const CodeCopyText = styled.span`
   font-size: 12px;
   font-weight: 700;
   line-height: 16px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
 `;
 const Description = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 8px;
 `;
 
@@ -125,14 +125,14 @@ const Info = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  color: #60c8de;
+  color: ${props => props.theme.colors.green};
   margin-right: 10px;
 `;
 const InfoText = styled.span`
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
-  color: #60c8de;
+  color: ${props => props.theme.colors.green};
 `;
 
 const ShareButton = styled.button`
@@ -140,22 +140,22 @@ const ShareButton = styled.button`
   height: 56px;
   border-radius: 16px;
   padding: 16px 10px;
-  color: #fff;
-  background-color: #60c8de;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.green};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
 `;
 const Divider = styled.hr`
   width: 100%;
-  border-bottom: 1px solid #f3f4fa;
+  border-bottom: 1px solid ${props => props.theme.colors.gray5};
   margin: 24px 0;
 `;
 const SecondTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black}
   margin-bottom: 12px;
 `;
 
@@ -173,9 +173,9 @@ const InputCode = styled.input`
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
-  border: 1px solid #e4e6f0;
+  border: 1px solid ${props => props.theme.colors.gray4};
   &::placeholder {
-    color: #9395a6;
+    color: ${props => props.theme.colors.gray2};
   }
 `;
 const InputImg = styled.img`
@@ -193,14 +193,14 @@ const EnterButton = styled.button`
   border-radius: 16px;
   padding: 16px 24px;
   background-color: #636474;
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   margin-left: 12px;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
   :disabled {
     background-color: rgba(228, 230, 240, 0.4);
-    color: #b7b9c9;
+    color: ${props => props.theme.colors.gray3};
     cursor: not-allowed;
   }
 `;

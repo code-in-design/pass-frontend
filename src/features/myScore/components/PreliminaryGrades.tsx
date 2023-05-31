@@ -197,7 +197,7 @@ const Description = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 4px;
   margin-top: 12px;
   :last-of-type {
@@ -209,7 +209,7 @@ const Description = styled.div`
 const Circle = styled.div`
   width: 4px;
   height: 4px;
-  background-color: #60c8de;
+  background-color: ${props => props.theme.colors.green};
   border-radius: 50%;
   margin-right: 4px;
 `;
@@ -228,7 +228,7 @@ const SubjectTitle = styled.div`
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 12px;
   min-width: 41px;
 `;
@@ -248,7 +248,7 @@ const Label = styled.label`
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-right: 4px;
 `;
 
@@ -280,7 +280,7 @@ const Information = styled.div`
 `;
 
 const InfoIconWrapper = styled.div`
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
   margin-right: 4px;
 `;
 
@@ -288,7 +288,7 @@ const InfoText = styled.span`
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const Buttons = styled.div`
@@ -300,16 +300,16 @@ const Button = styled.button`
   height: 56px;
   border-radius: 16px;
   padding: 18px 10px;
-  color: #fff;
-  background-color: #6b77f8;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.blue};
   text-align: center;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
   cursor: pointer;
   :first-of-type {
-    color: #9395a6;
-    background-color: #e4e6f0;
+    color: ${props => props.theme.colors.gray2};
+    background-color: ${props => props.theme.colors.gray4};
     margin-right: 12px;
   }
 `;
@@ -319,7 +319,7 @@ const TooltipText = styled.div`
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-left: 12px;
   text-align: left;
 `;

@@ -62,7 +62,7 @@ const ScoreTitle = styled.div<{ titleAlign?: string }>`
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 8px;
   text-align: ${props => (props.titleAlign ? props.titleAlign : 'left')};
 `;
@@ -71,8 +71,8 @@ const InputWrapper = styled.div<{ width: string }>`
   width: ${props => props.width || '100%'};
   height: 44px;
   border-radius: 16px;
-  border: 1px solid #e4e6f0;
-  background-color: #fff;
+  border: 1px solid ${props => props.theme.colors.gray4};
+  background-color: ${props => props.theme.colors.white};
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -86,9 +86,9 @@ const ScoreInput = styled.input<{ placeholderAlign?: string }>`
   font-size: 14px;
   line-height: 20px;
   width: 100%;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   ::placeholder {
-    color: #b7b9c9;
+    color: ${props => props.theme.colors.gray3};
     text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
   }
 `;
@@ -97,7 +97,7 @@ const InputText = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   white-space: nowrap;
 `;
 

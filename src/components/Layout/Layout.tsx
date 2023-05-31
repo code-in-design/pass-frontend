@@ -36,6 +36,6 @@ const ChildrenWrapper = styled.div`
   overflow-y: auto;
   /* height: 880px; */
   border-radius: 24px;
-  background-color: #f3f4fa;
+  background-color: ${props => props.theme.colors.gray5};
   padding: 40px;
 `;

@@ -31,8 +31,8 @@ const MenuListItem = styled.li`
     margin-bottom: 0;
   }
   &:hover {
-    background-color: #6b77f8;
-    color: #fff;
+    background-color: ${props => props.theme.colors.blue};
+    color: ${props => props.theme.colors.white};
     cursor: pointer;
   }
 `;

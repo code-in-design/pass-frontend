@@ -66,11 +66,11 @@ const ChoiceContainer = styled.div`
   display: flex;
   height: 36px;
   border-radius: 57px;
-  background-color: #f3f4fa;
+  background-color: ${props => props.theme.colors.gray5};
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
   padding: 2px;
 `;
 
@@ -79,15 +79,15 @@ const ChoiceItem = styled.div`
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
 `;
 
 const ChoiceItemSelect = styled.div`
   padding: 8px 12px;
   font-size: 14px;
   line-height: 16px;
-  color: #ffffff;
-  background-color: #60c8de;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.green};
   border-radius: 16px;
   cursor: pointer;
 `;

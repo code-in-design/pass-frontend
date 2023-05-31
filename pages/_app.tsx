@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { theme } from '@/theme';
 import store from '@/app/store';
+import { ThemeProvider } from '@emotion/react';
+import emotionTheme from '../src/theme/theme';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Z-ONE</title>
       </Head>
       <ChakraProvider theme={theme} resetCSS>
-        <Component {...pageProps} />
+        <ThemeProvider theme={emotionTheme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </ChakraProvider>
     </Provider>
   );

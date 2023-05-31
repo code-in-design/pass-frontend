@@ -36,7 +36,7 @@ const Title = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   letter-spacing: -0.04em;
   margin-bottom: 12px;
 `;
@@ -62,7 +62,7 @@ const ContentsLeftTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 8px;
 `;
 
@@ -70,7 +70,7 @@ const ContentsLeftName = styled.div`
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const ContentsLeftImg = styled.img`

@@ -43,14 +43,14 @@ const HeaderWrapper = styled.header`
   justify-content: flex-end;
   height: 112px;
   padding: 28px 60px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
 `;
 
 const AlertWrapper = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background-color: #f3f4fa;
+  background-color: ${props => props.theme.colors.gray5};
   padding: 4px;
   position: relative;
   margin-right: 24px;
@@ -65,7 +65,7 @@ const AlertDot = styled.div`
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: #6b77f8;
+  background-color: ${props => props.theme.colors.blue};
   position: absolute;
   top: 4px;
   right: 4px;
@@ -104,7 +104,7 @@ const UserMembership = styled.div`
   height: 20px;
   border-radius: 20px;
   background-color: #6b77fb;
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   font-size: 12px;
   font-weight: 600;
   line-height: 12px;

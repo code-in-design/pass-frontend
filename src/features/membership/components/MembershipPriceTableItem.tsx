@@ -25,7 +25,7 @@ const MembershipPriceTableItem = (props: Props) => {
 export default MembershipPriceTableItem;
 
 const TBodyTr = styled.tr`
-  border-bottom: 1px solid #f3f4fa;
+  border-bottom: 1px solid ${props => props.theme.colors.gray5};
 `;
 
 const TBodyTd = styled.td`

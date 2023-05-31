@@ -111,14 +111,14 @@ const Title = styled.div`
   line-height: 24px;
   letter-spacing: -0.04em;
   margin-bottom: 12px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const SubTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 8px;
 `;
 
@@ -142,7 +142,7 @@ const InfoText = styled.span`
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const SelectSection = styled.div`
@@ -162,7 +162,7 @@ const SelectText = styled.div`
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
 `;
 
 const Button = styled.button`
@@ -170,14 +170,14 @@ const Button = styled.button`
   height: 56px;
   border-radius: 16px;
   padding: 16px 10px;
-  color: #fff;
-  background-color: #6b77f8;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.blue};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
 `;
 
 const IconWrapper = styled.div`
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
   margin-right: 10px;
 `;
