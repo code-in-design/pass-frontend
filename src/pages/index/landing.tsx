@@ -150,7 +150,7 @@ const LandingPage = ({ isMobile, onClickReservation }: Props) => {
         />
       </div>
       <FeatureSection4
-        backgroundImage="/images/pass/Img_Feature_BG_01@2x.png"
+        backgroundImage="/images/pass/Img_Feature_01_BG@2x.png"
         titleProps={{ isVisible: false }}
         subTitleProps={{ isVisible: false }}
         badgeProps={{ isVisible: false }}
