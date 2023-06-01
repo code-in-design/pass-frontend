@@ -4,16 +4,16 @@ import axios from 'axios';
 
 // 헤더에 token추가하고 관리
 export const addTokenToHeader = (headers, { getState }) => {
-  const isAutoLogin = storageUtil.getItemFromLocalStorage('autoLogin');
-  let token;
-  if (Boolean(isAutoLogin)) {
-    token = storageUtil.getItemFromLocalStorage('accessToken');
-  } else {
-    token = storageUtil.getItemFromSessionStorage('accessToken');
-  }
-
-  if (token) {
-    headers.set('authorization', `Bearer ${token}`);
+  // const isAutoLogin = storageUtil.getItemFromLocalStorage('autoLogin');
+  // let token;
+  // if (Boolean(isAutoLogin)) {
+  //   token = storageUtil.getItemFromLocalStorage('accessToken');
+  // } else {
+  //   token = storageUtil.getItemFromSessionStorage('accessToken');
+  // }
+  const { accessToken, refreshToken } = storageUtil.getTokens();
+  if (accessToken) {
+    headers.set('authorization', `Bearer ${accessToken}`);
   }
   return headers;
 };

@@ -10,7 +10,6 @@ export const authApi = createApi({
     prepareHeaders: addTokenToHeader,
     responseHandler: fetchAccessToken,
   }),
-
   endpoints: builder => ({
     //네이버 인가코드
     fetchNaverVerify: builder.query<any, void>({
