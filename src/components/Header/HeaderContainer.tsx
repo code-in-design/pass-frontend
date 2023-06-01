@@ -3,10 +3,8 @@ import Header from './index';
 import { useFetchMeQuery } from '@/features/auth/apis/authApi';
 import { UserModel } from '@/models/UserModel';
 import MembershipBadge from '../MembershipBadge';
-import { useRouter } from 'next/router';
 
 function HeaderContainer() {
-  const router = useRouter();
   const { data, isSuccess, isLoading } = useFetchMeQuery();
   const [user, setUser] = useState<UserModel>({ userName: '', userEmail: '', membership: '' });
 
