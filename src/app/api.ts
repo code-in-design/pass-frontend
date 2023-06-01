@@ -1,7 +1,6 @@
-import { devBaseUrl } from '@/constants/url';
+import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils';
 import axios from 'axios';
-import { cond } from 'lodash';
 
 // 헤더에 token추가하고 관리
 export const addTokenToHeader = (headers, { getState }) => {
@@ -28,7 +27,7 @@ export const fetchAccessToken = async response => {
       // 새로운 엑세스토큰가져오기
       axios({
         method: 'get',
-        url: `${devBaseUrl}/auth/token/${refreshToken}`,
+        url: `${urls.baseUrl}/auth/token/${refreshToken}`,
       })
         .then(res => {
           storageUtil.setTokens(res.data.access_token);

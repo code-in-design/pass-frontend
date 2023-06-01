@@ -1,4 +1,4 @@
-import { devBaseUrl } from '@/constants/url';
+import { urls } from '@/constants/url';
 import LandingPage from '@/pages/index/landing';
 import { storageUtil } from '@/utils';
 import axios from 'axios';
@@ -18,7 +18,7 @@ export default function Home() {
 
     const client = axios.create({ headers: { Authorization: `Bearer ${accessToken}` } });
     client
-      .get(`${devBaseUrl}/auth/me`)
+      .get(`${urls.baseUrl}/auth/me`)
       .then(x => {
         setIsLogin(!isEmpty(x?.data));
       })
@@ -26,7 +26,6 @@ export default function Home() {
         setIsLoading(false);
       });
   }, []);
-
   if (isLoading) return null;
   if (isLogin) return <MainPage />;
   return <LandingPage />;

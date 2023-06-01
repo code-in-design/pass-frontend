@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
-import { devBaseUrl } from '@/constants/url';
+import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils';
 
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${devBaseUrl}/auth`,
+    baseUrl: `${urls.baseUrl}/auth`,
     prepareHeaders: addTokenToHeader,
     responseHandler: fetchAccessToken,
   }),
