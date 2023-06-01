@@ -7,10 +7,13 @@ import { theme } from '@/theme';
 import store from '@/app/store';
 import { ThemeProvider } from '@emotion/react';
 import emotionTheme from '../src/theme/theme';
+import 'code-in-design-system/dist/globals.css';
+import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <GoogleAnalytics />
       <Head>
         <title>Z-ONE</title>
       </Head>
@@ -22,3 +25,15 @@ export default function App({ Component, pageProps }: AppProps) {
     </Provider>
   );
 }
+
+App.getInitialProps = async ({ Component, ctx }) => {
+  const isServer = !!ctx.req;
+  const userAgent = isServer ? ctx.req.headers['user-agent'] : navigator.userAgent;
+  const isLine = /\bLine\//i.test(userAgent) || false;
+  const isMobile = /(iPad|iPhone|Android|Mobile)/i.test(userAgent) || false;
+  const rules = ['WebView', '(iPhone|iPod|iPad)(?!.*Safari/)', 'Android.*(wv|.0.0.0)'];
+  const regex = new RegExp(`(${rules.join('|')})`, 'ig');
+  const isInApp = Boolean(userAgent.match(regex));
+
+  return { pageProps: { isMobile, isInApp, isLine } };
+};

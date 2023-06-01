@@ -1,7 +1,7 @@
 import MyScoreContainer from '../../features/myScore/containers/MyScoreContainer';
 import React from 'react';
 
-const MyScorePage = props => {
+const MyScorePage = () => {
   return <MyScoreContainer />;
 };
 

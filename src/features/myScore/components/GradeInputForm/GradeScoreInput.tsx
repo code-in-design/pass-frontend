@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import { FieldValues, UseFormRegister, UseFormReturn, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   titleAlign?: string;
@@ -19,9 +19,21 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   min: number;
   max: number;
+  selectValue?: [{ value: string; label: string }, { value: string; label: string }];
 }
 
 const GradeScoreInput = (props: Props) => {
+  const pattern = /^[1-9](\.\d{1,2})?$/;
+  const unRequiredField = ['naesinGrade'];
+  const inquiry1Type = props.selectValue && props.selectValue[0]?.value;
+  const inquiry2Type = props.selectValue && props.selectValue[1]?.value;
+  if (inquiry1Type === '미응시') {
+    unRequiredField.push('naesinGrade', 'inquiry1Score', 'inquiry1Percentile', 'inquiry1Grade');
+  }
+  if (inquiry2Type === '미응시') {
+    unRequiredField.push('naesinGrade', 'inquiry2Score', 'inquiry2Percentile', 'inquiry2Grade');
+  }
+
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
@@ -29,12 +41,23 @@ const GradeScoreInput = (props: Props) => {
         <InputWrapper width={props.width}>
           <ScoreInput
             {...props.register(props.name, {
-              required: props.name === 'naesinGrade' ? false : '점수를 입력해주세요',
+              required: unRequiredField.includes(props.name) ? false : `${props.name}의 점수를 입력해주세요`,
               onChange: e => {
-                props.setValue(props.name, e.target.value);
+                if (pattern.test(e.target.value) || e.target.value === '') {
+                  props.setValue(props.name, e.target.value);
+                } else {
+                  const value = e.target.value;
+                  const result = value.substr(0, 4);
+                  e.target.value = result;
+                  props.setValue(props.name, e.target.value);
+                }
               },
               min: props.min,
               max: props.max,
+              pattern: {
+                value: pattern,
+                message: '1~9 사이의 숫자를 입력해주세요. 소수점은 둘째 자리까지 허용 됩니다.',
+              },
             })}
             placeholder={props.placeholder && props.placeholder}
             placeholderAlign={props.placeholderAlign}

@@ -41,29 +41,39 @@ export const scoresApi = createApi({
     //성적 확정 후 성적 입력하기
     setScores: builder.mutation({
       query: data => {
+        // if (data.inquiry1Type === '미응시') {
+        //   data.inquiry1Score = 0;
+        //   data.inquiry1Percentile = 0;
+        //   data.inquiry1Grade = 9;
+        // }
+        // if (data.inquiry2Type === '미응시') {
+        //   data.inquiry2Score = 0;
+        //   data.inquiry2Percentile = 0;
+        //   data.inquiry2Grade = 9;
+        // }
         return {
           url: `/scores`,
           method: 'POST',
           body: {
             korean_type: data.koreanType,
-            korean_std_score: data.koreanScore,
-            korean_percentile: data.koreanPercentile,
-            korean_grade: data.koreanGrade,
-            english_grade: data.englishGrade,
+            korean_std_score: Number(data.koreanScore),
+            korean_percentile: Number(data.koreanPercentile),
+            korean_grade: Number(data.koreanGrade),
+            english_grade: Number(data.englishGrade),
             math_type: data.mathType,
-            math_std_score: data.mathScore,
-            math_percentile: data.mathPercentile,
-            math_grade: data.mathGrade,
+            math_std_score: Number(data.mathScore),
+            math_percentile: Number(data.mathPercentile),
+            math_grade: Number(data.mathGrade),
             inquiry1_type: data.inquiry1Type,
-            inquiry1_std_score: data.inquiry1Score,
-            inquiry1_percentile: data.inquiry1Percentile,
-            inquiry1_grade: data.inquiry1Grade,
+            inquiry1_std_score: Number(data.inquiry1Score),
+            inquiry1_percentile: Number(data.inquiry1Percentile),
+            inquiry1_grade: Number(data.inquiry1Grade),
             inquiry2_type: data.inquiry2Type,
-            inquiry2_std_score: data.inquiry2Score,
-            inquiry2_percentile: data.inquiry2Percentile,
-            inquiry2_grade: data.inquiry2Grade,
-            kor_history_grade: data.historyGrade,
-            naesin_grade: data.naesinGrade,
+            inquiry2_std_score: Number(data.inquiry2Score),
+            inquiry2_percentile: Number(data.inquiry2Percentile),
+            inquiry2_grade: Number(data.inquiry2Grade),
+            kor_history_grade: Number(data.historyGrade),
+            naesin_grade: Number(data.naesinGrade),
           },
         };
       },
@@ -75,4 +85,4 @@ export const scoresApi = createApi({
   }),
 });
 
-export const { useLazyFetchPreScoresQuery, useFetchScoresQuery, useSetPreScoresMutation, useSetScoresMutation } = scoresApi;
+export const { useFetchPreScoresQuery, useFetchScoresQuery, useSetPreScoresMutation, useSetScoresMutation } = scoresApi;
