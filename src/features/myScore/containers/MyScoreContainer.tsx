@@ -94,19 +94,23 @@ const MyScoreContainer = () => {
         inquiry2: payload?.inquiry2_grade,
       }),
     ];
-    return (
-      <GradeInputForm title="성적 입력하기" subtitle="국어·수학·탐구 과목은 원점수를, 영어·한국사는 등급을 입력해주세요.">
-        <CheckMyScore onClickEditGrades={onClickEditGrades} lists={result} />
-      </GradeInputForm>
-    );
+    setStep(2);
+    setLists(result);
   }
+
   return (
     <GradeInputForm title="성적 입력하기" subtitle="국어·수학·탐구 과목은 원점수를, 영어·한국사는 등급을 입력해주세요.">
       {/* 성적 확정 전 */}
-      <form onSubmit={handleSubmit(onpresubmit)}>{step === 1 && <PreliminaryGrades onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} />}</form>
+      <form onSubmit={handleSubmit(onpresubmit)}>
+        {step === 1 && <PreliminaryGrades onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} />}
+        {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} lists={lists} />}
+      </form>
 
       {/* 성적 확정 후 */}
-      <form onSubmit={handleSubmit(onsubmit)}>{step === 1 && <FinalGrades selectValue={selectValue} onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} />}</form>
+      <form onSubmit={handleSubmit(onsubmit)}>
+        {step === 1 && <FinalGrades selectValue={selectValue} onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} />}
+        {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} lists={lists} />}
+      </form>
     </GradeInputForm>
   );
 };
