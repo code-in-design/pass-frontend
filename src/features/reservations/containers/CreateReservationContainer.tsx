@@ -8,11 +8,13 @@ const CreateReservationContainer = ({ isMobile }) => {
   const onClickReservation = (phone: string) => {
     setReservation(phone);
   };
+
   const goToPhoneInput = () => {
     const element = document.querySelector('#phoneInput');
     if (element) element.scrollIntoView();
   };
-  return <LandingPage onClickReservation={onClickReservation} isMobile />;
+
+  return <LandingPage onClickReservation={onClickReservation} isMobile={isMobile} />;
 };
 
 export default CreateReservationContainer;

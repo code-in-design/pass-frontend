@@ -1,5 +1,4 @@
 import { urls } from '@/constants/url';
-import LandingPage from '@/pages/index/landing';
 import axios, { AxiosHeaders } from 'axios';
 import { isEmpty } from 'lodash';
 import { useLayoutEffect, useState } from 'react';
@@ -47,5 +46,5 @@ export default function Home({ isMobile }) {
 
   if (isLoading) return null;
   if (isLogin) return <MainPage />;
-  return <CreateReservationContainer isMobile />;
+  return <CreateReservationContainer isMobile={isMobile} />;
 }
