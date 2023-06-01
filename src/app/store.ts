@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '@/features/auth/apis/authApi';
-import { reservationApi } from '@/pages/index/apis/reservationApi';
+import { reservationApi } from '@/features/reservations/apis/reservationApi';
 
 export const store = configureStore({
   reducer: {

@@ -1,22 +1,14 @@
 import React from 'react';
 import { Header1, Hero2, ApplyForm4, FeatureSection4, TextSection2, FeatureSection1, MemberSection1, FeatureSection2 } from 'code-in-design-system';
-import { useSetReservationsMutation } from './apis/reservationApi';
 
 interface Props {
   isMobile?: boolean;
+  onClickReservation: (phone: string) => void;
+  goToPhoneInput: () => void;
 }
 
-const LandingPage = ({ isMobile }: Props) => {
+const LandingPage = ({ isMobile, onClickReservation, goToPhoneInput }: Props) => {
   const headerMenus = [{ text: '', isActive: false, href: '/' }];
-  const [setReservation] = useSetReservationsMutation();
-
-  const onClickReservation = (phone: string) => {
-    setReservation(phone);
-  };
-  const goToPhoneInput = () => {
-    const element = document.querySelector('#phoneInput');
-    if (element) element.scrollIntoView();
-  };
 
   return (
     <div>

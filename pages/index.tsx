@@ -1,10 +1,10 @@
 import { urls } from '@/constants/url';
-import LandingPage from '@/pages/index/landing';
 import { storageUtil } from '@/utils';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { useLayoutEffect, useState } from 'react';
 import MainPage from '../src/pages/index';
+import CreateReservationContainer from '@/features/reservations/containers/CreateReservationContainer';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,5 +28,5 @@ export default function Home() {
   }, []);
   if (isLoading) return null;
   if (isLogin) return <MainPage />;
-  return <LandingPage />;
+  return <CreateReservationContainer />;
 }

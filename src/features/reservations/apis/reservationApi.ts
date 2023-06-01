@@ -25,6 +25,9 @@ export const reservationApi = createApi({
           },
         };
       },
+      transformResponse: () => {
+        alert('번호 등록이 완료되었습니다.');
+      },
       transformErrorResponse: (res: any) => {
         if (res.data?.message) {
           alert(res.data?.message);
