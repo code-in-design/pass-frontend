@@ -13,7 +13,7 @@ const LandingPage = ({ isMobile }: Props) => {
       <Header1
         buttons={[{ content: '사전 예약하기', size: 'sm', backgroundColor: '#6B77F8', color: 'white', onClick: () => alert('hi') }]}
         isMobile={isMobile}
-        logo="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/ICnbSuqlzVLElQSZQ55OUjyJMaE.png?Expires=1685581209&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=dRMr3q30J6q62dhxO~tY7Cx8sFsa7x4Uv8JNABMOLVpF9OF4r8z9UlTnyqGtoJvd3XGuvWxyr1jth9aUs69Z5eDox4l~2tQPIvAHjtxI6gEx6dN7bMXiPfu3Vreo0XlorKJx1XShwDwEzC39Vtd5fLh5jtvYhbZDzO-Lf9YveY7szMOeAA2LbQqkwhD7DUtmey0WfTuev-CRUFAjG3rpihBbIklHL~wht90csdj-2K1nhhXwpfmc0HlFZ6NoSIlrJUH-4RhIxNCfWbzO8rHGTDuq4ElW4Sjy~Px4YzOiJq~bMQC6xPB3uTaGm50ANV1wqaqDoS4SGcT4N~5~ecdBEQ__"
+        logo="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/ICnbSuqlzVLElQSZQ55OUjyJMaE.png?Expires=1685663700&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=cQIZ5wcyGqUkRXtuPxiw57fbZcb6eie3h3j5zc2s~mffozKhS7QXahHLz3fPLFdmMPbBfuHeor9cpj5Omr6ugKW8v7Xc1gYEClw57OpohSDB3rOUwauHf~gJCDsnw7BFud4Dw4nt1M5V29igXcAxQa21mvwGV9VqoptLclnnOxGmOYLQb160zDklBjRth-RdZsbkQmij~f698puy~I3oEyhkL5HO2hoLwSOaKUYUX46czv2IjJYnNDvsxIm6F0uDsemCwrbSDodHJyPQhS7nUh6TsOi4kWbkyfGM8gFzvIIyaTdgIiot1uk3XDhDLD7rmVHA73sx9Y2bHJ5y8qO6-Q__"
         logoHeight={32}
         menuButtonGap={32}
         menuColor="rgb(0, 0, 0)"
@@ -165,7 +165,7 @@ const LandingPage = ({ isMobile }: Props) => {
               size: 'lg',
             },
             descriptionProps: { isVisible: false },
-            imageUrls: ['/images/icons/Icon_Pc@3x.png', '/images/icons/Icon_Mobile@3x.png'],
+            imageUrls: ['/images/icons/Icon_PC@3x.png', '/images/icons/Icon_Mobile@3x.png'],
             thumbnail:
               'https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/xQ0QSueiC3H3iWpGIfLIwQA8.png?Expires=1685663701&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=G1DQLaOcZcM5pNS8OWVAbm4y3kynD2NU3yBraE~GBX9DQARd7CImlVGlKQI9-9vyH7uD99JSps6JOwjUs9pTqsN8P6Dazyoc4gRyVIuNOFl6axgtefEv~pZyz~Q9cITmMMgpJPQ0uIjyeeNaqzeXmqC6bm9BZ1jqp76MHxPDQ5BbHRWmhLVb3G2boz0ix5eh4JpF4h447nKlUV~kB3FDo4RjH9tmpyUazvQGdaG2Bz3Tx9wXwRVeyBOSV5MTJDw5zP9lLi8zAkooKPtu3btlGKnWuav5D8LEkWQPdi-YyQ6oVCA5k07huEhyQmHb-o~G-JlFcQXl0kEIQYCBVB6IOw__',
             isMobile,
