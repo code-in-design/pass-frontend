@@ -13,7 +13,10 @@ const LandingPage = ({ isMobile }: Props) => {
   const onClickReservation = (phone: string) => {
     setReservation(phone);
   };
-  const goToPhoneInput = () => {};
+  const goToPhoneInput = () => {
+    const element = document.getElementById('#phoneInput');
+    if (element) element.scrollIntoView();
+  };
 
   return (
     <div>

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { urls } from '@/constants/url';
 
 export const reservationApi = createApi({
-  reducerPath: 'auth',
+  reducerPath: 'reservation',
   baseQuery: fetchBaseQuery({
     baseUrl: `${urls.baseUrl}`,
   }),

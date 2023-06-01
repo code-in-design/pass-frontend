@@ -1,10 +1,11 @@
 import { Box, Button, Checkbox, Divider, Flex, Input, Text, VStack, Image, Spacer } from '@chakra-ui/react';
-import { authKakao, authNaver, devBaseUrl } from '@/constants/url';
+import { urls } from '@/constants/url';
 import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useForm } from 'react-hook-form';
 import { NextRouter } from 'next/router';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { storageUtil } from '@/utils';
+import { url } from 'inspector';
 
 interface Props {
   onClickSignIn: (data: any) => void;
@@ -25,7 +26,7 @@ const SignIn = (props: Props) => {
           <Button
             onClick={() => {
               props.setAutoLoginChecked();
-              location.href = `${devBaseUrl}${authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerify`;
+              location.href = `${urls.baseUrl}${urls.authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerify`;
             }}
             w="100%"
             h="56px"
@@ -42,7 +43,7 @@ const SignIn = (props: Props) => {
           <Button
             onClick={() => {
               props.setAutoLoginChecked();
-              location.href = `${devBaseUrl}${authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerify`;
+              location.href = `${urls.baseUrl}${urls.authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerify`;
             }}
             w="100%"
             h="56px"
