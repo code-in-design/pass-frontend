@@ -7,7 +7,7 @@ import { useLayoutEffect, useState } from 'react';
 import MainPage from '../src/pages/index';
 import tokenUtil from '../src/utils/TokenUtil';
 
-export default function Home() {
+export default function Home({ isMobile }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
 
@@ -46,6 +46,6 @@ export default function Home() {
   }, []);
 
   if (isLoading) return null;
-  if (isLogin) return <MainPage />;
-  return <LandingPage />;
+  if (isLogin) return <MainPage isMobile={isMobile} />;
+  return <LandingPage isMobile={isMobile} />;
 }
