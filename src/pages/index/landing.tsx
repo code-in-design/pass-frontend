@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header1, Hero2, Button, Icon, ApplyForm4, FeatureSection4, TextSection2, FeatureSection1, MemberSection1, FeatureSection2 } from 'code-in-design-system';
+import { Header1, Hero2, ApplyForm4, FeatureSection4, TextSection2, FeatureSection1, MemberSection1, FeatureSection2 } from 'code-in-design-system';
 
 interface Props {
   isMobile?: boolean;
@@ -19,13 +19,15 @@ const LandingPage = ({ isMobile }: Props) => {
         menuColor="rgb(0, 0, 0)"
         menuGap={56}
         menus={headerMenus}
-        headerBackground="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/jvWhMZF1uanHdmTckyawWbuCmxA.png?Expires=1685533881&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=eMUjbz0H6mgr-GCYNIJcnUrDwi9Sl6dbRkTG6SQK9fYgH9h76YA3pawPoOY5-lFVA5TOAuiCOiwWEM4ckjWkBVNlRuZt~0gGVWvIUPswp1jVkM-KddI5joKn~zb0GdJ6m3GMUpurHMed9kUufkpEcyfkdCk2wNvGcfRsWGPj3oh5LwzZ1srAChJyLMKZPbCTvu8RBP091RZbqnAAcmTM5QVbCoNEePrAutPxrmsqhKr1Z9NJjVaxytvEPh7pImACnqkJRF6Ef8w~YKKpUCiE1K5OobLaqCno6bwCLGbXzqVSfrXwHUhR6iNS5o9yFRmLquu7GHqGQhBVCfGYiLz0aw__"
         padding={{
           top: 20,
           bottom: 20,
           left: 192,
           right: 192,
           isApply: !isMobile,
+        }}
+        border={{
+          width: 0,
         }}
       />
       <Hero2

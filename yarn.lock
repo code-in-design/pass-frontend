@@ -4217,10 +4217,10 @@ cliui@^8.0.1:
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
 
-code-in-design-system@^0.1.44:
-  version "0.1.44"
-  resolved "https://registry.yarnpkg.com/code-in-design-system/-/code-in-design-system-0.1.44.tgz#2945a96784a825b57912688dab191ede8bc052e8"
-  integrity sha512-54b4D6dvYfm44R07YCpFFjuHuBaQ/gZ5fGCKOSpgrHN6QmH3cn2oiGzB4BjtkgVyAS30GcrRJTalTdlu04mxQw==
+code-in-design-system@^0.1.47:
+  version "0.1.47"
+  resolved "https://registry.yarnpkg.com/code-in-design-system/-/code-in-design-system-0.1.47.tgz#5d6c4b3b1a2d98d0eb5c143bb7500adaadc71e23"
+  integrity sha512-/IBPMalDtApUzMu+e9vHGP3QhrEm6KRhl00kUQXI9REjJAlKdjAUt2WIefTeWCQ79fLyF3wGHg+KJxqiK1oX6Q==
   dependencies:
     uid "^2.0.0"
     "@emotion/react" "^11"
