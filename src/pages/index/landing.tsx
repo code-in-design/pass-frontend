@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header1, Hero2, ApplyForm4, FeatureSection4, TextSection2, FeatureSection1, MemberSection1, FeatureSection2 } from 'code-in-design-system';
+import { useSetReservationsMutation } from './apis/reservationApi';
 
 interface Props {
   isMobile?: boolean;
@@ -7,11 +8,17 @@ interface Props {
 
 const LandingPage = ({ isMobile }: Props) => {
   const headerMenus = [{ text: '', isActive: false, href: '/' }];
+  const [setReservation] = useSetReservationsMutation();
+
+  const onClickReservation = (phone: string) => {
+    setReservation(phone);
+  };
+  const goToPhoneInput = () => {};
 
   return (
     <div>
       <Header1
-        buttons={[{ content: '사전 예약하기', size: 'sm', backgroundColor: '#6B77F8', color: 'white', onClick: () => alert('hi') }]}
+        buttons={[{ content: '사전 예약하기', size: 'sm', backgroundColor: '#6B77F8', color: 'white', onClick: () => goToPhoneInput() }]}
         isMobile={isMobile}
         logo="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/ICnbSuqlzVLElQSZQ55OUjyJMaE.png?Expires=1685663700&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=cQIZ5wcyGqUkRXtuPxiw57fbZcb6eie3h3j5zc2s~mffozKhS7QXahHLz3fPLFdmMPbBfuHeor9cpj5Omr6ugKW8v7Xc1gYEClw57OpohSDB3rOUwauHf~gJCDsnw7BFud4Dw4nt1M5V29igXcAxQa21mvwGV9VqoptLclnnOxGmOYLQb160zDklBjRth-RdZsbkQmij~f698puy~I3oEyhkL5HO2hoLwSOaKUYUX46czv2IjJYnNDvsxIm6F0uDsemCwrbSDodHJyPQhS7nUh6TsOi4kWbkyfGM8gFzvIIyaTdgIiot1uk3XDhDLD7rmVHA73sx9Y2bHJ5y8qO6-Q__"
         logoHeight={32}
@@ -45,7 +52,7 @@ const LandingPage = ({ isMobile }: Props) => {
             isDisabled: false,
             isFullWidth: false,
             isIconApply: false,
-            onClick: () => alert('hihi'),
+            onClick: () => goToPhoneInput(),
           },
         ]}
         description={{
@@ -87,64 +94,67 @@ const LandingPage = ({ isMobile }: Props) => {
         }}
         isMobile={isMobile}
       />
-      <ApplyForm4
-        backgroundColor="rgb(235, 236, 255)"
-        buttonProps={{
-          buttonType: 'solid',
-          size: 'md',
-          content: '사전 예약하기',
-          backgroundColor: 'var(--PASS_Primary_Color, #6b77f8)',
-          color: 'rgb(255, 255, 255)',
-          isLoading: false,
-          isDisabled: false,
-          isFullWidth: false,
-          onClick: text => alert(text),
-        }}
-        descriptionProps={{
-          content: '📌 연락처는 문자 메시지 발송에만 사용되며, 문자 발송 후 파기하여 저장하지 않아요.',
-          size: 'sm',
-          color: 'var(--Cool_Gray_500, #697077)',
-          fontWeight: 'normal',
-          isMobile: isMobile,
-          isVisible: true,
-          isFullWidth: false,
-          textAlign: 'left',
-        }}
-        inputProps={{
-          isActiveDeleteIcon: false,
-          isFullWidth: true,
-          placeholder: {
-            color: '#A2A9B0',
-            text: '연락처를 작성해주세요.',
-          },
-        }}
-        subTitleProps={{
-          size: 'sm',
-          content: '연락처를 남겨주시면, 정식 오픈 시에 제일 먼저 출시 완료 문자를 보내드릴게요.',
-          color: 'var(--Cool_Gray_500, #697077)',
-          fontWeight: 'normal',
-          isMobile: isMobile,
-          isVisible: true,
-          isFullWidth: false,
-          textAlign: 'center',
-        }}
-        titleProps={{
-          size: 'lg',
-          content: '제일 먼저 서비스를 이용하세요!',
-          highlight: {
-            color: '#9EA6FF',
-            height: isMobile ? 18 : 28,
+      <div id="phoneInput">
+        <ApplyForm4
+          backgroundColor="rgb(235, 236, 255)"
+          buttonProps={{
+            buttonType: 'solid',
+            size: 'md',
+            content: '사전 예약하기',
+            backgroundColor: 'var(--PASS_Primary_Color, #6b77f8)',
+            color: 'rgb(255, 255, 255)',
+            isLoading: false,
+            isDisabled: false,
+            isFullWidth: false,
+            onClick: phone => onClickReservation(phone),
+          }}
+          descriptionProps={{
+            content: '📌 연락처는 문자 메시지 발송에만 사용되며, 문자 발송 후 파기하여 저장하지 않아요.',
+            size: 'sm',
+            color: 'var(--Cool_Gray_500, #697077)',
+            fontWeight: 'normal',
+            isMobile: isMobile,
             isVisible: true,
-          },
-          color: 'var(--Cool_Gray_800, #21272A)',
-          fontWeight: 'bold',
-          isMobile: isMobile,
-          isVisible: true,
-          isFullWidth: false,
-          textAlign: 'center',
-        }}
-        isMobile={isMobile}
-      />
+            isFullWidth: false,
+            textAlign: 'left',
+          }}
+          inputProps={{
+            isActiveDeleteIcon: false,
+            isFullWidth: true,
+            placeholder: {
+              color: '#A2A9B0',
+              text: '연락처를 작성해주세요.',
+            },
+            onChange: phone => phone,
+          }}
+          subTitleProps={{
+            size: 'sm',
+            content: '연락처를 남겨주시면, 정식 오픈 시에 제일 먼저 출시 완료 문자를 보내드릴게요.',
+            color: 'var(--Cool_Gray_500, #697077)',
+            fontWeight: 'normal',
+            isMobile: isMobile,
+            isVisible: true,
+            isFullWidth: false,
+            textAlign: 'center',
+          }}
+          titleProps={{
+            size: 'lg',
+            content: '제일 먼저 서비스를 이용하세요!',
+            highlight: {
+              color: '#9EA6FF',
+              height: isMobile ? 18 : 28,
+              isVisible: true,
+            },
+            color: 'var(--Cool_Gray_800, #21272A)',
+            fontWeight: 'bold',
+            isMobile: isMobile,
+            isVisible: true,
+            isFullWidth: false,
+            textAlign: 'center',
+          }}
+          isMobile={isMobile}
+        />
+      </div>
       <FeatureSection4
         backgroundImage="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/V1PiBQkOPJaImp3J1NsNbjwZA.png?Expires=1685663700&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=JY3D0n4cZ4PG4ZRElmVmRlk99nY66WIC87YmjXgmeJ~duXp-n3HBy2wYi3qvs0Px2y~0u~nYGhpBbQxyjNAXUXThba~TwMVSuM5IT0zNLmKDL3qZO0n~GWMMyYNE7VqYxN03KkJhj3u9rA3TKK3w22oUNI4k7Bf7PlTFYVX8MB0rCAguE5Xz~zFf6KGbFYOVf583hBYDBb~nJszFCo44b5ZDVAb3AQl8cry~91gWz2pF5q6Apdlgpibz~hbMC2cCA~Ftv643JAqREV0fxDMeYwuRJ4i1nXKFVexv9ZdPdkU~knwJANewwY2QZwhgo0f5Ixs-iBbb1MhM8pAeYHDewA__"
         titleProps={{ isVisible: false }}
