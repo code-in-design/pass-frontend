@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useSignInMutation } from '../apis/authApi';
 import SignIn from '../components/SignIn';
 import { useForm } from 'react-hook-form';
-import { storageUtil } from '@/utils';
+import { storageUtil } from '@/utils/StorageUtil';
 
 const SignInContainer = () => {
   const router = useRouter();

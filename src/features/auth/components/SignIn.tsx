@@ -4,7 +4,7 @@ import { FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReturn, useFo
 import { NextRouter } from 'next/router';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-import { storageUtil } from '@/utils';
+import { storageUtil } from '@/utils/StorageUtil';
 import { url } from 'inspector';
 
 interface Props {

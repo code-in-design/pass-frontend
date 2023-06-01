@@ -1,19 +1,20 @@
 import React from 'react';
 import { Header1, Hero2, ApplyForm4, FeatureSection4, TextSection2, FeatureSection1, MemberSection1, FeatureSection2 } from 'code-in-design-system';
+import { useRouter } from 'next/router';
 
 interface Props {
   isMobile?: boolean;
   onClickReservation: (phone: string) => void;
-  goToPhoneInput: () => void;
 }
 
-const LandingPage = ({ isMobile, onClickReservation, goToPhoneInput }: Props) => {
+const LandingPage = ({ isMobile, onClickReservation }: Props) => {
   const headerMenus = [{ text: '', isActive: false, href: '/' }];
+  const router = useRouter();
 
   return (
     <div>
       <Header1
-        buttons={[{ content: '사전 예약하기', size: 'sm', backgroundColor: '#6B77F8', color: 'white', onClick: () => goToPhoneInput() }]}
+        buttons={[{ content: '사전 예약하기', size: 'sm', backgroundColor: '#6B77F8', color: 'white', onClick: () => router.push('#phoneInput') }]}
         isMobile={isMobile}
         logo="https://framerusercontent.com/projects/uDktL1PkKHe4L9UELhcL/assets/ICnbSuqlzVLElQSZQ55OUjyJMaE.png?Expires=1685663700&Key-Pair-Id=APKAIDY47RVYVKGA6NJQ&Signature=cQIZ5wcyGqUkRXtuPxiw57fbZcb6eie3h3j5zc2s~mffozKhS7QXahHLz3fPLFdmMPbBfuHeor9cpj5Omr6ugKW8v7Xc1gYEClw57OpohSDB3rOUwauHf~gJCDsnw7BFud4Dw4nt1M5V29igXcAxQa21mvwGV9VqoptLclnnOxGmOYLQb160zDklBjRth-RdZsbkQmij~f698puy~I3oEyhkL5HO2hoLwSOaKUYUX46czv2IjJYnNDvsxIm6F0uDsemCwrbSDodHJyPQhS7nUh6TsOi4kWbkyfGM8gFzvIIyaTdgIiot1uk3XDhDLD7rmVHA73sx9Y2bHJ5y8qO6-Q__"
         logoHeight={32}
@@ -46,8 +47,8 @@ const LandingPage = ({ isMobile, onClickReservation, goToPhoneInput }: Props) =>
             isLoading: false,
             isDisabled: false,
             isFullWidth: false,
-            isIconApply: false,
-            onClick: () => goToPhoneInput(),
+            // isIconApply: false,
+            onClick: () => router.push('#phoneInput'),
           },
         ]}
         description={{
