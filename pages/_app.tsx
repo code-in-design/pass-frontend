@@ -7,11 +7,13 @@ import { theme } from '@/theme';
 import store from '@/app/store';
 import 'code-in-design-system/dist/globals.css';
 import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
+import GoogleTagManager from '../src/marketings/GoogleTagManager';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <GoogleAnalytics />
+      <GoogleTagManager />
       <Head>
         <title>Z-ONE</title>
       </Head>
