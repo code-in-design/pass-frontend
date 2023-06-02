@@ -14,6 +14,12 @@ export const scoresApi = createApi({
     //성적 확정 전 성적 입력하기
     setPreScores: builder.mutation({
       query: (data: any) => {
+        if (data.inquiry1Type.value === '미응시') {
+          data.inquiry1Score = 0;
+        }
+        if (data.inquiry2Type.value === '미응시') {
+          data.inquiry2Score = 0;
+        }
         return {
           url: `/pre-scores`,
           method: 'POST',
@@ -28,7 +34,7 @@ export const scoresApi = createApi({
             inquiry2_type: data.inquiry2Type.value,
             inquiry2_score: Number(data.inquiry2Score),
             kor_history_grade: Number(data.historyGrade),
-            naesin_grade: parseFloat(data.naesinGrade),
+            naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
           },
         };
       },
@@ -51,9 +57,6 @@ export const scoresApi = createApi({
           data.inquiry2Percentile = 0;
           data.inquiry2Grade = 9;
         }
-        // if (data.naesinGrade === "") {
-        //   data.naesinGrade = 9;
-        // }
         return {
           url: `/scores`,
           method: 'POST',
@@ -76,7 +79,7 @@ export const scoresApi = createApi({
             inquiry2_percentile: Number(data.inquiry2Percentile),
             inquiry2_grade: Number(data.inquiry2Grade),
             kor_history_grade: Number(data.historyGrade),
-            naesin_grade: Number(data.naesinGrade),
+            naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
           },
         };
       },

@@ -6,6 +6,7 @@ import Table from '@/components/Table';
 interface Props {
   lists: Array<TableProps>;
   onClickEditGrades: () => void;
+  hasScoreData: boolean;
 }
 
 interface TableProps {
@@ -23,7 +24,7 @@ const CheckMyScore = (props: Props) => {
   return (
     <Container>
       <GradeCard>
-        <Title> 2024학년도 대학수학능력시험 성적 통지표</Title>
+        <Title> 2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
         <Table lists={props.lists} />
         <Information>
@@ -33,10 +34,12 @@ const CheckMyScore = (props: Props) => {
           <InfoText>표준점수, 백분위, 등급은 원점수 대비 자체 수능 분석 기준으로 산정된 점수입니다. 업데이트 이후 점수가 달라질 수 있습니다.</InfoText>
         </Information>
       </GradeCard>
-      <Buttons>
-        <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
-        <UniversityFinderModal />
-      </Buttons>
+      {!props.hasScoreData && (
+        <Buttons>
+          <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
+          <UniversityFinderModal />
+        </Buttons>
+      )}
     </Container>
   );
 };

@@ -20,26 +20,25 @@ const Table = (props: Props) => {
     <GradeTable>
       <GradeTableThead>
         <GradeTableTheadTr>
-          <td>영역</td>
-          <td>한국사</td>
-          <td>국어</td>
-          <td>수학</td>
-          <td>영어</td>
-          <td colSpan={2}>탐구</td>
+          <TableTd>영역</TableTd>
+          <TableTd>한국사</TableTd>
+          <TableTd>국어</TableTd>
+          <TableTd>수학</TableTd>
+          <TableTd>영어</TableTd>
+          <TableTd colSpan={2}>탐구</TableTd>
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
         {props.lists.map((list, item) => {
-          console.log(list);
           return (
             <GradeTableTBodyTr key={item}>
-              <td>{list.area ? list.area : '-'}</td>
-              <td>{list.history ? list.history : '-'}</td>
-              <td>{list.korean ? list.korean : '-'}</td>
-              <td>{list.math ? list.math : '-'}</td>
-              <td>{list.english ? list.english : '-'}</td>
-              <td>{list.inquiry1 ? list.inquiry1 : '-'}</td>
-              <td>{list.inquiry2 ? list.inquiry2 : '-'}</td>
+              <TableTd>{list.area ? list.area : '-'}</TableTd>
+              <TableTd>{list.history ? list.history : '-'}</TableTd>
+              <TableTd>{list.korean ? list.korean : '-'}</TableTd>
+              <TableTd>{list.math ? list.math : '-'}</TableTd>
+              <TableTd>{list.english ? list.english : '-'}</TableTd>
+              <TableTd>{list.inquiry1 ? list.inquiry1 : '-'}</TableTd>
+              <TableTd>{list.inquiry2 ? list.inquiry2 : '-'}</TableTd>
             </GradeTableTBodyTr>
           );
         })}
@@ -100,4 +99,8 @@ const GradeTableTBodyTr = styled.tr`
       color: #7f86d2;
     }
   }
+`;
+
+const TableTd = styled.td`
+  vertical-align: middle;
 `;

@@ -14,6 +14,7 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   onClickPrevButton: () => void;
+  onClickNextButton: () => void;
 }
 
 const Korean = ['언어와 매체', '화법과 작문'];
@@ -103,7 +104,14 @@ const PreliminaryGrades = (props: Props) => {
           <Button type="button" onClick={props.onClickPrevButton}>
             이전
           </Button>
-          <Button type="submit">다음</Button>
+          <Button
+            type="submit"
+            onClick={() => {
+              props.onClickNextButton();
+            }}
+          >
+            다음
+          </Button>
         </Buttons>
       </Bottom>
     </>

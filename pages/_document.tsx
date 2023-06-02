@@ -42,6 +42,8 @@ export default function Document() {
         <meta property="og:url" content={url} />
         <meta property="og:description" content={description} />
         {/* <meta property="og:image" content="" key="ogimage" /> */}
+
+        <meta name="naver-site-verification" content="6fc614587fc636493325df49b27cf6cb6694c546" />
       </Head>
       <body>
         <Main />

@@ -1,13 +1,15 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import More from '../../../../public/images/icons/moreHoriz.svg';
 import ProceedingModalLayout from '@/components/Modal/ProceedingModalLayout';
 import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
 import MyTooltip from '@/components/Tooltip';
 import ProgressBar from '@ramonak/react-progress-bar';
+import { useRouter } from 'next/router';
 
 const UniversityFinderModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -17,9 +19,16 @@ const UniversityFinderModal = () => {
     setIsOpen(false);
   }, [isOpen]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      // 대학찾기 메인페이지로 이동시키기
+      // router.push("/")
+    }, 3000);
+  }, []);
+
   return (
     <>
-      <Button data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={openModal}>
+      <Button type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={openModal}>
         확인
         <MyTooltip id="tooltip-myScore">
           <TooltipContainer>
@@ -50,7 +59,7 @@ const UniversityFinderModal = () => {
 
 export default UniversityFinderModal;
 
-const Button = styled.div`
+const Button = styled.button`
   width: 210px;
   height: 56px;
   border-radius: 16px;
