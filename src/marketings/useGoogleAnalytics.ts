@@ -6,8 +6,11 @@ const useGoogleAnalytics = () => {
   const router = useRouter();
 
   const pageview = useCallback(url => {
-    (window as any).gtag('config', GA_TRACKING_ID, {
-      page_path: url,
+    (window as any)?.gtag('event', 'page_view', {
+      page_title: document.title, // 페이지 제목
+      page_location: window.location.href, // 페이지 위치(URL)
+      page_path: url, // 페이지 경로
+      send_to: GA_TRACKING_ID, // Google Analytics 트래킹 ID
     });
   }, []);
 
@@ -28,7 +31,7 @@ const useGoogleAnalytics = () => {
     const isInitialized = typeof (window as any).ga === 'function';
     if (isInitialized || !router) return; // 딱 한번만 초기화
     const handleRouteChange = (url: any) => {
-      if (!url?.includes('#')) (window as any)?.gtag?.pageview(url);
+      if (!url?.includes('#')) pageview(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     router.events.on('hashChangeComplete', handleRouteChange);
