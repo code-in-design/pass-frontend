@@ -149,6 +149,41 @@ const LandingPage = ({ isMobile, onClickReservation }: Props) => {
           isMobile={isMobile}
         />
       </div>
+      <TextSection2
+        backgroundColor="var(--White, hsl(0, 0%, 100%))"
+        contentBackgroundColor="var(--Cool_Gray_50, #F2F4F8)"
+        contentPadding={{
+          top: 48,
+          bottom: 48,
+          left: 80,
+          right: 80,
+          isApply: false,
+        }}
+        subTitleProps={{
+          size: 'sm',
+          content: '체대입시 정보',
+          color: 'var(--PASS_Primary_Color, #6b77f8)',
+          fontWeight: 'normal',
+          isMobile: isMobile,
+          isVisible: true,
+          isFullWidth: false,
+          textAlign: 'center',
+        }}
+        titleProps={{
+          size: 'lg',
+          content: isMobile ? '이제 어렵게 입시요강 \n 찾아보는 것은 <c1>stop</c1>' : '이제 어렵게 입시요강 찾아보는 것은 <c1>stop</c1>',
+          color: 'var(--Cool_Gray_800, #21272A)',
+          partialColors: ['#6B77F8'],
+          fontWeight: 'bold',
+          isMobile: isMobile,
+          isVisible: true,
+          isFullWidth: false,
+          textAlign: 'center',
+        }}
+        backgroundImage={undefined}
+        features={[]}
+        isMobile={isMobile}
+      />
       <FeatureSection4
         backgroundImage="/images/pass/Img_Feature_01_BG@2x.png"
         titleProps={{ isVisible: false }}
@@ -218,41 +253,7 @@ const LandingPage = ({ isMobile, onClickReservation }: Props) => {
         buttonsProps={[]}
         isMobile={isMobile}
       />
-      <TextSection2
-        backgroundColor="var(--White, hsl(0, 0%, 100%))"
-        contentBackgroundColor="var(--Cool_Gray_50, #F2F4F8)"
-        contentPadding={{
-          top: 48,
-          bottom: 48,
-          left: 80,
-          right: 80,
-          isApply: false,
-        }}
-        subTitleProps={{
-          size: 'sm',
-          content: '체대입시 정보',
-          color: 'var(--PASS_Primary_Color, #6b77f8)',
-          fontWeight: 'normal',
-          isMobile: isMobile,
-          isVisible: true,
-          isFullWidth: false,
-          textAlign: 'center',
-        }}
-        titleProps={{
-          size: 'lg',
-          content: isMobile ? '이제 어렵게 입시요강 \n 찾아보는 것은 <c1>stop</c1>' : '이제 어렵게 입시요강 찾아보는 것은 <c1>stop</c1>',
-          color: 'var(--Cool_Gray_800, #21272A)',
-          partialColors: ['#6B77F8'],
-          fontWeight: 'bold',
-          isMobile: isMobile,
-          isVisible: true,
-          isFullWidth: false,
-          textAlign: 'center',
-        }}
-        backgroundImage={undefined}
-        features={[]}
-        isMobile={isMobile}
-      />
+
       <TextSection2
         backgroundColor="var(--PASS_Primary_Color, #6b77f8)"
         contentBackgroundColor="rgba(107, 119, 248, 0)"
