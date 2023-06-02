@@ -1,10 +1,8 @@
 import React from 'react';
-import ReservationListContainer from '@/features/reservations/containers/ReservationListContainer';
+import AdminReservationsPage from '@/pages/admin/ReservationsPage';
 
-type Props = {};
-
-const AdminPreReservationPage = (props: Props) => {
-  return <ReservationListContainer />;
+const AdminPreReservationPage = () => {
+  return <AdminReservationsPage />;
 };
 
 export default AdminPreReservationPage;
