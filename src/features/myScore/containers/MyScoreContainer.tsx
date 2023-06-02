@@ -50,7 +50,7 @@ const MyScoreContainer = () => {
       setValue('inquiry2Percentile', 0);
       setValue('inquiry2Grade', 9);
     }
-    // setScores(data);
+    setScores(data);
     console.log(data);
     // setStep(prev => prev + 1);
   };
@@ -97,14 +97,15 @@ const MyScoreContainer = () => {
     setStep(2);
     setLists(result);
   }
+  console.log(formState.errors);
 
   return (
     <GradeInputForm title="성적 입력하기" subtitle="국어·수학·탐구 과목은 원점수를, 영어·한국사는 등급을 입력해주세요.">
       {/* 성적 확정 전 */}
-      <form onSubmit={handleSubmit(onpresubmit)}>
+      {/* <form onSubmit={handleSubmit(onpresubmit)}>
         {step === 1 && <PreliminaryGrades onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} />}
         {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} lists={lists} />}
-      </form>
+      </form> */}
 
       {/* 성적 확정 후 */}
       <form onSubmit={handleSubmit(onsubmit)}>

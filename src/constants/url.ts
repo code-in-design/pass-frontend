@@ -1,13 +1,7 @@
-export const devBaseUrl = 'https://dev-api.z-one.kr';
-
-export const authKakao = '/auth/kakao';
-
-export const authNaver = '/auth/naver';
-
-class UrlsUtil {
+class Urls {
   baseUrl = 'https://dev-api.z-one.kr';
   authKakao = '/auth/kakao';
   authNaver = '/auth/naver';
 }
 
-export default urlsUtil = new urlsUtil();
+export const urls = new Urls();

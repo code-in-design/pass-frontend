@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
-import { devBaseUrl } from '@/constants/url';
-import { storageUtil } from '@/utils';
+import { urls } from '@/constants/url';
+import { storageUtil } from '@/utils/StorageUtil';
+import tokenUtil from '../../../utils/TokenUtil';
 
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${devBaseUrl}/auth`,
-    prepareHeaders: addTokenToHeader,
-    responseHandler: fetchAccessToken,
+    baseUrl: `${urls.baseUrl}/auth`,
+    prepareHeaders: tokenUtil.addTokenToHeader,
+    responseHandler: tokenUtil.silentRefreshAccessToken,
   }),
   endpoints: builder => ({
     //네이버 인가코드

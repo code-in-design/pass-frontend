@@ -20,10 +20,11 @@ interface Props {
   min: number;
   max: number;
   selectValue?: [{ value: string; label: string }, { value: string; label: string }];
+  pattern?: RegExp;
 }
 
 const GradeScoreInput = (props: Props) => {
-  const pattern = /^[1-9](\.\d{1,2})?$/;
+  // const pattern = /^[1-9](\.\d{1,2})?$/;
   const unRequiredField = ['naesinGrade'];
   const inquiry1Type = props.selectValue && props.selectValue[0]?.value;
   const inquiry2Type = props.selectValue && props.selectValue[1]?.value;
@@ -43,7 +44,7 @@ const GradeScoreInput = (props: Props) => {
             {...props.register(props.name, {
               required: unRequiredField.includes(props.name) ? false : `${props.name}의 점수를 입력해주세요`,
               onChange: e => {
-                if (pattern.test(e.target.value) || e.target.value === '') {
+                if (props.pattern?.test(e.target.value) || e.target.value === '') {
                   props.setValue(props.name, e.target.value);
                 } else {
                   const value = e.target.value;
@@ -54,10 +55,7 @@ const GradeScoreInput = (props: Props) => {
               },
               min: props.min,
               max: props.max,
-              pattern: {
-                value: pattern,
-                message: '1~9 사이의 숫자를 입력해주세요. 소수점은 둘째 자리까지 허용 됩니다.',
-              },
+              pattern: props.pattern,
             })}
             placeholder={props.placeholder && props.placeholder}
             placeholderAlign={props.placeholderAlign}

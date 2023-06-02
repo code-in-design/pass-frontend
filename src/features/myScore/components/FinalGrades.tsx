@@ -118,7 +118,7 @@ const FinalGrades = (props: Props) => {
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="내신" marginTop="4px">
             <FlexWrapper alignItems="flex-end">
               <SubTitle>전 과목 평균 등급</SubTitle>
-              <GradeScoreInput register={props.register} setValue={props.setValue} name="naesinGrade" min={1.0} max={9.0} width="224px" margintTop="44px" wapperWidth="auto" inputText="등급" />
+              <GradeScoreInput register={props.register} setValue={props.setValue} name="naesinGrade" pattern={/^[1-9](\.\d{1,2})?$/} min={1.0} max={9.0} width="224px" margintTop="44px" wapperWidth="auto" inputText="등급" />
             </FlexWrapper>
             <Description>
               <Circle /> 내신 등급 입력은 선택입니다

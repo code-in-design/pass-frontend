@@ -9,7 +9,11 @@ import Probability from './components/Probability';
 import ServiceList from './components/ServiceList';
 import { useForm } from 'react-hook-form';
 
-const MainPage = props => {
+interface Props {
+  isMobile?: boolean;
+}
+
+const MainPage = (props: Props) => {
   const { register } = useForm();
   return (
     <Layout>
