@@ -1,39 +1,30 @@
 import React, { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import AdminLayout from '@/components/AdminLayout/AdminLayout';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-balham.css';
 
 interface Props {
-  list: {
-    is_next: boolean;
-    is_prev: boolean;
-    limit: number;
-    page_cur: number;
-    page_end: number;
-    page_range: number;
-    page_start: number;
-    page_total: number;
-    result: Array<object>;
-    total: number;
-  };
+  rowData: [
+    {
+      ID: number;
+      핸드폰번호: string;
+      등록날짜: string;
+    },
+  ];
 }
 
 const ReservationList = (props: Props) => {
-  const columnDefs = [
-    { field: 'ID', flex: 1 },
-    { field: '핸드폰번호', flex: 1 },
-    { field: '등록날짜', flex: 1 },
+  const columnDefs: any = [
+    { field: 'ID', flex: 1, sortable: true, sort: 'desc' },
+    { field: '핸드폰번호', flex: 1, sortable: true },
+    { field: '등록날짜', flex: 1, sortable: true },
   ];
-  const [rowData] = useState([
-    { ID: '1', 핸드폰번호: 'Celica', 등록날짜: '2023-06-01' },
-    { ID: '2', 핸드폰번호: 'Mondeo', 등록날짜: '2023-06-01' },
-    { ID: '3', 핸드폰번호: 'Boxter', 등록날짜: '2023-06-01' },
-  ]);
+
   return (
     <AdminLayout>
       <div className="ag-theme-balham" style={{ height: '100%', width: '100%' }}>
-        <AgGridReact columnDefs={columnDefs} rowData={rowData} />
+        <AgGridReact columnDefs={columnDefs} rowData={props.rowData} />
       </div>
     </AdminLayout>
   );

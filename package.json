@@ -23,6 +23,7 @@
     "ag-grid-react": "^29.3.5",
     "axios": "^1.4.0",
     "code-in-design-system": "0.1.48",
+    "dayjs": "^1.11.7",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "framer-motion": "^10.12.4",
