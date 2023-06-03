@@ -8,10 +8,12 @@ import store from '@/app/store';
 import 'code-in-design-system/dist/globals.css';
 import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
 import GoogleTagManager from '../src/marketings/GoogleTagManager';
+import NaverSiteVerification from '../src/marketings/NaverSiteVerification';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <NaverSiteVerification />
       <GoogleAnalytics />
       <GoogleTagManager />
       <Head>
