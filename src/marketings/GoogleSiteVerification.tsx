@@ -3,7 +3,7 @@ import React from 'react';
 
 type Props = {};
 
-const NaverSiteVerification = (props: Props) => {
+const GoogleSiteVerification = (props: Props) => {
   return (
     <Head>
       <meta name="google-site-verification" content="xlmEn7JA1I2JrvTPW-eAK-pjSKdu37DdkPxC2DyZRjU" />
@@ -11,4 +11,4 @@ const NaverSiteVerification = (props: Props) => {
   );
 };
 
-export default NaverSiteVerification;
+export default GoogleSiteVerification;
