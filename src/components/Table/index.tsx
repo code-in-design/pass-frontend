@@ -6,7 +6,7 @@ interface Props {
 
 interface TableProps {
   list: object;
-  area: string;
+  rowHeader: string;
   english: string;
   history: string;
   korean: string;
@@ -32,13 +32,13 @@ const Table = (props: Props) => {
         {props.lists.map((list, item) => {
           return (
             <GradeTableTBodyTr key={item}>
-              <TableTd>{list.area ? list.area : '-'}</TableTd>
+              <TableTd>{list.rowHeader}</TableTd>
               <TableTd>{list.history ? list.history : '-'}</TableTd>
               <TableTd>{list.korean ? list.korean : '-'}</TableTd>
               <TableTd>{list.math ? list.math : '-'}</TableTd>
               <TableTd>{list.english ? list.english : '-'}</TableTd>
-              <TableTd>{list.inquiry1 ? list.inquiry1 : '-'}</TableTd>
-              <TableTd>{list.inquiry2 ? list.inquiry2 : '-'}</TableTd>
+              <TableTd>{list.inquiry1 !== undefined ? list.inquiry1 : '-'}</TableTd>
+              <TableTd>{list.inquiry2 !== undefined ? list.inquiry2 : '-'}</TableTd>
             </GradeTableTBodyTr>
           );
         })}

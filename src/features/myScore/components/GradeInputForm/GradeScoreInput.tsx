@@ -26,18 +26,18 @@ interface Props {
 
 const GradeScoreInput = (props: Props) => {
   // const pattern = /^[1-9](\.\d{1,2})?$/;
-  let unRequiredField: any = [];
+  let unRequiredField: string[] = ['naesinGrade'];
   const inquiry1Type = props.selectValue && props.selectValue[0]?.value;
   const inquiry2Type = props.selectValue && props.selectValue[1]?.value;
   const mathDropout = props.selectValue && props.selectValue[2];
   if (inquiry1Type === '미응시') {
-    unRequiredField.push('naesinGrade', 'inquiry1Score', 'inquiry1Percentile', 'inquiry1Grade');
+    unRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade');
   }
   if (inquiry2Type === '미응시') {
-    unRequiredField.push('naesinGrade', 'inquiry2Score', 'inquiry2Percentile', 'inquiry2Grade');
+    unRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade');
   }
   if (mathDropout) {
-    unRequiredField.push('naesinGrade', 'mathScore', 'mathType');
+    unRequiredField.push('mathRawScore', 'mathOptionalSubject');
   }
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>

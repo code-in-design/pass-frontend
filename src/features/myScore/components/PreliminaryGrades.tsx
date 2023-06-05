@@ -28,12 +28,12 @@ const PreliminaryGrades = (props: Props) => {
       <Wrapper>
         <Left>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={Korean}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
+            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
           </GradeInputFormItem>
 
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
             <FlexWrapper alignItems="flex-end">
-              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
+              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <CheckboxWrapper>
                   <Checkbox type="checkbox" id="mathDropout" {...props.register('mathDropout')} />
                   <Label htmlFor="mathDropout">수포자</Label>
@@ -53,13 +53,13 @@ const PreliminaryGrades = (props: Props) => {
           <GradeInputFormItem title="탐구" isRequire={true} register={props.register} setValue={props.setValue}>
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
-              <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+              <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               <GradeScoreInput
                 selectValue={props.selectValue}
                 register={props.register}
                 setValue={props.setValue}
                 getValues={props.getValues}
-                name="inquiry1Score"
+                name="inquiry1RawScore"
                 min={0}
                 max={50}
                 width="243px"
@@ -71,7 +71,7 @@ const PreliminaryGrades = (props: Props) => {
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
-              <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+              <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               <GradeScoreInput selectValue={props.selectValue} register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
             </SelectWrapper>
           </GradeInputFormItem>
@@ -170,8 +170,6 @@ PreliminaryGrades.defaultProps = {
     { value: '지구과학ⅠⅠ', label: '지구과학ⅠⅠ' },
   ],
 };
-
-const Form = styled.form``;
 
 const Wrapper = styled.div`
   width: 100%;

@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
 import { urls } from '@/constants/url';
+import { ScoresModel } from '@/models/ScoresModel';
+
+const scoresModel = new ScoresModel();
 
 export const scoresApi = createApi({
   reducerPath: 'score',
@@ -14,79 +17,59 @@ export const scoresApi = createApi({
     //성적 확정 전 성적 입력하기
     setPreScores: builder.mutation({
       query: (data: any) => {
-        if (data.inquiry1Type.value === '미응시') {
-          data.inquiry1Score = 0;
+        if (data.inquiry1OptionalSubject.value === '미응시') {
+          data.inquiry1RawScore = 0;
         }
-        if (data.inquiry2Type.value === '미응시') {
-          data.inquiry2Score = 0;
+        if (data.inquiry2OptionalSubject.value === '미응시') {
+          data.inquiry2RawScore = 0;
         }
+        const bodyData = scoresModel.formatModelData(data);
         return {
           url: `/pre-scores`,
           method: 'POST',
-          body: {
-            korean_type: data.koreanType,
-            korean_score: Number(data.koreanScore),
-            english_grade: Number(data.englishGrade),
-            math_type: data.mathType,
-            math_score: Number(data.mathScore),
-            inquiry1_type: data.inquiry1Type.value,
-            inquiry1_score: Number(data.inquiry1Score),
-            inquiry2_type: data.inquiry2Type.value,
-            inquiry2_score: Number(data.inquiry2Score),
-            kor_history_grade: Number(data.historyGrade),
-            naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
-          },
+          body: bodyData,
         };
       },
     }),
     //성적 확정 전 내 성적 확인하기
     fetchPreScores: builder.query<any, void>({
       query: () => '/pre-scores/me',
+      transformResponse: (res: any) => {
+        const data = JSON.parse(res);
+        const transData = scoresModel.setModelData(data);
+        return transData;
+      },
     }),
 
     //성적 확정 후 성적 입력하기
     setScores: builder.mutation({
       query: data => {
-        if (data.inquiry1Type.value === '미응시') {
-          data.inquiry1Score = 0;
+        if (data.inquiry1OptionalSubject.value === '미응시') {
+          data.inquiry1StandardScore = 0;
           data.inquiry1Percentile = 0;
           data.inquiry1Grade = 9;
         }
-        if (data.inquiry2Type.value === '미응시') {
-          data.inquiry2Score = 0;
+        if (data.inquiry2OptionalSubject.value === '미응시') {
+          data.inquiry2StandardScore = 0;
           data.inquiry2Percentile = 0;
           data.inquiry2Grade = 9;
         }
+        const bodyData = scoresModel.formatModelConfirmData();
         return {
           url: `/scores`,
           method: 'POST',
-          body: {
-            korean_type: data.koreanType,
-            korean_std_score: Number(data.koreanScore),
-            korean_percentile: Number(data.koreanPercentile),
-            korean_grade: Number(data.koreanGrade),
-            english_grade: Number(data.englishGrade),
-            math_type: data.mathType,
-            math_std_score: Number(data.mathScore),
-            math_percentile: Number(data.mathPercentile),
-            math_grade: Number(data.mathGrade),
-            inquiry1_type: data.inquiry1Type.value,
-            inquiry1_std_score: Number(data.inquiry1Score),
-            inquiry1_percentile: Number(data.inquiry1Percentile),
-            inquiry1_grade: Number(data.inquiry1Grade),
-            inquiry2_type: data.inquiry2Type.value,
-            inquiry2_std_score: Number(data.inquiry2Score),
-            inquiry2_percentile: Number(data.inquiry2Percentile),
-            inquiry2_grade: Number(data.inquiry2Grade),
-            kor_history_grade: Number(data.historyGrade),
-            naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
-          },
+          body: bodyData,
         };
       },
     }),
     //성적 확정 후 내 성적 확인하기
     fetchScores: builder.query<any, void>({
       query: () => '/scores/me',
+      transformResponse: (res: any) => {
+        const data = JSON.parse(res);
+        const transData = scoresModel.setModelData(data);
+        return transData;
+      },
     }),
   }),
 });

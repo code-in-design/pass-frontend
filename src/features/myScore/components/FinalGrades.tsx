@@ -30,7 +30,7 @@ const FinalGrades = (props: Props) => {
                 register={props.register}
                 setValue={props.setValue}
                 getValues={props.getValues}
-                name="koreanScore"
+                name="koreanStandardScore"
                 min={0}
                 max={200}
                 title="표준점수"
@@ -78,7 +78,7 @@ const FinalGrades = (props: Props) => {
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
-                  name="mathScore"
+                  name="mathStandardScore"
                   min={0}
                   max={200}
                   title="표준점수"
@@ -124,7 +124,7 @@ const FinalGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
               <SelectMargin>
-                <Select size="md" width="211px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1Type" setValue={props.setValue} register={props.register} required="과목을 선택해주세요" />
+                <Select size="md" width="211px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required="과목을 선택해주세요" />
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput
@@ -132,7 +132,7 @@ const FinalGrades = (props: Props) => {
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
-                  name="inquiry1Score"
+                  name="inquiry1StandardScore"
                   min={0}
                   max={200}
                   title="표준점수"
@@ -177,7 +177,7 @@ const FinalGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <SelectMargin>
-                <Select size="md" width="211px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+                <Select size="md" width="211px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput
@@ -185,7 +185,7 @@ const FinalGrades = (props: Props) => {
                   register={props.register}
                   getValues={props.getValues}
                   setValue={props.setValue}
-                  name="inquiry2Score"
+                  name="inquiry2StandardScore"
                   min={0}
                   max={200}
                   width="88px"

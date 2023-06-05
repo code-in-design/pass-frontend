@@ -16,10 +16,10 @@ interface Props {
 const GradeInputFormItem = (props: Props) => {
   let type = '';
   if (props.title === '국어') {
-    type = 'koreanType';
+    type = 'koreanOptionalSubject';
   }
   if (props.title === '수학') {
-    type = 'mathType';
+    type = 'mathOptionalSubject';
   }
   return (
     <Container>

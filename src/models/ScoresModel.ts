@@ -1,62 +1,189 @@
 export class ScoresModel {
-  koreanType: string;
-  koreanStdScore: string;
-  koreanPercentile?: string;
-  koreanGrade?: string;
-  englishGrade: string;
-  mathType: string;
-  mathStdScore: string;
-  mathPercentile?: string;
-  mathGrade?: string;
-  inquiry1Type: string;
-  inquiry1StdScore: string;
+  koreanOptionalSubject?: string; //국어 선택과목
+  koreanRawScore?: string; //국어 원점수
+  koreanStandardScore?: string; //국어 표준점수
+  koreanPercentile?: string; // 국어 백분위
+  koreanGrade?: string; // 국어 등급
+  englishGrade?: string; // 영어 등급
+  mathOptionalSubject?: string; // 수학 선택과목
+  mathRawScore?: string; // 수학 원점수
+  mathStandardScore?: string; // 수학 표준점수
+  mathPercentile?: string; // 수학 백분위
+  mathGrade?: string; // 수학 등급
+  inquiry1OptionalSubject?: string;
+  inquiry1RawScore?: string;
+  inquiry1StandardScore?: string;
   inquiry1Percentile?: string;
   inquiry1Grade?: string;
-  inquiry2Type: string;
-  inquiry2StdScore: string;
+  inquiry2OptionalSubject?: string;
+  inquiry2RawScore?: string;
+  inquiry2StandardScore?: string;
   inquiry2Percentile?: string;
   inquiry2Grade?: string;
-  historyGrade: string;
-  naesinGrade: string;
+  historyGrade?: string;
+  naesinGrade?: string;
   constructor(
-    koreanType: string,
-    koreanStdScore: string,
-    englishGrade: string,
-    mathType: string,
-    mathStdScore: string,
-    inquiry1Type: string,
-    inquiry1StdScore: string,
-    inquiry2Type: string,
-    inquiry2StdScore: string,
-    historyGrade: string,
-    naesinGrade: string,
-    inquiry2Percentile?: string,
+    koreanOptionalSubject?: string, //국어 선택과목
+    koreanRawScore?: string, //국어 원점수
+    koreanStandardScore?: string, //국어 표준점수
+    koreanPercentile?: string, // 국어 백분위
+    koreanGrade?: string, // 국어 등급
+    englishGrade?: string, // 영어 등급
+    mathOptionalSubject?: string, // 수학 선택과목
+    mathRawScore?: string, // 수학 원점수
+    mathStandardScore?: string, // 수학 표준점수
+    mathPercentile?: string, // 수학 백분위
+    mathGrade?: string, // 수학 등급
+    inquiry1OptionalSubject?: string,
+    inquiry1RawScore?: string,
+    inquiry1StandardScore?: string,
     inquiry1Percentile?: string,
     inquiry1Grade?: string,
-    mathPercentile?: string,
-    mathGrade?: string,
+    inquiry2OptionalSubject?: string,
+    inquiry2RawScore?: string,
+    inquiry2StandardScore?: string,
+    inquiry2Percentile?: string,
     inquiry2Grade?: string,
-    koreanPercentile?: string,
-    koreanGrade?: string,
+    historyGrade?: string,
+    naesinGrade?: string,
   ) {
-    this.koreanType = koreanType;
-    this.koreanStdScore = koreanStdScore;
+    this.koreanOptionalSubject = koreanOptionalSubject;
+    this.koreanRawScore = koreanRawScore;
+    this.koreanStandardScore = koreanStandardScore;
     this.koreanPercentile = koreanPercentile;
     this.koreanGrade = koreanGrade;
     this.englishGrade = englishGrade;
-    this.mathType = mathType;
-    this.mathStdScore = mathStdScore;
+    this.mathOptionalSubject = mathOptionalSubject;
+    this.mathRawScore = mathRawScore;
+    this.mathStandardScore = mathStandardScore;
     this.mathPercentile = mathPercentile;
     this.mathGrade = mathGrade;
-    this.inquiry1Type = inquiry1Type;
-    this.inquiry1StdScore = inquiry1StdScore;
+    this.inquiry1OptionalSubject = inquiry1OptionalSubject;
+    this.inquiry1RawScore = inquiry1RawScore;
+    this.inquiry1StandardScore = inquiry1StandardScore;
     this.inquiry1Percentile = inquiry1Percentile;
     this.inquiry1Grade = inquiry1Grade;
-    this.inquiry2Type = inquiry2Type;
-    this.inquiry2StdScore = inquiry2StdScore;
+    this.inquiry2OptionalSubject = inquiry2OptionalSubject;
+    this.inquiry2RawScore = inquiry2RawScore;
+    this.inquiry2StandardScore = inquiry2StandardScore;
     this.inquiry2Percentile = inquiry2Percentile;
     this.inquiry2Grade = inquiry2Grade;
     this.historyGrade = historyGrade;
     this.naesinGrade = naesinGrade;
   }
+
+  formatModelConfirmData = () => {
+    return {
+      korean_type: this.koreanOptionalSubject,
+      korean_std_score: Number(this.koreanStandardScore),
+      korean_percentile: Number(this.koreanPercentile),
+      korean_grade: Number(this.koreanGrade),
+      english_grade: Number(this.englishGrade),
+      math_type: this.mathOptionalSubject,
+      math_std_score: Number(this.mathStandardScore),
+      math_percentile: Number(this.mathPercentile),
+      math_grade: Number(this.mathGrade),
+      inquiry1_type: this.inquiry1OptionalSubject,
+      inquiry1_std_score: Number(this.inquiry1StandardScore),
+      inquiry1_percentile: Number(this.inquiry1Percentile),
+      inquiry1_grade: Number(this.inquiry1Grade),
+      inquiry2_type: this.inquiry2OptionalSubject,
+      inquiry2_std_score: Number(this.inquiry2StandardScore),
+      inquiry2_percentile: Number(this.inquiry2Percentile),
+      inquiry2_grade: Number(this.inquiry2Grade),
+      kor_history_grade: Number(this.historyGrade),
+      naesin_grade: this.naesinGrade === '' ? null : Number(this.naesinGrade),
+    };
+  };
+
+  formatModelData = data => {
+    return {
+      korean_type: data.koreanOptionalSubject,
+      korean_score: Number(data.koreanRawScore),
+      english_grade: Number(data.englishGrade),
+      math_type: data.mathOptionalSubject,
+      math_score: Number(data.mathRawScore),
+      inquiry1_type: data.inquiry1OptionalSubject.value,
+      inquiry1_score: Number(data.inquiry1RawScore),
+      inquiry2_type: data.inquiry2OptionalSubject.value,
+      inquiry2_score: Number(data.inquiry2RawScore),
+      kor_history_grade: Number(data.historyGrade),
+      naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
+    };
+  };
+  setModelData = data => {
+    this.koreanOptionalSubject = data.korean_type;
+    this.koreanRawScore = data.korean_score;
+    this.koreanStandardScore = data.korean_std_score;
+    this.koreanPercentile = data.korean_percentile;
+    this.koreanGrade = data.korean_grade;
+    this.englishGrade = data.english_grade;
+    this.mathOptionalSubject = data.math_type;
+    this.mathRawScore = data.math_score;
+    this.mathStandardScore = data.math_std_score;
+    this.mathPercentile = data.math_percentile;
+    this.mathGrade = data.math_grade;
+    this.inquiry1OptionalSubject = data.inquiry1_type;
+    this.inquiry1RawScore = data.inquiry1_score;
+    this.inquiry1StandardScore = data.inquiry1_std_score;
+    this.inquiry1Percentile = data.inquiry1_percentile;
+    this.inquiry1Grade = data.inquiry1_grade;
+    this.inquiry2OptionalSubject = data.inquiry2_type;
+    this.inquiry2RawScore = data.inquiry2_score;
+    this.inquiry2StandardScore = data.inquiry2_std_score;
+    this.inquiry2Percentile = data.inquiry2_percentile;
+    this.inquiry2Grade = data.inquiry2_grade;
+    this.historyGrade = data.kor_history_grade;
+    this.naesinGrade = data.naesin_grade;
+    return this;
+  };
+
+  // 선택과목 행 데이터 가져오기
+  getOptionalSubject = rowHeader => {
+    return {
+      rowHeader: rowHeader,
+      history: '-',
+      korean: this.koreanOptionalSubject,
+      math: this.mathOptionalSubject,
+      english: '-',
+      inquiry1: this.inquiry1OptionalSubject?.value,
+      inquiry2: this.inquiry2OptionalSubject?.value,
+    };
+  };
+  // 표준점수 행 데이터 가져오기
+  getStandardScore = rowHeader => {
+    return {
+      rowHeader: rowHeader,
+      history: '-',
+      korean: this.koreanStandardScore,
+      math: this.mathStandardScore,
+      english: '-',
+      inquiry1: this.inquiry1StandardScore,
+      inquiry2: this.inquiry2StandardScore,
+    };
+  };
+  // 백분위 행 데이터 가져오기
+  getPercentileScore = rowHeader => {
+    return {
+      rowHeader: rowHeader,
+      history: '-',
+      korean: this.koreanPercentile,
+      math: this.mathPercentile,
+      english: '-',
+      inquiry1: this.inquiry1Percentile,
+      inquiry2: this.inquiry2Percentile,
+    };
+  };
+  // 등급 행 데이터 가져오기
+  getGradeBySubject = rowHeader => {
+    return {
+      rowHeader: rowHeader,
+      history: this.historyGrade,
+      korean: this.koreanGrade,
+      math: this.mathGrade,
+      english: this.englishGrade,
+      inquiry1: this.inquiry1Grade,
+      inquiry2: this.inquiry2Grade,
+    };
+  };
 }
