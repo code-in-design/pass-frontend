@@ -5,7 +5,7 @@ import GradeInputForm from '../components/GradeInputForm/GradeInputForm';
 import PreliminaryGrades from '../components/PreliminaryGrades';
 import { useSetPreScoresMutation, useSetScoresMutation, useFetchScoresQuery } from '../apis/scoresApi';
 import { useRouter } from 'next/router';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTransformFetchAfterScore } from '../hooks/useTransformFetchAfterScore';
 import { useTransformFetchBeforeScore } from '../hooks/useTransformFetchBeforeScore';
 
@@ -14,7 +14,7 @@ const MyScoreContainer = () => {
   const [step, setStep] = useState(1);
   const [hasScoreData, setHasScoreData] = useState(false);
   const { register, setValue, handleSubmit, getValues, control, formState } = useForm();
-  let [tempData, setTempData] = useState();
+  const [tempData, setTempData] = useState();
   const [originalData, setOriginalData] = useState();
   let fetchResult;
   const selectValue = useWatch({
@@ -27,6 +27,7 @@ const MyScoreContainer = () => {
   //성적 불러오기
   // const { data } = useFetchPreScoresQuery();
   const { data } = useFetchScoresQuery();
+  const transData = useTransformFetchBeforeScore(data);
 
   const onClickPrevButton = () => {
     router.push('/');
@@ -52,8 +53,6 @@ const MyScoreContainer = () => {
     if (getValues('mathDropout')) {
       setValue('mathScore', 0);
     }
-    const transData = useTransformFetchBeforeScore(data);
-    console.log(transData);
     setTempData(transData);
     onClickNextButton();
   };
@@ -75,12 +74,11 @@ const MyScoreContainer = () => {
       setValue('inquiry2Percentile', 0);
       setValue('inquiry2Grade', 9);
     }
-    const transData = useTransformFetchBeforeScore(data);
     setTempData(transData);
     onClickNextButton();
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (data) {
       fetchResult = useTransformFetchAfterScore(JSON.parse(data));
       setTempData(fetchResult);

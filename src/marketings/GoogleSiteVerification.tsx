@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import React from 'react';
 
-type Props = {};
+// type Props = {};
 
-const GoogleSiteVerification = (props: Props) => {
+const GoogleSiteVerification = () => {
   return (
     <Head>
       <meta name="google-site-verification" content="xlmEn7JA1I2JrvTPW-eAK-pjSKdu37DdkPxC2DyZRjU" />
