@@ -3,7 +3,7 @@ import CheckMyScore from '../components/CheckMyScore';
 import FinalGrades from '../components/FinalGrades';
 import GradeInputForm from '../components/GradeInputForm/GradeInputForm';
 import PreliminaryGrades from '../components/PreliminaryGrades';
-import { useSetPreScoresMutation, useSetScoresMutation, useFetchScoresQuery } from '../apis/scoresApi';
+import { useSetPreScoresMutation, useSetScoresMutation, useFetchScoresQuery, useFetchPreScoresQuery } from '../apis/scoresApi';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTransformFetchAfterScore } from '../hooks/useTransformFetchAfterScore';
@@ -19,14 +19,14 @@ const MyScoreContainer = () => {
   let fetchResult;
   const selectValue = useWatch({
     control,
-    name: ['inquiry1Type', 'inquiry2Type'],
+    name: ['inquiry1Type', 'inquiry2Type', 'mathDropout'],
   });
   // 성적 입력하기
   const [setPreScores] = useSetPreScoresMutation();
   const [setScores] = useSetScoresMutation();
   //성적 불러오기
-  // const { data } = useFetchPreScoresQuery();
-  const { data } = useFetchScoresQuery();
+  const { data } = useFetchPreScoresQuery();
+  // const { data } = useFetchScoresQuery();
   const transData = useTransformFetchBeforeScore(data);
 
   const onClickPrevButton = () => {
@@ -78,28 +78,31 @@ const MyScoreContainer = () => {
     onClickNextButton();
   };
 
+  if (data) {
+    fetchResult = useTransformFetchAfterScore(JSON.parse(data));
+  }
+
   useEffect(() => {
     if (data) {
-      fetchResult = useTransformFetchAfterScore(JSON.parse(data));
       setTempData(fetchResult);
       setStep(2);
       setHasScoreData(true);
     }
   }, [data]);
-
+  console.log(formState.errors);
   return (
     <GradeInputForm title="성적 입력하기" subtitle="국어·수학·탐구 과목은 원점수를, 영어·한국사는 등급을 입력해주세요.">
       {/* 성적 확정 전 */}
-      {/* <form onSubmit={handleSubmit(onSubmitBeforeConfirmGrade)}>
-        {step === 1 && <PreliminaryGrades onClickPrevButton={onClickPrevButton} onClickNextButton={onClickNextButton} register={register} setValue={setValue} getValues={getValues} />}
-        {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} hasScoreData={hasScoreData} tempData={tempData} postScore={postScore} />}
-      </form> */}
-
-      {/* 성적 확정 후(수능 성적표 발표 후) */}
-      <form onSubmit={handleSubmit(onSubmitAfterConfirmGrade)}>
-        {step === 1 && <FinalGrades selectValue={selectValue} onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} getValues={getValues} />}
+      <form onSubmit={handleSubmit(onSubmitBeforeConfirmGrade)}>
+        {step === 1 && <PreliminaryGrades selectValue={selectValue} onClickPrevButton={onClickPrevButton} onClickNextButton={onClickNextButton} register={register} setValue={setValue} getValues={getValues} />}
         {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} hasScoreData={hasScoreData} tempData={tempData} postScore={postScore} />}
       </form>
+
+      {/* 성적 확정 후(수능 성적표 발표 후) */}
+      {/* <form onSubmit={handleSubmit(onSubmitAfterConfirmGrade)}>
+        {step === 1 && <FinalGrades selectValue={selectValue} onClickPrevButton={onClickPrevButton} register={register} setValue={setValue} getValues={getValues} />}
+        {step === 2 && <CheckMyScore onClickEditGrades={onClickEditGrades} hasScoreData={hasScoreData} tempData={tempData} postScore={postScore} />}
+      </form> */}
     </GradeInputForm>
   );
 };

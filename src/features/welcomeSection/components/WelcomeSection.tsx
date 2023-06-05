@@ -35,6 +35,9 @@ const WelcomeSection = (props: Props) => {
 };
 
 export default WelcomeSection;
+WelcomeSection.defaultProps = {
+  name: '지훈',
+};
 
 const Container = styled.div``;
 

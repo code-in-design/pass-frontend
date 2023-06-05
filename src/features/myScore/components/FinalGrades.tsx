@@ -13,7 +13,7 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
   onClickPrevButton: () => void;
-  selectValue: [any, any];
+  selectValue: [any, any, any];
 }
 
 const Korean = ['언어와 매체', '화법과 작문'];

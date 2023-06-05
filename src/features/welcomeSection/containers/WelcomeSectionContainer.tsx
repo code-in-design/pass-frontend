@@ -4,8 +4,11 @@ import { useFetchMeQuery } from '@/features/auth/apis/authApi';
 
 const WelcomeSectionContainer = () => {
   const { data } = useFetchMeQuery();
-  const result = JSON.parse(data);
-  return <WelcomeSection name={result.name} />;
+  let fetchDataName = '';
+  if (data) {
+    fetchDataName = JSON.parse(data).name;
+  }
+  return <WelcomeSection name={fetchDataName} />;
 };
 
 export default WelcomeSectionContainer;

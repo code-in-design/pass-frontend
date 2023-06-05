@@ -11,6 +11,7 @@ import MyTooltip from '@/components/Tooltip';
 interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
+  selectValue: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
@@ -53,12 +54,25 @@ const PreliminaryGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry1Score" min={0} max={50} width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점" />
+              <GradeScoreInput
+                selectValue={props.selectValue}
+                register={props.register}
+                setValue={props.setValue}
+                getValues={props.getValues}
+                name="inquiry1Score"
+                min={0}
+                max={50}
+                width="243px"
+                title="점수"
+                margintTop="12px"
+                wapperWidth="auto"
+                inputText="점"
+              />
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
+              <GradeScoreInput selectValue={props.selectValue} register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
             </SelectWrapper>
           </GradeInputFormItem>
         </Left>

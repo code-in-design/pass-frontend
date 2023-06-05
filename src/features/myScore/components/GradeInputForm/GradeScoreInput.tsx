@@ -20,23 +20,24 @@ interface Props {
   getValues: UseFormGetValues<FieldValues>;
   min: number;
   max: number;
-  selectValue?: [{ value: string; label: string }, { value: string; label: string }];
+  selectValue?: [{ value: string; label: string }, { value: string; label: string }, any];
   pattern?: RegExp;
 }
 
 const GradeScoreInput = (props: Props) => {
   // const pattern = /^[1-9](\.\d{1,2})?$/;
-  const unRequiredField = ['naesinGrade'];
+  let unRequiredField: any = [];
   const inquiry1Type = props.selectValue && props.selectValue[0]?.value;
   const inquiry2Type = props.selectValue && props.selectValue[1]?.value;
+  const mathDropout = props.selectValue && props.selectValue[2];
   if (inquiry1Type === '미응시') {
     unRequiredField.push('naesinGrade', 'inquiry1Score', 'inquiry1Percentile', 'inquiry1Grade');
   }
   if (inquiry2Type === '미응시') {
     unRequiredField.push('naesinGrade', 'inquiry2Score', 'inquiry2Percentile', 'inquiry2Grade');
   }
-  if (props.getValues('mathDropout')) {
-    unRequiredField.push('mathScore');
+  if (mathDropout) {
+    unRequiredField.push('naesinGrade', 'mathScore', 'mathType');
   }
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>

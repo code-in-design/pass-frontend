@@ -33,7 +33,7 @@ const Title = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 8px;
 `;
 

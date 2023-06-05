@@ -59,7 +59,7 @@ const Title = styled.div<{ marginTop: string }>`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-top: ${props => props.marginTop};
 `;
 
