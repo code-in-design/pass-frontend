@@ -7,6 +7,8 @@ interface Props {
   lists: Array<TableProps>;
   onClickEditGrades: () => void;
   hasScoreData: boolean;
+  tempData: any;
+  postScore: () => void;
 }
 
 interface TableProps {
@@ -26,7 +28,7 @@ const CheckMyScore = (props: Props) => {
       <GradeCard>
         <Title> 2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
-        <Table lists={props.lists} />
+        <Table lists={props.tempData} />
         <Information>
           <InfoIconWrapper>
             <InfoIcon />
@@ -37,7 +39,7 @@ const CheckMyScore = (props: Props) => {
       {!props.hasScoreData && (
         <Buttons>
           <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
-          <UniversityFinderModal />
+          <UniversityFinderModal postScore={props.postScore} />
         </Buttons>
       )}
     </Container>

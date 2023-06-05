@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   titleAlign?: string;
@@ -17,6 +17,7 @@ interface Props {
   name: string;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
   min: number;
   max: number;
   selectValue?: [{ value: string; label: string }, { value: string; label: string }];
@@ -33,6 +34,9 @@ const GradeScoreInput = (props: Props) => {
   }
   if (inquiry2Type === '미응시') {
     unRequiredField.push('naesinGrade', 'inquiry2Score', 'inquiry2Percentile', 'inquiry2Grade');
+  }
+  if (props.getValues('mathDropout')) {
+    unRequiredField.push('mathScore');
   }
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>

@@ -10,10 +10,14 @@ import emotionTheme from '../src/theme/theme';
 import 'code-in-design-system/dist/globals.css';
 import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
 import GoogleTagManager from '../src/marketings/GoogleTagManager';
+import NaverSiteVerification from '../src/marketings/NaverSiteVerification';
+import GoogleSiteVerification from '../src/marketings/GoogleSiteVerification';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <NaverSiteVerification />
+      <GoogleSiteVerification />
       <GoogleAnalytics />
       <GoogleTagManager />
       <Head>

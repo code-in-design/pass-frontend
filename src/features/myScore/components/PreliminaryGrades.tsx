@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Select from '@/components/Select';
-import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import Help from '../../../../public/images/icons/helpOutline.svg';
 import GradeInputFormItem from './GradeInputForm/GradeInputFormItem';
 import GradeScoreInput from './GradeInputForm/GradeScoreInput';
@@ -13,6 +13,7 @@ interface Props {
   inquiry2?: { value: string; label: string }[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
   onClickPrevButton: () => void;
   onClickNextButton: () => void;
 }
@@ -26,12 +27,12 @@ const PreliminaryGrades = (props: Props) => {
       <Wrapper>
         <Left>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={Korean}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} name="koreanScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
+            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
           </GradeInputFormItem>
 
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
             <FlexWrapper alignItems="flex-end">
-              <GradeScoreInput register={props.register} setValue={props.setValue} name="mathScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
+              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <CheckboxWrapper>
                   <Checkbox type="checkbox" id="mathDropout" {...props.register('mathDropout')} />
                   <Label htmlFor="mathDropout">수포자</Label>
@@ -52,29 +53,29 @@ const PreliminaryGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput register={props.register} setValue={props.setValue} name="inquiry1Score" min={0} max={50} width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점" />
+              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry1Score" min={0} max={50} width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점" />
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2Type" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput register={props.register} setValue={props.setValue} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
+              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
             </SelectWrapper>
           </GradeInputFormItem>
         </Left>
 
         <Right>
           <GradeInputFormItem title="영어" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} name="englishGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
+            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="englishGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
           </GradeInputFormItem>
 
           <GradeInputFormItem title="한국사" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} name="historyGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
+            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="historyGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
           </GradeInputFormItem>
 
           <GradeInputFormItem title="내신" marginTop="4px" register={props.register} setValue={props.setValue}>
             <FlexWrapper alignItems="flex-end">
               <SubTitle>전 과목 평균 등급</SubTitle>
-              <GradeScoreInput register={props.register} setValue={props.setValue} min={1.0} max={9.0} name="naesinGrade" width="224px" margintTop="44px" wapperWidth="auto" inputText="등급" />
+              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} min={1.0} max={9.0} name="naesinGrade" width="224px" margintTop="44px" wapperWidth="auto" inputText="등급" />
             </FlexWrapper>
             <Description>
               <Circle /> 내신 등급 입력은 선택입니다
@@ -104,14 +105,7 @@ const PreliminaryGrades = (props: Props) => {
           <Button type="button" onClick={props.onClickPrevButton}>
             이전
           </Button>
-          <Button
-            type="submit"
-            onClick={() => {
-              props.onClickNextButton();
-            }}
-          >
-            다음
-          </Button>
+          <Button type="submit">다음</Button>
         </Buttons>
       </Bottom>
     </>

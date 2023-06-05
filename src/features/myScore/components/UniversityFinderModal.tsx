@@ -7,24 +7,22 @@ import MyTooltip from '@/components/Tooltip';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { useRouter } from 'next/router';
 
-const UniversityFinderModal = () => {
+interface Props {
+  postScore: () => void;
+}
+
+const UniversityFinderModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const openModal = useCallback(() => {
+    props.postScore();
     setIsOpen(true);
   }, [isOpen]);
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, [isOpen]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      // 대학찾기 메인페이지로 이동시키기
-      // router.push("/")
-    }, 3000);
-  }, []);
 
   return (
     <>
