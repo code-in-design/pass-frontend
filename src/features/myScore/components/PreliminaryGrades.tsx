@@ -28,25 +28,28 @@ const PreliminaryGrades = (props: Props) => {
       <Wrapper>
         <Left>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
+            <GradeScoreInput title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
+              <ScoreInput {...props.register('koreanRawScore', { required: '국어점수를 입력해주세요.' })} />
+            </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={props.math}>
             <FlexWrapper alignItems="flex-end">
-              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
-                <CheckboxWrapper>
-                  <Checkbox type="checkbox" id="mathDropout" {...props.register('mathDropout')} />
-                  <Label htmlFor="mathDropout">수포자</Label>
-                  <HelpIcon data-tooltip-id="tooltip-mathDropout">
-                    <Help />
-                  </HelpIcon>
-                  <MyTooltip id="tooltip-mathDropout">
-                    <TooltipContainer>
-                      <TooltipText>수포자 체크시, 수학 영역은 모두 0점 처리되어 진행됩니다.</TooltipText>
-                    </TooltipContainer>
-                  </MyTooltip>
-                </CheckboxWrapper>
+              <GradeScoreInput title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
+                <ScoreInput {...props.register('mathRawScore', { required: '수학점수를 입력해주세요.' })} />
               </GradeScoreInput>
+              <CheckboxWrapper>
+                <Checkbox type="checkbox" id="mathDropout" {...props.register('mathDropout')} />
+                <Label htmlFor="mathDropout">수포자</Label>
+                <HelpIcon data-tooltip-id="tooltip-mathDropout">
+                  <Help />
+                </HelpIcon>
+                <MyTooltip id="tooltip-mathDropout">
+                  <TooltipContainer>
+                    <TooltipText>수포자 체크시, 수학 영역은 모두 0점 처리되어 진행됩니다.</TooltipText>
+                  </TooltipContainer>
+                </MyTooltip>
+              </CheckboxWrapper>
             </FlexWrapper>
           </GradeInputFormItem>
 
@@ -54,54 +57,39 @@ const PreliminaryGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput
-                unRequiredFields={props.unRequiredFields}
-                register={props.register}
-                setValue={props.setValue}
-                getValues={props.getValues}
-                name="inquiry1RawScore"
-                min={0}
-                max={50}
-                width="243px"
-                title="점수"
-                margintTop="12px"
-                wapperWidth="auto"
-                inputText="점"
-              />
+              <GradeScoreInput width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점">
+                <ScoreInput {...props.register('inquiry1RawScore', { required: '탐구 선택1의 점수를 입력해주세요.' })} />
+              </GradeScoreInput>
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput
-                unRequiredFields={props.unRequiredFields}
-                register={props.register}
-                setValue={props.setValue}
-                getValues={props.getValues}
-                name="inquiry2RawScore"
-                min={0}
-                max={50}
-                width="243px"
-                margintTop="8px"
-                wapperWidth="auto"
-                inputText="점"
-              />
+              <GradeScoreInput width="243px" margintTop="8px" wapperWidth="auto" inputText="점">
+                <ScoreInput {...props.register('inquiry2RawScore', { required: '탐구 선택2의 점수를 입력해주세요.' })} />
+              </GradeScoreInput>
             </SelectWrapper>
           </GradeInputFormItem>
         </Left>
 
         <Right>
           <GradeInputFormItem title="영어" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="englishGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
+            <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
+              <ScoreInput {...props.register('englishGrade', { required: '영어 등급을 입력해주세요.' })} />
+            </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem title="한국사" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
-            <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="historyGrade" min={1} max={9} width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급" />
+            <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
+              <ScoreInput {...props.register('historyGrade', { required: '한국사 등급을 입력해주세요.' })} />
+            </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem title="내신" marginTop="4px" register={props.register} setValue={props.setValue}>
             <FlexWrapper alignItems="flex-end">
               <SubTitle>전 과목 평균 등급</SubTitle>
-              <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} min={1.0} max={9.0} name="naesinGrade" width="224px" margintTop="44px" wapperWidth="auto" inputText="등급" />
+              <GradeScoreInput width="224px" margintTop="44px" wapperWidth="auto" inputText="등급">
+                <ScoreInput {...props.register('naesinGrade', { required: '내신 등급을 입력해주세요.' })} />
+              </GradeScoreInput>
             </FlexWrapper>
             <Description>
               <Circle /> 내신 등급 입력은 선택입니다
@@ -262,7 +250,8 @@ const SubjectTitle = styled.div`
 `;
 
 const CheckboxWrapper = styled.div`
-  margin-bottom: 8px;
+  width: 89px;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
 `;
@@ -278,6 +267,7 @@ const Label = styled.label`
   line-height: 24px;
   color: ${props => props.theme.colors.grayBlack};
   margin-right: 4px;
+  white-space: nowrap;
 `;
 
 const HelpIcon = styled.div`
@@ -355,4 +345,18 @@ const TooltipText = styled.div`
 const TooltipContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const ScoreInput = styled.input<{ placeholderAlign?: string }>`
+  text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
+  outline: none;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  width: 100%;
+  color: ${props => props.theme.colors.grayBlack};
+  ::placeholder {
+    color: ${props => props.theme.colors.gray3};
+    text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
+  }
 `;

@@ -20,7 +20,7 @@ const MyScoreContainer = () => {
     name: ['inquiry1OptionalSubject', 'inquiry2OptionalSubject', 'mathDropout'],
   });
   let tableData;
-  const isComfirmScore = true;
+  const isComfirmScore = false;
   // 성적 확정전, 성적 확정후 유저가 입력한게 있냐 없냐로(또는 서버데이터) step이 넘어간다.
 
   // 성적 입력하기
@@ -51,11 +51,12 @@ const MyScoreContainer = () => {
     setScores(scoreData);
   };
 
-  const onSubmitBeforeConfirmGrade = async data => {
+  const onSubmitBeforeConfirmGrade = data => {
     // TODO
     // 테이블형태로 데이터를 바꾸고 다음페이지로 넘어간다
-    const transData = fillTableData(data);
-    setScoreData(transData);
+    // const transData = fillTableData(data);
+    // setScoreData(transData);
+    tableData = scoreModel.getGradeCard(data);
     // onClickNextButton();
   };
 
@@ -68,14 +69,13 @@ const MyScoreContainer = () => {
   if (data) {
     tableData = fillTableData(data);
   }
-
-  // if (formState.errors) {
-  //   const firstKey = Object.keys(formState.errors)[0];
-  //   const firstValue = formState.errors[firstKey];
-  //   if (firstValue) {
-  //     alert(firstValue.message);
-  //   }
-  // }
+  if (formState.errors) {
+    const firstKey = Object.keys(formState.errors)[0];
+    const firstValue = formState.errors[firstKey];
+    if (firstValue) {
+      alert(firstValue?.message || '점수입력이 잘못되었습니다.');
+    }
+  }
   console.log(formState.errors);
 
   useEffect(() => {

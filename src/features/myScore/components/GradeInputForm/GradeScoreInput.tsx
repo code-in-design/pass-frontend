@@ -12,76 +12,48 @@ interface Props {
   children?: ReactNode;
   wapperWidth?: string;
   inputText?: string;
-  placeholder?: string;
-  placeholderAlign?: string;
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
-  getValues: UseFormGetValues<FieldValues>;
-  min: number;
-  max: number;
-  unRequiredFields?: [{ value: string; label: string }, { value: string; label: string }, any];
   pattern?: RegExp;
 }
 
 const GradeScoreInput = (props: Props) => {
-  const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
-  // TODO
-  const inquiry1Type = props.unRequiredFields && props.unRequiredFields[0]?.value;
-  const inquiry2Type = props.unRequiredFields && props.unRequiredFields[1]?.value;
-  const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
-  useEffect(() => {
-    const updatedUnRequiredField: string[] = ['naesinGrade'];
-    if (inquiry1Type === '미응시') {
-      updatedUnRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade', 'inquiry1RawScore');
-    }
-    if (inquiry2Type === '미응시') {
-      updatedUnRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade', 'inquiry2RawScore');
-    }
-    if (mathDropout) {
-      updatedUnRequiredField.push('mathRawScore');
-    }
-    setUnRequiredField(updatedUnRequiredField);
-  }, [inquiry1Type, inquiry2Type, mathDropout]);
+  // const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
+  // // TODO
+  // const inquiry1Type = props.unRequiredFields?.[0]?.value;
+  // const inquiry2Type = props.unRequiredFields?.[1]?.value;
+  // const mathDropout = props.unRequiredFields?.[2];
+  // useEffect(() => {
+  //   let updatedUnRequiredField: string[] = ['naesinGrade'];
+  //   if (inquiry1Type === '미응시') {
+  //     updatedUnRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade', 'inquiry1RawScore');
+  //   }
+  //   if (inquiry2Type === '미응시') {
+  //     updatedUnRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade', 'inquiry2RawScore');
+  //   }
+  //   if (mathDropout) {
+  //     updatedUnRequiredField.push('mathRawScore');
+  //     // props.setValue('mathRawScore', 0);
+  //   } else {
+  //     updatedUnRequiredField = updatedUnRequiredField.filter(field => field !== 'mathRawScore');
+  //   }
+  //   setUnRequiredField(updatedUnRequiredField);
+  // }, [inquiry1Type, inquiry2Type, mathDropout]);
 
-  const checkPattern = e => {
-    if (props.pattern?.test(e.target.value) || e.target.value === '') {
-      props.setValue(props.name, e.target.value);
-    } else {
-      const value = e.target.value;
-      const result = value.substr(0, 4);
-      e.target.value = result;
-      props.setValue(props.name, e.target.value);
-    }
-  };
+  // const checkPattern = e => {
+  //   const value = e.target.value;
+  //   const result = value.substr(0, 4);
+  //   e.target.value = result;
+  //   // props.setValue(props.name, e.target.value);
+  // };
 
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
       <InputChildren>
         <InputWrapper width={props.width}>
-          <ScoreInput
-            {...props.register(props.name, {
-              required: !unRequiredField.includes(props.name) ? `${props.name}의 점수를 입력해주세요` : false,
-              disabled: !unRequiredField.includes(props.name) ? false : true,
-              // validate: {
-              //   lessThanHundred: v => parseInt(v) <= 100,
-              //   lessThanFifty: v => parseInt(v) <= 50,
-              //   grade: v => 1 <= v && v <= 9,
-              // },
-              onChange: e => {
-                checkPattern(e);
-              },
-              min: props.min,
-              max: props.max,
-              pattern: props.pattern,
-            })}
-            placeholder={props.placeholder && props.placeholder}
-            placeholderAlign={props.placeholderAlign}
-          />
+          {props.children}
           {props.inputText && <InputText>{props.inputText && props.inputText}</InputText>}
         </InputWrapper>
-        {props.children}
+        {/* {props.children} */}
       </InputChildren>
     </ScoreWrapper>
   );
@@ -117,20 +89,6 @@ const InputWrapper = styled.div<{ width: string }>`
   display: flex;
   align-items: center;
   gap: 0 8px;
-`;
-
-const ScoreInput = styled.input<{ placeholderAlign?: string }>`
-  text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
-  outline: none;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  width: 100%;
-  color: ${props => props.theme.colors.grayBlack};
-  ::placeholder {
-    color: ${props => props.theme.colors.gray3};
-    text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
-  }
 `;
 
 const InputText = styled.div`
