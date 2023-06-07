@@ -3,6 +3,9 @@ import InfoIcon from '../../../../public/images/icons/info.svg';
 import UniversityFinderModal from './UniversityFinderModal';
 import Table from '@/components/Table';
 
+// TODO
+export interface ScoreData {}
+
 interface Props {
   lists: Array<TableProps>;
   onClickEditGrades: () => void;

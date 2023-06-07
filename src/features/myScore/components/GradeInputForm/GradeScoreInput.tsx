@@ -26,6 +26,7 @@ interface Props {
 
 const GradeScoreInput = (props: Props) => {
   const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
+  // TODO
   const inquiry1Type = props.unRequiredFields && props.unRequiredFields[0]?.value;
   const inquiry2Type = props.unRequiredFields && props.unRequiredFields[1]?.value;
   const mathDropout = props.unRequiredFields && props.unRequiredFields[2];

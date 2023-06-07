@@ -12,6 +12,7 @@ interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
   unRequiredFields?: [any, any, any];
+  // TODO
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
@@ -19,6 +20,7 @@ interface Props {
   onClickNextButton: () => void;
 }
 
+// TODO
 const Korean = ['언어와 매체', '화법과 작문'];
 const Math = ['확률과 통계', '미적분', '기하'];
 
