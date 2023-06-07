@@ -24,20 +24,29 @@ interface Props {
   pattern?: RegExp;
 }
 
+// 컴포넌트가 역할
 const GradeScoreInput = (props: Props) => {
   const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
   // TODO
   const inquiry1Type = props.unRequiredFields && props.unRequiredFields[0]?.value;
   const inquiry2Type = props.unRequiredFields && props.unRequiredFields[1]?.value;
   const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
+
+  // 수포자, 탐구 미응시인경우
   useEffect(() => {
     const updatedUnRequiredField: string[] = ['naesinGrade'];
+
+    // inquiry 질문, 탐구
     if (inquiry1Type === '미응시') {
       updatedUnRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade', 'inquiry1RawScore');
     }
+
+    // inquiry 질문, 탐구
     if (inquiry2Type === '미응시') {
       updatedUnRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade', 'inquiry2RawScore');
     }
+
+    // 수포자
     if (mathDropout) {
       updatedUnRequiredField.push('mathRawScore');
     }
@@ -60,7 +69,7 @@ const GradeScoreInput = (props: Props) => {
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
       <InputChildren>
         <InputWrapper width={props.width}>
-          <ScoreInput
+          {/* <ScoreInput
             {...props.register(props.name, {
               required: !unRequiredField.includes(props.name) ? `${props.name}의 점수를 입력해주세요` : false,
               disabled: !unRequiredField.includes(props.name) ? false : true,
@@ -78,7 +87,8 @@ const GradeScoreInput = (props: Props) => {
             })}
             placeholder={props.placeholder && props.placeholder}
             placeholderAlign={props.placeholderAlign}
-          />
+          /> */}
+          {props.children}
           {props.inputText && <InputText>{props.inputText && props.inputText}</InputText>}
         </InputWrapper>
         {props.children}
