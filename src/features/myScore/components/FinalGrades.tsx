@@ -9,22 +9,21 @@ import InfoIcon from '../../../../public/images/icons/info.svg';
 interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
+  korean?: Array<string>;
+  math?: Array<string>;
+  unRequiredFields: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
   onClickPrevButton: () => void;
-  unRequiredFields: [any, any, any];
 }
-
-const Korean = ['언어와 매체', '화법과 작문'];
-const Math = ['확률과 통계', '미적분', '기하'];
 
 const FinalGrades = (props: Props) => {
   return (
     <>
       <Wrapper>
         <Left>
-          <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={Korean}>
+          <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
             <GradeScoreInputWrapper>
               <GradeScoreInput
                 register={props.register}
@@ -71,7 +70,7 @@ const FinalGrades = (props: Props) => {
             </GradeScoreInputWrapper>
           </GradeInputFormItem>
 
-          <GradeInputFormItem register={props.register} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
+          <GradeInputFormItem register={props.register} setValue={props.setValue} title="수학" isRequire={true} isChoice={props.math}>
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInputWrapper>
                 <GradeScoreInput
@@ -327,6 +326,9 @@ FinalGrades.defaultProps = {
     { value: '생명과학ⅠⅠ', label: '생명과학ⅠⅠ' },
     { value: '지구과학ⅠⅠ', label: '지구과학ⅠⅠ' },
   ],
+
+  korean: ['언어와 매체', '화법과 작문'],
+  math: ['확률과 통계', '미적분', '기하'],
 };
 
 const Form = styled.form``;

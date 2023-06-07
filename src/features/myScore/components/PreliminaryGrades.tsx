@@ -11,6 +11,8 @@ import MyTooltip from '@/components/Tooltip';
 interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
+  korean?: Array<string>;
+  math?: Array<string>;
   unRequiredFields?: [any, any, any];
   // TODO
   register: UseFormRegister<FieldValues>;
@@ -20,20 +22,16 @@ interface Props {
   onClickNextButton: () => void;
 }
 
-// TODO
-const Korean = ['언어와 매체', '화법과 작문'];
-const Math = ['확률과 통계', '미적분', '기하'];
-
 const PreliminaryGrades = (props: Props) => {
   return (
     <>
       <Wrapper>
         <Left>
-          <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={Korean}>
+          <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
             <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
           </GradeInputFormItem>
 
-          <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
+          <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={props.math}>
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <CheckboxWrapper>
@@ -183,6 +181,8 @@ PreliminaryGrades.defaultProps = {
     { value: '생명과학ⅠⅠ', label: '생명과학ⅠⅠ' },
     { value: '지구과학ⅠⅠ', label: '지구과학ⅠⅠ' },
   ],
+  korean: ['언어와 매체', '화법과 작문'],
+  math: ['확률과 통계', '미적분', '기하'],
 };
 
 const Wrapper = styled.div`

@@ -40,12 +40,16 @@ const ChoiceItems = (props: ItemProps) => {
 };
 
 const SubjectSelection = (props: Props) => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(props?.isChoice[0]);
 
   const handleItemClick = item => {
     setSelectedItem(item);
     props.setValue(props.type, item);
   };
+
+  useEffect(() => {
+    props.setValue(props.type, props?.isChoice[0]);
+  }, []);
 
   return (
     <Choice>

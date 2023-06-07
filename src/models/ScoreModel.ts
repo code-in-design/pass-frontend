@@ -1,4 +1,4 @@
-export class ScoresModel {
+export class ScoreModel {
   koreanOptionalSubject?: string; //국어 선택과목
   koreanRawScore?: string; //국어 원점수
   koreanStandardScore?: string; //국어 표준점수
@@ -22,31 +22,30 @@ export class ScoresModel {
   inquiry2Grade?: string;
   historyGrade?: string;
   naesinGrade?: string;
-  constructor(data?: Partial<ScoresModel>) {
-    // TODO
+  constructor(data?: Partial<ScoreModel>) {
     this.koreanOptionalSubject = data?.koreanOptionalSubject;
-    // this.koreanRawScore = koreanRawScore;
-    // this.koreanStandardScore = koreanStandardScore;
-    // this.koreanPercentile = koreanPercentile;
-    // this.koreanGrade = koreanGrade;
-    // this.englishGrade = englishGrade;
-    // this.mathOptionalSubject = mathOptionalSubject;
-    // this.mathRawScore = mathRawScore;
-    // this.mathStandardScore = mathStandardScore;
-    // this.mathPercentile = mathPercentile;
-    // this.mathGrade = mathGrade;
-    // this.inquiry1OptionalSubject = inquiry1OptionalSubject;
-    // this.inquiry1RawScore = inquiry1RawScore;
-    // this.inquiry1StandardScore = inquiry1StandardScore;
-    // this.inquiry1Percentile = inquiry1Percentile;
-    // this.inquiry1Grade = inquiry1Grade;
-    // this.inquiry2OptionalSubject = inquiry2OptionalSubject;
-    // this.inquiry2RawScore = inquiry2RawScore;
-    // this.inquiry2StandardScore = inquiry2StandardScore;
-    // this.inquiry2Percentile = inquiry2Percentile;
-    // this.inquiry2Grade = inquiry2Grade;
-    // this.historyGrade = historyGrade;
-    // this.naesinGrade = naesinGrade;
+    this.koreanRawScore = data?.koreanRawScore;
+    this.koreanStandardScore = data?.koreanStandardScore;
+    this.koreanPercentile = data?.koreanPercentile;
+    this.koreanGrade = data?.koreanGrade;
+    this.englishGrade = data?.englishGrade;
+    this.mathOptionalSubject = data?.mathOptionalSubject;
+    this.mathRawScore = data?.mathRawScore;
+    this.mathStandardScore = data?.mathStandardScore;
+    this.mathPercentile = data?.mathPercentile;
+    this.mathGrade = data?.mathGrade;
+    this.inquiry1OptionalSubject = data?.inquiry1OptionalSubject;
+    this.inquiry1RawScore = data?.inquiry1RawScore;
+    this.inquiry1StandardScore = data?.inquiry1StandardScore;
+    this.inquiry1Percentile = data?.inquiry1Percentile;
+    this.inquiry1Grade = data?.inquiry1Grade;
+    this.inquiry2OptionalSubject = data?.inquiry2OptionalSubject;
+    this.inquiry2RawScore = data?.inquiry2RawScore;
+    this.inquiry2StandardScore = data?.inquiry2StandardScore;
+    this.inquiry2Percentile = data?.inquiry2Percentile;
+    this.inquiry2Grade = data?.inquiry2Grade;
+    this.historyGrade = data?.historyGrade;
+    this.naesinGrade = data?.naesinGrade;
   }
 
   formatModelConfirmData = data => {
@@ -116,8 +115,8 @@ export class ScoresModel {
     };
   };
 
-  // TODO: 이름 바꾸기 (성적표를 가져온다)
-  getOOO = (score: ScoresModel) => {
+  //성적표를 가져온다
+  getGradeCard = (score: ScoreModel) => {
     return [score.getOptionalSubject('선택과목'), score.getStandardScore('표준점수'), score.getPercentileScore('백분위'), score.getGradeBySubject('등급')];
   };
 

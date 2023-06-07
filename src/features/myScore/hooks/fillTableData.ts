@@ -1,8 +1,8 @@
-import { ScoresModel } from '@/models/ScoresModel';
+import { ScoreModel } from '@/models/ScoreModel';
 
 export const fillTableData = data => {
   let fetchResult: any = [];
-  const scoresModel = new ScoresModel({});
+  const scoresModel = new ScoreModel({});
   // TODO
   // scoresModel.englishGrade = data?.englishGrade;
   // scoresModel.historyGrade = data?.historyGrade;

@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
 import { urls } from '@/constants/url';
-import { ScoresModel } from '@/models/ScoresModel';
+import { ScoreModel } from '@/models/ScoreModel';
 
-const scoresModel = new ScoresModel();
+const scoreModel = new ScoreModel();
 
 export const scoresApi = createApi({
   reducerPath: 'score',
@@ -25,8 +25,9 @@ export const scoresApi = createApi({
         }
         if (!data.mathOptionalSubject) {
           data.mathOptionalSubject = '';
+          data.mathStandardScore = 0;
         }
-        const bodyData = scoresModel.formatModelData(data);
+        const bodyData = scoreModel.formatModelData(data);
         return {
           url: `/pre-scores`,
           method: 'POST',
@@ -40,7 +41,7 @@ export const scoresApi = createApi({
       transformResponse: (res: any) => {
         try {
           const data = JSON.parse(res);
-          const transData = scoresModel.setModelData(data);
+          const transData = scoreModel.setModelData(data);
           return transData;
         } catch {}
       },
@@ -59,7 +60,7 @@ export const scoresApi = createApi({
           data.inquiry2Percentile = 0;
           data.inquiry2Grade = 9;
         }
-        const bodyData = scoresModel.formatModelConfirmData(data);
+        const bodyData = scoreModel.formatModelConfirmData(data);
         return {
           url: `/scores`,
           method: 'POST',
@@ -73,7 +74,7 @@ export const scoresApi = createApi({
       transformResponse: (res: any) => {
         try {
           const data = JSON.parse(res);
-          const transData = scoresModel.setModelData(data);
+          const transData = scoreModel.setModelData(data);
           return transData;
         } catch {}
       },
