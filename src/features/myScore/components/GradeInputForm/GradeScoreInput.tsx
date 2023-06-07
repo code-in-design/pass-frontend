@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
@@ -20,25 +20,31 @@ interface Props {
   getValues: UseFormGetValues<FieldValues>;
   min: number;
   max: number;
-  selectValue?: [{ value: string; label: string }, { value: string; label: string }, any];
+  unRequiredFields?: [{ value: string; label: string }, { value: string; label: string }, any];
   pattern?: RegExp;
 }
 
 const GradeScoreInput = (props: Props) => {
-  // const pattern = /^[1-9](\.\d{1,2})?$/;
-  let unRequiredField: string[] = ['naesinGrade'];
-  const inquiry1Type = props.selectValue && props.selectValue[0]?.value;
-  const inquiry2Type = props.selectValue && props.selectValue[1]?.value;
-  const mathDropout = props.selectValue && props.selectValue[2];
-  if (inquiry1Type === '미응시') {
-    unRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade');
-  }
-  if (inquiry2Type === '미응시') {
-    unRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade');
-  }
-  if (mathDropout) {
-    unRequiredField.push('mathRawScore', 'mathOptionalSubject');
-  }
+  const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
+  const inquiry1Type = props.unRequiredFields && props.unRequiredFields[0]?.value;
+  const inquiry2Type = props.unRequiredFields && props.unRequiredFields[1]?.value;
+  const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
+
+  useEffect(() => {
+    const updatedUnRequiredField: string[] = ['naesinGrade'];
+    if (inquiry1Type === '미응시') {
+      updatedUnRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade', 'inquiry1RawScore');
+    }
+    if (inquiry2Type === '미응시') {
+      updatedUnRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade', 'inquiry2RawScore');
+    }
+    if (mathDropout) {
+      updatedUnRequiredField.push('mathRawScore');
+      props.setValue('mathRawScore', 0);
+    }
+    setUnRequiredField(updatedUnRequiredField);
+  }, [inquiry1Type, inquiry2Type, mathDropout]);
+
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
@@ -46,7 +52,7 @@ const GradeScoreInput = (props: Props) => {
         <InputWrapper width={props.width}>
           <ScoreInput
             {...props.register(props.name, {
-              required: unRequiredField.includes(props.name) ? false : `${props.name}의 점수를 입력해주세요`,
+              required: !unRequiredField.includes(props.name) ? `${props.name}의 점수를 입력해주세요` : false,
               onChange: e => {
                 if (props.pattern?.test(e.target.value) || e.target.value === '') {
                   props.setValue(props.name, e.target.value);

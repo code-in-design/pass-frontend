@@ -37,8 +37,8 @@ const Table = (props: Props) => {
               <TableTd>{list.korean ? list.korean : '-'}</TableTd>
               <TableTd>{list.math ? list.math : '-'}</TableTd>
               <TableTd>{list.english ? list.english : '-'}</TableTd>
-              <TableTd>{list.inquiry1 !== undefined ? list.inquiry1 : '-'}</TableTd>
-              <TableTd>{list.inquiry2 !== undefined ? list.inquiry2 : '-'}</TableTd>
+              <TableTd>{list.inquiry1 ? list.inquiry1 : '-'}</TableTd>
+              <TableTd>{list.inquiry2 ? list.inquiry2 : '-'}</TableTd>
             </GradeTableTBodyTr>
           );
         })}

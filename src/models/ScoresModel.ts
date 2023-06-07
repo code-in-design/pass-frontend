@@ -72,27 +72,27 @@ export class ScoresModel {
     this.naesinGrade = naesinGrade;
   }
 
-  formatModelConfirmData = () => {
+  formatModelConfirmData = data => {
     return {
-      korean_type: this.koreanOptionalSubject,
-      korean_std_score: Number(this.koreanStandardScore),
-      korean_percentile: Number(this.koreanPercentile),
-      korean_grade: Number(this.koreanGrade),
-      english_grade: Number(this.englishGrade),
-      math_type: this.mathOptionalSubject,
-      math_std_score: Number(this.mathStandardScore),
-      math_percentile: Number(this.mathPercentile),
-      math_grade: Number(this.mathGrade),
-      inquiry1_type: this.inquiry1OptionalSubject,
-      inquiry1_std_score: Number(this.inquiry1StandardScore),
-      inquiry1_percentile: Number(this.inquiry1Percentile),
-      inquiry1_grade: Number(this.inquiry1Grade),
-      inquiry2_type: this.inquiry2OptionalSubject,
-      inquiry2_std_score: Number(this.inquiry2StandardScore),
-      inquiry2_percentile: Number(this.inquiry2Percentile),
-      inquiry2_grade: Number(this.inquiry2Grade),
-      kor_history_grade: Number(this.historyGrade),
-      naesin_grade: this.naesinGrade === '' ? null : Number(this.naesinGrade),
+      korean_type: data.koreanOptionalSubject,
+      korean_std_score: Number(data.koreanStandardScore),
+      korean_percentile: Number(data.koreanPercentile),
+      korean_grade: Number(data.koreanGrade),
+      english_grade: Number(data.englishGrade),
+      math_type: data.mathOptionalSubject,
+      math_std_score: Number(data.mathStandardScore),
+      math_percentile: Number(data.mathPercentile),
+      math_grade: Number(data.mathGrade),
+      inquiry1_type: data.inquiry1OptionalSubject.value,
+      inquiry1_std_score: Number(data.inquiry1StandardScore),
+      inquiry1_percentile: Number(data.inquiry1Percentile),
+      inquiry1_grade: Number(data.inquiry1Grade),
+      inquiry2_type: data.inquiry2OptionalSubject.value,
+      inquiry2_std_score: Number(data.inquiry2StandardScore),
+      inquiry2_percentile: Number(data.inquiry2Percentile),
+      inquiry2_grade: Number(data.inquiry2Grade),
+      kor_history_grade: Number(data.historyGrade),
+      naesin_grade: data.naesinGrade === '' ? null : Number(data.naesinGrade),
     };
   };
 
@@ -112,30 +112,31 @@ export class ScoresModel {
     };
   };
   setModelData = data => {
-    this.koreanOptionalSubject = data.korean_type;
-    this.koreanRawScore = data.korean_score;
-    this.koreanStandardScore = data.korean_std_score;
-    this.koreanPercentile = data.korean_percentile;
-    this.koreanGrade = data.korean_grade;
-    this.englishGrade = data.english_grade;
-    this.mathOptionalSubject = data.math_type;
-    this.mathRawScore = data.math_score;
-    this.mathStandardScore = data.math_std_score;
-    this.mathPercentile = data.math_percentile;
-    this.mathGrade = data.math_grade;
-    this.inquiry1OptionalSubject = data.inquiry1_type;
-    this.inquiry1RawScore = data.inquiry1_score;
-    this.inquiry1StandardScore = data.inquiry1_std_score;
-    this.inquiry1Percentile = data.inquiry1_percentile;
-    this.inquiry1Grade = data.inquiry1_grade;
-    this.inquiry2OptionalSubject = data.inquiry2_type;
-    this.inquiry2RawScore = data.inquiry2_score;
-    this.inquiry2StandardScore = data.inquiry2_std_score;
-    this.inquiry2Percentile = data.inquiry2_percentile;
-    this.inquiry2Grade = data.inquiry2_grade;
-    this.historyGrade = data.kor_history_grade;
-    this.naesinGrade = data.naesin_grade;
-    return this;
+    return {
+      koreanOptionalSubject: data.korean_type,
+      koreanRawScore: data.korean_score,
+      koreanStandardScore: data.korean_std_score,
+      koreanPercentile: data.korean_percentile,
+      koreanGrade: data.korean_grade,
+      englishGrade: data.english_grade,
+      mathOptionalSubject: data.math_type,
+      mathRawScore: data.math_score,
+      mathStandardScore: data.math_std_score,
+      mathPercentile: data.math_percentile,
+      mathGrade: data.math_grade,
+      inquiry1OptionalSubject: data.inquiry1_type,
+      inquiry1RawScore: data.inquiry1_score,
+      inquiry1StandardScore: data.inquiry1_std_score,
+      inquiry1Percentile: data.inquiry1_percentile,
+      inquiry1Grade: data.inquiry1_grade,
+      inquiry2OptionalSubject: data.inquiry2_type,
+      inquiry2RawScore: data.inquiry2_score,
+      inquiry2StandardScore: data.inquiry2_std_score,
+      inquiry2Percentile: data.inquiry2_percentile,
+      inquiry2Grade: data.inquiry2_grade,
+      historyGrade: data.kor_history_grade,
+      naesinGrade: data.naesin_grade,
+    };
   };
 
   // 선택과목 행 데이터 가져오기
@@ -146,8 +147,8 @@ export class ScoresModel {
       korean: this.koreanOptionalSubject,
       math: this.mathOptionalSubject,
       english: '-',
-      inquiry1: this.inquiry1OptionalSubject?.value,
-      inquiry2: this.inquiry2OptionalSubject?.value,
+      inquiry1: this.inquiry1OptionalSubject,
+      inquiry2: this.inquiry2OptionalSubject,
     };
   };
   // 표준점수 행 데이터 가져오기

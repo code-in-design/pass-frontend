@@ -11,7 +11,7 @@ import MyTooltip from '@/components/Tooltip';
 interface Props {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
-  selectValue: [any, any, any];
+  unRequiredFields?: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
@@ -31,7 +31,7 @@ const PreliminaryGrades = (props: Props) => {
             <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="koreanRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점" />
           </GradeInputFormItem>
 
-          <GradeInputFormItem register={props.register} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
+          <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={Math}>
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInput register={props.register} setValue={props.setValue} getValues={props.getValues} name="mathRawScore" min={0} max={100} title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <CheckboxWrapper>
@@ -55,7 +55,7 @@ const PreliminaryGrades = (props: Props) => {
               <SubjectTitle>선택 1</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               <GradeScoreInput
-                selectValue={props.selectValue}
+                unRequiredFields={props.unRequiredFields}
                 register={props.register}
                 setValue={props.setValue}
                 getValues={props.getValues}
@@ -72,7 +72,19 @@ const PreliminaryGrades = (props: Props) => {
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
-              <GradeScoreInput selectValue={props.selectValue} register={props.register} setValue={props.setValue} getValues={props.getValues} name="inquiry2Score" min={0} max={50} width="243px" margintTop="8px" wapperWidth="auto" inputText="점" />
+              <GradeScoreInput
+                unRequiredFields={props.unRequiredFields}
+                register={props.register}
+                setValue={props.setValue}
+                getValues={props.getValues}
+                name="inquiry2RawScore"
+                min={0}
+                max={50}
+                width="243px"
+                margintTop="8px"
+                wapperWidth="auto"
+                inputText="점"
+              />
             </SelectWrapper>
           </GradeInputFormItem>
         </Left>

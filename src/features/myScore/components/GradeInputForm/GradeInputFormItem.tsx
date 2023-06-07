@@ -11,6 +11,7 @@ interface Props {
   marginTop?;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  unRequiredFields?: [any, any, any];
 }
 
 const GradeInputFormItem = (props: Props) => {
@@ -28,7 +29,7 @@ const GradeInputFormItem = (props: Props) => {
           {props.title}
           {props.isRequire && <Require>*</Require>}
         </Title>
-        {props.isChoice && <SubjectSelection type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} />}
+        {props.isChoice && <SubjectSelection unRequiredFields={props.unRequiredFields} type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} />}
       </TitleWrapper>
       {props.children}
     </Container>

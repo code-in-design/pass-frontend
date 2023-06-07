@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   isChoice: string[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  unRequiredFields?: [any, any, any];
 }
 interface ItemProps {
   selected: boolean;
@@ -15,17 +16,26 @@ interface ItemProps {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   handleClick: () => void;
+  unRequiredFields?: [any, any, any];
 }
 
 const ChoiceItems = (props: ItemProps) => {
-  return props.selected ? (
-    <ChoiceItemSelect {...props.register(props.type, { required: '국어,수학과목의 타입을 선택해주세요.' })} onClick={props.handleClick}>
+  const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
+  const Component = props.selected ? ChoiceItemSelect : ChoiceItem;
+  const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
+
+  useEffect(() => {
+    const updatedUnRequiredField: string[] = ['naesinGrade'];
+    if (mathDropout) {
+      updatedUnRequiredField.push('mathOptionalSubject');
+    }
+    setUnRequiredField(updatedUnRequiredField);
+  }, [mathDropout]);
+
+  return (
+    <Component {...props.register(props.type, { required: !unRequiredField.includes(props.type) ? `선택과목을 선택해주세요.` : false })} onClick={props.handleClick}>
       {props.text}
-    </ChoiceItemSelect>
-  ) : (
-    <ChoiceItem {...props.register(props.type, { required: '국어,수학과목의 타입을 선택해주세요.' })} onClick={props.handleClick}>
-      {props.text}
-    </ChoiceItem>
+    </Component>
   );
 };
 
@@ -42,7 +52,7 @@ const SubjectSelection = (props: Props) => {
       <ChoiceTitle>선택</ChoiceTitle>
       <ChoiceContainer>
         {props.isChoice.map((item, index) => (
-          <ChoiceItems type={props.type} text={item} key={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} register={props.register} setValue={props.setValue} />
+          <ChoiceItems unRequiredFields={props.unRequiredFields} type={props.type} text={item} key={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} register={props.register} setValue={props.setValue} />
         ))}
       </ChoiceContainer>
     </Choice>

@@ -23,6 +23,9 @@ export const scoresApi = createApi({
         if (data.inquiry2OptionalSubject.value === '미응시') {
           data.inquiry2RawScore = 0;
         }
+        if (!data.mathOptionalSubject) {
+          data.mathOptionalSubject = '';
+        }
         const bodyData = scoresModel.formatModelData(data);
         return {
           url: `/pre-scores`,
@@ -35,9 +38,11 @@ export const scoresApi = createApi({
     fetchPreScores: builder.query<any, void>({
       query: () => '/pre-scores/me',
       transformResponse: (res: any) => {
-        const data = JSON.parse(res);
-        const transData = scoresModel.setModelData(data);
-        return transData;
+        try {
+          const data = JSON.parse(res);
+          const transData = scoresModel.setModelData(data);
+          return transData;
+        } catch {}
       },
     }),
 
@@ -54,7 +59,7 @@ export const scoresApi = createApi({
           data.inquiry2Percentile = 0;
           data.inquiry2Grade = 9;
         }
-        const bodyData = scoresModel.formatModelConfirmData();
+        const bodyData = scoresModel.formatModelConfirmData(data);
         return {
           url: `/scores`,
           method: 'POST',
@@ -66,9 +71,11 @@ export const scoresApi = createApi({
     fetchScores: builder.query<any, void>({
       query: () => '/scores/me',
       transformResponse: (res: any) => {
-        const data = JSON.parse(res);
-        const transData = scoresModel.setModelData(data);
-        return transData;
+        try {
+          const data = JSON.parse(res);
+          const transData = scoresModel.setModelData(data);
+          return transData;
+        } catch {}
       },
     }),
   }),

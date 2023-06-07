@@ -13,7 +13,7 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
   onClickPrevButton: () => void;
-  selectValue: [any, any, any];
+  unRequiredFields: [any, any, any];
 }
 
 const Korean = ['언어와 매체', '화법과 작문'];
@@ -128,7 +128,7 @@ const FinalGrades = (props: Props) => {
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
@@ -143,7 +143,7 @@ const FinalGrades = (props: Props) => {
                   titleAlign="center"
                 />
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
@@ -158,7 +158,7 @@ const FinalGrades = (props: Props) => {
                   titleAlign="center"
                 />
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
@@ -181,7 +181,7 @@ const FinalGrades = (props: Props) => {
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   getValues={props.getValues}
                   setValue={props.setValue}
@@ -194,7 +194,7 @@ const FinalGrades = (props: Props) => {
                   placeholderAlign="center"
                 />
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
@@ -207,7 +207,7 @@ const FinalGrades = (props: Props) => {
                   placeholderAlign="center"
                 />
                 <GradeScoreInput
-                  selectValue={props.selectValue}
+                  unRequiredFields={props.unRequiredFields}
                   register={props.register}
                   setValue={props.setValue}
                   getValues={props.getValues}
