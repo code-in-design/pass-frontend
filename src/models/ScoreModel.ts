@@ -116,7 +116,7 @@ export class ScoreModel {
   };
 
   //성적표를 가져온다
-  getGradeCard = (score: ScoreModel) => {
+  getGrades = (score: ScoreModel) => {
     return [score.getOptionalSubject('선택과목'), score.getStandardScore('표준점수'), score.getPercentileScore('백분위'), score.getGradeBySubject('등급')];
   };
 

@@ -14,14 +14,14 @@ export interface ScoreData {
   inquiry2: string;
 }
 
-interface Props {
+export interface TableGradeCardProps {
   onClickEditGrades: () => void;
   scoreData: any;
   isScoreEntered: boolean;
   postScore: () => void;
 }
 
-const TableGradeCard = (props: Props) => {
+const TableGradeCard = (props: TableGradeCardProps) => {
   return (
     <Container>
       <GradeCard>
