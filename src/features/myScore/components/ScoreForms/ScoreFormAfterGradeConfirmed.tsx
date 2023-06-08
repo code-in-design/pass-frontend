@@ -7,7 +7,7 @@ import GradeScoreInput from '../GradeInputForm/GradeScoreInput';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
 import { Bottom, Button, Buttons, Circle, Description, FlexWrapper, InfoIconWrapper, InfoText, Information, Informations, Left, Right, ScoreInput, SelectWrapper, SubTitle, SubjectTitle, Wrapper } from './index.styles';
 
-interface Props {
+export interface ScoreFormAfterGradeConfirmedProps {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
   korean?: Array<string>;
@@ -15,13 +15,13 @@ interface Props {
   unRequiredFields: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  getValues: UseFormGetValues<FieldValues>;
   onClickPrevButton: () => void;
+  handleSubmit?: any;
 }
 
-const ScoreFormAfterGradeConfirmed = (props: Props) => {
+const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) => {
   return (
-    <>
+    <form onSubmit={props?.handleSubmit}>
       <Wrapper>
         <Left>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
@@ -327,7 +327,7 @@ const ScoreFormAfterGradeConfirmed = (props: Props) => {
           <Button type="submit">다음</Button>
         </Buttons>
       </Bottom>
-    </>
+    </form>
   );
 };
 

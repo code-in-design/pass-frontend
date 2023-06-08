@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import Select from '@/components/Select';
 import MyTooltip from '@/components/Tooltip';
 import GradeInputFormItem from '../GradeInputForm/GradeInputFormItem';
@@ -9,29 +9,34 @@ import InfoIcon from '../../../../../public/images/icons/info.svg';
 import Help from '../../../../../public/images/icons/helpOutline.svg';
 import { Bottom, Button, Buttons, Circle, Description, FlexWrapper, InfoIconWrapper, InfoText, Information, Informations, Left, Right, ScoreInput, SelectWrapper, SubTitle, SubjectTitle, Wrapper } from './index.styles';
 
-interface Props {
+export interface ScoreFormBeforeGradeConfirmedProps {
   inquiry1?: { value: string; label: string }[];
   inquiry2?: { value: string; label: string }[];
   korean?: Array<string>;
   math?: Array<string>;
   unRequiredFields?: [any, any, any];
-  // TODO
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  getValues: UseFormGetValues<FieldValues>;
-  onClickPrevButton: () => void;
-  onClickNextButton: () => void;
+  watch: UseFormWatch<FieldValues>;
+  onClickPrevButton?: () => void;
+  onClickNextButton?: () => void;
+  handleSubmit: any;
 }
 
-const ScoreFormBeforeGradeConfirmed = (props: Props) => {
+const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps) => {
+  const isMathRawScore = props.watch('mathRawScore');
+  const is탐구 = props.watch('inquiry1OptionalSubject');
+  // console.log(123, isMathRawScore);'inquiry1OptionalSubject', 'inquiry2OptionalSubject', 'mathDropout';
+  console.log(123, is탐구);
+
   return (
-    <>
+    <form onSubmit={props?.handleSubmit}>
       <Wrapper>
         <Left>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
             <GradeScoreInput title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
               <ScoreInput
-                {...props.register('koreanRawScore', {
+                {...props?.register?.('koreanRawScore', {
                   required: '국어점수를 입력해주세요.',
                   onChange: e => {
                     e.target.value = e.target.value.substr(0, 3);
@@ -53,7 +58,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInput title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <ScoreInput
-                  {...props.register('mathRawScore', {
+                  {...props?.register?.('mathRawScore', {
                     required: props.unRequiredFields?.[2] ? false : '수학점수를 입력해주세요.',
                     disabled: props.unRequiredFields?.[2] ? true : false,
                   })}
@@ -68,7 +73,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                 />
               </GradeScoreInput>
               <CheckboxWrapper>
-                <Checkbox type="checkbox" id="mathDropout" {...props.register('mathDropout')} />
+                <Checkbox type="checkbox" id="mathDropout" {...props?.register?.('mathDropout')} />
                 <Label htmlFor="mathDropout">수포자</Label>
                 <HelpIcon data-tooltip-id="tooltip-mathDropout">
                   <Help />
@@ -88,7 +93,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
               <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               <GradeScoreInput width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점">
                 <ScoreInput
-                  {...props.register('inquiry1RawScore', {
+                  {...props?.register?.('inquiry1RawScore', {
                     required: !props.unRequiredFields?.[0] ? '탐구 선택1의 점수를 입력해주세요.' : false,
                     disabled: props.unRequiredFields?.[0] === '미응시' ? true : false,
                   })}
@@ -105,10 +110,10 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
-              <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+              <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue!} register={props.register!} required={'과목을 선택해주세요'} />
               <GradeScoreInput width="243px" margintTop="8px" wapperWidth="auto" inputText="점">
                 <ScoreInput
-                  {...props.register('inquiry2RawScore', {
+                  {...props?.register?.('inquiry2RawScore', {
                     required: !props.unRequiredFields?.[1] ? '탐구 선택2의 점수를 입력해주세요.' : false,
                     disabled: props.unRequiredFields?.[1] === '미응시' ? true : false,
                   })}
@@ -130,7 +135,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
           <GradeInputFormItem title="영어" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
               <ScoreInput
-                {...props.register('englishGrade', { required: '영어 등급을 입력해주세요.' })}
+                {...props?.register?.('englishGrade', { required: '영어 등급을 입력해주세요.' })}
                 type="number"
                 min={1}
                 max={9}
@@ -146,7 +151,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
           <GradeInputFormItem title="한국사" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
               <ScoreInput
-                {...props.register('historyGrade', { required: '한국사 등급을 입력해주세요.' })}
+                {...props?.register?.('historyGrade', { required: '한국사 등급을 입력해주세요.' })}
                 type="number"
                 min={1}
                 max={9}
@@ -164,7 +169,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
               <SubTitle>전 과목 평균 등급</SubTitle>
               <GradeScoreInput width="224px" margintTop="44px" wapperWidth="auto" inputText="등급">
                 <ScoreInput
-                  {...props.register('naesinGrade', {
+                  {...props?.register?.('naesinGrade', {
                     onChange: e => {
                       e.target.value = e.target.value.substr(0, 4);
                     },
@@ -211,7 +216,7 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
           <Button type="submit">다음</Button>
         </Buttons>
       </Bottom>
-    </>
+    </form>
   );
 };
 

@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react';
 interface Props {
   children: ReactNode;
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const ProceedingModalLayout = (props: Props) => {

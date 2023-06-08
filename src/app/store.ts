@@ -3,12 +3,14 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '@/features/auth/apis/authApi';
 import { scoresApi } from '@/features/myScore/apis/scoresApi';
 import { reservationApi } from '@/features/reservations/apis/reservationApi';
+import { scoresReducer, scoresSlice } from './../features/myScore/slices/scoresSlice';
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
-    [scoresApi.reducerPath]: scoresApi.reducer,
     [reservationApi.reducerPath]: reservationApi.reducer,
+    [scoresApi.reducerPath]: scoresApi.reducer,
+    [scoresSlice.name]: scoresReducer,
   },
   // 캐싱, 요청 취소, 폴링 등등 유용한 rtk-query의 기능들을 위한 api 미들웨어 추가
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware).concat(scoresApi.middleware).concat(reservationApi.middleware),

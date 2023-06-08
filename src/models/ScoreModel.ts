@@ -1,3 +1,6 @@
+import { TranscriptItemModel } from './TranscriptItemModel';
+import { TranscriptModel } from './TranscriptModel';
+
 export class ScoreModel {
   koreanOptionalSubject?: string; //국어 선택과목
   koreanRawScore?: string; //국어 원점수
@@ -115,14 +118,14 @@ export class ScoreModel {
     };
   };
 
-  //성적표를 가져온다
-  getGrades = (score: ScoreModel) => {
-    return [score.getOptionalSubject('선택과목'), score.getStandardScore('표준점수'), score.getPercentileScore('백분위'), score.getGradeBySubject('등급')];
+  transformToTranscriptModel = () => {
+    const transcriptItems = [this.getOptionalSubject('선택과목'), this.getStandardScore('표준점수'), this.getPercentileScore('백분위'), this.getGradeBySubject('등급')];
+    return new TranscriptModel({ items: transcriptItems });
   };
 
   // 선택과목 행 데이터 가져오기
   getOptionalSubject = rowHeader => {
-    return {
+    return new TranscriptItemModel({
       rowHeader: rowHeader,
       history: '-',
       korean: this.koreanOptionalSubject,
@@ -130,11 +133,11 @@ export class ScoreModel {
       english: '-',
       inquiry1: this.inquiry1OptionalSubject,
       inquiry2: this.inquiry2OptionalSubject,
-    };
+    });
   };
   // 표준점수 행 데이터 가져오기
   getStandardScore = rowHeader => {
-    return {
+    return new TranscriptItemModel({
       rowHeader: rowHeader,
       history: '-',
       korean: this.koreanStandardScore,
@@ -142,11 +145,11 @@ export class ScoreModel {
       english: '-',
       inquiry1: this.inquiry1StandardScore,
       inquiry2: this.inquiry2StandardScore,
-    };
+    });
   };
   // 백분위 행 데이터 가져오기
   getPercentileScore = rowHeader => {
-    return {
+    return new TranscriptItemModel({
       rowHeader: rowHeader,
       history: '-',
       korean: this.koreanPercentile,
@@ -154,11 +157,11 @@ export class ScoreModel {
       english: '-',
       inquiry1: this.inquiry1Percentile,
       inquiry2: this.inquiry2Percentile,
-    };
+    });
   };
   // 등급 행 데이터 가져오기
   getGradeBySubject = rowHeader => {
-    return {
+    return new TranscriptItemModel({
       rowHeader: rowHeader,
       history: this.historyGrade,
       korean: this.koreanGrade,
@@ -166,6 +169,6 @@ export class ScoreModel {
       english: this.englishGrade,
       inquiry1: this.inquiry1Grade,
       inquiry2: this.inquiry2Grade,
-    };
+    });
   };
 }

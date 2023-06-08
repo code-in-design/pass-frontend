@@ -6,13 +6,12 @@ import { ScoreModel } from '@/models/ScoreModel';
 const scoreModel = new ScoreModel();
 
 export const scoresApi = createApi({
-  reducerPath: 'score',
+  reducerPath: 'scoresApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${urls.baseUrl}`,
     prepareHeaders: addTokenToHeader,
     responseHandler: fetchAccessToken,
   }),
-
   endpoints: builder => ({
     //성적 확정 전 성적 입력하기
     setPreScores: builder.mutation({
@@ -46,7 +45,6 @@ export const scoresApi = createApi({
         } catch {}
       },
     }),
-
     //성적 확정 후 성적 입력하기
     setScores: builder.mutation({
       query: data => {
@@ -71,7 +69,7 @@ export const scoresApi = createApi({
     //성적 확정 후 내 성적 확인하기
     fetchScores: builder.query<any, void>({
       query: () => '/scores/me',
-      transformResponse: (res: any) => {
+      transformResponse: (res: any, meta) => {
         try {
           const data = JSON.parse(res);
           const transData = scoreModel.setModelData(data);

@@ -1,11 +1,12 @@
-import { ScoreData } from '@/features/myScore/components/TableGradeCard';
 import styled from '@emotion/styled';
+import { TranscriptModel } from '../../models/TranscriptModel';
 
 interface Props {
-  scoreData: Array<ScoreData>;
+  transcript: TranscriptModel;
 }
 
 const Table = (props: Props) => {
+  console.log(123, props?.transcript);
   return (
     <GradeTable>
       <GradeTableThead>
@@ -19,16 +20,16 @@ const Table = (props: Props) => {
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.scoreData.map((list, item) => {
+        {props.transcript?.items?.map((transcriptItem, index) => {
           return (
-            <GradeTableTBodyTr key={item}>
-              <TableTd>{list.rowHeader}</TableTd>
-              <TableTd>{list.history ? list.history : '-'}</TableTd>
-              <TableTd>{list.korean ? list.korean : '-'}</TableTd>
-              <TableTd>{list.math ? list.math : '-'}</TableTd>
-              <TableTd>{list.english ? list.english : '-'}</TableTd>
-              <TableTd>{list.inquiry1 ? list.inquiry1 : '-'}</TableTd>
-              <TableTd>{list.inquiry2 ? list.inquiry2 : '-'}</TableTd>
+            <GradeTableTBodyTr key={index}>
+              <TableTd>{transcriptItem?.rowHeader}</TableTd>
+              <TableTd>{transcriptItem?.history || '-'}</TableTd>
+              <TableTd>{transcriptItem?.korean || '-'}</TableTd>
+              <TableTd>{transcriptItem?.math || '-'}</TableTd>
+              <TableTd>{transcriptItem?.english || '-'}</TableTd>
+              <TableTd>{transcriptItem?.inquiry1 || '-'}</TableTd>
+              <TableTd>{transcriptItem?.inquiry2 || '-'}</TableTd>
             </GradeTableTBodyTr>
           );
         })}

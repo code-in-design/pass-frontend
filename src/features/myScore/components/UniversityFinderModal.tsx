@@ -2,43 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import More from '../../../../public/images/icons/moreHoriz.svg';
 import ProceedingModalLayout from '@/components/Modal/ProceedingModalLayout';
-import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
-import MyTooltip from '@/components/Tooltip';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { useRouter } from 'next/router';
 
 interface Props {
-  sendScoreToServer: () => void;
+  isOpen?: boolean;
 }
 
-const UniversityFinderModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
-
-  const openModal = useCallback(() => {
-    props.sendScoreToServer();
-    setIsOpen(true);
-  }, [isOpen]);
-
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, [isOpen]);
-
+const UniversityFinderModal = ({ isOpen }: Props) => {
   return (
     <>
-      <Button type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={openModal}>
-        확인
-        <MyTooltip id="tooltip-myScore">
-          <TooltipContainer>
-            <TooltipImg />
-            <TooltipText>
-              위의 가상 성적표와 실제 성적표를 비교한 뒤, <TextEmphasis>점수가 일치하면 ‘확인’</TextEmphasis>을 눌러주세요
-            </TooltipText>
-          </TooltipContainer>
-        </MyTooltip>
-      </Button>
       {isOpen && (
-        <ProceedingModalLayout isOpen={isOpen} onClose={closeModal}>
+        <ProceedingModalLayout isOpen={isOpen}>
           <SchoolIconWrapper>
             <SchoolIcon src="/images/icons/school.jpg" alt="school" />
           </SchoolIconWrapper>
@@ -56,21 +30,6 @@ const UniversityFinderModal = (props: Props) => {
 };
 
 export default UniversityFinderModal;
-
-const Button = styled.button`
-  width: 210px;
-  height: 56px;
-  border-radius: 16px;
-  padding: 18px 10px;
-  color: ${props => props.theme.colors.white};
-  background-color: ${props => props.theme.colors.blue};
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  cursor: pointer;
-  position: relative;
-`;
 
 const SchoolIconWrapper = styled.div`
   width: 63px;
@@ -103,22 +62,4 @@ const MoreWrpper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const TooltipText = styled.div`
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.grayBlack};
-  margin-left: 12px;
-  text-align: left;
-`;
-
-const TextEmphasis = styled.span`
-  color: ${props => props.theme.colors.blue};
-`;
-
-const TooltipContainer = styled.div`
-  display: flex;
-  align-items: center;
 `;

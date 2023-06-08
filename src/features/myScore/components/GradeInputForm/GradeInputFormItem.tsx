@@ -7,7 +7,7 @@ interface Props {
   title: string;
   isRequire?: boolean;
   isChoice?: string[];
-  children: ReactNode;
+  children?: ReactNode;
   marginTop?;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;

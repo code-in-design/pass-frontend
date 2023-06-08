@@ -2,31 +2,28 @@ import styled from '@emotion/styled';
 import InfoIcon from '../../../../public/images/icons/info.svg';
 import UniversityFinderModal from './UniversityFinderModal';
 import Table from '@/components/Table';
+import { TranscriptModel } from '../../../models/TranscriptModel';
+import { isEmpty } from 'lodash';
+import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
+import MyTooltip from '../../../components/Tooltip';
 
-export interface ScoreData {
-  rowHeader: string;
-  english: string;
-  history: string;
-  korean: string;
-  math: string;
-  inquiry1: string;
-  inquiry2: string;
+export interface TranscriptTableProps {
+  // onClickEditGrades: () => void;
+  transcript: TranscriptModel;
+  // isScoreEntered: boolean;
+  // sendScoreToServer: () => void;
+  hasButtons?: boolean;
+  onModify?: () => any;
+  onSubmit?: () => any;
 }
 
-export interface TableGradeCardProps {
-  onClickEditGrades: () => void;
-  scoreData: Array<ScoreData>;
-  isScoreEntered: boolean;
-  sendScoreToServer: () => void;
-}
-
-const TableGradeCard = (props: TableGradeCardProps) => {
+const TranscriptTable = (props: TranscriptTableProps) => {
   return (
     <Container>
       <GradeCard>
-        <Title> 2024학년도 9월 모의고사 성적 통지표</Title>
+        <Title>2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
-        <Table scoreData={props.scoreData} />
+        <Table transcript={props.transcript} />
         <Information>
           <InfoIconWrapper>
             <InfoIcon />
@@ -34,19 +31,29 @@ const TableGradeCard = (props: TableGradeCardProps) => {
           <InfoText>표준점수, 백분위, 등급은 원점수 대비 자체 수능 분석 기준으로 산정된 점수입니다. 업데이트 이후 점수가 달라질 수 있습니다.</InfoText>
         </Information>
       </GradeCard>
-      {props.isScoreEntered && (
+      {props?.hasButtons && (
         <Buttons>
-          <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
-          <UniversityFinderModal sendScoreToServer={props.sendScoreToServer} />
+          <Button onClick={props?.onModify}>성적 수정하기</Button>
+          <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
+            확인
+            <MyTooltip id="tooltip-myScore">
+              <TooltipContainer>
+                <TooltipImg />
+                <TooltipText>
+                  위의 가상 성적표와 실제 성적표를 비교한 뒤, <TextEmphasis>점수가 일치하면 ‘확인’</TextEmphasis>을 눌러주세요
+                </TooltipText>
+              </TooltipContainer>
+            </MyTooltip>
+          </ConfirmButton>
         </Buttons>
       )}
     </Container>
   );
 };
 
-export default TableGradeCard;
+export default TranscriptTable;
 
-TableGradeCard.defaultProps = {
+TranscriptTable.defaultProps = {
   scoreData: [
     { rowHeader: '선택과목', history: '-', korean: '화법과작문', math: '확률과통계', english: '-', inquiry1: '사회문화', inquiry2: '생활과윤리' },
     { rowHeader: '표준점수', history: '-', korean: '128', math: '138', english: '-', inquiry1: '62', inquiry2: '68' },
@@ -124,4 +131,37 @@ const Button = styled.div`
     background-color: ${props => props.theme.colors.gray1};
     margin-right: 12px;
   }
+`;
+
+const ConfirmButton = styled.button`
+  width: 210px;
+  height: 56px;
+  border-radius: 16px;
+  padding: 18px 10px;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.blue};
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+  position: relative;
+`;
+
+const TooltipText = styled.div`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: ${props => props.theme.colors.grayBlack};
+  margin-left: 12px;
+  text-align: left;
+`;
+
+const TextEmphasis = styled.span`
+  color: ${props => props.theme.colors.blue};
+`;
+
+const TooltipContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
