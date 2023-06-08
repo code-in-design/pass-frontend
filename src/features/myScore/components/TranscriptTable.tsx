@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import InfoIcon from '../../../../public/images/icons/info.svg';
-import UniversityFinderModal from './UniversityFinderModal';
 import Table from '@/components/Table';
 import { TranscriptModel } from '../../../models/TranscriptModel';
-import { isEmpty } from 'lodash';
 import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
 import MyTooltip from '../../../components/Tooltip';
 

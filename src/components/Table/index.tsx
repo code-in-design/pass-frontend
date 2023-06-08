@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Table = (props: Props) => {
-  console.log(123, props?.transcript);
   return (
     <GradeTable>
       <GradeTableThead>

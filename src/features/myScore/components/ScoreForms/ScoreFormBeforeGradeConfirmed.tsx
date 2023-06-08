@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { Control, FieldValues, UseFormRegister, UseFormSetValue, UseFormWatch, useWatch } from 'react-hook-form';
 import Select from '@/components/Select';
 import MyTooltip from '@/components/Tooltip';
 import GradeInputFormItem from '../GradeInputForm/GradeInputFormItem';
@@ -17,17 +17,25 @@ export interface ScoreFormBeforeGradeConfirmedProps {
   unRequiredFields?: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  watch: UseFormWatch<FieldValues>;
   onClickPrevButton?: () => void;
   onClickNextButton?: () => void;
+  control: Control<FieldValues, any>;
   handleSubmit: any;
 }
 
 const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps) => {
-  const isMathRawScore = props.watch('mathRawScore');
-  const is탐구 = props.watch('inquiry1OptionalSubject');
-  // console.log(123, isMathRawScore);'inquiry1OptionalSubject', 'inquiry2OptionalSubject', 'mathDropout';
-  console.log(123, is탐구);
+  const isMathRawDropout = useWatch({
+    control: props.control,
+    name: 'mathDropout',
+  });
+  const isOptionalSubject1 = useWatch({
+    control: props.control,
+    name: 'inquiry1OptionalSubject',
+  });
+  const isOptionalSubject2 = useWatch({
+    control: props.control,
+    name: 'inquiry2OptionalSubject',
+  });
 
   return (
     <form onSubmit={props?.handleSubmit}>
@@ -54,13 +62,13 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
             </GradeScoreInput>
           </GradeInputFormItem>
 
-          <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={props.math}>
+          <GradeInputFormItem register={props.register} unRequiredFields={props.unRequiredFields} setValue={props.setValue} title="수학" isRequire={true} isChoice={props.math} isMathRawDropout={isMathRawDropout}>
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInput title="원점수" width="296px" margintTop="12px" marginBottom="8px" inputText="점">
                 <ScoreInput
                   {...props?.register?.('mathRawScore', {
-                    required: props.unRequiredFields?.[2] ? false : '수학점수를 입력해주세요.',
-                    disabled: props.unRequiredFields?.[2] ? true : false,
+                    required: isMathRawDropout ? false : '수학점수를 입력해주세요.',
+                    disabled: isMathRawDropout ? true : false,
                   })}
                   type="number"
                   min={0}
@@ -94,8 +102,8 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
               <GradeScoreInput width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점">
                 <ScoreInput
                   {...props?.register?.('inquiry1RawScore', {
-                    required: !props.unRequiredFields?.[0] ? '탐구 선택1의 점수를 입력해주세요.' : false,
-                    disabled: props.unRequiredFields?.[0] === '미응시' ? true : false,
+                    required: !isOptionalSubject1 ? '탐구 선택1의 점수를 입력해주세요.' : false,
+                    disabled: isOptionalSubject1 === '미응시' ? true : false,
                   })}
                   type="number"
                   min={0}
@@ -114,8 +122,8 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
               <GradeScoreInput width="243px" margintTop="8px" wapperWidth="auto" inputText="점">
                 <ScoreInput
                   {...props?.register?.('inquiry2RawScore', {
-                    required: !props.unRequiredFields?.[1] ? '탐구 선택2의 점수를 입력해주세요.' : false,
-                    disabled: props.unRequiredFields?.[1] === '미응시' ? true : false,
+                    required: !isOptionalSubject2 ? '탐구 선택2의 점수를 입력해주세요.' : false,
+                    disabled: isOptionalSubject2 === '미응시' ? true : false,
                   })}
                   type="number"
                   min={0}

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues } from 'react-hook-form';
+import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues, Control, useWatch } from 'react-hook-form';
 import Select from '@/components/Select';
 import GradeInputFormItem from '../GradeInputForm/GradeInputFormItem';
 import GradeScoreInput from '../GradeInputForm/GradeScoreInput';
@@ -15,11 +15,20 @@ export interface ScoreFormAfterGradeConfirmedProps {
   unRequiredFields: [any, any, any];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  control: Control<FieldValues, any>;
   onClickPrevButton: () => void;
   handleSubmit?: any;
 }
 
 const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) => {
+  const isOptionalSubject1 = useWatch({
+    control: props.control,
+    name: 'inquiry1OptionalSubject',
+  });
+  const isOptionalSubject2 = useWatch({
+    control: props.control,
+    name: 'inquiry2OptionalSubject',
+  });
   return (
     <form onSubmit={props?.handleSubmit}>
       <Wrapper>
@@ -140,7 +149,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
               <GradeScoreInputWrapper>
                 <GradeScoreInput title="표준점수" width="88px" margintTop="12px" titleAlign="center">
                   <ScoreInput
-                    {...props.register('inquiry1StandardScore', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 표준점수를 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    {...props.register('inquiry1StandardScore', { required: !isOptionalSubject1 ? '탐구 선택1의 표준점수를 입력해주세요.' : false, disabled: isOptionalSubject1 ? true : false })}
                     placeholder="표준점수"
                     placeholderAlign="center"
                     type="number"
@@ -155,7 +164,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
                 </GradeScoreInput>
                 <GradeScoreInput title="백분위" width="88px" margintTop="12px" titleAlign="center">
                   <ScoreInput
-                    {...props.register('inquiry1Percentile', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 백분위를 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    {...props.register('inquiry1Percentile', { required: !isOptionalSubject1 ? '탐구 선택1의 백분위를 입력해주세요.' : false, disabled: isOptionalSubject1 === '미응시' ? true : false })}
                     placeholder="백분위"
                     placeholderAlign="center"
                     type="number"
@@ -170,7 +179,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
                 </GradeScoreInput>
                 <GradeScoreInput title="등급" width="88px" margintTop="12px" titleAlign="center">
                   <ScoreInput
-                    {...props.register('inquiry1Grade', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 등급을 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    {...props.register('inquiry1Grade', { required: !isOptionalSubject1 ? '탐구 선택1의 등급을 입력해주세요.' : false, disabled: isOptionalSubject1 === '미응시' ? true : false })}
                     placeholder="등급"
                     placeholderAlign="center"
                     type="number"
@@ -193,7 +202,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
               <GradeScoreInputWrapper>
                 <GradeScoreInput width="88px" margintTop="12px">
                   <ScoreInput
-                    {...props.register('inquiry2StandardScore', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 표준점수를 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    {...props.register('inquiry2StandardScore', { required: !isOptionalSubject2 ? '탐구 선택2의 표준점수를 입력해주세요.' : false, disabled: isOptionalSubject2 === '미응시' ? true : false })}
                     placeholder="표준점수"
                     placeholderAlign="center"
                     type="number"
@@ -208,7 +217,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
                 </GradeScoreInput>
                 <GradeScoreInput width="88px" margintTop="12px">
                   <ScoreInput
-                    {...props.register('inquiry2Percentile', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 백분위를 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    {...props.register('inquiry2Percentile', { required: !isOptionalSubject2 ? '탐구 선택2의 백분위를 입력해주세요.' : false, disabled: isOptionalSubject2 === '미응시' ? true : false })}
                     placeholder="백분위"
                     placeholderAlign="center"
                     type="number"
@@ -223,7 +232,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
                 </GradeScoreInput>
                 <GradeScoreInput width="88px" margintTop="12px">
                   <ScoreInput
-                    {...props.register('inquiry2Grade', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 등급을 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    {...props.register('inquiry2Grade', { required: !isOptionalSubject2 ? '탐구 선택2의 등급을 입력해주세요.' : false, disabled: isOptionalSubject2 === '미응시' ? true : false })}
                     placeholder="등급"
                     placeholderAlign="center"
                     type="number"

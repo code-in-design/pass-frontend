@@ -8,6 +8,7 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   unRequiredFields?: [any, any, any];
+  isMathRawDropout?: boolean;
 }
 interface ItemProps {
   selected: boolean;
@@ -17,23 +18,14 @@ interface ItemProps {
   setValue: UseFormSetValue<FieldValues>;
   handleClick: () => void;
   unRequiredFields?: [any, any, any];
+  isMathRawDropout?: boolean;
 }
 
 const ChoiceItems = (props: ItemProps) => {
-  const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
   const Component = props.selected ? ChoiceItemSelect : ChoiceItem;
-  const mathDropout = props.unRequiredFields?.[2];
-
-  useEffect(() => {
-    const updatedUnRequiredField: string[] = ['naesinGrade'];
-    if (mathDropout) {
-      updatedUnRequiredField.push('mathOptionalSubject');
-    }
-    setUnRequiredField(updatedUnRequiredField);
-  }, [mathDropout]);
 
   return (
-    <Component {...props.register(props.type, { required: !unRequiredField.includes(props.type) ? `선택과목을 선택해주세요.` : false })} onClick={props.handleClick}>
+    <Component {...props.register(props.type, { required: !props.isMathRawDropout ? `선택과목을 선택해주세요.` : false })} onClick={props.handleClick}>
       {props.text}
     </Component>
   );
@@ -44,6 +36,9 @@ const SubjectSelection = (props: Props) => {
 
   const handleItemClick = item => {
     setSelectedItem(item);
+    if (props.isMathRawDropout) {
+      props.setValue(props.type, '미응시');
+    }
     props.setValue(props.type, item);
   };
 
@@ -51,12 +46,28 @@ const SubjectSelection = (props: Props) => {
     props.setValue(props.type, props?.isChoice[0]);
   }, []);
 
+  useEffect(() => {
+    if (props.isMathRawDropout) {
+      props.setValue(props.type, '미응시');
+    }
+  }, [props.isMathRawDropout]);
+
   return (
     <Choice>
       <ChoiceTitle>선택</ChoiceTitle>
       <ChoiceContainer>
         {props.isChoice.map((item, index) => (
-          <ChoiceItems unRequiredFields={props.unRequiredFields} type={props.type} text={item} key={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} register={props.register} setValue={props.setValue} />
+          <ChoiceItems
+            unRequiredFields={props.unRequiredFields}
+            type={props.type}
+            text={item}
+            key={item}
+            selected={item === selectedItem}
+            handleClick={() => handleItemClick(item)}
+            register={props.register}
+            setValue={props.setValue}
+            isMathRawDropout={props.isMathRawDropout}
+          />
         ))}
       </ChoiceContainer>
     </Choice>

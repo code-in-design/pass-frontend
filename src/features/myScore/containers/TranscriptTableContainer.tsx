@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
-import { Router, useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { useSetPreScoresMutation, useSetScoresMutation } from '../apis/scoresApi';
 import TranscriptTable from '../components/TranscriptTable';
 import UniversityFinderModal from '../components/UniversityFinderModal';
@@ -39,7 +39,7 @@ const TranscriptTableContainer = () => {
     router.push('/university/find');
   };
 
-  if (isEmpty(transcript)) return null;
+  // if (isEmpty(transcript)) return null;
   return (
     <>
       <UniversityFinderModal isOpen={isProcessing} />
