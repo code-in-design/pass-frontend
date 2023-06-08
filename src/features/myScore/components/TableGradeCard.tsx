@@ -3,7 +3,6 @@ import InfoIcon from '../../../../public/images/icons/info.svg';
 import UniversityFinderModal from './UniversityFinderModal';
 import Table from '@/components/Table';
 
-// TODO
 export interface ScoreData {
   rowHeader: string;
   english: string;
@@ -16,9 +15,9 @@ export interface ScoreData {
 
 export interface TableGradeCardProps {
   onClickEditGrades: () => void;
-  scoreData: any;
+  scoreData: Array<ScoreData>;
   isScoreEntered: boolean;
-  postScore: () => void;
+  sendScoreToServer: () => void;
 }
 
 const TableGradeCard = (props: TableGradeCardProps) => {
@@ -38,7 +37,7 @@ const TableGradeCard = (props: TableGradeCardProps) => {
       {props.isScoreEntered && (
         <Buttons>
           <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
-          <UniversityFinderModal postScore={props.postScore} />
+          <UniversityFinderModal sendScoreToServer={props.sendScoreToServer} />
         </Buttons>
       )}
     </Container>

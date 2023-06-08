@@ -34,12 +34,17 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                 {...props.register('koreanRawScore', {
                   required: '국어점수를 입력해주세요.',
                   onChange: e => {
-                    console.log(e);
+                    e.target.value = e.target.value.substr(0, 3);
                   },
-                  min: { value: 0, message: '0~100사이의 숫자를 입력하세요.' },
-                  max: { value: 100, message: '0~100사이의 숫자를 입력하세요.' },
                 })}
                 type="number"
+                min={0}
+                max={100}
+                onInput={e => {
+                  if (Number(e.target) > 100) {
+                    console.log(e);
+                  }
+                }}
               />
             </GradeScoreInput>
           </GradeInputFormItem>
@@ -51,9 +56,15 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                   {...props.register('mathRawScore', {
                     required: props.unRequiredFields?.[2] ? false : '수학점수를 입력해주세요.',
                     disabled: props.unRequiredFields?.[2] ? true : false,
-                    min: { value: 0, message: '0~100사이의 숫자를 입력하세요.' },
-                    max: { value: 100, message: '0~100사이의 숫자를 입력하세요.' },
                   })}
+                  type="number"
+                  min={0}
+                  max={100}
+                  onInput={e => {
+                    if (Number(e.target) > 100) {
+                      console.log(e);
+                    }
+                  }}
                 />
               </GradeScoreInput>
               <CheckboxWrapper>
@@ -80,9 +91,15 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                   {...props.register('inquiry1RawScore', {
                     required: !props.unRequiredFields?.[0] ? '탐구 선택1의 점수를 입력해주세요.' : false,
                     disabled: props.unRequiredFields?.[0] === '미응시' ? true : false,
-                    min: { value: 0, message: '0~50사이의 숫자를 입력하세요.' },
-                    max: { value: 50, message: '0~50사이의 숫자를 입력하세요.' },
                   })}
+                  type="number"
+                  min={0}
+                  max={50}
+                  onInput={e => {
+                    if (Number(e.target) > 50) {
+                      console.log(e);
+                    }
+                  }}
                 />
               </GradeScoreInput>
             </SelectWrapper>
@@ -94,9 +111,15 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                   {...props.register('inquiry2RawScore', {
                     required: !props.unRequiredFields?.[1] ? '탐구 선택2의 점수를 입력해주세요.' : false,
                     disabled: props.unRequiredFields?.[1] === '미응시' ? true : false,
-                    min: { value: 0, message: '0~50사이의 숫자를 입력하세요.' },
-                    max: { value: 50, message: '0~50사이의 숫자를 입력하세요.' },
                   })}
+                  type="number"
+                  min={0}
+                  max={50}
+                  onInput={e => {
+                    if (Number(e.target) > 50) {
+                      console.log(e);
+                    }
+                  }}
                 />
               </GradeScoreInput>
             </SelectWrapper>
@@ -106,13 +129,33 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
         <Right>
           <GradeInputFormItem title="영어" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
-              <ScoreInput {...props.register('englishGrade', { required: '영어 등급을 입력해주세요.', min: { value: 1, message: '1~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '1~9사이의 숫자를 입력하세요.' } })} />
+              <ScoreInput
+                {...props.register('englishGrade', { required: '영어 등급을 입력해주세요.' })}
+                type="number"
+                min={1}
+                max={9}
+                onInput={e => {
+                  if (Number(e.target) > 0 && Number(e.target) < 9) {
+                    console.log(e);
+                  }
+                }}
+              />
             </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem title="한국사" isRequire={true} marginTop="4px" register={props.register} setValue={props.setValue}>
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
-              <ScoreInput {...props.register('historyGrade', { required: '한국사 등급을 입력해주세요.', min: { value: 1, message: '1~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '1~9사이의 숫자를 입력하세요.' } })} />
+              <ScoreInput
+                {...props.register('historyGrade', { required: '한국사 등급을 입력해주세요.' })}
+                type="number"
+                min={1}
+                max={9}
+                onInput={e => {
+                  if (Number(e.target) > 0 && Number(e.target) < 9) {
+                    console.log(e);
+                  }
+                }}
+              />
             </GradeScoreInput>
           </GradeInputFormItem>
 
@@ -125,15 +168,15 @@ const ScoreFormBeforeGradeConfirmed = (props: Props) => {
                     onChange: e => {
                       e.target.value = e.target.value.substr(0, 4);
                     },
-                    min: {
-                      value: 1,
-                      message: '1~9사이의 숫자를 입력하세요.',
-                    },
-                    max: {
-                      value: 9,
-                      message: '1~9사이의 숫자를 입력하세요.',
-                    },
                   })}
+                  type="number"
+                  min={1}
+                  max={9}
+                  onInput={e => {
+                    if (Number(e.target) > 0 && Number(e.target) < 9) {
+                      console.log(e);
+                    }
+                  }}
                 />
               </GradeScoreInput>
             </FlexWrapper>

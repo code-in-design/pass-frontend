@@ -17,10 +17,10 @@ export const scoresApi = createApi({
     //성적 확정 전 성적 입력하기
     setPreScores: builder.mutation({
       query: (data: any) => {
-        if (data.inquiry1OptionalSubject.value === '미응시') {
+        if (data.inquiry1OptionalSubject === '미응시') {
           data.inquiry1RawScore = 0;
         }
-        if (data.inquiry2OptionalSubject.value === '미응시') {
+        if (data.inquiry2OptionalSubject === '미응시') {
           data.inquiry2RawScore = 0;
         }
         if (!data.mathOptionalSubject) {
@@ -50,12 +50,12 @@ export const scoresApi = createApi({
     //성적 확정 후 성적 입력하기
     setScores: builder.mutation({
       query: data => {
-        if (data.inquiry1OptionalSubject.value === '미응시') {
+        if (data.inquiry1OptionalSubject === '미응시') {
           data.inquiry1StandardScore = 0;
           data.inquiry1Percentile = 0;
           data.inquiry1Grade = 9;
         }
-        if (data.inquiry2OptionalSubject.value === '미응시') {
+        if (data.inquiry2OptionalSubject === '미응시') {
           data.inquiry2StandardScore = 0;
           data.inquiry2Percentile = 0;
           data.inquiry2Grade = 9;

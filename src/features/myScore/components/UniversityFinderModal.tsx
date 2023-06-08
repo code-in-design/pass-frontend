@@ -8,7 +8,7 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { useRouter } from 'next/router';
 
 interface Props {
-  postScore: () => void;
+  sendScoreToServer: () => void;
 }
 
 const UniversityFinderModal = (props: Props) => {
@@ -16,7 +16,7 @@ const UniversityFinderModal = (props: Props) => {
   const router = useRouter();
 
   const openModal = useCallback(() => {
-    props.postScore();
+    props.sendScoreToServer();
     setIsOpen(true);
   }, [isOpen]);
 
