@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { ReactNode, useEffect, useState } from 'react';
-import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { ReactNode } from 'react';
 
 interface Props {
   titleAlign?: string;
@@ -12,73 +11,18 @@ interface Props {
   children?: ReactNode;
   wapperWidth?: string;
   inputText?: string;
-  pattern?: RegExp;
 }
 
 // 컴포넌트가 역할
 const GradeScoreInput = (props: Props) => {
-  const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
-  // TODO
-  const inquiry1Type = props.unRequiredFields && props.unRequiredFields[0]?.value;
-  const inquiry2Type = props.unRequiredFields && props.unRequiredFields[1]?.value;
-  const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
-
-  // 수포자, 탐구 미응시인경우
-  useEffect(() => {
-    const updatedUnRequiredField: string[] = ['naesinGrade'];
-
-    // inquiry 질문, 탐구
-    if (inquiry1Type === '미응시') {
-      updatedUnRequiredField.push('inquiry1StandardScore', 'inquiry1Percentile', 'inquiry1Grade', 'inquiry1RawScore');
-    }
-
-    // inquiry 질문, 탐구
-    if (inquiry2Type === '미응시') {
-      updatedUnRequiredField.push('inquiry2StandardScore', 'inquiry2Percentile', 'inquiry2Grade', 'inquiry2RawScore');
-    }
-
-    // 수포자
-    if (mathDropout) {
-      updatedUnRequiredField.push('mathRawScore');
-    }
-    setUnRequiredField(updatedUnRequiredField);
-  }, [inquiry1Type, inquiry2Type, mathDropout]);
-
-  // const checkPattern = e => {
-  //   const value = e.target.value;
-  //   const result = value.substr(0, 4);
-  //   e.target.value = result;
-  //   // props.setValue(props.name, e.target.value);
-  // };
-
   return (
     <ScoreWrapper wapperWidth={props.wapperWidth} alignItems={props.alignItems} marginTop={props.margintTop} marginBottom={props.marginBottom}>
       {props.title && <ScoreTitle titleAlign={props.titleAlign}>{props.title}</ScoreTitle>}
       <InputChildren>
         <InputWrapper width={props.width}>
-          {/* <ScoreInput
-            {...props.register(props.name, {
-              required: !unRequiredField.includes(props.name) ? `${props.name}의 점수를 입력해주세요` : false,
-              disabled: !unRequiredField.includes(props.name) ? false : true,
-              // validate: {
-              //   lessThanHundred: v => parseInt(v) <= 100,
-              //   lessThanFifty: v => parseInt(v) <= 50,
-              //   grade: v => 1 <= v && v <= 9,
-              // },
-              onChange: e => {
-                checkPattern(e);
-              },
-              min: props.min,
-              max: props.max,
-              pattern: props.pattern,
-            })}
-            placeholder={props.placeholder && props.placeholder}
-            placeholderAlign={props.placeholderAlign}
-          /> */}
           {props.children}
           {props.inputText && <InputText>{props.inputText && props.inputText}</InputText>}
         </InputWrapper>
-        {/* {props.children} */}
       </InputChildren>
     </ScoreWrapper>
   );

@@ -4,19 +4,8 @@ import UniversityFinderModal from './UniversityFinderModal';
 import Table from '@/components/Table';
 
 // TODO
-export interface ScoreData {}
-
-interface Props {
-  lists: Array<TableProps>;
-  onClickEditGrades: () => void;
-  scoreData: any;
-  isScoreEntered: boolean;
-  postScore: () => void;
-}
-
-interface TableProps {
-  list: object;
-  area: string;
+export interface ScoreData {
+  rowHeader: string;
   english: string;
   history: string;
   korean: string;
@@ -25,13 +14,20 @@ interface TableProps {
   inquiry2: string;
 }
 
-const CheckMyScore = (props: Props) => {
+interface Props {
+  onClickEditGrades: () => void;
+  scoreData: any;
+  isScoreEntered: boolean;
+  postScore: () => void;
+}
+
+const TableGradeCard = (props: Props) => {
   return (
     <Container>
       <GradeCard>
         <Title> 2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
-        <Table lists={props.scoreData} />
+        <Table scoreData={props.scoreData} />
         <Information>
           <InfoIconWrapper>
             <InfoIcon />
@@ -39,7 +35,7 @@ const CheckMyScore = (props: Props) => {
           <InfoText>표준점수, 백분위, 등급은 원점수 대비 자체 수능 분석 기준으로 산정된 점수입니다. 업데이트 이후 점수가 달라질 수 있습니다.</InfoText>
         </Information>
       </GradeCard>
-      {!props.isScoreEntered && (
+      {props.isScoreEntered && (
         <Buttons>
           <Button onClick={props.onClickEditGrades}>성적 수정하기</Button>
           <UniversityFinderModal postScore={props.postScore} />
@@ -49,14 +45,14 @@ const CheckMyScore = (props: Props) => {
   );
 };
 
-export default CheckMyScore;
+export default TableGradeCard;
 
-CheckMyScore.defaultProps = {
-  lists: [
-    { area: '선택과목', history: '-', korean: '화법과작문', math: '확률과통계', english: '-', inquiry1: '사회문화', inquiry2: '생활과윤리' },
-    { area: '표준점수', history: '-', korean: '128', math: '138', english: '-', inquiry1: '62', inquiry2: '68' },
-    { area: '백분위', history: '-', korean: '96', math: '98', english: '-', inquiry1: '85', inquiry2: '96' },
-    { area: '등급', history: '2', korean: '2', math: '1', english: '1', inquiry1: '3', inquiry2: '1' },
+TableGradeCard.defaultProps = {
+  scoreData: [
+    { rowHeader: '선택과목', history: '-', korean: '화법과작문', math: '확률과통계', english: '-', inquiry1: '사회문화', inquiry2: '생활과윤리' },
+    { rowHeader: '표준점수', history: '-', korean: '128', math: '138', english: '-', inquiry1: '62', inquiry2: '68' },
+    { rowHeader: '백분위', history: '-', korean: '96', math: '98', english: '-', inquiry1: '85', inquiry2: '96' },
+    { rowHeader: '등급', history: '2', korean: '2', math: '1', english: '1', inquiry1: '3', inquiry2: '1' },
   ],
 };
 

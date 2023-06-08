@@ -22,7 +22,7 @@ interface ItemProps {
 const ChoiceItems = (props: ItemProps) => {
   const [unRequiredField, setUnRequiredField] = useState<string[]>([]);
   const Component = props.selected ? ChoiceItemSelect : ChoiceItem;
-  const mathDropout = props.unRequiredFields && props.unRequiredFields[2];
+  const mathDropout = props.unRequiredFields?.[2];
 
   useEffect(() => {
     const updatedUnRequiredField: string[] = ['naesinGrade'];

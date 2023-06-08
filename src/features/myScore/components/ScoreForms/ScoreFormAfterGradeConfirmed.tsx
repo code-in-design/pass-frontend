@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues } from 'react-hook-form';
 import Select from '@/components/Select';
-import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues, Controller } from 'react-hook-form';
-import GradeInputFormItem from './GradeInputForm/GradeInputFormItem';
-import GradeScoreInput from './GradeInputForm/GradeScoreInput';
-import InfoIcon from '../../../../public/images/icons/info.svg';
+import GradeInputFormItem from '../GradeInputForm/GradeInputFormItem';
+import GradeScoreInput from '../GradeInputForm/GradeScoreInput';
+import InfoIcon from '../../../../../public/images/icons/info.svg';
+import { Bottom, Button, Buttons, Circle, Description, FlexWrapper, InfoIconWrapper, InfoText, Information, Informations, Left, Right, ScoreInput, SelectWrapper, SubTitle, SubjectTitle, Wrapper } from './index.styles';
 
 interface Props {
   inquiry1?: { value: string; label: string }[];
@@ -18,7 +19,7 @@ interface Props {
   onClickPrevButton: () => void;
 }
 
-const FinalGrades = (props: Props) => {
+const ScoreFormAfterGradeConfirmed = (props: Props) => {
   return (
     <>
       <Wrapper>
@@ -26,13 +27,53 @@ const FinalGrades = (props: Props) => {
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="국어" isRequire={true} isChoice={props.korean}>
             <GradeScoreInputWrapper>
               <GradeScoreInput title="표준점수" width="179.67px" margintTop="12px" marginBottom="8px">
-                <ScoreInput {...props.register('koreanStandardScore', { required: '국어과목의 표준점수를 입력해주세요.' })} placeholder="표준점수" />
+                <ScoreInput
+                  {...props.register('koreanStandardScore', {
+                    required: '국어과목의 표준점수를 입력해주세요.',
+                    onChange: e => {
+                      e.target.value = e.target.value.substr(0, 3);
+                    },
+                  })}
+                  placeholder="표준점수"
+                  placeholderAlign="left"
+                  type="number"
+                  min={0}
+                  max={200}
+                  onInput={e => {
+                    if (Number(e.target) > 200) {
+                      console.log(e);
+                    }
+                  }}
+                />
               </GradeScoreInput>
               <GradeScoreInput title="백분위" width="179.67px" margintTop="12px" marginBottom="8px">
-                <ScoreInput {...props.register('koreanPercentile', { required: '국어과목의 백분위점수를 입력해주세요.' })} placeholder="백분위" />
+                <ScoreInput
+                  {...props.register('koreanPercentile', { required: '국어과목의 백분위점수를 입력해주세요.' })}
+                  placeholder="백분위"
+                  placeholderAlign="left"
+                  min={0}
+                  max={100}
+                  onInput={e => {
+                    if (Number(e.target) > 100) {
+                      console.log(e);
+                    }
+                  }}
+                />
               </GradeScoreInput>
               <GradeScoreInput title="등급" width="179.67px" margintTop="12px" marginBottom="8px">
-                <ScoreInput {...props.register('koreanGrade', { required: '국어점수를 입력해주세요.' })} placeholder="등급" />
+                <ScoreInput
+                  {...props.register('koreanGrade', { required: '국어등급을 입력해주세요.', min: { value: 0, message: '0~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '0~9사이의 숫자를 입력하세요.' } })}
+                  placeholder="등급"
+                  placeholderAlign="left"
+                  type="number"
+                  min={1}
+                  max={9}
+                  onInput={e => {
+                    if (Number(e.target) > 0 && Number(e.target) < 9) {
+                      console.log(e);
+                    }
+                  }}
+                />
               </GradeScoreInput>
             </GradeScoreInputWrapper>
           </GradeInputFormItem>
@@ -41,13 +82,17 @@ const FinalGrades = (props: Props) => {
             <FlexWrapper alignItems="flex-end">
               <GradeScoreInputWrapper>
                 <GradeScoreInput title="표준점수" width="179.67px" margintTop="12px" marginBottom="8px">
-                  <ScoreInput {...props.register('mathStandardScore', { required: '수학과목의 표준점수를 입력해주세요.' })} placeholder="표준점수" />
+                  <ScoreInput {...props.register('mathStandardScore', { required: '수학과목의 표준점수를 입력해주세요.' })} placeholder="표준점수" placeholderAlign="left" />
                 </GradeScoreInput>
                 <GradeScoreInput title="백분위" width="179.67px" margintTop="12px" marginBottom="8px">
-                  <ScoreInput {...props.register('mathPercentile', { required: '수학과목의 백분위점수를 입력해주세요.' })} placeholder="백분위" />
+                  <ScoreInput {...props.register('mathPercentile', { required: '수학과목의 백분위점수를 입력해주세요.' })} placeholder="백분위" placeholderAlign="left" />
                 </GradeScoreInput>
                 <GradeScoreInput title="등급" width="179.67px" margintTop="12px" marginBottom="8px">
-                  <ScoreInput {...props.register('mathGrade', { required: '수학점수를 입력해주세요.' })} placeholder="등급" />
+                  <ScoreInput
+                    {...props.register('mathGrade', { required: '수학등급을 입력해주세요.', min: { value: 0, message: '0~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '0~9사이의 숫자를 입력하세요.' } })}
+                    placeholder="등급"
+                    placeholderAlign="left"
+                  />
                 </GradeScoreInput>
               </GradeScoreInputWrapper>
             </FlexWrapper>
@@ -61,13 +106,25 @@ const FinalGrades = (props: Props) => {
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput title="표준점수" width="88px" margintTop="12px" titleAlign="center">
-                  <ScoreInput {...props.register('inquiry1StandardScore', { required: '탐구선택1의 표준점수를 입력해주세요.' })} placeholder="표준점수" />
+                  <ScoreInput
+                    {...props.register('inquiry1StandardScore', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 표준점수를 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    placeholder="표준점수"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
                 <GradeScoreInput title="백분위" width="88px" margintTop="12px" titleAlign="center">
-                  <ScoreInput {...props.register('inquiry1Percentile', { required: '탐구선택1의 백분위점수를 입력해주세요.' })} placeholder="백분위" />
+                  <ScoreInput
+                    {...props.register('inquiry1Percentile', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 백분위를 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    placeholder="백분위"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
                 <GradeScoreInput title="등급" width="88px" margintTop="12px" titleAlign="center">
-                  <ScoreInput {...props.register('inquiry1Grade', { required: '탐구선택1의 점수를 입력해주세요.' })} placeholder="등급" />
+                  <ScoreInput
+                    {...props.register('inquiry1Grade', { required: !(props.unRequiredFields?.[0] === '미응시') ? '탐구 선택1의 등급을 입력해주세요.' : false, disabled: props.unRequiredFields?.[0] === '미응시' ? true : false })}
+                    placeholder="등급"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
               </GradeScoreInputWrapper>
             </SelectWrapper>
@@ -78,13 +135,25 @@ const FinalGrades = (props: Props) => {
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput width="88px" margintTop="12px">
-                  <ScoreInput {...props.register('inquiry2StandardScore', { required: '탐구선택2의 표준점수를 입력해주세요' })} placeholder="표준점수" />
+                  <ScoreInput
+                    {...props.register('inquiry2StandardScore', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 표준점수를 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    placeholder="표준점수"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
                 <GradeScoreInput width="88px" margintTop="12px">
-                  <ScoreInput {...props.register('inquiry2Percentile', { required: '탐구선택2의 백분위점수를 입력해주세요.' })} placeholder="백분위" />
+                  <ScoreInput
+                    {...props.register('inquiry2Percentile', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 백분위를 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    placeholder="백분위"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
                 <GradeScoreInput width="88px" margintTop="12px">
-                  <ScoreInput {...props.register('inquiry2Grade', { required: '탐구선택2의 점수를 입력해주세요.' })} placeholder="등급" />
+                  <ScoreInput
+                    {...props.register('inquiry2Grade', { required: !(props.unRequiredFields?.[1] === '미응시') ? '탐구 선택2의 등급을 입력해주세요.' : false, disabled: props.unRequiredFields?.[1] === '미응시' ? true : false })}
+                    placeholder="등급"
+                    placeholderAlign="center"
+                  />
                 </GradeScoreInput>
               </GradeScoreInputWrapper>
             </SelectWrapper>
@@ -94,21 +163,29 @@ const FinalGrades = (props: Props) => {
         <Right>
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="영어" isRequire={true} marginTop="4px">
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
-              <ScoreInput {...props.register('englishGrade', { required: '영어점수를 입력해주세요.' })} />
+              <ScoreInput {...props.register('englishGrade', { required: '영어 등급을 입력해주세요.', min: { value: 0, message: '0~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '0~9사이의 숫자를 입력하세요.' } })} />
             </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="한국사" isRequire={true} marginTop="4px">
             <GradeScoreInput width="224px" margintTop="44px" marginBottom="12px" alignItems="flex-end" inputText="등급">
-              <ScoreInput {...props.register('historyGrade', { required: '한국사 점수를 입력해주세요.' })} />
+              <ScoreInput {...props.register('historyGrade', { required: '한국사 등급을 입력해주세요.', min: { value: 0, message: '0~9사이의 숫자를 입력하세요.' }, max: { value: 9, message: '0~9사이의 숫자를 입력하세요.' } })} />
             </GradeScoreInput>
           </GradeInputFormItem>
 
           <GradeInputFormItem register={props.register} setValue={props.setValue} title="내신" marginTop="4px">
             <FlexWrapper alignItems="flex-end">
               <SubTitle>전 과목 평균 등급</SubTitle>
-              <GradeScoreInput pattern={/^[1-9](\.\d{1,2})?$/} width="224px" margintTop="44px" wapperWidth="auto" inputText="등급">
-                <ScoreInput {...props.register('naesinGrade', { required: '내신점수를 입력해주세요.' })} />
+              <GradeScoreInput width="224px" margintTop="44px" wapperWidth="auto" inputText="등급">
+                <ScoreInput
+                  {...props.register('naesinGrade', {
+                    onChange: e => {
+                      e.target.value = e.target.value.substr(0, 4);
+                    },
+                    min: { value: 0, message: '0~9사이의 숫자를 입력하세요.' },
+                    max: { value: 9, message: '0~9사이의 숫자를 입력하세요.' },
+                  })}
+                />
               </GradeScoreInput>
             </FlexWrapper>
             <Description>
@@ -137,7 +214,9 @@ const FinalGrades = (props: Props) => {
           </Information>
         </Informations>
         <Buttons>
-          <Button type="button">이전</Button>
+          <Button type="button" onClick={props.onClickPrevButton}>
+            이전
+          </Button>
           <Button type="submit">다음</Button>
         </Buttons>
       </Bottom>
@@ -145,9 +224,9 @@ const FinalGrades = (props: Props) => {
   );
 };
 
-export default FinalGrades;
+export default ScoreFormAfterGradeConfirmed;
 
-FinalGrades.defaultProps = {
+ScoreFormAfterGradeConfirmed.defaultProps = {
   inquiry1: [
     { value: '미응시', label: '미응시' },
     { value: '생활과 윤리', label: '생활과 윤리' },
@@ -193,26 +272,6 @@ FinalGrades.defaultProps = {
   math: ['확률과 통계', '미적분', '기하'],
 };
 
-const Form = styled.form``;
-
-const Wrapper = styled.div`
-  width: 100%;
-  /* height: 592px; */
-  display: flex;
-  justify-content: space-between;
-  gap: 0 24px;
-`;
-
-const Left = styled.div`
-  min-width: 619px;
-  width: 100%;
-`;
-
-const Right = styled.div`
-  min-width: 397px;
-  width: 100%;
-`;
-
 const GradeScoreInputWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -221,135 +280,6 @@ const GradeScoreInputWrapper = styled.div`
   width: 100%;
 `;
 
-const FlexWrapper = styled.div<{ alignItems: string }>`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: ${props => (props.alignItems ? props.alignItems : 'center')};
-`;
-
-const SubTitle = styled.div`
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  color: #636474;
-  margin-bottom: 12px;
-  min-width: 105px;
-`;
-
-const Description = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: ${props => props.theme.colors.gray1};
-  margin-bottom: 4px;
-  margin-top: 12px;
-  :last-of-type {
-    margin-top: 4px;
-    margin-bottom: 0;
-  }
-`;
-
-const Circle = styled.div`
-  width: 4px;
-  height: 4px;
-  background-color: ${props => props.theme.colors.green};
-  border-radius: 50%;
-  margin-right: 4px;
-`;
-
-const SelectWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  :last-of-type {
-    margin-top: 8px;
-  }
-`;
-
-const SubjectTitle = styled.div`
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  color: ${props => props.theme.colors.gray1};
-  margin-bottom: 12px;
-  margin-right: 14px;
-  min-width: 41px;
-`;
-
-const Bottom = styled.div`
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Informations = styled.div``;
-
-const Information = styled.div`
-  display: flex;
-  align-items: center;
-  width: 445px;
-  height: 40px;
-  border-radius: 16px;
-  padding: 8px 16px;
-  background-color: rgba(107, 119, 248, 0.1);
-  :first-of-type {
-    margin-bottom: 8px;
-  }
-`;
-
-const InfoIconWrapper = styled.div`
-  color: ${props => props.theme.colors.blue};
-  margin-right: 4px;
-`;
-
-const InfoText = styled.span`
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-  color: ${props => props.theme.colors.blue};
-`;
-
-const Buttons = styled.div`
-  display: flex;
-`;
-
-const Button = styled.button`
-  width: 210px;
-  height: 56px;
-  border-radius: 16px;
-  padding: 18px 10px;
-  color: ${props => props.theme.colors.white};
-  background-color: ${props => props.theme.colors.blue};
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  cursor: pointer;
-  :first-of-type {
-    color: ${props => props.theme.colors.gray2};
-    background-color: ${props => props.theme.colors.gray4};
-    margin-right: 12px;
-  }
-`;
-
 const SelectMargin = styled.div`
   margin-right: 12px;
-`;
-const ScoreInput = styled.input<{ placeholderAlign?: string }>`
-  text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
-  outline: none;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  width: 100%;
-  color: ${props => props.theme.colors.grayBlack};
-  ::placeholder {
-    color: ${props => props.theme.colors.gray3};
-    text-align: ${props => (props.placeholderAlign ? props.placeholderAlign : 'right')};
-  }
 `;

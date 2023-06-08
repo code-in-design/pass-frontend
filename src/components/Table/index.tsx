@@ -1,18 +1,8 @@
+import { ScoreData } from '@/features/myScore/components/TableGradeCard';
 import styled from '@emotion/styled';
 
 interface Props {
-  lists: Array<TableProps>;
-}
-
-interface TableProps {
-  list: object;
-  rowHeader: string;
-  english: string;
-  history: string;
-  korean: string;
-  math: string;
-  inquiry1: string;
-  inquiry2: string;
+  scoreData: Array<ScoreData>;
 }
 
 const Table = (props: Props) => {
@@ -29,7 +19,7 @@ const Table = (props: Props) => {
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.lists.map((list, item) => {
+        {props.scoreData.map((list, item) => {
           return (
             <GradeTableTBodyTr key={item}>
               <TableTd>{list.rowHeader}</TableTd>

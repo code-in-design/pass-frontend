@@ -21,7 +21,7 @@ const Select = (props: SelectProps) => {
 
   const handleChange = useCallback(
     (newValue: any, actionMeta: ActionMeta<any>) => {
-      setValue(name, newValue);
+      setValue(name, newValue.value);
     },
     [name, setValue],
   );
