@@ -3,7 +3,7 @@ import { Navbar } from '../Navbar';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 
-interface LayoutProps extends HTMLProps<HTMLElement> {}
+type LayoutProps = HTMLProps<HTMLElement>;
 
 const Layout = (props: LayoutProps) => {
   return (
@@ -36,6 +36,6 @@ const ChildrenWrapper = styled.div`
   overflow-y: auto;
   /* height: 880px; */
   border-radius: 24px;
-  background-color: #f3f4fa;
+  background-color: ${props => props.theme.colors.gray5};
   padding: 40px;
 `;

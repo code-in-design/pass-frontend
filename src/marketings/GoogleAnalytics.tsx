@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import useGoogleAnalytics from './useGoogleAnalytics';
 import Script from 'next/script';
 
-type Props = {};
+// type Props = {};
 
-const GoogleAnalytics = (props: Props) => {
+const GoogleAnalytics = () => {
   const { GA_TRACKING_ID, event, pageview } = useGoogleAnalytics();
 
   return (

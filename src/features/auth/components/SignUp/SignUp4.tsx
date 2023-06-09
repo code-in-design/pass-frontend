@@ -17,7 +17,7 @@ const SignUp4 = (props: Props) => {
 
   const handleComplete = data => {
     let fullAddress = data.address;
-    let zoneCode = data.zonecode;
+    const zoneCode = data.zonecode;
     let extraAddress = '';
 
     if (data.addressType === 'R') {

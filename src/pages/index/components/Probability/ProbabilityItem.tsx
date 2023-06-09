@@ -31,7 +31,7 @@ const ProbabilityItemContainer = styled.div`
   height: 81.33px;
   padding: 16px;
   border-radius: 16px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   margin-bottom: 6px;
@@ -50,14 +50,14 @@ const ProbabilityItemName = styled.div`
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const ProbabilityItemTitle = styled.div`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const ProbabilityItemArrowWrapper = styled.div`

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 import { AdminNavbar } from '../AdminNavbar';
 
-interface LayoutProps extends HTMLProps<HTMLElement> {}
+type LayoutProps = HTMLProps<HTMLElement>;
 
 const AdminLayout = (props: LayoutProps) => {
   return (

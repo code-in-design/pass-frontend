@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { StyledSelectLarge, StyledSelectSmall, StyledSelectMedium } from './index.styles';
-import { FieldValues, UseFormRegister, UseFormRegisterReturn, UseFormReturn, useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormReturn } from 'react-hook-form';
 import { ActionMeta } from 'react-select';
 
 export interface SelectProps {
@@ -21,7 +21,7 @@ const Select = (props: SelectProps) => {
 
   const handleChange = useCallback(
     (newValue: any, actionMeta: ActionMeta<any>) => {
-      setValue(name, newValue);
+      setValue(name, newValue.value);
     },
     [name, setValue],
   );

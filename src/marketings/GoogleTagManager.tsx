@@ -1,9 +1,9 @@
 import React from 'react';
 import Script from 'next/script';
 
-type Props = {};
+// type Props = {};
 
-const GoogleTagManager = (props: Props) => {
+const GoogleTagManager = () => {
   return (
     <Script
       id="gtag-manager"

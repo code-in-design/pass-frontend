@@ -1,8 +1,6 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
-import { MutationDefinition, BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/dist/query';
-import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { useState } from 'react';
-import { FieldValues, UseFormGetValues, UseFormRegister, useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 
 interface Props {
   onNextButtonClick: () => void;

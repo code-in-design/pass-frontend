@@ -1,16 +1,28 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import SubjectSelection from './SubjectSelection';
+import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   title: string;
   isRequire?: boolean;
   isChoice?: string[];
-  children: ReactNode;
+  children?: ReactNode;
   marginTop?;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  unRequiredFields?: [any, any, any];
+  isMathRawDropout?: boolean;
 }
 
 const GradeInputFormItem = (props: Props) => {
+  let type = '';
+  if (props.title === '국어') {
+    type = 'koreanOptionalSubject';
+  }
+  if (props.title === '수학') {
+    type = 'mathOptionalSubject';
+  }
   return (
     <Container>
       <TitleWrapper>
@@ -18,7 +30,7 @@ const GradeInputFormItem = (props: Props) => {
           {props.title}
           {props.isRequire && <Require>*</Require>}
         </Title>
-        {props.isChoice && <SubjectSelection isChoice={props.isChoice} />}
+        {props.isChoice && <SubjectSelection unRequiredFields={props.unRequiredFields} type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} isMathRawDropout={props.isMathRawDropout} />}
       </TitleWrapper>
       {props.children}
     </Container>
@@ -32,7 +44,7 @@ GradeInputFormItem.defaultProps = {
 };
 
 const Container = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   width: 100%;
   border-radius: 16px;
   padding: 20px 24px 16px;
@@ -49,7 +61,7 @@ const Title = styled.div<{ marginTop: string }>`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
   margin-top: ${props => props.marginTop};
 `;
 
@@ -58,6 +70,6 @@ const Require = styled.span`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
   margin-left: 4px;
 `;

@@ -1,18 +1,8 @@
 import styled from '@emotion/styled';
+import { TranscriptModel } from '../../models/TranscriptModel';
 
 interface Props {
-  lists: Array<TableProps>;
-}
-
-interface TableProps {
-  list: object;
-  area: string;
-  english: string;
-  history: string;
-  korean: string;
-  math: string;
-  inquirySubject1: string;
-  inquirySubject2: string;
+  transcript: TranscriptModel;
 }
 
 const Table = (props: Props) => {
@@ -20,26 +10,28 @@ const Table = (props: Props) => {
     <GradeTable>
       <GradeTableThead>
         <GradeTableTheadTr>
-          <td>영역</td>
-          <td>한국사</td>
-          <td>국어</td>
-          <td>수학</td>
-          <td>영어</td>
-          <td colSpan={2}>탐구</td>
+          <TableTd>영역</TableTd>
+          <TableTd>한국사</TableTd>
+          <TableTd>국어</TableTd>
+          <TableTd>수학</TableTd>
+          <TableTd>영어</TableTd>
+          <TableTd colSpan={2}>탐구</TableTd>
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.lists.map((list, item) => (
-          <GradeTableTBodyTr key={item}>
-            <td>{list.area}</td>
-            <td>{list.history}</td>
-            <td>{list.korean}</td>
-            <td>{list.math}</td>
-            <td>{list.english}</td>
-            <td>{list.inquirySubject1}</td>
-            <td>{list.inquirySubject2}</td>
-          </GradeTableTBodyTr>
-        ))}
+        {props.transcript?.items?.map((transcriptItem, index) => {
+          return (
+            <GradeTableTBodyTr key={index}>
+              <TableTd>{transcriptItem?.rowHeader}</TableTd>
+              <TableTd>{transcriptItem?.history || '-'}</TableTd>
+              <TableTd>{transcriptItem?.korean || '-'}</TableTd>
+              <TableTd>{transcriptItem?.math || '-'}</TableTd>
+              <TableTd>{transcriptItem?.english || '-'}</TableTd>
+              <TableTd>{transcriptItem?.inquiry1 || '-'}</TableTd>
+              <TableTd>{transcriptItem?.inquiry2 || '-'}</TableTd>
+            </GradeTableTBodyTr>
+          );
+        })}
       </GradeTableTbody>
     </GradeTable>
   );
@@ -52,7 +44,7 @@ const GradeTable = styled.table`
   border-collapse: collapse;
   border-radius: 12px;
   border-style: hidden;
-  box-shadow: 0 0 0 1px #6b77f8;
+  box-shadow: 0 0 0 1px ${props => props.theme.colors.blue};
   overflow: hidden;
 `;
 
@@ -62,7 +54,7 @@ const GradeTableThead = styled.thead`
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #6b77f8;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const GradeTableTheadTr = styled.tr`
@@ -70,7 +62,7 @@ const GradeTableTheadTr = styled.tr`
   height: 51.2px;
   & > td {
     width: 152px;
-    border: 1px solid #e4e6f0;
+    border: 1px solid ${props => props.theme.colors.gray4};
     &:last-of-type {
       width: 216px;
     }
@@ -83,7 +75,7 @@ const GradeTableTbody = styled.tbody`
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const GradeTableTBodyTr = styled.tr`
@@ -91,10 +83,14 @@ const GradeTableTBodyTr = styled.tr`
   letter-spacing: -0.04em;
   & > td {
     width: 152px;
-    border: 1px solid #e4e6f0;
+    border: 1px solid ${props => props.theme.colors.gray4};
     :first-of-type {
       background-color: #f8f8fc;
       color: #7f86d2;
     }
   }
+`;
+
+const TableTd = styled.td`
+  vertical-align: middle;
 `;

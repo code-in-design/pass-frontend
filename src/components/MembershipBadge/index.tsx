@@ -36,7 +36,7 @@ const UserMembership = styled.div`
   height: 20px;
   border-radius: 20px;
   background-color: ${props => props.color};
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   font-size: 12px;
   font-weight: 600;
   line-height: 1;

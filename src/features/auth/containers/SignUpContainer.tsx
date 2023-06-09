@@ -7,10 +7,11 @@ import SignUp4 from '../components/SignUp/SignUp4';
 import SignUp5 from '../components/SignUp/SignUp5';
 import SignUp6 from '../components/SignUp/SignUp6';
 import { useFetchOtpMutation, useFetchOtpVerifyMutation, useSetSignUpMutation } from '../apis/authApi';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { isEmpty } from 'lodash';
 
 const SignUpContainer = () => {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const mutation = useSetSignUpMutation();
   const setSignUp = mutation[0];
@@ -32,15 +33,14 @@ const SignUpContainer = () => {
   });
 
   const onsubmit = data => {
-    console.log(data);
     setSignUp(data);
-    // router.push('/signIn');
+    router.push('/signIn');
   };
 
   const showError = () => {
     if (!isEmpty(errors)) {
-      let firstKey = Object.keys(errors)[0];
-      let firstValue = errors[firstKey];
+      const firstKey = Object.keys(errors)[0];
+      const firstValue = errors[firstKey];
       if (firstValue) {
         alert(firstValue.message);
       }

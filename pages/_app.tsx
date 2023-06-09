@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { theme } from '@/theme';
 import store from '@/app/store';
+import { ThemeProvider } from '@emotion/react';
+import emotionTheme from '../src/theme/theme';
 import 'code-in-design-system/dist/globals.css';
 import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
 import GoogleTagManager from '../src/marketings/GoogleTagManager';
@@ -22,7 +24,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Z-ONE</title>
       </Head>
       <ChakraProvider theme={theme} resetCSS>
-        <Component {...pageProps} />
+        <ThemeProvider theme={emotionTheme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </ChakraProvider>
     </Provider>
   );

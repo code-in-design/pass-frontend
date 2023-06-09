@@ -81,13 +81,13 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.04em;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 12px;
 `;
 
 const SwiperWrapper = styled.div`
   padding: 13px 16px 6px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 16px;
   height: 152px;
 `;

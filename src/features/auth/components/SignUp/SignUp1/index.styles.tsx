@@ -7,7 +7,7 @@ export const Form = styled.div`
   height: 296px;
   border-radius: 16px;
   padding: 32px 24px;
-  border: 1px solid #e4e6f0;
+  border: 1px solid ${props => props.theme.colors.gray4};
 `;
 
 export const Header = styled.div`
@@ -17,8 +17,8 @@ export const Header = styled.div`
 export const HeaderCheckbox = styled.input`
   width: 15px;
   height: 15px;
-  color: #353644;
-  border: 1px solid #353644;
+  color: ${props => props.theme.colors.grayBlack};
+  border: 1px solid ${props => props.theme.colors.grayBlack};
   padding: 2.5px;
   margin-right: 4px;
   margin-bottom: 2.5px;
@@ -27,17 +27,17 @@ export const HeaderLabel = styled.label`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   margin-right: 8px;
 `;
 export const HeaderOption = styled.span`
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
 `;
 export const Divider = styled.hr`
-  color: #e4e6f0;
+  color: ${props => props.theme.colors.gray4};
   margin: 24px 0;
 `;
 export const Body = styled.div`
@@ -51,8 +51,8 @@ export const Body = styled.div`
 export const BodyCheckbox = styled.input`
   width: 14.17px;
   height: 14.17px;
-  color: #626474;
-  border: 1px solid #626474;
+  color: ${props => props.theme.colors.gray1};
+  border: 1px solid ${props => props.theme.colors.gray1};
   padding: 2.5px;
   margin-right: 4px;
   margin-bottom: 2.5px;
@@ -61,14 +61,14 @@ export const BodyLabel = styled.label`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-right: 8px;
 `;
 export const BodyOption = styled.span`
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: ${props => props.color || '#9395A6'};
+  color: ${props => props.color || props.theme.colors.gray2};
 `;
 export const BodyArrowRight = styled.img`
   padding: 5.35px 7.02px;
@@ -81,8 +81,8 @@ export const NextButton = styled.button`
   height: 56px;
   border-radius: 16px;
   padding: 16px 10px;
-  background-color: #6b77f8;
-  color: #fff;
+  background-color: ${props => props.theme.colors.blue};
+  color: ${props => props.theme.colors.white};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;

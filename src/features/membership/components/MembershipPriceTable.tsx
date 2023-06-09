@@ -57,14 +57,14 @@ const TableContainer = styled.table`
 const THead = styled.thead``;
 
 const THeadTr = styled.tr`
-  border-bottom: 1px solid #626474;
+  border-bottom: 1px solid ${props => props.theme.colors.gray1};
 `;
 
 const THedaTd = styled.td`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: ${props => (props.color === 'Basic' ? '#9395A6' : props.color === 'Light' ? '#60C8DE' : '#6B77F8')};
+  color: ${props => (props.color === 'Basic' ? props.theme.colors.gray2 : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
   padding-bottom: 16px;
   width: 182px;
   text-align: center;

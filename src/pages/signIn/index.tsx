@@ -1,9 +1,7 @@
 import React from 'react';
 import SignInContainer from '../../features/auth/containers/SignInContainer';
 
-type Props = {};
-
-const SignInPage = (props: Props) => {
+const SignInPage = props => {
   return <SignInContainer />;
 };
 

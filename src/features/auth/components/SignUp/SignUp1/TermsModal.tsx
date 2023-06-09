@@ -9,7 +9,7 @@ interface Props {
   markdown: string;
 }
 const TermsDetail: React.FC<Props> = props => {
-  let index = props.index;
+  const index = props.index;
   return (
     <ModalWrapper>
       <ModalOutside onClick={() => props.onCloseClick(index)} />
@@ -52,7 +52,7 @@ const Container = styled.div`
   width: 611px;
   padding: 32px;
   height: 480px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
   position: absolute;
   top: 50%;
@@ -72,7 +72,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black}
   margin-bottom: 24px;
 `;
 
@@ -82,7 +82,7 @@ const Context = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   overflow-y: auto;
   margin-bottom: 24px;
 `;

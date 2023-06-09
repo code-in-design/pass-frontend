@@ -17,10 +17,10 @@ export default UpdateItem;
 
 const UpdateItemWrapper = styled.li`
   padding: 16px 0;
-  border-bottom: 1px solid #f3f4fa;
+  border-bottom: 1px solid ${props => props.theme.colors.gray5};
   display: flex;
   align-items: center;
-  &:first-child {
+  &:first-of-type {
     padding: 0 0 16px 0;
   }
 `;

@@ -3,9 +3,7 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import { useCallback, useState } from 'react';
 import ProbabilityItem from './ProbabilityItem';
 
-interface Props {}
-
-const SupportabilityModal = (props: Props) => {
+const SupportabilityModal = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -43,13 +41,13 @@ const Title = styled.div`
   line-height: 24px;
   letter-spacing: -0.04em;
   margin-bottom: 12px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
 `;
 
 const SubTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  color: #626474;
+  color: ${props => props.theme.colors.gray1};
   margin-bottom: 8px;
 `;

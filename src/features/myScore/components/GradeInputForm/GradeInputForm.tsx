@@ -33,7 +33,7 @@ const Title = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
   margin-bottom: 8px;
 `;
 
@@ -41,6 +41,6 @@ const SubTitle = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
   margin-bottom: 32px;
 `;

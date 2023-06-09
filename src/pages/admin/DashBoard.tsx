@@ -1,9 +1,9 @@
 import React from 'react';
 import AdminLayout from '../../components/AdminLayout/AdminLayout';
 
-type Props = {};
+// type Props = {};
 
-const AdminDashBoardPage = (props: Props) => {
+const AdminDashBoardPage = () => {
   return <AdminLayout>AdminDashBoardPage</AdminLayout>;
 };
 

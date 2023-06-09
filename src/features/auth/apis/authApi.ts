@@ -90,9 +90,6 @@ export const authApi = createApi({
         storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
         window.location.assign('/');
       },
-      transformErrorResponse: response => {
-        console.log(response);
-      },
     }),
     // 회원가입
     setSignUp: builder.mutation({
@@ -108,8 +105,8 @@ export const authApi = createApi({
             email: data.email,
             zonecode: data.zonecode,
             address: data.address,
-            gender: data.gender.value,
-            grade: data.grade.value,
+            gender: data.gender,
+            grade: data.grade,
             password: data.password,
             agree_flag_14_age: data.agree_flag_14_age,
             agree_flag_terms: data.agree_flag_terms,
@@ -155,7 +152,6 @@ export const authApi = createApi({
         alert('인증에 성공했습니다.');
       },
       transformErrorResponse: response => {
-        console.log(response);
         alert('인증에 실패했습니다.');
       },
     }),

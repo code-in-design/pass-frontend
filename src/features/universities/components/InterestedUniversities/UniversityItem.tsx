@@ -42,7 +42,7 @@ const ItemWrapper = styled.div`
   height: 68px;
   border-radius: 16px;
   padding: 10px 16px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -96,7 +96,7 @@ const ScoreName = styled.div`
   font-weight: 600;
   line-height: 16px;
   letter-spacing: -1.7px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
   margin-bottom: 4px;
   text-align: center;
 `;
@@ -105,7 +105,7 @@ const Score = styled.div`
   font-size: 20px;
   line-height: 24px;
   font-weight: 600;
-  color: #353644;
+  color: ${props => props.theme.colors.grayBlack};
   text-align: center;
 `;
 const Wrapper = styled.div`

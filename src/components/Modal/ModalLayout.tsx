@@ -45,7 +45,7 @@ const Container = styled.div`
   height: auto;
   max-height: 816px;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
   position: absolute;
   top: 50%;

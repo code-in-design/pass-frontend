@@ -3,9 +3,7 @@ import styled from '@emotion/styled';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useState, useCallback } from 'react';
 
-interface Props {}
-
-const PrivacyModal = (props: Props) => {
+const PrivacyModal = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -35,6 +33,6 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 32px;
   text-align: center;
-  color: #191e25;
+  color: ${props => props.theme.colors.black}
   margin-bottom: 8px;
 `;
