@@ -6,6 +6,7 @@ import TranscriptTable from '../components/TranscriptTable';
 import UniversityFinderModal from '../components/UniversityFinderModal';
 import { useScoreFormContext } from '../context/useScoreFormContext';
 import useScores from '../hooks/useScores';
+import { ScoreModel } from '@/models/ScoreModel';
 
 const TranscriptTableContainer = () => {
   const router = useRouter();
@@ -38,8 +39,7 @@ const TranscriptTableContainer = () => {
     if (성적발표후) await setScore(formData);
     router.push('/university/find');
   };
-
-  // if (isEmpty(transcript)) return null;
+  if (isEmpty(transcript)) return null;
   return (
     <>
       <UniversityFinderModal isOpen={isProcessing} />

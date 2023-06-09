@@ -2,10 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
 import { urls } from '@/constants/url';
 import { ScoreModel } from '@/models/ScoreModel';
+import { useDispatch } from 'react-redux';
 import { scoresActions } from '../slices/scoresSlice';
+import useScores from '../hooks/useScores';
 
 const scoreModel = new ScoreModel();
-
 export const scoresApi = createApi({
   reducerPath: 'scoresApi',
   baseQuery: fetchBaseQuery({
@@ -82,6 +83,3 @@ export const scoresApi = createApi({
 });
 
 export const { useFetchPreScoresQuery, useFetchScoresQuery, useSetPreScoresMutation, useSetScoresMutation } = scoresApi;
-function dispatch(arg0: { payload: any; type: 'scores/setTranscript' }) {
-  throw new Error('Function not implemented.');
-}
