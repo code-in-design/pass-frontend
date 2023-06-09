@@ -4,6 +4,7 @@ declare module '@emotion/react' {
       white: string;
       black: string;
       grayBlack: string;
+      gray6: string;
       gray5: string;
       gray4: string;
       gray3: string;
@@ -20,6 +21,7 @@ const theme = {
     white: '#fff',
     black: '#191E25',
     grayBlack: '#353644',
+    gray6: '#f8f8fc',
     gray5: '#f3f4fa',
     gray4: '#e4e6f0',
     gray3: '#b7b9c9',
