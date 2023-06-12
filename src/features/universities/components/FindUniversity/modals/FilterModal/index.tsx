@@ -158,14 +158,15 @@ const FileterButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0 8px;
+  gap: 0 4px;
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.white};
-  padding: 4px 8px;
+  padding: 8px 24px;
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
   cursor: pointer;
+  white-space: normal;
 `;
 
 const Title = styled.div`

@@ -1,6 +1,15 @@
 import styled from '@emotion/styled';
 import React, { useCallback, useState } from 'react';
 import ModalLayout from '@/components/Modal/ModalLayout';
+import Info from '../../../../../../../public/images/icons/info.svg';
+import HelpOutline from '../../../../../../../public/images/icons/helpOutline.svg';
+import LoudSpeaker from '../../../../../../../public/images/icons/Loudspeaker.svg';
+import Calendar from '../../../../../../../public/images/icons/calendar.svg';
+import School from '../../../../../../../public/images/icons/school.svg';
+import Book from '../../../../../../../public/images/icons/book.svg';
+import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
+import MyTooltip from '@/components/Tooltip';
+import CustomTooltip from '@/components/Tooltip';
 
 interface Props {
   name: string;
@@ -33,32 +42,52 @@ const UniversityInfoModal = (props: Props) => {
             </CompetitionRate>
           </Header>
           <MenuTitle>학과정보</MenuTitle>
-          <Content>
-            <ContentBox>
-              <ContentBoxTitle>모집군</ContentBoxTitle>
-              <ContentBoxText>가군</ContentBoxText>
-            </ContentBox>
-            <ContentBox>
-              <ContentBoxTitle>모집정원</ContentBoxTitle>
-              <ContentBoxText>33</ContentBoxText>
-            </ContentBox>
-            <ContentMethod>
+          <Information>
+            <InformationBox>
+              <InformationBoxTitle>모집군</InformationBoxTitle>
+              <InformationBoxText>가군</InformationBoxText>
+            </InformationBox>
+            <InformationBox>
+              <InformationBoxTitle>
+                모집정원
+                <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
+                  <Info />
+                </InfoIconWrapper>
+                <CustomTooltip id="tooltip-recruitmentQuota" width="210px" border="1px solid #000">
+                  <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
+                </CustomTooltip>
+              </InformationBoxTitle>
+              <InformationBoxText>33</InformationBoxText>
+            </InformationBox>
+            <InformationMethod>
               <Wrapper>
-                <ContentMethodTitle>전형 방법</ContentMethodTitle>
-                <ContentMethodTitle>다단계 전형 세부사항</ContentMethodTitle>
+                <InformationMethodTitle>전형 방법</InformationMethodTitle>
+                <InformationMethodTitle>
+                  다단계 전형 세부사항
+                  <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
+                    <HelpOutline />
+                  </HelpIconWrapper>
+                  <CustomTooltip id="tooltip-universityDetail" width="180px" border="1px solid #000">
+                    <TooltipText>다단계 반영 비율 나타내기</TooltipText>
+                  </CustomTooltip>
+                </InformationMethodTitle>
               </Wrapper>
               <Wrapper>
-                <Graph>
+                <Graph width="10%">
                   <GraphTitle>수능</GraphTitle>
-                  <GraphScore>50%</GraphScore>
+                  <GraphScore>10%</GraphScore>
                 </Graph>
-                <Graph>
+                <Graph width="30%">
+                  <GraphTitle>내신</GraphTitle>
+                  <GraphScore>30%</GraphScore>
+                </Graph>
+                <Graph width="60%">
                   <GraphTitle>실기</GraphTitle>
-                  <GraphScore>50%</GraphScore>
+                  <GraphScore>60%</GraphScore>
                 </Graph>
               </Wrapper>
-            </ContentMethod>
-          </Content>
+            </InformationMethod>
+          </Information>
 
           <MenuTitle>수능 과목별 반영 비율</MenuTitle>
           <GradeTable>
@@ -83,10 +112,18 @@ const UniversityInfoModal = (props: Props) => {
               </GradeTableTBodyTr>
             </GradeTableTbody>
           </GradeTable>
-          <Wrapper>
-            <MenuTitle>실기 반영 종목</MenuTitle>
-            <ShowTable>배점표 보기</ShowTable>
-          </Wrapper>
+
+          <MenuTitle>
+            <Wrapper>
+              실기 반영 종목
+              <ShowTable>
+                <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
+                  <Info />
+                </InfoIconWrapper>
+                배점표 보기
+              </ShowTable>
+            </Wrapper>
+          </MenuTitle>
           <Wrapper>
             <TestItem>
               <TestIcon />
@@ -117,32 +154,34 @@ const UniversityInfoModal = (props: Props) => {
           </Wrapper>
           <Wrapper>
             <DateBox>
-              <Icon />
-              <div>
+              <Calendar />
+              <DateContainer>
                 <DateName>실기고사 일정</DateName>
                 <Date>2024년 1월 23일</Date>
-              </div>
+              </DateContainer>
             </DateBox>
             <DateBox>
-              <Icon />
-              <div>
+              <LoudSpeaker />
+              <DateContainer>
                 <DateName>최초 합격자 발표일</DateName>
                 <Date>2024년 1월 23일</Date>
-              </div>
+              </DateContainer>
             </DateBox>
           </Wrapper>
           <MenuTitle>학교 정보 바로가기</MenuTitle>
           <Wrapper>
             <InfoItem>
-              <InfoIcon />
+              <InfoIcon>
+                <School />
+              </InfoIcon>
               <InfoTitle>대학 홈페이지</InfoTitle>
             </InfoItem>
             <InfoItem>
-              <InfoIcon />
+              <Book />
               <InfoTitle>학과 정보</InfoTitle>
             </InfoItem>
             <InfoItem>
-              <InfoIcon />
+              <NoticeBoard />
               <InfoTitle>모집 요강</InfoTitle>
             </InfoItem>
           </Wrapper>
@@ -154,6 +193,25 @@ const UniversityInfoModal = (props: Props) => {
 
 export default UniversityInfoModal;
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const InfoIconWrapper = styled.span<{ color: string; marginLeft?: string; marginRight?: string }>`
+  display: inline-block;
+  color: ${props => props.color};
+  width: 14px;
+  height: 14px;
+  margin-left: ${props => props.marginLeft};
+  margin-right: ${props => props.marginRight};
+  cursor: pointer;
+`;
+
+const TooltipText = styled.div`
+  color: #000;
+`;
+// 학과 제목, 경쟁률
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -195,50 +253,44 @@ const CompetitionRate = styled.div`
   }
 `;
 
+// 학과정보, 수능 과목별 반영비율, 실기 반영종목, 학교 정보 바로가기
 const MenuTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
   color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 12px;
+  margin-top: 32px;
+  &:first-of-type {
+    margin-top: 24px;
+  }
 `;
 
-const ShowTable = styled.div`
-  height: 24px;
-  padding: 4px 8px;
+// 학과 정보
+const Information = styled.div`
   display: flex;
-  align-items: center;
-  border-radius: 8px;
-  gap: 0 4px;
-  border: 1px solid ${props => props.theme.colors.gray4};
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
 `;
 
-const Content = styled.div`
-  display: flex;
-  margin-bottom: 32px;
-`;
-
-const ContentBox = styled.div`
+const InformationBox = styled.div`
   width: 96px;
   height: 72px;
   border-radius: 16px;
   background-color: ${props => props.theme.colors.gray6};
-  padding: 12px 24px;
+  padding: 12px;
+  margin-right: 8px;
 `;
 
-const ContentBoxTitle = styled.div`
+const InformationBoxTitle = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   color: ${props => props.theme.colors.gray1};
   margin-bottom: 4px;
 `;
 
-const ContentBoxText = styled.div`
+const InformationBoxText = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 28px;
@@ -246,16 +298,20 @@ const ContentBoxText = styled.div`
   color: ${props => props.theme.colors.grayBlack};
 `;
 
-const ContentMethod = styled.div`
+const InformationMethod = styled.div`
   min-width: 323px;
+  margin-left: 16px;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+const HelpIconWrapper = styled.span`
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  color: ${props => props.theme.colors.gray3};
+  margin-left: 4px;
 `;
 
-const ContentMethodTitle = styled.div`
+const InformationMethodTitle = styled.div`
   font-size: 14px;
   line-height: 16px;
   font-weight: 600;
@@ -263,13 +319,20 @@ const ContentMethodTitle = styled.div`
   margin-bottom: 8px;
 `;
 
-const Graph = styled.div`
+// 전형 방법
+const Graph = styled.div<{ width }>`
   color: ${props => props.theme.colors.white};
   padding: 8px;
-  width: 50%;
+  min-width: 48px;
+  width: ${props => props.width};
   height: 48px;
   border-radius: 8px 0 0 8px;
   background-color: ${props => props.theme.colors.blue};
+  white-space: nowrap;
+  &:nth-child(2) {
+    border-radius: 0 0px 0px 0;
+    background-color: '#AA83FF';
+  }
   &:last-of-type {
     border-radius: 0 8px 8px 0;
     background-color: ${props => props.theme.colors.green};
@@ -288,39 +351,72 @@ const GraphScore = styled.div`
   font-weight: 700;
 `;
 
-const DateBox = styled.div`
-  height: 68px;
-  padding: 16px 24px;
-  background-color: rgba(107, 119, 248, 0.15);
-  display: flex;
-  border-radius: 16px;
+//수능 과목별 반영 비율
+const GradeTable = styled.table`
   width: 100%;
-  margin-right: 16px;
-  margin-bottom: 32px;
-  :last-of-type {
-    margin-right: 0;
-  }
+  border-collapse: collapse;
+  border-radius: 12px;
+  border-style: hidden;
+  box-shadow: 0 0 0 1px ${props => props.theme.colors.gray4};
+  overflow: hidden;
 `;
 
-const Icon = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 16px;
-`;
-
-const DateName = styled.div`
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grayBlack};
-`;
-const Date = styled.div`
-  font-size: 16px;
-  line-height: 20px;
+const GradeTableThead = styled.thead`
+  text-align: center;
+  font-size: 14px;
   font-weight: 700;
+  line-height: 16px;
   color: ${props => props.theme.colors.blue};
 `;
 
+const GradeTableTheadTr = styled.tr`
+  background-color: rgba(107, 119, 248, 0.2);
+  height: 32px;
+  & > td {
+    width: 109.4px;
+    border: 1px solid ${props => props.theme.colors.gray4};
+  }
+`;
+
+const GradeTableTbody = styled.tbody`
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: ${props => props.theme.colors.black};
+`;
+
+const GradeTableTBodyTr = styled.tr`
+  height: 32px;
+  & > td {
+    border: 1px solid ${props => props.theme.colors.gray4};
+  }
+`;
+
+const TableTd = styled.td`
+  vertical-align: middle;
+  & > span {
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 500;
+  }
+`;
+
+// 배점표 보기
+const ShowTable = styled.div`
+  height: 24px;
+  padding: 4px 8px;
+  display: flex;
+  border-radius: 8px;
+  gap: 0 4px;
+  border: 1px solid ${props => props.theme.colors.gray4};
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+// 실기 반영 종목
 const TestItem = styled.div`
   display: flex;
   width: 100%;
@@ -348,6 +444,41 @@ const TestTitle = styled.div`
   color: ${props => props.theme.colors.gray1};
 `;
 
+// 실기고사 일정, 최초합격자 발표일
+const DateBox = styled.div`
+  height: 68px;
+  padding: 16px 24px;
+  background-color: rgba(107, 119, 248, 0.15);
+  display: flex;
+  border-radius: 16px;
+  width: 100%;
+  margin-right: 16px;
+  margin-top: 32px;
+  color: ${props => props.theme.colors.blue};
+  :last-of-type {
+    margin-right: 0;
+    background-color: rgba(96, 200, 222, 0.15);
+    color: #45bfd9;
+  }
+`;
+
+const DateContainer = styled.div`
+  margin-left: 16px;
+`;
+
+const DateName = styled.div`
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: ${props => props.theme.colors.grayBlack};
+`;
+const Date = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+`;
+
+// 학교 정보 바로가기
 const InfoItem = styled.div`
   display: flex;
   width: 100%;
@@ -358,12 +489,14 @@ const InfoItem = styled.div`
   border-radius: 16px;
   border: 1px solid ${props => props.theme.colors.gray4};
   margin-right: 10px;
+  cursor: pointer;
   &:last-of-type {
     margin-right: 0;
   }
 `;
 
-const InfoIcon = styled.img`
+const InfoIcon = styled.div`
+  color: ${props => props.theme.colors.green};
   width: 20px;
   height: 20px;
 `;
@@ -373,56 +506,4 @@ const InfoTitle = styled.div`
   line-height: 16px;
   font-weight: 600;
   color: ${props => props.theme.colors.grayBlack};
-`;
-
-const GradeTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  border-style: hidden;
-  box-shadow: 0 0 0 1px ${props => props.theme.colors.gray4};
-  overflow: hidden;
-`;
-
-const GradeTableThead = styled.thead`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: ${props => props.theme.colors.blue};
-`;
-
-const GradeTableTheadTr = styled.tr`
-  background-color: rgba(107, 119, 248, 0.1);
-  height: 51.2px;
-  & > td {
-    width: 152px;
-    border: 1px solid ${props => props.theme.colors.gray4};
-    &:last-of-type {
-      width: 216px;
-    }
-  }
-`;
-
-const GradeTableTbody = styled.tbody`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: ${props => props.theme.colors.black};
-`;
-
-const GradeTableTBodyTr = styled.tr`
-  height: 51.2px;
-  letter-spacing: -0.04em;
-  & > td {
-    width: 152px;
-    border: 1px solid ${props => props.theme.colors.gray4};
-  }
-`;
-
-const TableTd = styled.td`
-  vertical-align: middle;
 `;

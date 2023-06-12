@@ -127,6 +127,8 @@ const Info = styled.div`
 const IconWrapper = styled.div`
   color: ${props => props.theme.colors.green};
   margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;
 const InfoText = styled.span`
   font-size: 14px;

@@ -86,7 +86,7 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
                 <HelpIcon data-tooltip-id="tooltip-mathDropout">
                   <Help />
                 </HelpIcon>
-                <MyTooltip id="tooltip-mathDropout">
+                <MyTooltip id="tooltip-mathDropout" width="371px">
                   <TooltipContainer>
                     <TooltipText>수포자 체크시, 수학 영역은 모두 0점 처리되어 진행됩니다.</TooltipText>
                   </TooltipContainer>

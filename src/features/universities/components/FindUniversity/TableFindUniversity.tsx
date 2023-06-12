@@ -18,7 +18,9 @@ const TableFindUniversity = () => {
             <SearchUniversity placeholder="대학명 검색" />
           </InputWrapper>
           <InfoWrapper>
-            <InfoIcon />
+            <InfoIconWrapper>
+              <InfoIcon />
+            </InfoIconWrapper>
             <InfoText>학과명을 클릭하면 입시 정보를 볼 수 있어요!</InfoText>
           </InfoWrapper>
         </SearchWrapper>
@@ -75,6 +77,11 @@ const InfoWrapper = styled.div`
   display: flex;
   align-items: center;
   color: ${props => props.theme.colors.gray2};
+`;
+
+const InfoIconWrapper = styled.div`
+  width: 16px;
+  height: 16px;
 `;
 
 const InfoText = styled.text`

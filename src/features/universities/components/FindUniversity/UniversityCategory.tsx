@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import School from '../../../../../public/images/icons/navSchool.svg';
+import School from '../../../../../public/images/icons/schoolOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 
@@ -99,6 +99,8 @@ const Wrapper = styled.div`
 const IconWrapper = styled.div`
   color: #45bfd9;
   margin-right: 4px;
+  width: 16px;
+  height: 16px;
 `;
 const ContainerText = styled.div`
   font-size: 16px;
