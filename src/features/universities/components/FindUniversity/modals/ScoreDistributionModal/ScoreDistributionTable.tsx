@@ -24,7 +24,7 @@ const ScoreDistributionTable = (props: Props) => {
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.data.map((item, index) => {
+        {props.data.map((item, index = 100) => {
           const score = 100;
           return (
             <GradeTableTBodyTr key={index}>
@@ -62,7 +62,6 @@ ScoreDistributionTable.defaultProps = {
 };
 
 const GradeTable = styled.table`
-  margin-top: 32px;
   width: 100%;
   border-collapse: collapse;
   border-radius: 12px;

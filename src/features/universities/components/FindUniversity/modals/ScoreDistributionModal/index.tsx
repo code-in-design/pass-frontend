@@ -38,6 +38,7 @@ const ScoreDistributionModal = (props: Props) => {
           </TitleWrapper>
           <MenuTitle>실기 반영 비율</MenuTitle>
           <Wrapper>
+            {/* 컴포넌트로 분리하기 */}
             <TestItem onClick={() => setSelectSubject('제자리 멀리 뛰기')}>
               <TestIcon />
               <TestTitle>제자리 멀리뛰기</TestTitle>
@@ -73,6 +74,7 @@ const ScoreDistributionModal = (props: Props) => {
 };
 
 export default ScoreDistributionModal;
+ScoreDistributionModal.defaultProps = {};
 
 const InfoIconWrapper = styled.span<{ color: string; marginLeft?: string; marginRight?: string }>`
   display: inline-block;
@@ -167,6 +169,7 @@ const TestTitle = styled.div`
 // 배점 표
 const TableWrapper = styled.div`
   width: 100%;
-  min-height: 448px;
+  height: 448px;
   overflow-y: auto;
+  margin-top: 32px;
 `;

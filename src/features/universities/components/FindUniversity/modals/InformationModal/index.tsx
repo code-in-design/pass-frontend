@@ -17,7 +17,7 @@ interface Props {
   competition: string;
 }
 
-const UniversityInfoModal = (props: Props) => {
+const UniversityInformationModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -186,7 +186,7 @@ const UniversityInfoModal = (props: Props) => {
   );
 };
 
-export default UniversityInfoModal;
+export default UniversityInformationModal;
 
 const Wrapper = styled.div`
   display: flex;

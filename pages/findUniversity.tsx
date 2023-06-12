@@ -1,8 +1,8 @@
-import UniversityContainer from '@/features/universities/containers/UniversityContainer';
+import FindUniversityPage from '@/pages/findUniversity';
 import React from 'react';
 
 const findUniversity = () => {
-  return <UniversityContainer />;
+  return <FindUniversityPage />;
 };
 
 export default findUniversity;

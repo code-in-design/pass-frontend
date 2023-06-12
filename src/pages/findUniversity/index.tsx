@@ -1,22 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '@/components/Layout/Layout';
-import UniversityCategory from './UniversityCategory';
-import TableFindUniversity from './TableFindUniversity';
+import UniversityCategoryList from '@/features/universities/components/FindUniversity/UniversityCategoryList';
+import UniversitySearchContainer from '@/features/universities/containers/UniversitySearchContainer';
+import UniversityTableContainer from '@/features/universities/containers/UniversityTableContainer';
 
-const FindUniversity = () => {
+const FindUniversityPage = () => {
   return (
     <Layout>
       <Container>
         <Title>대학 찾기</Title>
-        <UniversityCategory />
-        <TableFindUniversity />
+        <UniversityCategoryList />
+        <UniversitySearchContainer />
+        <UniversityTableContainer />
       </Container>
     </Layout>
   );
 };
 
-export default FindUniversity;
+export default FindUniversityPage;
 
 const Container = styled.div`
   display: flex;
