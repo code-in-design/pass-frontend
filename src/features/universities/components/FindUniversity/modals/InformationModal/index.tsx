@@ -10,6 +10,7 @@ import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
 import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
+import PracticalEvent from '../../PracticalEvent';
 
 interface Props {
   name: string;
@@ -120,32 +121,7 @@ const UniversityInformationModal = (props: Props) => {
             </Wrapper>
           </MenuTitle>
           <Wrapper>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>제자리 멀리뛰기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>배근력</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>사이드스텝</TestTitle>
-            </TestItem>
-          </Wrapper>
-          <Wrapper>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>메디신볼던지기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>메달리기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>서전트점프</TestTitle>
-            </TestItem>
+            <PracticalEvent title="제자리 멀리뛰기" />
           </Wrapper>
           <Wrapper>
             <DateBox>
