@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
+import Info from '../../../../../../../public/images/icons/info.svg';
+import ScoreDistributionTable from './ScoreDistributionTable';
 
 interface Props {
   name: string;
@@ -17,17 +19,26 @@ const ScoreDistributionModal = (props: Props) => {
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, [isOpen]);
+
+  const [selectSubject, setSelectSubject] = useState('');
+
   return (
     <>
-      <button onClick={openModal}>실기 배점표 보기</button>
+      <ShowTable onClick={openModal}>
+        <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
+          <Info />
+        </InfoIconWrapper>
+        배점표 보기
+      </ShowTable>
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <TitleWrapper>
             <Title>{props.name}</Title>
             <SubTitle>{props.subTitle}</SubTitle>
           </TitleWrapper>
+          <MenuTitle>실기 반영 비율</MenuTitle>
           <Wrapper>
-            <TestItem>
+            <TestItem onClick={() => setSelectSubject('제자리 멀리 뛰기')}>
               <TestIcon />
               <TestTitle>제자리 멀리뛰기</TestTitle>
             </TestItem>
@@ -39,8 +50,6 @@ const ScoreDistributionModal = (props: Props) => {
               <TestIcon />
               <TestTitle>사이드스텝</TestTitle>
             </TestItem>
-          </Wrapper>
-          <Wrapper>
             <TestItem>
               <TestIcon />
               <TestTitle>메디신볼던지기</TestTitle>
@@ -54,27 +63,9 @@ const ScoreDistributionModal = (props: Props) => {
               <TestTitle>서전트점프</TestTitle>
             </TestItem>
           </Wrapper>
-
-          <GradeTable>
-            <GradeTableThead>
-              <GradeTableTheadTr>
-                <TableTd>종목</TableTd>
-                <TableTd colSpan={2}>제자리멀리뛰기</TableTd>
-              </GradeTableTheadTr>
-              <GradeTableTheadTr>
-                <TableTd>배점</TableTd>
-                <TableTd>남</TableTd>
-                <TableTd>여</TableTd>
-              </GradeTableTheadTr>
-            </GradeTableThead>
-            <GradeTableTbody>
-              <GradeTableTBodyTr>
-                <TableTd>100</TableTd>
-                <TableTd>300이상</TableTd>
-                <TableTd>250이상</TableTd>
-              </GradeTableTBodyTr>
-            </GradeTableTbody>
-          </GradeTable>
+          <TableWrapper>
+            <ScoreDistributionTable title={selectSubject} />
+          </TableWrapper>
         </ModalLayout>
       )}
     </>
@@ -82,6 +73,46 @@ const ScoreDistributionModal = (props: Props) => {
 };
 
 export default ScoreDistributionModal;
+
+const InfoIconWrapper = styled.span<{ color: string; marginLeft?: string; marginRight?: string }>`
+  display: inline-block;
+  color: ${props => props.color};
+  width: 14px;
+  height: 14px;
+  margin-left: ${props => props.marginLeft};
+  margin-right: ${props => props.marginRight};
+  cursor: pointer;
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 12px;
+  min-width: 547px;
+`;
+
+const MenuTitle = styled.div`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: ${props => props.theme.colors.grayBlack};
+  margin-bottom: 12px;
+  margin-top: 24px;
+`;
+
+// 배점표 보기
+const ShowTable = styled.div`
+  height: 24px;
+  padding: 4px 8px;
+  display: flex;
+  border-radius: 8px;
+  gap: 0 4px;
+  border: 1px solid ${props => props.theme.colors.gray4};
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  cursor: pointer;
+`;
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -104,12 +135,7 @@ const SubTitle = styled.div`
   color: ${props => props.theme.colors.gray2};
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  min-width: 547px;
-`;
-
+// 실기 반영 종목
 const TestItem = styled.div`
   display: flex;
   width: 100%;
@@ -120,6 +146,7 @@ const TestItem = styled.div`
   border-radius: 16px;
   margin-right: 10px;
   background-color: ${props => props.theme.colors.gray6};
+  cursor: pointer;
   &:last-of-type {
     margin-right: 0;
   }
@@ -137,54 +164,9 @@ const TestTitle = styled.div`
   color: ${props => props.theme.colors.gray1};
 `;
 
-const GradeTable = styled.table`
+// 배점 표
+const TableWrapper = styled.div`
   width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  border-style: hidden;
-  box-shadow: 0 0 0 1px ${props => props.theme.colors.gray4};
-  overflow: hidden;
-`;
-
-const GradeTableThead = styled.thead`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: ${props => props.theme.colors.blue};
-`;
-
-const GradeTableTheadTr = styled.tr`
-  background-color: rgba(107, 119, 248, 0.1);
-  height: 51.2px;
-  & > td {
-    width: 152px;
-    border: 1px solid ${props => props.theme.colors.gray4};
-    &:last-of-type {
-      width: 216px;
-    }
-  }
-`;
-
-const GradeTableTbody = styled.tbody`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.04em;
-  color: ${props => props.theme.colors.black};
-`;
-
-const GradeTableTBodyTr = styled.tr`
-  height: 51.2px;
-  letter-spacing: -0.04em;
-  & > td {
-    width: 152px;
-    border: 1px solid ${props => props.theme.colors.gray4};
-  }
-`;
-
-const TableTd = styled.td`
-  vertical-align: middle;
+  min-height: 448px;
+  overflow-y: auto;
 `;

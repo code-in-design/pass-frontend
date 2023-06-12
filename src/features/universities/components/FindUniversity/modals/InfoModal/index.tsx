@@ -9,7 +9,7 @@ import School from '../../../../../../../public/images/icons/school.svg';
 import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
-import CustomTooltip from '@/components/Tooltip';
+import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
 
 interface Props {
   name: string;
@@ -53,9 +53,9 @@ const UniversityInfoModal = (props: Props) => {
                 <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
                   <Info />
                 </InfoIconWrapper>
-                <CustomTooltip id="tooltip-recruitmentQuota" width="210px" border="1px solid #000">
+                <MyTooltip id="tooltip-recruitmentQuota" width="210px">
                   <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
-                </CustomTooltip>
+                </MyTooltip>
               </InformationBoxTitle>
               <InformationBoxText>33</InformationBoxText>
             </InformationBox>
@@ -67,9 +67,9 @@ const UniversityInfoModal = (props: Props) => {
                   <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
                     <HelpOutline />
                   </HelpIconWrapper>
-                  <CustomTooltip id="tooltip-universityDetail" width="180px" border="1px solid #000">
+                  <MyTooltip id="tooltip-universityDetail" width="180px">
                     <TooltipText>다단계 반영 비율 나타내기</TooltipText>
-                  </CustomTooltip>
+                  </MyTooltip>
                 </InformationMethodTitle>
               </Wrapper>
               <Wrapper>
@@ -116,12 +116,7 @@ const UniversityInfoModal = (props: Props) => {
           <MenuTitle>
             <Wrapper>
               실기 반영 종목
-              <ShowTable>
-                <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
-                  <Info />
-                </InfoIconWrapper>
-                배점표 보기
-              </ShowTable>
+              <UniversityScoreModalContainer />
             </Wrapper>
           </MenuTitle>
           <Wrapper>
@@ -323,7 +318,6 @@ const InformationMethodTitle = styled.div`
 const Graph = styled.div<{ width }>`
   color: ${props => props.theme.colors.white};
   padding: 8px;
-  min-width: 48px;
   width: ${props => props.width};
   height: 48px;
   border-radius: 8px 0 0 8px;
@@ -331,7 +325,7 @@ const Graph = styled.div<{ width }>`
   white-space: nowrap;
   &:nth-child(2) {
     border-radius: 0 0px 0px 0;
-    background-color: '#AA83FF';
+    background-color: ${props => props.theme.colors.purple};
   }
   &:last-of-type {
     border-radius: 0 8px 8px 0;
@@ -400,20 +394,6 @@ const TableTd = styled.td`
     line-height: 12px;
     font-weight: 500;
   }
-`;
-
-// 배점표 보기
-const ShowTable = styled.div`
-  height: 24px;
-  padding: 4px 8px;
-  display: flex;
-  border-radius: 8px;
-  gap: 0 4px;
-  border: 1px solid ${props => props.theme.colors.gray4};
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  cursor: pointer;
 `;
 
 // 실기 반영 종목

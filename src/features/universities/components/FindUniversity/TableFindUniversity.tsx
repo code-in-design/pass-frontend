@@ -26,7 +26,7 @@ const TableFindUniversity = () => {
         </SearchWrapper>
         <UniversityFilterModalContainer />
       </Wrapper>
-      테이블 데이터
+      테이블 데이터 <br />
       <UniversityInfoModalContainer />
       <UniversityScoreModalContainer />
     </Container>
