@@ -7,84 +7,55 @@ import ScoreDistributionTable from './ScoreDistributionTable';
 interface Props {
   name: string;
   subTitle: string;
+  onClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ScoreDistributionModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = useCallback(() => {
-    setIsOpen(true);
-  }, [isOpen]);
-
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, [isOpen]);
-
   const [selectSubject, setSelectSubject] = useState('');
 
   return (
-    <>
-      <ShowTable onClick={openModal}>
-        <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
-          <Info />
-        </InfoIconWrapper>
-        배점표 보기
-      </ShowTable>
-      {isOpen && (
-        <ModalLayout isOpen={isOpen} onClose={closeModal}>
-          <TitleWrapper>
-            <Title>{props.name}</Title>
-            <SubTitle>{props.subTitle}</SubTitle>
-          </TitleWrapper>
-          <MenuTitle>실기 반영 비율</MenuTitle>
-          <Wrapper>
-            {/* 컴포넌트로 분리하기 */}
-            <TestItem onClick={() => setSelectSubject('제자리 멀리 뛰기')}>
-              <TestIcon />
-              <TestTitle>제자리 멀리뛰기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>배근력</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>사이드스텝</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>메디신볼던지기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>메달리기</TestTitle>
-            </TestItem>
-            <TestItem>
-              <TestIcon />
-              <TestTitle>서전트점프</TestTitle>
-            </TestItem>
-          </Wrapper>
-          <TableWrapper>
-            <ScoreDistributionTable title={selectSubject} />
-          </TableWrapper>
-        </ModalLayout>
-      )}
-    </>
+    <ModalLayout onClose={() => props.onClose(false)}>
+      <TitleWrapper>
+        <Title>{props.name}</Title>
+        <SubTitle>{props.subTitle}</SubTitle>
+      </TitleWrapper>
+      <MenuTitle>실기 반영 비율</MenuTitle>
+      <Wrapper>
+        {/* 컴포넌트로 분리하기 */}
+        <TestItem onClick={() => setSelectSubject('제자리 멀리 뛰기')}>
+          <TestIcon />
+          <TestTitle>제자리 멀리뛰기</TestTitle>
+        </TestItem>
+        <TestItem>
+          <TestIcon />
+          <TestTitle>배근력</TestTitle>
+        </TestItem>
+        <TestItem>
+          <TestIcon />
+          <TestTitle>사이드스텝</TestTitle>
+        </TestItem>
+        <TestItem>
+          <TestIcon />
+          <TestTitle>메디신볼던지기</TestTitle>
+        </TestItem>
+        <TestItem>
+          <TestIcon />
+          <TestTitle>메달리기</TestTitle>
+        </TestItem>
+        <TestItem>
+          <TestIcon />
+          <TestTitle>서전트점프</TestTitle>
+        </TestItem>
+      </Wrapper>
+      <TableWrapper>
+        <ScoreDistributionTable title={selectSubject} />
+      </TableWrapper>
+    </ModalLayout>
   );
 };
 
 export default ScoreDistributionModal;
 ScoreDistributionModal.defaultProps = {};
-
-const InfoIconWrapper = styled.span<{ color: string; marginLeft?: string; marginRight?: string }>`
-  display: inline-block;
-  color: ${props => props.color};
-  width: 14px;
-  height: 14px;
-  margin-left: ${props => props.marginLeft};
-  margin-right: ${props => props.marginRight};
-  cursor: pointer;
-`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -100,20 +71,6 @@ const MenuTitle = styled.div`
   color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 12px;
   margin-top: 24px;
-`;
-
-// 배점표 보기
-const ShowTable = styled.div`
-  height: 24px;
-  padding: 4px 8px;
-  display: flex;
-  border-radius: 8px;
-  gap: 0 4px;
-  border: 1px solid ${props => props.theme.colors.gray4};
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  cursor: pointer;
 `;
 
 const TitleWrapper = styled.div`

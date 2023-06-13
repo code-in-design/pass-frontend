@@ -17,8 +17,8 @@ const UniversityCategoryList = (props: Props) => {
   };
   return (
     <Container>
-      {props.lists.map(list => (
-        <UniversityCategoryListItem lists={list} isSelected={toggleItem === list.text} onClick={handleItemClick} />
+      {props.lists.map((list, index) => (
+        <UniversityCategoryListItem key={index} lists={list} isSelected={toggleItem === list.text} onClick={handleItemClick} />
       ))}
     </Container>
   );

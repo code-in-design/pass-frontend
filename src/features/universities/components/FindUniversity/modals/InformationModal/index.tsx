@@ -20,17 +20,19 @@ interface Props {
 
 const UniversityInformationModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const openModal = useCallback(() => {
+  const openInformationModal = useCallback(() => {
     setIsOpen(true);
   }, [isOpen]);
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, [isOpen]);
+
   return (
     <>
-      <button onClick={openModal}>학교정보</button>
+      <button onClick={openInformationModal}>학교정보</button>
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Header>
@@ -73,7 +75,7 @@ const UniversityInformationModal = (props: Props) => {
                   </MyTooltip>
                 </InformationMethodTitle>
               </Wrapper>
-              <Wrapper>
+              <GraphWrapper>
                 <Graph width="10%">
                   <GraphTitle>수능</GraphTitle>
                   <GraphScore>10%</GraphScore>
@@ -86,7 +88,7 @@ const UniversityInformationModal = (props: Props) => {
                   <GraphTitle>실기</GraphTitle>
                   <GraphScore>60%</GraphScore>
                 </Graph>
-              </Wrapper>
+              </GraphWrapper>
             </InformationMethod>
           </Information>
 
@@ -117,7 +119,12 @@ const UniversityInformationModal = (props: Props) => {
           <MenuTitle>
             <Wrapper>
               실기 반영 종목
-              <UniversityScoreModalContainer />
+              <ShowTable onClick={() => setOpenModal(true)}>
+                <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
+                  <Info />
+                </InfoIconWrapper>
+                배점표 보기
+              </ShowTable>
             </Wrapper>
           </MenuTitle>
           <Wrapper>
@@ -158,6 +165,7 @@ const UniversityInformationModal = (props: Props) => {
           </Wrapper>
         </ModalLayout>
       )}
+      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} />}
     </>
   );
 };
@@ -291,20 +299,27 @@ const InformationMethodTitle = styled.div`
 `;
 
 // 전형 방법
+const GraphWrapper = styled.div`
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
 const Graph = styled.div<{ width }>`
   color: ${props => props.theme.colors.white};
   padding: 8px;
+  min-width: 48px;
   width: ${props => props.width};
   height: 48px;
-  border-radius: 8px 0 0 8px;
-  background-color: ${props => props.theme.colors.blue};
   white-space: nowrap;
+  display: ${props => (props.width === '0' ? 'none' : 'block')};
+  &:first-of-type {
+    background-color: ${props => props.theme.colors.blue};
+  }
   &:nth-child(2) {
-    border-radius: 0 0px 0px 0;
     background-color: ${props => props.theme.colors.purple};
   }
   &:last-of-type {
-    border-radius: 0 8px 8px 0;
     background-color: ${props => props.theme.colors.green};
   }
 `;
@@ -462,4 +477,18 @@ const InfoTitle = styled.div`
   line-height: 16px;
   font-weight: 600;
   color: ${props => props.theme.colors.grayBlack};
+`;
+
+// 배점표 보기
+const ShowTable = styled.div`
+  height: 24px;
+  padding: 4px 8px;
+  display: flex;
+  border-radius: 8px;
+  gap: 0 4px;
+  border: 1px solid ${props => props.theme.colors.gray4};
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  cursor: pointer;
 `;
