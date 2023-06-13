@@ -3,8 +3,8 @@ import UniversitySettingFilterModal from '../components/FindUniversity/modals/Fi
 import { useForm } from 'react-hook-form';
 
 const UniversityFilterModalContainer = () => {
-  const { register } = useForm();
-  return <UniversitySettingFilterModal register={register} />;
+  const { register, handleSubmit } = useForm();
+  return <UniversitySettingFilterModal register={register} handleSubmit={handleSubmit} />;
 };
 
 export default UniversityFilterModalContainer;

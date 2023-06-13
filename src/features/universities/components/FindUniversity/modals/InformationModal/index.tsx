@@ -17,6 +17,7 @@ interface Props {
   subTitle: string;
   competition: string;
   exercise: string[];
+  onClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UniversityInformationModal = (props: Props) => {
@@ -33,139 +34,136 @@ const UniversityInformationModal = (props: Props) => {
 
   return (
     <>
-      <button onClick={openInformationModal}>학교정보</button>
-      {isOpen && (
-        <ModalLayout isOpen={isOpen} onClose={closeModal}>
-          <Header>
-            <TitleWrapper>
-              <Title>{props.name}</Title>
-              <SubTitle>{props.subTitle}</SubTitle>
-            </TitleWrapper>
-            <CompetitionRate>
-              2023 경쟁률 <span>{props.competition}</span>
-            </CompetitionRate>
-          </Header>
-          <MenuTitle>학과정보</MenuTitle>
-          <Information>
-            <InformationBox>
-              <InformationBoxTitle>모집군</InformationBoxTitle>
-              <InformationBoxText>가군</InformationBoxText>
-            </InformationBox>
-            <InformationBox>
-              <InformationBoxTitle>
-                모집정원
-                <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
-                  <Info />
-                </InfoIconWrapper>
-                <MyTooltip id="tooltip-recruitmentQuota" width="210px">
-                  <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
-                </MyTooltip>
-              </InformationBoxTitle>
-              <InformationBoxText>33</InformationBoxText>
-            </InformationBox>
-            <InformationMethod>
-              <Wrapper>
-                <InformationMethodTitle>전형 방법</InformationMethodTitle>
-                <InformationMethodTitle>
-                  다단계 전형 세부사항
-                  <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
-                    <HelpOutline />
-                  </HelpIconWrapper>
-                  <MyTooltip id="tooltip-universityDetail" width="180px">
-                    <TooltipText>다단계 반영 비율 나타내기</TooltipText>
-                  </MyTooltip>
-                </InformationMethodTitle>
-              </Wrapper>
-              <GraphWrapper>
-                <Graph width="10%">
-                  <GraphTitle>수능</GraphTitle>
-                  <GraphScore>10%</GraphScore>
-                </Graph>
-                <Graph width="30%">
-                  <GraphTitle>내신</GraphTitle>
-                  <GraphScore>30%</GraphScore>
-                </Graph>
-                <Graph width="60%">
-                  <GraphTitle>실기</GraphTitle>
-                  <GraphScore>60%</GraphScore>
-                </Graph>
-              </GraphWrapper>
-            </InformationMethod>
-          </Information>
-
-          <MenuTitle>수능 과목별 반영 비율</MenuTitle>
-          <GradeTable>
-            <GradeTableThead>
-              <GradeTableTheadTr>
-                <TableTd>국어</TableTd>
-                <TableTd>수학</TableTd>
-                <TableTd>영어</TableTd>
-                <TableTd>탐구</TableTd>
-                <TableTd>한국사</TableTd>
-              </GradeTableTheadTr>
-            </GradeTableThead>
-            <GradeTableTbody>
-              <GradeTableTBodyTr>
-                <TableTd>40%</TableTd>
-                <TableTd>-</TableTd>
-                <TableTd>20%</TableTd>
-                <TableTd>
-                  40% <span>(상위1과목)</span>
-                </TableTd>
-                <TableTd>가산점</TableTd>
-              </GradeTableTBodyTr>
-            </GradeTableTbody>
-          </GradeTable>
-
-          <MenuTitle>
-            <Wrapper>
-              실기 반영 종목
-              <ShowTable onClick={() => setOpenModal(true)}>
+      <ModalLayout isOpen={isOpen} onClose={() => props.onClose(false)}>
+        <Header>
+          <TitleWrapper>
+            <Title>{props.name}</Title>
+            <SubTitle>{props.subTitle}</SubTitle>
+          </TitleWrapper>
+          <CompetitionRate>
+            2023 경쟁률 <span>{props.competition}</span>
+          </CompetitionRate>
+        </Header>
+        <MenuTitle>학과정보</MenuTitle>
+        <Information>
+          <InformationBox>
+            <InformationBoxTitle>모집군</InformationBoxTitle>
+            <InformationBoxText>가군</InformationBoxText>
+          </InformationBox>
+          <InformationBox>
+            <InformationBoxTitle>
+              모집정원
+              <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
                 <Info />
-                배점표 보기
-              </ShowTable>
+              </InfoIconWrapper>
+              <MyTooltip id="tooltip-recruitmentQuota" width="210px">
+                <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
+              </MyTooltip>
+            </InformationBoxTitle>
+            <InformationBoxText>33</InformationBoxText>
+          </InformationBox>
+          <InformationMethod>
+            <Wrapper>
+              <InformationMethodTitle>전형 방법</InformationMethodTitle>
+              <InformationMethodTitle>
+                다단계 전형 세부사항
+                <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
+                  <HelpOutline />
+                </HelpIconWrapper>
+                <MyTooltip id="tooltip-universityDetail" width="180px">
+                  <TooltipText>다단계 반영 비율 나타내기</TooltipText>
+                </MyTooltip>
+              </InformationMethodTitle>
             </Wrapper>
-          </MenuTitle>
-          <ExerciseWrapper>
-            {props?.exercise?.map((item, index) => {
-              return <ExerciseType key={index} type={item} />;
-            })}
-          </ExerciseWrapper>
+            <GraphWrapper>
+              <Graph width="10%">
+                <GraphTitle>수능</GraphTitle>
+                <GraphScore>10%</GraphScore>
+              </Graph>
+              <Graph width="30%">
+                <GraphTitle>내신</GraphTitle>
+                <GraphScore>30%</GraphScore>
+              </Graph>
+              <Graph width="60%">
+                <GraphTitle>실기</GraphTitle>
+                <GraphScore>60%</GraphScore>
+              </Graph>
+            </GraphWrapper>
+          </InformationMethod>
+        </Information>
+
+        <MenuTitle>수능 과목별 반영 비율</MenuTitle>
+        <GradeTable>
+          <GradeTableThead>
+            <GradeTableTheadTr>
+              <TableTd>국어</TableTd>
+              <TableTd>수학</TableTd>
+              <TableTd>영어</TableTd>
+              <TableTd>탐구</TableTd>
+              <TableTd>한국사</TableTd>
+            </GradeTableTheadTr>
+          </GradeTableThead>
+          <GradeTableTbody>
+            <GradeTableTBodyTr>
+              <TableTd>40%</TableTd>
+              <TableTd>-</TableTd>
+              <TableTd>20%</TableTd>
+              <TableTd>
+                40% <span>(상위1과목)</span>
+              </TableTd>
+              <TableTd>가산점</TableTd>
+            </GradeTableTBodyTr>
+          </GradeTableTbody>
+        </GradeTable>
+
+        <MenuTitle>
           <Wrapper>
-            <DateBox>
-              <Calendar />
-              <DateContainer>
-                <DateName>실기고사 일정</DateName>
-                <Date>2024년 1월 23일</Date>
-              </DateContainer>
-            </DateBox>
-            <DateBox>
-              <LoudSpeaker />
-              <DateContainer>
-                <DateName>최초 합격자 발표일</DateName>
-                <Date>2024년 1월 23일</Date>
-              </DateContainer>
-            </DateBox>
+            실기 반영 종목
+            <ShowTable onClick={() => setOpenModal(true)}>
+              <Info />
+              배점표 보기
+            </ShowTable>
           </Wrapper>
-          <MenuTitle>학교 정보 바로가기</MenuTitle>
-          <Wrapper>
-            <InfoItem>
-              <InfoIcon>
-                <School />
-              </InfoIcon>
-              <InfoTitle>대학 홈페이지</InfoTitle>
-            </InfoItem>
-            <InfoItem>
-              <Book />
-              <InfoTitle>학과 정보</InfoTitle>
-            </InfoItem>
-            <InfoItem>
-              <NoticeBoard />
-              <InfoTitle>모집 요강</InfoTitle>
-            </InfoItem>
-          </Wrapper>
-        </ModalLayout>
-      )}
+        </MenuTitle>
+        <ExerciseWrapper>
+          {props?.exercise?.map((item, index) => {
+            return <ExerciseType key={index} type={item} />;
+          })}
+        </ExerciseWrapper>
+        <Wrapper>
+          <DateBox>
+            <Calendar />
+            <DateContainer>
+              <DateName>실기고사 일정</DateName>
+              <Date>2024년 1월 23일</Date>
+            </DateContainer>
+          </DateBox>
+          <DateBox>
+            <LoudSpeaker />
+            <DateContainer>
+              <DateName>최초 합격자 발표일</DateName>
+              <Date>2024년 1월 23일</Date>
+            </DateContainer>
+          </DateBox>
+        </Wrapper>
+        <MenuTitle>학교 정보 바로가기</MenuTitle>
+        <Wrapper>
+          <InfoItem>
+            <InfoIcon>
+              <School />
+            </InfoIcon>
+            <InfoTitle>대학 홈페이지</InfoTitle>
+          </InfoItem>
+          <InfoItem>
+            <Book />
+            <InfoTitle>학과 정보</InfoTitle>
+          </InfoItem>
+          <InfoItem>
+            <NoticeBoard />
+            <InfoTitle>모집 요강</InfoTitle>
+          </InfoItem>
+        </Wrapper>
+      </ModalLayout>
       {openModal && <UniversityScoreModalContainer onClose={setOpenModal} />}
     </>
   );

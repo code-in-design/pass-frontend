@@ -12,11 +12,11 @@ const UniversityCategoryListItem = (props: Props) => {
 
   return (
     <Component onClick={() => props.onClick(props.lists.text)}>
-      {props.lists.total ? <ContainerTotalTitle>{props.lists.total}</ContainerTotalTitle> : <ContainerTitle>{props.lists.title}</ContainerTitle>}
+      {props.lists.total ? <ContainerTotalTitle>{props.lists.total}</ContainerTotalTitle> : <ContainerTitle isSelected={props.isSelected}>{props.lists.title}</ContainerTitle>}
       {!props.lists.total && (
         <Wrapper>
-          <IconWrapper>{props.lists.icon}</IconWrapper>
-          <ContainerText>{props.lists.text}</ContainerText>
+          <IconWrapper isSelected={props.isSelected}>{props.lists.icon}</IconWrapper>
+          <ContainerText isSelected={props.isSelected}>{props.lists.text}</ContainerText>
         </Wrapper>
       )}
     </Component>
@@ -54,11 +54,11 @@ const ItemSelectContainer = styled.div`
   cursor: pointer;
 `;
 
-const ContainerTitle = styled.div`
+const ContainerTitle = styled.div<{ isSelected: boolean }>`
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
-  color: ${props => props.theme.colors.gray2};
+  color: ${props => (props.isSelected ? props.theme.colors.white : props.theme.colors.gray2)};
   margin-bottom: 12px;
 `;
 
@@ -75,15 +75,15 @@ const Wrapper = styled.div`
   color: #45bfd9;
 `;
 
-const IconWrapper = styled.div`
-  color: #45bfd9;
+const IconWrapper = styled.div<{ isSelected: boolean }>`
+  color: ${props => (props.isSelected ? props.theme.colors.white : '#45bfd9')};
   margin-right: 4px;
   width: 16px;
   height: 16px;
 `;
-const ContainerText = styled.div`
+const ContainerText = styled.div<{ isSelected: boolean }>`
   font-size: 16px;
   line-height: 16px;
   font-weight: 700;
-  color: ${props => props.theme.colors.grayBlack};
+  color: ${props => (props.isSelected ? props.theme.colors.white : props.theme.colors.grayBlack)};
 `;

@@ -38,6 +38,9 @@ const IconWrapper = styled.div`
   position: absolute;
   top: 12px;
   left: 12px;
+  width: 16px;
+  height: 16px;
+  color: ${props => props.theme.colors.gray3};
 `;
 
 const SearchUniversity = styled.input`
