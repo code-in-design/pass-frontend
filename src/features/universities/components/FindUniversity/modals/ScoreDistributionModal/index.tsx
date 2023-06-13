@@ -1,17 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
-import Info from '../../../../../../../public/images/icons/info.svg';
 import ScoreDistributionTable from './ScoreDistributionTable';
+import ExerciseType from '../../ExerciseType';
 
 interface Props {
   name: string;
   subTitle: string;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
+  exercise: string[];
 }
 
 const ScoreDistributionModal = (props: Props) => {
-  const [selectSubject, setSelectSubject] = useState('');
+  const [toggleItem, setToggleItem] = useState(props.exercise[0]);
+
+  const handleItemClick = item => {
+    setToggleItem(item);
+  };
 
   return (
     <ModalLayout onClose={() => props.onClose(false)}>
@@ -19,43 +24,23 @@ const ScoreDistributionModal = (props: Props) => {
         <Title>{props.name}</Title>
         <SubTitle>{props.subTitle}</SubTitle>
       </TitleWrapper>
-      <MenuTitle>실기 반영 비율</MenuTitle>
+      <MenuTitle>실기 반영 종목</MenuTitle>
       <Wrapper>
-        {/* 컴포넌트로 분리하기 */}
-        <TestItem onClick={() => setSelectSubject('제자리 멀리 뛰기')}>
-          <TestIcon />
-          <TestTitle>제자리 멀리뛰기</TestTitle>
-        </TestItem>
-        <TestItem>
-          <TestIcon />
-          <TestTitle>배근력</TestTitle>
-        </TestItem>
-        <TestItem>
-          <TestIcon />
-          <TestTitle>사이드스텝</TestTitle>
-        </TestItem>
-        <TestItem>
-          <TestIcon />
-          <TestTitle>메디신볼던지기</TestTitle>
-        </TestItem>
-        <TestItem>
-          <TestIcon />
-          <TestTitle>메달리기</TestTitle>
-        </TestItem>
-        <TestItem>
-          <TestIcon />
-          <TestTitle>서전트점프</TestTitle>
-        </TestItem>
+        {props?.exercise?.map((item, index) => {
+          return <ExerciseType key={index} type={item} isSelected={toggleItem === item} onClick={handleItemClick} />;
+        })}
       </Wrapper>
       <TableWrapper>
-        <ScoreDistributionTable title={selectSubject} />
+        <ScoreDistributionTable title={toggleItem} />
       </TableWrapper>
     </ModalLayout>
   );
 };
 
 export default ScoreDistributionModal;
-ScoreDistributionModal.defaultProps = {};
+ScoreDistributionModal.defaultProps = {
+  exercise: ['제자리 멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
+};
 
 const Wrapper = styled.div`
   display: grid;
@@ -92,35 +77,6 @@ const SubTitle = styled.div`
   line-height: 24px;
   font-weight: 500;
   color: ${props => props.theme.colors.gray2};
-`;
-
-// 실기 반영 종목
-const TestItem = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 0 10px;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  border-radius: 16px;
-  margin-right: 10px;
-  background-color: ${props => props.theme.colors.gray6};
-  cursor: pointer;
-  &:last-of-type {
-    margin-right: 0;
-  }
-`;
-
-const TestIcon = styled.img`
-  width: 16px;
-  height: 16px;
-`;
-
-const TestTitle = styled.div`
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 600;
-  color: ${props => props.theme.colors.gray1};
 `;
 
 // 배점 표

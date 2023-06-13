@@ -15,6 +15,7 @@ const UniversityCategoryList = (props: Props) => {
   const handleItemClick = item => {
     setToggleItem(item);
   };
+
   return (
     <Container>
       {props.lists.map((list, index) => (

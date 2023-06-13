@@ -10,12 +10,13 @@ import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
 import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
-import PracticalEvent from '../../PracticalEvent';
+import ExerciseType from '../../ExerciseType';
 
 interface Props {
   name: string;
   subTitle: string;
   competition: string;
+  exercise: string[];
 }
 
 const UniversityInformationModal = (props: Props) => {
@@ -120,16 +121,16 @@ const UniversityInformationModal = (props: Props) => {
             <Wrapper>
               실기 반영 종목
               <ShowTable onClick={() => setOpenModal(true)}>
-                <InfoIconWrapper color="#626474" marginRight="4px" data-tooltip-id="tooltip-gradingTable">
-                  <Info />
-                </InfoIconWrapper>
+                <Info />
                 배점표 보기
               </ShowTable>
             </Wrapper>
           </MenuTitle>
-          <Wrapper>
-            <PracticalEvent title="제자리 멀리뛰기" />
-          </Wrapper>
+          <ExerciseWrapper>
+            {props?.exercise?.map((item, index) => {
+              return <ExerciseType key={index} type={item} />;
+            })}
+          </ExerciseWrapper>
           <Wrapper>
             <DateBox>
               <Calendar />
@@ -171,6 +172,9 @@ const UniversityInformationModal = (props: Props) => {
 };
 
 export default UniversityInformationModal;
+UniversityInformationModal.defaultProps = {
+  exercise: ['제자리멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
+};
 
 const Wrapper = styled.div`
   display: flex;
@@ -316,7 +320,7 @@ const Graph = styled.div<{ width }>`
   &:first-of-type {
     background-color: ${props => props.theme.colors.blue};
   }
-  &:nth-child(2) {
+  &:nth-of-type(2) {
     background-color: ${props => props.theme.colors.purple};
   }
   &:last-of-type {
@@ -385,34 +389,6 @@ const TableTd = styled.td`
     line-height: 12px;
     font-weight: 500;
   }
-`;
-
-// 실기 반영 종목
-const TestItem = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 0 10px;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  border-radius: 16px;
-  margin-right: 10px;
-  background-color: ${props => props.theme.colors.gray6};
-  &:last-of-type {
-    margin-right: 0;
-  }
-`;
-
-const TestIcon = styled.img`
-  width: 13px;
-  height: 13px;
-`;
-
-const TestTitle = styled.div`
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  color: ${props => props.theme.colors.gray1};
 `;
 
 // 실기고사 일정, 최초합격자 발표일
@@ -491,4 +467,11 @@ const ShowTable = styled.div`
   line-height: 16px;
   font-weight: 600;
   cursor: pointer;
+`;
+
+// 실기 반영 종목
+const ExerciseWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 12px;
 `;
