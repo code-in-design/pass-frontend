@@ -24,11 +24,11 @@ const ScoreDistributionTable = (props: Props) => {
         </GradeTableTheadTr>
       </GradeTableThead>
       <GradeTableTbody>
-        {props.data.map((item, index = 100) => {
-          const score = 100;
+        {props.data.map((item, index) => {
+          const score = 100 - index;
           return (
             <GradeTableTBodyTr key={index}>
-              <TableTd>{score - 1}</TableTd>
+              <TableTd>{score}</TableTd>
               <TableTd>{item.men}</TableTd>
               <TableTd>{item.women}</TableTd>
             </GradeTableTBodyTr>

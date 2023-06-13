@@ -22,8 +22,12 @@ const FindUniversityFilterModalItem = (props: Props) => {
 export default FindUniversityFilterModalItem;
 
 const FilterItem = styled.div`
-  padding: 12px 0;
-  border-bottom: 1px solid ${props => props.theme.colors.gray6};
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 1px solid ${props => props.theme.colors.gray6};
+  &:first-of-type {
+    border-top: 1px solid #fff;
+  }
 `;
 const TitleWrapper = styled.div`
   display: flex;
