@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import School from '../../../../../public/images/icons/schoolOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
@@ -6,14 +6,19 @@ import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem from './UniversityCategoryListItem';
 
 interface Props {
-  lists: [{ total?: string; title?: string; icon?: ReactNode; text?: string }];
+  lists: [{ total?: string; title?: string; icon?: ReactNode; text: string }];
 }
 
 const UniversityCategoryList = (props: Props) => {
+  const [toggleItem, setToggleItem] = useState('');
+
+  const handleItemClick = item => {
+    setToggleItem(item);
+  };
   return (
     <Container>
       {props.lists.map(list => (
-        <UniversityCategoryListItem lists={list} />
+        <UniversityCategoryListItem lists={list} isSelected={toggleItem === list.text} onClick={handleItemClick} />
       ))}
     </Container>
   );
@@ -22,7 +27,7 @@ const UniversityCategoryList = (props: Props) => {
 export default UniversityCategoryList;
 UniversityCategoryList.defaultProps = {
   lists: [
-    { total: '전체보기', title: '' },
+    { total: '전체보기', title: '', text: '' },
     { title: '모집군', icon: <Stickynote />, text: '가군' },
     { title: '모집군', icon: <Stickynote />, text: '나군' },
     { title: '모집군', icon: <Stickynote />, text: '다군' },

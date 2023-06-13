@@ -2,14 +2,16 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
-  lists: { total?: string; title?: string; icon?: ReactNode; text?: string };
+  lists: { total?: string; title?: string; icon?: ReactNode; text: string };
+  isSelected: boolean;
+  onClick: (item: string) => void;
 }
 
 const UniversityCategoryListItem = (props: Props) => {
-  const Component = false ? ItemSelectContainer : ItemContainer;
+  const Component = props.isSelected ? ItemSelectContainer : ItemContainer;
 
   return (
-    <Component onClick={() => console.log()}>
+    <Component onClick={() => props.onClick(props.lists.text)}>
       {props.lists.total ? <ContainerTotalTitle>{props.lists.total}</ContainerTotalTitle> : <ContainerTitle>{props.lists.title}</ContainerTitle>}
       {!props.lists.total && (
         <Wrapper>
