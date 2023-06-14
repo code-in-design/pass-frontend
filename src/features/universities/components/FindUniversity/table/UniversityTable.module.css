@@ -1,0 +1,22 @@
+.table {
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 600;
+  color: #353644;
+}
+
+.ag-root-wrapper {
+  border: none;
+}
+
+.ag-header-cell-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.ag-header-row {
+  border-bottom: 1px solid #e4e6f0;
+}

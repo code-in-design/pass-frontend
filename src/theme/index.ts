@@ -1,7 +1,7 @@
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react';
-import { checkboxStyle } from './components/checkbox';
 import { inputStyle } from './components/input';
 import { buttonTheme } from './components/button';
+import { checkboxStyle } from './components/checkbox';
 
 export const theme: Record<string, any> = extendTheme({
   colors: {
