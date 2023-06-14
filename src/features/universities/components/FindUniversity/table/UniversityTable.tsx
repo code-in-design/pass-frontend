@@ -11,6 +11,7 @@ import ArrowUp from '../../../../../../public/images/icons/arrowDropUp.svg';
 import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoubleDown.svg';
 import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
 import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
+import HelpOutline from '../../../../../../public/images/icons/helpOutline.svg';
 
 interface Props {
   data: {
@@ -75,6 +76,17 @@ const UniversityTable = (props: Props) => {
     );
   };
 
+  const TooltipRenderer = props => {
+    console.log(props);
+    const { displayName } = props;
+    return (
+      <>
+        {displayName}
+        <HelpOutline />
+      </>
+    );
+  };
+
   const onRowClick = props => {
     setToggleModal(true);
     setSelectedData(props.data.대학명);
@@ -100,9 +112,10 @@ const UniversityTable = (props: Props) => {
         { field: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
         { field: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
       ],
+      headerGroupComponent: TooltipRenderer,
     },
-    { field: '수능환산점수', minWidth: 120, flex: 2.5 },
-    { field: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1 },
+    { field: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TooltipRenderer },
+    { field: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TooltipRenderer },
     { field: '지원가능성', sortable: true, cellRendererFramework: SupportabilityRenderer, minWidth: 104, flex: 2.1 },
     { field: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
   ]);

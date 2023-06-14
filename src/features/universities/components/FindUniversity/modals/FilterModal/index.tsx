@@ -148,9 +148,7 @@ const UniversitySettingFilterModal = (props: Props) => {
                   </FlexContainer>
                 </FindUniversityFilterModalItem>
                 <FindUniversityFilterModalItem title="경쟁률 범위 설정" subtitle="* 2023학년도 기준입니다">
-                  <RangeWrapper>
-                    <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} />
-                  </RangeWrapper>
+                  <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} />
                 </FindUniversityFilterModalItem>
               </Left>
 
@@ -180,7 +178,7 @@ const UniversitySettingFilterModal = (props: Props) => {
                   </FlexContainer>
                 </FindUniversityFilterModalItem>
 
-                <FindUniversityFilterModalItem title="기여도" subtitle="* 중복 선택 가능합니다">
+                <FindUniversityFilterModalItem title="기여도" subtitle="* 중복 선택 가능합니다" tooltip>
                   <FlexContainerSmall>
                     <SubTitle>수능 기여도</SubTitle>
                     <Checkbox size="noControlCheckbox" {...props.register('examinationTop')}>
@@ -222,40 +220,40 @@ const UniversitySettingFilterModal = (props: Props) => {
                 <FindUniversityFilterModalItem title="실기 반영" subtitle="* 실기 선택을 해제할 경우, 해당 실기를 반영하지 않는 대학만 검색됩니다.">
                   <ExerciseTitle>점프</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('standingLongJump')}>
+                    <Checkbox size="checkButton" {...props.register('standingLongJump')} isChecked>
                       제자리멀리뛰기
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('surgentJump')}>
+                    <Checkbox size="checkButton" {...props.register('surgentJump')} isChecked>
                       서전트 점프
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>유연성</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('sittingFlexion')}>
+                    <Checkbox size="checkButton" {...props.register('sittingFlexion')} isChecked>
                       좌전굴
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('standingFlexion')}>
+                    <Checkbox size="checkButton" {...props.register('standingFlexion')} isChecked>
                       체전굴
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>던지기</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('throwingMedicineBall')}>
+                    <Checkbox size="checkButton" {...props.register('throwingMedicineBall')} isChecked>
                       메디신볼던지기
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('throwingHandball')}>
+                    <Checkbox size="checkButton" {...props.register('throwingHandball')} isChecked>
                       핸드볼공던지기
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>기타종목</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('sitUp')}>
+                    <Checkbox size="checkButton" {...props.register('sitUp')} isChecked>
                       싯업
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('backMuscleStrength')}>
+                    <Checkbox size="checkButton" {...props.register('backMuscleStrength')} isChecked>
                       배근력
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('pullUp')}>
+                    <Checkbox size="checkButton" {...props.register('pullUp')} isChecked>
                       턱걸이 매달리기
                     </Checkbox>
                   </FlexContainer>
@@ -381,8 +379,4 @@ const CheckBoxWrapper = styled.div`
   margin-top: 8px;
   margin-left: 40px;
   display: flex;
-`;
-
-const RangeWrapper = styled.div`
-  padding: 0 20px;
 `;

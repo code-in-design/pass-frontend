@@ -64,42 +64,81 @@ const TwoThumbsRange = ({ STEP, MIN, MAX }) => {
               alignItems: 'center',
             }}
           >
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '-36px',
-                color: '#fff',
-                width: '76px',
-                height: '28px',
-                borderRadius: '8px',
-                backgroundColor: '#60C8DE',
-                fontSize: '14px',
-                lineHeight: '16px',
-                fontWeight: 700,
-                whiteSpace: 'nowrap',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '0 4px',
-              }}
-            >
+            {index === 0 ? (
               <div
                 style={{
                   position: 'absolute',
-                  right: '50%',
-                  top: '-14px',
-                  transform: 'translateX(50%)',
-                  marginTop: '0px',
-                  borderTop: '10px solid transparent',
-                  borderRight: '10px solid transparent',
-                  borderBottom: '10px solid #60C8DE',
-                  borderLeft: '10px solid transparent',
-                  borderRadius: '2px',
+                  bottom: '-36px',
+                  left: '0',
+                  color: '#fff',
+                  width: '76px',
+                  height: '28px',
+                  borderRadius: '8px',
+                  backgroundColor: '#60C8DE',
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '0 4px',
                 }}
-              />
-              {values[index]}
-              {index === 0 ? <span style={{ fontSize: '10px', lineHeight: '12px', fontWeight: 500 }}>부터</span> : <span style={{ fontSize: '10px', lineHeight: '12px', fontWeight: 500 }}>까지</span>}
-            </div>
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: '-15px',
+                    marginTop: '0px',
+                    borderTop: '10px solid transparent',
+                    borderRight: '10px solid transparent',
+                    borderBottom: '10px solid #60C8DE',
+                    borderLeft: '10px solid transparent',
+                    borderRadius: '2px',
+                  }}
+                />
+                {values[0]}
+                <span style={{ fontSize: '10px', lineHeight: '12px', fontWeight: 500 }}>부터</span>
+              </div>
+            ) : (
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '-36px',
+                  right: '0',
+                  color: '#fff',
+                  width: '76px',
+                  height: '28px',
+                  borderRadius: '8px',
+                  backgroundColor: '#60C8DE',
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '0 4px',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '0',
+                    top: '-15px',
+                    marginTop: '0px',
+                    borderTop: '10px solid transparent',
+                    borderRight: '10px solid transparent',
+                    borderBottom: '10px solid #60C8DE',
+                    borderLeft: '10px solid transparent',
+                    borderRadius: '2px',
+                  }}
+                />
+                {values[1]}
+                <span style={{ fontSize: '10px', lineHeight: '12px', fontWeight: 500 }}>까지</span>
+              </div>
+            )}
           </div>
         )}
       />
@@ -109,6 +148,6 @@ const TwoThumbsRange = ({ STEP, MIN, MAX }) => {
 
 export default TwoThumbsRange;
 
-const A = styled.div`
+const LeftLabel = styled.div`
   transform: translateX();
 `;

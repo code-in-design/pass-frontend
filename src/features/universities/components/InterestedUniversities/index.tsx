@@ -17,7 +17,7 @@ const InterestedUniversities = (props: Props) => {
         </DescriptionWrapper>
       )}
       {props.data.map(props => (
-        <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
+        <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.convertedScore} result={props.result} />
       ))}
     </Container>
   );
