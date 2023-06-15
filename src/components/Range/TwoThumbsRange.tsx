@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
-import styled from '@emotion/styled';
+import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
-const TwoThumbsRange = ({ STEP, MIN, MAX }) => {
+interface Props {
+  STEP: number;
+  MIN: number;
+  MAX: number;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+}
+
+const TwoThumbsRange = (props: Props) => {
+  const { MIN, MAX, STEP } = props;
   const [values, setValues] = useState([MIN, MAX]);
   return (
     <div
@@ -19,6 +28,8 @@ const TwoThumbsRange = ({ STEP, MIN, MAX }) => {
         max={MAX}
         onChange={values => {
           setValues(values);
+          props.setValue('competitionMinRate', values[0]);
+          props.setValue('competitionMaxRate', values[1]);
         }}
         renderTrack={({ props, children }) => (
           <div
@@ -147,7 +158,3 @@ const TwoThumbsRange = ({ STEP, MIN, MAX }) => {
 };
 
 export default TwoThumbsRange;
-
-const LeftLabel = styled.div`
-  transform: translateX();
-`;

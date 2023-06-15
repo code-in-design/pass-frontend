@@ -1,17 +1,19 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
   lists: { total?: string; title?: string; icon?: ReactNode; text: string };
   isSelected: boolean;
-  onClick: (item: string) => void;
+  onClick: (item: { total?: string; title?: string; icon?: ReactNode; text: string }) => void;
 }
 
 const UniversityCategoryListItem = (props: Props) => {
   const Component = props.isSelected ? ItemSelectContainer : ItemContainer;
 
+  useEffect(() => {}, []);
+
   return (
-    <Component onClick={() => props.onClick(props.lists.text)}>
+    <Component onClick={() => props.onClick(props.lists)}>
       {props.lists.total ? <ContainerTotalTitle>{props.lists.total}</ContainerTotalTitle> : <ContainerTitle isSelected={props.isSelected}>{props.lists.title}</ContainerTitle>}
       {!props.lists.total && (
         <Wrapper>

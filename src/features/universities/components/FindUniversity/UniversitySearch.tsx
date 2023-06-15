@@ -2,15 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
 import InputFindIcon from '../../../../../public/images/icons/search.svg';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 
 const UniversitySearch = () => {
+  const [searchUniversity, setSearchUniversity] = useQueryParam('searchUniversity');
+
+  function onInputChange(event) {
+    setSearchUniversity(event.target.value);
+  }
+
   return (
     <SearchWrapper>
       <InputWrapper>
         <IconWrapper>
           <InputFindIcon />
         </IconWrapper>
-        <SearchUniversity placeholder="대학명 검색" />
+        <SearchUniversity placeholder="대학명 검색" onChange={onInputChange} />
       </InputWrapper>
       <InfoWrapper>
         <InfoIconWrapper>

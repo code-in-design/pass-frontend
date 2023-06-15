@@ -4,6 +4,7 @@ import School from '../../../../../public/images/icons/schoolOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem from './UniversityCategoryListItem';
+import { useQueryParam } from 'use-query-params';
 
 interface Props {
   lists: [{ total?: string; title?: string; icon?: ReactNode; text: string }];
@@ -11,9 +12,21 @@ interface Props {
 
 const UniversityCategoryList = (props: Props) => {
   const [toggleItem, setToggleItem] = useState('');
+  const [applicationPeriod, setApplicationPeriod] = useQueryParam('applicationPeriod');
+  const [region, setRegion] = useQueryParam('region');
+  const [universityDepartment, setUniversityDepartment] = useQueryParam('universityDepartment');
 
   const handleItemClick = item => {
-    setToggleItem(item);
+    setToggleItem(item.text);
+    if (item.title === '모집군') {
+      setApplicationPeriod(item.text);
+    }
+    if (item.title === '지역') {
+      setRegion(item.text);
+    }
+    if (item.title === '인기계열') {
+      setUniversityDepartment(item.text);
+    }
   };
 
   return (

@@ -1,14 +1,15 @@
+import { UniversityDepartmentsModel } from './UniversityDepartmentsModel';
+
 export class UniversitiesModel {
-  logo: string;
-  name: string;
-  majorName: string;
-  convertedScore: number;
-  result: string;
-  constructor(logo: string, name: string, majorName: string, score: number, result: string) {
+  logo: string; //대학교 로고
+  universityName: string; // 대학교 이름
+  universityDepartments: UniversityDepartmentsModel[]; // 학과 종류
+  universityHomepage: string; //대학교 홈페이지
+
+  constructor(logo: string, universityName: string, universityDepartments: UniversityDepartmentsModel[], universityHomepage: string) {
     this.logo = logo;
-    this.name = name;
-    this.majorName = majorName;
-    this.convertedScore = score;
-    this.result = result;
+    this.universityName = universityName;
+    this.universityDepartments = universityDepartments;
+    this.universityHomepage = universityHomepage;
   }
 }

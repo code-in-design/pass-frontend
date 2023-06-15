@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Info from '../../../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../../../public/images/icons/helpOutline.svg';
@@ -21,20 +21,11 @@ interface Props {
 }
 
 const UniversityInformationModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-
-  const openInformationModal = useCallback(() => {
-    setIsOpen(true);
-  }, [isOpen]);
-
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, [isOpen]);
 
   return (
     <>
-      <ModalLayout isOpen={isOpen} onClose={() => props.onClose(false)}>
+      <ModalLayout onClose={() => props.onClose(false)}>
         <Header>
           <TitleWrapper>
             <Title>{props.name}</Title>
@@ -164,14 +155,14 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
-      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} />}
+      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
     </>
   );
 };
 
 export default UniversityInformationModal;
 UniversityInformationModal.defaultProps = {
-  exercise: ['제자리멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
+  exercise: ['제자리 멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
 };
 
 const Wrapper = styled.div`

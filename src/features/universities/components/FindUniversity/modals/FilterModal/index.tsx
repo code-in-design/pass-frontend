@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 import Filter from '../../../../../../../public/images/icons/filter.svg';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import FindUniversityFilterModalItem from './UniversityFilterModalItem';
-import { UseFormRegister, FieldValues, UseFormHandleSubmit } from 'react-hook-form';
+import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
 import TwoThumbsRange from '@/components/Range/TwoThumbsRange';
 import { Checkbox } from '@chakra-ui/react';
 
 interface Props {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const UniversitySettingFilterModal = (props: Props) => {
@@ -147,8 +148,9 @@ const UniversitySettingFilterModal = (props: Props) => {
                     </Checkbox>
                   </FlexContainer>
                 </FindUniversityFilterModalItem>
+
                 <FindUniversityFilterModalItem title="경쟁률 범위 설정" subtitle="* 2023학년도 기준입니다">
-                  <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} />
+                  <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} register={props.register} setValue={props.setValue} />
                 </FindUniversityFilterModalItem>
               </Left>
 
@@ -220,40 +222,40 @@ const UniversitySettingFilterModal = (props: Props) => {
                 <FindUniversityFilterModalItem title="실기 반영" subtitle="* 실기 선택을 해제할 경우, 해당 실기를 반영하지 않는 대학만 검색됩니다.">
                   <ExerciseTitle>점프</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('standingLongJump')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('standingLongJump')} defaultChecked>
                       제자리멀리뛰기
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('surgentJump')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('surgentJump')} defaultChecked>
                       서전트 점프
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>유연성</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('sittingFlexion')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('sittingFlexion')} defaultChecked>
                       좌전굴
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('standingFlexion')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('standingFlexion')} defaultChecked>
                       체전굴
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>던지기</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('throwingMedicineBall')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('throwingMedicineBall')} defaultChecked>
                       메디신볼던지기
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('throwingHandball')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('throwingHandball')} defaultChecked>
                       핸드볼공던지기
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>기타종목</ExerciseTitle>
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('sitUp')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('sitUp')} defaultChecked>
                       싯업
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('backMuscleStrength')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('backMuscleStrength')} defaultChecked>
                       배근력
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('pullUp')} isChecked>
+                    <Checkbox size="checkButton" {...props.register('pullUp')} defaultChecked>
                       턱걸이 매달리기
                     </Checkbox>
                   </FlexContainer>
