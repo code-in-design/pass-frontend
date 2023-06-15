@@ -1,5 +1,6 @@
 export class RegionModel {
   id: number;
+  name: string;
   entire: string; //전체
   seoul: string; //서울
   gyeongGi: string; //경기
@@ -11,8 +12,9 @@ export class RegionModel {
   jeolLa: string; //전라
   chungCheong: string; //충청
 
-  constructor(id: number, entire: string, seoul: string, gyeongGi: string, inCheon: string, gyeongNam: string, gyeongBuk: string, gangWonJeju: string, gwangJu: string, jeolLa: string, chungCheong: string) {
+  constructor(id: number, name: string, entire: string, seoul: string, gyeongGi: string, inCheon: string, gyeongNam: string, gyeongBuk: string, gangWonJeju: string, gwangJu: string, jeolLa: string, chungCheong: string) {
     this.id = id;
+    this.name = name;
     this.entire = entire;
     this.seoul = seoul;
     this.gyeongGi = gyeongGi;

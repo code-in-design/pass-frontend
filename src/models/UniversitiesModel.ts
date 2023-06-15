@@ -12,4 +12,15 @@ export class UniversitiesModel {
     this.universityDepartments = universityDepartments;
     this.universityHomepage = universityHomepage;
   }
+
+  //나의 관심 대학
+  setInterestedUniversitiesData = data => {
+    return {
+      logo: data.logo,
+      universityName: data.universityName,
+      departmentName: data.departmentName,
+      conversionScore: data.conversionScore,
+      possibilityOfSupport: data.possibilityOfSupport,
+    };
+  };
 }
