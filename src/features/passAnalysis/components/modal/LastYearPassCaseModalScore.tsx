@@ -14,7 +14,7 @@ const LastYearPassCaseModalScore = (props: Props) => {
         {props.data.map((item, index) => {
           return (
             <Item key={index}>
-              <ItemName>{item.name}</ItemName>
+              <ItemName dangerouslySetInnerHTML={{ __html: `${item.name}` }}></ItemName>
               <ItemScore>{item.score}</ItemScore>
             </Item>
           );
@@ -60,9 +60,9 @@ const ItemName = styled.div`
   font-weight: 700;
   text-align: center;
   color: ${props => props.theme.colors.gray2};
-  /* margin-bottom: 4px; */
-  max-width: 34px;
-  margin: 0 auto 4px;
+  margin-bottom: 4px;
+  /* max-width: 34px; */
+  /* margin: 0 auto 4px; */
 `;
 
 const ItemScore = styled.div`

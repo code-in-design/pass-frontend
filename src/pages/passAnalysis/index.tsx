@@ -14,38 +14,45 @@ import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSel
 
 const PassAnalysisPage = () => {
   const [tabMenu, setTabMenu] = useQueryParam('tabMenu');
-
+  console.log(tabMenu);
   return (
     <Layout>
       <Wrapper>
         <ApplicationPossibilityAnalysisContainer />
         <UniversityInformation>
-          <Header>
-            <TitleWrapper>
-              <Title>경상대학교 체육교육과</Title>
-              <SubTitle>수능 일반 전형</SubTitle>
-            </TitleWrapper>
-            <SideHeader>
-              <RecruitmentGroup>가군</RecruitmentGroup>
-              <BookmarkContainer />
-            </SideHeader>
-          </Header>
-          <Menu>
-            <MenuItem onClick={() => setTabMenu(1)}>합격 분석</MenuItem>
-            <MenuItem onClick={() => setTabMenu(2)}>지원자 현황</MenuItem>
-            <MenuItem onClick={() => setTabMenu(3)}>학과 정보</MenuItem>
-          </Menu>
-          <div>
-            <PassAnalysisContainer />
-            <TestScoreAnalysisContainer />
-            <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
-            <LastYearPassCaseContainer />
-            <NoAnalysisUniversity />
-            <NoSelectAnalysisUniversity />
-          </div>
-          <div>
-            <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
-          </div>
+          <>
+            {tabMenu && (
+              <>
+                <Header>
+                  <TitleWrapper>
+                    <Title>경상대학교 체육교육과</Title>
+                    <SubTitle>수능 일반 전형</SubTitle>
+                  </TitleWrapper>
+                  <SideHeader>
+                    <RecruitmentGroup>가군</RecruitmentGroup>
+                    <BookmarkContainer />
+                  </SideHeader>
+                </Header>
+                <Menu>
+                  <MenuItem onClick={() => setTabMenu(1)}>합격 분석</MenuItem>
+                  <MenuItem onClick={() => setTabMenu(2)}>지원자 현황</MenuItem>
+                  <MenuItem onClick={() => setTabMenu(3)}>학과 정보</MenuItem>
+                </Menu>
+              </>
+            )}
+
+            {!tabMenu && <NoSelectAnalysisUniversity />}
+            {tabMenu === '1' && (
+              <>
+                <PassAnalysisContainer />
+                <TestScoreAnalysisContainer />
+                <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
+                <LastYearPassCaseContainer />
+                <NoAnalysisUniversity />
+              </>
+            )}
+            {tabMenu === '3' && <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />}
+          </>
         </UniversityInformation>
       </Wrapper>
     </Layout>
