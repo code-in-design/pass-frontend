@@ -3,6 +3,7 @@ import { TranscriptModel } from '../../models/TranscriptModel';
 
 interface Props {
   transcript: TranscriptModel;
+  size; // size = small
 }
 
 const Table = (props: Props) => {

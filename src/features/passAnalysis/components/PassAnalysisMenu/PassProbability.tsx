@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const PassProbability = () => {
   return (
@@ -53,6 +53,7 @@ const TotalScoreBox = styled.div`
   height: 68px;
   border-radius: 12px;
   padding: 24px;
+  background-color: ${props => props.theme.colors.gray6};
 `;
 
 const TotalScoreTitle = styled.div`
@@ -82,6 +83,7 @@ const ScoreBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: ${props => props.theme.colors.gray6};
 `;
 
 const ScoreTitle = styled.div`

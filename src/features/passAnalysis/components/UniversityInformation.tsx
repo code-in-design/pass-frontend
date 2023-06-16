@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import PassAnalysisMenu from './PassAnalysisMenu/PassAnalysisMenu';
+import PassAnalysisMenu from './PassAnalysisMenu';
 
 const UniversityInformation = () => {
   return (

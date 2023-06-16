@@ -9,6 +9,7 @@ const PassAnalysisPage = () => {
     <Layout>
       <Wrapper>
         <ApplicationPossibilityAnalysisContainer />
+
         <UniversityInformationContainer />
       </Wrapper>
     </Layout>
