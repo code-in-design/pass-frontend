@@ -13,15 +13,15 @@ import NoAnalysisUniversity from '@/features/passAnalysis/components/NoAnalysisU
 import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSelectAnalysisUniversity';
 
 const PassAnalysisPage = () => {
-  const [tabMenu, setTabMenu] = useQueryParam('tabMenu');
-  console.log(tabMenu);
+  const [menu, setMenu] = useQueryParam('menu');
+
   return (
     <Layout>
       <Wrapper>
         <ApplicationPossibilityAnalysisContainer />
         <UniversityInformation>
           <>
-            {tabMenu && (
+            {menu && (
               <>
                 <Header>
                   <TitleWrapper>
@@ -34,15 +34,33 @@ const PassAnalysisPage = () => {
                   </SideHeader>
                 </Header>
                 <Menu>
-                  <MenuItem onClick={() => setTabMenu(1)}>합격 분석</MenuItem>
-                  <MenuItem onClick={() => setTabMenu(2)}>지원자 현황</MenuItem>
-                  <MenuItem onClick={() => setTabMenu(3)}>학과 정보</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setMenu('passAnalysis');
+                    }}
+                  >
+                    합격 분석
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setMenu('candidateStatus');
+                    }}
+                  >
+                    지원자 현황
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setMenu('departmentInfromation');
+                    }}
+                  >
+                    학과 정보
+                  </MenuItem>
                 </Menu>
               </>
             )}
 
-            {!tabMenu && <NoSelectAnalysisUniversity />}
-            {tabMenu === '1' && (
+            {!menu && <NoSelectAnalysisUniversity />}
+            {menu === 'passAnalysis' && (
               <>
                 <PassAnalysisContainer />
                 <TestScoreAnalysisContainer />
@@ -52,7 +70,7 @@ const PassAnalysisPage = () => {
                 <NoAnalysisUniversity />
               </>
             )}
-            {tabMenu === '3' && <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />}
+            {menu === 'departmentInfromation' && <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />}
           </>
         </UniversityInformation>
       </Wrapper>
