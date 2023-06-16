@@ -34,7 +34,7 @@ const TranscriptTable = (props: TranscriptTableProps) => {
           <Button onClick={props?.onModify}>성적 수정하기</Button>
           <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
             확인
-            <MyTooltip id="tooltip-myScore">
+            <MyTooltip id="tooltip-myScore" width="371px">
               <TooltipContainer>
                 <TooltipImg />
                 <TooltipText>
@@ -97,6 +97,8 @@ const Information = styled.div`
 const InfoIconWrapper = styled.div`
   color: ${props => props.theme.colors.gray2};
   margin-right: 4px;
+  width: 20px;
+  height: 20px;
 `;
 
 const InfoText = styled.span`

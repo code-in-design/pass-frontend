@@ -12,6 +12,8 @@ import GoogleAnalytics from '../src/marketings/GoogleAnalytics';
 import GoogleTagManager from '../src/marketings/GoogleTagManager';
 import NaverSiteVerification from '../src/marketings/NaverSiteVerification';
 import GoogleSiteVerification from '../src/marketings/GoogleSiteVerification';
+import NextAdapterPages from 'next-query-params/pages';
+import { QueryParamProvider } from 'use-query-params';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -25,7 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ChakraProvider theme={theme} resetCSS>
         <ThemeProvider theme={emotionTheme}>
-          <Component {...pageProps} />
+          <QueryParamProvider adapter={NextAdapterPages}>
+            <Component {...pageProps} />
+          </QueryParamProvider>
         </ThemeProvider>
       </ChakraProvider>
     </Provider>
