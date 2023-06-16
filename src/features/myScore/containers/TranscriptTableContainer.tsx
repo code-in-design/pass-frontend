@@ -43,7 +43,7 @@ const TranscriptTableContainer = () => {
   return (
     <>
       <UniversityFinderModal isOpen={isProcessing} />
-      <TranscriptTable transcript={transcript} onSubmit={handleSubmit} onModify={handleModify} hasButtons={isScoreEnteredOnFrontend && !isScoreEnteredOnBackend} />
+      <TranscriptTable transcript={transcript} 가채점기간={가채점기간} onSubmit={handleSubmit} onModify={handleModify} hasButtons={isScoreEnteredOnFrontend && !isScoreEnteredOnBackend} />
     </>
   );
 };

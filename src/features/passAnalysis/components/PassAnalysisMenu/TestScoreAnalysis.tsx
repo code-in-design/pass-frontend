@@ -8,7 +8,7 @@ const TestScoreAnalysis = () => {
   return (
     <Container>
       <Title>수능 점수 분석</Title>
-      <Table transcript={transcript!} />
+      <Table transcript={transcript!} size="sm" />
     </Container>
   );
 };
