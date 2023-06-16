@@ -9,7 +9,8 @@ const PassProbability = () => {
           <TotalScoreTitle>총 환산 점수</TotalScoreTitle>
           <TotalScore>780.16</TotalScore>
         </TotalScoreBox>
-        <ScoreWrapper>
+        {/* 내신이 없을 경우 */}
+        {/* <ScoreWrapper>
           <ScoreBox>
             <ScoreTitle>
               수능
@@ -26,7 +27,23 @@ const PassProbability = () => {
             </ScoreTitle>
             <Score>300.16</Score>
           </ScoreBox>
-        </ScoreWrapper>
+        </ScoreWrapper> */}
+
+        {/* 내신이 있을 경우 */}
+        <ScoreWrapperNaesin>
+          <ScoreBoxNaesin>
+            <ScoreTitleNaesin>수능환산 점수</ScoreTitleNaesin>
+            <ScoreNaesin>580.16</ScoreNaesin>
+          </ScoreBoxNaesin>
+          <ScoreBoxNaesin>
+            <ScoreTitleNaesin>내신환산 점수</ScoreTitleNaesin>
+            <ScoreNaesin>580.16</ScoreNaesin>
+          </ScoreBoxNaesin>
+          <ScoreBoxNaesin>
+            <ScoreTitleNaesin>실기환산 점수</ScoreTitleNaesin>
+            <ScoreNaesin>580.16</ScoreNaesin>
+          </ScoreBoxNaesin>
+        </ScoreWrapperNaesin>
       </ScoreContainer>
     </Container>
   );
@@ -91,12 +108,37 @@ const ScoreTitle = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: #9395a6;
+  color: ${props => props.theme.colors.gray2};
 `;
 
 const Score = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  color: #191e25;
+  color: ${props => props.theme.colors.black};
+`;
+
+const ScoreWrapperNaesin = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 0 8px;
+`;
+const ScoreBoxNaesin = styled.div`
+  flex: 1;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background-color: ${props => props.theme.colors.gray6};
+`;
+const ScoreTitleNaesin = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${props => props.theme.colors.gray2};
+  margin-bottom: 8px;
+`;
+const ScoreNaesin = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: ${props => props.theme.colors.black};
 `;

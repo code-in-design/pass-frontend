@@ -8,6 +8,9 @@ import TestScoreAnalysisContainer from '@/features/passAnalysis/container/TestSc
 import PracticalScoreAnalysisContainer from '@/features/passAnalysis/container/PracticalScoreAnalysisContainer';
 import LastYearPassCaseContainer from '@/features/passAnalysis/container/LastYearPassCaseContainer';
 import { useQueryParam } from 'use-query-params';
+import DepartmentInformation from '@/features/passAnalysis/components/DepartmentInformation';
+import NoAnalysisUniversity from '@/features/passAnalysis/components/NoAnalysisUniversity';
+import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSelectAnalysisUniversity';
 
 const PassAnalysisPage = () => {
   const [tabMenu, setTabMenu] = useQueryParam('tabMenu');
@@ -37,6 +40,11 @@ const PassAnalysisPage = () => {
             <TestScoreAnalysisContainer />
             <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
             <LastYearPassCaseContainer />
+            <NoAnalysisUniversity />
+            <NoSelectAnalysisUniversity />
+          </div>
+          <div>
+            <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
           </div>
         </UniversityInformation>
       </Wrapper>

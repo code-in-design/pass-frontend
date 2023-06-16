@@ -60,7 +60,9 @@ const ItemName = styled.div`
   font-weight: 700;
   text-align: center;
   color: ${props => props.theme.colors.gray2};
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
+  max-width: 34px;
+  margin: 0 auto 4px;
 `;
 
 const ItemScore = styled.div`

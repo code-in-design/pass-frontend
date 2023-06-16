@@ -455,6 +455,7 @@ const ShowTable = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
+  color: ${props => props.theme.colors.gray1};
   cursor: pointer;
 `;
 
