@@ -48,6 +48,7 @@ const PassAnalysisPage = () => {
                 <TestScoreAnalysisContainer />
                 <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
                 <LastYearPassCaseContainer />
+                {/* 서비스하지 않는 대학일 경우 */}
                 <NoAnalysisUniversity />
               </>
             )}
