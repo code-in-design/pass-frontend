@@ -1,0 +1,10 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="8" cy="8" r="6" stroke="currentColor"/>
+<path d="M7.90004 5.47727L10.4938 7.36177L9.50309 10.411H6.29699L5.30625 7.36177L7.90004 5.47727Z" fill="currentColor"/>
+<path d="M7.90004 5.47727L10.4938 7.36177M7.90004 5.47727L5.30625 7.36177M7.90004 5.47727V2.75M10.4938 7.36177L9.50309 10.411M10.4938 7.36177L12.9 6.38636M9.50309 10.411H6.29699M9.50309 10.411L11.0818 12.75M6.29699 10.411L5.30625 7.36177M6.29699 10.411L4.71821 12.75M5.30625 7.36177L2.90002 6.38636" stroke="currentColor" stroke-linejoin="round"/>
+<path d="M9.5 2.5H6.5L8 3L9.5 2.5Z" stroke="currentColor" stroke-linejoin="round"/>
+<path d="M13.7647 7.84068L12.8 5L12.8089 6.58111L13.7647 7.84068Z" stroke="currentColor" stroke-linejoin="round"/>
+<path d="M2.2353 7.84068L3.19995 5L3.19107 6.58111L2.2353 7.84068Z" stroke="currentColor" stroke-linejoin="round"/>
+<path d="M6.15044 13.4524L3.66333 11.7748L5.18648 12.1991L6.15044 13.4524Z" stroke="currentColor" stroke-linejoin="round"/>
+<path d="M9.94294 13.4524L12.4301 11.7748L10.9069 12.1991L9.94294 13.4524Z" stroke="currentColor" stroke-linejoin="round"/>
+</svg>

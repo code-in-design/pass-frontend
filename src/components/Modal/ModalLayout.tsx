@@ -3,8 +3,8 @@ import { ReactNode, useState } from 'react';
 
 interface Props {
   children: ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 const ModalLayout = (props: Props) => {

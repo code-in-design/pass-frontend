@@ -180,4 +180,6 @@ const Button = styled.button`
 const IconWrapper = styled.div`
   color: ${props => props.theme.colors.blue};
   margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;
