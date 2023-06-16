@@ -7,8 +7,11 @@ import PassAnalysisContainer from '@/features/passAnalysis/container/PassAnalysi
 import TestScoreAnalysisContainer from '@/features/passAnalysis/container/TestScoreAnalysisContainer';
 import PracticalScoreAnalysisContainer from '@/features/passAnalysis/container/PracticalScoreAnalysisContainer';
 import LastYearPassCaseContainer from '@/features/passAnalysis/container/LastYearPassCaseContainer';
+import { useQueryParam } from 'use-query-params';
 
 const PassAnalysisPage = () => {
+  const [tabMenu, setTabMenu] = useQueryParam('tabMenu');
+
   return (
     <Layout>
       <Wrapper>
@@ -25,14 +28,14 @@ const PassAnalysisPage = () => {
             </SideHeader>
           </Header>
           <Menu>
-            <MenuItem>합격 분석</MenuItem>
-            <MenuItem>지원자 현황</MenuItem>
-            <MenuItem>학과 정보</MenuItem>
+            <MenuItem onClick={() => setTabMenu(1)}>합격 분석</MenuItem>
+            <MenuItem onClick={() => setTabMenu(2)}>지원자 현황</MenuItem>
+            <MenuItem onClick={() => setTabMenu(3)}>학과 정보</MenuItem>
           </Menu>
           <div>
             <PassAnalysisContainer />
             <TestScoreAnalysisContainer />
-            <PracticalScoreAnalysisContainer />
+            <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
             <LastYearPassCaseContainer />
           </div>
         </UniversityInformation>
@@ -50,6 +53,8 @@ const Wrapper = styled.div`
 
 const UniversityInformation = styled.div`
   min-width: 611px;
+  height: 792px;
+  overflow-y: scroll;
   background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
   padding: 24px;
@@ -58,7 +63,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 `;
 
 const TitleWrapper = styled.div`
@@ -98,6 +103,7 @@ const Menu = styled.div`
   align-items: center;
   padding: 16px;
   border-bottom: 1px solid ${props => props.theme.colors.gray4};
+  margin-bottom: 24px;
 `;
 
 const MenuItem = styled.div`
@@ -108,6 +114,7 @@ const MenuItem = styled.div`
   text-align: center;
   color: ${props => props.theme.colors.gray2};
   border-right: 1px solid ${props => props.theme.colors.gray4};
+  cursor: pointer;
   :last-of-type {
     border-right: none;
   }

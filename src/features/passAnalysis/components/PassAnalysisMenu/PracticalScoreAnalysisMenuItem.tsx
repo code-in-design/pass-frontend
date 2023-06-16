@@ -1,20 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { exerciseProps } from '@/features/universities/components/FindUniversity/ExerciseType';
 
-const PracticalScoreAnalysisMenuItem = () => {
+interface Props {
+  title: string;
+  record: string;
+  score: string;
+}
+
+const PracticalScoreAnalysisMenuItem = (props: Props) => {
+  const exerciseIcon = exerciseProps[props.title] || { text: '-', icon: '' };
   return (
     <Container>
       <Wrapper>
         <TitleWrapper>
-          <IconWrapper></IconWrapper>
-          <Title>제자리 멀리 뛰기</Title>
+          <IconWrapper>{exerciseIcon.icon}</IconWrapper>
+          <Title>{props.title}</Title>
         </TitleWrapper>
-        <Record>280cm</Record>
+        <Record>{props.record}</Record>
       </Wrapper>
       <div>
         <Wrapper>
           <ScoreTitle>취득점수</ScoreTitle>
-          <Score>100</Score>
+          <Score>{props.score}</Score>
         </Wrapper>
       </div>
     </Container>
@@ -47,7 +55,6 @@ const IconWrapper = styled.div`
   width: 16px;
   height: 16px;
   color: ${props => props.theme.colors.blue};
-  background-color: black;
 `;
 
 const Title = styled.div`

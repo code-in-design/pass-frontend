@@ -38,7 +38,7 @@ interface Props {
   onClick?: (item?: string) => void;
 }
 
-const exerciseProps = {
+export const exerciseProps = {
   달리기10m: {
     text: '10m 달리기',
     icon: <Run10m />,
@@ -166,6 +166,7 @@ const exerciseProps = {
 };
 
 const ExerciseType = (props: Props) => {
+  console.log(props.type);
   const exercise = exerciseProps[props.type] || { text: '-', icon: '' };
   const Component = props.isSelected ? SelectExerciseItem : ExerciseItem;
   const handleClick = () => {
