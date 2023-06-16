@@ -11,6 +11,8 @@ import { useQueryParam } from 'use-query-params';
 import DepartmentInformation from '@/features/passAnalysis/components/DepartmentInformation';
 import NoAnalysisUniversity from '@/features/passAnalysis/components/NoAnalysisUniversity';
 import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSelectAnalysisUniversity';
+import ExpectedAverageScoresContainer from '@/features/passAnalysis/container/ExpectedAverageScoresContainer';
+import ExpectedPracticalRecordsContainer from '@/features/passAnalysis/container/ExpectedPracticalRecordsContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -68,6 +70,12 @@ const PassAnalysisPage = () => {
                 <LastYearPassCaseContainer />
                 {/* 서비스하지 않는 대학일 경우 */}
                 <NoAnalysisUniversity />
+              </>
+            )}
+            {menu === 'candidateStatus' && (
+              <>
+                <ExpectedAverageScoresContainer />
+                <ExpectedPracticalRecordsContainer />
               </>
             )}
             {menu === 'departmentInfromation' && <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />}
