@@ -229,6 +229,9 @@ const UniversitySettingFilterModal = (props: Props) => {
                     <Checkbox size="checkButton" {...props.register('surgentJump')} defaultChecked>
                       서전트 점프
                     </Checkbox>
+                    <Checkbox size="checkButton" {...props.register('highJump')} defaultChecked>
+                      높이뛰기
+                    </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>유연성</ExerciseTitle>
                   <FlexContainer>

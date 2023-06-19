@@ -1,18 +1,19 @@
-import Layout from '@/components/Layout/Layout';
-import ApplicationPossibilityAnalysisContainer from '@/features/passAnalysis/container/ApplicationPossibilityAnalysisContainer';
-import { BookmarkContainer } from '@/features/passAnalysis/container/BookmarkContainer';
 import React from 'react';
+import { useQueryParam } from 'use-query-params';
 import styled from '@emotion/styled';
+import Layout from '@/components/Layout/Layout';
+import { BookmarkContainer } from '@/features/passAnalysis/container/BookmarkContainer';
 import PassAnalysisContainer from '@/features/passAnalysis/container/PassAnalysisContainer';
 import TestScoreAnalysisContainer from '@/features/passAnalysis/container/TestScoreAnalysisContainer';
 import PracticalScoreAnalysisContainer from '@/features/passAnalysis/container/PracticalScoreAnalysisContainer';
 import LastYearPassCaseContainer from '@/features/passAnalysis/container/LastYearPassCaseContainer';
-import { useQueryParam } from 'use-query-params';
 import DepartmentInformation from '@/features/passAnalysis/components/DepartmentInformation';
 import NoAnalysisUniversity from '@/features/passAnalysis/components/NoAnalysisUniversity';
 import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSelectAnalysisUniversity';
 import ExpectedAverageScoresContainer from '@/features/passAnalysis/container/ExpectedAverageScoresContainer';
 import ExpectedPracticalRecordsContainer from '@/features/passAnalysis/container/ExpectedPracticalRecordsContainer';
+import UniversitySettingFilterModalContainer from '../../features/universities/containers/UniversitySettingFilterModalContainer';
+import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassAnalysisSearchContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -20,7 +21,14 @@ const PassAnalysisPage = () => {
   return (
     <Layout>
       <Wrapper>
-        <ApplicationPossibilityAnalysisContainer />
+        <ApplicationPossibilityAnalysisContainer>
+          <AnalysisTitleWrapper>
+            <AnalysisTitle>지원 가능 분석</AnalysisTitle>
+            <UniversitySettingFilterModalContainer size="sm" />
+          </AnalysisTitleWrapper>
+          <PassAnalysisSearchContainer />
+        </ApplicationPossibilityAnalysisContainer>
+
         <UniversityInformation>
           <>
             {menu && (
@@ -93,6 +101,26 @@ const Wrapper = styled.div`
   gap: 0 32px;
 `;
 
+const ApplicationPossibilityAnalysisContainer = styled.div`
+  min-width: 397px;
+  background-color: ${props => props.theme.colors.white};
+  border-radius: 24px;
+  padding: 24px;
+  flex: 1;
+`;
+
+const AnalysisTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const AnalysisTitle = styled.div`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: ${props => props.theme.colors.grayBlack};
+`;
+
 const UniversityInformation = styled.div`
   min-width: 611px;
   height: 792px;
@@ -100,6 +128,7 @@ const UniversityInformation = styled.div`
   background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
   padding: 24px;
+  flex: 1.5;
 `;
 const Header = styled.div`
   display: flex;

@@ -1,40 +1,18 @@
 import { useRef, useState } from 'react';
-import { Range, getTrackBackground, useThumbOverlap } from 'react-range';
+import { Range, getTrackBackground } from 'react-range';
+import Triangle from '../../../public/images/icons/triangle.svg';
+import Medal from '../../../public/images/icons/medal.svg';
 
-const STEP = 0.1;
+interface Props {
+  VALUE: number[];
+}
 const MIN = 0;
 const MAX = 100;
 const COLORS = ['#E4E6F0', '#6B77F8', '#6B77F8', '#E4E6F0'];
 
-const ThumbLabel = ({ rangeRef, values, index }: { rangeRef: Range | null; values: number[]; index: number }) => {
-  const [labelValue, style] = useThumbOverlap(rangeRef, values, index);
-  return (
-    <div
-      data-label={index}
-      style={{
-        display: 'block',
-        position: 'absolute',
-        // top: '-28px',
-        bottom: '-38px',
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: '14px',
-        fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
-        padding: '4px',
-        borderRadius: '4px',
-        backgroundColor: '#548BF4',
-        whiteSpace: 'nowrap',
-        ...(style as React.CSSProperties),
-      }}
-    >
-      {/* {labelValue} */}
-      최고기록
-    </div>
-  );
-};
-
-const LabeledMergeSkinny: React.FC<{ rtl: boolean }> = ({ rtl }) => {
-  const [values, setValues] = useState([25, 50, 75]);
+const LabeledMergeSkinny = (props: Props) => {
+  const { VALUE } = props;
+  const [values, setValues] = useState(VALUE);
   const rangeRef: any = useRef<Range>();
 
   return (
@@ -46,19 +24,15 @@ const LabeledMergeSkinny: React.FC<{ rtl: boolean }> = ({ rtl }) => {
       }}
     >
       <Range
-        allowOverlap
         disabled
+        allowOverlap
         values={values}
         ref={rangeRef}
-        step={STEP}
         min={MIN}
         max={MAX}
-        rtl={rtl}
         onChange={values => setValues(values)}
         renderTrack={({ props, children }) => (
           <div
-            onMouseDown={props.onMouseDown}
-            onTouchStart={props.onTouchStart}
             style={{
               ...props.style,
               height: '36px',
@@ -71,13 +45,12 @@ const LabeledMergeSkinny: React.FC<{ rtl: boolean }> = ({ rtl }) => {
               style={{
                 height: '6px',
                 width: '100%',
-                borderRadius: '7px',
+                borderRadius: '4px',
                 background: getTrackBackground({
                   values,
                   colors: COLORS,
                   min: MIN,
                   max: MAX,
-                  rtl,
                 }),
                 alignSelf: 'center',
               }}
@@ -86,26 +59,96 @@ const LabeledMergeSkinny: React.FC<{ rtl: boolean }> = ({ rtl }) => {
             </div>
           </div>
         )}
-        renderThumb={({ props, index }) => {
+        renderThumb={({ props, index, value }) => {
           return (
             <div
               {...props}
               style={{
                 ...props.style,
-                height: `0px`,
-                width: `0px`,
+                borderRadius: '4px',
+                backgroundColor: '#6B77F8',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
-              <div
-                style={{
-                  height: '16px',
-                  width: '5px',
-                }}
-              />
-              <ThumbLabel rangeRef={rangeRef.current} values={values} index={index} />
+              {index === 0 && (
+                <div
+                  data-label={index}
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    bottom: '-28px',
+                    color: '#B7B9C9',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    lineHeight: '16px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <div style={{ color: '#B7B9C9', width: '8px', margin: '0 auto' }}>
+                    <Triangle />
+                  </div>
+                  최저 기록
+                </div>
+              )}
+              {index === 1 && (
+                <div
+                  data-label={index}
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    top: '-34px',
+                    color: '#fff',
+                    fontSize: '12px',
+                    lineHeight: '16px',
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap',
+                    backgroundColor: '#60C8DE',
+                    borderRadius: '8px',
+                    padding: '4px 8px',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '50%',
+                      bottom: '-15px',
+                      marginTop: '0px',
+                      borderTop: '10px solid #60C8DE',
+                      borderRight: '10px solid transparent',
+                      borderBottom: '10px solid transparent',
+                      borderLeft: '10px solid transparent',
+                      borderRadius: '2px',
+                      transform: 'translate(-50%)',
+                    }}
+                  />
+                  나의 위치
+                </div>
+              )}
+              {index === 2 && (
+                <div
+                  data-label={index}
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    bottom: '-28px',
+                    color: '#6B77F8',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    lineHeight: '16px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <div style={{ color: '#6B77F8', width: '8px', margin: '0 auto' }}>
+                    <Triangle />
+                  </div>
+                  <div style={{ display: 'flex' }}>
+                    최고 기록
+                    <Medal />
+                  </div>
+                </div>
+              )}
             </div>
           );
         }}

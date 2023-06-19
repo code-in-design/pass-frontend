@@ -46,7 +46,6 @@ const ExpectedAverageScores = (props: Props) => {
         <SubjectSelection type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} isPassAnalysis={true} />
         <ScoreWrapper>
           {props.scores.map((item, index) => {
-            console.log(item);
             return <ExpectedAverageScoreItem key={index} title={item.title} averageScore={item.averageScore} score={item.score} />;
           })}
         </ScoreWrapper>
