@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import FilterModal from '../../../features/universities/containers/UniversitySettingFilterModalContainer';
 
-const ApplicationPossibilityAnalysis = () => {
+const ApplicationPossibilityAnalysis = props => {
   return (
     <Container>
       <TitleWrapper>
         <Title>지원 가능 분석</Title>
+        <FilterModal size="sm" />
       </TitleWrapper>
     </Container>
   );

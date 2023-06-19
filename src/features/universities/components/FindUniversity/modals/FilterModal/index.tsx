@@ -11,6 +11,7 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  size: 'sm' | 'md';
 }
 
 const UniversitySettingFilterModal = (props: Props) => {
@@ -30,7 +31,7 @@ const UniversitySettingFilterModal = (props: Props) => {
 
   return (
     <>
-      <FileterButton onClick={openModal}>
+      <FileterButton size={props.size} onClick={openModal}>
         <Filter />
         필터 열기
       </FileterButton>
@@ -277,9 +278,9 @@ const UniversitySettingFilterModal = (props: Props) => {
 
 export default UniversitySettingFilterModal;
 
-const FileterButton = styled.div`
-  max-width: 112px;
-  height: 32px;
+const FileterButton = styled.div<{ size: string }>`
+  max-width: ${props => (props.size === 'sm' ? '80px' : '112px')};
+  height: ${props => (props.size === 'sm' ? '24px' : '32px')};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -287,7 +288,7 @@ const FileterButton = styled.div`
   gap: 0 4px;
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.white};
-  padding: 8px 24px;
+  padding: ${props => (props.size === 'sm' ? '4px 8px' : '8px 14px')};
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;

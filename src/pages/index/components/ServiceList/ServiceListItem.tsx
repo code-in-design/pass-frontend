@@ -32,6 +32,8 @@ const MenuListItem = styled.li`
 `;
 
 const MenuImg = styled.div`
+  width: 24px;
+  height: 24px;
   margin-right: 12px;
   color: ${props => props.theme.colors.blue};
 `;

@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import ThumbUp from '../../../../public/images/icons/thumbUp.svg';
+import BarChart from '../../../../public/images/icons/barChart.svg';
+import Star from '../../../../public/images/icons/star.svg';
+import LabeledMergeSkinny from '@/components/Range/LabeledMergeSkinny';
 
 interface Props {
   type: string;
@@ -20,19 +24,36 @@ const ExpectedPracticalRecoredItem = (props: Props) => {
       <Box>
         <ScoreWrapper>
           <ScoreBox>
-            <ScoreTitle>최고 기록</ScoreTitle>
+            <ScoreTitle>
+              <IconGreenWrapper>
+                <ThumbUp />
+              </IconGreenWrapper>
+              최고 기록
+            </ScoreTitle>
             <Score>{props.bestScore}</Score>
           </ScoreBox>
           <ScoreBox>
-            <ScoreTitle>평균 기록</ScoreTitle>
+            <ScoreTitle>
+              <IconGreenWrapper>
+                <BarChart />
+              </IconGreenWrapper>
+              평균 기록
+            </ScoreTitle>
             <Score>{props.averageScore}</Score>
           </ScoreBox>
           <ScoreBox>
-            <ScoreTitle>만점 기록</ScoreTitle>
+            <ScoreTitle>
+              <IconGreenWrapper>
+                <Star />
+              </IconGreenWrapper>
+              만점 기록
+            </ScoreTitle>
             <Score>{props.perfectScore}</Score>
           </ScoreBox>
         </ScoreWrapper>
-        <Graph></Graph>
+        <Graph>
+          <LabeledMergeSkinny rtl={false} />
+        </Graph>
       </Box>
     </Container>
   );
@@ -109,4 +130,10 @@ const Score = styled.div`
 const Graph = styled.div`
   min-width: 221px;
   height: 68px;
+`;
+
+const IconGreenWrapper = styled.div`
+  width: 12px;
+  height: 12px;
+  color: ${props => props.theme.colors.deepGreen};
 `;
