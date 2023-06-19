@@ -7,7 +7,7 @@ const UniversitySearchContainer = () => {
   return (
     <Wrapper>
       <UniversitySearch />
-      <UniversityFilterModalContainer />
+      <UniversityFilterModalContainer size="md" />
     </Wrapper>
   );
 };

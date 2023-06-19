@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
-import Filter from '../../../../../../../public/images/icons/filter.svg';
+import Filter from '../../../../public/images/icons/filter.svg';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import FindUniversityFilterModalItem from './UniversityFilterModalItem';
 import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
@@ -11,9 +11,10 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  size: 'sm' | 'md';
 }
 
-const UniversitySettingFilterModal = (props: Props) => {
+const UniversityFilterModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -30,7 +31,7 @@ const UniversitySettingFilterModal = (props: Props) => {
 
   return (
     <>
-      <FileterButton onClick={openModal}>
+      <FileterButton size={props.size} onClick={openModal}>
         <Filter />
         필터 열기
       </FileterButton>
@@ -219,7 +220,7 @@ const UniversitySettingFilterModal = (props: Props) => {
                   </FlexContainerSmall>
                 </FindUniversityFilterModalItem>
 
-                <FindUniversityFilterModalItem title="실기 반영" subtitle="* 실기 선택을 해제할 경우, 해당 실기를 반영하지 않는 대학만 검색됩니다.">
+                <FindUniversityFilterModalItem title="제외할 실기 종목">
                   <ExerciseTitle>점프</ExerciseTitle>
                   <FlexContainer>
                     <Checkbox size="checkButton" {...props.register('standingLongJump')} defaultChecked>
@@ -227,6 +228,9 @@ const UniversitySettingFilterModal = (props: Props) => {
                     </Checkbox>
                     <Checkbox size="checkButton" {...props.register('surgentJump')} defaultChecked>
                       서전트 점프
+                    </Checkbox>
+                    <Checkbox size="checkButton" {...props.register('highJump')} defaultChecked>
+                      높이뛰기
                     </Checkbox>
                   </FlexContainer>
                   <ExerciseTitle>유연성</ExerciseTitle>
@@ -275,11 +279,11 @@ const UniversitySettingFilterModal = (props: Props) => {
   );
 };
 
-export default UniversitySettingFilterModal;
+export default UniversityFilterModal;
 
-const FileterButton = styled.div`
-  max-width: 112px;
-  height: 32px;
+const FileterButton = styled.div<{ size: string }>`
+  max-width: ${props => (props.size === 'sm' ? '80px' : '112px')};
+  height: ${props => (props.size === 'sm' ? '24px' : '32px')};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -287,7 +291,7 @@ const FileterButton = styled.div`
   gap: 0 4px;
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.white};
-  padding: 8px 24px;
+  padding: ${props => (props.size === 'sm' ? '4px 8px' : '8px 14px')};
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;

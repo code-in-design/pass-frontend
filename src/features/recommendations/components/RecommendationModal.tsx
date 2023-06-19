@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import InfoIcon from '../../../../public/images/icons/info.svg';
+import ThumbUp from '../../../../public/images/icons/thumbUp.svg';
 
 const RecommendationModal = props => {
   const [myCode, setMyCode] = useState('ABCD10');
@@ -20,7 +21,7 @@ const RecommendationModal = props => {
 
   return (
     <>
-      <ServiceListItem img="/images/icons/thumbUp.svg" text="추천하기 / 받기" onClick={openModal} />
+      <ServiceListItem icon={<ThumbUp />} text="추천하기 / 받기" onClick={openModal} />
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Title>내 초대 코드</Title>

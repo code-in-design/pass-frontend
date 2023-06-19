@@ -9,6 +9,7 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   unRequiredFields?: [any, any, any];
   isMathRawDropout?: boolean;
+  isPassAnalysis?: boolean;
 }
 interface ItemProps {
   selected: boolean;
@@ -19,13 +20,14 @@ interface ItemProps {
   handleClick: () => void;
   unRequiredFields?: [any, any, any];
   isMathRawDropout?: boolean;
+  isPassAnalysis?: boolean;
 }
 
 const ChoiceItems = (props: ItemProps) => {
   const Component = props.selected ? ChoiceItemSelect : ChoiceItem;
 
   return (
-    <Component {...props.register(props.type, { required: !props.isMathRawDropout ? `선택과목을 선택해주세요.` : false })} onClick={props.handleClick}>
+    <Component isPassAnalysis={props.isPassAnalysis || true} {...props.register(props.type, { required: !props.isMathRawDropout ? `선택과목을 선택해주세요.` : false })} onClick={props.handleClick}>
       {props.text}
     </Component>
   );
@@ -54,7 +56,7 @@ const SubjectSelection = (props: Props) => {
 
   return (
     <Choice>
-      <ChoiceTitle>선택</ChoiceTitle>
+      {!props.isPassAnalysis && <ChoiceTitle>선택</ChoiceTitle>}
       <ChoiceContainer>
         {props.isChoice.map((item, index) => (
           <ChoiceItems
@@ -67,6 +69,7 @@ const SubjectSelection = (props: Props) => {
             register={props.register}
             setValue={props.setValue}
             isMathRawDropout={props.isMathRawDropout}
+            isPassAnalysis={props.isPassAnalysis}
           />
         ))}
       </ChoiceContainer>
@@ -99,16 +102,17 @@ const ChoiceContainer = styled.div`
   padding: 2px;
 `;
 
-const ChoiceItem = styled.div`
-  padding: 8px 12px;
+const ChoiceItem = styled.div<{ isPassAnalysis: boolean }>`
+  /* padding: 8px 12px; */
+  padding: ${props => (props.isPassAnalysis ? '8px 19.5px' : '8px 12px')};
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
   color: ${props => props.theme.colors.gray2};
 `;
 
-const ChoiceItemSelect = styled.div`
-  padding: 8px 12px;
+const ChoiceItemSelect = styled.div<{ isPassAnalysis: boolean }>`
+  padding: ${props => (props.isPassAnalysis ? '8px 19.5px' : '8px 12px')};
   font-size: 14px;
   line-height: 16px;
   color: ${props => props.theme.colors.white};

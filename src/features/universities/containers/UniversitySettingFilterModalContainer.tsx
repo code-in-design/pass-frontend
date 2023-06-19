@@ -1,10 +1,14 @@
 import React from 'react';
-import UniversitySettingFilterModal from '../components/FindUniversity/modals/FilterModal';
+import UniversitySettingFilterModal from '../../../components/Modal/UniversityFilterModal/UniversityFilterModal';
 import { useForm } from 'react-hook-form';
 
-const UniversityFilterModalContainer = () => {
+interface Props {
+  size: 'sm' | 'md';
+}
+
+const UniversityFilterModalContainer = (props: Props) => {
   const { register, handleSubmit, setValue } = useForm();
-  return <UniversitySettingFilterModal register={register} handleSubmit={handleSubmit} setValue={setValue} />;
+  return <UniversitySettingFilterModal register={register} handleSubmit={handleSubmit} setValue={setValue} size={props.size} />;
 };
 
 export default UniversityFilterModalContainer;

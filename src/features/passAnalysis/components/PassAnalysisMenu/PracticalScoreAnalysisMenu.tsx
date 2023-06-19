@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PracticalScoreAnalysisMenuItem from './PracticalScoreAnalysisMenuItem';
+import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import Info from '../../../../../public/images/icons/info.svg';
-import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
 
 interface Props {
   name: string;
@@ -37,7 +37,7 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
           })}
         </ItemWrapper>
       </Container>
-      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
     </>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
 import MyTooltip from '@/components/Tooltip';
+import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
+import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import LoudSpeaker from '../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../public/images/icons/calendar.svg';
 import School from '../../../../../public/images/icons/school.svg';
 import Book from '../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../public/images/icons/noticeBoard.svg';
 import Info from '../../../../../public/images/icons/info.svg';
-import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
 
 interface Props {
   name: string;
@@ -132,7 +132,7 @@ const DepartmentInformation = (props: Props) => {
           <InfoTitle>모집 요강</InfoTitle>
         </InfoItem>
       </Wrapper>
-      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
     </>
   );
 };

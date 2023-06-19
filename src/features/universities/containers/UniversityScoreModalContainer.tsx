@@ -1,5 +1,5 @@
+import ScoreDistributionTableModal from '@/components/Table/ScoreDistributionTableModal';
 import React from 'react';
-import ScoreDistributionModal from '../components/FindUniversity/modals/ScoreDistributionModal';
 
 interface Props {
   name: string;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const UniversityScoreModalContainer = (props: Props) => {
-  return <ScoreDistributionModal name={props.name} subTitle={props.subTitle} onClose={props.onClose} />;
+  return <ScoreDistributionTableModal name={props.name} subTitle={props.subTitle} onClose={props.onClose} />;
 };
 
 export default UniversityScoreModalContainer;

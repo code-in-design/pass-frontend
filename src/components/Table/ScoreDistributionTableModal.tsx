@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import ModalLayout from '@/components/Modal/ModalLayout';
-import ScoreDistributionTable from './ScoreDistributionTable';
-import ExerciseType from '../../ExerciseType';
+import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
+import ScoreDistributionTable from '@/components/Table/ScoreDistributionTable';
+import ModalLayout from '../Modal/ModalLayout';
 
 interface Props {
   name: string;
@@ -11,7 +11,7 @@ interface Props {
   exercise: string[];
 }
 
-const ScoreDistributionModal = (props: Props) => {
+const DistributionTableModal = (props: Props) => {
   const [toggleItem, setToggleItem] = useState(props.exercise[0]);
 
   const handleItemClick = item => {
@@ -37,8 +37,9 @@ const ScoreDistributionModal = (props: Props) => {
   );
 };
 
-export default ScoreDistributionModal;
-ScoreDistributionModal.defaultProps = {
+export default DistributionTableModal;
+
+DistributionTableModal.defaultProps = {
   exercise: ['제자리 멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
 };
 
