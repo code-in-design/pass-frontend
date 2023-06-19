@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import ExpectedAverageScoreItem from './ExpectedAverageScoreItem';
 
 interface Props {
-  isChoice: string[];
+  choices: string[];
   scores: {
     국어: { title: string; averageScore: number; score: number }[];
     수학: { title: string; averageScore: number; score: number }[];
@@ -26,7 +26,7 @@ const ChoiceItems = (props: ItemProps) => {
 
 const ExpectedAverageScores = (props: Props) => {
   const [score, setScore] = useState<{ title: string; averageScore: number; score: number }[]>(props.scores.국어);
-  const [selectedItem, setSelectedItem] = useState(props.isChoice[0]);
+  const [selectedItem, setSelectedItem] = useState(props.choices[0]);
 
   const handleItemClick = item => {
     setSelectedItem(item);
@@ -52,7 +52,7 @@ const ExpectedAverageScores = (props: Props) => {
       </TitleWrapper>
       <Container>
         <ChoiceContainer>
-          {props.isChoice.map((item, index) => {
+          {props.choices.map((item, index) => {
             return <ChoiceItems key={item} text={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} />;
           })}
         </ChoiceContainer>
@@ -68,7 +68,7 @@ const ExpectedAverageScores = (props: Props) => {
 
 export default ExpectedAverageScores;
 ExpectedAverageScores.defaultProps = {
-  isChoice: ['국어', '수학', '영어', '탐구'],
+  choices: ['국어', '수학', '영어', '탐구'],
   scores: {
     국어: [
       { title: '표준점수', averageScore: 120.5, score: 124 },

@@ -17,6 +17,7 @@ import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassA
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
+  // const isMenuSelected
 
   return (
     <Layout>
@@ -31,6 +32,8 @@ const PassAnalysisPage = () => {
 
         <UniversityInformation>
           <>
+            {!menu && <NoSelectAnalysisUniversity />}
+
             {menu && (
               <>
                 <Header>
@@ -96,7 +99,6 @@ const PassAnalysisPage = () => {
               </>
             )}
 
-            {!menu && <NoSelectAnalysisUniversity />}
             {menu === 'passAnalysis' && (
               <>
                 <PassAnalysisContainer />

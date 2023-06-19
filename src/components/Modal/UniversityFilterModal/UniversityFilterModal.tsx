@@ -14,7 +14,7 @@ interface Props {
   size: 'sm' | 'md';
 }
 
-const UniversitySettingFilterModal = (props: Props) => {
+const UniversityFilterModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -220,7 +220,7 @@ const UniversitySettingFilterModal = (props: Props) => {
                   </FlexContainerSmall>
                 </FindUniversityFilterModalItem>
 
-                <FindUniversityFilterModalItem title="실기 반영" subtitle="* 실기 선택을 해제할 경우, 해당 실기를 반영하지 않는 대학만 검색됩니다.">
+                <FindUniversityFilterModalItem title="제외할 실기 종목">
                   <ExerciseTitle>점프</ExerciseTitle>
                   <FlexContainer>
                     <Checkbox size="checkButton" {...props.register('standingLongJump')} defaultChecked>
@@ -279,7 +279,7 @@ const UniversitySettingFilterModal = (props: Props) => {
   );
 };
 
-export default UniversitySettingFilterModal;
+export default UniversityFilterModal;
 
 const FileterButton = styled.div<{ size: string }>`
   max-width: ${props => (props.size === 'sm' ? '80px' : '112px')};

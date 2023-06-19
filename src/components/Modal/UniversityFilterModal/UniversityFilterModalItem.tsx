@@ -5,7 +5,7 @@ import HelpOutline from '../../../../public/images/icons/helpOutline.svg';
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   children: ReactNode;
   tooltip?: boolean;
 }

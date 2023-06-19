@@ -1,5 +1,5 @@
 import React from 'react';
-import UniversitySettingFilterModal from '../../../components/Modal/FilterModal';
+import UniversitySettingFilterModal from '../../../components/Modal/UniversityFilterModal/UniversityFilterModal';
 import { useForm } from 'react-hook-form';
 
 interface Props {
