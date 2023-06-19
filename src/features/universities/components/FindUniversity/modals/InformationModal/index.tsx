@@ -9,8 +9,8 @@ import School from '../../../../../../../public/images/icons/school.svg';
 import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
-import UniversityScoreModalContainer from '@/features/universities/containers/UniversityScoreModalContainer';
 import ExerciseType from '../../ExerciseType';
+import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 
 interface Props {
   name: string;
@@ -155,7 +155,7 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
-      {openModal && <UniversityScoreModalContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
     </>
   );
 };

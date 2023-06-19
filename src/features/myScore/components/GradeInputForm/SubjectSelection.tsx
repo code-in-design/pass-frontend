@@ -53,6 +53,7 @@ const SubjectSelection = (props: Props) => {
       props.setValue(props.type, '미응시');
     }
   }, [props.isMathRawDropout]);
+
   return (
     <Choice>
       {!props.isPassAnalysis && <ChoiceTitle>선택</ChoiceTitle>}

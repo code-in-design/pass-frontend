@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import MyTooltip from '@/components/Tooltip';
-import HelpOutline from '../../../../../../../public/images/icons/helpOutline.svg';
+import HelpOutline from '../../../../public/images/icons/helpOutline.svg';
 
 interface Props {
   title: string;

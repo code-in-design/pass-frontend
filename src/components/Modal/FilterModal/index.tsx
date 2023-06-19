@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
-import Filter from '../../../../../../../public/images/icons/filter.svg';
+import Filter from '../../../../public/images/icons/filter.svg';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import FindUniversityFilterModalItem from './UniversityFilterModalItem';
 import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';

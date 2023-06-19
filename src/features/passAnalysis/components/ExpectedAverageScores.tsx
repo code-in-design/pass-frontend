@@ -1,40 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import SubjectSelection from '@/features/myScore/components/GradeInputForm/SubjectSelection';
-import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 import ExpectedAverageScoreItem from './ExpectedAverageScoreItem';
 
 interface Props {
   isChoice: string[];
-  // scores: {
-  //   국어: { title: string; averageScore: number; score: number }[];
-  //   수학: { title: string; averageScore: number; score: number }[];
-  //   영어: { title: string; averageScore: number; score: number }[];
-  //   탐구: { title: string; averageScore: number; score: number }[];
-  // };
-  scores: { title: string; averageScore: number; score: number }[];
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
+  scores: {
+    국어: { title: string; averageScore: number; score: number }[];
+    수학: { title: string; averageScore: number; score: number }[];
+    영어: { title: string; averageScore: number; score: number }[];
+    탐구: { title: string; averageScore: number; score: number }[];
+  };
 }
 
-const ExpectedAverageScores = (props: Props) => {
-  const [score, setScore] = useState<{ title: string; averageScore: number; score: number }[]>();
-  let type = '';
+interface ItemProps {
+  selected: boolean;
+  text: string;
+  handleClick: () => void;
+}
 
-  for (let i = 0; i <= props.isChoice.length; i++) {
-    if (props.isChoice[i] === '국어') {
-      type = 'korean';
+const ChoiceItems = (props: ItemProps) => {
+  const Component = props.selected ? ChoiceItemSelect : ChoiceItem;
+
+  return <Component onClick={props.handleClick}>{props.text}</Component>;
+};
+
+const ExpectedAverageScores = (props: Props) => {
+  const [score, setScore] = useState<{ title: string; averageScore: number; score: number }[]>(props.scores.국어);
+  const [selectedItem, setSelectedItem] = useState(props.isChoice[0]);
+
+  const handleItemClick = item => {
+    setSelectedItem(item);
+    if (item === '국어') {
+      setScore(props.scores.국어);
     }
-    if (props.isChoice[i] === '수학') {
-      type = 'math';
+    if (item === '수학') {
+      setScore(props.scores.수학);
     }
-    if (props.isChoice[i] === '영어') {
-      type = 'korean';
+    if (item === '영어') {
+      setScore(props.scores.영어);
     }
-    if (props.isChoice[i] === '탐구') {
-      type = 'math';
+    if (item === '탐구') {
+      setScore(props.scores.탐구);
     }
-  }
+  };
 
   return (
     <>
@@ -43,9 +51,13 @@ const ExpectedAverageScores = (props: Props) => {
         <Update>2023.12.05 update</Update>
       </TitleWrapper>
       <Container>
-        <SubjectSelection type={type} isChoice={props.isChoice} register={props.register} setValue={props.setValue} isPassAnalysis={true} />
+        <ChoiceContainer>
+          {props.isChoice.map((item, index) => {
+            return <ChoiceItems key={item} text={item} selected={item === selectedItem} handleClick={() => handleItemClick(item)} />;
+          })}
+        </ChoiceContainer>
         <ScoreWrapper>
-          {props.scores.map((item, index) => {
+          {score.map((item, index) => {
             return <ExpectedAverageScoreItem key={index} title={item.title} averageScore={item.averageScore} score={item.score} />;
           })}
         </ScoreWrapper>
@@ -57,40 +69,30 @@ const ExpectedAverageScores = (props: Props) => {
 export default ExpectedAverageScores;
 ExpectedAverageScores.defaultProps = {
   isChoice: ['국어', '수학', '영어', '탐구'],
-  scores: [
-    { title: '표준점수', averageScore: 120.5, score: 124 },
-    { title: '백분위', averageScore: 89.5, score: 90 },
-    { title: '등급', averageScore: 3.3, score: 3 },
-  ],
-  // scores: [
-  //   {
-  //     국어: [
-  //       { title: '표준점수', averageScore: 120.5, score: 124 },
-  //       { title: '백분위', averageScore: 89.5, score: 90 },
-  //       { title: '등급', averageScore: 3.3, score: 3 },
-  //     ],
-  //   },
-  //   {
-  //     수학: [
-  //       { title: '표준점수', averageScore: 120.5, score: 124 },
-  //       { title: '백분위', averageScore: 89.5, score: 90 },
-  //       { title: '등급', averageScore: 3.3, score: 3 },
-  //     ],
-  //   },
-  //   {
-  //     영어: [
-  //       { title: '표준점수', averageScore: 0, score: 0 },
-  //       { title: '백분위', averageScore: 0, score: 0 },
-  //       { title: '등급', averageScore: 3.3, score: 3 },
-  //     ],
-  //   },
-  //   {
-  //     탐구: [
-  //       { title: '백분위', averageScore: 89.5, score: 90 },
-  //       { title: '등급', averageScore: 3.3, score: 3 },
-  //     ],
-  //   },
-  // ],
+  scores: {
+    국어: [
+      { title: '표준점수', averageScore: 120.5, score: 124 },
+      { title: '백분위', averageScore: 89.5, score: 90 },
+      { title: '등급', averageScore: 3.3, score: 3 },
+    ],
+
+    수학: [
+      { title: '표준점수', averageScore: 120.5, score: 124 },
+      { title: '백분위', averageScore: 89.5, score: 90 },
+      { title: '등급', averageScore: 3.3, score: 3 },
+    ],
+
+    영어: [
+      { title: '표준점수', averageScore: 0, score: 0 },
+      { title: '백분위', averageScore: 0, score: 0 },
+      { title: '등급', averageScore: 3.3, score: 3 },
+    ],
+
+    탐구: [
+      { title: '백분위', averageScore: 89.5, score: 90 },
+      { title: '등급', averageScore: 3.3, score: 3 },
+    ],
+  },
 };
 
 const TitleWrapper = styled.div`
@@ -130,4 +132,35 @@ const ScoreWrapper = styled.div`
   margin-top: 16px;
   display: flex;
   gap: 0 12px;
+`;
+
+const ChoiceContainer = styled.div`
+  width: 256px;
+  display: flex;
+  height: 36px;
+  border-radius: 57px;
+  background-color: ${props => props.theme.colors.gray5};
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${props => props.theme.colors.gray2};
+  padding: 2px;
+`;
+
+const ChoiceItem = styled.div`
+  padding: 8px 19.5px;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+  color: ${props => props.theme.colors.gray2};
+`;
+
+const ChoiceItemSelect = styled.div`
+  padding: 8px 19.5px;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.green};
+  border-radius: 16px;
+  cursor: pointer;
 `;

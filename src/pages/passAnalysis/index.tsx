@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQueryParam } from 'use-query-params';
 import styled from '@emotion/styled';
 import Layout from '@/components/Layout/Layout';
@@ -48,6 +48,15 @@ const PassAnalysisPage = () => {
                     onClick={() => {
                       setMenu('passAnalysis');
                     }}
+                    style={
+                      menu === 'passAnalysis'
+                        ? {
+                            fontWeight: 700,
+                            color: '#191E25',
+                            borderBottom: '3px solid #6B77F8',
+                          }
+                        : {}
+                    }
                   >
                     합격 분석
                   </MenuItem>
@@ -55,6 +64,15 @@ const PassAnalysisPage = () => {
                     onClick={() => {
                       setMenu('candidateStatus');
                     }}
+                    style={
+                      menu === 'candidateStatus'
+                        ? {
+                            fontWeight: 700,
+                            color: '#191E25',
+                            borderBottom: '3px solid #6B77F8',
+                          }
+                        : {}
+                    }
                   >
                     지원자 현황
                   </MenuItem>
@@ -62,6 +80,15 @@ const PassAnalysisPage = () => {
                     onClick={() => {
                       setMenu('departmentInfromation');
                     }}
+                    style={
+                      menu === 'departmentInfromation'
+                        ? {
+                            fontWeight: 700,
+                            color: '#191E25',
+                            borderBottom: '3px solid #6B77F8',
+                          }
+                        : {}
+                    }
                   >
                     학과 정보
                   </MenuItem>
@@ -172,8 +199,6 @@ const RecruitmentGroup = styled.div`
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid ${props => props.theme.colors.gray4};
   margin-bottom: 24px;
 `;
 
@@ -184,9 +209,23 @@ const MenuItem = styled.div`
   line-height: 20px;
   text-align: center;
   color: ${props => props.theme.colors.gray2};
-  border-right: 1px solid ${props => props.theme.colors.gray4};
+  border-bottom: 1px solid ${props => props.theme.colors.gray4};
+  padding: 16px;
   cursor: pointer;
+  position: relative;
   :last-of-type {
     border-right: none;
+  }
+  ::before {
+    content: '|';
+    color: ${props => props.theme.colors.gray4};
+    line-height: 18px;
+    position: absolute;
+    left: 0;
+  }
+  :first-of-type {
+    ::before {
+      content: none;
+    }
   }
 `;
