@@ -2,6 +2,7 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import styled from '@emotion/styled';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useState, useCallback } from 'react';
+import PanelSettings from '../../../../../public/images/icons/panelSettings.svg';
 
 const PrivacyModal = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const PrivacyModal = props => {
 
   return (
     <>
-      <ServiceListItem img="/images/icons/panelSettings.svg" text="개인정보 보호 안내" onClick={openModal} />
+      <ServiceListItem icon={<PanelSettings />} text="개인정보 보호 안내" onClick={openModal} />
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Title>개인정보 보호 안내</Title>
@@ -33,6 +34,6 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 32px;
   text-align: center;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 8px;
 `;

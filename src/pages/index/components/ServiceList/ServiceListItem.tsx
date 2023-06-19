@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { ReactNode } from 'react';
 
 interface Props {
-  img: string;
+  icon: ReactNode;
   text: string;
   onClick: () => void;
 }
@@ -9,7 +10,7 @@ interface Props {
 const ServiceListItem = (props: Props) => {
   return (
     <MenuListItem onClick={props.onClick}>
-      <MenuImg src={props.img} alt={props.text} />
+      <MenuImg>{props.icon}</MenuImg>
       <MenuTitle>{props.text}</MenuTitle>
     </MenuListItem>
   );
@@ -30,11 +31,9 @@ const MenuListItem = styled.li`
   cursor: pointer;
 `;
 
-const MenuImg = styled.img`
-  width: 24px;
-  height: 24px;
-  display: block;
+const MenuImg = styled.div`
   margin-right: 12px;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const MenuTitle = styled.span`

@@ -40,7 +40,12 @@ const ExpectedPracticalRecoredItem = (props: Props) => {
 
 export default ExpectedPracticalRecoredItem;
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 12px;
+  :last-of-type {
+    margin-bottom: 0;
+  }
+`;
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -50,6 +55,7 @@ const TitleWrapper = styled.div`
 const IconWrapper = styled.div`
   width: 16px;
   height: 16px;
+  color: ${props => props.theme.colors.blue};
 `;
 
 const Title = styled.div`
