@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import PracticalScoreAnalysisMenuItem from './PracticalScoreAnalysisMenuItem';
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import Info from '../../../../../public/images/icons/info.svg';
+import { useRouter } from 'next/router';
 
 interface Props {
   name: string;
@@ -12,6 +13,7 @@ interface Props {
 
 const PracticalScoreAnalysisMenu = (props: Props) => {
   const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
 
   return (
     <>

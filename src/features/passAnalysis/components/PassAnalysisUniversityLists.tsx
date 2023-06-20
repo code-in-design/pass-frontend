@@ -1,10 +1,11 @@
-import { Tooltip } from '@chakra-ui/react';
+import { Tooltip, useQuery } from '@chakra-ui/react';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import HelpOutline from '../../../../public/images/icons/helpOutline.svg';
 import 'ag-grid-community/styles/ag-grid.css';
 import { GridApi } from 'ag-grid-community';
+import { useQueryParam } from 'use-query-params';
 
 interface Props {
   data: {
@@ -55,6 +56,7 @@ const PassAnalysisUniversityLists = (props: Props) => {
     { field: '지원가능성', cellRendererFramework: SupportabilityRenderer, minWidth: 64, flex: 2.1 },
   ]);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [university, setUniversity] = useQueryParam('university');
 
   const getRowStyle = params => {
     if (params.rowIndex === selectedRow) {
@@ -73,6 +75,7 @@ const PassAnalysisUniversityLists = (props: Props) => {
 
   const onRowClick = props => {
     setSelectedRow(props.rowIndex);
+    setUniversity(props.data['대학/학과']);
   };
 
   useEffect(() => {
@@ -96,16 +99,16 @@ const PassAnalysisUniversityLists = (props: Props) => {
 export default PassAnalysisUniversityLists;
 PassAnalysisUniversityLists.defaultProps = {
   data: [
+    { 군: '가', '대학/학과': '서울대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '고려대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '인천대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '강원대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '충남대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '충북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '부산대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
+    { 군: '가', '대학/학과': '제주대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
     { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
-    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '경남대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
     { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
     { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
     { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },

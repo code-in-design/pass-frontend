@@ -17,10 +17,11 @@ import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassA
 import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/container/PassAnalysisUniversityListsContainer';
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateAnalysisContainer from '@/features/passAnalysis/container/UpdateAnalysisContainer';
+import PracticalChangeScoreContainer from '@/features/passAnalysis/container/PracticalChangeScoreContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
-  // const isMenuSelected // query param이 있는지 없는지 판단하기
+  const [selectedUniversity] = useQueryParam('university');
 
   return (
     <Layout>
@@ -36,12 +37,12 @@ const PassAnalysisPage = () => {
 
         <UniversityInformation>
           <>
-            {!menu && <NoSelectAnalysisUniversity />}
-            {menu && (
+            {!selectedUniversity && <NoSelectAnalysisUniversity />}
+            {selectedUniversity && (
               <>
                 <Header>
                   <TitleWrapper>
-                    <Title>경상대학교 체육교육과</Title>
+                    <Title>{String(selectedUniversity)}</Title>
                     <SubTitle>수능 일반 전형</SubTitle>
                   </TitleWrapper>
                   <SideHeader>
@@ -104,16 +105,17 @@ const PassAnalysisPage = () => {
 
             {menu === 'passAnalysis' && (
               <>
-                <PassProbabilityContainer />
+                {/* <PassProbabilityContainer />
                 <TestScoreAnalysisContainer />
-                <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
-                <LastYearPassCaseContainer />
+                <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" />
+                <LastYearPassCaseContainer /> */}
                 {/* 서비스하지 않는 대학일 경우 */}
-                <NoAnalysisUniversity />
+                {/* <NoAnalysisUniversity /> */}
                 {/* 멤버십이 없는 경우 */}
-                <NoMembershipContainer />
+                {/* <NoMembershipContainer /> */}
                 {/* 업데이트예정일 경우 */}
-                <UpdateAnalysisContainer />
+                {/* <UpdateAnalysisContainer /> */}
+                <PracticalChangeScoreContainer />
               </>
             )}
             {menu === 'candidateStatus' && (
@@ -122,7 +124,7 @@ const PassAnalysisPage = () => {
                 <ExpectedPracticalRecordsContainer />
               </>
             )}
-            {menu === 'departmentInfromation' && <DepartmentInformation name="경상대학교 체육교육과" subTitle="수능 일반 전형" />}
+            {menu === 'departmentInfromation' && <DepartmentInformation name={String(selectedUniversity)} subTitle="수능 일반 전형" />}
           </>
         </UniversityInformation>
       </Wrapper>
@@ -208,7 +210,6 @@ const RecruitmentGroup = styled.div`
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
 `;
 
 const MenuItem = styled.div`
