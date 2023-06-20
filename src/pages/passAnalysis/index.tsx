@@ -3,7 +3,7 @@ import { useQueryParam } from 'use-query-params';
 import styled from '@emotion/styled';
 import Layout from '@/components/Layout/Layout';
 import { BookmarkContainer } from '@/features/passAnalysis/container/BookmarkContainer';
-import PassAnalysisContainer from '@/features/passAnalysis/container/PassAnalysisContainer';
+import PassProbabilityContainer from '@/features/passAnalysis/container/PassProbabilityContainer';
 import TestScoreAnalysisContainer from '@/features/passAnalysis/container/TestScoreAnalysisContainer';
 import PracticalScoreAnalysisContainer from '@/features/passAnalysis/container/PracticalScoreAnalysisContainer';
 import LastYearPassCaseContainer from '@/features/passAnalysis/container/LastYearPassCaseContainer';
@@ -14,10 +14,13 @@ import ExpectedAverageScoresContainer from '@/features/passAnalysis/container/Ex
 import ExpectedPracticalRecordsContainer from '@/features/passAnalysis/container/ExpectedPracticalRecordsContainer';
 import UniversitySettingFilterModalContainer from '../../features/universities/containers/UniversitySettingFilterModalContainer';
 import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassAnalysisSearchContainer';
+import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/container/PassAnalysisUniversityListsContainer';
+import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
+import UpdateAnalysisContainer from '@/features/passAnalysis/container/UpdateAnalysisContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
-  // const isMenuSelected
+  // const isMenuSelected // query param이 있는지 없는지 판단하기
 
   return (
     <Layout>
@@ -28,12 +31,12 @@ const PassAnalysisPage = () => {
             <UniversitySettingFilterModalContainer size="sm" />
           </AnalysisTitleWrapper>
           <PassAnalysisSearchContainer />
+          <PassAnalysisUniversityListsContainer />
         </ApplicationPossibilityAnalysisContainer>
 
         <UniversityInformation>
           <>
-            {!menu && <NoSelectAnalysisUniversity />}
-
+            {/* {!menu && <NoSelectAnalysisUniversity />} */}
             {menu && (
               <>
                 <Header>
@@ -98,10 +101,12 @@ const PassAnalysisPage = () => {
                 </Menu>
               </>
             )}
+            {/* <NoMembershipContainer />
+            <UpdateAnalysisContainer /> */}
 
             {menu === 'passAnalysis' && (
               <>
-                <PassAnalysisContainer />
+                <PassProbabilityContainer />
                 <TestScoreAnalysisContainer />
                 <PracticalScoreAnalysisContainer name="경상대학교 체육교육과" subTitle="수능 일반 전형" />
                 <LastYearPassCaseContainer />
