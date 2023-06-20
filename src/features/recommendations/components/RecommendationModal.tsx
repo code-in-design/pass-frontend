@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import InfoIcon from '../../../../public/images/icons/info.svg';
+import ThumbUp from '../../../../public/images/icons/thumbUp.svg';
 
 const RecommendationModal = props => {
   const [myCode, setMyCode] = useState('ABCD10');
@@ -20,7 +21,7 @@ const RecommendationModal = props => {
 
   return (
     <>
-      <ServiceListItem img="/images/icons/thumbUp.svg" text="추천하기 / 받기" onClick={openModal} />
+      <ServiceListItem icon={<ThumbUp />} text="추천하기 / 받기" onClick={openModal} />
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Title>내 초대 코드</Title>
@@ -67,7 +68,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 24px;
 `;
 
@@ -127,6 +128,8 @@ const Info = styled.div`
 const IconWrapper = styled.div`
   color: ${props => props.theme.colors.green};
   margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;
 const InfoText = styled.span`
   font-size: 14px;
@@ -155,7 +158,7 @@ const SecondTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 12px;
 `;
 

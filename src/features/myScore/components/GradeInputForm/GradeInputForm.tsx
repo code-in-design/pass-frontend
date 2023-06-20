@@ -1,7 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import InfoIcon from '../../../../../public/images/icons/info.svg';
 
 interface Props {
   title: string;

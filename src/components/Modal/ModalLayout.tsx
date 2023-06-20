@@ -3,15 +3,16 @@ import { ReactNode, useState } from 'react';
 
 interface Props {
   children: ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  padding?: string;
+  onClose?: () => void;
 }
 
 const ModalLayout = (props: Props) => {
   return (
     <ModalWrapper>
       <ModalOutside onClick={props.onClose} />
-      <Container>
+      <Container padding={props?.padding || '32px'}>
         <Close src="/images/icons/close.svg" alt="close" onClick={props.onClose} />
         {props.children}
       </Container>
@@ -39,9 +40,9 @@ const ModalOutside = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ padding }>`
   width: auto;
-  padding: 32px;
+  padding: ${props => props.padding};
   height: auto;
   max-height: 816px;
   overflow-y: auto;

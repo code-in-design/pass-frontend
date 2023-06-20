@@ -17,7 +17,7 @@ const InterestedUniversities = (props: Props) => {
         </DescriptionWrapper>
       )}
       {props.data.map(props => (
-        <UniversityItem key={`univ-${props.name}`} logo={props.logo} name={props.name} majorName={props.majorName} score={props.score} result={props.result} />
+        <UniversityItem key={`univ-${props.universityName}`} logo={props.logo} name={props.universityName} />
       ))}
     </Container>
   );
@@ -29,17 +29,17 @@ InterestedUniversities.defaultProps = {
   data: [
     {
       logo: 'hanyang',
-      name: '한양대학교',
-      majorName: '스포츠사이언스 전공',
-      score: 246.34,
-      result: '소신',
+      universityName: '한양대학교',
+      departmentName: '스포츠사이언스 전공',
+      conversionScore: 246.34,
+      possibilityOfSupport: '소신',
     },
     {
       logo: 'hanyang',
-      name: '대구가톨릭대',
-      majorName: '스포츠매니지먼트 전공',
-      score: 246.34,
-      result: '안정',
+      universityName: '대구가톨릭대',
+      departmentName: '스포츠매니지먼트 전공',
+      conversionScore: 246.34,
+      possibilityOfSupport: '안정',
     },
   ],
 };

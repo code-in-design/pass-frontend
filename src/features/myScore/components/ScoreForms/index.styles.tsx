@@ -102,6 +102,8 @@ export const Information = styled.div`
 export const InfoIconWrapper = styled.div`
   color: ${props => props.theme.colors.blue};
   margin-right: 4px;
+  width: 20px;
+  height: 20px;
 `;
 
 export const InfoText = styled.span`

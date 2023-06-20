@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 interface Props {
   logo: string;
   name: string;
-  majorName: string;
-  score: number;
-  result: string;
+  departmentName?: string;
+  conversionScore?: number;
+  possibilityOfSupport?: string;
 }
 
 const UniversityItem = (props: Props) => {
@@ -15,17 +15,17 @@ const UniversityItem = (props: Props) => {
         <UnivLogo src={`/images/icons/univ/${props.logo}.svg`} alt={props.logo} />
         <UnivNameWrapper>
           <UnivName>{props.name}</UnivName>
-          <UnivMajorName>{props.majorName}</UnivMajorName>
+          <UnivMajorName>{props.departmentName}</UnivMajorName>
         </UnivNameWrapper>
       </UnivWrapper>
       <ScoreWrapper>
         <ScoreName>수능 환산 점수</ScoreName>
-        <Score>{props.score}</Score>
+        <Score>{props.conversionScore}</Score>
       </ScoreWrapper>
       <Wrapper>
-        {props.result === '적정' && <Result color="primary">{props.result}</Result>}
-        {props.result === '소신' && <Result color="danger">{props.result}</Result>}
-        {props.result === '안정' && <Result>{props.result}</Result>}
+        {props.possibilityOfSupport === '적정' && <Result color="primary">{props.possibilityOfSupport}</Result>}
+        {props.possibilityOfSupport === '소신' && <Result color="danger">{props.possibilityOfSupport}</Result>}
+        {props.possibilityOfSupport === '안정' && <Result>{props.possibilityOfSupport}</Result>}
         <MoreWrpper>
           <More src="/images/icons/more.svg" alt="more" />
         </MoreWrpper>

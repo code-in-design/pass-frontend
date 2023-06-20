@@ -129,14 +129,15 @@ export const StyledSelectSmall = styled(Select)`
   &.react-select-small {
     &-container {
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 16px;
       color: ${props => props.theme.colors.grayBlack};
       .react-select-small__control {
-        height: 28px;
-        border-radius: 8px;
+        height: 40px;
+        border-radius: 16px;
         color: ${props => props.theme.colors.gray4};
-        border: none;
+        border: 1px solid ${props => props.theme.colors.gray4};
+        box-shadow: none;
         .react-select-small__value-container {
           padding: 0;
           margin: 0;
@@ -151,14 +152,14 @@ export const StyledSelectSmall = styled(Select)`
         }
       }
       .react-select-small__control--menu-is-open {
-        border-radius: 8px 8px 0 0;
+        border-radius: 16px 16px 0 0;
       }
       .react-select-small__control--is-focused {
         box-shadow: none;
       }
       .react-select-small__indicators {
         margin: auto 0;
-        height: 28px;
+        height: 40px;
         padding-right: 12px;
         .react-select-small__indicator-separator {
           display: none;
@@ -169,11 +170,87 @@ export const StyledSelectSmall = styled(Select)`
         }
       }
       .react-select-small__menu {
-        border-radius: 0 0 8px 8px;
+        border-radius: 0 0 16px 16px;
         margin: 0;
         &-list {
           padding: 0;
           .react-select-small__option {
+            padding: 4px 12px;
+            height: 28px;
+            &--is-selected {
+              background-color: #f8f8fc;
+              color: ${props => props.theme.colors.grayBlack};
+              font-weight: 700;
+            }
+            &--is-focused {
+              /* background-color: #f8f8fc; */
+              /* color: #353644; */
+              /* font-weight: 700; */
+            }
+            &:last-child {
+              border-radius: 0 0 16px 16px;
+            }
+          }
+        }
+      }
+    }
+
+    &__value-container {
+      color: ${props => props.theme.colors.grayBlack};
+      font-weight: 700;
+    }
+  }
+`;
+
+export const StyledSelectMini = styled(Select)`
+  &.react-select-mini {
+    &-container {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: ${props => props.theme.colors.grayBlack};
+      .react-select-mini__control {
+        height: 28px;
+        border-radius: 8px;
+        color: ${props => props.theme.colors.gray4};
+        border: none;
+        .react-select-mini__value-container {
+          padding: 0;
+          margin: 0;
+          padding-left: 12px;
+          letter-spacing: -0.02em;
+          .react-select-mini__input-container {
+            padding: 0;
+            margin: 0;
+            height: 16px;
+            color: ${props => props.theme.colors.gray1};
+          }
+        }
+      }
+      .react-select-mini__control--menu-is-open {
+        border-radius: 8px 8px 0 0;
+      }
+      .react-select-mini__control--is-focused {
+        box-shadow: none;
+      }
+      .react-select-mini__indicators {
+        margin: auto 0;
+        height: 28px;
+        padding-right: 12px;
+        .react-select-mini__indicator-separator {
+          display: none;
+        }
+        .react-select-mini__indicator {
+          padding: 4px;
+          color: ${props => props.theme.colors.gray1};
+        }
+      }
+      .react-select-mini__menu {
+        border-radius: 0 0 8px 8px;
+        margin: 0;
+        &-list {
+          padding: 0;
+          .react-select-mini__option {
             padding: 4px 12px;
             height: 28px;
             &--is-selected {

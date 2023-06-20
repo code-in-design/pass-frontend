@@ -13,6 +13,7 @@ export interface TranscriptTableProps {
   hasButtons?: boolean;
   onModify?: () => any;
   onSubmit?: () => any;
+  가채점기간: boolean;
 }
 
 const TranscriptTable = (props: TranscriptTableProps) => {
@@ -21,20 +22,22 @@ const TranscriptTable = (props: TranscriptTableProps) => {
       <GradeCard>
         <Title>2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
-        <Table transcript={props.transcript} />
-        <Information>
-          <InfoIconWrapper>
-            <InfoIcon />
-          </InfoIconWrapper>
-          <InfoText>표준점수, 백분위, 등급은 원점수 대비 자체 수능 분석 기준으로 산정된 점수입니다. 업데이트 이후 점수가 달라질 수 있습니다.</InfoText>
-        </Information>
+        <Table transcript={props.transcript} size="md" />
+        {props.가채점기간 && (
+          <Information>
+            <InfoIconWrapper>
+              <InfoIcon />
+            </InfoIconWrapper>
+            <InfoText>표준점수, 백분위, 등급은 원점수 대비 자체 수능 분석 기준으로 산정된 점수입니다. 업데이트 이후 점수가 달라질 수 있습니다.</InfoText>
+          </Information>
+        )}
       </GradeCard>
       {props?.hasButtons && (
         <Buttons>
           <Button onClick={props?.onModify}>성적 수정하기</Button>
           <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
             확인
-            <MyTooltip id="tooltip-myScore">
+            <MyTooltip id="tooltip-myScore" width="371px">
               <TooltipContainer>
                 <TooltipImg />
                 <TooltipText>
@@ -97,6 +100,8 @@ const Information = styled.div`
 const InfoIconWrapper = styled.div`
   color: ${props => props.theme.colors.gray2};
   margin-right: 4px;
+  width: 20px;
+  height: 20px;
 `;
 
 const InfoText = styled.span`

@@ -37,13 +37,13 @@ const TranscriptTableContainer = () => {
     const formData = getValues();
     if (가채점기간) await setPreScore(formData);
     if (성적발표후) await setScore(formData);
-    router.push('/university/find');
+    router.push('/findUniversity');
   };
   if (isEmpty(transcript)) return null;
   return (
     <>
       <UniversityFinderModal isOpen={isProcessing} />
-      <TranscriptTable transcript={transcript} onSubmit={handleSubmit} onModify={handleModify} hasButtons={isScoreEnteredOnFrontend && !isScoreEnteredOnBackend} />
+      <TranscriptTable transcript={transcript} 가채점기간={가채점기간} onSubmit={handleSubmit} onModify={handleModify} hasButtons={isScoreEnteredOnFrontend && !isScoreEnteredOnBackend} />
     </>
   );
 };

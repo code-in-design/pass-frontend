@@ -5,6 +5,7 @@ import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useCallback, useState } from 'react';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
+import Help from '../../../../../public/images/icons/help.svg';
 
 interface Props {
   first: { value: string; label: string }[];
@@ -31,7 +32,7 @@ const FinalSelectionUniversity = (props: Props) => {
 
   return (
     <>
-      <ServiceListItem img="/images/icons/help.svg" text="서비스 소개" onClick={openModal} />
+      <ServiceListItem icon={<Help />} text="서비스 소개" onClick={openModal} />
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Container onSubmit={handleSubmit(onSubmit)}>
@@ -180,4 +181,6 @@ const Button = styled.button`
 const IconWrapper = styled.div`
   color: ${props => props.theme.colors.blue};
   margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;

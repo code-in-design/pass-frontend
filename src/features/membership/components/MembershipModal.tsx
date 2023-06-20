@@ -4,6 +4,7 @@ import Card from './MembershipPriceCard';
 import Table from './MembershipPriceTable';
 import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
 import { useState, useCallback } from 'react';
+import Badge from '../../../../public/images/icons/badge.svg';
 
 export interface CardProps {
   name: string;
@@ -32,7 +33,7 @@ const MembershipModal = (props: Props) => {
 
   return (
     <>
-      <ServiceListItem img="/images/icons/badge.svg" text="멤버십 안내" onClick={openModal} />
+      <ServiceListItem icon={<Badge />} text="멤버십 안내" onClick={openModal} />
       {isOpen && (
         <ModalLayout isOpen={isOpen} onClose={closeModal}>
           <Title>합격할 준비 되었나요?</Title>
@@ -88,7 +89,7 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 32px;
   text-align: center;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 8px;
 `;
 

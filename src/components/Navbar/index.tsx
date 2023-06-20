@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../public/images/icons/home.svg';
 import EditSquare from '../../../public/images/icons/editSquare.svg';
-import School from '../../../public/images/icons/navSchool.svg';
+import School from '../../../public/images/icons/schoolOutline.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
@@ -39,9 +39,9 @@ Navbar.defaultProps = {
   menuList: [
     { icon: <Home />, title: '메인홈', route: '/' },
     { icon: <EditSquare />, title: '내 점수 입력하기', route: '/myScore' },
-    { icon: <School />, title: '대학찾기', route: 'myScore' },
-    { icon: <Analytics />, title: '합격분석', route: 'myScore' },
-    { icon: <Settings />, title: '환경설정', route: 'myScore' },
+    { icon: <School />, title: '대학찾기', route: '/findUniversity' },
+    { icon: <Analytics />, title: '합격분석', route: '/passAnalysis' },
+    { icon: <Settings />, title: '환경설정', route: '/' },
   ],
 };
 
