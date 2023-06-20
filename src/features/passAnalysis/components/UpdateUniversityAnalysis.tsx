@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import Refresh from '../../../../public/images/icons/refresh.svg';
 import Alarm from '../../../../public/images/icons/alarm.svg';
 
-const UpdateAnalysis = () => {
+interface Props {
+  updateDate: string;
+}
+
+const UpdateUniversityAnalysis = (props: Props) => {
   return (
     <Container>
       <RefreshWrapper>
@@ -11,12 +15,12 @@ const UpdateAnalysis = () => {
       </RefreshWrapper>
       <Title>세부 합격 분석 업데이트 중입니다</Title>
       <Text>
-        세부 합격 분석 첫 업데이트는{' '}
+        세부 합격 분석 첫 업데이트는
         <Time>
           <AlarmWrapper>
             <Alarm />
           </AlarmWrapper>
-          2024년 01월 06일 00시
+          {props.updateDate}
         </Time>
         에 진행됩니다.
       </Text>
@@ -25,7 +29,11 @@ const UpdateAnalysis = () => {
   );
 };
 
-export default UpdateAnalysis;
+UpdateUniversityAnalysis.defaultProps = {
+  updateDate: '2024년 01월 06일 00시',
+};
+
+export default UpdateUniversityAnalysis;
 
 const Container = styled.div`
   padding-top: 160px;

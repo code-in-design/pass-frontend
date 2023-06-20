@@ -37,6 +37,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   gap: 0 8px;
+  padding: 0 16px;
 `;
 
 const InputContainer = styled.div`

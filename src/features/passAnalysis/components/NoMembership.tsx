@@ -4,7 +4,11 @@ import Tickets from '../../../../public/images/icons/tickets.svg';
 import ProTickets from '../../../../public/images/icons/proTickets.svg';
 import Infinity from '../../../../public/images/icons/infinity.svg';
 
-const NoMembership = () => {
+interface Props {
+  ticketNumber: number;
+}
+
+const NoMembership = (props: Props) => {
   return (
     <Container>
       <Box>
@@ -14,7 +18,7 @@ const NoMembership = () => {
         </ImageWrapper>
         <Text>합격 분석 열람권 사용하기</Text>
         <SubTitle>
-          남아있는 합격 분석 열람권 개수 <span>1개</span>
+          남아있는 합격 분석 열람권 개수 <span>{props.ticketNumber}개</span>
         </SubTitle>
       </Box>
       <ProBox>
@@ -30,6 +34,10 @@ const NoMembership = () => {
       </ProBox>
     </Container>
   );
+};
+
+NoMembership.defaultProps = {
+  ticketNumber: 1,
 };
 
 export default NoMembership;

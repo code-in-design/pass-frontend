@@ -8,7 +8,7 @@ import TestScoreAnalysisContainer from '@/features/passAnalysis/container/TestSc
 import PracticalScoreAnalysisContainer from '@/features/passAnalysis/container/PracticalScoreAnalysisContainer';
 import LastYearPassCaseContainer from '@/features/passAnalysis/container/LastYearPassCaseContainer';
 import DepartmentInformation from '@/features/passAnalysis/components/DepartmentInformation';
-import NoAnalysisUniversity from '@/features/passAnalysis/components/NoAnalysisUniversity';
+import NoServiceUniversity from '@/features/passAnalysis/components/NoServiceUniversity';
 import NoSelectAnalysisUniversity from '@/features/passAnalysis/components/NoSelectAnalysisUniversity';
 import ExpectedAverageScoresContainer from '@/features/passAnalysis/container/ExpectedAverageScoresContainer';
 import ExpectedPracticalRecordsContainer from '@/features/passAnalysis/container/ExpectedPracticalRecordsContainer';
@@ -16,7 +16,7 @@ import UniversitySettingFilterModalContainer from '../../features/universities/c
 import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassAnalysisSearchContainer';
 import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/container/PassAnalysisUniversityListsContainer';
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
-import UpdateAnalysisContainer from '@/features/passAnalysis/container/UpdateAnalysisContainer';
+import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
 import PracticalChangeScoreContainer from '@/features/passAnalysis/container/PracticalChangeScoreContainer';
 
 const PassAnalysisPage = () => {
@@ -104,25 +104,25 @@ const PassAnalysisPage = () => {
             )}
 
             {menu === 'passAnalysis' && (
-              <>
-                {/* <PassProbabilityContainer />
+              <UniversityInfoWrapper>
+                <PassProbabilityContainer />
                 <TestScoreAnalysisContainer />
                 <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" />
-                <LastYearPassCaseContainer /> */}
+                <LastYearPassCaseContainer />
                 {/* 서비스하지 않는 대학일 경우 */}
-                {/* <NoAnalysisUniversity /> */}
+                {/* <NoServiceUniversity /> */}
                 {/* 멤버십이 없는 경우 */}
                 {/* <NoMembershipContainer /> */}
-                {/* 업데이트예정일 경우 */}
-                {/* <UpdateAnalysisContainer /> */}
-                <PracticalChangeScoreContainer />
-              </>
+                {/* 세부 합격 분석업데이트예정일 경우 */}
+                {/* <UpdateUniversityAnalysisContainer /> */}
+                {/* <PracticalChangeScoreContainer /> */}
+              </UniversityInfoWrapper>
             )}
             {menu === 'candidateStatus' && (
-              <>
+              <UniversityInfoWrapper>
                 <ExpectedAverageScoresContainer />
                 <ExpectedPracticalRecordsContainer />
-              </>
+              </UniversityInfoWrapper>
             )}
             {menu === 'departmentInfromation' && <DepartmentInformation name={String(selectedUniversity)} subTitle="수능 일반 전형" />}
           </>
@@ -143,11 +143,13 @@ const ApplicationPossibilityAnalysisContainer = styled.div`
   min-width: 397px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
-  padding: 24px;
+  padding: 24px 8px;
   flex: 1;
 `;
 
 const AnalysisTitleWrapper = styled.div`
+  min-width: 349px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
 `;
@@ -161,8 +163,6 @@ const AnalysisTitle = styled.div`
 
 const UniversityInformation = styled.div`
   min-width: 611px;
-  height: 792px;
-  overflow-y: scroll;
   background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
   padding: 24px;
@@ -237,5 +237,21 @@ const MenuItem = styled.div`
     ::before {
       content: none;
     }
+  }
+`;
+
+const UniversityInfoWrapper = styled.div`
+  width: 579px;
+  padding-right: 8px;
+  height: 636px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 8px;
+    border-radius: 14px;
+    background-color: ${props => props.theme.colors.gray4};
   }
 `;

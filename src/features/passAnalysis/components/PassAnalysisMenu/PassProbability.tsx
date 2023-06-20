@@ -76,6 +76,7 @@ export default PassProbability;
 const Container = styled.div`
   display: flex;
   gap: 0 16px;
+  margin-top: 24px;
 `;
 
 const ScoreGraph = styled.div`

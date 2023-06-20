@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Sad from '../../../../public/images/icons/sad.svg';
 
-const NoAnalysisUniversity = () => {
+const NoServiceUniversity = () => {
   return (
     <Container>
       <IconWrapper>
@@ -13,7 +13,7 @@ const NoAnalysisUniversity = () => {
   );
 };
 
-export default NoAnalysisUniversity;
+export default NoServiceUniversity;
 
 const Container = styled.div`
   width: 100%;
