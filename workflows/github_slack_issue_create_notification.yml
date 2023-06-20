@@ -1,0 +1,17 @@
+name: Issue Create Notification
+on:
+  issues:
+    types: [opened]
+jobs:
+  slack-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack notification
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#02-코드리뷰'
+          message: '<${{ github.event.issue.html_url }}|${{github.event.issue.title}}>'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
