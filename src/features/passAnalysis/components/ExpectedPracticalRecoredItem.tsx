@@ -11,7 +11,7 @@ interface Props {
   bestScore: number;
   averageScore: number;
   perfectScore: number;
-  value: number[];
+  value: number;
 }
 
 const ExpectedPracticalRecoredItem = (props: Props) => {
@@ -53,7 +53,8 @@ const ExpectedPracticalRecoredItem = (props: Props) => {
           </ScoreBox>
         </ScoreWrapper>
         <Graph>
-          <LabeledMergeSkinny VALUE={props.value} />
+          <LabeledMergeSkinny value={props.value} />
+          <GraphBackground></GraphBackground>
         </Graph>
       </Box>
     </Container>
@@ -134,6 +135,17 @@ const Graph = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+`;
+
+const GraphBackground = styled.div`
+  position: absolute;
+  top: 31px;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: ${props => props.theme.colors.gray4};
 `;
 
 const IconGreenWrapper = styled.div`

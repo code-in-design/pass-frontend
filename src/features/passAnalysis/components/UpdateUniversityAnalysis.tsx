@@ -37,6 +37,7 @@ export default UpdateUniversityAnalysis;
 
 const Container = styled.div`
   padding-top: 160px;
+  padding-left: 8px;
 `;
 
 const RefreshWrapper = styled.div`

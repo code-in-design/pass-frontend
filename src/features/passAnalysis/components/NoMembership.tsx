@@ -45,7 +45,7 @@ export default NoMembership;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 190px 0;
+  padding: 190px 16px 0 24px;
   gap: 0 12px;
 `;
 

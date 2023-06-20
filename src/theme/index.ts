@@ -2,6 +2,7 @@ import { extendTheme, theme as baseTheme } from '@chakra-ui/react';
 import { inputStyle } from './components/input';
 import { buttonTheme } from './components/button';
 import { checkboxStyle } from './components/checkbox';
+import { radioTheme } from './components/radio';
 
 export const theme: Record<string, any> = extendTheme({
   colors: {
@@ -26,5 +27,6 @@ export const theme: Record<string, any> = extendTheme({
     Checkbox: checkboxStyle,
     Input: inputStyle,
     Button: buttonTheme,
+    Radio: radioTheme,
   },
 });

@@ -29,10 +29,10 @@ const PassAnalysisUniversityLists = (props: Props) => {
 
   const getRowStyle = params => {
     if (params.rowIndex === selectedRow) {
-      return { padding: '16px', fontSize: '12px', lineHeight: '16px', fontWeight: 500, color: '#353644', backgroundColor: '#f3f4fa', borderRadius: '12px' };
+      return { padding: '12px', fontSize: '12px', lineHeight: '16px', fontWeight: 500, color: '#353644', backgroundColor: '#f3f4fa', borderRadius: '12px' };
     }
     return {
-      padding: '16px',
+      padding: '12px',
       fontSize: '12px',
       lineHeight: '16px',
       fontWeight: 500,

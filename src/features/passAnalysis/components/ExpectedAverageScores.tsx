@@ -66,7 +66,6 @@ const ExpectedAverageScores = (props: Props) => {
   );
 };
 
-export default ExpectedAverageScores;
 ExpectedAverageScores.defaultProps = {
   choices: ['국어', '수학', '영어', '탐구'],
   scores: {
@@ -94,6 +93,7 @@ ExpectedAverageScores.defaultProps = {
     ],
   },
 };
+export default ExpectedAverageScores;
 
 const TitleWrapper = styled.div`
   display: flex;
