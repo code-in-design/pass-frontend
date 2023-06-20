@@ -36,7 +36,7 @@ const PassAnalysisPage = () => {
 
         <UniversityInformation>
           <>
-            {/* {!menu && <NoSelectAnalysisUniversity />} */}
+            {!menu && <NoSelectAnalysisUniversity />}
             {menu && (
               <>
                 <Header>
@@ -101,8 +101,6 @@ const PassAnalysisPage = () => {
                 </Menu>
               </>
             )}
-            {/* <NoMembershipContainer />
-            <UpdateAnalysisContainer /> */}
 
             {menu === 'passAnalysis' && (
               <>
@@ -112,6 +110,10 @@ const PassAnalysisPage = () => {
                 <LastYearPassCaseContainer />
                 {/* 서비스하지 않는 대학일 경우 */}
                 <NoAnalysisUniversity />
+                {/* 멤버십이 없는 경우 */}
+                <NoMembershipContainer />
+                {/* 업데이트예정일 경우 */}
+                <UpdateAnalysisContainer />
               </>
             )}
             {menu === 'candidateStatus' && (

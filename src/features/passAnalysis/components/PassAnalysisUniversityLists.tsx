@@ -1,16 +1,17 @@
 import { Tooltip } from '@chakra-ui/react';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import 'ag-grid-community/styles/ag-grid.css';
 import HelpOutline from '../../../../public/images/icons/helpOutline.svg';
+import 'ag-grid-community/styles/ag-grid.css';
+import { GridApi } from 'ag-grid-community';
 
 interface Props {
   data: {
-    group: string;
-    name: string;
-    zValue: number;
-    possibility: string;
+    군: string;
+    '대학/학과': string;
+    'Z-지수': number;
+    지원가능성: string;
   }[];
 }
 
@@ -24,14 +25,14 @@ const TooltipRenderer = props => {
   );
 
   return (
-    <>
+    <div style={{ fontSize: '12px', fontWeight: 700, lineHeight: '16px', color: '#353644', display: 'flex', gap: '0 2px' }}>
       {displayName}
       <Tooltip hasArrow label={zValue} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
         <div>
           <HelpOutline />
         </div>
       </Tooltip>
-    </>
+    </div>
   );
 };
 
@@ -45,6 +46,7 @@ const SupportabilityRenderer = props => {
 };
 
 const PassAnalysisUniversityLists = (props: Props) => {
+  const [gridApi, setGridApi] = useState<any>(null);
   const [rowData] = useState(props.data);
   const [columnDefs] = useState([
     { field: '군', minWidth: 11, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
@@ -52,27 +54,66 @@ const PassAnalysisUniversityLists = (props: Props) => {
     { field: 'Z-지수', minWidth: 46, flex: 2.1, headerComponent: TooltipRenderer, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     { field: '지원가능성', cellRendererFramework: SupportabilityRenderer, minWidth: 64, flex: 2.1 },
   ]);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const getRowStyle = params => {
-    return { padding: '12px 16px' };
+    if (params.rowIndex === selectedRow) {
+      return { padding: '16px', fontSize: '12px', lineHeight: '16px', fontWeight: 500, color: '#353644', backgroundColor: '#f3f4fa', borderRadius: '12px' };
+    }
+    return {
+      padding: '16px',
+      fontSize: '12px',
+      lineHeight: '16px',
+      fontWeight: 500,
+      color: '#353644',
+      backgroundColor: '#fff',
+      borderRadius: '0px',
+    };
   };
 
+  const onRowClick = props => {
+    setSelectedRow(props.rowIndex);
+  };
+
+  useEffect(() => {
+    if (gridApi) {
+      gridApi.redrawRows();
+    }
+  }, [gridApi, selectedRow]);
+
   return (
-    <>
-      <div
-        // className={customThemes.table}
-        style={{
-          height: 656,
-          width: '100%',
-        }}
-      >
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
-      </div>
-    </>
+    <div
+      style={{
+        height: 656,
+        width: '100%',
+      }}
+    >
+      <AgGridReact onGridReady={params => setGridApi(params.api)} onRowClicked={onRowClick} rowData={rowData} columnDefs={columnDefs} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
+    </div>
   );
 };
 
 export default PassAnalysisUniversityLists;
+PassAnalysisUniversityLists.defaultProps = {
+  data: [
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '적정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '지원불가' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '소신' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
+    { 군: '가', '대학/학과': '경북대학교 체육교육과', 'Z-지수': 2.12, 지원가능성: '안정' },
+  ],
+};
 
 const SupportabilityWrapper = styled.div`
   display: flex;
