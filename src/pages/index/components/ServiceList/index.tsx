@@ -1,12 +1,16 @@
 import styled from '@emotion/styled';
 import FinalSelectionUniversity from '../../../../features/universities/components/FinalSelectionUniversity';
-import MembershipModal from '@/features/membership/components/MembershipModal';
 import RecommendationModal from '@/features/recommendations/components/RecommendationModal';
+import MembershipModal from '@/components/Modal/MembershipModal/MembershipModal';
 import PrivacyModal from './PrivacyModal';
 import { useForm } from 'react-hook-form';
+import ServiceListItem from './ServiceListItem';
+import Badge from '../../../../../public/images/icons/badge.svg';
+import { useState } from 'react';
 
 const ServiceList = props => {
   const { register } = useForm();
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
@@ -14,11 +18,12 @@ const ServiceList = props => {
         <Title>서비스 바로가기</Title>
         <MenuList>
           <FinalSelectionUniversity register={register} />
-          <MembershipModal />
+          <ServiceListItem icon={<Badge />} text="멤버십 안내" onClick={() => setOpenModal(true)} />
           <PrivacyModal />
           <RecommendationModal />
         </MenuList>
       </Container>
+      {openModal && <MembershipModal onClose={setOpenModal} />}
     </>
   );
 };

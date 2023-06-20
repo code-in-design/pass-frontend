@@ -13,7 +13,7 @@ const PracticalChangeScoreContainer = (props: Props) => {
   let step = 0;
   const [practicalName, setPracticalName] = useState(props.types[0].name);
   const [practicalScore, setPracticalScore] = useState(props.types[0]?.multipleChoice);
-  const { register, handleSubmit, setValue, getValues } = useForm();
+  const { register, handleSubmit, setValue, formState, getValues } = useForm();
 
   const goPrevStep = useCallback(() => {
     step = step - 1;

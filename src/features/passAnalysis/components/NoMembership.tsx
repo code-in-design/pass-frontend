@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Tickets from '../../../../public/images/icons/tickets.svg';
 import ProTickets from '../../../../public/images/icons/proTickets.svg';
 import Infinity from '../../../../public/images/icons/infinity.svg';
+import MembershipModal from '@/components/Modal/MembershipModal/MembershipModal';
 
 interface Props {
   ticketNumber: number;
 }
 
 const NoMembership = (props: Props) => {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
-    <Container>
-      <Box>
-        <Title>Basic / Light Plan</Title>
-        <ImageWrapper>
-          <Tickets />
-        </ImageWrapper>
-        <Text>합격 분석 열람권 사용하기</Text>
-        <SubTitle>
-          남아있는 합격 분석 열람권 개수 <span>{props.ticketNumber}개</span>
-        </SubTitle>
-      </Box>
-      <ProBox>
-        <ProTitle>Premium plan</ProTitle>
-        <ImageWrapper>
-          <ProTickets />
-          <ProImageWrapper>
-            <Infinity />
-          </ProImageWrapper>
-        </ImageWrapper>
-        <ProText>무제한 합격 분석</ProText>
-        <ProSubTitle>PRO 멤버십 구매하기</ProSubTitle>
-      </ProBox>
-    </Container>
+    <>
+      <Container>
+        <Box>
+          <Title>Basic / Light Plan</Title>
+          <ImageWrapper>
+            <Tickets />
+          </ImageWrapper>
+          <Text>합격 분석 열람권 사용하기</Text>
+          <SubTitle>
+            남아있는 합격 분석 열람권 개수 <span>{props.ticketNumber}개</span>
+          </SubTitle>
+        </Box>
+        <ProBox onClick={() => setOpenModal(true)}>
+          <ProTitle>Premium plan</ProTitle>
+          <ImageWrapper>
+            <ProTickets />
+            <ProImageWrapper>
+              <Infinity />
+            </ProImageWrapper>
+          </ImageWrapper>
+          <ProText>무제한 합격 분석</ProText>
+          <ProSubTitle>PRO 멤버십 구매하기</ProSubTitle>
+        </ProBox>
+      </Container>
+      {openModal && <MembershipModal onClose={setOpenModal} />}
+    </>
   );
 };
 
@@ -55,6 +61,7 @@ const Box = styled.div`
   background-color: ${props => props.theme.colors.gray6};
   flex: 1;
   padding: 24px 0;
+  cursor: pointer;
 `;
 
 const ProBox = styled.div`
@@ -63,6 +70,7 @@ const ProBox = styled.div`
   background-color: rgba(107, 119, 248, 0.1);
   flex: 1;
   padding: 24px 0;
+  cursor: pointer;
 `;
 
 const Title = styled.div`

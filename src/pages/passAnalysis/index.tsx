@@ -113,7 +113,7 @@ const PassAnalysisPage = () => {
                 {/* 서비스하지 않는 대학일 경우 */}
                 {/* <NoServiceUniversity /> */}
                 {/* 멤버십이 없는 경우 */}
-                {/* <NoMembershipContainer /> */}
+                <NoMembershipContainer />
                 {/* 세부 합격 분석업데이트예정일 경우 */}
                 {/* <UpdateUniversityAnalysisContainer /> */}
                 {/* </UniversityInfoWrapper> */}

@@ -40,7 +40,7 @@ const PracticalChangeScoreForm = (props: Props) => {
               <Stack direction="column">
                 {props?.practicalScore.map((item, index) => {
                   return (
-                    <Radio {...props.register(exerciseIcon.text)} key={index} value={String(index)} variant="outline">
+                    <Radio {...props.register(exerciseIcon.text, { onChange: e => console.log(e.target.checked) })} key={index} value={String(index)} variant="outline">
                       {item}
                     </Radio>
                   );
