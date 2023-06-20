@@ -1,70 +1,37 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { exerciseType } from '@/components/PracticalIcon/PracticalType';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
-import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
   type: string;
-  index?: number;
-  practicalScore?: string[];
-  lastType: number;
   goPrevStep: () => void;
-  goNextStep: () => void;
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
 }
 
-const PracticalChangeScoreForm = (props: Props) => {
+const PracticalScoreCheckForm = (props: Props) => {
   const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
 
   return (
     <Container>
       <FormContainer>
-        <Title>실기 기록 입력</Title>
+        <Title>실기 기록 입력 확인</Title>
         <Information>
           <InfoIconWrapper>
             <ExclamationMark />
           </InfoIconWrapper>
-          기록 변경 횟수가 제한되어 있으니 신중히 입력하세요!
+          입력한 실기 기록이 정확한지 다시 한 번 확인해주세요!
         </Information>
         <PracticalName>
           <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
           {exerciseIcon.text}
         </PracticalName>
-        {props?.practicalScore ? (
-          // 객관식 입력
-          <Content>
-            <RadioGroup>
-              <Stack direction="column">
-                {props?.practicalScore.map((item, index) => {
-                  return (
-                    <Radio {...props.register(exerciseIcon.text, { onChange: e => console.log(e.target.checked) })} key={index} value={String(index)} variant="outline">
-                      {item}
-                    </Radio>
-                  );
-                })}
-              </Stack>
-            </RadioGroup>
-          </Content>
-        ) : (
-          // 주관식 입력
-          <Content>
-            <InputWrapper>
-              <Input {...props.register(exerciseIcon.text)} />
-              <MetricUnits>cm</MetricUnits>
-            </InputWrapper>
-          </Content>
-        )}
 
         <Buttons>
           <Button type="button" onClick={props.goPrevStep}>
             이전
           </Button>
-
-          <Button type="button" next onClick={props.goNextStep}>
-            다음
+          <Button type="submit" next>
+            확인
           </Button>
         </Buttons>
       </FormContainer>
@@ -72,7 +39,7 @@ const PracticalChangeScoreForm = (props: Props) => {
   );
 };
 
-export default PracticalChangeScoreForm;
+export default PracticalScoreCheckForm;
 
 const Container = styled.div`
   height: 636px;

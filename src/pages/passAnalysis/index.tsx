@@ -17,7 +17,7 @@ import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassA
 import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/container/PassAnalysisUniversityListsContainer';
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
-import PracticalChangeScoreContainer from '@/features/passAnalysis/container/PracticalChangeScoreContainer';
+import PracticalScoreInputContainer from '@/features/passAnalysis/container/PracticalScoreInputContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -113,11 +113,11 @@ const PassAnalysisPage = () => {
                 {/* 서비스하지 않는 대학일 경우 */}
                 {/* <NoServiceUniversity /> */}
                 {/* 멤버십이 없는 경우 */}
-                <NoMembershipContainer />
+                {/* <NoMembershipContainer /> */}
                 {/* 세부 합격 분석업데이트예정일 경우 */}
                 {/* <UpdateUniversityAnalysisContainer /> */}
                 {/* </UniversityInfoWrapper> */}
-                <PracticalChangeScoreContainer />
+                <PracticalScoreInputContainer />
               </>
             )}
             {menu === 'candidateStatus' && (
