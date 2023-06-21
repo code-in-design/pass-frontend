@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Radio, RadioGroup, Stack, useEditable } from '@chakra-ui/react';
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { exerciseType } from '@/components/PracticalIcon/PracticalType';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
 import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
@@ -19,6 +19,7 @@ interface Props {
 
 const PracticalScoreInputForm = (props: Props) => {
   const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
+  const [value, setValue] = React.useState('');
 
   return (
     <Container>
@@ -37,12 +38,22 @@ const PracticalScoreInputForm = (props: Props) => {
         {props?.practicalScore ? (
           // 객관식 입력
           <Content>
-            <RadioGroup>
+            <RadioGroup defaultValue={props.getValues(exerciseIcon.text)}>
               <Stack direction="column">
                 {props?.practicalScore.map((item, index) => {
-                  console.log(item, props.getValues(exerciseIcon.text) === item);
+                  console.log();
                   return (
-                    <Radio {...props.register(exerciseIcon.text, { required: '점수를 선택해주세요', onChange: e => props.setValue(exerciseIcon.text, e.target.value) })} key={index} value={item} variant="outline">
+                    <Radio
+                      {...props.register(exerciseIcon.text, {
+                        required: '점수를 선택해주세요',
+                        onChange: e => {
+                          props.setValue(exerciseIcon.text, e.target.value);
+                        },
+                      })}
+                      key={index}
+                      value={item}
+                      variant="outline"
+                    >
                       {item}
                     </Radio>
                   );
