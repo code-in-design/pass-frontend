@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../public/images/icons/home.svg';
 import EditSquare from '../../../public/images/icons/editSquare.svg';
-import School from '../../../public/images/icons/schoolOutline.svg';
+import School from '../../../public/images/icons/graduationOutline.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';

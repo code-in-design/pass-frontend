@@ -2,14 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { exerciseType } from '@/components/PracticalIcon/PracticalType';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
+import { UseFormGetValues, FieldValues } from 'react-hook-form';
 
 interface Props {
-  type: string;
+  types: { name: string; multipleChoice?: string[] }[];
   goPrevStep: () => void;
+  getValues: UseFormGetValues<FieldValues>;
 }
 
 const PracticalScoreCheckForm = (props: Props) => {
-  const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
+  const typesName = props.types.map(types => types.name);
+  const practicalResults = props.getValues(typesName);
 
   return (
     <Container>
@@ -21,10 +24,23 @@ const PracticalScoreCheckForm = (props: Props) => {
           </InfoIconWrapper>
           입력한 실기 기록이 정확한지 다시 한 번 확인해주세요!
         </Information>
-        <PracticalName>
-          <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
-          {exerciseIcon.text}
-        </PracticalName>
+        {props.types.map((type, index) => {
+          const exerciseIcon = exerciseType[type.name] || { text: '-', icon: '' };
+          return (
+            <React.Fragment key={index}>
+              <PracticalName>
+                <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
+                {exerciseIcon.text}
+              </PracticalName>
+              <Content>
+                <InputWrapper>
+                  <Result>{practicalResults[index]}</Result>
+                  {!type.multipleChoice && <MetricUnits>cm</MetricUnits>}
+                </InputWrapper>
+              </Content>
+            </React.Fragment>
+          );
+        })}
 
         <Buttons>
           <Button type="button" onClick={props.goPrevStep}>
@@ -52,8 +68,11 @@ const Container = styled.div`
 
 const FormContainer = styled.div`
   min-width: 400px;
+  min-height: 400px;
+  height: 552px;
   background-color: #fff;
   padding: 32px;
+  overflow-y: scroll;
   border-radius: 24px;
 `;
 
@@ -66,6 +85,7 @@ const Title = styled.div`
 `;
 
 const Information = styled.div`
+  width: 336px;
   border-radius: 16px;
   padding: 8px 16px;
   background-color: rgba(255, 68, 68, 0.1);
@@ -92,7 +112,11 @@ const PracticalName = styled.div`
   line-height: 20px;
   font-weight: 700;
   color: ${props => props.theme.colors.gray1};
+  margin-top: 16px;
   margin-bottom: 8px;
+  :first-of-type {
+    margin-top: 0;
+  }
 `;
 
 const ExerciseIconWrapper = styled.div`
@@ -125,19 +149,16 @@ const InputWrapper = styled.div`
   height: 44px;
   border-radius: 16px;
   border: 1px solid ${props => props.theme.colors.gray4};
-  padding: 0px 45px;
-  position: relative;
+  padding: 12px;
+  display: flex;
+  align-items: flex-end;
 `;
 
-const Input = styled.input`
+const Result = styled.div`
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;
   color: ${props => props.theme.colors.grayBlack};
-  text-align: right;
-  position: absolute;
-  top: 14px;
-  right: 45px;
 `;
 
 const MetricUnits = styled.div`
@@ -145,7 +166,5 @@ const MetricUnits = styled.div`
   line-height: 16px;
   font-weight: 600;
   color: ${props => props.theme.colors.gray1};
-  position: absolute;
-  top: 14px;
-  right: 24px;
+  margin-left: 8px;
 `;

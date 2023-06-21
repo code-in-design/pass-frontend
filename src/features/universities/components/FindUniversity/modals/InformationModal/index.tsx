@@ -5,7 +5,7 @@ import Info from '../../../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../../../public/images/icons/helpOutline.svg';
 import LoudSpeaker from '../../../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../../../public/images/icons/calendar.svg';
-import School from '../../../../../../../public/images/icons/school.svg';
+import School from '../../../../../../../public/images/icons/graduation.svg';
 import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';

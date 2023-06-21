@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
-import School from '../../../../../public/images/icons/schoolOutline.svg';
+import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem from './UniversityCategoryListItem';

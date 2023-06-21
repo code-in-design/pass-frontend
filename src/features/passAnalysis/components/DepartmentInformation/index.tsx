@@ -5,7 +5,7 @@ import ExerciseType from '@/features/universities/components/FindUniversity/Exer
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import LoudSpeaker from '../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../public/images/icons/calendar.svg';
-import School from '../../../../../public/images/icons/school.svg';
+import School from '../../../../../public/images/icons/graduation.svg';
 import Book from '../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../public/images/icons/noticeBoard.svg';
 import Info from '../../../../../public/images/icons/info.svg';

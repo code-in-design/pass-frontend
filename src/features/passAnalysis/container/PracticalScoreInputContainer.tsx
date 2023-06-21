@@ -17,7 +17,6 @@ const PracticalScoreInputContainer = () => {
   const [practicalName, setPracticalName] = useState(types[0].name);
   const [practicalScore, setPracticalScore] = useState(types[0]?.multipleChoice);
   const { register, handleSubmit, setValue, formState, getValues } = useForm();
-  const typesName = types.map(item => item.name);
 
   const goPrevStep = useCallback(() => {
     if (step > 0) {
@@ -41,8 +40,10 @@ const PracticalScoreInputContainer = () => {
 
   return (
     <form onSubmit={handleSubmit(onsubmit)}>
-      {step !== types.length && <PracticalScoreInputForm type={practicalName} practicalScore={practicalScore} register={register} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} index={step} lastType={types.length} />}
-      {step === types.length && <PracticalScoreCheckForm type={practicalName} goPrevStep={goPrevStep} />}
+      {step !== types.length && (
+        <PracticalScoreInputForm type={practicalName} practicalScore={practicalScore} register={register} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} index={step} lastType={types.length} />
+      )}
+      {step === types.length && <PracticalScoreCheckForm types={types} getValues={getValues} goPrevStep={goPrevStep} />}
     </form>
   );
 };
