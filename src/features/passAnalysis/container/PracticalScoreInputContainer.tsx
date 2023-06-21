@@ -1,5 +1,6 @@
+import { isEmpty } from 'lodash';
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import PracticalScoreCheckForm from '../components/PassAnalysisMenu/PracticalScoreCheckForm';
 import PracticalScoreInputForm from '../components/PassAnalysisMenu/PracticalScoreInputForm';
 
@@ -16,7 +17,30 @@ const PracticalScoreInputContainer = () => {
   const [step, setStep] = useState(0);
   const [practicalName, setPracticalName] = useState(types[0].name);
   const [practicalScore, setPracticalScore] = useState(types[0]?.multipleChoice);
-  const { register, handleSubmit, setValue, formState, getValues } = useForm();
+  const typesName = types.map(type => type.name);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    control,
+    getValues,
+    trigger,
+  } = useForm();
+
+  const triggerAndCheck = async fields => {
+    const result = await trigger(fields);
+    if (!result) {
+      if (!isEmpty(errors)) {
+        const firstKey = Object.keys(errors)[0];
+        const firstValue = errors[firstKey];
+        if (firstValue) {
+          alert(firstValue.message);
+        }
+      }
+    }
+    return result;
+  };
 
   const goPrevStep = useCallback(() => {
     if (step > 0) {
@@ -26,11 +50,14 @@ const PracticalScoreInputContainer = () => {
     }
   }, [types, step]);
 
-  const goNextStep = useCallback(() => {
-    setStep(step + 1);
-    if (step < types.length - 1) {
-      setPracticalName(types[step + 1].name);
-      setPracticalScore(types[step + 1]?.multipleChoice);
+  const goNextStep = useCallback(async () => {
+    const checkList = typesName[step];
+    if (await triggerAndCheck(checkList)) {
+      setStep(step + 1);
+      if (step < types.length - 1) {
+        setPracticalName(types[step + 1].name);
+        setPracticalScore(types[step + 1]?.multipleChoice);
+      }
     }
   }, [types, step]);
 

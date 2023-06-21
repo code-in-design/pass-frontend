@@ -19,7 +19,7 @@ interface Props {
 
 const PracticalScoreInputForm = (props: Props) => {
   const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
-  console.log(props.getValues(props.type));
+
   return (
     <Container>
       <FormContainer>
@@ -40,8 +40,9 @@ const PracticalScoreInputForm = (props: Props) => {
             <RadioGroup>
               <Stack direction="column">
                 {props?.practicalScore.map((item, index) => {
+                  console.log(item, props.getValues(exerciseIcon.text) === item);
                   return (
-                    <Radio {...props.register(exerciseIcon.text, { onChange: e => props.setValue(exerciseIcon.text, e.target.value) })} key={index} value={item} variant="outline">
+                    <Radio {...props.register(exerciseIcon.text, { required: '점수를 선택해주세요', onChange: e => props.setValue(exerciseIcon.text, e.target.value) })} key={index} value={item} variant="outline">
                       {item}
                     </Radio>
                   );
@@ -53,7 +54,7 @@ const PracticalScoreInputForm = (props: Props) => {
           // 주관식 입력
           <Content>
             <InputWrapper>
-              <Input {...props.register(exerciseIcon.text, { value: '' })} />
+              <Input {...props.register(exerciseIcon.text, { value: '', required: '점수를 입력해주세요' })} />
               <MetricUnits>cm</MetricUnits>
             </InputWrapper>
           </Content>
