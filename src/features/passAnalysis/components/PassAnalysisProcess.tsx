@@ -5,26 +5,20 @@ import Chart from '../../../../public/images/icons/chart.svg';
 import { useRouter } from 'next/router';
 
 const PassAnalysisProcess = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const setFakeLoading = async () => {
-    //합격 분석중을 표현하기 위해 일부러 3초간 로딩한다.
-    const timeout: Promise<boolean> = new Promise(resolve =>
-      setTimeout(() => {
-        resolve(false);
-      }, 3000),
-    );
-    setLoading(true);
-    const result = await timeout;
-    setLoading(result);
-  };
-
-  if (loading) router.push('/passAnalysis');
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      router.push('/passAnalysis');
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
-      {!loading && (
+      {loading && (
         <Container>
           <ProcessBar img={<Chart />} text="합격분석 중입니다" iconSize="40px" iconMargin="0 0 8px" textJustify="flex-start" />
         </Container>

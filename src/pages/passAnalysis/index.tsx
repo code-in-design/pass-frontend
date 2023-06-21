@@ -105,19 +105,19 @@ const PassAnalysisPage = () => {
 
             {menu === 'passAnalysis' && (
               <>
-                {/* <UniversityInfoWrapper> */}
-                {/* <PassProbabilityContainer />
+                <UniversityInfoWrapper>
+                  <PassProbabilityContainer />
                   <TestScoreAnalysisContainer />
                   <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" />
-                  <LastYearPassCaseContainer /> */}
-                {/* 서비스하지 않는 대학일 경우 */}
-                {/* <NoServiceUniversity /> */}
-                {/* 멤버십이 없는 경우 */}
-                {/* <NoMembershipContainer /> */}
-                {/* 세부 합격 분석업데이트예정일 경우 */}
-                {/* <UpdateUniversityAnalysisContainer /> */}
-                {/* </UniversityInfoWrapper> */}
-                <PracticalScoreInputContainer />
+                  <LastYearPassCaseContainer />
+                  {/* 서비스하지 않는 대학일 경우 */}
+                  {/* <NoServiceUniversity /> */}
+                  {/* 멤버십이 없는 경우 */}
+                  {/* <NoMembershipContainer /> */}
+                  {/* 세부 합격 분석업데이트예정일 경우 */}
+                  {/* <UpdateUniversityAnalysisContainer /> */}
+                </UniversityInfoWrapper>
+                {/* <PracticalScoreInputContainer /> */}
               </>
             )}
             {menu === 'candidateStatus' && (
