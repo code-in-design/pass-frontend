@@ -1,12 +1,13 @@
 import { isEmpty } from 'lodash';
 import React, { useCallback, useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import PracticalScoreCheckForm from '../components/PassAnalysisMenu/PracticalScoreCheckForm';
 import PracticalScoreInputForm from '../components/PassAnalysisMenu/PracticalScoreInputForm';
+import PassAnalysisProcess from '../components/PassAnalysisProcess';
 
 const types = [
-  { name: '제자리 멀리뛰기', multipleChoice: ['3초 이상 유지 후 멀리뛰기 깔끔하게 수행', '1~3초 무난하게 유지 후 멀리뛰기 깔끔하게 수행', '다소 아쉬운 물구나무서기 후 무난한 멀리뛰기 수행'] },
   { name: '배근력', multipleChoice: ['3초 이상 유지 후 배근력 깔끔하게 수행', '1~3초 무난하게 유지 후 배근력 깔끔하게 수행', '다소 아쉬운 물구나무서기 후 무난한 배근력 수행'] },
+  { name: '제자리 멀리뛰기', multipleChoice: ['3초 이상 유지 후 멀리뛰기 깔끔하게 수행', '1~3초 무난하게 유지 후 멀리뛰기 깔끔하게 수행', '다소 아쉬운 물구나무서기 후 무난한 멀리뛰기 수행'] },
   { name: '사이드스텝' },
   { name: '서전트점프' },
   { name: '매달리기' },
@@ -15,8 +16,7 @@ const types = [
 
 const PracticalScoreInputContainer = () => {
   const [step, setStep] = useState(0);
-  const [practicalName, setPracticalName] = useState(types[0].name);
-  const [practicalScore, setPracticalScore] = useState(types[0]?.multipleChoice);
+  const [isProcess, setIsProcess] = useState(false);
   const typesName = types.map(type => type.name);
   const {
     register,
@@ -45,8 +45,6 @@ const PracticalScoreInputContainer = () => {
   const goPrevStep = useCallback(() => {
     if (step > 0) {
       setStep(step - 1);
-      setPracticalName(types[step - 1].name);
-      setPracticalScore(types[step - 1]?.multipleChoice);
     }
   }, [types, step]);
 
@@ -54,24 +52,27 @@ const PracticalScoreInputContainer = () => {
     const checkList = typesName[step];
     if (await triggerAndCheck(checkList)) {
       setStep(step + 1);
-      if (step < types.length - 1) {
-        setPracticalName(types[step + 1].name);
-        setPracticalScore(types[step + 1]?.multipleChoice);
-      }
     }
   }, [types, step]);
+
+  const onClickConfirm = () => {
+    setIsProcess(true);
+  };
 
   const onsubmit = data => {
     console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)}>
-      {step !== types.length && (
-        <PracticalScoreInputForm type={practicalName} practicalScore={practicalScore} register={register} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} index={step} lastType={types.length} />
+    <>
+      {!isProcess && (
+        <form onSubmit={handleSubmit(onsubmit)}>
+          {step !== types.length && <PracticalScoreInputForm types={types} step={step} register={register} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} />}
+          {step === types.length && <PracticalScoreCheckForm types={types} getValues={getValues} goPrevStep={goPrevStep} onClickConfirm={onClickConfirm} />}
+        </form>
       )}
-      {step === types.length && <PracticalScoreCheckForm types={types} getValues={getValues} goPrevStep={goPrevStep} />}
-    </form>
+      {isProcess && <PassAnalysisProcess />}
+    </>
   );
 };
 

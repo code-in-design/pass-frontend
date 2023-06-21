@@ -6,34 +6,43 @@ import ProgressBar from '@ramonak/react-progress-bar';
 interface Props {
   img: ReactNode;
   text: string;
+  iconSize: string;
+  iconMargin: string;
+  textJustify: string;
 }
 
 const ProcessBar = (props: Props) => {
   return (
-    <>
-      <IconWrapper>{props.img}</IconWrapper>
-      <TextWrapper>
+    <Container>
+      <IconWrapper iconSize={props.iconSize} iconMargin={props.iconMargin}>
+        {props.img}
+      </IconWrapper>
+      <TextWrapper textJustify={props.textJustify}>
         <Text>{props.text}</Text>
         <MoreWrpper>
           <More />
         </MoreWrpper>
       </TextWrapper>
-      <ProgressBar completed={100} bgColor="#6B77F8" height="24px" width="784px" borderRadius="53px" baseBgColor="#F3F4FA" />
-    </>
+      <ProgressBar completed={100} bgColor="#6B77F8" height="24px" width="100%" borderRadius="53px" baseBgColor="#F3F4FA" />
+    </Container>
   );
 };
 
 export default ProcessBar;
 
-const IconWrapper = styled.div`
-  width: 63px;
-  height: 63px;
-  margin: 0 auto 8px;
+const Container = styled.div`
+  width: 100%;
 `;
 
-const TextWrapper = styled.div`
+const IconWrapper = styled.div<{ iconSize: string; iconMargin: string }>`
+  width: ${props => props.iconSize};
+  height: ${props => props.iconSize};
+  margin: ${props => props.iconMargin};
+`;
+
+const TextWrapper = styled.div<{ textJustify: string }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${props => props.textJustify};
   margin-bottom: 20px;
 `;
 

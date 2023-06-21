@@ -14,7 +14,7 @@ const LabeledMergeSkinny = (props: Props) => {
   const { value } = props;
   const [values, setValues] = useState([0, value, 100]);
   const rangeRef: any = useRef<Range>();
-  console.log(value);
+
   return (
     <div
       style={{

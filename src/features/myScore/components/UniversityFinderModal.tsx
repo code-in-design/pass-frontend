@@ -12,7 +12,7 @@ const UniversityFinderModal = ({ isOpen }: Props) => {
     <>
       {isOpen && (
         <ProceedingModalLayout isOpen={isOpen}>
-          <ProcessBar img={<School />} text="지원 가능한 대학·학과를 찾는 중입니다" />
+          <ProcessBar img={<School />} text="지원 가능한 대학·학과를 찾는 중입니다" iconSize="63px" iconMargin="0 auto 8px" textJustify="center" />
         </ProceedingModalLayout>
       )}
     </>

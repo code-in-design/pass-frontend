@@ -107,9 +107,9 @@ const PassAnalysisPage = () => {
               <>
                 {/* <UniversityInfoWrapper> */}
                 {/* <PassProbabilityContainer />
-                <TestScoreAnalysisContainer />
-                <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" />
-              <LastYearPassCaseContainer /> */}
+                  <TestScoreAnalysisContainer />
+                  <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" />
+                  <LastYearPassCaseContainer /> */}
                 {/* 서비스하지 않는 대학일 경우 */}
                 {/* <NoServiceUniversity /> */}
                 {/* 멤버십이 없는 경우 */}
@@ -243,6 +243,7 @@ const MenuItem = styled.div`
 `;
 
 const UniversityInfoWrapper = styled.div`
+  width: 100%;
   padding-right: 8px;
   height: 636px;
   overflow-y: scroll;

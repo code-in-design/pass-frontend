@@ -176,6 +176,7 @@ const InformationBoxTitle = styled.div`
   justify-content: center;
   color: ${props => props.theme.colors.gray1};
   margin-bottom: 4px;
+  white-space: nowrap;
 `;
 
 const InformationBoxText = styled.div`
@@ -189,6 +190,7 @@ const InformationBoxText = styled.div`
 const InformationMethod = styled.div`
   min-width: 323px;
   margin-left: 16px;
+  width: 100%;
 `;
 
 const InformationMethodTitle = styled.div`

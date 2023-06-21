@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { exerciseType } from '@/components/PracticalIcon/PracticalType';
@@ -6,10 +6,8 @@ import ExclamationMark from '../../../../../public/images/icons/exclamation.svg'
 import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface Props {
-  type: string;
-  index?: number;
-  practicalScore?: string[];
-  lastType: number;
+  types: { name: string; multipleChoice?: string[] }[];
+  step: number;
   goPrevStep: () => void;
   goNextStep: () => void;
   register: UseFormRegister<FieldValues>;
@@ -18,8 +16,7 @@ interface Props {
 }
 
 const PracticalScoreInputForm = (props: Props) => {
-  const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
-  const [value, setValue] = React.useState('');
+  const exerciseIcon = exerciseType[props.types[props.step].name] || { text: '-', icon: '' };
 
   return (
     <Container>
@@ -31,46 +28,46 @@ const PracticalScoreInputForm = (props: Props) => {
           </InfoIconWrapper>
           기록 변경 횟수가 제한되어 있으니 신중히 입력하세요!
         </Information>
-        <PracticalName>
-          <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
-          {exerciseIcon.text}
-        </PracticalName>
-        {props?.practicalScore ? (
-          // 객관식 입력
-          <Content>
-            <RadioGroup defaultValue={props.getValues(exerciseIcon.text)}>
-              <Stack direction="column">
-                {props?.practicalScore.map((item, index) => {
-                  console.log();
-                  return (
-                    <Radio
-                      {...props.register(exerciseIcon.text, {
-                        required: '점수를 선택해주세요',
-                        onChange: e => {
-                          props.setValue(exerciseIcon.text, e.target.value);
-                        },
-                      })}
-                      key={index}
-                      value={item}
-                      variant="outline"
-                    >
-                      {item}
-                    </Radio>
-                  );
-                })}
-              </Stack>
-            </RadioGroup>
-          </Content>
-        ) : (
-          // 주관식 입력
-          <Content>
-            <InputWrapper>
-              <Input {...props.register(exerciseIcon.text, { value: '', required: '점수를 입력해주세요' })} />
-              <MetricUnits>cm</MetricUnits>
-            </InputWrapper>
-          </Content>
-        )}
-
+        <React.Fragment key={props.step}>
+          <PracticalName>
+            <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
+            {exerciseIcon.text}
+          </PracticalName>
+          {props.types[props.step]?.multipleChoice ? (
+            // 객관식 입력
+            <Content>
+              <RadioGroup defaultValue={props.getValues(exerciseIcon.text)}>
+                <Stack direction="column">
+                  {props.types[props.step].multipleChoice?.map((item, index) => {
+                    return (
+                      <Radio
+                        {...props.register(exerciseIcon.text, {
+                          required: '점수를 선택해주세요',
+                          onChange: e => {
+                            props.setValue(exerciseIcon.text, e.target.value);
+                          },
+                        })}
+                        key={item}
+                        value={item}
+                        variant="outline"
+                      >
+                        {item}
+                      </Radio>
+                    );
+                  })}
+                </Stack>
+              </RadioGroup>
+            </Content>
+          ) : (
+            // 주관식 입력
+            <Content>
+              <InputWrapper>
+                <Input {...props.register(exerciseIcon.text, { value: '', required: '점수를 입력해주세요' })} />
+                <MetricUnits>cm</MetricUnits>
+              </InputWrapper>
+            </Content>
+          )}
+        </React.Fragment>
         <Buttons>
           <Button type="button" onClick={props.goPrevStep}>
             이전

@@ -8,6 +8,7 @@ interface Props {
   types: { name: string; multipleChoice?: string[] }[];
   goPrevStep: () => void;
   getValues: UseFormGetValues<FieldValues>;
+  onClickConfirm: () => void;
 }
 
 const PracticalScoreCheckForm = (props: Props) => {
@@ -46,7 +47,7 @@ const PracticalScoreCheckForm = (props: Props) => {
           <Button type="button" onClick={props.goPrevStep}>
             이전
           </Button>
-          <Button type="submit" next>
+          <Button type="submit" next onClick={props.onClickConfirm}>
             확인
           </Button>
         </Buttons>
