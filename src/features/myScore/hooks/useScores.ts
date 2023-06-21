@@ -23,10 +23,10 @@ const useScores = () => {
 
   const step = useSelector((state: RootState) => state.scores.step);
 
-  const dispatchSetTranscript = transcript => dispatch(scoresActions.setTranscript(transcript));
+  const dispatchSetTranscript = transcript => dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
   const dispatchSetTranscriptByScores = (score: ScoreModel) => {
     const transcript = score.transformToTranscriptModel();
-    dispatch(scoresActions.setTranscript(transcript));
+    dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
   };
   const dispatchNextStep = () => dispatch(scoresActions.goNextStep());
   const dispatchPrevStep = () => dispatch(scoresActions.goPrevStep());

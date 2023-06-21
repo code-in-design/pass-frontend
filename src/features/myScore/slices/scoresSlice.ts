@@ -12,7 +12,7 @@ export const scoresSlice = createSlice({
   initialState: { step: 1 } as ScoresSliceInitialState,
   reducers: {
     setTranscript(state, action) {
-      state.transcript = action.payload;
+      state.transcript = JSON.parse(action.payload);
     },
     setStep(state, action) {
       state.step = Number(action.payload);

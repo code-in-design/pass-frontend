@@ -7,6 +7,7 @@ import { ScoreFormProvider } from '../context/useScoreFormContext';
 
 const MyScoreContainer = () => {
   const { isScoreEnteredOnFrontend, isScoreEnteredOnBackend, step, 가채점기간, 성적발표후 } = useScores();
+  console.log(isScoreEnteredOnBackend, isScoreEnteredOnFrontend, step, 가채점기간, 성적발표후);
   return (
     <ScoreFormProvider>
       <GradeInputForm title="성적 입력하기" subtitle="국어·수학·탐구 과목은 원점수를, 영어·한국사는 등급을 입력해주세요.">
