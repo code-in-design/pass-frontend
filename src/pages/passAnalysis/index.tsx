@@ -18,6 +18,7 @@ import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/contai
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
 import PracticalScoreInputContainer from '@/features/passAnalysis/container/PracticalScoreInputContainer';
+import NaesinScoreContainer from '@/features/passAnalysis/container/NaesinScoreInputContainer';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -117,7 +118,8 @@ const PassAnalysisPage = () => {
                   {/* 세부 합격 분석업데이트예정일 경우 */}
                   {/* <UpdateUniversityAnalysisContainer /> */}
                 </UniversityInfoWrapper>
-                {/* <PracticalScoreInputContainer /> */}
+                <PracticalScoreInputContainer />
+                <NaesinScoreContainer />
               </>
             )}
             {menu === 'candidateStatus' && (

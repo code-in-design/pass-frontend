@@ -8,7 +8,6 @@ interface Props {
 }
 
 const ChangePracticalScoreModal = (props: Props) => {
-  console.log(props.remainChange);
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
