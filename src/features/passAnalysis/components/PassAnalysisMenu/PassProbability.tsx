@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { PieChart } from 'react-minimal-pie-chart';
 
-const PassProbability = () => {
+interface Props {
+  scorePercentage: number;
+}
+
+const PassProbability = (props: Props) => {
   return (
     <Container>
       <ScoreGraph>
-        <PieChart
-          animate
-          lengthAngle={360}
-          data={[{ value: 70, color: '#6B77F8' }]}
-          reveal={70}
-          background="#E4E6F0"
-          lineWidth={18}
-          rounded
-          label={({ dataEntry }) => dataEntry.value + '%'}
-          labelPosition={50}
-          labelStyle={{ fontSize: '24px', lineHeight: '28px', fontWeight: 700, color: '#6b77f8' }}
-        />
+        <PieChart animate lengthAngle={360} data={[{ value: props.scorePercentage, color: '#6B77F8' }]} reveal={props.scorePercentage} background="#E4E6F0" lineWidth={18} rounded startAngle={270} />
         <ScoreInner>
+          <ScorePercentage>{props.scorePercentage}%</ScorePercentage>
           <ScoreInnerText>예상 합격 확률</ScoreInnerText>
         </ScoreInner>
       </ScoreGraph>
@@ -103,9 +97,20 @@ const ScoreInner = styled.div`
   background-color: rgba(107, 119, 248, 0.15);
 `;
 
+const ScorePercentage = styled.div`
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: ${props => props.theme.colors.blue};
+`;
+
 const ScoreInnerText = styled.div`
   position: absolute;
-  bottom: 16px;
+  bottom: 22px;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;

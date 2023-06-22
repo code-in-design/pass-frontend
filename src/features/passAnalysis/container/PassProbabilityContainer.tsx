@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PassProbability from '../components/PassAnalysisMenu/PassProbability';
 
 const PassAnalysisContainer = () => {
-  return <PassProbability />;
+  const [scorePercentage, setScorePercentage] = useState(70);
+  return <PassProbability scorePercentage={scorePercentage} />;
 };
 
 export default PassAnalysisContainer;

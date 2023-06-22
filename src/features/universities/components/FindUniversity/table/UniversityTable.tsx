@@ -76,7 +76,7 @@ const UniversityTable = (props: Props) => {
 
   const onRowClick = props => {
     setToggleModal(true);
-    setSelectedData(props.data.대학명);
+    setSelectedData(props.data.universityName);
   };
   const onCellClicked = props => {
     if (props.colDef.field === '합격가능성보기') {
