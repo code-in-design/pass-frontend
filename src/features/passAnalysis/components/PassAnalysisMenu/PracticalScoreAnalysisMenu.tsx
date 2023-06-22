@@ -6,6 +6,7 @@ import PracticalScoreAnalysisMenuItem from './PracticalScoreAnalysisMenuItem';
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import Info from '../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
+import ChangePracticalScoreModal from '../modal/ChangePracticalScoreModal';
 
 interface Props {
   name: string;
@@ -61,7 +62,7 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
               </Tooltip>
               남은 실기 변경 횟수 <span>{props.remainChange}회</span>
             </SubTitle>
-            <ChangeRecord>기록 변경하기</ChangeRecord>
+            <ChangePracticalScoreModal remainChange={props.remainChange} />
           </Wrapper>
         </TitleWrapper>
         <ItemWrapper>
@@ -130,20 +131,6 @@ const HelpIconWrapper = styled.div`
   height: 16px;
   color: ${props => props.theme.colors.gray2};
   margin-right: 4px;
-  cursor: pointer;
-`;
-
-const ChangeRecord = styled.div`
-  width: 80px;
-  height: 24px;
-  border-radius: 8px;
-  padding: 4px 8px;
-  border: 1px solid ${props => props.theme.colors.blue};
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  color: ${props => props.theme.colors.blue};
-  white-space: nowrap;
   cursor: pointer;
 `;
 
