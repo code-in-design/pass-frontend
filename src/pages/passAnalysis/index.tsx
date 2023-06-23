@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQueryParam } from 'use-query-params';
 import styled from '@emotion/styled';
 import Layout from '@/components/Layout/Layout';
@@ -19,10 +19,23 @@ import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershi
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
 import PracticalScoreInputContainer from '@/features/passAnalysis/container/PracticalScoreInputContainer';
 import NaesinScoreContainer from '@/features/passAnalysis/container/NaesinScoreInputContainer';
+import useScores from '@/features/myScore/hooks/useScores';
+import { useRouter } from 'next/router';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
+  const [selectedMenu, setSelectedMenu] = useState([true, false, false]);
   const [selectedUniversity] = useQueryParam('university');
+  const { isBeforeScoreEnteredOnBackend, isAfterScoreEnteredOnBackend, 가채점기간, 성적발표후 } = useScores();
+  const [isMembership, setIsMembership] = useState(true);
+  const [isNoServiceUniversity, setIsNoServiceUniversity] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (selectedUniversity) {
+      setMenu('passAnalysis');
+    }
+  }, [selectedUniversity]);
 
   return (
     <Layout>
@@ -53,50 +66,29 @@ const PassAnalysisPage = () => {
                 </Header>
                 <Menu>
                   <MenuItem
+                    selectedMenu={selectedMenu[0]}
                     onClick={() => {
                       setMenu('passAnalysis');
+                      setSelectedMenu([true, false, false]);
                     }}
-                    style={
-                      menu === 'passAnalysis'
-                        ? {
-                            fontWeight: 700,
-                            color: '#191E25',
-                            borderBottom: '3px solid #6B77F8',
-                          }
-                        : {}
-                    }
                   >
                     합격 분석
                   </MenuItem>
                   <MenuItem
+                    selectedMenu={selectedMenu[1]}
                     onClick={() => {
                       setMenu('candidateStatus');
+                      setSelectedMenu([false, true, false]);
                     }}
-                    style={
-                      menu === 'candidateStatus'
-                        ? {
-                            fontWeight: 700,
-                            color: '#191E25',
-                            borderBottom: '3px solid #6B77F8',
-                          }
-                        : {}
-                    }
                   >
                     지원자 현황
                   </MenuItem>
                   <MenuItem
+                    selectedMenu={selectedMenu[2]}
                     onClick={() => {
                       setMenu('departmentInfromation');
+                      setSelectedMenu([false, false, true]);
                     }}
-                    style={
-                      menu === 'departmentInfromation'
-                        ? {
-                            fontWeight: 700,
-                            color: '#191E25',
-                            borderBottom: '3px solid #6B77F8',
-                          }
-                        : {}
-                    }
                   >
                     학과 정보
                   </MenuItem>
@@ -106,27 +98,34 @@ const PassAnalysisPage = () => {
 
             {menu === 'passAnalysis' && (
               <>
-                <UniversityInfoWrapper>
-                  <PassProbabilityContainer />
-                  <TestScoreAnalysisContainer />
-                  <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} />
-                  <LastYearPassCaseContainer />
-                  {/* 서비스하지 않는 대학일 경우 */}
-                  {/* <NoServiceUniversity /> */}
-                  {/* 멤버십이 없는 경우 */}
-                  {/* <NoMembershipContainer /> */}
-                  {/* 세부 합격 분석업데이트예정일 경우 */}
-                  {/* <UpdateUniversityAnalysisContainer /> */}
-                </UniversityInfoWrapper>
-                <PracticalScoreInputContainer />
+                {isMembership && (
+                  <UniversityInfoWrapper>
+                    <PassProbabilityContainer />
+                    <TestScoreAnalysisContainer />
+                    <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} />
+                    <LastYearPassCaseContainer />
+                  </UniversityInfoWrapper>
+                )}
+                {/* 세부 합격 분석업데이트예정일 경우 */}
+                {/* <UpdateUniversityAnalysisContainer /> */}
+                {/* 실기기록입력 */}
+                {/* <PracticalScoreInputContainer /> */}
+                {/* 내신성적입력 */}
                 <NaesinScoreContainer />
+                {/* {!isNoServiceUniversity && <NoServiceUniversity />} */}
+                {/* {!isMembership && <NoMembershipContainer />} */}
               </>
             )}
             {menu === 'candidateStatus' && (
-              <UniversityInfoWrapper>
-                <ExpectedAverageScoresContainer />
-                <ExpectedPracticalRecordsContainer />
-              </UniversityInfoWrapper>
+              <>
+                {isMembership && (
+                  <UniversityInfoWrapper>
+                    <ExpectedAverageScoresContainer />
+                    <ExpectedPracticalRecordsContainer />
+                  </UniversityInfoWrapper>
+                )}
+                {/* {!isMembership && <NoMembershipContainer />} */}
+              </>
             )}
             {menu === 'departmentInfromation' && <DepartmentInformation name={String(selectedUniversity)} subTitle="수능 일반 전형" />}
           </>
@@ -216,14 +215,14 @@ const Menu = styled.div`
   align-items: center;
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled.div<{ selectedMenu: boolean }>`
   flex: 1;
-  font-weight: 600;
+  font-weight: ${props => (props.selectedMenu ? 700 : 600)};
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  color: ${props => props.theme.colors.gray2};
-  border-bottom: 1px solid ${props => props.theme.colors.gray4};
+  color: ${props => (props.selectedMenu ? props.theme.colors.grayBlack : props.theme.colors.gray2)};
+  border-bottom: ${props => (props.selectedMenu ? `3px solid #6B77F8` : `1px solid  #e4e6f0`)};
   padding: 16px;
   cursor: pointer;
   position: relative;
@@ -247,7 +246,7 @@ const MenuItem = styled.div`
 const UniversityInfoWrapper = styled.div`
   width: 100%;
   padding-right: 8px;
-  height: 636px;
+  max-height: 636px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     background-color: transparent;

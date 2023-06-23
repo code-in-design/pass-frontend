@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Edit from '../../../../../public/images/icons/edit.svg';
+import NaesinScoreInputTable2 from '../PassAnalysisMenu/NaesinScoreInputTable2';
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 
 const NaesinScoreInputModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSave, setIsSave] = useState(false);
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -26,15 +28,23 @@ const NaesinScoreInputModal = (props: Props) => {
           </ScoreInputIconWrapper>
           <ScoreInputTitle>{props.title}</ScoreInputTitle>
         </TitleWrapper>
-        <ScoreButton>입력하기</ScoreButton>
+        <ScoreButton>{isSave ? '입력완료' : '입력하기'}</ScoreButton>
       </ScoreContainer>
       {isOpen && (
         <ModalLayout onClose={closeModal} padding="24px">
           <Container>
             <Wrapper>
               <ModalTitle>{props.title}</ModalTitle>
-              <SaveButton>저장</SaveButton>
+              <SaveButton
+                onClick={() => {
+                  setIsSave(true);
+                  closeModal();
+                }}
+              >
+                저장
+              </SaveButton>
             </Wrapper>
+            <NaesinScoreInputTable2 />
           </Container>
         </ModalLayout>
       )}
@@ -93,9 +103,11 @@ const ScoreButton = styled.div`
 //modal
 const Container = styled.div`
   min-width: 856px;
+  min-height: 620px;
 `;
 
 const Wrapper = styled.div`
+  width: 808px;
   display: flex;
   justify-content: space-between;
   align-items: center;

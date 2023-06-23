@@ -277,3 +277,86 @@ export const StyledSelectMini = styled(Select)`
     }
   }
 `;
+
+export const StyledSelectMiniBorder = styled(Select)`
+  &.react-select-miniBorder {
+    &-container {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: ${props => props.theme.colors.grayBlack};
+      .react-select-miniBorder__control {
+        height: 24px;
+        border-radius: 8px;
+        color: ${props => props.theme.colors.gray4};
+        border: 1px solid ${props => props.theme.colors.gray4};
+        .react-select-miniBorder__value-container {
+          padding: 0;
+          margin: 0;
+          padding-left: 12px;
+          letter-spacing: -0.02em;
+          .react-select-miniBorder__input-container {
+            padding: 0;
+            margin: 0;
+            height: 16px;
+            color: ${props => props.theme.colors.gray1};
+          }
+        }
+      }
+      .react-select-miniBorder__control--menu-is-open {
+        border-radius: 8px 8px 0 0;
+      }
+      .react-select-miniBorder__control--is-focused {
+        box-shadow: none;
+      }
+      .react-select-miniBorder__indicators {
+        margin: auto 0;
+        height: 28px;
+        padding-right: 12px;
+        .react-select-miniBorder__indicator-separator {
+          display: none;
+        }
+        .react-select-miniBorder__indicator {
+          padding: 4px;
+          color: ${props => props.theme.colors.gray1};
+        }
+      }
+      .react-select-miniBorder__menu {
+        border-radius: 0 0 8px 8px;
+        margin: 0;
+        &-list {
+          padding: 0;
+          .react-select-miniBorder__option {
+            padding: 4px 12px;
+            height: 28px;
+            &--is-selected {
+              background-color: #f8f8fc;
+              color: ${props => props.theme.colors.grayBlack};
+              font-weight: 700;
+            }
+            &--is-focused {
+              /* background-color: #f8f8fc; */
+              /* color: #353644; */
+              /* font-weight: 700; */
+            }
+            &:last-child {
+              border-radius: 0 0 8px 8px;
+            }
+          }
+        }
+      }
+    }
+
+    &__value-container {
+      color: ${props => props.theme.colors.grayBlack};
+      font-weight: 700;
+    }
+  }
+
+  .react-select-miniBorder__menu-portal {
+    z-index: 20;
+  }
+  #react-select-react-select-miniBorder-listbox {
+    z-index: 20;
+  }
+`;

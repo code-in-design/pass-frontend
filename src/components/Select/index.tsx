@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
-import { StyledSelectLarge, StyledSelectSmall, StyledSelectMedium, StyledSelectMini } from './index.styles';
+import { StyledSelectLarge, StyledSelectSmall, StyledSelectMedium, StyledSelectMini, StyledSelectMiniBorder } from './index.styles';
 import { FieldValues, UseFormRegister, UseFormReturn } from 'react-hook-form';
 import { ActionMeta } from 'react-select';
 
 export interface SelectProps {
-  size: 'mini' | 'sm' | 'md' | 'lg';
+  size: 'mini' | 'miniBorder' | 'sm' | 'md' | 'lg';
   options?: Array<any>;
   defaultValue?: object;
   placeholder?: string;
@@ -29,6 +29,7 @@ const Select = (props: SelectProps) => {
   return (
     <>
       {props.size === 'mini' && <StyledSelectMini {...selectProps} onChange={handleChange} className="react-select-mini-container" classNamePrefix="react-select-mini" instanceId="react-select-mini" />}
+      {props.size === 'miniBorder' && <StyledSelectMiniBorder {...selectProps} onChange={handleChange} className="react-select-miniBorder-container" classNamePrefix="react-select-miniBorder" instanceId="react-select-miniBorder" />}
       {props.size === 'sm' && <StyledSelectSmall {...selectProps} defaultValue={props.defaultValue} onChange={handleChange} className="react-select-small-container" classNamePrefix="react-select-small" instanceId="react-select-small" />}
       {props.size === 'md' && <StyledSelectMedium {...selectProps} onChange={handleChange} width={props.width} className="react-select-middle-container" classNamePrefix="react-select-middle" instanceId="react-select-middle" />}
       {props.size === 'lg' && (

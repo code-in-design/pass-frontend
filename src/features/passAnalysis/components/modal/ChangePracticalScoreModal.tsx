@@ -36,7 +36,7 @@ const ChangePracticalScoreModal = (props: Props) => {
               <RemainChange>{props.remainChange}개</RemainChange>
             </RemainChangeWrapper>
             <Buttons>
-              <Button>아니오</Button>
+              <Button onClick={closeModal}>아니오</Button>
               <Button yes>예</Button>
             </Buttons>
           </Container>

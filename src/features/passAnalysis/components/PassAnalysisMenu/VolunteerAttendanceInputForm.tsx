@@ -5,6 +5,7 @@ import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues } from 
 
 interface Props {
   step: number;
+  isdisable: boolean;
   goPrevStep: () => void;
   goNextStep: () => void;
   register: UseFormRegister<FieldValues>;
@@ -27,7 +28,7 @@ const VolunteerAttendanceInputForm = (props: Props) => {
         <div>
           <InpuwTitle>봉사시간</InpuwTitle>
           <InputWrapper>
-            <Input {...props.register('volunteerTime', { required: '봉사시간을 입력해주세요' })} />
+            <Input type="number" {...props.register('volunteerTime')} />
             <InputSubText>시간</InputSubText>
           </InputWrapper>
         </div>
@@ -36,14 +37,14 @@ const VolunteerAttendanceInputForm = (props: Props) => {
           <div>
             <InpuwTitle>미인정 결석 수</InpuwTitle>
             <InputWrapper>
-              <Input {...props.register('absence', { required: '미인정 결석수를 입력해주세요' })} />
+              <Input type="number" {...props.register('absence')} />
               <InputSubText>회</InputSubText>
             </InputWrapper>
           </div>
           <div>
             <InpuwTitle>미인정 지각 수</InpuwTitle>
             <InputWrapper>
-              <Input {...props.register('lateNumber', { required: '미인정 지각수를 입력해주세요' })} />
+              <Input type="number" {...props.register('lateNumber')} />
               <InputSubText>회</InputSubText>
             </InputWrapper>
           </div>
@@ -53,21 +54,21 @@ const VolunteerAttendanceInputForm = (props: Props) => {
           <div>
             <InpuwTitle>미인정 조퇴 수</InpuwTitle>
             <InputWrapper>
-              <Input {...props.register('earlyLeaveNumber', { required: '미인정 조퇴수를 입력해주세요' })} />
+              <Input type="number" {...props.register('earlyLeaveNumber')} />
               <InputSubText>회</InputSubText>
             </InputWrapper>
           </div>
           <div>
             <InpuwTitle>미인정 결과 수</InpuwTitle>
             <InputWrapper>
-              <Input {...props.register('resultNumber', { required: '미인정 결과수를 입력해주세요' })} />
+              <Input type="number" {...props.register('resultNumber')} />
               <InputSubText>회</InputSubText>
             </InputWrapper>
           </div>
         </Wrapper>
 
         <Buttons>
-          <Button type="button" onClick={props.goNextStep}>
+          <Button type="button" onClick={props.goNextStep} disabled={!props.isdisable}>
             다음
           </Button>
         </Buttons>
@@ -171,13 +172,13 @@ const Buttons = styled.div`
   justify-content: flex-end;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ disabled: boolean }>`
   width: 50%;
   height: 44px;
   border-radius: 16px;
-  background-color: ${props => props.theme.colors.blue};
+  background-color: ${props => (props.disabled ? 'rgba(107, 119, 248, 0.2)' : props.theme.colors.blue)};
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: ${props => props.theme.colors.white};
+  color: ${props => (props.disabled ? props.theme.colors.blue : props.theme.colors.white)};
 `;
