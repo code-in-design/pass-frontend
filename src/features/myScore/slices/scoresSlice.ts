@@ -9,7 +9,7 @@ export interface ScoresSliceInitialState {
 
 export const scoresSlice = createSlice({
   name: 'scores',
-  initialState: { step: 1 } as ScoresSliceInitialState,
+  initialState: { step: 0 } as ScoresSliceInitialState,
   reducers: {
     setTranscript(state, action) {
       state.transcript = JSON.parse(action.payload);

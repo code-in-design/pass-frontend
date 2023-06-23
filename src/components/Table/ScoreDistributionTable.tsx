@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import LockFill from '../../../public/images/icons/lockFill.svg';
 
 interface Props {
   title: string;
-  data: {
+  data?: {
     men: string;
     women: string;
   }[];
@@ -11,55 +12,58 @@ interface Props {
 
 const ScoreDistributionTable = (props: Props) => {
   return (
-    <GradeTable>
-      <GradeTableThead>
-        <GradeTableTheadTr>
-          <TableTd>종목</TableTd>
-          <TableTd colSpan={2}>{props.title}</TableTd>
-        </GradeTableTheadTr>
-        <GradeTableTheadTr>
-          <TableTd>배점</TableTd>
-          <TableTd>남</TableTd>
-          <TableTd>여</TableTd>
-        </GradeTableTheadTr>
-      </GradeTableThead>
-      <GradeTableTbody>
-        {props.data.map((item, index) => {
-          const score = 100 - index;
-          return (
-            <GradeTableTBodyTr key={index}>
-              <TableTd>{score}</TableTd>
-              <TableTd>{item.men}</TableTd>
-              <TableTd>{item.women}</TableTd>
-            </GradeTableTBodyTr>
-          );
-        })}
-      </GradeTableTbody>
-    </GradeTable>
+    <>
+      {props.data ? (
+        <GradeTable>
+          <GradeTableThead>
+            <GradeTableTheadTr>
+              <TableTd colSpan={2}>종목</TableTd>
+              <TableTd colSpan={2}>{props.title}</TableTd>
+            </GradeTableTheadTr>
+            <GradeTableTheadTr>
+              <TableTd>급간</TableTd>
+              <TableTd>배점</TableTd>
+              <TableTd>남</TableTd>
+              <TableTd>여</TableTd>
+            </GradeTableTheadTr>
+          </GradeTableThead>
+          <GradeTableTbody>
+            {props?.data?.map((item, index) => {
+              const score = 100 - index;
+              const count = index + 1;
+              return (
+                <GradeTableTBodyTr key={index}>
+                  <TableTd>{count}</TableTd>
+                  <TableTd>{score}</TableTd>
+                  <TableTd>{item.men}</TableTd>
+                  <TableTd>{item.women}</TableTd>
+                </GradeTableTBodyTr>
+              );
+            })}
+          </GradeTableTbody>
+        </GradeTable>
+      ) : (
+        <>
+          <NoDataWrapper>
+            <IconWrapper>
+              <LockFill />
+            </IconWrapper>
+            <NoDataText>
+              해당 종목의 배점 및<br />
+              실기계산방식은 대학 비공개입니다.
+            </NoDataText>
+          </NoDataWrapper>
+          <Text>
+            Z-ONE에서는 빅데이터 분석을 통한
+            <br /> 비공개 계산 방식을 추출하여, 합격 예측이 가능합니다.
+          </Text>
+        </>
+      )}
+    </>
   );
 };
 
 export default ScoreDistributionTable;
-ScoreDistributionTable.defaultProps = {
-  data: [
-    { men: '300이상', women: '250이상' },
-    { men: '297-299', women: '247-249' },
-    ,
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-    { men: '300이상', women: '250이상' },
-    { men: '297-299', women: '247-249' },
-    ,
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-  ],
-};
 
 const GradeTable = styled.table`
   width: 100%;
@@ -82,7 +86,6 @@ const GradeTableTheadTr = styled.tr`
   background-color: rgba(107, 119, 248, 0.2);
   height: 32px;
   & > td {
-    width: 30%;
     border: 1px solid ${props => props.theme.colors.gray4};
   }
   &:last-of-type {
@@ -107,4 +110,39 @@ const GradeTableTBodyTr = styled.tr`
 
 const TableTd = styled.td`
   vertical-align: middle;
+`;
+
+const NoDataWrapper = styled.div`
+  width: 100%;
+  height: 256px;
+  border-radius: 24px;
+  background-color: ${props => props.theme.colors.gray6};
+  margin: 32px 0 24px;
+  padding: 64px 0;
+`;
+
+const IconWrapper = styled.div`
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+`;
+const NoDataText = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500px;
+  width: 215px;
+  text-align: center;
+  margin: 16px auto 0px;
+  color: ${props => props.theme.colors.gray2};
+`;
+
+const Text = styled.div`
+  width: 286px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: ${props => props.theme.colors.deepGreen};
+  white-space: nowrap;
 `;

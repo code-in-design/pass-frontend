@@ -183,13 +183,14 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
                     },
                   })}
                   type="number"
-                  min={1}
-                  max={9}
-                  onInput={e => {
-                    if (Number(e.target) > 0 && Number(e.target) < 9) {
-                      console.log(e);
-                    }
-                  }}
+                  min={1.0}
+                  max={9.0}
+                  step={0.01}
+                  // onInput={e => {
+                  //   if (Number(e.target) > 0 && Number(e.target) < 9) {
+                  //     console.log(e);
+                  //   }
+                  // }}
                 />
               </GradeScoreInput>
             </FlexWrapper>

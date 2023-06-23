@@ -17,31 +17,51 @@ const useScores = () => {
   const afterScore = useFetchScoresQuery();
   // 서버에 저장된 점수가 있는가
   const isScoreEnteredOnBackend = !isEmpty(beforeScore.data) && !isEmpty(afterScore.data);
+  const isBeforeScoreEnteredOnBackend = !isEmpty(beforeScore.data);
+  const isAfterScoreEnteredOnBackend = !isEmpty(afterScore.data);
   // TODO: 백엔드에서 데이터 받아와서 구분하기
   const 가채점기간 = true;
   const 성적발표후 = !가채점기간;
 
   const step = useSelector((state: RootState) => state.scores.step);
 
-  const dispatchSetTranscript = transcript => dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
-  const dispatchSetTranscriptByScores = (score: ScoreModel) => {
-    const transcript = score.transformToTranscriptModel();
+  const dispatchSetTranscriptByAfterScores = (score: ScoreModel) => {
+    const transcript = score.transformToAfterTranscriptModel();
+    dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
+  };
+  const dispatchSetTranscriptByBeforScores = (score: ScoreModel) => {
+    const transcript = score.transformToBeforeTranscriptModel();
     dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
   };
   const dispatchNextStep = () => dispatch(scoresActions.goNextStep());
   const dispatchPrevStep = () => dispatch(scoresActions.goPrevStep());
 
   // 가채점기간 => beforeScore.data, 성적발표후 => afterScore.data
-  useEffect(() => {
-    if (beforeScore.isSuccess && 가채점기간) {
-      dispatchSetTranscriptByScores(new ScoreModel(beforeScore.data));
-    }
-    if (afterScore.isSuccess && 성적발표후) {
-      dispatchSetTranscriptByScores(new ScoreModel(afterScore.data));
-    }
-  }, [beforeScore.data, afterScore.data]);
+  // useEffect(() => {
+  //   if (beforeScore.data && 가채점기간) {
+  //     dispatchSetTranscriptByBeforScores(new ScoreModel(beforeScore.data));
+  //   }
+  //   if (afterScore.data && 성적발표후) {
+  //     dispatchSetTranscriptByAfterScores(new ScoreModel(afterScore.data));
+  //   }
+  // }, [beforeScore.data, afterScore.data]);
 
-  return { 가채점기간, 성적발표후, transcript, isScoreEnteredOnFrontend, isScoreEnteredOnBackend, step, dispatchPrevStep, dispatchNextStep, dispatchSetTranscript, dispatchSetTranscriptByScores };
+  return {
+    가채점기간,
+    성적발표후,
+    beforeScore,
+    afterScore,
+    transcript,
+    isScoreEnteredOnFrontend,
+    isScoreEnteredOnBackend,
+    isBeforeScoreEnteredOnBackend,
+    isAfterScoreEnteredOnBackend,
+    step,
+    dispatchPrevStep,
+    dispatchNextStep,
+    dispatchSetTranscriptByAfterScores,
+    dispatchSetTranscriptByBeforScores,
+  };
 };
 
 export default useScores;
