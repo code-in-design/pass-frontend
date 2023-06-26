@@ -22,7 +22,6 @@ interface Props {
 }
 
 const NaesinScoreInputTableItem = (props: Props) => {
-  console.log(props.getValues('selectCareer'));
   return (
     <TableBodyTr>
       <TableBodyTd>
@@ -41,7 +40,7 @@ const NaesinScoreInputTableItem = (props: Props) => {
         <Input type="number" {...props.register('rawScore')} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`${props.getValues('subject')}subjetAverage`)} />
+        <Input type="number" {...props.register('subjetAverage')} />
       </TableBodyTd>
       <TableBodyTd>
         <Input type="number" {...props.register('standardDeviation')} />

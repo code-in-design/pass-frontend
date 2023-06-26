@@ -4,13 +4,16 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Plus from '../../../../../public/images/icons/plus.svg';
 import NaesinScoreInputTableItem from './NaesinScoreInputTableItem';
-import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFieldArrayAppend, UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 
 interface Props {
   headers: string[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
+  fields: Record<'id', string>[];
+  append: UseFieldArrayAppend<FieldValues, 'fieldArray'>;
+  watch: UseFormWatch<FieldValues>;
 }
 
 const NaesinScoreInputTable = (props: Props) => {
@@ -20,10 +23,20 @@ const NaesinScoreInputTable = (props: Props) => {
     setSubjectCount(prevCount => prevCount + 1); // 과목 개수 증가
   };
 
+  const watchFieldArray = props.watch('fieldArray');
+  const controlledFields = props.fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchFieldArray[index],
+    };
+  });
+
+  console.log('updated', controlledFields);
+
   const renderSubjectItems = () => {
     const items: JSX.Element[] = [];
     for (let i = 0; i < subjectCount; i++) {
-      items.push(<NaesinScoreInputTableItem register={props.register} setValue={props.setValue} getValues={props.getValues} />);
+      items.push(<NaesinScoreInputTableItem key={i} register={props.register} setValue={props.setValue} getValues={props.getValues} />);
     }
     return items;
   };
@@ -42,7 +55,13 @@ const NaesinScoreInputTable = (props: Props) => {
           <TableBody>{renderSubjectItems()}</TableBody>
         </NasinScoreTable>
       </NasinTableWrapper>
-      <AddRowButton type="button" onClick={handleAddSubject}>
+      <AddRowButton
+        type="button"
+        onClick={() => {
+          handleAddSubject;
+          props.append({ name: 'bill' });
+        }}
+      >
         <PlusIconWrapper>
           <Plus />
         </PlusIconWrapper>

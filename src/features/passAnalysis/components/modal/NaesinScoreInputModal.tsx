@@ -4,13 +4,15 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import Edit from '../../../../../public/images/icons/edit.svg';
 import NaesinScoreInputTable from '../PassAnalysisMenu/NaesinScoreInputTable';
 import { useNaesinScoreContext } from '../../context/useNaesinScoreContext';
+import { useFieldArray } from 'react-hook-form';
 
 interface Props {
   title: string;
 }
 
 const NaesinScoreInputModal = (props: Props) => {
-  const { register, setValue, handleSubmit, getValues } = useNaesinScoreContext();
+  const { register, setValue, handleSubmit, getValues, control, watch } = useNaesinScoreContext();
+  const { fields, append } = useFieldArray({ control, name: 'fieldArray' });
   const [isOpen, setIsOpen] = useState(false);
   const [isSave, setIsSave] = useState(false);
 
@@ -22,8 +24,14 @@ const NaesinScoreInputModal = (props: Props) => {
     setIsOpen(false);
   }, [isOpen]);
 
+  const onsubmit = data => {
+    // setIsSave(true);
+    // closeModal();
+    console.log(data);
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onsubmit)}>
       <ScoreContainer onClick={openModal}>
         <TitleWrapper>
           <ScoreInputIconWrapper>
@@ -38,21 +46,13 @@ const NaesinScoreInputModal = (props: Props) => {
           <Container>
             <Wrapper>
               <ModalTitle>{props.title}</ModalTitle>
-              <SaveButton
-                type="submit"
-                onClick={() => {
-                  setIsSave(true);
-                  closeModal();
-                }}
-              >
-                저장
-              </SaveButton>
+              <SaveButton type="submit">저장</SaveButton>
             </Wrapper>
-            <NaesinScoreInputTable register={register} setValue={setValue} getValues={getValues} />
+            <NaesinScoreInputTable register={register} setValue={setValue} getValues={getValues} fields={fields} append={append} watch={watch} />
           </Container>
         </ModalLayout>
       )}
-    </>
+    </form>
   );
 };
 
