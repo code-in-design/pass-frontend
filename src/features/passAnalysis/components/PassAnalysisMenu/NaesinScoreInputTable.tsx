@@ -1,87 +1,104 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { AgGridReact } from 'ag-grid-react';
-import { GridApi, ColumnApi } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { Checkbox } from '@chakra-ui/react';
-import Select from '@/components/Select';
+import Plus from '../../../../../public/images/icons/plus.svg';
+import NaesinScoreInputTableItem from './NaesinScoreInputTableItem';
+import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
-const subjectGroup = [
-  { value: 'korean', label: '국어' },
-  { value: 'english', label: '영어' },
-  { value: 'math', label: '수학' },
-  { value: 'social', label: '사회(역사/도덕 포함)' },
-  { value: 'history', label: '한국사' },
-  { value: 'technologyHome', label: '기술가정/제2외국어/한문/교양' },
-  { value: 'physical', label: '체육' },
-  { value: 'art', label: '예술' },
-];
+interface Props {
+  headers: string[];
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
+}
 
-const NaesinScoreInputTable = () => {
-  const [gridApi, setGridApi] = useState<GridApi | null>(null);
-  const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | null>(null);
-  const [rowData, setRowData] = useState([{ checkCareer: '' }, { checkCareer: '' }, { checkCareer: '' }]);
+const NaesinScoreInputTable = (props: Props) => {
+  const [subjectCount, setSubjectCount] = useState(10); // 초기 과목 개수는 1로 설정
 
-  const onGridReady = params => {
-    setGridApi(params.api);
-    setGridColumnApi(params.columnApi);
+  const handleAddSubject = () => {
+    setSubjectCount(prevCount => prevCount + 1); // 과목 개수 증가
   };
 
-  const addRow = () => {
-    if (gridApi) {
-      const newData = {
-        // 새 행의 초기 데이터
-      };
-      gridApi.applyTransaction({ add: [newData] });
+  const renderSubjectItems = () => {
+    const items: JSX.Element[] = [];
+    for (let i = 0; i < subjectCount; i++) {
+      items.push(<NaesinScoreInputTableItem register={props.register} setValue={props.setValue} getValues={props.getValues} />);
     }
-  };
-
-  const checkbox = () => {
-    return <Checkbox />;
-  };
-  const selectbox = () => {
-    return <Select size="miniBorder" name="subjectSelect" placeholder="선택" options={subjectGroup} />;
-  };
-  const input = props => {
-    return <Input type="text" />;
-  };
-  const inputNumber = props => {
-    return <Input type="number" />;
-  };
-
-  const getRowStyle = params => {
-    return { padding: '12px 16px' };
+    return items;
   };
 
   return (
-    <div style={{ height: 564, width: 856 }}>
-      <AgGridReact
-        onGridReady={onGridReady}
-        rowData={rowData}
-        getRowHeight={() => 48}
-        columnDefs={[
-          { headerName: '진로선택', field: 'checkCareer', cellRenderer: checkbox, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '20px' } },
-          { headerName: '교과', field: 'subjectGroup', cellRenderer: selectbox, minWidth: 100, flex: 2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '과목', field: 'subject', cellRenderer: input, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '단위수', field: 'column2', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '원점수', field: 'rawScore', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '과목평균', field: 'subjectAverage', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '표준편차', field: 'standardDeviation', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '성취도', field: 'Achievement', cellRenderer: input, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '수강자 수', field: 'studentNumber', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-          { headerName: '등급', field: 'grade', cellRenderer: inputNumber, minWidth: 72, flex: 1.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-        ]}
-        getRowStyle={getRowStyle}
-      ></AgGridReact>
-      <AddRowButton type="button" onClick={addRow}>
+    <>
+      <NasinTableWrapper>
+        <NasinScoreTable>
+          <TableHeader>
+            <TableHeaderTr>
+              {props.headers.map(header => (
+                <TableHeaderTd key={header}>{header}</TableHeaderTd>
+              ))}
+            </TableHeaderTr>
+          </TableHeader>
+          <TableBody>{renderSubjectItems()}</TableBody>
+        </NasinScoreTable>
+      </NasinTableWrapper>
+      <AddRowButton type="button" onClick={handleAddSubject}>
+        <PlusIconWrapper>
+          <Plus />
+        </PlusIconWrapper>
         과목 추가하기
       </AddRowButton>
-    </div>
+    </>
   );
 };
 
+NaesinScoreInputTable.defaultProps = {
+  headers: ['진로선택', '교과', '과목', '단위수', '원점수', '과목평균', '표준편차', '성취도', '수강자 수', '등급'],
+};
 export default NaesinScoreInputTable;
+
+const NasinTableWrapper = styled.div`
+  max-height: 520px;
+  min-height: 520px;
+  overflow-y: scroll;
+`;
+
+const NasinScoreTable = styled.table`
+  width: 100%;
+`;
+
+const TableHeader = styled.thead`
+  width: 100%;
+`;
+
+const TableHeaderTr = styled.tr`
+  height: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+`;
+
+const TableHeaderTd = styled.td`
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    border-bottom: 1px solid ${props => props.theme.colors.gray4};
+  }
+`;
+
+const TableBody = styled.tbody`
+  height: 48px;
+`;
 
 const AddRowButton = styled.button`
   width: 100%;
@@ -92,17 +109,13 @@ const AddRowButton = styled.button`
   line-height: 16px;
   font-weight: 700;
   color: ${props => props.theme.colors.blue};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Input = styled.input`
-  width: 72px;
-  height: 24px;
-  border-radius: 8px;
-  padding: 4px 12px;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 700;
-  color: ${props => props.theme.colors.gray2};
-  border: 1px solid ${props => props.theme.colors.gray4};
-  text-align: center;
+const PlusIconWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  color: ${props => props.theme.colors.blue};
 `;

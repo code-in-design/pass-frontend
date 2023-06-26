@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
-import { UseFormRegister, FieldValues, UseFormSetValue, UseFormGetValues } from 'react-hook-form';
-import Edit from '../../../../../public/images/icons/edit.svg';
 import NaesinScoreInputModal from '../modal/NaesinScoreInputModal';
 
 interface Props {
@@ -10,9 +8,6 @@ interface Props {
   scores: { title: string }[];
   goPrevStep: () => void;
   goNextStep: () => void;
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
-  getValues: UseFormGetValues<FieldValues>;
 }
 
 const NaesinScoreInputForm = (props: Props) => {
@@ -105,50 +100,4 @@ const Button = styled.button<{ next? }>`
   font-weight: 700;
   line-height: 20px;
   color: ${props => (props.next ? props.theme.colors.white : props.theme.colors.gray1)};
-`;
-
-const ScoreContainer = styled.div`
-  width: 100%;
-  height: 48px;
-  border-radius: 16px;
-  border: 1px solid ${props => props.theme.colors.gray4};
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  margin-bottom: 8px;
-  :last-of-type {
-    margin-bottom: 0;
-  }
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  gap: 0 8px;
-`;
-
-const ScoreInputIconWrapper = styled.div`
-  width: 20px;
-  height: 20px;
-  color: ${props => props.theme.colors.gray2};
-`;
-
-const ScoreInputTitle = styled.div`
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 700;
-  color: ${props => props.theme.colors.grayBlack};
-`;
-
-const ScoreButton = styled.div`
-  width: 70px;
-  height: 24px;
-  border-radius: 8px;
-  background-color: ${prpos => prpos.theme.colors.green};
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 700;
-  color: ${prpos => prpos.theme.colors.white};
-  padding: 4px 0;
-  text-align: center;
 `;

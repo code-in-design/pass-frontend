@@ -18,9 +18,10 @@ import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/contai
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
 import PracticalScoreInputContainer from '@/features/passAnalysis/container/PracticalScoreInputContainer';
-import NaesinScoreContainer from '@/features/passAnalysis/container/NaesinScoreInputContainer';
+import NaesinScoreContainer from '@/features/passAnalysis/container/NaesinScoreContainer';
 import useScores from '@/features/myScore/hooks/useScores';
 import { useRouter } from 'next/router';
+import { NaesinScoreProvider } from '@/features/passAnalysis/context/useNaesinScoreContext';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -111,7 +112,9 @@ const PassAnalysisPage = () => {
                 {/* 실기기록입력 */}
                 {/* <PracticalScoreInputContainer /> */}
                 {/* 내신성적입력 */}
-                <NaesinScoreContainer />
+                <NaesinScoreProvider>
+                  <NaesinScoreContainer />
+                </NaesinScoreProvider>
                 {/* {!isNoServiceUniversity && <NoServiceUniversity />} */}
                 {/* {!isMembership && <NoMembershipContainer />} */}
               </>

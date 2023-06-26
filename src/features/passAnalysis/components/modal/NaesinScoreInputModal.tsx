@@ -2,13 +2,15 @@ import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Edit from '../../../../../public/images/icons/edit.svg';
-import NaesinScoreInputTable2 from '../PassAnalysisMenu/NaesinScoreInputTable2';
+import NaesinScoreInputTable from '../PassAnalysisMenu/NaesinScoreInputTable';
+import { useNaesinScoreContext } from '../../context/useNaesinScoreContext';
 
 interface Props {
   title: string;
 }
 
 const NaesinScoreInputModal = (props: Props) => {
+  const { register, setValue, handleSubmit, getValues } = useNaesinScoreContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isSave, setIsSave] = useState(false);
 
@@ -19,6 +21,7 @@ const NaesinScoreInputModal = (props: Props) => {
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, [isOpen]);
+
   return (
     <>
       <ScoreContainer onClick={openModal}>
@@ -28,7 +31,7 @@ const NaesinScoreInputModal = (props: Props) => {
           </ScoreInputIconWrapper>
           <ScoreInputTitle>{props.title}</ScoreInputTitle>
         </TitleWrapper>
-        <ScoreButton>{isSave ? '입력완료' : '입력하기'}</ScoreButton>
+        <ScoreButton isSave={isSave}>{isSave ? '입력완료' : '입력하기'}</ScoreButton>
       </ScoreContainer>
       {isOpen && (
         <ModalLayout onClose={closeModal} padding="24px">
@@ -36,6 +39,7 @@ const NaesinScoreInputModal = (props: Props) => {
             <Wrapper>
               <ModalTitle>{props.title}</ModalTitle>
               <SaveButton
+                type="submit"
                 onClick={() => {
                   setIsSave(true);
                   closeModal();
@@ -44,7 +48,7 @@ const NaesinScoreInputModal = (props: Props) => {
                 저장
               </SaveButton>
             </Wrapper>
-            <NaesinScoreInputTable2 />
+            <NaesinScoreInputTable register={register} setValue={setValue} getValues={getValues} />
           </Container>
         </ModalLayout>
       )}
@@ -64,9 +68,6 @@ const ScoreContainer = styled.div`
   justify-content: space-between;
   cursor: pointer;
   margin-bottom: 8px;
-  :last-of-type {
-    margin-bottom: 0;
-  }
 `;
 
 const TitleWrapper = styled.div`
@@ -87,15 +88,15 @@ const ScoreInputTitle = styled.div`
   color: ${props => props.theme.colors.grayBlack};
 `;
 
-const ScoreButton = styled.div`
+const ScoreButton = styled.div<{ isSave: boolean }>`
   width: 70px;
   height: 24px;
   border-radius: 8px;
-  background-color: ${prpos => prpos.theme.colors.green};
+  background-color: ${props => (props.isSave ? 'rgba(96, 200, 222, 0.15)' : props.theme.colors.green)};
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
-  color: ${prpos => prpos.theme.colors.white};
+  color: ${props => (props.isSave ? props.theme.colors.deepGreen : props.theme.colors.white)};
   padding: 4px 0;
   text-align: center;
 `;

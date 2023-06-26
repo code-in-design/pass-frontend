@@ -241,7 +241,7 @@ export const StyledSelectMini = styled(Select)`
           display: none;
         }
         .react-select-mini__indicator {
-          padding: 4px;
+          padding: 0px;
           color: ${props => props.theme.colors.gray1};
         }
       }
@@ -284,9 +284,12 @@ export const StyledSelectMiniBorder = styled(Select)`
       font-size: 12px;
       font-weight: 500;
       line-height: 16px;
+      width: 100px;
+      margin: 0 auto;
       color: ${props => props.theme.colors.grayBlack};
       .react-select-miniBorder__control {
         height: 24px;
+        min-height: 24px;
         border-radius: 8px;
         color: ${props => props.theme.colors.gray4};
         border: 1px solid ${props => props.theme.colors.gray4};
@@ -295,6 +298,7 @@ export const StyledSelectMiniBorder = styled(Select)`
           margin: 0;
           padding-left: 12px;
           letter-spacing: -0.02em;
+          text-align: left;
           .react-select-miniBorder__input-container {
             padding: 0;
             margin: 0;
@@ -311,19 +315,24 @@ export const StyledSelectMiniBorder = styled(Select)`
       }
       .react-select-miniBorder__indicators {
         margin: auto 0;
-        height: 28px;
+        height: 24px;
         padding-right: 12px;
         .react-select-miniBorder__indicator-separator {
           display: none;
         }
         .react-select-miniBorder__indicator {
-          padding: 4px;
+          padding: 0px;
           color: ${props => props.theme.colors.gray1};
+          > svg {
+            width: 16px;
+            height: 16px;
+          }
         }
       }
       .react-select-miniBorder__menu {
         border-radius: 0 0 8px 8px;
         margin: 0;
+        text-align: left;
         &-list {
           padding: 0;
           .react-select-miniBorder__option {
