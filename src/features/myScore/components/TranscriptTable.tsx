@@ -34,7 +34,7 @@ const TranscriptTable = (props: TranscriptTableProps) => {
       </GradeCard>
       {props?.hasButtons && (
         <Buttons>
-          <Button onClick={props?.onModify}>성적 수정하기</Button>
+          <Button onClick={props.onModify}>성적 수정하기</Button>
           <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
             확인
             <MyTooltip id="tooltip-myScore" width="371px">

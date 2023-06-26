@@ -20,7 +20,7 @@ const useScores = () => {
   const isBeforeScoreEnteredOnBackend = !isEmpty(beforeScore.data);
   const isAfterScoreEnteredOnBackend = !isEmpty(afterScore.data);
   // TODO: 백엔드에서 데이터 받아와서 구분하기
-  const 가채점기간 = true;
+  const 가채점기간 = false;
   const 성적발표후 = !가채점기간;
 
   const step = useSelector((state: RootState) => state.scores.step);
@@ -34,17 +34,19 @@ const useScores = () => {
     dispatch(scoresActions.setTranscript(JSON.stringify(transcript)));
   };
   const dispatchNextStep = () => dispatch(scoresActions.goNextStep());
+
   const dispatchPrevStep = () => dispatch(scoresActions.goPrevStep());
 
   // 가채점기간 => beforeScore.data, 성적발표후 => afterScore.data
-  // useEffect(() => {
-  //   if (beforeScore.data && 가채점기간) {
-  //     dispatchSetTranscriptByBeforScores(new ScoreModel(beforeScore.data));
-  //   }
-  //   if (afterScore.data && 성적발표후) {
-  //     dispatchSetTranscriptByAfterScores(new ScoreModel(afterScore.data));
-  //   }
-  // }, [beforeScore.data, afterScore.data]);
+  useEffect(() => {
+    // 가채점 기간에 입력한 성적값을 서버에서 보여줄때
+    if (가채점기간 && isBeforeScoreEnteredOnBackend) {
+      dispatchSetTranscriptByAfterScores(new ScoreModel(beforeScore.data));
+    }
+    if (성적발표후 && isAfterScoreEnteredOnBackend) {
+      dispatchSetTranscriptByAfterScores(new ScoreModel(afterScore.data));
+    }
+  }, [beforeScore.data, afterScore.data]);
 
   return {
     가채점기간,

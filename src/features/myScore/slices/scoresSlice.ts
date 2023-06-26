@@ -18,10 +18,10 @@ export const scoresSlice = createSlice({
       state.step = Number(action.payload);
     },
     goNextStep(state) {
-      state.step = Math.min(Number(state.step) + 1, 2);
+      state.step = Math.min(Number(state.step) + 1, 1);
     },
     goPrevStep(state) {
-      state.step = Math.max(Number(state.step) - 1, 1);
+      state.step = Math.max(Number(state.step) - 1, 0);
     },
   },
 });
