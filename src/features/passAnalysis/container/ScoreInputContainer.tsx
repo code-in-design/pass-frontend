@@ -5,7 +5,7 @@ import { useScoreContext } from '../context/useScoreContext';
 import PracticalScoreInputContainer from './PracticalScoreInputContainer';
 
 const ScoreInputContainer = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const { register, setValue, handleSubmit, trigger, getValues, watch, formState } = useScoreContext();
   const confirmStep0 = watch(['volunteerTime', 'absence', 'lateNumber', 'earlyLeaveNumber', 'resultNumber']);
   const [isdisable, setIsdisable] = useState(false);

@@ -8,6 +8,8 @@ import { useFieldArray } from 'react-hook-form';
 
 interface Props {
   title: string;
+  index: number;
+  removeIndexFromSaveButtonsArray: (idx: number) => void;
 }
 
 const NaesinScoreInputModal = (props: Props) => {
@@ -27,6 +29,7 @@ const NaesinScoreInputModal = (props: Props) => {
   const onClickSaveButton = () => {
     setIsSave(true);
     closeModal();
+    props.removeIndexFromSaveButtonsArray(props.index);
   };
 
   return (

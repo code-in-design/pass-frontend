@@ -181,4 +181,8 @@ const Button = styled.button<{ disabled: boolean }>`
   font-weight: 700;
   line-height: 20px;
   color: ${props => (props.disabled ? props.theme.colors.blue : props.theme.colors.white)};
+  :disabled {
+    background-color: rgba(107, 119, 248, 0.2);
+    color: ${props => props.theme.colors.blue};
+  }
 `;

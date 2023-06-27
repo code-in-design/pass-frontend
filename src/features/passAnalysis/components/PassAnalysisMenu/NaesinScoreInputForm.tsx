@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
 import NaesinScoreInputModal from '../modal/NaesinScoreInputModal';
@@ -11,6 +11,19 @@ interface Props {
 }
 
 const NaesinScoreInputForm = (props: Props) => {
+  const [disabled, setDisabled] = useState(true);
+  const [saveButtonsArray, setSaveButtonsArray] = useState([0, 1, 2, 3, 4, 5]);
+
+  useEffect(() => {
+    if (saveButtonsArray.length === 0) {
+      setDisabled(false);
+    }
+  }, [saveButtonsArray]);
+
+  const removeIndexFromSaveButtonsArray = (idx: number) => {
+    setSaveButtonsArray(prevArray => prevArray.filter(item => item !== idx));
+  };
+
   return (
     <Container>
       <FormContainer>
@@ -22,13 +35,13 @@ const NaesinScoreInputForm = (props: Props) => {
           각 학년 학기별 성적을 클릭해 입력해주세요.
         </Information>
         {props.scores.map((score, index) => {
-          return <NaesinScoreInputModal key={index} title={score.title} />;
+          return <NaesinScoreInputModal key={index} title={score.title} index={index} removeIndexFromSaveButtonsArray={removeIndexFromSaveButtonsArray} />;
         })}
         <Buttons>
           <Button type="button" onClick={props.goPrevStep}>
             이전
           </Button>
-          <Button type="button" next onClick={props.goNextStep}>
+          <Button type="button" next onClick={props.goNextStep} disabled={disabled}>
             다음
           </Button>
         </Buttons>
@@ -100,4 +113,8 @@ const Button = styled.button<{ next? }>`
   font-weight: 700;
   line-height: 20px;
   color: ${props => (props.next ? props.theme.colors.white : props.theme.colors.gray1)};
+  :disabled {
+    background-color: rgba(107, 119, 248, 0.2);
+    color: ${props => props.theme.colors.blue};
+  }
 `;
