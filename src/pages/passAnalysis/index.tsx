@@ -17,11 +17,10 @@ import PassAnalysisSearchContainer from '@/features/passAnalysis/container/PassA
 import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/container/PassAnalysisUniversityListsContainer';
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
-import PracticalScoreInputContainer from '@/features/passAnalysis/container/PracticalScoreInputContainer';
-import NaesinScoreContainer from '@/features/passAnalysis/container/NaesinScoreContainer';
+import ScoreInputContainer from '@/features/passAnalysis/container/ScoreInputContainer';
 import useScores from '@/features/myScore/hooks/useScores';
 import { useRouter } from 'next/router';
-import { NaesinScoreProvider } from '@/features/passAnalysis/context/useNaesinScoreContext';
+import { NaesinScoreProvider } from '@/features/passAnalysis/context/useScoreContext';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -99,21 +98,19 @@ const PassAnalysisPage = () => {
 
             {menu === 'passAnalysis' && (
               <>
-                {isMembership && (
+                {/* {isMembership && (
                   <UniversityInfoWrapper>
                     <PassProbabilityContainer />
                     <TestScoreAnalysisContainer />
                     <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} />
                     <LastYearPassCaseContainer />
                   </UniversityInfoWrapper>
-                )}
+                )} */}
                 {/* 세부 합격 분석업데이트예정일 경우 */}
                 {/* <UpdateUniversityAnalysisContainer /> */}
-                {/* 실기기록입력 */}
-                {/* <PracticalScoreInputContainer /> */}
-                {/* 내신성적입력 */}
+                {/* 성적입력 */}
                 <NaesinScoreProvider>
-                  <NaesinScoreContainer />
+                  <ScoreInputContainer />
                 </NaesinScoreProvider>
                 {/* {!isNoServiceUniversity && <NoServiceUniversity />} */}
                 {/* {!isMembership && <NoMembershipContainer />} */}

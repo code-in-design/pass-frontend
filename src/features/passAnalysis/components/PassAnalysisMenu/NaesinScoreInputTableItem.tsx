@@ -19,40 +19,42 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
+  id: string;
+  index: number;
 }
 
 const NaesinScoreInputTableItem = (props: Props) => {
   return (
-    <TableBodyTr>
+    <TableBodyTr key={props.id}>
       <TableBodyTd>
-        <Checkbox {...props.register('selectCareer')} />
+        <Checkbox {...props.register(`naesinScores.${props.index}.selectCareer`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Select size="miniBorder" register={props.register} setValue={props.setValue} name="subjectSelect" placeholder="선택" options={subjectGroup} />
+        <Select size="miniBorder" register={props.register} setValue={props.setValue} name={`naesinScores.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="text" {...props.register(`subject`, { onChange: e => props.setValue('subject', e.target.value) })} placeholder="과목명 입력" width={'100px'} />
+        <Input type="text" {...props.register(`naesinScores.${props.index}.subject`)} placeholder="과목명 입력" width={'100px'} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('number')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.number`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('rawScore')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.rawScore`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('subjetAverage')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.subjetAverage`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('standardDeviation')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.standardDeviation`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="text" {...props.register('achievement')} />
+        <Input type="text" {...props.register(`naesinScores.${props.index}.achievement`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('studentNumber')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.studentNumber`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register('grade')} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.grade`)} />
       </TableBodyTd>
     </TableBodyTr>
   );

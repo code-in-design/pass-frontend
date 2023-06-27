@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Edit from '../../../../../public/images/icons/edit.svg';
 import NaesinScoreInputTable from '../PassAnalysisMenu/NaesinScoreInputTable';
-import { useNaesinScoreContext } from '../../context/useNaesinScoreContext';
+import { useScoreContext } from '../../context/useScoreContext';
 import { useFieldArray } from 'react-hook-form';
 
 interface Props {
@@ -11,8 +11,8 @@ interface Props {
 }
 
 const NaesinScoreInputModal = (props: Props) => {
-  const { register, setValue, handleSubmit, getValues, control, watch } = useNaesinScoreContext();
-  const { fields, append } = useFieldArray({ control, name: 'fieldArray' });
+  const { register, setValue, handleSubmit, getValues, control, watch } = useScoreContext();
+  const { fields, append } = useFieldArray({ control, name: 'naesinScores' });
   const [isOpen, setIsOpen] = useState(false);
   const [isSave, setIsSave] = useState(false);
 
@@ -27,7 +27,8 @@ const NaesinScoreInputModal = (props: Props) => {
   const onsubmit = data => {
     // setIsSave(true);
     // closeModal();
-    console.log(data);
+    // console.log(data);
+    console.log(getValues('naesinScores'));
   };
 
   return (
