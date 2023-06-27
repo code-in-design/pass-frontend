@@ -6,8 +6,7 @@ import PracticalScoreInputContainer from './PracticalScoreInputContainer';
 
 const ScoreInputContainer = () => {
   const [step, setStep] = useState(0);
-  const [isProcess, setIsProcess] = useState(false);
-  const { register, setValue, handleSubmit, control, getValues, watch } = useForm();
+  const { register, setValue, handleSubmit, trigger, getValues, watch, formState } = useForm();
   const confirmStep0 = watch(['volunteerTime', 'absence', 'lateNumber', 'earlyLeaveNumber', 'resultNumber']);
   const [isdisable, setIsdisable] = useState(false);
 
@@ -25,20 +24,16 @@ const ScoreInputContainer = () => {
     setStep(step + 1);
   }, [step]);
 
-  const onClickConfirm = () => {
-    setIsProcess(true);
-  };
-
   const onsubmit = data => {
     console.log(data);
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onsubmit)}>
       {step === 0 && <VolunteerAttendanceInputForm step={step} register={register} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} isdisable={isdisable} />}
       {step === 1 && <NaesinScoreInputForm step={step} goPrevStep={goPrevStep} goNextStep={goNextStep} />}
-      {step === 2 && <PracticalScoreInputContainer />}
-    </>
+      {step === 2 && <PracticalScoreInputContainer step={step} register={register} trigger={trigger} formState={formState} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} />}
+    </form>
   );
 };
 

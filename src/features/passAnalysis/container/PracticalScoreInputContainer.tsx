@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, FormState, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import PracticalScoreCheckForm from '../components/PassAnalysisMenu/PracticalScoreCheckForm';
 import PracticalScoreInputForm from '../components/PassAnalysisMenu/PracticalScoreInputForm';
 import PassAnalysisProcess from '../components/PassAnalysisProcess';
@@ -14,26 +14,27 @@ const types = [
   { name: '메디신볼던지기', multipleChoice: ['3초 이상 유지 후 볼던지기 깔끔하게 수행', '1~3초 무난하게 유지 후 볼던지기 깔끔하게 수행', '다소 아쉬운 물구나무서기 후 무난한 볼던지기 수행'] },
 ];
 
-const PracticalScoreInputContainer = () => {
+interface Props {
+  step: number;
+  goPrevStep: () => void;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
+  trigger: UseFormTrigger<FieldValues>;
+  formState: FormState<FieldValues>;
+}
+
+const PracticalScoreInputContainer = (props: Props) => {
   const [step, setStep] = useState(0);
   const [isProcess, setIsProcess] = useState(false);
   const typesName = types.map(type => type.name);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    control,
-    getValues,
-    trigger,
-  } = useForm();
 
   const triggerAndCheck = async fields => {
-    const result = await trigger(fields);
+    const result = await props.trigger(fields);
     if (!result) {
-      if (!isEmpty(errors)) {
-        const firstKey = Object.keys(errors)[0];
-        const firstValue = errors[firstKey];
+      if (!isEmpty(props.formState.errors)) {
+        const firstKey = Object.keys(props.formState.errors)[0];
+        const firstValue = props.formState.errors[firstKey];
         if (firstValue) {
           alert(firstValue.message);
         }
@@ -46,6 +47,9 @@ const PracticalScoreInputContainer = () => {
     if (step > 0) {
       setStep(step - 1);
     }
+    if (step === 0 && props.step === 2) {
+      props.goPrevStep();
+    }
   }, [types, step]);
 
   const goNextStep = useCallback(async () => {
@@ -56,20 +60,16 @@ const PracticalScoreInputContainer = () => {
   }, [types, step]);
 
   const onClickConfirm = () => {
-    setIsProcess(true);
-  };
-
-  const onsubmit = data => {
-    console.log(data);
+    // setIsProcess(true);
   };
 
   return (
     <>
       {!isProcess && (
-        <form onSubmit={handleSubmit(onsubmit)}>
-          {step !== types.length && <PracticalScoreInputForm types={types} step={step} register={register} getValues={getValues} setValue={setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} />}
-          {step === types.length && <PracticalScoreCheckForm types={types} getValues={getValues} goPrevStep={goPrevStep} onClickConfirm={onClickConfirm} />}
-        </form>
+        <>
+          {step !== types.length && <PracticalScoreInputForm types={types} step={step} register={props.register} getValues={props.getValues} setValue={props.setValue} goPrevStep={goPrevStep} goNextStep={goNextStep} />}
+          {step === types.length && <PracticalScoreCheckForm types={types} getValues={props.getValues} goPrevStep={goPrevStep} onClickConfirm={onClickConfirm} />}
+        </>
       )}
       {isProcess && <PassAnalysisProcess />}
     </>

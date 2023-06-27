@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Checkbox } from '@chakra-ui/react';
 import Select from '@/components/Select';
@@ -24,10 +24,23 @@ interface Props {
 }
 
 const NaesinScoreInputTableItem = (props: Props) => {
+  const [disable, setDisable] = useState(false);
+
   return (
     <TableBodyTr key={props.id}>
       <TableBodyTd>
-        <Checkbox {...props.register(`naesinScores.${props.index}.selectCareer`)} />
+        <Checkbox
+          {...props.register(`naesinScores.${props.index}.selectCareer`, {
+            onChange: e => {
+              if (e.target.checked) {
+                setDisable(true);
+              }
+              if (!e.target.checked) {
+                setDisable(false);
+              }
+            },
+          })}
+        />
       </TableBodyTd>
       <TableBodyTd>
         <Select size="miniBorder" register={props.register} setValue={props.setValue} name={`naesinScores.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
@@ -45,7 +58,7 @@ const NaesinScoreInputTableItem = (props: Props) => {
         <Input type="number" {...props.register(`naesinScores.${props.index}.subjetAverage`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.standardDeviation`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.standardDeviation`, { disabled: disable })} />
       </TableBodyTd>
       <TableBodyTd>
         <Input type="text" {...props.register(`naesinScores.${props.index}.achievement`)} />
@@ -54,7 +67,7 @@ const NaesinScoreInputTableItem = (props: Props) => {
         <Input type="number" {...props.register(`naesinScores.${props.index}.studentNumber`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.grade`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.index}.grade`, { disabled: disable })} />
       </TableBodyTd>
     </TableBodyTr>
   );
@@ -82,4 +95,7 @@ const Input = styled.input<{ width?: string }>`
   color: ${props => props.theme.colors.gray2};
   border: 1px solid ${props => props.theme.colors.gray4};
   text-align: center;
+  :disabled {
+    background-color: ${props => props.theme.colors.gray5};
+  }
 `;

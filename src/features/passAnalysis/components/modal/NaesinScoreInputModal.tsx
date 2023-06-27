@@ -24,15 +24,14 @@ const NaesinScoreInputModal = (props: Props) => {
     setIsOpen(false);
   }, [isOpen]);
 
-  const onsubmit = data => {
-    // setIsSave(true);
-    // closeModal();
-    // console.log(data);
+  const onClickSaveButton = () => {
+    setIsSave(true);
+    closeModal();
     console.log(getValues('naesinScores'));
   };
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)}>
+    <>
       <ScoreContainer onClick={openModal}>
         <TitleWrapper>
           <ScoreInputIconWrapper>
@@ -47,13 +46,15 @@ const NaesinScoreInputModal = (props: Props) => {
           <Container>
             <Wrapper>
               <ModalTitle>{props.title}</ModalTitle>
-              <SaveButton type="submit">저장</SaveButton>
+              <SaveButton type="button" onClick={onClickSaveButton}>
+                저장
+              </SaveButton>
             </Wrapper>
             <NaesinScoreInputTable register={register} setValue={setValue} getValues={getValues} fields={fields} append={append} watch={watch} />
           </Container>
         </ModalLayout>
       )}
-    </form>
+    </>
   );
 };
 

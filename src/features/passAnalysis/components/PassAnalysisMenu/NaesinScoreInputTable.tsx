@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Plus from '../../../../../public/images/icons/plus.svg';
-import Select from '@/components/Select';
 import NaesinScoreInputTableItem from './NaesinScoreInputTableItem';
 import { FieldValues, UseFieldArrayAppend, UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 
@@ -12,21 +11,10 @@ interface Props {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
-  // fields: Record<'id', string>[];
   fields: any;
   append: UseFieldArrayAppend<FieldValues, 'naesinScores'>;
   watch: UseFormWatch<FieldValues>;
 }
-const subjectGroup = [
-  { value: 'korean', label: '국어' },
-  { value: 'english', label: '영어' },
-  { value: 'math', label: '수학' },
-  { value: 'social', label: '사회(역사/도덕)' },
-  { value: 'history', label: '한국사' },
-  { value: 'technologyHome', label: '기술가정/제2외국어/한문/교양' },
-  { value: 'physical', label: '체육' },
-  { value: 'art', label: '예술' },
-];
 
 const NaesinScoreInputTable = (props: Props) => {
   const [subjectCount, setSubjectCount] = useState(10); // 초기 과목 개수는 1로 설정
