@@ -1,12 +1,18 @@
 import React, { createContext, useContext } from 'react';
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { useForm, UseFormReturn, FieldValues } from 'react-hook-form';
 
-const ScoreContext = createContext<UseFormReturn | null>(null);
+interface ScoreContextProps extends UseFormReturn<FieldValues> {}
 
-export const NaesinScoreProvider: React.FC<any> = ({ children }) => {
+const ScoreContext = createContext<ScoreContextProps | null>(null);
+
+export const ScoreProvider: React.FC<any> = ({ children }) => {
   const formMethods = useForm();
 
-  return <ScoreContext.Provider value={formMethods}>{children}</ScoreContext.Provider>;
+  const contextValue: ScoreContextProps = {
+    ...formMethods,
+  };
+
+  return <ScoreContext.Provider value={contextValue}>{children}</ScoreContext.Provider>;
 };
 
 export const useScoreContext = () => {

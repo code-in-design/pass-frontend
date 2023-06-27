@@ -20,7 +20,7 @@ import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container
 import ScoreInputContainer from '@/features/passAnalysis/container/ScoreInputContainer';
 import useScores from '@/features/myScore/hooks/useScores';
 import { useRouter } from 'next/router';
-import { NaesinScoreProvider } from '@/features/passAnalysis/context/useScoreContext';
+import { ScoreProvider } from '@/features/passAnalysis/context/useScoreContext';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
@@ -109,9 +109,9 @@ const PassAnalysisPage = () => {
                 {/* 세부 합격 분석업데이트예정일 경우 */}
                 {/* <UpdateUniversityAnalysisContainer /> */}
                 {/* 성적입력 */}
-                <NaesinScoreProvider>
+                <ScoreProvider>
                   <ScoreInputContainer />
-                </NaesinScoreProvider>
+                </ScoreProvider>
                 {/* {!isNoServiceUniversity && <NoServiceUniversity />} */}
                 {/* {!isMembership && <NoMembershipContainer />} */}
               </>

@@ -12,8 +12,9 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
   fields: any;
-  append: UseFieldArrayAppend<FieldValues, 'naesinScores'>;
+  append: UseFieldArrayAppend<FieldValues, `naesinScores.${string}`>;
   watch: UseFormWatch<FieldValues>;
+  title: string;
 }
 
 const NaesinScoreInputTable = (props: Props) => {
@@ -23,7 +24,7 @@ const NaesinScoreInputTable = (props: Props) => {
     setSubjectCount(prevCount => prevCount + 1); // 과목 개수 증가
   };
 
-  const watchFieldArray = props.watch('naesinScores');
+  const watchFieldArray = props.watch(`naesinScores.${props.title}`);
   const controlledFields = props.fields.map((field, index) => {
     return {
       ...field,
@@ -49,7 +50,7 @@ const NaesinScoreInputTable = (props: Props) => {
         });
       }
     }
-  }, [subjectCount, controlledFields.length, props.append]);
+  }, []);
 
   return (
     <>
@@ -64,7 +65,7 @@ const NaesinScoreInputTable = (props: Props) => {
           </TableHeader>
           <TableBody>
             {props.fields.map((field, index) => {
-              return <NaesinScoreInputTableItem key={index} id={field.id} index={index} register={props.register} setValue={props.setValue} getValues={props.getValues} />;
+              return <NaesinScoreInputTableItem title={props.title} key={index} id={field.id} index={index} register={props.register} setValue={props.setValue} getValues={props.getValues} />;
             })}
           </TableBody>
         </NasinScoreTable>

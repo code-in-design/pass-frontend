@@ -11,8 +11,8 @@ interface Props {
 }
 
 const NaesinScoreInputModal = (props: Props) => {
-  const { register, setValue, handleSubmit, getValues, control, watch } = useScoreContext();
-  const { fields, append } = useFieldArray({ control, name: 'naesinScores' });
+  const { register, setValue, getValues, control, watch } = useScoreContext();
+  const { fields, append } = useFieldArray({ control, name: `naesinScores.${props.title}` });
   const [isOpen, setIsOpen] = useState(false);
   const [isSave, setIsSave] = useState(false);
 
@@ -27,7 +27,6 @@ const NaesinScoreInputModal = (props: Props) => {
   const onClickSaveButton = () => {
     setIsSave(true);
     closeModal();
-    console.log(getValues('naesinScores'));
   };
 
   return (
@@ -50,7 +49,7 @@ const NaesinScoreInputModal = (props: Props) => {
                 저장
               </SaveButton>
             </Wrapper>
-            <NaesinScoreInputTable register={register} setValue={setValue} getValues={getValues} fields={fields} append={append} watch={watch} />
+            <NaesinScoreInputTable title={props.title} register={register} setValue={setValue} getValues={getValues} fields={fields} append={append} watch={watch} />
           </Container>
         </ModalLayout>
       )}

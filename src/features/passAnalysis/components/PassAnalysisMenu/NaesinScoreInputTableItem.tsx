@@ -21,6 +21,7 @@ interface Props {
   getValues: UseFormGetValues<FieldValues>;
   id: string;
   index: number;
+  title: string;
 }
 
 const NaesinScoreInputTableItem = (props: Props) => {
@@ -30,7 +31,7 @@ const NaesinScoreInputTableItem = (props: Props) => {
     <TableBodyTr key={props.id}>
       <TableBodyTd>
         <Checkbox
-          {...props.register(`naesinScores.${props.index}.selectCareer`, {
+          {...props.register(`naesinScores.${props.title}.${props.index}.selectCareer`, {
             onChange: e => {
               if (e.target.checked) {
                 setDisable(true);
@@ -43,31 +44,31 @@ const NaesinScoreInputTableItem = (props: Props) => {
         />
       </TableBodyTd>
       <TableBodyTd>
-        <Select size="miniBorder" register={props.register} setValue={props.setValue} name={`naesinScores.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
+        <Select size="miniBorder" register={props.register} setValue={props.setValue} name={`naesinScores.${props.title}.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="text" {...props.register(`naesinScores.${props.index}.subject`)} placeholder="과목명 입력" width={'100px'} />
+        <Input type="text" {...props.register(`naesinScores.${props.title}.${props.index}.subject`)} placeholder="과목명 입력" width={'100px'} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.number`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.number`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.rawScore`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.rawScore`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.subjetAverage`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.subjetAverage`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.standardDeviation`, { disabled: disable })} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.standardDeviation`, { disabled: disable })} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="text" {...props.register(`naesinScores.${props.index}.achievement`)} />
+        <Input type="text" {...props.register(`naesinScores.${props.title}.${props.index}.achievement`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.studentNumber`)} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.studentNumber`)} />
       </TableBodyTd>
       <TableBodyTd>
-        <Input type="number" {...props.register(`naesinScores.${props.index}.grade`, { disabled: disable })} />
+        <Input type="number" {...props.register(`naesinScores.${props.title}.${props.index}.grade`, { disabled: disable })} />
       </TableBodyTd>
     </TableBodyTr>
   );

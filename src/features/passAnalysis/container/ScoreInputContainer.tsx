@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import NaesinScoreInputForm from '../components/PassAnalysisMenu/NaesinScoreInputForm';
 import VolunteerAttendanceInputForm from '../components/PassAnalysisMenu/VolunteerAttendanceInputForm';
+import { useScoreContext } from '../context/useScoreContext';
 import PracticalScoreInputContainer from './PracticalScoreInputContainer';
 
 const ScoreInputContainer = () => {
-  const [step, setStep] = useState(0);
-  const { register, setValue, handleSubmit, trigger, getValues, watch, formState } = useForm();
+  const [step, setStep] = useState(1);
+  const { register, setValue, handleSubmit, trigger, getValues, watch, formState } = useScoreContext();
   const confirmStep0 = watch(['volunteerTime', 'absence', 'lateNumber', 'earlyLeaveNumber', 'resultNumber']);
   const [isdisable, setIsdisable] = useState(false);
 
