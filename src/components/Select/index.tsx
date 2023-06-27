@@ -13,6 +13,7 @@ export interface SelectProps {
   register: UseFormRegister<FieldValues>;
   required?: string;
   width?: string;
+  height?: string;
 }
 
 const Select = (props: SelectProps) => {
@@ -33,7 +34,15 @@ const Select = (props: SelectProps) => {
       {props.size === 'sm' && <StyledSelectSmall {...selectProps} defaultValue={props.defaultValue} onChange={handleChange} className="react-select-small-container" classNamePrefix="react-select-small" instanceId="react-select-small" />}
       {props.size === 'md' && <StyledSelectMedium {...selectProps} onChange={handleChange} width={props.width} className="react-select-middle-container" classNamePrefix="react-select-middle" instanceId="react-select-middle" />}
       {props.size === 'lg' && (
-        <StyledSelectLarge {...selectProps} {...props.register(name, { required: props.required })} onChange={handleChange} className="react-select-large-container" classNamePrefix="react-select-large" instanceId="react-select-large" />
+        <StyledSelectLarge
+          {...selectProps}
+          height={props.height}
+          {...props.register(name, { required: props.required })}
+          onChange={handleChange}
+          className="react-select-large-container"
+          classNamePrefix="react-select-large"
+          instanceId="react-select-large"
+        />
       )}
     </>
   );

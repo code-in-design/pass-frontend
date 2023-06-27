@@ -1,14 +1,14 @@
 import Select from 'react-select';
 import styled from '@emotion/styled';
 
-export const StyledSelectLarge = styled(Select)`
+export const StyledSelectLarge = styled(Select)<{ height }>`
   &.react-select-large {
     &-container {
       font-size: 16px;
       font-weight: 600;
       color: ${props => props.theme.colors.grayBlack};
       .react-select-large__control {
-        height: 56px;
+        height: ${props => (props.height ? props.height : '56px')};
         border-radius: 16px;
         color: ${props => props.theme.colors.gray4};
         border: 1px solid ${props => props.theme.colors.gray4};
@@ -330,6 +330,7 @@ export const StyledSelectMiniBorder = styled(Select)`
         }
       }
       .react-select-miniBorder__menu {
+        width: max-content;
         border-radius: 0 0 8px 8px;
         margin: 0;
         text-align: left;
@@ -337,16 +338,12 @@ export const StyledSelectMiniBorder = styled(Select)`
           padding: 0;
           .react-select-miniBorder__option {
             padding: 4px 12px;
-            height: 28px;
+            height: 24px;
+            color: ${props => props.theme.colors.gray1};
             &--is-selected {
               background-color: #f8f8fc;
               color: ${props => props.theme.colors.grayBlack};
               font-weight: 700;
-            }
-            &--is-focused {
-              /* background-color: #f8f8fc; */
-              /* color: #353644; */
-              /* font-weight: 700; */
             }
             &:last-child {
               border-radius: 0 0 8px 8px;
