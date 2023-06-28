@@ -1,6 +1,6 @@
 import React, { HTMLProps } from 'react';
 import styled from '@emotion/styled';
-import HeaderContainer from '../Header/HeaderContainer';
+import HeaderContainer from '../../../components/Header/HeaderContainer';
 import { AdminNavbar } from '../AdminNavbar';
 
 type LayoutProps = HTMLProps<HTMLElement>;

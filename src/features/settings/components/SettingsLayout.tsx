@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 import styled from '@emotion/styled';
-import Layout from './Layout';
-import SettingsNavbar from '../Navbar/SettingsNavbar';
+import Layout from '../../../components/Layout/Layout';
+import SettingsNavbar from '../../../components/Navbar/SettingsNavbar';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 

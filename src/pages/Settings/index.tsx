@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsLayout from '@/components/Layout/SettingsLayout';
+import SettingsLayout from '@/features/settings/components/SettingsLayout';
 import SettingsContainer from '@/features/settings/containers/SettingsContainer';
 
 const SettingsPage = () => {
