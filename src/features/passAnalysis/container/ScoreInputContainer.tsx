@@ -10,10 +10,6 @@ const ScoreInputContainer = () => {
   const confirmStep0 = watch(['volunteerTime', 'absence', 'lateNumber', 'earlyLeaveNumber', 'resultNumber']);
   const [isdisable, setIsdisable] = useState(false);
 
-  useEffect(() => {
-    setIsdisable(confirmStep0.filter(v => v === '').length === 0);
-  }, [confirmStep0]);
-
   const goPrevStep = useCallback(() => {
     if (step > 0) {
       setStep(step - 1);
@@ -27,6 +23,10 @@ const ScoreInputContainer = () => {
   const onsubmit = data => {
     console.log(data);
   };
+
+  useEffect(() => {
+    setIsdisable(confirmStep0.filter(v => v === '').length === 0);
+  }, [confirmStep0]);
 
   return (
     <form onSubmit={handleSubmit(onsubmit)}>

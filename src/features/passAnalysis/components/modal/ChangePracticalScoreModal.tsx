@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
+import { useRouter } from 'next/router';
 
 interface Props {
   remainChange: number;
@@ -9,6 +10,8 @@ interface Props {
 
 const ChangePracticalScoreModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { asPath } = router;
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -17,6 +20,11 @@ const ChangePracticalScoreModal = (props: Props) => {
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, [isOpen]);
+
+  const moveToPage = () => {
+    router.push(`${asPath}&scoreRecord=volunteerScore`);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -37,7 +45,9 @@ const ChangePracticalScoreModal = (props: Props) => {
             </RemainChangeWrapper>
             <Buttons>
               <Button onClick={closeModal}>아니오</Button>
-              <Button yes>예</Button>
+              <Button yes onClick={moveToPage}>
+                예
+              </Button>
             </Buttons>
           </Container>
         </ModalLayout>

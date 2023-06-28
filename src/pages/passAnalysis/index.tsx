@@ -18,18 +18,18 @@ import PassAnalysisUniversityListsContainer from '@/features/passAnalysis/contai
 import NoMembershipContainer from '@/features/passAnalysis/container/NoMembershipContainer';
 import UpdateUniversityAnalysisContainer from '@/features/passAnalysis/container/UpdateUniversityAnalysisContainer';
 import ScoreInputContainer from '@/features/passAnalysis/container/ScoreInputContainer';
-import useScores from '@/features/myScore/hooks/useScores';
-import { useRouter } from 'next/router';
 import { ScoreProvider } from '@/features/passAnalysis/context/useScoreContext';
+import { useRouter } from 'next/router';
 
 const PassAnalysisPage = () => {
   const [menu, setMenu] = useQueryParam('menu');
   const [selectedMenu, setSelectedMenu] = useState([true, false, false]);
   const [selectedUniversity] = useQueryParam('university');
-  const { isBeforeScoreEnteredOnBackend, isAfterScoreEnteredOnBackend, 가채점기간, 성적발표후 } = useScores();
+  const [scoreRecord] = useQueryParam('scoreRecord');
   const [isMembership, setIsMembership] = useState(true);
-  const [isNoServiceUniversity, setIsNoServiceUniversity] = useState(false);
   const router = useRouter();
+
+  console.log(router.query.scoreRecord);
 
   useEffect(() => {
     if (selectedUniversity) {
@@ -98,20 +98,23 @@ const PassAnalysisPage = () => {
 
             {menu === 'passAnalysis' && (
               <>
-                {/* {isMembership && (
+                {isMembership && !router.query.scoreRecord && (
                   <UniversityInfoWrapper>
                     <PassProbabilityContainer />
                     <TestScoreAnalysisContainer />
                     <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} />
                     <LastYearPassCaseContainer />
                   </UniversityInfoWrapper>
-                )} */}
+                )}
                 {/* 세부 합격 분석업데이트예정일 경우 */}
                 {/* <UpdateUniversityAnalysisContainer /> */}
                 {/* 성적입력 */}
-                <ScoreProvider>
-                  <ScoreInputContainer />
-                </ScoreProvider>
+                {router.query?.scoreRecord === 'volunteerScore' && (
+                  <ScoreProvider>
+                    <ScoreInputContainer />
+                  </ScoreProvider>
+                )}
+
                 {/* {!isNoServiceUniversity && <NoServiceUniversity />} */}
                 {/* {!isMembership && <NoMembershipContainer />} */}
               </>

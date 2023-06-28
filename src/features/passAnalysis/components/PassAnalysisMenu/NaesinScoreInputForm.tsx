@@ -12,7 +12,7 @@ interface Props {
 
 const NaesinScoreInputForm = (props: Props) => {
   const [disabled, setDisabled] = useState(true);
-  const [saveButtonsArray, setSaveButtonsArray] = useState([0, 1, 2, 3, 4, 5]);
+  const [saveButtonsArray, setSaveButtonsArray] = useState([0, 1, 2, 3, 4]);
 
   useEffect(() => {
     if (saveButtonsArray.length === 0) {

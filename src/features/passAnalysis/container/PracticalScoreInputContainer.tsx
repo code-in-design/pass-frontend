@@ -60,7 +60,7 @@ const PracticalScoreInputContainer = (props: Props) => {
   }, [types, step]);
 
   const onClickConfirm = () => {
-    // setIsProcess(true);
+    setIsProcess(true);
   };
 
   return (
