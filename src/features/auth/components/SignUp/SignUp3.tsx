@@ -1,6 +1,8 @@
 import { Box, Button, Flex, Text, Image, Tooltip, Input } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
+import styled from '@emotion/styled';
+import Person from '../../../../../public/images/icons/person.svg';
 
 interface Props {
   onNextButtonClick: () => void;
@@ -47,7 +49,9 @@ const SignUp3 = (props: Props) => {
             lineHeight="20px"
             fontWeight={700}
           />
-          <Image src="/images/icons/person.svg" alt="person" position="absolute" top="18px" left="24px" />
+          <PersonIconWrapper>
+            <Person />
+          </PersonIconWrapper>
         </Box>
         <Text margin="24px 0 12px" fontSize="16px" lineHeight="20px" fontWeight={700} color="#353644" _placeholder={{ color: '#9395a6' }}>
           연락처
@@ -126,3 +130,12 @@ const SignUp3 = (props: Props) => {
 };
 
 export default SignUp3;
+
+const PersonIconWrapper = styled.div`
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  width: 20px;
+  height: 20px;
+  color: ${props => props.theme.colors.gray3};
+`;
