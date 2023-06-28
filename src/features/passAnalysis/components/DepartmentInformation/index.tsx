@@ -194,7 +194,11 @@ const InformationWrapper = styled.div`
   gap: 0 24px;
 `;
 
-const InformationWrapperItem = styled.div``;
+const InformationWrapperItem = styled.div`
+  :last-of-type {
+    flex: 1;
+  }
+`;
 
 const Information = styled.div`
   display: flex;
@@ -230,7 +234,6 @@ const InformationBoxText = styled.div`
 
 const InformationMethod = styled.div`
   min-width: 323px;
-  margin-left: 16px;
   width: 100%;
 `;
 

@@ -81,6 +81,7 @@ const ScoreGraph = styled.div`
 
 const ScoreContainer = styled.div`
   min-width: 403px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px 0;

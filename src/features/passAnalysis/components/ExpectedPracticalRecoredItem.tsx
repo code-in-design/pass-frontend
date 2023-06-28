@@ -96,6 +96,7 @@ const Box = styled.div`
   border: 1px solid ${props => props.theme.colors.gray4};
   display: flex;
   justify-content: space-between;
+  gap: 0 24px;
 `;
 const ScoreWrapper = styled.div`
   display: flex;
@@ -130,6 +131,7 @@ const Score = styled.div`
 `;
 
 const Graph = styled.div`
+  width: 100%;
   min-width: 221px;
   height: 68px;
   display: flex;
