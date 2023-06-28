@@ -326,7 +326,6 @@ const ExerciseTitle = styled.div`
   font-size: 14px;
   line-height: 16px;
   font-weight: 700;
-  color: ${props => props.theme.colors.gray1};
   margin-bottom: 8px;
 `;
 

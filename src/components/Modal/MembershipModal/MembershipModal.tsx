@@ -1,10 +1,8 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import styled from '@emotion/styled';
-import Card from './MembershipPriceCard';
-import Table from './MembershipPriceTable';
-import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
-import { useState, useCallback } from 'react';
-import Badge from '../../../../public/images/icons/badge.svg';
+import { useState, useCallback, Dispatch, SetStateAction } from 'react';
+import MembershipPriceCard from './MembershipPriceCard';
+import MembershipPriceTable from './MembershipPriceTable';
 
 export interface CardProps {
   name: string;
@@ -18,35 +16,25 @@ export interface CardProps {
 
 interface Props {
   data?: Array<CardProps>;
+  onClose: Dispatch<SetStateAction<boolean>>;
 }
 
 const MembershipModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = useCallback(() => {
-    setIsOpen(true);
-  }, [isOpen]);
-
   const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, [isOpen]);
+    props.onClose(false);
+  }, []);
 
   return (
-    <>
-      <ServiceListItem icon={<Badge />} text="멤버십 안내" onClick={openModal} />
-      {isOpen && (
-        <ModalLayout isOpen={isOpen} onClose={closeModal}>
-          <Title>합격할 준비 되었나요?</Title>
-          <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
-          <Container>
-            {props.data?.map((item, index) => (
-              <Card key={index} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
-            ))}
-          </Container>
-          <Table />
-        </ModalLayout>
-      )}
-    </>
+    <ModalLayout onClose={closeModal}>
+      <Title>합격할 준비 되었나요?</Title>
+      <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
+      <Container>
+        {props.data?.map((item, index) => (
+          <MembershipPriceCard key={index} name={item.name} price={item.price} text={item.text} button={item.button} descriptions={item.descriptions} img={item.img} colorText={item.colorText} />
+        ))}
+      </Container>
+      <MembershipPriceTable />
+    </ModalLayout>
   );
 };
 

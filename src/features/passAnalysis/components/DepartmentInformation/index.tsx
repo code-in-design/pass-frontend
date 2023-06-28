@@ -5,10 +5,11 @@ import ExerciseType from '@/features/universities/components/FindUniversity/Exer
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import LoudSpeaker from '../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../public/images/icons/calendar.svg';
-import School from '../../../../../public/images/icons/school.svg';
+import School from '../../../../../public/images/icons/graduation.svg';
 import Book from '../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../public/images/icons/noticeBoard.svg';
 import Info from '../../../../../public/images/icons/info.svg';
+import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
 
 interface Props {
   name: string;
@@ -21,44 +22,77 @@ const DepartmentInformation = (props: Props) => {
 
   return (
     <>
-      <MenuTitle>학과정보</MenuTitle>
-      <Information>
-        <InformationBox>
-          <InformationBoxTitle>모집군</InformationBoxTitle>
-          <InformationBoxText>가군</InformationBoxText>
-        </InformationBox>
-        <InformationBox>
-          <InformationBoxTitle>
-            모집정원
-            <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
-              <Info />
-            </InfoIconWrapper>
-            <MyTooltip id="tooltip-recruitmentQuota" width="210px">
-              <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
-            </MyTooltip>
-          </InformationBoxTitle>
-          <InformationBoxText>33</InformationBoxText>
-        </InformationBox>
-        <InformationMethod>
+      <InformationWrapper>
+        <InformationWrapperItem>
+          <MenuTitle>학과정보</MenuTitle>
+          <Information>
+            <InformationBox>
+              <InformationBoxTitle>모집군</InformationBoxTitle>
+              <InformationBoxText>가군</InformationBoxText>
+            </InformationBox>
+            <InformationBox>
+              <InformationBoxTitle>
+                모집정원
+                <InfoIconWrapper color="#9395A6" marginLeft="4px" data-tooltip-id="tooltip-recruitmentQuota">
+                  <Info />
+                </InfoIconWrapper>
+                <MyTooltip id="tooltip-recruitmentQuota" width="210px">
+                  <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
+                </MyTooltip>
+              </InformationBoxTitle>
+              <InformationBoxText>33</InformationBoxText>
+            </InformationBox>
+          </Information>
+        </InformationWrapperItem>
+        <InformationWrapperItem>
           <Wrapper>
-            <InformationMethodTitle>전형 방법</InformationMethodTitle>
+            <MenuTitle>전형 방법</MenuTitle>
+            <InformationMethodTitle>
+              다단계 전형 세부사항
+              <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
+                <HelpOutline />
+              </HelpIconWrapper>
+              <MyTooltip id="tooltip-universityDetail" width="180px">
+                <TooltipText>다단계 반영 비율 나타내기</TooltipText>
+              </MyTooltip>
+            </InformationMethodTitle>
           </Wrapper>
-          <GraphWrapper>
-            <Graph width="10%">
+          <InformationMethod>
+            <GraphWrapper>
               <GraphTitle>수능</GraphTitle>
-              <GraphScore>10%</GraphScore>
-            </Graph>
-            <Graph width="30%">
+              <Graph>
+                <GraphScore width={'10%'} bgColor={'#6B77F8'}>
+                  10%
+                </GraphScore>
+              </Graph>
+            </GraphWrapper>
+            <GraphWrapper>
               <GraphTitle>내신</GraphTitle>
-              <GraphScore>30%</GraphScore>
-            </Graph>
-            <Graph width="60%">
+              <Graph>
+                <GraphScore width={'30%'} bgColor={'#AA83FF'}>
+                  30%
+                </GraphScore>
+              </Graph>
+            </GraphWrapper>
+            <GraphWrapper>
               <GraphTitle>실기</GraphTitle>
-              <GraphScore>60%</GraphScore>
-            </Graph>
-          </GraphWrapper>
-        </InformationMethod>
-      </Information>
+              <Graph>
+                <GraphScore width={'60%'} bgColor={'#60C8DE'}>
+                  60%
+                </GraphScore>
+              </Graph>
+            </GraphWrapper>
+            <GraphWrapper>
+              <GraphTitle>기타</GraphTitle>
+              <Graph>
+                <GraphScore width={'90%'} bgColor={'#9395a6'}>
+                  90%
+                </GraphScore>
+              </Graph>
+            </GraphWrapper>
+          </InformationMethod>
+        </InformationWrapperItem>
+      </InformationWrapper>
 
       <MenuTitle>수능 과목별 반영 비율</MenuTitle>
       <GradeTable>
@@ -155,6 +189,17 @@ const MenuTitle = styled.div`
 `;
 
 // 학과 정보
+const InformationWrapper = styled.div`
+  display: flex;
+  gap: 0 24px;
+`;
+
+const InformationWrapperItem = styled.div`
+  :last-of-type {
+    flex: 1;
+  }
+`;
+
 const Information = styled.div`
   display: flex;
 `;
@@ -176,6 +221,7 @@ const InformationBoxTitle = styled.div`
   justify-content: center;
   color: ${props => props.theme.colors.gray1};
   margin-bottom: 4px;
+  white-space: nowrap;
 `;
 
 const InformationBoxText = styled.div`
@@ -188,53 +234,60 @@ const InformationBoxText = styled.div`
 
 const InformationMethod = styled.div`
   min-width: 323px;
-  margin-left: 16px;
+  width: 100%;
 `;
 
 const InformationMethodTitle = styled.div`
+  margin: 24px 0 12px;
   font-size: 14px;
   line-height: 16px;
   font-weight: 600;
-  color: ${props => props.theme.colors.gray1};
-  margin-bottom: 8px;
+  color: ${props => props.theme.colors.grayBlack};
 `;
 
 // 전형 방법
 const GraphWrapper = styled.div`
   display: flex;
-  border-radius: 8px;
-  overflow: hidden;
+  gap: 0 8px;
+  margin-bottom: 2px;
+  :last-of-type {
+    margin-bottom: 0px;
+  }
 `;
 
-const Graph = styled.div<{ width }>`
-  color: ${props => props.theme.colors.white};
-  padding: 8px;
-  min-width: 48px;
-  width: ${props => props.width};
-  height: 48px;
-  white-space: nowrap;
-  display: ${props => (props.width === '0' ? 'none' : 'block')};
-  &:first-of-type {
-    background-color: ${props => props.theme.colors.blue};
-  }
-  &:nth-of-type(2) {
-    background-color: ${props => props.theme.colors.purple};
-  }
-  &:last-of-type {
-    background-color: ${props => props.theme.colors.green};
-  }
+const Graph = styled.div`
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+  background-color: ${props => props.theme.colors.gray5};
+  overflow: hidden;
 `;
 
 const GraphTitle = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
+  color: ${props => props.theme.colors.gray1};
+  white-space: nowrap;
 `;
 
-const GraphScore = styled.div`
-  font-size: 16px;
+const GraphScore = styled.div<{ width: string; bgColor: string }>`
+  width: ${props => props.width};
+  font-size: 10px;
   line-height: 16px;
   font-weight: 700;
+  color: ${props => props.theme.colors.white};
+  padding: 0 4px;
+  text-align: right;
+  background-color: ${props => props.bgColor};
+`;
+
+const HelpIconWrapper = styled.span`
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  color: ${props => props.theme.colors.gray3};
+  margin-left: 4px;
 `;
 
 //수능 과목별 반영 비율

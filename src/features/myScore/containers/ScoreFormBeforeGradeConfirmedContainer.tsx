@@ -9,12 +9,12 @@ import useScores from '../hooks/useScores';
 
 const ScoreFormBeforeGradeConfirmedContainer = () => {
   const router = useRouter();
-  const { dispatchSetTranscriptByScores, dispatchNextStep } = useScores();
+  const { dispatchSetTranscriptByBeforScores, dispatchNextStep } = useScores();
   const { onInvalid } = useFormError();
   const { register, setValue, handleSubmit, control } = useScoreFormContext();
   // 성적을 입력하고 확인버튼을 누를때 에러가 없으면 실행됨
   const onSubmitConfirmGrade: SubmitHandler<FieldValues> = (data, event) => {
-    dispatchSetTranscriptByScores(new ScoreModel(data));
+    dispatchSetTranscriptByBeforScores(new ScoreModel(data));
     dispatchNextStep();
   };
 

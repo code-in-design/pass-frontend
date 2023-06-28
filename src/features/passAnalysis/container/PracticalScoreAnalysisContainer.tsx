@@ -4,10 +4,11 @@ import PracticalScoreAnalysisMenu from '../components/PassAnalysisMenu/Practical
 interface Props {
   name: string;
   subTitle: string;
+  remainChange: number;
 }
 
 const PracticalScoreAnalysisContainer = (props: Props) => {
-  return <PracticalScoreAnalysisMenu name={props.name} subTitle={props.subTitle} />;
+  return <PracticalScoreAnalysisMenu name={props.name} subTitle={props.subTitle} remainChange={props.remainChange} />;
 };
 
 export default PracticalScoreAnalysisContainer;

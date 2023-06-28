@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { Tooltip } from '@chakra-ui/react';
 import PracticalScoreAnalysisMenuItem from './PracticalScoreAnalysisMenuItem';
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
 import Info from '../../../../../public/images/icons/info.svg';
+import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
+import ChangePracticalScoreModal from '../modal/ChangePracticalScoreModal';
 
 interface Props {
   name: string;
   subTitle: string;
+  remainChange: number;
   data: { title: string; record: string; score: string }[];
 }
 
 const PracticalScoreAnalysisMenu = (props: Props) => {
   const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -26,9 +32,37 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
           </Wrapper>
           <Wrapper>
             <SubTitle>
-              남은 실기 변경 횟수 <span>5회</span>
+              <Tooltip
+                placement="top-start"
+                color="#626474"
+                bgColor="#fff"
+                width="226px"
+                height="176px"
+                borderRadius="16px"
+                padding="16px"
+                label={
+                  <LabelWrapper>
+                    실기 변경 횟수는 가채점 기간 1회,
+                    <br />
+                    실채점 이후 원서접수 전까지 1회,
+                    <br />
+                    원서 접수 이후 1회 제공됩니다.
+                    <br />
+                    <br />
+                    추가적으로 실기 기록을 변경하고 싶을 경우, 실기 기록 변경권을 구매해야 합니다.
+                    <br />
+                    <br />
+                    <span>* 남은 실기 변경 횟수가 0회일 때 기록 변경하기 버튼을 클릭하여 구매 가능합니다.</span>
+                  </LabelWrapper>
+                }
+              >
+                <HelpIconWrapper>
+                  <HelpOutline />
+                </HelpIconWrapper>
+              </Tooltip>
+              남은 실기 변경 횟수 <span>{props.remainChange}회</span>
             </SubTitle>
-            <ChangeRecord>기록 변경하기</ChangeRecord>
+            <ChangePracticalScoreModal remainChange={props.remainChange} />
           </Wrapper>
         </TitleWrapper>
         <ItemWrapper>
@@ -82,6 +116,8 @@ const SubTitle = styled.div`
   font-weight: 500;
   line-height: 24px;
   color: ${props => props.theme.colors.gray2};
+  display: flex;
+  align-items: center;
   & > span {
     display: inline-block;
     margin-left: 4px;
@@ -90,17 +126,11 @@ const SubTitle = styled.div`
   }
 `;
 
-const ChangeRecord = styled.div`
-  width: 80px;
-  height: 24px;
-  border-radius: 8px;
-  padding: 4px 8px;
-  border: 1px solid ${props => props.theme.colors.blue};
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  color: ${props => props.theme.colors.blue};
-  white-space: nowrap;
+const HelpIconWrapper = styled.div`
+  width: 16px;
+  height: 16px;
+  color: ${props => props.theme.colors.gray2};
+  margin-right: 4px;
   cursor: pointer;
 `;
 
@@ -122,4 +152,15 @@ const ItemWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px 12px;
+`;
+
+const LabelWrapper = styled.div`
+  width: 194px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: ${props => props.theme.colors.gray1};
+  & > span {
+    color: ${props => props.theme.colors.gray3};
+  }
 `;

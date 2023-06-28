@@ -149,7 +149,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
               <GradeScoreInputWrapper>
                 <GradeScoreInput title="표준점수" width="88px" margintTop="12px" titleAlign="center">
                   <ScoreInput
-                    {...props.register('inquiry1StandardScore', { required: !isOptionalSubject1 ? '탐구 선택1의 표준점수를 입력해주세요.' : false, disabled: isOptionalSubject1 ? true : false })}
+                    {...props.register('inquiry1StandardScore', { required: !isOptionalSubject1 ? '탐구 선택1의 표준점수를 입력해주세요.' : false, disabled: isOptionalSubject1 === '미응시' ? true : false })}
                     placeholder="표준점수"
                     placeholderAlign="center"
                     type="number"

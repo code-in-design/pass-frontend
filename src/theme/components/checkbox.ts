@@ -1,6 +1,5 @@
 import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/react';
 import { checkboxAnatomy } from '@chakra-ui/anatomy';
-import plus from '../../../public/images/icons/plus.svg';
 
 const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(checkboxAnatomy.keys);
 
@@ -114,7 +113,7 @@ const sizes = {
     control: defineStyle({
       width: '16px',
       height: '16px',
-      backgroundImage: "url('/images/icons/plus.svg')",
+      backgroundImage: "url('/images/icons/filterPlus.svg')",
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       border: 'none',
