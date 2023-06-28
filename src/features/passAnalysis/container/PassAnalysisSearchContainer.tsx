@@ -34,10 +34,10 @@ export default PassAnalysisSearchContainer;
 
 const Container = styled.div`
   margin-top: 24px;
-  margin-bottom: 16px;
   width: 100%;
   display: flex;
   gap: 0 8px;
+  padding: 0 16px;
 `;
 
 const InputContainer = styled.div`

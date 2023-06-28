@@ -5,10 +5,10 @@ import ExpectedAverageScoreItem from './ExpectedAverageScoreItem';
 interface Props {
   choices: string[];
   scores: {
-    국어: { title: string; averageScore: number; score: number }[];
-    수학: { title: string; averageScore: number; score: number }[];
-    영어: { title: string; averageScore: number; score: number }[];
-    탐구: { title: string; averageScore: number; score: number }[];
+    국어: { title: string; averageScore: number | string; score: number | string }[];
+    수학: { title: string; averageScore: number | string; score: number | string }[];
+    영어: { title: string; averageScore: number | string; score: number | string }[];
+    탐구: { title: string; averageScore: number | string; score: number | string }[];
   };
 }
 
@@ -25,7 +25,7 @@ const ChoiceItems = (props: ItemProps) => {
 };
 
 const ExpectedAverageScores = (props: Props) => {
-  const [score, setScore] = useState<{ title: string; averageScore: number; score: number }[]>(props.scores.국어);
+  const [score, setScore] = useState<{ title: string; averageScore: number | string; score: number | string }[]>(props.scores.국어);
   const [selectedItem, setSelectedItem] = useState(props.choices[0]);
 
   const handleItemClick = item => {
@@ -58,7 +58,7 @@ const ExpectedAverageScores = (props: Props) => {
         </ChoiceContainer>
         <ScoreWrapper>
           {score.map((item, index) => {
-            return <ExpectedAverageScoreItem key={index} title={item.title} averageScore={item.averageScore} score={item.score} />;
+            return <ExpectedAverageScoreItem key={index} title={item.title} averageScore={item.averageScore === 0 ? '-' : item.averageScore} score={item.score === 0 ? '-' : item.score} />;
           })}
         </ScoreWrapper>
       </Container>
@@ -66,7 +66,6 @@ const ExpectedAverageScores = (props: Props) => {
   );
 };
 
-export default ExpectedAverageScores;
 ExpectedAverageScores.defaultProps = {
   choices: ['국어', '수학', '영어', '탐구'],
   scores: {
@@ -94,6 +93,7 @@ ExpectedAverageScores.defaultProps = {
     ],
   },
 };
+export default ExpectedAverageScores;
 
 const TitleWrapper = styled.div`
   display: flex;

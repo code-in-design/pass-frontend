@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import ExpectedPracticalRecoredItem from './ExpectedPracticalRecoredItem';
 
 interface Props {
-  data: { type: string; bestScore: number; averageScore: number; perfectScore: number; value: number[] }[];
+  data: { type: string; bestScore: number; averageScore: number; perfectScore: number; value: number }[];
 }
 
 const ExpectedPracticalRecoreds = (props: Props) => {
@@ -23,9 +23,9 @@ const ExpectedPracticalRecoreds = (props: Props) => {
 export default ExpectedPracticalRecoreds;
 ExpectedPracticalRecoreds.defaultProps = {
   data: [
-    { type: '제자리 멀리뛰기', bestScore: 120.5, averageScore: 250.5, perfectScore: 120.5, value: [30, 50, 80] },
-    { type: '배근력', bestScore: 130.5, averageScore: 250.5, perfectScore: 120.5, value: [10, 70, 80] },
-    { type: '매달리기', bestScore: 140.5, averageScore: 250.5, perfectScore: 120.5, value: [40, 60, 90] },
+    { type: '제자리 멀리뛰기', bestScore: 120.5, averageScore: 250.5, perfectScore: 120.5, value: 50 },
+    { type: '배근력', bestScore: 130.5, averageScore: 250.5, perfectScore: 120.5, value: 70 },
+    { type: '매달리기', bestScore: 140.5, averageScore: 250.5, perfectScore: 120.5, value: 20 },
   ],
 };
 

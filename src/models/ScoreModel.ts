@@ -118,8 +118,13 @@ export class ScoreModel {
     };
   };
 
-  transformToTranscriptModel = () => {
+  transformToAfterTranscriptModel = () => {
     const transcriptItems = [this.getOptionalSubject('선택과목'), this.getStandardScore('표준점수'), this.getPercentileScore('백분위'), this.getGradeBySubject('등급')];
+    return new TranscriptModel({ items: transcriptItems });
+  };
+
+  transformToBeforeTranscriptModel = () => {
+    const transcriptItems = [this.getOptionalSubject('선택과목'), this.getRowScore('원점수'), this.getGradeBySubject('등급')];
     return new TranscriptModel({ items: transcriptItems });
   };
 
@@ -135,6 +140,19 @@ export class ScoreModel {
       inquiry2: this.inquiry2OptionalSubject,
     });
   };
+  //원점수 행 데이터 가져오기
+  getRowScore = rowHeader => {
+    return new TranscriptItemModel({
+      rowHeader: rowHeader,
+      history: '-',
+      korean: this.koreanRawScore,
+      math: this.mathRawScore,
+      english: '-',
+      inquiry1: this.inquiry1RawScore,
+      inquiry2: this.inquiry2RawScore,
+    });
+  };
+
   // 표준점수 행 데이터 가져오기
   getStandardScore = rowHeader => {
     return new TranscriptItemModel({

@@ -4,15 +4,15 @@ import Triangle from '../../../public/images/icons/triangle.svg';
 import Medal from '../../../public/images/icons/medal.svg';
 
 interface Props {
-  VALUE: number[];
+  value: number;
 }
 const MIN = 0;
 const MAX = 100;
 const COLORS = ['#E4E6F0', '#6B77F8', '#6B77F8', '#E4E6F0'];
 
 const LabeledMergeSkinny = (props: Props) => {
-  const { VALUE } = props;
-  const [values, setValues] = useState(VALUE);
+  const { value } = props;
+  const [values, setValues] = useState([0, value, 100]);
   const rangeRef: any = useRef<Range>();
 
   return (
@@ -21,6 +21,8 @@ const LabeledMergeSkinny = (props: Props) => {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
+        zIndex: '1',
+        padding: '0 15px',
       }}
     >
       <Range

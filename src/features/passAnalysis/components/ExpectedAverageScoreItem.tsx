@@ -4,8 +4,8 @@ import ArrowNorth from '../../../../public/images/icons/arrowNorth.svg';
 
 interface Props {
   title: string;
-  averageScore: number;
-  score: number;
+  averageScore: number | string;
+  score: number | string;
 }
 
 const ExpectedAverageScoreItem = (props: Props) => {
@@ -14,9 +14,11 @@ const ExpectedAverageScoreItem = (props: Props) => {
       <Title>{props.title}</Title>
       <AverageScoreWrapper>
         <AverageScore>{props.averageScore}</AverageScore>
-        <IconWrapper>
-          <ArrowNorth />
-        </IconWrapper>
+        {props.averageScore !== '-' && (
+          <IconWrapper>
+            <ArrowNorth />
+          </IconWrapper>
+        )}
       </AverageScoreWrapper>
       <Score>{props.score}</Score>
     </Container>

@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { Portal, Tooltip } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import 'ag-grid-community/styles/ag-grid.css';
 import customThemes from './UniversityTable.module.css';
@@ -12,68 +11,25 @@ import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoub
 import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
 import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 import ExerciseIcon from './ExerciseIcon';
-import HelpOutline from '../../../../../../public/images/icons/helpOutline.svg';
-import MyTooltip from '@/components/Tooltip';
+import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
+import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
 
 interface Props {
   data: {
     id: number;
-    군: string;
-    대학명: string;
-    학과명: string;
-    실기종목: string[];
-    기여도: string;
-    수능: string;
-    실기: string;
-    수능환산점수: number;
-    'Z-지수': number;
-    지원가능성: string;
-    합격가능성보기: ReactNode;
+    group: string;
+    universityName: string;
+    departmentName: string;
+    practicalType: string[];
+    contribution: string;
+    test: string;
+    practical: string;
+    conversionScore: number;
+    Zvalue: number;
+    applicationPossibility: string;
+    passPossibility: ReactNode;
   }[];
 }
-
-const TooltipRenderer = props => {
-  const { displayName } = props;
-  let label;
-  const contribution = (
-    <div>
-      수능기여도 : 반영 비율과 상관없이 합격을 위한 수능이 차지하는 실질변별력이에요 <br />
-      실기 기여도 : 반영 비율과 상관없이 합격을 위한 실기가 차지하는 실질변별력이에요
-    </div>
-  );
-  const conversionScore = '실기 만점을 기준으로 환산된 총 환산 점수에요!';
-  const zValue = (
-    <div>
-      대학별 반영 과목과 반영 비율을 기준으로 등급 을 환산한 수치로, 숫자가 낮을 수록 더 유리하다고 생각하면 돼요. <br />
-      예를들어, 국어2등급, 영어 3등급, 탐구 1과목 3등급인 학생의 국어 40% 영어 20% 탐구 상위 1과목 40%를 반영하는 학과에서의 Z-지수는 2x0.4 + 3x0.2 + 3x0.4 = 2.6이에요
-    </div>
-  );
-  if (displayName === '기여도') label = contribution;
-  if (displayName === '수능환산점수') label = conversionScore;
-  if (displayName === 'Z-지수') label = zValue;
-
-  return (
-    // <>
-    //   <div data-tooltip-id={displayName} style={{ display: 'flex', alignItems: 'center', gap: '0 2px' }}>
-    //     {displayName}
-    //     <HelpOutline />
-    //   </div>
-    //   <MyTooltip id={displayName} width="371px">
-    //     {displayName === '기여도' && contribution}
-    //     {displayName === '수능환산점수' && conversionScore}
-    //     {displayName === 'Z-지수' && zValue}
-    //   </MyTooltip>
-    // </>
-    <>
-      {displayName}
-      <Tooltip hasArrow label={label} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
-        <div>
-          <HelpOutline />
-        </div>
-      </Tooltip>
-    </>
-  );
-};
 
 const UniversityTable = (props: Props) => {
   const [rowData] = useState(props.data);
@@ -118,18 +74,9 @@ const UniversityTable = (props: Props) => {
     );
   };
 
-  const SupportabilityRenderer = props => {
-    const { value } = props;
-    return (
-      <SupportabilityWrapper>
-        <Supportability type={value}>{value}</Supportability>
-      </SupportabilityWrapper>
-    );
-  };
-
   const onRowClick = props => {
     setToggleModal(true);
-    setSelectedData(props.data.대학명);
+    setSelectedData(props.data.universityName);
   };
   const onCellClicked = props => {
     if (props.colDef.field === '합격가능성보기') {
@@ -142,224 +89,198 @@ const UniversityTable = (props: Props) => {
   };
 
   const [columnDefs] = useState([
-    { field: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: '실기종목', cellRendererFramework: ImageRenderer, minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'practicalType', headerName: '실기종목', cellRendererFramework: ImageRenderer, minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     {
-      field: '기여도',
+      field: 'contribution',
+      headerName: '기여도',
       children: [
-        { field: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-        { field: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+        { field: 'test', headerName: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+        { field: 'practical', headerName: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
       ],
-      headerGroupComponent: TooltipRenderer,
+      headerGroupComponent: TableHeaderTooltip,
     },
-    { field: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TooltipRenderer, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TooltipRenderer, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: '지원가능성', sortable: true, cellRendererFramework: SupportabilityRenderer, minWidth: 104, flex: 2.1 },
-    { field: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
+    { field: 'conversionScore', headerName: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'Zvalue', headerName: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'applicationPossibility', headerName: '지원가능성', sortable: true, cellRendererFramework: ApplicationPossibilityTag, minWidth: 104, flex: 2.1 },
+    { field: 'passPossibility', headerName: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
   ]);
 
   return (
     <>
-      <div
-        className={customThemes.table}
-        style={{
-          height: 548,
-          width: '100%',
-        }}
-      >
+      <AgGridWrapper className={customThemes.table}>
         <AgGridReact rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClick} onCellClicked={onCellClicked} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
-      </div>
+      </AgGridWrapper>
       {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedData} />}
     </>
   );
 };
 
-export default UniversityTable;
 UniversityTable.defaultProps = {
   data: [
     {
       id: 1,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠사이언스전공',
-      실기종목: ['농구', '달리기10m', '셔틀런', '싯업', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: <Search />,
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠사이언스전공',
+      practicalType: ['농구', '달리기10m', '셔틀런', '싯업', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: <Search />,
     },
     {
       id: 2,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠사이언스전공',
-      실기종목: ['농구', '달리기10m', '셔틀런', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '최하',
-      실기: '하',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '적정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠사이언스전공',
+      practicalType: ['농구', '달리기10m', '셔틀런', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '최하',
+      practical: '하',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '적정',
+      passPossibility: '검색',
     },
     {
       id: 3,
-      군: '가',
-      대학명: '서울대학교',
-      학과명: '스포츠사이언스전공',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '최상',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '소신',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '서울대학교',
+      departmentName: '스포츠사이언스전공',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '최상',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '소신',
+      passPossibility: '검색',
     },
     {
       id: 4,
-      군: '가',
-      대학명: '고려대학교',
-      학과명: '스포츠사이언스전공',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '지원불가',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '고려대학교',
+      departmentName: '스포츠사이언스전공',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '지원불가',
+      passPossibility: '검색',
     },
     {
       id: 5,
-      군: '가',
-      대학명: '연세대학교',
-      학과명: '스포츠사이언스전공',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '연세대학교',
+      departmentName: '스포츠사이언스전공',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 1,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 6,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 7,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 8,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 9,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
     {
       id: 10,
-      군: '가',
-      대학명: '한양대학교',
-      학과명: '스포츠응용산업학과',
-      실기종목: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
-      기여도: '',
-      수능: '중',
-      실기: '상',
-      수능환산점수: 145.87,
-      'Z-지수': 2.12,
-      지원가능성: '안정',
-      합격가능성보기: '검색',
+      group: '가',
+      universityName: '한양대학교',
+      departmentName: '스포츠응용산업학과',
+      practicalType: ['농구', '달리기10m', '농구', '달리기10m', '농구', '달리기10m'],
+      contribution: '',
+      test: '중',
+      practical: '상',
+      conversionScore: 145.87,
+      Zvalue: 2.12,
+      applicationPossibility: '안정',
+      passPossibility: '검색',
     },
   ],
 };
+export default UniversityTable;
 
-const SupportabilityWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Supportability = styled.div<{ type: string }>`
-  width: 64px;
-  height: 24px;
-  border-radius: 8px;
-  padding: 4px 2px;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  font-weight: 600;
-
-  color: ${props => props.type === '안정' && '#4F8AFC'};
-  color: ${props => props.type === '적정' && '#00A070'};
-  color: ${props => props.type === '소신' && '#F66514'};
-  color: ${props => props.type === '지원불가' && '#FF4444'};
-
-  background-color: ${props => props.type === '안정' && 'rgba(79, 138, 252, 0.2)'};
-  background-color: ${props => props.type === '적정' && 'rgba(30, 203, 151, 0.2)'};
-  background-color: ${props => props.type === '소신' && 'rgba(255, 131, 62, 0.2);'};
-  background-color: ${props => props.type === '지원불가' && 'rgba(254, 117, 117, 0.2);'};
+const AgGridWrapper = styled.div`
+  height: 548px;
+  width: 100%;
 `;
 
 const ContributionContainer = styled.div`

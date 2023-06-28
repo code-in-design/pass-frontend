@@ -19,6 +19,12 @@ export interface TranscriptTableProps {
 const TranscriptTable = (props: TranscriptTableProps) => {
   return (
     <Container>
+      {!props?.hasButtons && (
+        <>
+          <TranscriptTableBackground1 />
+          <TranscriptTableBackground2 />
+        </>
+      )}
       <GradeCard>
         <Title>2024학년도 9월 모의고사 성적 통지표</Title>
         <Horizon />
@@ -34,7 +40,7 @@ const TranscriptTable = (props: TranscriptTableProps) => {
       </GradeCard>
       {props?.hasButtons && (
         <Buttons>
-          <Button onClick={props?.onModify}>성적 수정하기</Button>
+          <Button onClick={props.onModify}>성적 수정하기</Button>
           <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
             확인
             <MyTooltip id="tooltip-myScore" width="371px">
@@ -67,14 +73,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 `;
 
 const GradeCard = styled.div`
   width: 100%;
   background-color: ${props => props.theme.colors.white};
+  box-shadow: 3px 3px 24px -4px rgba(36, 62, 113, 0.08);
   border-radius: 8px;
   margin-top: 24px;
   padding: 32px;
+  z-index: 9;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 const Title = styled.div`
@@ -167,4 +177,30 @@ const TextEmphasis = styled.span`
 const TooltipContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const TranscriptTableBackground1 = styled.div`
+  width: 100%;
+  height: 447px;
+  background-color: white;
+  border-radius: 8px;
+  position: absolute;
+  transform: rotate(-3.73deg);
+  top: 24px;
+  left: 0;
+  box-shadow: 3px 3px 24px -4px rgba(36, 62, 113, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+`;
+
+const TranscriptTableBackground2 = styled.div`
+  width: 100%;
+  height: 413px;
+  background-color: white;
+  border-radius: 8px;
+  position: absolute;
+  transform: rotate(3.92deg);
+  bottom: -3px;
+  left: 0;
+  box-shadow: 3px 3px 24px -4px rgba(36, 62, 113, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 `;

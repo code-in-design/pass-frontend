@@ -14,6 +14,7 @@ declare module '@emotion/react' {
       green: string;
       deepGreen: string;
       purple: string;
+      red: string;
     };
   }
 }
@@ -33,6 +34,7 @@ const theme = {
     green: '#60C8DE',
     deepGreen: '#45BFD9',
     purple: '#AA83FF',
+    red: '#FF4444',
   },
 };
 
