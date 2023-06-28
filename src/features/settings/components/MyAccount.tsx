@@ -9,6 +9,16 @@ interface Props {
 }
 
 const MyAccount = (props: Props) => {
+  let gender = '';
+  if (props.gender === 'male') gender = '남성';
+  if (props.gender === 'female') gender = '여성';
+
+  let grade = '';
+  if (props.grade === 'high1') grade = '고1';
+  if (props.grade === 'high2') grade = '고2';
+  if (props.grade === 'high3') grade = '고3';
+  if (props.grade === 'high4') grade = '재수이상';
+
   return (
     <Container>
       <Title>나의 계정</Title>
@@ -23,11 +33,11 @@ const MyAccount = (props: Props) => {
       <Wrapper>
         <InputWrapper>
           <InputTitle>학년</InputTitle>
-          <Input>{props.grade}</Input>
+          <Input>{grade}</Input>
         </InputWrapper>
         <InputWrapper>
           <InputTitle>성별</InputTitle>
-          <Input>{props.gender}</Input>
+          <Input>{gender}</Input>
         </InputWrapper>
       </Wrapper>
     </Container>

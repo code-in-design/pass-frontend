@@ -6,12 +6,13 @@ import MembershipBadge from '../MembershipBadge';
 
 function HeaderContainer() {
   const { data, isSuccess, isLoading } = useFetchMeQuery();
-  const [user, setUser] = useState<UserModel>({ userName: '', userEmail: '', membership: '' });
+  const [user, setUser] = useState({ name: '', email: '', membership: '' });
 
   useEffect(() => {
     if (isSuccess) {
       const result = JSON.parse(data);
-      const getUser = new UserModel(result.name, result.membership, result.email);
+      const userModel = new UserModel();
+      const getUser = userModel.formatHeader(result);
       setUser(getUser);
     }
   }, [data]);
@@ -19,7 +20,7 @@ function HeaderContainer() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Header name={user.userName} email={user.userEmail}>
+    <Header name={user.name} email={user.email}>
       <MembershipBadge membership={user.membership} />
     </Header>
   );
