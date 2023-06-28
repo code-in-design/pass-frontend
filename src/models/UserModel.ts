@@ -41,18 +41,18 @@ export class UserModel {
   userAvatar?: string;
 
   constructor(data?: Partial<UserModel>) {
-    return plainToClass(UserModel, data);
+    return plainToClass(UserModel, data, { excludeExtraneousValues: true });
   }
 
-  translateGender = data => {
-    if (data === 'male') return (this.gender = '남성');
-    if (data === 'female') return (this.gender = '여성');
+  translateGender = () => {
+    if (this.gender === 'male') return '남성';
+    if (this.gender === 'female') return '여성';
   };
 
-  translateGrade = data => {
-    if (data === 'high1') return (this.grade = '고1');
-    if (data === 'high2') return (this.grade = '고2');
-    if (data === 'high3') return (this.grade = '고3');
-    if (data === 'high4') return (this.grade = '재수이상');
+  translateGrade = () => {
+    if (this.grade === 'high1') return '고1';
+    if (this.grade === 'high2') return '고2';
+    if (this.grade === 'high3') return '고3';
+    if (this.grade === 'high4') return '재수이상';
   };
 }

@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Switch from 'react-switch';
 
-const Notification = () => {
-  const [checked, setChecked] = useState(false);
+interface Props {
+  onChange: (checked) => void;
+  checked: boolean;
+}
 
-  const handleChange = checked => {
-    setChecked(checked);
-  };
-
+const Notification = (props: Props) => {
   return (
     <div>
       <Title>알림</Title>
@@ -17,7 +16,7 @@ const Notification = () => {
           <Text>마케팅 정보 소식</Text>
           <Description>서비스 공지 및 업데이트 알림을 이메일 및 SMS로 받고 싶어요!</Description>
         </div>
-        <Switch onChange={handleChange} checked={checked} onColor="#6B77F8" onHandleColor="#fff" width={56} height={32} handleDiameter={24} uncheckedIcon={false} checkedIcon={false} />
+        <Switch onChange={props.onChange} checked={props.checked} onColor="#6B77F8" onHandleColor="#fff" width={56} height={32} handleDiameter={24} uncheckedIcon={false} checkedIcon={false} />
       </Wrapper>
     </div>
   );

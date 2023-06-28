@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Layout from '../../../components/Layout/Layout';
 import SettingsNavbar from './SettingsNavbar';
 
-type LayoutProps = HTMLProps<HTMLElement>;
+interface LayoutProps extends HTMLProps<HTMLElement> {}
 
 const SettingsLayout = (props: LayoutProps) => {
   return (

@@ -6,8 +6,8 @@ import { UserModel } from '@/models/UserModel';
 const MyAccountContainer = () => {
   const { data } = useFetchMeQuery();
   const user = new UserModel();
-  const gender = user.translateGender(data?.gender);
-  const grade = user.translateGrade(data?.grade);
+  const gender = user.translateGender();
+  const grade = user.translateGrade();
 
   return <MyAccount name={data?.name} email={data?.email} gender={gender} grade={grade} />;
 };
