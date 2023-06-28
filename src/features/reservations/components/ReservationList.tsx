@@ -1,6 +1,6 @@
 import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import AdminLayout from '@/components/AdminLayout/AdminLayout';
+import AdminLayout from '@/features/admin/AdminLayout/AdminLayout';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-balham.css';
 import styled from '@emotion/styled';
