@@ -28,14 +28,14 @@ export default InterestedUniversities;
 InterestedUniversities.defaultProps = {
   data: [
     {
-      logo: 'hanyang',
+      logo: '한양대학교',
       universityName: '한양대학교',
       departmentName: '스포츠사이언스 전공',
       conversionScore: 246.34,
       possibilityOfSupport: '소신',
     },
     {
-      logo: 'hanyang',
+      logo: '한양대학교',
       universityName: '대구가톨릭대',
       departmentName: '스포츠매니지먼트 전공',
       conversionScore: 246.34,
