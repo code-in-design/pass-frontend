@@ -2,13 +2,13 @@ import React, { ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import SettingsNavbarItem from './SettingsNavbarItem';
-import Person from '../../../public/images/icons/person.svg';
-import NotificationActive from '../../../public/images/icons/notificationsActive.svg';
-import Membership from '../../../public/images/icons/membership.svg';
-import Withdrawal from '../../../public/images/icons/withdrawal.svg';
+import Person from '../../../../public/images/icons/person.svg';
+import NotificationActive from '../../../../public/images/icons/notificationsActive.svg';
+import Membership from '../../../../public/images/icons/membership.svg';
+import Withdrawal from '../../../../public/images/icons/withdrawal.svg';
 
 interface Props {
-  menuList: { icon: ReactNode; title: string; route: string }[];
+  menuList: { icon: ReactNode; title: string; path: string }[];
 }
 
 const SettingsNavbar = (props: Props) => {
@@ -19,7 +19,7 @@ const SettingsNavbar = (props: Props) => {
       <Title>계정</Title>
       <MenuList>
         {props?.menuList?.map((item, index) => (
-          <SettingsNavbarItem key={index} title={item.title} onClick={() => router.push(item.route)}>
+          <SettingsNavbarItem key={index} title={item.title} onClick={() => router.push(item.path)}>
             {item.icon}
           </SettingsNavbarItem>
         ))}
@@ -30,10 +30,10 @@ const SettingsNavbar = (props: Props) => {
 
 SettingsNavbar.defaultProps = {
   menuList: [
-    { icon: <Person />, title: '나의 계정', route: '/settings' },
-    { icon: <NotificationActive />, title: '알림', route: '/' },
-    { icon: <Membership />, title: '멤버십 설정', route: '/' },
-    { icon: <Withdrawal />, title: '회원 탈퇴', route: '/' },
+    { icon: <Person />, title: '나의 계정', path: '/settings' },
+    { icon: <NotificationActive />, title: '알림', path: '/' },
+    { icon: <Membership />, title: '멤버십 설정', path: '/' },
+    { icon: <Withdrawal />, title: '회원 탈퇴', path: '/' },
   ],
 };
 

@@ -9,36 +9,26 @@ interface Props {
 }
 
 const MyAccount = (props: Props) => {
-  let gender = '';
-  if (props.gender === 'male') gender = '남성';
-  if (props.gender === 'female') gender = '여성';
-
-  let grade = '';
-  if (props.grade === 'high1') grade = '고1';
-  if (props.grade === 'high2') grade = '고2';
-  if (props.grade === 'high3') grade = '고3';
-  if (props.grade === 'high4') grade = '재수이상';
-
   return (
     <Container>
       <Title>나의 계정</Title>
-      <InputWrapper>
-        <InputTitle>이름</InputTitle>
-        <Input>{props.name}</Input>
-      </InputWrapper>
-      <InputWrapper>
-        <InputTitle>이메일</InputTitle>
-        <Input>{props.email}</Input>
-      </InputWrapper>
+      <BoxWrapper>
+        <BoxTitle>이름</BoxTitle>
+        <Box>{props.name}</Box>
+      </BoxWrapper>
+      <BoxWrapper>
+        <BoxTitle>이메일</BoxTitle>
+        <Box>{props.email}</Box>
+      </BoxWrapper>
       <Wrapper>
-        <InputWrapper>
-          <InputTitle>학년</InputTitle>
-          <Input>{grade}</Input>
-        </InputWrapper>
-        <InputWrapper>
-          <InputTitle>성별</InputTitle>
-          <Input>{gender}</Input>
-        </InputWrapper>
+        <BoxWrapper>
+          <BoxTitle>학년</BoxTitle>
+          <Box>{props.grade}</Box>
+        </BoxWrapper>
+        <BoxWrapper>
+          <BoxTitle>성별</BoxTitle>
+          <Box>{props.gender}</Box>
+        </BoxWrapper>
       </Wrapper>
     </Container>
   );
@@ -70,13 +60,13 @@ const Wrapper = styled.div`
   gap: 0 16px;
 `;
 
-const InputWrapper = styled.div`
+const BoxWrapper = styled.div`
   min-width: 182px;
   max-width: 50%;
   margin-bottom: 16px;
 `;
 
-const InputTitle = styled.div`
+const BoxTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
@@ -84,7 +74,7 @@ const InputTitle = styled.div`
   margin-bottom: 12px;
 `;
 
-const Input = styled.div`
+const Box = styled.div`
   width: 100%;
   height: 56px;
   border-radius: 16px;

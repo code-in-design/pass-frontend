@@ -22,6 +22,7 @@
     "ag-grid-community": "^29.3.5",
     "ag-grid-react": "^29.3.5",
     "axios": "^1.4.0",
+    "class-transformer": "^0.5.1",
     "code-in-design-system": "0.1.48",
     "dayjs": "^1.11.7",
     "eslint": "^8.41.0",
@@ -46,6 +47,7 @@
     "react-spinners": "^0.13.8",
     "react-switch": "^7.0.0",
     "react-tooltip": "^5.13.1",
+    "reflect-metadata": "^0.1.13",
     "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.11",
     "swiper": "^9.3.0",
@@ -53,6 +55,7 @@
     "use-query-params": "^2.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.22.5",
     "@emotion/babel-plugin": "^11.11.0",
     "@svgr/webpack": "^8.0.1",
     "@types/react-redux": "^7.1.25",

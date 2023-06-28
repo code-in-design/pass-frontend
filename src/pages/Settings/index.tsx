@@ -1,11 +1,13 @@
 import React from 'react';
 import SettingsLayout from '@/features/settings/components/SettingsLayout';
-import SettingsContainer from '@/features/settings/containers/SettingsContainer';
+import MyAccountContainer from '@/features/settings/containers/MyAccountContainer';
+import NotificationContainer from '@/features/settings/containers/NotificationContainer';
 
 const SettingsPage = () => {
   return (
     <SettingsLayout>
-      <SettingsContainer />
+      <MyAccountContainer />
+      {/* <NotificationContainer /> */}
     </SettingsLayout>
   );
 };

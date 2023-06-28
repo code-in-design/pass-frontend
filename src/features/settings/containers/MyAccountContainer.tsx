@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useFetchMeQuery } from '@/features/auth/apis/authApi';
-import { UserModel } from '@/models/UserModel';
 import MyAccount from '../components/MyAccount';
+import { UserModel } from '@/models/UserModel';
 
 const MyAccountContainer = () => {
-  const { data, isSuccess, isLoading } = useFetchMeQuery();
-  const [account, setAccount] = useState({ name: '', email: '', grade: '', gender: '' });
+  const { data } = useFetchMeQuery();
+  const user = new UserModel();
+  const gender = user.translateGender(data?.gender);
+  const grade = user.translateGrade(data?.grade);
 
-  useEffect(() => {
-    if (isSuccess) {
-      const result = JSON.parse(data);
-      const userModel = new UserModel();
-      const getAccont = userModel.formatMyAccount(result);
-      setAccount(getAccont);
-    }
-  }, [data]);
-
-  return <MyAccount name={account.name} email={account.email} gender={account.gender} grade={account.grade} />;
+  return <MyAccount name={data?.name} email={data?.email} gender={gender} grade={grade} />;
 };
 
 export default MyAccountContainer;
