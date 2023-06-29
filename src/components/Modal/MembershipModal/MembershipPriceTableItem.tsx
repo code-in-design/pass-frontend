@@ -1,23 +1,18 @@
 import styled from '@emotion/styled';
+import { ReactNode } from 'react';
 
 interface Props {
   title: string;
-  items: Array<string>;
+  items: string | ReactNode[];
 }
 
 const MembershipPriceTableItem = (props: Props) => {
   return (
     <TBodyTr>
       <TBodyTd>{props.title}</TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[0]}.svg`} />
-      </TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[1]}.svg`} />
-      </TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[2]}.svg`} />
-      </TBodyTd>
+      <TBodyTd>{props.items[0]}</TBodyTd>
+      <TBodyTd>{props.items[1]}</TBodyTd>
+      <TBodyTd>{props.items[2]}</TBodyTd>
     </TBodyTr>
   );
 };
@@ -29,7 +24,8 @@ const TBodyTr = styled.tr`
 `;
 
 const TBodyTd = styled.td`
-  padding: 4px 0;
+  vertical-align: middle;
+  height: 40px;
   font-size: 14px;
   line-height: 32px;
   font-weight: 600;
@@ -42,11 +38,7 @@ const TBodyTd = styled.td`
   &:last-of-type {
     padding-right: 53.5px;
   }
-`;
-
-const TableIcon = styled.img`
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 0 auto;
+  & svg {
+    margin: 0 auto;
+  }
 `;

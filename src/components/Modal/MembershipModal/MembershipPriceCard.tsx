@@ -8,7 +8,7 @@ const MembershipPriceCard = (props: CardProps) => {
       <MembershipName>{props.name}</MembershipName>
       <MembershipPrice>
         <PriceIcon>&#x20a9;</PriceIcon>
-        {props.price}
+        {Number(props.price).toLocaleString()}
       </MembershipPrice>
       <MembershipText>
         <ColorText color={props.name}>{props.colorText}</ColorText>
@@ -17,8 +17,8 @@ const MembershipPriceCard = (props: CardProps) => {
       <MembershipButton color={props.name}>{props.button}</MembershipButton>
       <CardDescription>
         <DescriptionTitle>{props.name}의 기본 기능 +</DescriptionTitle>
-        {props.descriptions.map(item => (
-          <DescriptionItem key={`membership-price-card-${props.name}`}>
+        {props.descriptions.map((item, index) => (
+          <DescriptionItem key={index}>
             <DescriptionItemIcon color={props.name}>&#x2713;</DescriptionItemIcon>
             <DescriptionText>{item}</DescriptionText>
           </DescriptionItem>
@@ -33,7 +33,8 @@ export default MembershipPriceCard;
 const CardWrapper = styled.div`
   width: calc(100% / 3);
   min-width: 269.33px;
-  height: 488px;
+  min-height: 488px;
+  height: fit-content;
   padding: 24px;
   border: 1px solid;
   border-color: ${props => (props.color === 'Basic' ? props => props.theme.colors.gray4 : props.color === 'Light' ? props.theme.colors.green : props.theme.colors.blue)};
@@ -101,7 +102,7 @@ const MembershipButton = styled.button`
 `;
 
 const CardDescription = styled.div`
-  height: 172px;
+  height: 274px;
   border-radius: 16px;
   padding: 16px 24px;
   background-color: #f8f8fc;

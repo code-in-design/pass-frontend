@@ -4,12 +4,14 @@ import styled from '@emotion/styled';
 interface Props {
   title: string;
   children: ReactNode;
-  onClick: () => void;
+  handleClickItem: (item) => void;
+  index: number;
+  isSelected: boolean;
 }
 
 const SettingsNavbarItem = (props: Props) => {
   return (
-    <MenuListItem onClick={props.onClick}>
+    <MenuListItem isSelected={props.isSelected} onClick={() => props.handleClickItem(props.index)}>
       <ImageWrapper>{props.children}</ImageWrapper>
       <span>{props.title}</span>
     </MenuListItem>
@@ -18,24 +20,25 @@ const SettingsNavbarItem = (props: Props) => {
 
 export default SettingsNavbarItem;
 
-const MenuListItem = styled.li`
+const MenuListItem = styled.li<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   height: 56px;
   margin-bottom: 16px;
   border-radius: 16px;
   padding: 16px;
-  color: ${props => props.theme.colors.gray1};
+  color: ${props => (props.isSelected ? props.theme.colors.grayBlack : props.theme.colors.gray1)};
   font-size: 16px;
-  font-weight: 500;
+  font-weight: ${props => (props.isSelected ? 700 : 500)};
   line-height: 24px;
+  background-color: ${props => (props.isSelected ? props.theme.colors.gray6 : props.theme.colors.white)};
   &:last-child {
     margin-bottom: 0;
   }
   &:hover {
-    background-color: ${props => props.theme.colors.gray6};
+    /* background-color: ${props => props.theme.colors.gray6};
     color: ${props => props.theme.colors.grayBlack};
-    font-weight: 700;
+    font-weight: 700; */
     cursor: pointer;
   }
 `;
