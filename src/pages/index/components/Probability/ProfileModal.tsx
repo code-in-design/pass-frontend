@@ -6,7 +6,7 @@ import ProfileModalItem from './ProfileModalItem';
 import NaverIcon from '../../../../../public/images/icons/naverIcon.svg';
 import YoutubeIcon from '../../../../../public/images/icons/youtubeIcon.svg';
 import MailIcon from '../../../../../public/images/icons/mailIcon.svg';
-import FaceBookIcon from '../../../../../public/images/icons/faceBookIcon.svg';
+import FaceBookIcon from '../../../../../public/images/icons/facebookIcon.svg';
 import BookIcon from '../../../../../public/images/icons/bookIcon.svg';
 import LinkIcon from '../../../../../public/images/icons/linkIcon.svg';
 
