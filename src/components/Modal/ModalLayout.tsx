@@ -60,4 +60,5 @@ const Close = styled.img`
   position: absolute;
   top: 32px;
   right: 32px;
+  z-index: 99;
 `;

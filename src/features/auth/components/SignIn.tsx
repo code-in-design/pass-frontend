@@ -52,7 +52,7 @@ const SignIn = (props: Props) => {
             letterSpacing="-0.02px"
             marginTop="12px"
           >
-            <Image src="/images/icons/naverIcon.svg" alt="naverIcon" marginRight="10.83px" />
+            <Image src="/images/icons/naver.svg" alt="naverIcon" marginRight="10.83px" />
             네이버로 시작하기
           </Button>
         </VStack>
