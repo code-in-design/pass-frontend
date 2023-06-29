@@ -17,7 +17,7 @@ const ApplyPossibilityModal = (props: Props) => {
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
-  }, [isOpen]);
+  }, []);
 
   return (
     <>

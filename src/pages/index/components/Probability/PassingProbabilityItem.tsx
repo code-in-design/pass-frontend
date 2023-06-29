@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { numberFormattingUtil } from '@/utils/NumberFormattingUtil';
 
 interface Props {
   percent: number[];
@@ -9,11 +10,7 @@ interface Props {
 const PassingProbabilityItem = (props: Props) => {
   return (
     <Wrapper>
-      <Percent>
-        {props.percent[0]}
-        {props.percent.length !== 1 && '~'}
-        {props.percent[1]}%
-      </Percent>
+      <Percent>{numberFormattingUtil.formattingPercentage(props.percent[0], props.percent[1])}</Percent>
       <div dangerouslySetInnerHTML={{ __html: `${props.text}` }}></div>
     </Wrapper>
   );
