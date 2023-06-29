@@ -2,8 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PaymentTableItem from './PaymentTableItem';
 
+export type statusType = '결제 완료' | '결제 실패' | '결제 대기중';
+
 interface Props {
-  data: { date: string; membership: string; info: string; method: string; amount: string; status: '결제 완료' | '결제 실패' | '결제 대기중' | undefined }[];
+  data: { date: string; membership: string; info: string; method: string; amount: string; status?: statusType }[];
 }
 
 const PaymentTable = (props: Props) => {

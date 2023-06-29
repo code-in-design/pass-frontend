@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { statusType } from './PaymentTable';
 
 interface Props {
   date: string;
@@ -7,7 +8,7 @@ interface Props {
   info: string;
   method: string;
   amount: string;
-  status: '결제 완료' | '결제 실패' | '결제 대기중' | undefined;
+  status?: statusType;
 }
 
 const PaymentTableItem = (props: Props) => {
@@ -29,7 +30,7 @@ const TableBodyTr = styled.tr`
   height: 40px;
 `;
 
-const TableBodyTd = styled.td<{ status?: '결제 완료' | '결제 실패' | '결제 대기중' }>`
+const TableBodyTd = styled.td<{ status?: statusType }>`
   text-align: center;
   vertical-align: middle;
   font-size: 14px;

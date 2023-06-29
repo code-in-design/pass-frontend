@@ -17,7 +17,7 @@ const SettingsNavbar = (props: Props) => {
   const handleClickItem = item => {
     router.push({
       pathname: '/settings',
-      query: { settingMenu: item },
+      query: { menu: item },
     });
   };
 
@@ -26,7 +26,7 @@ const SettingsNavbar = (props: Props) => {
       <Title>계정</Title>
       <MenuList>
         {props?.menuList?.map((item, index) => (
-          <SettingsNavbarItem key={index} title={item.title} handleClickItem={handleClickItem} index={index} isSelected={String(index) === router.query.settingMenu}>
+          <SettingsNavbarItem key={item.title} title={item.title} handleClickItem={handleClickItem} index={index} isSelected={String(index) === router.query.settingMenu}>
             {item.icon}
           </SettingsNavbarItem>
         ))}

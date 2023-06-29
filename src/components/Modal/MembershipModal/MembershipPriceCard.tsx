@@ -2,21 +2,13 @@ import styled from '@emotion/styled';
 import { CardProps } from './MembershipModal';
 
 const MembershipPriceCard = (props: CardProps) => {
-  const addComma = target => {
-    if (target === 0) {
-      return 0;
-    } else {
-      return String(target).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-  };
-
   return (
     <CardWrapper color={props.name}>
       <CardIcon src={props.img} alt={props.img} />
       <MembershipName>{props.name}</MembershipName>
       <MembershipPrice>
         <PriceIcon>&#x20a9;</PriceIcon>
-        {addComma(props.price)}
+        {Number(props.price).toLocaleString()}
       </MembershipPrice>
       <MembershipText>
         <ColorText color={props.name}>{props.colorText}</ColorText>

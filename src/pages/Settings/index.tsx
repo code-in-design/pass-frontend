@@ -8,14 +8,14 @@ import { useRouter } from 'next/router';
 
 const SettingsPage = () => {
   const router = useRouter();
-  const { settingMenu } = router.query;
+  const { menu } = router.query;
 
   return (
     <SettingsLayout>
-      {settingMenu === '0' && <MyAccountContainer />}
-      {settingMenu === '1' && <NotificationContainer />}
-      {settingMenu === '2' && <MembershipSettingContainer />}
-      {settingMenu === '3' && <WithdrawalContainer />}
+      {menu === '0' && <MyAccountContainer />}
+      {menu === '1' && <NotificationContainer />}
+      {menu === '2' && <MembershipSettingContainer />}
+      {menu === '3' && <WithdrawalContainer />}
     </SettingsLayout>
   );
 };
