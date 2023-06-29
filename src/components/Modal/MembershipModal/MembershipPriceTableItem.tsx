@@ -9,15 +9,9 @@ const MembershipPriceTableItem = (props: Props) => {
   return (
     <TBodyTr>
       <TBodyTd>{props.title}</TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[0]}.svg`} />
-      </TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[1]}.svg`} />
-      </TBodyTd>
-      <TBodyTd>
-        <TableIcon src={`/images/icons/${props.items[2]}.svg`} />
-      </TBodyTd>
+      <TBodyTd>{props.items[0] !== 'circle' && props.items[0] !== 'X' ? <span>{props.items[0]}</span> : <TableIcon src={`/images/icons/${props.items[0]}.svg`} />}</TBodyTd>
+      <TBodyTd>{props.items[1] !== 'circle' && props.items[1] !== 'X' ? <span>{props.items[1]}</span> : <TableIcon src={`/images/icons/${props.items[1]}.svg`} />}</TBodyTd>
+      <TBodyTd>{props.items[2] !== 'circle' && props.items[2] !== 'X' ? <span>{props.items[2]}</span> : <TableIcon src={`/images/icons/${props.items[2]}.svg`} />}</TBodyTd>
     </TBodyTr>
   );
 };
@@ -29,7 +23,8 @@ const TBodyTr = styled.tr`
 `;
 
 const TBodyTd = styled.td`
-  padding: 4px 0;
+  vertical-align: middle;
+  height: 40px;
   font-size: 14px;
   line-height: 32px;
   font-weight: 600;
@@ -50,3 +45,5 @@ const TableIcon = styled.img`
   height: 20px;
   margin: 0 auto;
 `;
+
+const TableText = styled.span``;
