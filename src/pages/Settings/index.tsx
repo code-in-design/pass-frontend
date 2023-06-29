@@ -4,14 +4,18 @@ import MyAccountContainer from '@/features/settings/containers/MyAccountContaine
 import NotificationContainer from '@/features/settings/containers/NotificationContainer';
 import MembershipSettingContainer from '@/features/settings/containers/MembershipSettingContainer';
 import WithdrawalContainer from '@/features/settings/containers/WithdrawalContainer';
+import { useRouter } from 'next/router';
 
 const SettingsPage = () => {
+  const router = useRouter();
+  const { settingMenu } = router.query;
+
   return (
     <SettingsLayout>
-      {/* <MyAccountContainer /> */}
-      {/* <NotificationContainer /> */}
-      <MembershipSettingContainer />
-      {/* <WithdrawalContainer /> */}
+      {settingMenu === '0' && <MyAccountContainer />}
+      {settingMenu === '1' && <NotificationContainer />}
+      {settingMenu === '2' && <MembershipSettingContainer />}
+      {settingMenu === '3' && <WithdrawalContainer />}
     </SettingsLayout>
   );
 };
