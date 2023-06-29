@@ -4,7 +4,7 @@ import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListIte
 import { useState, useCallback } from 'react';
 import PanelSettings from '../../../../../public/images/icons/panelSettings.svg';
 import Markdown from '@/components/Markdown/Markdown';
-import { personalInformationProtection } from '@/features/auth/components/SignUp/SignUp1/terms';
+import { personalInformationProtection } from './terms';
 
 const PrivacyModal = props => {
   const [isOpen, setIsOpen] = useState(false);
