@@ -21,9 +21,9 @@ const MembershipPriceTable = (props: Props) => {
   const columns = useMemo(
     () => [
       { Header: '', accessor: 'title' },
-      { Header: 'Basic', accessor: 'Basic', headerStyle: { color: '#9395A6' } },
-      { Header: 'Light', accessor: 'Light', headerStyle: { color: '#45BFD9' } },
-      { Header: 'Premium', accessor: 'Premium', headerStyle: { color: '#6B77F8' } },
+      { Header: 'Basic', accessor: 'basic', headerStyle: { color: '#9395A6' } },
+      { Header: 'Light', accessor: 'light', headerStyle: { color: '#45BFD9' } },
+      { Header: 'Premium', accessor: 'premium', headerStyle: { color: '#6B77F8' } },
     ],
     [],
   );
