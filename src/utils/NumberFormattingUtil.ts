@@ -1,8 +1,11 @@
 class NumberFormattingUtil {
-  formattingPercentage = (min: number, max?: number) => {
-    // max값이 주어졌을때 (return 10~100%)
+  formatPercentRange = (min: number, max?: number) => {
+    // min값과 max값을 받아서 범위를 퍼센트 문자열로 반환합니다.
+    // parameters : min - 최소값, max - 최대값
+    // return : max값이 주어졌을때 - min~max% (0~100%)
+    // return : max값이 안주어졌을때 - min% (100%)
+
     if (max) return min + '~' + max + '%';
-    // max값이 안주어졌을때 (return 100%)
     if (!max) return min + '%';
   };
 }

@@ -6,7 +6,7 @@ interface Props {
   name: string;
 }
 
-const WelcomeSection = (props: Props) => {
+const Welcome = (props: Props) => {
   return (
     <Container>
       <MainTitle>
@@ -43,8 +43,8 @@ const WelcomeSection = (props: Props) => {
   );
 };
 
-export default WelcomeSection;
-WelcomeSection.defaultProps = {
+export default Welcome;
+Welcome.defaultProps = {
   name: '지훈',
 };
 

@@ -12,7 +12,7 @@ const PassingProbabilityItem = (props: Props) => {
   const maxPercent = props.percent[1];
   return (
     <Wrapper>
-      <Percent>{numberFormattingUtil.formattingPercentage(minPercent, maxPercent)}</Percent>
+      <Percent>{numberFormattingUtil.formatPercentRange(minPercent, maxPercent)}</Percent>
       <div dangerouslySetInnerHTML={{ __html: `${props.text}` }}></div>
     </Wrapper>
   );
