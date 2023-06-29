@@ -6,7 +6,7 @@ import MembershipPriceTable from './MembershipPriceTable';
 
 export interface CardProps {
   name: string;
-  price: string;
+  price: number;
   colorText?: string;
   text: string;
   button: string;
@@ -56,7 +56,7 @@ MembershipModal.defaultProps = {
     },
     {
       name: 'Light',
-      price: '39,000',
+      price: 39000,
       colorText: '1개 체육 대학·학과',
       text: '를 무제한 합격 예측 할 수 있습니다.',
       button: '지금 시작하기',
@@ -65,7 +65,7 @@ MembershipModal.defaultProps = {
     },
     {
       name: 'Premium',
-      price: '89,000',
+      price: 89000,
       colorText: '전체 체육 대학·학과',
       text: '를 무제한 합격 예측 할 수 있습니다.',
       button: '지금 시작하기',
@@ -94,7 +94,8 @@ const SubTitle = styled.div`
 `;
 
 const ScrollWrapper = styled.div`
-  width: 936px;
+  min-width: 936px;
+  width: auto;
   height: 660px;
   overflow-y: scroll;
 `;

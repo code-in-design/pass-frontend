@@ -4,7 +4,7 @@ import Warning from '../../../../public/images/icons/warning.svg';
 import { Checkbox } from '@chakra-ui/react';
 
 const Withdrawal = () => {
-  const [disabled, setDisabled] = useState(false);
+  const [withdrawalButtonDisabled, setWithdrawalButtonDisabled] = useState(false);
 
   return (
     <Container>
@@ -21,7 +21,7 @@ const Withdrawal = () => {
 
       <Checkbox
         onChange={e => {
-          setDisabled(e.target.checked);
+          setWithdrawalButtonDisabled(e.target.checked);
         }}
       >
         <AgreeText>회원 탈퇴 유의사항을 확인하였으며 이에 동의합니다.</AgreeText>
@@ -32,7 +32,7 @@ const Withdrawal = () => {
         <Reason placeholder="탈퇴 사유를 적어주세요" />
       </ReasonBox>
 
-      <WithdrawlButton type="button" disabled={disabled}>
+      <WithdrawlButton type="button" disabled={withdrawalButtonDisabled}>
         회원 탈퇴
       </WithdrawlButton>
     </Container>

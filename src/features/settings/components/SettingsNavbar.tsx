@@ -13,10 +13,8 @@ interface Props {
 
 const SettingsNavbar = (props: Props) => {
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState(0);
 
   const handleClickItem = item => {
-    setSelectedItem(item);
     router.push({
       pathname: '/settings',
       query: { settingMenu: item },
@@ -28,7 +26,7 @@ const SettingsNavbar = (props: Props) => {
       <Title>계정</Title>
       <MenuList>
         {props?.menuList?.map((item, index) => (
-          <SettingsNavbarItem key={index} title={item.title} handleClickItem={handleClickItem} index={index} isSelected={index === selectedItem}>
+          <SettingsNavbarItem key={index} title={item.title} handleClickItem={handleClickItem} index={index} isSelected={String(index) === router.query.settingMenu}>
             {item.icon}
           </SettingsNavbarItem>
         ))}

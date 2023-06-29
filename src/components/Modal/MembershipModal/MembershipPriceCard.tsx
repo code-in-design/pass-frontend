@@ -2,13 +2,21 @@ import styled from '@emotion/styled';
 import { CardProps } from './MembershipModal';
 
 const MembershipPriceCard = (props: CardProps) => {
+  const addComma = target => {
+    if (target === 0) {
+      return 0;
+    } else {
+      return String(target).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  };
+
   return (
     <CardWrapper color={props.name}>
       <CardIcon src={props.img} alt={props.img} />
       <MembershipName>{props.name}</MembershipName>
       <MembershipPrice>
         <PriceIcon>&#x20a9;</PriceIcon>
-        {props.price}
+        {addComma(props.price)}
       </MembershipPrice>
       <MembershipText>
         <ColorText color={props.name}>{props.colorText}</ColorText>
@@ -17,8 +25,8 @@ const MembershipPriceCard = (props: CardProps) => {
       <MembershipButton color={props.name}>{props.button}</MembershipButton>
       <CardDescription>
         <DescriptionTitle>{props.name}의 기본 기능 +</DescriptionTitle>
-        {props.descriptions.map(item => (
-          <DescriptionItem key={`membership-price-card-${props.name}`}>
+        {props.descriptions.map((item, index) => (
+          <DescriptionItem key={index}>
             <DescriptionItemIcon color={props.name}>&#x2713;</DescriptionItemIcon>
             <DescriptionText>{item}</DescriptionText>
           </DescriptionItem>

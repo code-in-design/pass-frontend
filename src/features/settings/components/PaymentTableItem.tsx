@@ -7,7 +7,7 @@ interface Props {
   info: string;
   method: string;
   amount: string;
-  status: string;
+  status: '결제 완료' | '결제 실패' | '결제 대기중' | undefined;
 }
 
 const PaymentTableItem = (props: Props) => {
@@ -29,7 +29,7 @@ const TableBodyTr = styled.tr`
   height: 40px;
 `;
 
-const TableBodyTd = styled.td<{ status?: string }>`
+const TableBodyTd = styled.td<{ status?: '결제 완료' | '결제 실패' | '결제 대기중' }>`
   text-align: center;
   vertical-align: middle;
   font-size: 14px;

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PaymentTableItem from './PaymentTableItem';
 
 interface Props {
-  data: { date: string; membership: string; info: string; method: string; amount: string; status: string }[];
+  data: { date: string; membership: string; info: string; method: string; amount: string; status: '결제 완료' | '결제 실패' | '결제 대기중' | undefined }[];
 }
 
 const PaymentTable = (props: Props) => {
