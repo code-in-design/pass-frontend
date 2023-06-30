@@ -7,9 +7,6 @@ export class UniversitiesModel {
   id?: string; //대학교 아이디
 
   @Expose()
-  logo?: string; //대학교 로고
-
-  @Expose()
   universityName?: string; // 대학교 이름
 
   @Expose()
@@ -19,14 +16,24 @@ export class UniversitiesModel {
   type?: string; //운영 : 사립, 공립
 
   @Expose()
-  universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
+  universityDepartments?: UniversityDepartmentsModel; // 학과 종류
 
   @Expose()
-  region?: RegionModel[]; //지역
+  region?: RegionModel; //지역
 
   constructor(data?: Partial<UniversitiesModel>) {
     return plainToClass(UniversitiesModel, data, { excludeExtraneousValues: true });
   }
+
+  setModelFromData = data => {
+    return {
+      id: data.id,
+      universityName: data.대학명,
+      universityHomepage: data.대학_홈페이지,
+      type: data.운영,
+      region: data.지역,
+    };
+  };
 
   //나의 관심 대학
   setInterestedUniversitiesData = data => {

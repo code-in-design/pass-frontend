@@ -1,19 +1,35 @@
 import { urls } from '@/constants/url';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { addTokenToHeader, fetchAccessToken } from '@/app/api';
+import tokenUtil from '@/utils/TokenUtil';
+import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { classToPlain } from 'class-transformer';
 
 export const universityApi = createApi({
   reducerPath: 'universityApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${urls.baseUrl}`,
-    prepareHeaders: addTokenToHeader,
-    responseHandler: fetchAccessToken,
+    baseUrl: `${urls.baseUrl}/university`,
+    prepareHeaders: tokenUtil.addTokenToHeader,
+    responseHandler: tokenUtil.silentRefreshAccessToken,
   }),
 
   endpoints: builder => ({
     //대학 리스트 조회
-    fetchUniversityList: builder.query({
-      query: () => '/university',
+    fetchUniversityList: builder.query<any, void>({
+      query: () => {
+        return `/?page=${1}&limit=${20}&range=${10}`;
+      },
+      transformResponse: (res: any) => {
+        try {
+          const data = JSON.parse(res);
+          console.log(data);
+          const universityData = new UniversitiesModel(data.result);
+          return classToPlain(universityData);
+        } catch (e) {
+          console.error(e);
+        }
+      },
     }),
   }),
 });
+
+export const { useFetchUniversityListQuery } = universityApi;

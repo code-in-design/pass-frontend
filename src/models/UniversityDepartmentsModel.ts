@@ -120,9 +120,6 @@ export class UniversityDepartmentsModel {
   practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
 
   @Expose()
-  practicalApplyTypes?: PracticalApplyModel[]; //실기 반영 종목
-
-  @Expose()
   practicalApplyType1?: PracticalApplyModel;
 
   @Expose()
