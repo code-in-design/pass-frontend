@@ -162,9 +162,9 @@ export const authApi = createApi({
       query: () => '/me',
       transformResponse: (response: any) => {
         try {
+          const user = new UserModel();
           const data = JSON.parse(response);
-          const user = new UserModel(data);
-          return classToPlain(user);
+          return user.toJSON(data);
         } catch {}
       },
     }),

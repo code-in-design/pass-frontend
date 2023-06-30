@@ -1,4 +1,4 @@
-import { Expose, plainToClass } from 'class-transformer';
+import { classToPlain, Expose, plainToClass } from 'class-transformer';
 
 export class UserModel {
   @Expose()
@@ -43,6 +43,10 @@ export class UserModel {
   constructor(data?: Partial<UserModel>) {
     return plainToClass(UserModel, data, { excludeExtraneousValues: true });
   }
+
+  toJSON = data => {
+    classToPlain(data);
+  };
 
   translateGender = () => {
     if (this.gender === 'male') return '남성';
