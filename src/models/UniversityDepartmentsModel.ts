@@ -1,113 +1,146 @@
+import { Expose, plainToClass } from 'class-transformer';
 import { PracticalApplyModel } from './PracticalApplyModel';
 
 export class UniversityDepartmentsModel {
-  departmentName: string; //학과이름
-  conversionScore: number; //수능환산점수
-  possibilityOfSupport: string; //지원가능성
-  recruitmentGroup: string; //모집군
-  contribution: string; //기여도
-  zValue: number; //z-지수
-  koreanRequired: string; //국어 필수반영
-  koreanChoice: string; //국어 선택반영
-  koreanNoApply: string; //국어 미반영
-  mathRequired: string; //수학 필수반영
-  mathChoice: string; //수학 선택반영
-  mathNoApply: string; //수학 미반영
-  englishRequired: string; //영어 필수반영
-  englishChoice: string; //영어 선택반영
-  englishNoApply: string; //영어 미반영
-  inquiryRequired: string; //탐구 필수반영
-  inquiryChoice: string; //탐구 선택반영
-  inquiryNoApply: string; //탐구 미반영
-  competitionMinRate: number; //경쟁률 최소
-  competitionMaxRate: number; //경쟁률 최대
-  recruitNumber: number; //모집정원
-  practicalTestDate: string; //실기고사 일정
-  successfulApplicantDate: string; //합격자 발표일
-  departmentInformation: string; //학과정보
-  recruitmentGuideline: string; //모집요강
-  testRate: number; //수능 전형반영비율
-  practicalRate: number; //실기 전형반영비율
-  naesinRate: number; //내신 전형반영비율
-  etcRate: number; //기타 전형빈영비율
-  testKoreanRate: number; //수능 국어 반영 비율
-  testMathRate: number; //수능 수학 반영 비율
-  testEnglishRate: number; //수능 영어 반영 비율
-  testInquiryRate: number; //수능 탐구 반영 비율
-  testHistoryRate: number; //수능 한국사 반영 비율
-  practicalApplyTypes: PracticalApplyModel[]; //실기 반영 종목
+  @Expose()
+  departmentName?: string; //학과이름
 
-  constructor(
-    departmentName: string,
-    conversionScore: number,
-    possibilityOfSupport: string,
-    recruitmentGroup: string,
-    contribution: string,
-    zValue: number,
-    koreanRequired: string,
-    koreanChoice: string,
-    koreanNoApply: string,
-    mathRequired: string,
-    mathChoice: string,
-    mathNoApply: string,
-    englishRequired: string,
-    englishChoice: string,
-    englishNoApply: string,
-    inquiryRequired: string,
-    inquiryChoice: string,
-    inquiryNoApply: string,
-    competitionMinRate: number,
-    competitionMaxRate: number,
-    recruitNumber: number,
-    practicalTestDate: string,
-    successfulApplicantDate: string,
-    departmentInformation: string,
-    recruitmentGuideline: string,
-    testRate: number,
-    practicalRate: number,
-    naesinRate: number,
-    etcRate: number,
-    testKoreanRate: number,
-    testMathRate: number,
-    testEnglishRate: number,
-    testInquiryRate: number,
-    testHistoryRate: number,
-    practicalApplyTypes: PracticalApplyModel[],
-  ) {
-    this.departmentName = departmentName;
-    this.conversionScore = conversionScore;
-    this.possibilityOfSupport = possibilityOfSupport;
-    this.recruitmentGroup = recruitmentGroup;
-    this.contribution = contribution;
-    this.zValue = zValue;
-    this.koreanRequired = koreanRequired;
-    this.koreanChoice = koreanChoice;
-    this.koreanNoApply = koreanNoApply;
-    this.mathRequired = mathRequired;
-    this.mathChoice = mathChoice;
-    this.mathNoApply = mathNoApply;
-    this.englishRequired = englishRequired;
-    this.englishChoice = englishChoice;
-    this.englishNoApply = englishNoApply;
-    this.inquiryRequired = inquiryRequired;
-    this.inquiryChoice = inquiryChoice;
-    this.inquiryNoApply = inquiryNoApply;
-    this.competitionMinRate = competitionMinRate;
-    this.competitionMaxRate = competitionMaxRate;
-    this.recruitNumber = recruitNumber;
-    this.practicalTestDate = practicalTestDate;
-    this.successfulApplicantDate = successfulApplicantDate;
-    this.departmentInformation = departmentInformation;
-    this.recruitmentGuideline = recruitmentGuideline;
-    this.testRate = testRate;
-    this.practicalRate = practicalRate;
-    this.naesinRate = naesinRate;
-    this.etcRate = etcRate;
-    this.testKoreanRate = testKoreanRate;
-    this.testMathRate = testMathRate;
-    this.testEnglishRate = testEnglishRate;
-    this.testInquiryRate = testInquiryRate;
-    this.testHistoryRate = testHistoryRate;
-    this.practicalApplyTypes = practicalApplyTypes;
+  @Expose()
+  conversionScore?: number; //수능환산점수
+
+  @Expose()
+  possibilityOfSupport?: string; //지원가능성
+
+  @Expose()
+  recruitmentGroup?: string; //모집군
+
+  @Expose()
+  zValue?: number; //z-지수
+
+  @Expose()
+  koreanRequiredType?: string; //국어 필수반영 : 필수반영, 선택반영, 미반영
+
+  @Expose()
+  mathRequiredType?: string; //수학 필수반영: 필수반영, 선택반영, 미반영
+
+  @Expose()
+  englishRequiredType?: string; //영어 필수반영: 필수반영, 선택반영, 미반영
+
+  @Expose()
+  inquiryRequiredType?: string; //탐구 필수반영: 필수반영, 선택반영, 미반영
+
+  @Expose()
+  competitionMinRate?: number; //경쟁률 최소
+
+  @Expose()
+  competitionMaxRate?: number; //경쟁률 최대
+
+  @Expose()
+  recruitNumber?: number; //모집정원
+
+  @Expose()
+  practicalTestDate?: string; //실기고사 일정
+
+  @Expose()
+  successfulApplicantDate?: string; //합격자 발표일
+
+  @Expose()
+  recruitmentGuideline?: string; //모집요강 홈페이지
+
+  @Expose()
+  testRate?: number; //수능 전형반영비율
+
+  @Expose()
+  practicalRate?: number; //실기 전형반영비율
+
+  @Expose()
+  naesinRate?: number; //내신 전형반영비율
+
+  @Expose()
+  etcRate?: number; //기타 전형빈영비율
+
+  @Expose()
+  testKoreanRate?: number; //수능 국어 반영 비율
+
+  @Expose()
+  testMathRate?: number; //수능 수학 반영 비율
+
+  @Expose()
+  testEnglishRate?: number; //수능 영어 반영 비율
+
+  @Expose()
+  testInquiryRate?: number; //수능 탐구 반영 비율
+
+  @Expose()
+  inquiryNumber?: number; // 탐구 반영 개수
+
+  @Expose()
+  testHistoryRate?: number; //수능 한국사 반영 비율
+
+  @Expose()
+  lastYearCompetitionRate?: number; //작년 경쟁률
+
+  @Expose()
+  isApplyPossibility?: boolean; //지원가능성 분석 여부
+
+  @Expose()
+  isPassPossibility?: boolean; //합격확률 분석 여부
+
+  @Expose()
+  isMultistage?: boolean; //다단계 여부
+
+  @Expose()
+  MultistageDetail?: string; //다단계 세부사항
+
+  @Expose()
+  UniversityDepartmentHomepage?: string; //학과 홈페이지
+
+  @Expose()
+  isTeachingPossibility?: boolean; //교직이수 가능 여부
+
+  @Expose()
+  exceptionRateDescription?: string; //예외 반영 비율 설명
+
+  @Expose()
+  applyType?: string; //전형 : 수능,
+
+  @Expose()
+  applyTypeDetail?: string; //세부 전형 : 일반학생 전형, 수능 일반전형
+
+  @Expose()
+  departmentAffiliation?: string; //학과 계열
+
+  @Expose()
+  isEndAnalysis?: boolean; //분석 종료 여부
+
+  @Expose()
+  testContributions?: string; //수능 기여도 : 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  practicalApplyTypes?: PracticalApplyModel[]; //실기 반영 종목
+
+  @Expose()
+  practicalApplyType1?: PracticalApplyModel;
+
+  @Expose()
+  practicalApplyType2?: PracticalApplyModel;
+
+  @Expose()
+  practicalApplyType3?: PracticalApplyModel;
+
+  @Expose()
+  practicalApplyType4?: PracticalApplyModel;
+
+  @Expose()
+  practicalApplyType5?: PracticalApplyModel;
+
+  @Expose()
+  practicalApplyType6?: PracticalApplyModel;
+
+  constructor(data?: Partial<UniversityDepartmentsModel>) {
+    return plainToClass(UniversityDepartmentsModel, data, { excludeExtraneousValues: true });
   }
 }
