@@ -45,7 +45,7 @@ export class UserModel {
   }
 
   toJSON = data => {
-    classToPlain(data);
+    return classToPlain(data);
   };
 
   translateGender = () => {
