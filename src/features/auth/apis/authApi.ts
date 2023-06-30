@@ -1,7 +1,9 @@
+import safeJsonParse from 'safe-json-parse';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils/StorageUtil';
 import tokenUtil from '../../../utils/TokenUtil';
+import { UserModel } from '@/models/UserModel';
 
 export const authApi = createApi({
   reducerPath: 'auth',
@@ -158,6 +160,14 @@ export const authApi = createApi({
     // 유저 정보 가져오기
     fetchMe: builder.query<any, void>({
       query: () => '/me',
+      transformResponse: (response: any) => {
+        const data = safeJsonParse(response);
+        if (data !== null) {
+          return new UserModel(data);
+        } else {
+          console.error('JSON parsing error');
+        }
+      },
     }),
   }),
 });

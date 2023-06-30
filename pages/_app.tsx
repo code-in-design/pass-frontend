@@ -14,6 +14,7 @@ import NaverSiteVerification from '../src/marketings/NaverSiteVerification';
 import GoogleSiteVerification from '../src/marketings/GoogleSiteVerification';
 import NextAdapterPages from 'next-query-params/pages';
 import { QueryParamProvider } from 'use-query-params';
+import 'reflect-metadata';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

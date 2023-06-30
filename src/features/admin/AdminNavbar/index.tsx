@@ -2,8 +2,8 @@ import NavbarItem from './NavbarItem';
 import { useNavbar } from './useNavbar';
 import { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import Home from '../../../public/images/icons/home.svg';
-import Analytics from '../../../public/images/icons/analytics.svg';
+import Home from '../../../../public/images/icons/home.svg';
+import Analytics from '../../../../public/images/icons/analytics.svg';
 import { useRouter } from 'next/router';
 
 interface Props {

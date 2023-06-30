@@ -41,7 +41,7 @@ Navbar.defaultProps = {
     { icon: <EditSquare />, title: '내 점수 입력하기', route: '/myScore' },
     { icon: <School />, title: '대학찾기', route: '/findUniversity' },
     { icon: <Analytics />, title: '합격분석', route: '/passAnalysis' },
-    { icon: <Settings />, title: '환경설정', route: '/' },
+    { icon: <Settings />, title: '환경설정', route: '/settings?menu=0' },
   ],
 };
 
