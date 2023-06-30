@@ -3,7 +3,8 @@ import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils/StorageUtil';
 import tokenUtil from '../../../utils/TokenUtil';
 import { UserModel } from '@/models/UserModel';
-
+import tryParse from 'safe-json-parse';
+import { classToPlain } from 'class-transformer';
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
@@ -163,13 +164,8 @@ export const authApi = createApi({
         try {
           const data = JSON.parse(response);
           const user = new UserModel(data);
-          return user;
+          return classToPlain(user);
         } catch {}
-        // const data = safeParse(response);
-        // if (data) {
-        //   const user = new UserModel(data);
-        //   return user;
-        // }
       },
     }),
   }),
