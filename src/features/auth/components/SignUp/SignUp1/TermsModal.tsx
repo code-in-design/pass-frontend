@@ -72,7 +72,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: ${props => props.theme.colors.black}
+  color: ${props => props.theme.colors.black};
   margin-bottom: 24px;
 `;
 

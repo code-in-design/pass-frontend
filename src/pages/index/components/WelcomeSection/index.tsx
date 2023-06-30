@@ -1,7 +1,9 @@
-import WelcomeSectionContainer from '@/features/welcomeSection/containers/WelcomeSectionContainer';
+import { useFetchMeQuery } from '@/features/auth/apis/authApi';
+import Welcome from './Welcome';
 
 const WelcomeSection = () => {
-  return <WelcomeSectionContainer />;
+  const { data } = useFetchMeQuery();
+  return <Welcome name={data?.name} />;
 };
 
 export default WelcomeSection;

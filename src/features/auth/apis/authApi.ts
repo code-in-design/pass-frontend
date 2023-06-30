@@ -1,10 +1,10 @@
-import safeJsonParse from 'safe-json-parse';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils/StorageUtil';
 import tokenUtil from '../../../utils/TokenUtil';
 import { UserModel } from '@/models/UserModel';
-
+import tryParse from 'safe-json-parse';
+import { classToPlain } from 'class-transformer';
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
@@ -161,12 +161,11 @@ export const authApi = createApi({
     fetchMe: builder.query<any, void>({
       query: () => '/me',
       transformResponse: (response: any) => {
-        const data = safeJsonParse(response);
-        if (data !== null) {
-          return new UserModel(data);
-        } else {
-          console.error('JSON parsing error');
-        }
+        try {
+          const user = new UserModel();
+          const data = JSON.parse(response);
+          return user.toJSON(data);
+        } catch {}
       },
     }),
   }),
