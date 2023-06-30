@@ -4,8 +4,7 @@ import UniversityTable from '../components/FindUniversity/table/UniversityTable'
 
 const UniversityTableContainer = () => {
   const { data } = useFetchUniversityListQuery();
-
-  return <UniversityTable />;
+  return <UniversityTable data={data} />;
 };
 
 export default UniversityTableContainer;

@@ -32,6 +32,7 @@ interface Props {
 }
 
 const UniversityTable = (props: Props) => {
+  console.log(props.data);
   const [rowData] = useState(props.data);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedData, setSelectedData] = useState('');

@@ -1,4 +1,4 @@
-import { Expose, plainToClass } from 'class-transformer';
+import { classToPlain, Expose, plainToClass } from 'class-transformer';
 import { PracticalApplyModel } from './PracticalApplyModel';
 
 export class UniversityDepartmentsModel {
@@ -140,4 +140,8 @@ export class UniversityDepartmentsModel {
   constructor(data?: Partial<UniversityDepartmentsModel>) {
     return plainToClass(UniversityDepartmentsModel, data, { excludeExtraneousValues: true });
   }
+
+  toJSON = data => {
+    return classToPlain(data);
+  };
 }

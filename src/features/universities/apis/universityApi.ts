@@ -2,7 +2,9 @@ import { urls } from '@/constants/url';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import tokenUtil from '@/utils/TokenUtil';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
-import { classToPlain } from 'class-transformer';
+import { UniversityDepartmentsModel } from '@/models/UniversityDepartmentsModel';
+
+const universityModel = new UniversitiesModel();
 
 export const universityApi = createApi({
   reducerPath: 'universityApi',
@@ -21,9 +23,9 @@ export const universityApi = createApi({
       transformResponse: (res: any) => {
         try {
           const data = JSON.parse(res);
-          console.log(data);
-          const universityData = new UniversitiesModel(data.result);
-          return classToPlain(universityData);
+
+          const universityData = data.result.map((item: any) => universityModel.setModelFromData(item));
+          return universityData;
         } catch (e) {
           console.error(e);
         }
