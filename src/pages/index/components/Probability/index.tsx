@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import ProbabilityItem from './ProbabilityItem';
-import SupportabilityModal from './SupportabilityModal';
+import ApplyPossibilityModal from './ApplyPossibilityModal';
 import PassingProbabilityModal from './PassingProbabilityModal';
 import ProfileModal from './ProfileModal';
 
@@ -18,7 +18,7 @@ const Probability = props => {
           <ContentsLeftImg src="/images/icons/probabilityTeacher.svg" alt="teacherImg" />
         </ContentsLeft>
         <ContentsRight>
-          <SupportabilityModal />
+          <ApplyPossibilityModal />
           <PassingProbabilityModal />
           <ProfileModal />
         </ContentsRight>

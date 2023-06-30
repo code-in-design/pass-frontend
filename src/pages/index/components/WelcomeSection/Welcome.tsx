@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 interface Props {
   name: string;
 }
 
-const WelcomeSection = (props: Props) => {
+const Welcome = (props: Props) => {
   return (
     <Container>
       <MainTitle>
@@ -16,26 +17,34 @@ const WelcomeSection = (props: Props) => {
       <SubTitle>당신의 미래와 합격을 Z-ONE이 응원합니다</SubTitle>
       <MenuList>
         <MenuListItem>
-          <MenuTitle>대학 찾기</MenuTitle>
-          <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
-          <RectangleTop />
-          <RectangleBottom />
-          <SchoolIcon src="/images/icons/findSchool.svg" alt="icon" />
+          <Link href="/findUniversity">
+            <Wrapper>
+              <MenuTitle>대학 찾기</MenuTitle>
+              <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
+            </Wrapper>
+            <RectangleTop />
+            <RectangleBottom />
+            <SchoolIcon src="/images/icons/findSchool.svg" alt="icon" />
+          </Link>
         </MenuListItem>
         <MenuListItem>
-          <MenuTitle>합격 분석</MenuTitle>
-          <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
-          <RectangleTop />
-          <RectangleBottom />
-          <ChartIcon src="/images/icons/passAnalysis.svg" alt="icon" />
+          <Link href="/passAnalysis">
+            <Wrapper>
+              <MenuTitle>합격 분석</MenuTitle>
+              <MenuArrow src="/images/icons/arrowRightWhite.svg" alt="arrow" />
+            </Wrapper>
+            <RectangleTop />
+            <RectangleBottom />
+            <ChartIcon src="/images/icons/passAnalysis.svg" alt="icon" />
+          </Link>
         </MenuListItem>
       </MenuList>
     </Container>
   );
 };
 
-export default WelcomeSection;
-WelcomeSection.defaultProps = {
+export default Welcome;
+Welcome.defaultProps = {
   name: '지훈',
 };
 
@@ -48,8 +57,13 @@ const MainTitle = styled.div`
   color: ${props => props.theme.colors.black};
   margin-bottom: 8px;
 `;
+
 const Name = styled.span`
   color: ${props => props.theme.colors.blue};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
 `;
 
 const SubTitle = styled.span`
