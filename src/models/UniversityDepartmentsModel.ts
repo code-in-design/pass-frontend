@@ -1,4 +1,6 @@
 import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
+import { KoreanSubjectModel } from './KoreanSubjectModel';
+import { MathSubjectModel } from './MathSubjectModel';
 import { PracticalApplyModel } from './PracticalApplyModel';
 import { SubjectModel } from './SubjectModel';
 
@@ -94,10 +96,10 @@ export class UniversityDepartmentsModel {
   practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
 
   @Expose()
-  practicalApplyType?: string[];
+  practicalApplyType?: string[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
 
   @Expose()
-  subject?: any;
+  subject?: Array<object>; // 과목별 반영비율,반영필수 여부 : {국어반영비율:20,국어 반영필수여부:필수반영}
 
   constructor(data?: Partial<UniversityDepartmentsModel>) {
     return plainToClass(UniversityDepartmentsModel, data, { excludeExtraneousValues: true });
@@ -168,9 +170,9 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalContributions = data.실기_기여도; //실기 기여도= 최상; 상; 중; 하 ; 최하
 
-    universityDepartment.practicalApplyType = PracticalApplyModel.setPracticalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
+    universityDepartment.practicalApplyType = PracticalApplyModel.practicalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
 
-    universityDepartment.subject = SubjectModel.setModelFromData(data);
+    universityDepartment.subject = [MathSubjectModel.setModelFromData(data), KoreanSubjectModel.setModelFromData(data)];
 
     return universityDepartment;
   }

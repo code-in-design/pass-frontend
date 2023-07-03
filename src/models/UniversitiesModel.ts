@@ -19,7 +19,7 @@ export class UniversitiesModel {
   universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
 
   @Expose()
-  region?: RegionModel; //지역
+  region?: string; //지역
 
   @Expose()
   logo?: string;
