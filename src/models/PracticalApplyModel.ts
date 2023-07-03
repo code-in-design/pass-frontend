@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
 
-type PracticalType =
+export type PracticalType =
   | '제자리멀리뛰기'
   | '서전트'
   | '좌전굴'

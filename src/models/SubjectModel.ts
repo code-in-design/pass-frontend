@@ -1,6 +1,7 @@
 import { Expose, plainToClass } from 'class-transformer';
 
 export class SubjectModel {
+  @Expose()
   subjectName?: '국어' | '수학' | '영어' | '탐구' | '한국사';
 
   @Expose()

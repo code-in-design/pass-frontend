@@ -17,6 +17,7 @@ export class UniversitiesModel {
   type?: string; //운영 : 사립, 공립
 
   @Expose()
+  @Type(() => UniversityDepartmentsModel)
   universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
 
   @Expose()
