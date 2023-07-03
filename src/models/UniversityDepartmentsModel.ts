@@ -1,6 +1,10 @@
-import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
+import { classToPlain, Expose, plainToClass } from 'class-transformer';
+import { EnglishSubjectModel } from './EnglishSubjectModel';
+import { HistorySubjectModel } from './HistorySubjectModel';
+import { InquirySubjectModel } from './InquirySubjectModel';
+import { KoreanSubjectModel } from './KoreanSubjectModel';
+import { MathSubjectModel } from './MathSubjectModel';
 import { PracticalApplyModel } from './PracticalApplyModel';
-import { EnglishSubjectModel, HistorySubjectModel, InquirySubjectModel, KoreanSubjectModel, MathSubjectModel } from './SubjectModel';
 
 export class UniversityDepartmentsModel {
   @Expose()
@@ -97,7 +101,7 @@ export class UniversityDepartmentsModel {
   practicalApplyType?: string[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
 
   @Expose()
-  subject?: Array<object>; // 과목별 반영비율,반영필수 여부 : {국어반영비율:20,국어 반영필수여부:필수반영}
+  subjects?: Array<object>; // 과목별 반영비율,반영필수 여부 : {국어반영비율:20,국어 반영필수여부:필수반영}
 
   constructor(data?: Partial<UniversityDepartmentsModel>) {
     return plainToClass(UniversityDepartmentsModel, data, { excludeExtraneousValues: true });
@@ -109,6 +113,13 @@ export class UniversityDepartmentsModel {
 
   static setModelFromData(data) {
     const universityDepartment = new UniversityDepartmentsModel();
+    const filterSubjects = [
+      data.국어_반영_비율 && KoreanSubjectModel.setModelFromData(data),
+      data.수학_반영_비율 && MathSubjectModel.setModelFromData(data),
+      data.영어_반영_비율 && EnglishSubjectModel.setModelFromData(data),
+      data.탐구_반영_비율 && InquirySubjectModel.setModelFromData(data),
+      data.한국사_반영_비율 && HistorySubjectModel.setModelFromData(data),
+    ];
     universityDepartment.departmentName = data.학과명; //학과이름
     // universityDepartment.conversionScore= data.수능환산점수; //수능환산점수
 
@@ -170,13 +181,7 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalApplyType = PracticalApplyModel.practicalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
 
-    universityDepartment.subject = [
-      KoreanSubjectModel.setModelFromData(data),
-      MathSubjectModel.setModelFromData(data),
-      EnglishSubjectModel.setModelFromData(data),
-      InquirySubjectModel.setModelFromData(data),
-      HistorySubjectModel.setModelFromData(data),
-    ];
+    universityDepartment.subjects = filterSubjects.filter(Boolean);
 
     return universityDepartment;
   }
