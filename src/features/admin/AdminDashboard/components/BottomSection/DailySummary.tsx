@@ -19,12 +19,9 @@ const DailySummaryWrapper = styled.div`
   background: var(--gray-white, #fff);
 `;
 
-const Title = styled.span`
+const Title = styled.h1`
   color: var(--gray-black, #353644);
   font-size: 20px;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.4px;
 `;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { SalesChart } from './SalesChart';
 import { WeeklySalesChart } from './WeeklySalesChart';
-import { TodayInputSummary } from './TodayInputSummary';
+import { GradeAndSampleCounter } from './GradeAndSampleCounter';
 
 interface Props {}
 
@@ -10,7 +10,7 @@ export const SalesSection = (props: Props) => {
     <SalesSectionWrapper>
       <SalesChart />
       <WeeklySalesChart />
-      <TodayInputSummary />
+      <GradeAndSampleCounter />
     </SalesSectionWrapper>
   );
 };

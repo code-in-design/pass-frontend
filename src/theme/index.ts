@@ -16,10 +16,6 @@ export const theme: Record<string, any> = extendTheme({
     black: '#000',
     white: '#fff',
   },
-  fonts: {
-    heading: `Prentendard-Bold, sans-serif`,
-    body: `Prentendard-Regular, sans-serif`,
-  },
   breakpoints: {
     sm: '1080px',
   },
