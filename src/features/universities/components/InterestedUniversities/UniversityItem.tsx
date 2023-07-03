@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 interface Props {
-  logo: string;
-  name: string;
+  logo?: string;
+  name?: string;
   departmentName?: string;
   conversionScore?: number;
   possibilityOfSupport?: string;
@@ -12,7 +12,7 @@ const UniversityItem = (props: Props) => {
   return (
     <ItemWrapper>
       <UnivWrapper>
-        <UnivLogo src={`/images/icons/univ/${props.logo}.svg`} alt={props.logo} />
+        <UnivLogo src={`/images/logos/university/${props.logo}.png`} alt={props.logo} />
         <UnivNameWrapper>
           <UnivName>{props.name}</UnivName>
           <UnivMajorName>{props.departmentName}</UnivMajorName>

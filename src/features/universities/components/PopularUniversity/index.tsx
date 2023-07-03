@@ -38,31 +38,31 @@ export default PopularUniversity;
 PopularUniversity.defaultProps = {
   data: [
     {
-      img: '/images/icons/univ/hanyang.svg',
+      img: '/images/logos/university/한양대학교.png',
       name: '한양대학교',
       major: '스포츠사이언스학과',
       number: 1,
     },
     {
-      img: '/images/icons/univ/hanyang.svg',
+      img: '/images/logos/university/한양대학교.png',
       name: '한양대학교',
       major: '스포츠사이언스학과',
       number: 2,
     },
     {
-      img: '/images/icons/univ/hanyang.svg',
+      img: '/images/logos/university/한양대학교.png',
       name: '한양대학교',
       major: '스포츠사이언스학과',
       number: 3,
     },
     {
-      img: '/images/icons/univ/hanyang.svg',
+      img: '/images/logos/university/한양대학교.png',
       name: '한양대학교',
       major: '스포츠사이언스학과',
       number: 4,
     },
     {
-      img: '/images/icons/univ/hanyang.svg',
+      img: '/images/logos/university/한양대학교.png',
       name: '한양대학교',
       major: '스포츠사이언스학과',
       number: 5,

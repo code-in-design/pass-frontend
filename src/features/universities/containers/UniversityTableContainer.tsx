@@ -1,8 +1,10 @@
 import React from 'react';
+import { useFetchUniversityListQuery } from '../apis/universityApi';
 import UniversityTable from '../components/FindUniversity/table/UniversityTable';
 
 const UniversityTableContainer = () => {
-  return <UniversityTable />;
+  const { data } = useFetchUniversityListQuery();
+  return <UniversityTable data={data} />;
 };
 
 export default UniversityTableContainer;

@@ -41,12 +41,12 @@ class TokenUtil {
     // 엑세스 토큰 만료
     if (isAccessTokenExpired) {
       // 리프레시토큰이 있으면, 액세스토큰 재발급
-      if (!isExistRefreshToken) {
+      if (isExistRefreshToken) {
         const accessToken = await this.refreshAccessTokenByRefreshToken(refreshToken!);
         storageUtil.setTokens({ accessToken, refreshToken: refreshToken! });
       }
       // 리프레시토큰이 없으면, 재로그인
-      if (isExistRefreshToken) {
+      if (!isExistRefreshToken) {
         window.location.assign('/signIn');
       }
     }
