@@ -1,6 +1,7 @@
 import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
-import { RegionModel } from './RegionModel';
 import { UniversityDepartmentsModel } from './UniversityDepartmentsModel';
+
+type RegionType = '서울권' | '경기권' | '인천권' | '경남권' | '경북권' | '강원제주권' | '광주권' | '전라권' | '충청권';
 
 export class UniversitiesModel {
   @Expose()
@@ -19,7 +20,7 @@ export class UniversitiesModel {
   universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
 
   @Expose()
-  region?: string; //지역
+  region?: RegionType; //지역
 
   @Expose()
   logo?: string;

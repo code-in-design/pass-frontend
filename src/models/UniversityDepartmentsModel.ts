@@ -1,8 +1,6 @@
 import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
-import { KoreanSubjectModel } from './KoreanSubjectModel';
-import { MathSubjectModel } from './MathSubjectModel';
 import { PracticalApplyModel } from './PracticalApplyModel';
-import { SubjectModel } from './SubjectModel';
+import { EnglishSubjectModel, HistorySubjectModel, InquirySubjectModel, KoreanSubjectModel, MathSubjectModel } from './SubjectModel';
 
 export class UniversityDepartmentsModel {
   @Expose()
@@ -172,7 +170,13 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalApplyType = PracticalApplyModel.practicalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
 
-    universityDepartment.subject = [MathSubjectModel.setModelFromData(data), KoreanSubjectModel.setModelFromData(data)];
+    universityDepartment.subject = [
+      KoreanSubjectModel.setModelFromData(data),
+      MathSubjectModel.setModelFromData(data),
+      EnglishSubjectModel.setModelFromData(data),
+      InquirySubjectModel.setModelFromData(data),
+      HistorySubjectModel.setModelFromData(data),
+    ];
 
     return universityDepartment;
   }
