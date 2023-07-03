@@ -16,9 +16,11 @@ const InterestedUniversities = (props: Props) => {
           <Description>합격 분석 메뉴에서 나의 관심 대학을 설정해주세요!</Description>
         </DescriptionWrapper>
       )}
-      {props.data.map(props => (
-        <UniversityItem key={`univ-${props.universityName}`} logo={props.logo} name={props.universityName} />
-      ))}
+      {props.data.map((item, index) => {
+        if (index < 3) {
+          return <UniversityItem key={`univ-${item.universityName}`} name={item?.universityName} logo={item?.logo} />;
+        }
+      })}
     </Container>
   );
 };

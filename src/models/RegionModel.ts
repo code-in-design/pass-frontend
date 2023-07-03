@@ -2,12 +2,6 @@ import { Expose, plainToClass } from 'class-transformer';
 
 export class RegionModel {
   @Expose()
-  id?: number;
-
-  @Expose()
-  name?: string;
-
-  @Expose()
   entire?: string; //전체
 
   @Expose()

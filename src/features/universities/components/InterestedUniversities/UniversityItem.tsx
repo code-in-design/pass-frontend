@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 interface Props {
-  logo: string;
-  name: string;
+  logo?: string;
+  name?: string;
   departmentName?: string;
   conversionScore?: number;
   possibilityOfSupport?: string;

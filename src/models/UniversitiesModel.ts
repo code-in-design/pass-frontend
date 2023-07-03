@@ -1,4 +1,4 @@
-import { classToPlain, Expose, plainToClass } from 'class-transformer';
+import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
 import { RegionModel } from './RegionModel';
 import { UniversityDepartmentsModel } from './UniversityDepartmentsModel';
 
@@ -16,10 +16,13 @@ export class UniversitiesModel {
   type?: string; //운영 : 사립, 공립
 
   @Expose()
-  universityDepartments?: UniversityDepartmentsModel; // 학과 종류
+  universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
 
   @Expose()
   region?: RegionModel; //지역
+
+  @Expose()
+  logo?: string;
 
   constructor(data?: Partial<UniversitiesModel>) {
     return plainToClass(UniversitiesModel, data, { excludeExtraneousValues: true });
@@ -36,17 +39,7 @@ export class UniversitiesModel {
       universityHomepage: data.대학_홈페이지,
       type: data.운영,
       region: data.지역,
-    };
-  };
-
-  //나의 관심 대학
-  setInterestedUniversitiesData = data => {
-    return {
-      logo: data.logo,
-      universityName: data.universityName,
-      departmentName: data.departmentName,
-      conversionScore: data.conversionScore,
-      possibilityOfSupport: data.possibilityOfSupport,
+      universityDepartments: UniversityDepartmentsModel.setModelFromData(data),
     };
   };
 }

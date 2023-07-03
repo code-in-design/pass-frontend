@@ -42,7 +42,7 @@ const UniversityTable = (props: Props) => {
     const id = props.data.id;
     return (
       <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
-        {value.map((icon, index) => {
+        {value?.map((icon, index) => {
           return (
             <ImageWrapper key={index}>
               <ExerciseIcon type={icon} id={id} />

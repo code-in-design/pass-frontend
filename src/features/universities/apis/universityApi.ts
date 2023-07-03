@@ -23,12 +23,27 @@ export const universityApi = createApi({
       transformResponse: (res: any) => {
         try {
           const data = JSON.parse(res);
-
-          const universityData = data.result.map((item: any) => universityModel.setModelFromData(item));
-          return universityData;
+          const universityData = data?.result?.map((item: any) => {
+            return universityModel.setModelFromData(item);
+          });
+          return universityModel.toJSON(universityData);
         } catch (e) {
           console.error(e);
         }
+      },
+    }),
+
+    // 대학 상세 조회
+    fetchUniversityDetail: builder.query({
+      query: (id: number) => {
+        return `/${id}`;
+      },
+    }),
+
+    // 대학 리스트 조회 개수
+    fetchUniversityCount: builder.query({
+      query: () => {
+        return `/count/?page=${1}&limit=${20}&range=${10}`;
       },
     }),
   }),
