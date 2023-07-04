@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -9,8 +9,6 @@ interface Props {
 
 const UniversityCategoryListItem = (props: Props) => {
   const Component = props.isSelected ? ItemSelectContainer : ItemContainer;
-
-  useEffect(() => {}, []);
 
   return (
     <Component onClick={() => props.onClick(props.lists)}>

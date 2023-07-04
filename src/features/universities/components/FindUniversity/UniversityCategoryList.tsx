@@ -12,27 +12,38 @@ interface Props {
 
 const UniversityCategoryList = (props: Props) => {
   const [toggleItem, setToggleItem] = useState('');
-  const [applicationPeriod, setApplicationPeriod] = useQueryParam('applicationPeriod');
-  const [region, setRegion] = useQueryParam('region');
-  const [universityDepartment, setUniversityDepartment] = useQueryParam('universityDepartment');
+  const [applyGroup, setApplyGroup] = useQueryParam('모집군_리스트');
+  const [region, setRegion] = useQueryParam('지역_리스트');
+  const [department, setDepartment] = useQueryParam('학과_계열_리스트');
 
   const handleItemClick = item => {
     setToggleItem(item.text);
+    if (item.title === '') {
+      setDepartment(undefined);
+      setApplyGroup(undefined);
+      setRegion(undefined);
+    }
     if (item.title === '모집군') {
-      setApplicationPeriod(item.text);
+      setApplyGroup([item.text]);
+      setRegion(undefined);
+      setDepartment(undefined);
     }
     if (item.title === '지역') {
-      setRegion(item.text);
+      setRegion([item.text]);
+      setApplyGroup(undefined);
+      setDepartment(undefined);
     }
     if (item.title === '인기계열') {
-      setUniversityDepartment(item.text);
+      setDepartment([item.text]);
+      setApplyGroup(undefined);
+      setRegion(undefined);
     }
   };
 
   return (
     <Container>
       {props.lists.map((list, index) => (
-        <UniversityCategoryListItem key={index} lists={list} isSelected={toggleItem === list.text} onClick={handleItemClick} />
+        <UniversityCategoryListItem key={index} lists={list} isSelected={toggleItem === list.text || applyGroup === list.text || region === list.text || department === list.text} onClick={handleItemClick} />
       ))}
     </Container>
   );
@@ -41,12 +52,12 @@ const UniversityCategoryList = (props: Props) => {
 export default UniversityCategoryList;
 UniversityCategoryList.defaultProps = {
   lists: [
-    { total: '전체보기', title: '', text: '' },
+    { total: '전체보기', title: '', text: '전체' },
     { title: '모집군', icon: <Stickynote />, text: '가군' },
     { title: '모집군', icon: <Stickynote />, text: '나군' },
     { title: '모집군', icon: <Stickynote />, text: '다군' },
     { title: '지역', icon: <Location />, text: '서울권' },
-    { title: '지역', icon: <Location />, text: '수도권' },
+    { title: '지역', icon: <Location />, text: '경기권' },
     { title: '인기계열', icon: <School />, text: '체육교육과' },
   ],
 };

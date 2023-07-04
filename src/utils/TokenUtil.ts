@@ -24,8 +24,17 @@ class TokenUtil {
       const result = await axios({
         method: 'get',
         url: `${urls.baseUrl}/auth/token/${refreshToken}`,
-      });
+      })
+        .then(e => {
+          console.log(e);
+        })
+        .catch(e => {
+          if (e.response.status === 400) {
+            console.log(123);
+          }
+        });
       const accessToken = result?.data?.access_token as string;
+      console.log(accessToken);
       return accessToken;
     } catch (e) {
       console.error(e);
