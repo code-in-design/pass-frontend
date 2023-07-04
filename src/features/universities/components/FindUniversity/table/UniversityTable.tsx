@@ -32,6 +32,7 @@ interface Props {
 }
 
 const UniversityTable = (props: Props) => {
+  console.log(props.data);
   const [rowData] = useState(props.data);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedData, setSelectedData] = useState('');
@@ -41,7 +42,7 @@ const UniversityTable = (props: Props) => {
     const id = props.data.id;
     return (
       <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
-        {value.map((icon, index) => {
+        {value?.map((icon, index) => {
           return (
             <ImageWrapper key={index}>
               <ExerciseIcon type={icon} id={id} />

@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import Layout from '../../components/Layout/Layout';
 import WelcomeSection from './components/WelcomeSection';
 import UpdateHistory from '../../features/versions/components/UpdateHistory';
 import PopularUniversity from '../../features/universities/components/PopularUniversity';
-import InterestedUniversities from '../../features/universities/components/InterestedUniversities';
 import Probability from './components/Probability';
 import ServiceList from './components/ServiceList';
-import { useForm } from 'react-hook-form';
+import InterestedUniversityContainer from '@/features/universities/containers/InterestedUniversityContainer';
 
 interface Props {
   isMobile?: boolean;
@@ -22,7 +22,7 @@ const MainPage = (props: Props) => {
           <WelcomeSection /> <ServiceList /> <Probability />
         </MainLeft>
         <MainRight>
-          <InterestedUniversities /> <PopularUniversity /> <UpdateHistory register={register} />
+          <InterestedUniversityContainer /> <PopularUniversity /> <UpdateHistory register={register} />
         </MainRight>
       </MainWrapper>
     </Layout>
