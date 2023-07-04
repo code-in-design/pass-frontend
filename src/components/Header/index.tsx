@@ -41,9 +41,9 @@ Header.defaultProps = {
 const HeaderWrapper = styled.header`
   display: flex;
   justify-content: flex-end;
-  height: 112px;
   padding: 28px 60px;
   background-color: ${props => props.theme.colors.white};
+  flex: 1;
 `;
 
 const AlertWrapper = styled.div`
