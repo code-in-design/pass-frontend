@@ -8,12 +8,13 @@ interface Props {
   isTitleCustom?: boolean;
   titleAlign?: 'left' | 'center' | 'right';
   isFlexible?: boolean;
+  padding?: string;
 }
 
 export const InfoCard = (props: Props) => {
-  const { icon, title, content, isTitleCustom, titleAlign, isFlexible } = props;
+  const { icon, title, content, isTitleCustom, titleAlign, isFlexible, padding } = props;
   return (
-    <CardWrapper isFlexible={isFlexible}>
+    <CardWrapper isFlexible={isFlexible} padding={padding}>
       {icon && <IconWrapper>{icon}</IconWrapper>}
       <InfoWrapper>
         {isTitleCustom ? <Title titleAlign={titleAlign} dangerouslySetInnerHTML={{ __html: title ?? '' }} /> : <Title>{title}</Title>}
@@ -23,14 +24,14 @@ export const InfoCard = (props: Props) => {
   );
 };
 
-const CardWrapper = styled.div<{ isFlexible?: boolean }>`
+const CardWrapper = styled.div<{ isFlexible?: boolean; padding?: string }>`
   display: flex;
   flex: ${({ isFlexible }) => (isFlexible ? '1 0 0' : '0')};
   width: ${({ isFlexible }) => (isFlexible ? '100%' : 'auto')};
   height: ${({ isFlexible }) => (isFlexible ? '100%' : 'auto')};
   min-width: fit-content;
   justify-content: center;
-  padding: 16px 24px;
+  padding: ${({ padding }) => (padding ? padding : '16px 24px')};
   align-items: center;
   gap: 16px;
   border-radius: 16px;

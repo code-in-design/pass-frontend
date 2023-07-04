@@ -6,9 +6,10 @@ import EditDocumentIcon from '../../../../../public/images/icons/edit_document.s
 import UpdateIcon from '../../../../../public/images/icons/update.svg';
 import { Flex } from '@chakra-ui/react';
 import { UpdateCounter } from '../components/UpdateCounter';
-import { SalesChart } from '../components/SalesSection/SalesChart';
-import { WeeklySalesChart } from '../components/SalesSection/WeeklySalesChart';
-import { GradeAndSampleCounter } from '../components/SalesSection/GradeAndSampleCounter';
+import { SalesChart } from '../components/SalesChart';
+import { WeeklySalesChart } from '../components/WeeklySalesChart';
+import { GradeAndSampleCounter } from '../components/GradeAndSampleCounter';
+import { DailyReport } from '../components/DailyReport';
 
 export const DashboardContainer = () => {
   return (
@@ -25,9 +26,9 @@ export const DashboardContainer = () => {
         <WeeklySalesChart />
         <GradeAndSampleCounter />
       </Flex>
-      <Flex gap="16px"></Flex>
-
-      {/* <BottomSection /> */}
+      <Flex gap="16px">
+        <DailyReport />
+      </Flex>
     </DashboardWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import { InfoCard } from '../InfoCard';
+import { InfoCard } from './InfoCard';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -8,8 +8,8 @@ export const GradeAndSampleCounter = () => {
 
   return (
     <GradeAndSampleCounterWrapper>
-      <InfoCard isFlexible={true} isTitleCustom={true} titleAlign="center" title={'오늘의<br/>성적 입력 개수'} content="123" />
-      <InfoCard isFlexible={true} isTitleCustom={true} titleAlign="center" title={'오늘의<br/>표본 입력 개수'} content="50" />
+      <InfoCard padding="20.75px 20.5px" isFlexible={true} isTitleCustom={true} titleAlign="center" title={'오늘의<br/>성적 입력 개수'} content="123" />
+      <InfoCard padding="20.75px 20.5px" isFlexible={true} isTitleCustom={true} titleAlign="center" title={'오늘의<br/>표본 입력 개수'} content="50" />
     </GradeAndSampleCounterWrapper>
   );
 };
