@@ -10,6 +10,7 @@ import { SalesChart } from '../components/SalesChart';
 import { WeeklySalesChart } from '../components/WeeklySalesChart';
 import { GradeAndSampleCounter } from '../components/GradeAndSampleCounter';
 import { DailyReport } from '../components/DailyReport';
+import { PurchasePlanRatioChart } from '../components/PurchasePlanRatioChart';
 
 export const DashboardContainer = () => {
   return (
@@ -28,6 +29,7 @@ export const DashboardContainer = () => {
       </Flex>
       <Flex gap="16px">
         <DailyReport />
+        <PurchasePlanRatioChart />
       </Flex>
     </DashboardWrapper>
   );
