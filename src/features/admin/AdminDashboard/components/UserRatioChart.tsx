@@ -41,7 +41,7 @@ export const UserRatioChart = (props: Props) => {
         <div>
           <Legend>
             {data.map((item, index) => {
-              if (index < 2)
+              if (index < 3)
                 return (
                   <LegndItem key={index}>
                     <Marker backgroundColor={item.color} />
@@ -54,7 +54,7 @@ export const UserRatioChart = (props: Props) => {
         <div>
           <Legend>
             {data.map((item, index) => {
-              if (index >= 2)
+              if (index >= 3)
                 return (
                   <LegndItem key={index}>
                     <Marker backgroundColor={item.color} />
