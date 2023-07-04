@@ -5,6 +5,9 @@ import { checkboxStyle } from './components/checkbox';
 import { radioTheme } from './components/radio';
 
 export const theme: Record<string, any> = extendTheme({
+  fonts: {
+    body: 'Pretendard Regular',
+  },
   colors: {
     ...baseTheme.colors,
     blue: { 50: '#EDF5FF', 100: '#D0E2FF', 200: 'A6C8FF', 300: '#78A9FF', 400: '#4589FF', 500: '#6B77F8', 600: '#6b77f8cc', 700: '#002D9C', 800: '#001D6C', 900: '#001141' },

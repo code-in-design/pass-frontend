@@ -33,10 +33,8 @@ const BodyWrapper = styled.div`
 `;
 
 const ChildrenWrapper = styled.div`
+  flex: 1;
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  /* height: 880px; */
   border-radius: 24px;
   background-color: #f3f4fa;
   padding: 40px;

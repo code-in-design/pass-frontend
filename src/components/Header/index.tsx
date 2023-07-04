@@ -43,7 +43,6 @@ const HeaderWrapper = styled.header`
   justify-content: flex-end;
   padding: 28px 60px;
   background-color: ${props => props.theme.colors.white};
-  flex: 1;
 `;
 
 const AlertWrapper = styled.div`

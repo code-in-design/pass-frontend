@@ -205,7 +205,7 @@ table {
     url('../fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Bold.otf') format('opentype');
 } */
 
-@font-face {
+/* @font-face {
   font-family: 'GmarketSansMedium';
   src: url('../fonts/GmarketSansOTF/GmarketSansMedium.otf') format('opentype');
 }
@@ -218,9 +218,9 @@ table {
 @font-face {
   font-family: 'GmarketSansBold';
   src: url('../fonts/GmarketSansOTF/GmarketSansBold.otf') format('opentype');
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: 'SUIT Bold';
   src: url('../fonts/SUIT/SUIT-Bold.woff2') format('woff2');
 }
@@ -262,4 +262,4 @@ table {
 @font-face {
   font-family: 'SUIT Thin';
   src: url('../fonts/SUIT/SUIT-Thin.woff2') format('woff2');
-}
+} */
