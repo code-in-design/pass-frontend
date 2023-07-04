@@ -38,4 +38,5 @@ const ChildrenWrapper = styled.div`
   border-radius: 24px;
   background-color: #f3f4fa;
   padding: 40px;
+  overflow-y: auto;
 `;
