@@ -3,8 +3,6 @@ import { ColDef, GridOptions, RowClassParams, CellStyle } from 'ag-grid-communit
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { Box } from '@chakra-ui/react';
-import customStyles from '../styles/Table.module.css';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -30,6 +28,7 @@ export const Table = (props: Props) => {
   };
 
   const gridOptions: GridOptions = {
+    headerHeight: 36,
     domLayout: 'autoHeight',
     suppressMovableColumns: true,
     pinnedBottomRowData: [
@@ -43,15 +42,16 @@ export const Table = (props: Props) => {
     ],
   };
   const columnDefs: ColDef[] = [
-    { headerName: '일자', field: 'orderDate', flex: 1, minWidth: 96, cellStyle: { fontSize: '12px', justifyContent: 'center', textAlign: 'center', fontFamily: 'Pretendard SemiBold' } },
+    { headerName: '일자', field: 'orderDate', flex: 1, minWidth: 96, cellStyle: { justifyContent: 'center', textAlign: 'center', fontFamily: 'Pretendard SemiBold' } },
     { headerName: '주문수', field: 'orderItems', flex: 1, cellStyle: params => customizeCell(params) },
-    { headerName: '매출액', field: 'orderTotal', flex: 1, cellStyle: params => customizeCell(params) },
+    { headerName: '매출액', field: 'orderTotal', flex: 1, cellStyle: params => customizeCell(params), valueFormatter: params => params.value.toLocaleString() + '원' },
     {
       headerName: '유입표본수',
       field: 'NumberOfSamples',
       flex: 1,
       minWidth: 96,
       cellStyle: params => customizeCell(params),
+      valueFormatter: params => params.value.toLocaleString(),
     },
   ];
 
@@ -124,10 +124,18 @@ Table.defaultProps = {
 const AgiGridWrapper = styled.div`
   width: 100%;
 
+  .ag-root {
+  }
+
   .ag-header-row-column {
     border-radius: 12px 12px 0px 0px;
-    border-bottom: 1px solid var(--gray-4, #e4e6f0);
     background: var(--gray-6, #f8f8fc);
+  }
+
+  .ag-header {
+    border-bottom: 1px solid var(--gray-4, #e4e6f0);
+    line-height: 20px;
+    letter-spacing: -0.28px;
   }
 
   .ag-header-cell-label {
@@ -142,6 +150,11 @@ const AgiGridWrapper = styled.div`
   }
 
   .ag-floating-bottom-container {
+    line-height: 16px;
+    letter-spacing: -0.28px;
+  }
+
+  .ag-floating-bottom-container .ag-cell[col-id='orderDate'] {
     font-size: 14px;
   }
 
@@ -158,6 +171,11 @@ const AgiGridWrapper = styled.div`
 
   .ag-root-wrapper {
     border: none;
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px;
+  }
+
+  .ag-center-cols-container {
+    letter-spacing: -0.24px;
+    line-height: 16px;
   }
 `;
