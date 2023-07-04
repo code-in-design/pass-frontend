@@ -1,4 +1,5 @@
 import { urls } from '@/constants/url';
+import queryString from 'query-string';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import tokenUtil from '@/utils/TokenUtil';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
@@ -42,10 +43,11 @@ export const universityApi = createApi({
     // 대학 리스트 조회 개수
     fetchUniversityCount: builder.query<any, void>({
       query: () => {
-        return `/count`;
+        const currentQuery = window.location.search;
+        return `/count?${currentQuery}`;
       },
     }),
   }),
 });
 
-export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useFetchUniversityCountQuery } = universityApi;
+export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;
