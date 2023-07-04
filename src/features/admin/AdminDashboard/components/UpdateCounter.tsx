@@ -24,7 +24,6 @@ export const UpdateCounter = (props: Props) => {
       </Flex>
     </CardWrapper>
   );
-
 };
 const CardWrapper = styled.div`
   display: flex;

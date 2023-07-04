@@ -20,11 +20,8 @@ export const SalesChart = (props: Props) => {
 };
 
 const SalesChartWrapper = styled.div`
-  // 추가
-  // flex-grow: 1;
   display: flex;
   padding: 24px;
-  height: 235px;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -70,9 +67,6 @@ const Profit = styled.span`
 `;
 
 const ChartWrapper = styled.div`
-  // 추가
-  // width: 100%;
-  // height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

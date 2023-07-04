@@ -25,6 +25,8 @@ export const DashboardContainer = () => {
         <WeeklySalesChart />
         <GradeAndSampleCounter />
       </Flex>
+      <Flex gap="16px"></Flex>
+
       {/* <BottomSection /> */}
     </DashboardWrapper>
   );
