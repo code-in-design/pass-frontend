@@ -1,9 +1,10 @@
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, GridOptions, RowClassParams, CellStyle } from 'ag-grid-community';
+import { ColDef, GridOptions } from 'ag-grid-community';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 interface Props {
   data: {
@@ -16,15 +17,15 @@ interface Props {
 
 export const Table = (props: Props) => {
   const { data } = props;
-  const orderItemsTotal = data.reduce((sum, row) => sum + row.orderItems, 0);
-  const orderTotal = data.reduce((sum, row) => sum + row.orderTotal, 0);
-  const NumberOfSamplesTotal = data.reduce((sum, row) => sum + row.NumberOfSamples, 0);
+  const orderItemsTotal = useMemo(() => data.reduce((sum, row) => sum + row.orderItems, 0), [data]);
+  const orderTotal = useMemo(() => data.reduce((sum, row) => sum + row.orderTotal, 0), [data]);
+  const NumberOfSamplesTotal = useMemo(() => data.reduce((sum, row) => sum + row.NumberOfSamples, 0), [data]);
 
   const customizeCell = params => {
     if (params.data && params.data.total) {
       return { color: 'rgba(107, 119, 248, 1)', textAlign: 'center', fontFamily: 'Pretendard SemiBold', fontSize: 14 };
     }
-    return { textAlign: 'center', fontFamily: 'Pretendard Regular' };
+    return { textAlign: 'center', fontFamily: 'Pretendard Regular', color: '', fontSize: '' };
   };
 
   const gridOptions: GridOptions = {
