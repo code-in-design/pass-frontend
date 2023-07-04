@@ -12,18 +12,22 @@ interface Props {
   }[];
 }
 
-export const PurchasePlanRatioChart = (props: Props) => {
+export const UserRatioChart = (props: Props) => {
   const { data } = props;
+  const percentages: number[] = [];
+  const colors: string[] = [];
+  data.forEach(item => {
+    percentages.push(item.value);
+    colors.push(item.color);
+  });
+
   return (
-    <PurchasePlanRatioChartWrapper>
-      <Title>구매 플랜 비율</Title>
+    <UserRatioChartWrapper>
+      <Title>사용자 비율</Title>
       <DoughnutChartWrapper>
-        <DoughnutChart />
+        <DoughnutChart percentages={percentages} colors={colors} opt={{ spacing: 1, borderRadius: 4, cutout: 60, rotation: -90 }} />
       </DoughnutChartWrapper>
-      {/* <PieChartWrraper>
-        <PieChart data={data} style={{ width: '100%', height: '100%' }} lengthAngle={360} startAngle={90} lineWidth={30} />
-      </PieChartWrraper> */}
-      <Legend>
+      {/* <Legend>
         {data.map((item, index) => {
           return (
             <LegndItem key={index}>
@@ -32,20 +36,50 @@ export const PurchasePlanRatioChart = (props: Props) => {
             </LegndItem>
           );
         })}
-      </Legend>
-    </PurchasePlanRatioChartWrapper>
+      </Legend> */}
+      <LegendWrapper>
+        <div>
+          <Legend>
+            {data.map((item, index) => {
+              if (index < 2)
+                return (
+                  <LegndItem key={index}>
+                    <Marker backgroundColor={item.color} />
+                    <Label>{item.title}</Label>
+                  </LegndItem>
+                );
+            })}
+          </Legend>
+        </div>
+        <div>
+          <Legend>
+            {data.map((item, index) => {
+              if (index >= 2)
+                return (
+                  <LegndItem key={index}>
+                    <Marker backgroundColor={item.color} />
+                    <Label>{item.title}</Label>
+                  </LegndItem>
+                );
+            })}
+          </Legend>
+        </div>
+      </LegendWrapper>
+    </UserRatioChartWrapper>
   );
 };
 
-PurchasePlanRatioChart.defaultProps = {
+UserRatioChart.defaultProps = {
   data: [
-    { title: 'Basic', value: 25, color: 'rgba(228, 230, 240, 1)' },
-    { title: 'Light', value: 25, color: 'rgba(96, 200, 222, 1)' },
-    { title: 'Premium', value: 50, color: 'rgba(107, 119, 248, 1)' },
+    { title: '고1', value: 25, color: '#60C8DE' },
+    { title: '고2', value: 25, color: '#6B77F8' },
+    { title: '고3', value: 25, color: '#AA83FF' },
+    { title: '학부모', value: 12.5, color: '#E4E6F0' },
+    { title: '교육자', value: 12.5, color: '#F3F4FA' },
   ],
 };
 
-const PurchasePlanRatioChartWrapper = styled.div`
+const UserRatioChartWrapper = styled.div`
   display: flex;
   height: 348px;
   padding: 24px;
@@ -68,6 +102,15 @@ const Title = styled.span`
 const PieChartWrraper = styled.div`
   height: 198px;
   flex-shrink: 0;
+  align-self: stretch;
+`;
+
+const LegendWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   align-self: stretch;
 `;
 
