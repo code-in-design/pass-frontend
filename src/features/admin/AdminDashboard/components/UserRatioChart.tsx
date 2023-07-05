@@ -20,9 +20,6 @@ UserRatioChart.defaultProps = {
     { title: '교육자', value: 12.5, color: '#F3F4FA' },
   ],
   options: {
-    spacing: 1,
-    borderRadius: 4,
-    cutout: 60,
     rotation: -90,
   },
 };
