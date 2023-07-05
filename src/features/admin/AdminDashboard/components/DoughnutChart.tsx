@@ -34,8 +34,3 @@ export function DoughnutChart(props: Props) {
   };
   return <Doughnut data={data} options={options} width="100%" height="100%" />;
 }
-
-DoughnutChart.defaultProps = {
-  percentages: [25, 25, 50],
-  colors: ['#60C8DE', '#E4E6F0', '#6B77F8'],
-};

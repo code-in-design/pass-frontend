@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { DoughnutChart } from './DoughnutChart';
 import { ChartOptions } from 'chart.js';
+import theme from '@/theme/theme';
 
 export interface DoughnutChartWithLegendData {
   title: string;
@@ -13,15 +14,14 @@ export interface DoughnutChartWithLegendProps {
   data: DoughnutChartWithLegendData[];
   legendWidth: string;
   options?: ChartOptions<'doughnut'>;
-  upsideDown?: boolean;
 }
 
 export const DoughnutChartWithLegend = (props: DoughnutChartWithLegendProps) => {
-  const { title, data, legendWidth, options, upsideDown } = props;
+  const { title, data, legendWidth, options } = props;
   return (
-    <PurchasePlanRatioChartWrapper>
+    <DoughnutChartWithLegendWrapper>
       <Title>{title}</Title>
-      <DoughnutChartWrapper upsideDown={upsideDown}>
+      <DoughnutChartWrapper>
         <DoughnutChart data={data} options={options} />
       </DoughnutChartWrapper>
       <Legend>
@@ -29,53 +29,41 @@ export const DoughnutChartWithLegend = (props: DoughnutChartWithLegendProps) => 
           {data.map((item, index) => {
             return (
               <LegndItem key={index}>
-                <Marker backgroundColor={item.color} />
+                <Marker color={item.color} />
                 <Label>{item.title}</Label>
               </LegndItem>
             );
           })}
         </LegndItemWrapper>
       </Legend>
-    </PurchasePlanRatioChartWrapper>
+    </DoughnutChartWithLegendWrapper>
   );
 };
 
 DoughnutChartWithLegend.defaultProps = {
   title: '타이틀',
   data: [
-    { title: 'Basic', value: 25, color: 'rgba(228, 230, 240, 1)' },
-    { title: 'Light', value: 25, color: 'rgba(96, 200, 222, 1)' },
-    { title: 'Premium', value: 50, color: 'rgba(107, 119, 248, 1)' },
+    { title: 'Light', value: 25, color: theme.colors.gray4 },
+    { title: 'Basic', value: 25, color: theme.colors.green },
+    { title: 'Premium', value: 50, color: theme.colors.blue },
   ],
   legendWidth: '100%',
 };
 
-interface MarkerProps {
-  backgroundColor: string;
-}
-
-interface LegndItemWrapperProps {
-  legendWidth?: string;
-}
-
-interface DoughnutChartWrapperProps {
-  upsideDown?: boolean;
-}
-
-const PurchasePlanRatioChartWrapper = styled.div`
+const DoughnutChartWithLegendWrapper = styled.div`
   display: flex;
   height: 348px;
   padding: 24px;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  flex: 1 0 0;
+  flex: 1;
   border-radius: 16px;
-  background: var(--gray-white, #fff);
+  background: ${theme.colors.white};
 `;
 
 const Title = styled.span`
-  color: var(--gray-black, #353644);
+  color: ${theme.colors.grayBlack};
   font-size: 20px;
   font-family: Pretendard Bold;
   line-height: 24px;
@@ -90,7 +78,7 @@ const Legend = styled.div`
   gap: 20px;
 `;
 
-const LegndItemWrapper = styled.div<LegndItemWrapperProps>`
+const LegndItemWrapper = styled.div<Pick<DoughnutChartWithLegendProps, 'legendWidth'>>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,30 +93,25 @@ const LegndItem = styled.div`
   gap: 8px;
 `;
 
-const Marker = styled.div<MarkerProps>`
+const Marker = styled.div<Pick<DoughnutChartWithLegendData, 'color'>>`
   width: 14px;
   height: 14px;
   border-radius: 14px;
-  background: ${({ backgroundColor }) => backgroundColor};
+  background: ${({ color }) => color};
 `;
 
 const Label = styled.span`
-  color: var(--gray-1, #626474);
+  color: ${theme.colors.gray1};
   font-size: 12px;
   font-family: Pretendard SemiBold;
   line-height: 16px;
   letter-spacing: -0.24px;
 `;
 
-const DoughnutChartWrapper = styled.div<DoughnutChartWrapperProps>`
+const DoughnutChartWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 198px;
-  ${({ upsideDown }) =>
-    upsideDown &&
-    `
-    transform: scaleY(-1);
-  `}
 `;

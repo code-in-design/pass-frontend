@@ -1,3 +1,4 @@
+import theme from '@/theme/theme';
 import { DoughnutChartWithLegend, DoughnutChartWithLegendData } from './DoughnutChartWithLegend';
 
 interface PurchasePlanRatioChartProps {
@@ -6,7 +7,13 @@ interface PurchasePlanRatioChartProps {
 
 export const PurchasePlanRatioChart = (props: PurchasePlanRatioChartProps) => {
   const { data } = props;
-  return <DoughnutChartWithLegend title="구매 플랜 비율" data={data} upsideDown={true} />;
+  return <DoughnutChartWithLegend title="구매 플랜 비율" data={data} />;
 };
 
-PurchasePlanRatioChart.defaultProps = {};
+PurchasePlanRatioChart.defaultProps = {
+  data: [
+    { title: 'Light', value: 25, color: theme.colors.gray4 },
+    { title: 'Basic', value: 25, color: theme.colors.green },
+    { title: 'Premium', value: 50, color: theme.colors.blue },
+  ],
+};
