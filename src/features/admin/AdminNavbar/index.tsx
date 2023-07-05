@@ -1,17 +1,19 @@
 import NavbarItem from './NavbarItem';
 import { useNavbar } from './useNavbar';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../../public/images/icons/home.svg';
 import Analytics from '../../../../public/images/icons/analytics.svg';
 import UpdateIcon from '../../../../public/images/icons/sync.svg';
 import { useRouter } from 'next/router';
+import { VersionUpdateModal } from '../AdminDashboard/components/VersionUpdateModal';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
 }
 
 export const AdminNavbar = (props: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { rootProps } = useNavbar();
   const router = useRouter();
 
@@ -27,7 +29,7 @@ export const AdminNavbar = (props: Props) => {
       </MenuList>
       <BottomWrapper>
         <UpdateButton>
-          <UpdateIcon />
+          <UpdateIcon onClick={() => setIsOpen(!isOpen)} />
           <UpdateButtonText>업데이트</UpdateButtonText>
         </UpdateButton>
         <LogOut>
@@ -35,6 +37,7 @@ export const AdminNavbar = (props: Props) => {
           <LogOutText>로그아웃</LogOutText>
         </LogOut>
       </BottomWrapper>
+      <VersionUpdateModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </NavWrapper>
   );
 };
