@@ -1,6 +1,6 @@
 import NavbarItem from './NavbarItem';
 import { useNavbar } from './useNavbar';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../../public/images/icons/home.svg';
 import Analytics from '../../../../public/images/icons/analytics.svg';
@@ -28,8 +28,8 @@ export const AdminNavbar = (props: Props) => {
         ))}
       </MenuList>
       <BottomWrapper>
-        <UpdateButton>
-          <UpdateIcon onClick={() => setIsOpen(!isOpen)} />
+        <UpdateButton onClick={() => setIsOpen(!isOpen)}>
+          <UpdateIcon />
           <UpdateButtonText>업데이트</UpdateButtonText>
         </UpdateButton>
         <LogOut>
@@ -37,7 +37,7 @@ export const AdminNavbar = (props: Props) => {
           <LogOutText>로그아웃</LogOutText>
         </LogOut>
       </BottomWrapper>
-      <VersionUpdateModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <VersionUpdateModal isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} />
     </NavWrapper>
   );
 };
