@@ -18,13 +18,19 @@ const UniversityCategoryListItem = (props: UniversityCategoryListItemProps) => {
 
   return (
     <ItemContainer isSelected={isSelected} onClick={() => onClick(props)}>
-      <ContainerTitle isSelected={isSelected} hasTitle={!isEmpty(title)}>
-        {title}
-      </ContainerTitle>
-      <Wrapper>
-        <IconWrapper isSelected={isSelected}>{icon}</IconWrapper>
+      {text === '전체보기' ? (
         <ContainerText isSelected={isSelected}>{text}</ContainerText>
-      </Wrapper>
+      ) : (
+        <>
+          <ContainerTitle isSelected={isSelected} hasTitle={!isEmpty(title)}>
+            {title}
+          </ContainerTitle>
+          <Wrapper>
+            <IconWrapper isSelected={isSelected}>{icon}</IconWrapper>
+            <ContainerText isSelected={isSelected}>{text}</ContainerText>
+          </Wrapper>
+        </>
+      )}
     </ItemContainer>
   );
 };
@@ -76,4 +82,5 @@ const ContainerText = styled.div<{ isSelected: boolean }>`
   line-height: 16px;
   font-weight: 700;
   color: ${props => (props.isSelected ? props.theme.colors.white : props.theme.colors.grayBlack)};
+  white-space: nowrap;
 `;

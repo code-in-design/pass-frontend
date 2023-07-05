@@ -1,12 +1,11 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem, { UniversityCategoryItem } from './UniversityCategoryListItem';
-import { ArrayParam, BooleanParam, NumberParam, StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
-import { useRouter } from 'next/router';
-import { concat, flatten, includes, isEmpty, merge } from 'lodash';
+import { ArrayParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
+import { flatten, includes, isEmpty } from 'lodash';
 
 interface Props {
   lists: UniversityCategoryItem[];

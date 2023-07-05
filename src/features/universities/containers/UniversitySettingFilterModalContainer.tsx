@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import queryString from 'query-string';
 import UniversitySettingFilterModal from '../../../components/Modal/UniversityFilterModal/UniversityFilterModal';
 import { useLazyFetchUniversityCountQuery } from '../apis/universityApi';
-import { useQueryParam } from 'use-query-params';
+import { ArrayParam, useQueryParam, useQueryParams } from 'use-query-params';
 import { isEmpty } from 'lodash';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 const UniversityFilterModalContainer = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit, setValue, watch } = useForm();
+  const { register, handleSubmit, setValue, watch, reset, getValues } = useForm();
   const formData = watch();
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
   const [filterQuery, setFilterQuery] = useQueryParam('filter');
@@ -46,7 +46,7 @@ const UniversityFilterModalContainer = (props: Props) => {
     universityCount();
   }, [filterQuery]);
 
-  return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} filterResult={data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
+  return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} searchResultNumber={data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
 };
 
 export default UniversityFilterModalContainer;

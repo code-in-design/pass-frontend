@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Checkbox } from '@chakra-ui/react';
 import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
@@ -14,7 +14,7 @@ interface Props {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   onSubmit: (data) => void;
-  filterResult: any;
+  searchResultNumber: any;
   openModal: () => void;
   closeModal: () => void;
   isOpen: boolean;
@@ -37,13 +37,13 @@ const UniversityFilterModal = (props: Props) => {
               <Left>
                 <FindUniversityFilterModalItem title="모집시기" subtitle="* 중복 선택 가능합니다">
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup" defaultChecked={router.query.모집군_리스트 === '가군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup" defaultChecked={router.query.applyGroup === '가군'}>
                       가군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup" defaultChecked={router.query.모집군_리스트 === '나군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup" defaultChecked={router.query.applyGroup === '나군'}>
                       나군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup" defaultChecked={router.query.모집군_리스트 === '다군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup" defaultChecked={router.query.applyGroup === '다군'}>
                       다군
                     </Checkbox>
                   </FlexContainer>
@@ -110,10 +110,10 @@ const UniversityFilterModal = (props: Props) => {
                     <Checkbox size="checkButton" {...props.register('region')} value="전체">
                       전체
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('region')} value="서울권" defaultChecked={router.query.지역_리스트 === '서울권'}>
+                    <Checkbox size="checkButton" {...props.register('region')} value="서울권">
                       서울권
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('region')} value="경기권" defaultChecked={router.query.지역_리스트 === '경기권'}>
+                    <Checkbox size="checkButton" {...props.register('region')} value="경기권">
                       경기권
                     </Checkbox>
                     <Checkbox size="checkButton" {...props.register('region')} value="인천권">
@@ -152,7 +152,7 @@ const UniversityFilterModal = (props: Props) => {
               <Right>
                 <FindUniversityFilterModalItem title="학과 계열" subtitle="* 학과명에 따른 분류입니다">
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('department')} value="체육교육·지도" defaultChecked={router.query.학과_계열_리스트 === '체육교육과'}>
+                    <Checkbox size="checkButton" {...props.register('department')} value="체육교육·지도">
                       체육교육 지도
                     </Checkbox>
                     <Checkbox size="checkButton" {...props.register('department')} value="스포츠의학">
@@ -261,7 +261,7 @@ const UniversityFilterModal = (props: Props) => {
               <Checkbox size="greenCheckbox" {...props.register('completionTeaching')}>
                 교직 이수 가능한 대학만 보기
               </Checkbox>
-              <ResultButton type="submit">검색결과 {props.filterResult}개 보기</ResultButton>
+              <ResultButton type="submit">검색결과 {props.searchResultNumber}개 보기</ResultButton>
             </Bottom>
           </form>
         </ModalLayout>
