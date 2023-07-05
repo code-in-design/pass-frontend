@@ -10,8 +10,8 @@ import { SalesChart } from '../components/SalesChart';
 import { WeeklySalesChart } from '../components/WeeklySalesChart';
 import { GradeAndSampleCounter } from '../components/GradeAndSampleCounter';
 import { DailyReport } from '../components/DailyReport';
-import { PurchasePlanRatioChart } from '../components/PurchasePlanRatioChart';
 import { UserRatioChart } from '../components/UserRatioChart';
+import { PurchasePlanRatioChart } from '../components/PurchasePlanRatioChart';
 
 export const DashboardContainer = () => {
   return (
