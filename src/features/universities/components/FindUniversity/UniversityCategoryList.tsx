@@ -1,10 +1,12 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem from './UniversityCategoryListItem';
 import { useQueryParam } from 'use-query-params';
+import { useRouter } from 'next/router';
+import { isEmpty } from 'lodash';
 
 interface Props {
   lists: [{ total?: string; title?: string; icon?: ReactNode; text: string }];
@@ -15,30 +17,46 @@ const UniversityCategoryList = (props: Props) => {
   const [applyGroup, setApplyGroup] = useQueryParam('모집군_리스트');
   const [region, setRegion] = useQueryParam('지역_리스트');
   const [department, setDepartment] = useQueryParam('학과_계열_리스트');
+  const [filterQuery, setFilterQuery] = useQueryParam('filter');
+  const router = useRouter();
 
   const handleItemClick = item => {
     setToggleItem(item.text);
     if (item.title === '') {
-      setDepartment(undefined);
       setApplyGroup(undefined);
       setRegion(undefined);
+      setDepartment(undefined);
     }
     if (item.title === '모집군') {
-      setApplyGroup([item.text]);
+      setApplyGroup(item.text);
       setRegion(undefined);
       setDepartment(undefined);
     }
     if (item.title === '지역') {
-      setRegion([item.text]);
+      setRegion(item.text);
       setApplyGroup(undefined);
       setDepartment(undefined);
     }
     if (item.title === '인기계열') {
-      setDepartment([item.text]);
+      setDepartment(item.text);
       setApplyGroup(undefined);
       setRegion(undefined);
     }
   };
+
+  useEffect(() => {
+    if (isEmpty(router.query)) {
+      setToggleItem('전체');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (filterQuery) {
+      setApplyGroup(undefined);
+      setRegion(undefined);
+      setDepartment(undefined);
+    }
+  }, [filterQuery]);
 
   return (
     <Container>

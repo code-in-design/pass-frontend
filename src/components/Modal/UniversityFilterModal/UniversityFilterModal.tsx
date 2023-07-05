@@ -15,28 +15,22 @@ interface Props {
   setValue: UseFormSetValue<FieldValues>;
   onSubmit: (data) => void;
   filterResult: any;
+  openModal: () => void;
+  closeModal: () => void;
+  isOpen: boolean;
 }
 
 const UniversityFilterModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
-  const openModal = useCallback(() => {
-    setIsOpen(true);
-  }, [isOpen]);
-
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, [isOpen]);
 
   return (
     <>
-      <FileterButton size={props.size} onClick={openModal}>
+      <FileterButton size={props.size} onClick={props.openModal}>
         <Filter />
         필터 열기
       </FileterButton>
-      {isOpen && (
-        <ModalLayout isOpen={isOpen} onClose={closeModal}>
+      {props.isOpen && (
+        <ModalLayout isOpen={props.isOpen} onClose={props.closeModal}>
           <Title>필터</Title>
           <form onSubmit={props.handleSubmit(props.onSubmit)}>
             <Container>

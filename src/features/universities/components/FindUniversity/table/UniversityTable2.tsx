@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useCallback, useMemo, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import styled from '@emotion/styled';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -13,6 +13,7 @@ import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 import ExerciseIcon from './ExerciseIcon';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
+import { useFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
 
 interface Props {
   data: {
@@ -31,49 +32,49 @@ interface Props {
   }[];
 }
 
+const ImageRenderer = props => {
+  const { value } = props;
+  const id = props.data.id;
+  return (
+    <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
+      {value?.map((icon, index) => {
+        return (
+          <ImageWrapper key={index}>
+            <ExerciseIcon type={icon} id={id} />
+          </ImageWrapper>
+        );
+      })}
+    </div>
+  );
+};
+
+const SearchImageRenderer = () => {
+  return (
+    <IconWrapper>
+      <Search />
+    </IconWrapper>
+  );
+};
+
+const ContributionRenderer = props => {
+  const { value } = props;
+  return (
+    <ContributionContainer>
+      {value === '최하' && <ArrowDoubleDown />}
+      {value === '하' && <ArrowDown />}
+      {value === '중' && <Hyphen />}
+      {value === '상' && <ArrowUp />}
+      {value === '최상' && <ArrowDoubleUp />}
+      <ContributionText type={value}>{value}</ContributionText>
+    </ContributionContainer>
+  );
+};
+
 const UniversityTable = (props: Props) => {
-  console.log(props.data);
   const [rowData] = useState(props.data);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedData, setSelectedData] = useState('');
-
-  const ImageRenderer = props => {
-    const { value } = props;
-    const id = props.data.id;
-    return (
-      <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
-        {value?.map((icon, index) => {
-          return (
-            <ImageWrapper key={index}>
-              <ExerciseIcon type={icon} id={id} />
-            </ImageWrapper>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const SearchImageRenderer = () => {
-    return (
-      <IconWrapper>
-        <Search />
-      </IconWrapper>
-    );
-  };
-
-  const ContributionRenderer = props => {
-    const { value } = props;
-    return (
-      <ContributionContainer>
-        {value === '최하' && <ArrowDoubleDown />}
-        {value === '하' && <ArrowDown />}
-        {value === '중' && <Hyphen />}
-        {value === '상' && <ArrowUp />}
-        {value === '최상' && <ArrowDoubleUp />}
-        <ContributionText type={value}>{value}</ContributionText>
-      </ContributionContainer>
-    );
-  };
+  const { data } = useFetchUniversityListQuery();
 
   const onRowClick = props => {
     setToggleModal(true);
@@ -89,30 +90,95 @@ const UniversityTable = (props: Props) => {
     return { padding: '12px 16px' };
   };
 
-  const [columnDefs] = useState([
-    { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'practicalType', headerName: '실기종목', cellRendererFramework: ImageRenderer, minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+  const [columnDefs, setColumnDefs] = useState([
     {
-      field: 'contribution',
-      headerName: '기여도',
-      children: [
-        { field: 'test', headerName: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-        { field: 'practical', headerName: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-      ],
-      headerGroupComponent: TableHeaderTooltip,
+      field: 'id',
+      headerName: '군',
+      sortable: true,
+      minWidth: 48,
+      flex: 1,
+      cellRenderer: props => {
+        if (props.value !== undefined) {
+          return props.value;
+        } else {
+          return <img src="https://www.ag-grid.com/example-assets/loading.gif" />;
+        }
+      },
+      cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' },
     },
-    { field: 'conversionScore', headerName: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'Zvalue', headerName: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'applicationPossibility', headerName: '지원가능성', sortable: true, cellRendererFramework: ApplicationPossibilityTag, minWidth: 104, flex: 2.1 },
-    { field: 'passPossibility', headerName: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
   ]);
+  const defaultColDef = useMemo(() => {
+    return {
+      flex: 1,
+      resizable: true,
+      minWidth: 100,
+    };
+  }, []);
+
+  const onGridReady = useCallback(params => {
+    fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+      .then(resp => resp.json())
+      .then(data => {
+        const dataSource = {
+          rowCount: undefined,
+          getRows: params => {
+            // console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+            // At this point in your code, you would call the server.
+            // To make the demo look real, wait for 500ms before returning
+            setTimeout(function () {
+              // take a slice of the total rows
+              const rowsThisPage = data.slice(params.startRow, params.endRow);
+              // if on or after the last page, work out the last row.
+              let lastRow = -1;
+              if (data.length <= params.endRow) {
+                lastRow = data.length;
+              }
+              // call the success callback
+              params.successCallback(rowsThisPage, lastRow);
+            }, 500);
+          },
+        };
+        params.api.setDatasource(dataSource);
+      });
+  }, []);
+
+  const onGridReady2 = useCallback(params => {
+    const { api } = params;
+    const dataSource = {
+      rowCount: undefined,
+      getRows: params => {
+        setTimeout(function () {
+          // take a slice of the total rows
+          // const rowsThisPage = data.slice(params.startRow, params.endRow);
+          // // if on or after the last page, work out the last row.
+          // let lastRow = -1;
+          // if (data.length <= params.endRow) {
+          //   lastRow = data.length;
+          // }
+          // // call the success callback
+          // params.successCallback(rowsThisPage, lastRow);
+        }, 500);
+      },
+    };
+    api.setDatasource(dataSource);
+  }, []);
 
   return (
     <>
       <AgGridWrapper className={customThemes.table}>
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClick} onCellClicked={onCellClicked} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
+        <AgGridReact
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          rowBuffer={0}
+          rowSelection={'multiple'}
+          rowModelType={'infinite'}
+          cacheBlockSize={20}
+          cacheOverflowSize={2}
+          maxConcurrentDatasourceRequests={1}
+          infiniteInitialRowCount={1000}
+          maxBlocksInCache={10}
+          onGridReady={onGridReady}
+        ></AgGridReact>
       </AgGridWrapper>
       {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedData} />}
     </>
