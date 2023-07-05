@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import queryString from 'query-string';
 import UniversitySettingFilterModal from '../../../components/Modal/UniversityFilterModal/UniversityFilterModal';
 import { useLazyFetchUniversityCountQuery } from '../apis/universityApi';
-import { ArrayParam, useQueryParam, useQueryParams } from 'use-query-params';
+import { useQueryParam } from 'use-query-params';
 import { isEmpty } from 'lodash';
 
 interface Props {
@@ -27,24 +27,38 @@ const UniversityFilterModalContainer = (props: Props) => {
 
   const onSubmit = data => {
     console.log(data);
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    // formData에 false인 값은 제거한다.
     if (!isEmpty(formData)) {
+      // formData에 false인 값은 제거한다.
       const filteredData = Object.entries(formData)
         .filter(([_, value]) => value !== false)
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
       const query = queryString.stringify(filteredData);
-      setFilterQuery(query);
+      setFilterQuery(query, 'replace');
     }
-  }, [formData]);
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     universityCount();
   }, [filterQuery]);
+
+  useEffect(() => {
+    const result = queryString.parse(filterQuery);
+
+    if (!isEmpty(filterQuery)) {
+      setValue('applyGroup', result.applyGroup || false);
+      setValue('department', result.department || false);
+      setValue('exceptionPractical', result.exceptionPractical || false);
+      setValue('isEnglishRequired', result.isEnglishRequired || false);
+      setValue('isInquiryRequired', result.isInquiryRequired || false);
+      setValue('isKoreanRequired', result.isKoreanRequired || false);
+      setValue('isMathRequired', result.isMathRequired || false);
+      setValue('practicalContribution', result.practicalContribution || false);
+      setValue('testContribution', result.testContribution || false);
+      setValue('region', result.region || false);
+    }
+  }, [isOpen]);
 
   return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} searchResultNumber={data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
 };

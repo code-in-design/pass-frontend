@@ -4,7 +4,7 @@ import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
 import UniversityCategoryListItem, { UniversityCategoryItem } from './UniversityCategoryListItem';
-import { ArrayParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
+import { ArrayParam, StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 import { flatten, includes, isEmpty } from 'lodash';
 
 interface Props {
@@ -17,6 +17,7 @@ const UniversityCategoryList = (props: Props) => {
     region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
     department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
   });
+  const [filterQuery, setFilterQuery] = useQueryParam('filter');
 
   const handleItemClick = (item: UniversityCategoryItem) => {
     const { title, text } = item;
@@ -37,7 +38,7 @@ const UniversityCategoryList = (props: Props) => {
         const isSelectedInRegion = includes(region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
         const isSelectedInDepartment = includes(department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
 
-        if (item.text === '전체보기' && isNotFilterApplied) isSelected = true;
+        if (item.text === '전체보기' && isNotFilterApplied && !filterQuery) isSelected = true;
         if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
         if (item.title === '지역' && isSelectedInRegion) isSelected = true;
         if (item.title === '인기계열' && isSelectedInDepartment) isSelected = true;
