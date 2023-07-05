@@ -3,66 +3,48 @@ import styled from '@emotion/styled';
 import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
-import UniversityCategoryListItem from './UniversityCategoryListItem';
-import { useQueryParam } from 'use-query-params';
+import UniversityCategoryListItem, { UniversityCategoryItem } from './UniversityCategoryListItem';
+import { ArrayParam, BooleanParam, NumberParam, StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 import { useRouter } from 'next/router';
-import { isEmpty } from 'lodash';
+import { concat, flatten, includes, isEmpty, merge } from 'lodash';
 
 interface Props {
-  lists: [{ total?: string; title?: string; icon?: ReactNode; text: string }];
+  lists: UniversityCategoryItem[];
 }
 
 const UniversityCategoryList = (props: Props) => {
-  const [toggleItem, setToggleItem] = useState('');
-  const [applyGroup, setApplyGroup] = useQueryParam('모집군_리스트');
-  const [region, setRegion] = useQueryParam('지역_리스트');
-  const [department, setDepartment] = useQueryParam('학과_계열_리스트');
-  const [filterQuery, setFilterQuery] = useQueryParam('filter');
-  const router = useRouter();
+  const [query, setQuery] = useQueryParams({
+    applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
+    region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
+    department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
+  });
 
-  const handleItemClick = item => {
-    setToggleItem(item.text);
-    if (item.title === '') {
-      setApplyGroup(undefined);
-      setRegion(undefined);
-      setDepartment(undefined);
-    }
-    if (item.title === '모집군') {
-      setApplyGroup(item.text);
-      setRegion(undefined);
-      setDepartment(undefined);
-    }
-    if (item.title === '지역') {
-      setRegion(item.text);
-      setApplyGroup(undefined);
-      setDepartment(undefined);
-    }
-    if (item.title === '인기계열') {
-      setDepartment(item.text);
-      setApplyGroup(undefined);
-      setRegion(undefined);
-    }
+  const handleItemClick = (item: UniversityCategoryItem) => {
+    const { title, text } = item;
+    if (text === '전체보기') setQuery({ applyGroup: [], region: [], department: [] }, 'replace');
+    if (title === '모집군') setQuery({ applyGroup: [text!] }, 'replace');
+    if (title === '지역') setQuery({ region: [text!] }, 'replace');
+    if (title === '인기계열') setQuery({ department: [text!] }, 'replace');
   };
-
-  useEffect(() => {
-    if (isEmpty(router.query)) {
-      setToggleItem('전체');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (filterQuery) {
-      setApplyGroup(undefined);
-      setRegion(undefined);
-      setDepartment(undefined);
-    }
-  }, [filterQuery]);
 
   return (
     <Container>
-      {props.lists.map((list, index) => (
-        <UniversityCategoryListItem key={index} lists={list} isSelected={toggleItem === list.text || applyGroup === list.text || region === list.text || department === list.text} onClick={handleItemClick} />
-      ))}
+      {props?.lists?.map((item, index) => {
+        const { applyGroup, region, department } = query;
+        let isSelected = false;
+
+        const isNotFilterApplied = isEmpty(flatten([applyGroup, region, department]));
+        const isSelectedInApplyGroup = includes(applyGroup, item.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
+        const isSelectedInRegion = includes(region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
+        const isSelectedInDepartment = includes(department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
+
+        if (item.text === '전체보기' && isNotFilterApplied) isSelected = true;
+        if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
+        if (item.title === '지역' && isSelectedInRegion) isSelected = true;
+        if (item.title === '인기계열' && isSelectedInDepartment) isSelected = true;
+
+        return <UniversityCategoryListItem key={index} isSelected={isSelected} onClick={handleItemClick} {...item} />;
+      })}
     </Container>
   );
 };
@@ -70,7 +52,7 @@ const UniversityCategoryList = (props: Props) => {
 export default UniversityCategoryList;
 UniversityCategoryList.defaultProps = {
   lists: [
-    { total: '전체보기', title: '', text: '전체' },
+    { text: '전체보기' },
     { title: '모집군', icon: <Stickynote />, text: '가군' },
     { title: '모집군', icon: <Stickynote />, text: '나군' },
     { title: '모집군', icon: <Stickynote />, text: '다군' },
