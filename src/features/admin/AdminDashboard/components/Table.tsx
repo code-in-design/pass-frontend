@@ -47,17 +47,12 @@ const AgiGridWrapper = styled.div`
   .ag-row-even,
   .ag-row-odd {
     border: none;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: ${theme.colors.white};
   }
 
-  .ag-center-cols-clipper {
-  }
   // 헤더 배경
   .ag-header-viewport {
     background-color: ${theme.colors.gray6};
-  }
-
-  .ag-header ag-pivot-off {
   }
 
   // 헤더 가운데 정렬
@@ -89,7 +84,7 @@ const AgiGridWrapper = styled.div`
   }
 
   // 바디 로우 첫 번째 컬럼 폰트 변경
-  .ag-center-cols-container [aria-colindex='1'] {
+  .ag-center-cols-container .ag-cell:first-child {
     font-family: Pretendard SemiBold;
     line-height: 16px;
     letter-spacing: -0.24px;
@@ -103,10 +98,8 @@ const AgiGridWrapper = styled.div`
     letter-spacing: -0.28px;
   }
 
-  // 합계 2,3,4 열 폰트 색상 변경
-  .ag-floating-bottom-container [aria-colindex='2'],
-  .ag-floating-bottom-container [aria-colindex='3'],
-  .ag-floating-bottom-container [aria-colindex='4'] {
+  // 합계 첫 번째 열 제외하고 폰트 색상 변경
+  .ag-floating-bottom-container .ag-cell:not(:first-child) {
     color: ${theme.colors.blue};
   }
 `;
