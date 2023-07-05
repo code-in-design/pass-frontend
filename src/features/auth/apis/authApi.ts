@@ -3,8 +3,7 @@ import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils/StorageUtil';
 import tokenUtil from '../../../utils/TokenUtil';
 import { UserModel } from '@/models/UserModel';
-import tryParse from 'safe-json-parse';
-import { classToPlain } from 'class-transformer';
+
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
@@ -46,17 +45,11 @@ export const authApi = createApi({
       query: () => {
         const codeParams = new URLSearchParams(window.location.search);
         const code = codeParams.get('code');
-        return `/kakao/verify?code=${code}&redirect_uri=${encodeURIComponent('http://localhost:3000/oauth/kakao/kakaoVerify')}`;
+        return `/kakao/verify?code=${code}&redirect_uri=${encodeURIComponent(urls.redirectUri)}`;
       },
       transformResponse: (response: any, meta, arg) => {
         const result = JSON.parse(response);
         const kakaoId = result.kakao_id;
-
-        // if (!kakaoId) {
-        //   const { access_token, refresh_token } = result;
-        //   storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-        //   window.location.assign('/');
-        // }
 
         // 카카오로 로그인을하고, z-one에 회원가입이 되어있지 않은경우
         if (kakaoId) {
