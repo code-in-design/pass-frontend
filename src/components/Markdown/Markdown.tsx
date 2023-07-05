@@ -11,8 +11,12 @@ const Markdown: React.FC<Props> = props => {
       children={props.markdown}
       remarkPlugins={[remarkGfm]}
       components={{
-        // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
         em: ({ node, ...props }) => <i style={{ color: 'red' }} {...props} />,
+        strong: ({ node, ...props }) => <strong style={{ color: '#353644', fontWeight: 700, lineHeight: '24px' }} {...props} />,
+        h3: ({ node, ...props }) => <h3 style={{ marginBottom: '12px' }} {...props} />,
+        p: ({ node, ...props }) => <p style={{ fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#626474', marginBottom: '12px' }} {...props} />,
+        ol: ({ node, ...props }) => <ol style={{ fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#626474', marginBottom: '12px' }} {...props} />,
+        ul: ({ node, ...props }) => <ul style={{ fontSize: '16px', fontWeight: 400, lineHeight: '24px', color: '#626474', marginBottom: '12px' }} {...props} />,
       }}
     />
   );
