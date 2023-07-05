@@ -8,7 +8,7 @@ interface UserRatioChartProps {
 
 export const UserRatioChart = (props: UserRatioChartProps) => {
   const { data, options } = props;
-  return <DoughnutChartWithLegend title="사용자 비율" data={data} options={options} />;
+  return <DoughnutChartWithLegend title="사용자 비율" data={data} options={options} legendWidth="180px" />;
 };
 
 UserRatioChart.defaultProps = {

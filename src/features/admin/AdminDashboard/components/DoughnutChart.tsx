@@ -11,7 +11,6 @@ interface Props {
 }
 
 export function DoughnutChart(props: Props) {
-  const { options } = props;
   const rawData = props.data;
 
   const percentages = useMemo(() => rawData.map(data => data.value), [rawData]);
@@ -26,15 +25,17 @@ export function DoughnutChart(props: Props) {
       },
     ],
   };
+
+  const options = {
+    spacing: 1,
+    borderRadius: 4,
+    cutout: 60,
+    ...props.options,
+  };
   return <Doughnut data={data} options={options} width="100%" height="100%" />;
 }
 
 DoughnutChart.defaultProps = {
   percentages: [25, 25, 50],
   colors: ['#60C8DE', '#E4E6F0', '#6B77F8'],
-  options: {
-    spacing: 1,
-    borderRadius: 4,
-    cutout: 60,
-  },
 };
