@@ -29,13 +29,12 @@ class TokenUtil {
         .then(e => {
           if (e.status === 200) {
             accessToken = e.data.access_token as string;
-            console.log(accessToken);
             return accessToken;
           }
         })
         .catch(e => {
           if (e.response.status === 400) {
-            console.log(123);
+            window.location.assign('/signIn');
           }
         });
       // const accessToken = result?.data?.access_token as string;
@@ -64,7 +63,6 @@ class TokenUtil {
         window.location.assign('/signIn');
       }
     }
-
     // // 제대로 된 액세스토큰 다시 받아서 다시 저장하고
     // // 원래 호출 실패했던 API호출을 새로운 액세스토큰으로 재호출
     return response.text();
