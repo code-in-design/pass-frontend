@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../../public/images/icons/home.svg';
 import Analytics from '../../../../public/images/icons/analytics.svg';
+import UpdateIcon from '../../../../public/images/icons/sync.svg';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -24,10 +25,16 @@ export const AdminNavbar = (props: Props) => {
           </NavbarItem>
         ))}
       </MenuList>
-      <LogOut>
-        <LogOutImg src="/images/icons/logout.svg" alt="logout" />
-        <LogOutText>로그아웃</LogOutText>
-      </LogOut>
+      <BottomWrapper>
+        <UpdateButton>
+          <UpdateIcon />
+          <UpdateButtonText>업데이트</UpdateButtonText>
+        </UpdateButton>
+        <LogOut>
+          <LogOutImg src="/images/icons/logout.svg" alt="logout" />
+          <LogOutText>로그아웃</LogOutText>
+        </LogOut>
+      </BottomWrapper>
     </NavWrapper>
   );
 };
@@ -66,7 +73,7 @@ const LogOut = styled.div`
   display: flex;
   align-items: center;
   padding: 24px 16px;
-  border-top: 1px solid #e7eaef;
+  // border-top: 1px solid #e7eaef;
   margin-top: auto;
   &:hover {
     cursor: pointer;
@@ -84,4 +91,30 @@ const LogOutText = styled.span`
   font-weight: 500;
   line-height: 24px;
   color: #353644;
+`;
+
+const BottomWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+`;
+
+const UpdateButton = styled.button`
+  display: flex;
+  width: 224px;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-4, #e4e6f0);
+`;
+
+const UpdateButtonText = styled.span`
+  color: var(--gray-2, #9395a6);
+  font-size: 16px;
+  font-family: Pretendard Bold;
+  line-height: 24px;
+  letter-spacing: -0.32px;
 `;
