@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import queryString from 'query-string';
 import UniversitySettingFilterModal from '../../../components/Modal/UniversityFilterModal/UniversityFilterModal';
 import { useLazyFetchUniversityCountQuery } from '../apis/universityApi';
-import { useQueryParam } from 'use-query-params';
-import { isEmpty } from 'lodash';
+import { ArrayParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
+import { flatten, isEmpty } from 'lodash';
 
 interface Props {
   size: 'sm' | 'md';
@@ -16,6 +16,25 @@ const UniversityFilterModalContainer = (props: Props) => {
   const formData = watch();
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
   const [filterQuery, setFilterQuery] = useQueryParam('filter');
+  const [query, setQuery] = useQueryParams({
+    applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
+    region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
+    department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
+  });
+  const initialValues = {
+    applyGroup: false,
+    completionTeaching: false,
+    department: false,
+    exceptionPractical: false,
+    isEnglishRequired: false,
+    isInquiryRequired: false,
+    isKoreanRequired: false,
+    isMathRequired: false,
+    oneSubject: false,
+    practicalContribution: false,
+    region: false,
+    testContribution: false,
+  };
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -45,6 +64,7 @@ const UniversityFilterModalContainer = (props: Props) => {
 
   useEffect(() => {
     const result = queryString.parse(filterQuery);
+    const { applyGroup, region, department } = query;
 
     if (!isEmpty(filterQuery)) {
       setValue('applyGroup', result.applyGroup || false);
@@ -57,6 +77,13 @@ const UniversityFilterModalContainer = (props: Props) => {
       setValue('practicalContribution', result.practicalContribution || false);
       setValue('testContribution', result.testContribution || false);
       setValue('region', result.region || false);
+    }
+
+    if (!isEmpty(flatten([applyGroup, region, department]))) {
+      reset(initialValues);
+      setValue('applyGroup', applyGroup || false);
+      setValue('region', region || false);
+      setValue('department', department || false);
     }
   }, [isOpen]);
 
