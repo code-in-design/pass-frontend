@@ -11,10 +11,13 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
-      <AlertWrapper>
+      {/* <AlertWrapper>
         <Alert src="/images/icons/notifications.svg" alt="notifications" />
         <AlertDot />
-      </AlertWrapper>
+      </AlertWrapper> */}
+      <VersionBadge>
+        <VersionText>{'user ver. 2.3.2'}</VersionText>
+      </VersionBadge>
       <UserWrapper>
         <UserImage src={props.avatar} alt="user" />
         <UserInfo>
@@ -41,8 +44,10 @@ Header.defaultProps = {
 const HeaderWrapper = styled.header`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 28px 60px;
   background-color: ${props => props.theme.colors.white};
+  gap: 24px;
 `;
 
 const AlertWrapper = styled.div`
@@ -116,4 +121,21 @@ const UserEmail = styled.span`
   font-weight: 500;
   line-height: 20px;
   color: #737c89;
+`;
+
+const VersionBadge = styled.div`
+  display: inline-flex;
+  padding: 8px 16px;
+  height: fit-content;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--gray-black, #353644);
+`;
+
+const VersionText = styled.span`
+  color: var(--gray-white, #fff);
+  font-size: 14px;
+  font-family: Pretendard Regular;
+  line-height: 16px;
 `;
