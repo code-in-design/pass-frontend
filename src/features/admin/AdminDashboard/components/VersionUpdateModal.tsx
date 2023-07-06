@@ -1,177 +1,188 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import Select from '@/components/Select';
 import theme from '@/theme/theme';
-import { Button, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
+import { VersionBadge } from './VersionBadge';
+import { UpdateItem, UpdateItemProps } from './UpdateItem';
+import { UseFormRegister } from 'react-hook-form';
+import { UpdateInputs } from '../containers/DashboardModalContainer';
+import CalenderIcon from '../../../../../public/images/icons/calendarMonth.svg';
+
+interface SelectProps {
+  label: string;
+  value: string;
+}
 
 interface VersionUpdateModalProps {
-  isOpen?: boolean;
-  onClose?: () => void;
+  onNext?: () => void;
+  onPrev?: () => void;
+  options: SelectProps[];
+  updateItems?: UpdateItemProps[];
+  register: UseFormRegister<UpdateInputs>;
 }
 
 export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
-  const { isOpen, onClose } = props;
-  const versions = ['ver.2.3.0', 'ver.2.3.1', 'ver.2.3.2'];
-  const options = useMemo(
-    () =>
-      versions.map(version => {
-        return { value: version, label: version };
-      }),
-    [versions],
-  );
-  const updateItems = [
-    {
-      name: '업데이트 코멘트',
-      status: '작성 완료',
-    },
-    {
-      name: '3학년 예상 점수표',
-      status: '업로드 완료',
-    },
-    {
-      name: '2학년 예상 점수표',
-      status: '미완료',
-    },
-    {
-      name: '1학년 예상 점수표',
-      status: '미완료',
-    },
-  ];
+  const { onNext, onPrev, options, updateItems, register } = props;
 
   return (
-    <>
-      {isOpen && (
-        <ModalLayout isOpen={isOpen} onClose={onClose}>
-          <Flex width="429px" direction="column" gap="24px">
-            <TitleWrapper>
-              <Title>버전 업데이트</Title>
-              <VersionBadge>
-                <VersionText>{'user ver. 2.3.2'}</VersionText>
-              </VersionBadge>
-            </TitleWrapper>
-            <Flex direction="column" gap="12px">
-              <ContentWrapperTitle>버전 선택</ContentWrapperTitle>
-              <SelectorWrapper>
-                <Select size="md" width="100%" options={options} placeholder="업데이트할 버전을 선택해주세요" name="AnalysisSortng" setValue={() => {}} register={() => {}} />
-              </SelectorWrapper>
-            </Flex>
-            <Flex direction="column" gap="12px">
-              <ContentWrapper>
-                <ContentWrapperTitle>업데이트 예정일</ContentWrapperTitle>
-                <InuptDate type="datetime-local" />
-              </ContentWrapper>
-            </Flex>
-            <Flex direction="column" gap="12px">
-              <ContentWrapperTitle>업데이트 요소 상태</ContentWrapperTitle>
-              <Flex direction="column" gap="8px">
-                {updateItems.map(item => {
-                  return (
-                    <Flex justifyContent="space-between">
-                      <Flex>{item.name}</Flex>
-                      <Flex>{item.status}</Flex>
-                    </Flex>
-                  );
-                })}
-              </Flex>
-            </Flex>
-            <ButtonWrapper>
-              <Button>취소</Button>
-              <Button>업데이트하기</Button>
-            </ButtonWrapper>
-          </Flex>
-        </ModalLayout>
-      )}
-    </>
+    <ModalLayout onClose={onPrev} isCloseButton={false}>
+      <Container>
+        <TitleSection>
+          <Title>버전 업데이트</Title>
+          <VersionBadge text="user ver. 2.3.2" />
+        </TitleSection>
+        <Section>
+          <SectionTitle>버전 선택</SectionTitle>
+          <SelectWrapper>
+            <Select size="md" width="100%" options={options} placeholder="업데이트할 버전을 선택해주세요" name="AnalysisSortng" setValue={() => {}} />
+          </SelectWrapper>
+        </Section>
+        <Section>
+          <SectionTitle>업데이트 예정일</SectionTitle>
+          <CalendarWrapper>
+            <Label htmlFor="calendar">
+              <Date>2023.01.02 11:00</Date>
+              <CalenderIcon />
+            </Label>
+            <Calendar id="calendar" type="datetime-local" />
+          </CalendarWrapper>
+        </Section>
+        <Section>
+          <SectionTitle>업데이트 요소 상태</SectionTitle>
+          <UpdateItemBox>
+            {updateItems?.map((item, index) => {
+              console.log(item.name);
+              return <UpdateItem key={index} iconType={item.iconType} name={item.name} status={item.status} isActive={item.isActive} />;
+            })}
+          </UpdateItemBox>
+        </Section>
+        <ButtonSection>
+          <Button fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onPrev}>
+            취소
+          </Button>
+          <Button fontColor={theme.colors.white} backgroundColor={theme.colors.blue} onClick={onNext}>
+            업데이트하기
+          </Button>
+        </ButtonSection>
+      </Container>
+    </ModalLayout>
   );
 };
 
-const TitleWrapper = styled.div`
+interface ButtonProps {
+  fontColor: string;
+  backgroundColor: string;
+}
+
+const Container = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 365px;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const TitleSection = styled.div`
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  align-self: stretch;
 `;
 
 const Title = styled.span`
   color: ${theme.colors.black};
-  font-size: 20px;
   font-family: Pretendard Bold;
+  font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.4px;
 `;
 
-const VersionBadge = styled.div`
-  display: inline-flex;
-  padding: 8px 16px;
-  height: fit-content;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
-  background: ${theme.colors.grayBlack};
-`;
-
-const VersionText = styled.span`
-  color: ${theme.colors.white};
-  font-size: 14px;
-  font-family: Pretendard Regular;
-  line-height: 16px;
-`;
-
-const ContentBox = styled.div`
+const Section = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
-  gap: 24px;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
   gap: 12px;
   align-self: stretch;
 `;
 
-const ContentWrapperTitle = styled.span`
-  color: ${theme.colors.grayBlack};
+const SectionTitle = styled.span`
+  color: ${theme.colors.black};
+  font-family: Pretendard Bold;
   font-size: 16px;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.32px;
 `;
 
-const SelectorWrapper = styled.div`
-  width: 100%;
-  font-size: 16px;
+const UpdateItemBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
 `;
 
-const InuptDate = styled.input`
-  display: hidden;
-  position: relative;
-
-  &:after {
-    content: '';
-    display: flex;
-    height: 48px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border: 1px solid black;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-`;
-
-const ButtonWrapper = styled.div`
+const ButtonSection = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
 `;
+
+const Button = styled.button<ButtonProps>`
+  display: flex;
+  height: 44px;
+  padding: 16px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 16px;
+  color: ${({ fontColor }) => fontColor};
+  background: ${({ backgroundColor }) => backgroundColor};
+  font-family: Pretendard Bold;
+  line-height: 20px;
+  letter-spacing: -0.32px;
+`;
+
+const Calendar = styled.input`
+    flex: 1;
+  }
+`;
+
+const CalendarWrapper = styled.div`
+  display: flex;
+  input[type='datetime-local'] {
+    &::-webkit-calendar-picker-indicator,
+    &::-webkit-inner-spin-button {
+      width: 100%;
+      height: 48px;
+      opacity: 0;
+    }
+    appearance: none;
+  }
+  position: relative;
+`;
+
+const Label = styled.label`
+  display: flex;
+  height: 48px;
+  width: 100%;
+  padding: 16px 24px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 16px;
+  border: 1px solid ${theme.colors.gray4};
+  background: #fff;
+  position: absolute;
+  pointer-events: none;
+`;
+
+const Date = styled.span`
+  color: ${theme.colors.grayBlack};
+  font-family: Pretendard Bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.32px;
+`;
+
+const SelectWrapper = styled.div``;

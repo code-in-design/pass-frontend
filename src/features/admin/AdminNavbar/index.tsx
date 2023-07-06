@@ -7,6 +7,7 @@ import Analytics from '../../../../public/images/icons/analytics.svg';
 import UpdateIcon from '../../../../public/images/icons/sync.svg';
 import { useRouter } from 'next/router';
 import { VersionUpdateModal } from '../AdminDashboard/components/VersionUpdateModal';
+import { DashboardModalContainer } from '../AdminDashboard/containers/DashboardModalContainer';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
@@ -28,16 +29,12 @@ export const AdminNavbar = (props: Props) => {
         ))}
       </MenuList>
       <BottomWrapper>
-        <UpdateButton onClick={() => setIsOpen(!isOpen)}>
-          <UpdateIcon />
-          <UpdateButtonText>업데이트</UpdateButtonText>
-        </UpdateButton>
+        <DashboardModalContainer />
         <LogOut>
           <LogOutImg src="/images/icons/logout.svg" alt="logout" />
           <LogOutText>로그아웃</LogOutText>
         </LogOut>
       </BottomWrapper>
-      <VersionUpdateModal isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} />
     </NavWrapper>
   );
 };
