@@ -17,7 +17,7 @@ const UniversityFilterModalContainer = (props: Props) => {
   const formData = watch();
   const router = useRouter();
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
-  const [filterQuery, setFilterQuery] = useQueryParam<any>('filter');
+  // const [filterQuery, setFilterQuery] = useQueryParam<any>('filter');
   const [query, setQuery] = useQueryParams({
     applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
     region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
@@ -27,15 +27,15 @@ const UniversityFilterModalContainer = (props: Props) => {
     applyGroup: [],
     completionTeaching: false,
     department: [],
-    exceptionPractical: false,
-    isEnglishRequired: false,
-    isInquiryRequired: false,
-    isKoreanRequired: false,
-    isMathRequired: false,
+    exceptionPractical: [],
+    isEnglishRequired: [],
+    isInquiryRequired: [],
+    isKoreanRequired: [],
+    isMathRequired: [],
     oneSubject: false,
-    practicalContribution: false,
+    practicalContribution: [],
     region: [],
-    testContribution: false,
+    testContribution: [],
   };
 
   const openModal = useCallback(() => {
@@ -47,7 +47,7 @@ const UniversityFilterModalContainer = (props: Props) => {
   }, [isOpen]);
 
   const onSubmit = data => {
-    console.log(data);
+    console.log('formdata :', data);
     if (!isEmpty(formData)) {
       // formData에 false인 값은 제거한다.
       const filteredData = Object.entries(data)
@@ -55,37 +55,36 @@ const UniversityFilterModalContainer = (props: Props) => {
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
       const query = queryString.stringify(filteredData);
-      setFilterQuery(query, 'replace');
+      // setFilterQuery(query, 'replace');
     }
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    universityCount();
-  }, [filterQuery]);
+  // useEffect(() => {
+  //   universityCount();
+  // }, [filterQuery]);
 
   useEffect(() => {
-    const result = queryString.parse(filterQuery);
     const { applyGroup, region, department } = query;
+    // const result = queryString.parse(filterQuery);
 
-    if (!isEmpty(filterQuery)) {
-      console.log(result);
-      setValue('applyGroup', result.applyGroup || false);
-      setValue('department', result.department || false);
-      setValue('exceptionPractical', result.exceptionPractical || false);
-      setValue('isEnglishRequired', result.isEnglishRequired || false);
-      setValue('isInquiryRequired', result.isInquiryRequired || false);
-      setValue('isKoreanRequired', result.isKoreanRequired || false);
-      setValue('isMathRequired', result.isMathRequired || false);
-      setValue('practicalContribution', result.practicalContribution || false);
-      setValue('testContribution', result.testContribution || false);
-      setValue('region', result.region || false);
-    }
+    // if (!isEmpty(filterQuery)) {
+    //   setValue('applyGroup', result.applyGroup);
+    //   setValue('department', result.department);
+    //   setValue('exceptionPractical', result.exceptionPractical);
+    //   setValue('isEnglishRequired', result.isEnglishRequired);
+    //   setValue('isInquiryRequired', result.isInquiryRequired);
+    //   setValue('isKoreanRequired', result.isKoreanRequired);
+    //   setValue('isMathRequired', result.isMathRequired);
+    //   setValue('practicalContribution', result.practicalContribution);
+    //   setValue('testContribution', result.testContribution);
+    //   setValue('region', result.region);
+    // }
     if (!isEmpty(flatten([applyGroup, region, department]))) {
       reset(initialValues);
-      setValue('applyGroup', applyGroup || false);
-      setValue('region', region || false);
-      setValue('department', department || false);
+      setValue('applyGroup', applyGroup);
+      setValue('region', region);
+      setValue('department', department);
     }
   }, [isOpen]);
 
