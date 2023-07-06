@@ -98,7 +98,9 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
           <GradeInputFormItem title="탐구" isRequire={true} register={props.register} setValue={props.setValue}>
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
-              <Select size="md" width="247px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+              <SelectContainer>
+                <Select height={44} border="16px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+              </SelectContainer>
               <GradeScoreInput width="243px" title="점수" margintTop="12px" wapperWidth="auto" inputText="점">
                 <ScoreInput
                   {...props?.register?.('inquiry1RawScore', {
@@ -118,7 +120,9 @@ const ScoreFormBeforeGradeConfirmed = (props: ScoreFormBeforeGradeConfirmedProps
             </SelectWrapper>
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
-              <Select size="md" width="247px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue!} register={props.register!} required={'과목을 선택해주세요'} />
+              <SelectContainer>
+                <Select height={44} border="16px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue!} register={props.register!} required={'과목을 선택해주세요'} />
+              </SelectContainer>
               <GradeScoreInput width="243px" margintTop="8px" wapperWidth="auto" inputText="점">
                 <ScoreInput
                   {...props?.register?.('inquiry2RawScore', {
@@ -315,4 +319,8 @@ const TooltipText = styled.div`
 const TooltipContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const SelectContainer = styled.div`
+  width: 247px;
 `;

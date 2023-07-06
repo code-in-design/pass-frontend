@@ -4,10 +4,9 @@ import { ReactNode, useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import Home from '../../../../public/images/icons/home.svg';
 import Analytics from '../../../../public/images/icons/analytics.svg';
-import UpdateIcon from '../../../../public/images/icons/sync.svg';
 import { useRouter } from 'next/router';
-import { VersionUpdateModal } from '../AdminDashboard/components/VersionUpdateModal';
 import { DashboardModalContainer } from '../AdminDashboard/containers/DashboardModalContainer';
+import theme from '@/theme/theme';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
@@ -51,7 +50,7 @@ const NavWrapper = styled.nav`
   min-width: 288px;
   height: 100vh;
   padding: 34px 32px 40px;
-  background-color: #fff;
+  background-color: ${theme.colors.white};
   display: flex;
   flex-direction: column;
 `;

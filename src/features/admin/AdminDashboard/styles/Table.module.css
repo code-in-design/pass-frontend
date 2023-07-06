@@ -1,3 +1,4 @@
-.centerHeader .ag-header-cell-label {
+.table {
+  font-size: 14px;
   justify-content: center;
 }

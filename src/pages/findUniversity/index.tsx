@@ -4,6 +4,7 @@ import Layout from '@/components/Layout/Layout';
 import UniversityCategoryList from '@/features/universities/components/FindUniversity/UniversityCategoryList';
 import UniversitySearchContainer from '@/features/universities/containers/UniversitySearchContainer';
 import UniversityTableContainer from '@/features/universities/containers/UniversityTableContainer';
+import UniversityFilterModalContainer from '@/features/universities/containers/UniversitySettingFilterModalContainer';
 
 const FindUniversityPage = () => {
   return (
@@ -11,7 +12,10 @@ const FindUniversityPage = () => {
       <Container>
         <Title>대학 찾기</Title>
         <UniversityCategoryList />
-        <UniversitySearchContainer />
+        <Wrapper>
+          <UniversitySearchContainer />
+          <UniversityFilterModalContainer size="md" />
+        </Wrapper>
         <UniversityTableContainer />
       </Container>
     </Layout>
@@ -36,4 +40,10 @@ const Title = styled.div`
   line-height: 32px;
   color: ${props => props.theme.colors.grayBlack};
   margin-bottom: 24px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
 `;

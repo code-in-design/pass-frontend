@@ -34,7 +34,7 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
         <Section>
           <SectionTitle>버전 선택</SectionTitle>
           <SelectWrapper>
-            <Select size="md" width="100%" options={options} placeholder="업데이트할 버전을 선택해주세요" name="AnalysisSortng" setValue={() => {}} />
+            <Select height={48} border="16px" size="md" width="100%" options={options} placeholder="업데이트할 버전을 선택해주세요" name="AnalysisSortng" setValue={() => {}} register={() => {}} />
           </SelectWrapper>
         </Section>
         <Section>
@@ -185,4 +185,6 @@ const Date = styled.span`
   letter-spacing: -0.32px;
 `;
 
-const SelectWrapper = styled.div``;
+const SelectWrapper = styled.div`
+  border-radius: 16px;
+`;
