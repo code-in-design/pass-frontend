@@ -7,9 +7,10 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import { VersionUpdateModal } from '../components/VersionUpdateModal';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { UpdateItemProps } from '../components/UpdateItem';
+import dayjs from 'dayjs';
 
 export interface UpdateInputs {
-  version: string;
+  version?: string;
   date?: string;
 }
 
@@ -18,8 +19,18 @@ export const DashboardModalContainer = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
-  } = useForm<UpdateInputs>();
+  } = useForm();
+
+  console.log('watch', watch());
+  const selectedVersion = watch('versionSorting', '');
+  const toBeUpdatedDate = watch('toBeUpdatedDate', '');
+  const formattedDate = dayjs(toBeUpdatedDate).format('YYYY.MM.DD HH:mm');
+  useEffect(() => {
+    console.log(selectedVersion);
+  }, [selectedVersion]);
 
   const versions = ['2.3.0', '2.3.1', '2.3.2'];
   const options = useMemo(
@@ -74,8 +85,8 @@ export const DashboardModalContainer = () => {
         <UpdateIcon />
         <UpdateButtonText>업데이트</UpdateButtonText>
       </UpdateButton>
-      {step === 1 && <VersionUpdateModal onNext={goNextStep} onPrev={goPrevStep} options={options} updateItems={updateItems} register={register} />}
-      {step === 2 && <ConfirmModal onPrev={goPrevStep} onReset={resetStep} />}
+      {step === 1 && <VersionUpdateModal onNext={goNextStep} onPrev={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} />}
+      {step === 2 && <ConfirmModal onPrev={goPrevStep} onReset={resetStep} version={selectedVersion} handleSubmit={handleSubmit} />}
     </>
   );
 };

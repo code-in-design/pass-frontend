@@ -1,36 +1,46 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
+import { FieldValues, UseFormHandleSubmit, useForm } from 'react-hook-form';
 
 interface ConfirmModalProps {
   isOpen?: boolean;
   onPrev?: () => void;
-  onReset?: () => void;
+  onReset: () => void;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
   version: string;
 }
 
 export const ConfirmModal = (props: ConfirmModalProps) => {
-  const { onPrev, onReset, version } = props;
+  const { onPrev, onReset, version, handleSubmit } = props;
+
+  const onSubmit = data => {
+    console.log('제출', data);
+    onReset();
+  };
+
   return (
     <ModalLayout isCloseButton={false}>
-      <Container>
-        <Title>업데이트 확인</Title>
-        <VersionDisplaySection>
-          <VersionDisplaySectionText>아래 버전으로 업데이트합니다.</VersionDisplaySectionText>
-          <VersionDisplay>
-            <PlaceholderText>ver.</PlaceholderText>
-            <VersionText>{version}</VersionText>
-          </VersionDisplay>
-        </VersionDisplaySection>
-        <ButtonSection>
-          <Button fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onPrev}>
-            이전
-          </Button>
-          <Button fontColor={theme.colors.white} backgroundColor={theme.colors.blue} onClick={onReset}>
-            업데이트
-          </Button>
-        </ButtonSection>
-      </Container>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Container>
+          <Title>업데이트 확인</Title>
+          <VersionDisplaySection>
+            <VersionDisplaySectionText>아래 버전으로 업데이트합니다.</VersionDisplaySectionText>
+            <VersionDisplay>
+              <PlaceholderText>ver.</PlaceholderText>
+              <VersionText>{version}</VersionText>
+            </VersionDisplay>
+          </VersionDisplaySection>
+          <ButtonSection>
+            <Button type="button" fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onPrev}>
+              이전
+            </Button>
+            <Button type="submit" fontColor={theme.colors.white} backgroundColor={theme.colors.blue}>
+              업데이트
+            </Button>
+          </ButtonSection>
+        </Container>
+      </form>
     </ModalLayout>
   );
 };

@@ -4,8 +4,7 @@ import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import { VersionBadge } from './VersionBadge';
 import { UpdateItem, UpdateItemProps } from './UpdateItem';
-import { UseFormRegister } from 'react-hook-form';
-import { UpdateInputs } from '../containers/DashboardModalContainer';
+import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
 import CalenderIcon from '../../../../../public/images/icons/calendarMonth.svg';
 
 interface SelectProps {
@@ -18,11 +17,13 @@ interface VersionUpdateModalProps {
   onPrev?: () => void;
   options: SelectProps[];
   updateItems?: UpdateItemProps[];
-  register: UseFormRegister<UpdateInputs>;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  date: string;
 }
 
 export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
-  const { onNext, onPrev, options, updateItems, register } = props;
+  const { onNext, onPrev, options, updateItems, setValue, register, date } = props;
 
   return (
     <ModalLayout onClose={onPrev} isCloseButton={false}>
@@ -34,24 +35,23 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
         <Section>
           <SectionTitle>버전 선택</SectionTitle>
           <SelectWrapper>
-            <Select height={48} border="16px" size="md" width="100%" options={options} placeholder="업데이트할 버전을 선택해주세요" name="AnalysisSortng" setValue={() => {}} register={() => {}} />
+            <Select height={48} border="16px" options={options} placeholder="업데이트할 버전을 선택해주세요" name="versionSorting" setValue={setValue} register={register} />
           </SelectWrapper>
         </Section>
         <Section>
           <SectionTitle>업데이트 예정일</SectionTitle>
           <CalendarWrapper>
             <Label htmlFor="calendar">
-              <Date>2023.01.02 11:00</Date>
+              <Date>{date}</Date>
               <CalenderIcon />
             </Label>
-            <Calendar id="calendar" type="datetime-local" />
+            <Calendar id="calendar" type="datetime-local" {...register('toBeUpdatedDate')} />
           </CalendarWrapper>
         </Section>
         <Section>
           <SectionTitle>업데이트 요소 상태</SectionTitle>
           <UpdateItemBox>
             {updateItems?.map((item, index) => {
-              console.log(item.name);
               return <UpdateItem key={index} iconType={item.iconType} name={item.name} status={item.status} isActive={item.isActive} />;
             })}
           </UpdateItemBox>
@@ -158,6 +158,7 @@ const CalendarWrapper = styled.div`
       opacity: 0;
     }
     appearance: none;
+    outline: none;
   }
   position: relative;
 `;
