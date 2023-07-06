@@ -1,39 +1,50 @@
-import React, { ReactNode, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
-import UniversityCategoryListItem from './UniversityCategoryListItem';
-import { useQueryParam } from 'use-query-params';
+import UniversityCategoryListItem, { UniversityCategoryItem } from './UniversityCategoryListItem';
+import { ArrayParam, StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
+import { flatten, includes, isEmpty } from 'lodash';
 
 interface Props {
-  lists: [{ total?: string; title?: string; icon?: ReactNode; text: string }];
+  lists: UniversityCategoryItem[];
 }
 
 const UniversityCategoryList = (props: Props) => {
-  const [toggleItem, setToggleItem] = useState('');
-  const [applicationPeriod, setApplicationPeriod] = useQueryParam('applicationPeriod');
-  const [region, setRegion] = useQueryParam('region');
-  const [universityDepartment, setUniversityDepartment] = useQueryParam('universityDepartment');
+  const [query, setQuery] = useQueryParams({
+    applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
+    region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
+    department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
+  });
+  const [filterQuery, setFilterQuery] = useQueryParam('filter');
 
-  const handleItemClick = item => {
-    setToggleItem(item.text);
-    if (item.title === '모집군') {
-      setApplicationPeriod(item.text);
-    }
-    if (item.title === '지역') {
-      setRegion(item.text);
-    }
-    if (item.title === '인기계열') {
-      setUniversityDepartment(item.text);
-    }
+  const handleItemClick = (item: UniversityCategoryItem) => {
+    const { title, text } = item;
+    if (text === '전체보기') setQuery({ applyGroup: [], region: [], department: [] }, 'replace');
+    if (title === '모집군') setQuery({ applyGroup: [text!] }, 'replace');
+    if (title === '지역') setQuery({ region: [text!] }, 'replace');
+    if (title === '인기계열') setQuery({ department: [text!] }, 'replace');
   };
 
   return (
     <Container>
-      {props.lists.map((list, index) => (
-        <UniversityCategoryListItem key={index} lists={list} isSelected={toggleItem === list.text} onClick={handleItemClick} />
-      ))}
+      {props?.lists?.map((item, index) => {
+        const { applyGroup, region, department } = query;
+        let isSelected = false;
+
+        const isNotFilterApplied = isEmpty(flatten([applyGroup, region, department]));
+        const isSelectedInApplyGroup = includes(applyGroup, item.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
+        const isSelectedInRegion = includes(region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
+        const isSelectedInDepartment = includes(department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
+
+        if (item.text === '전체보기' && isNotFilterApplied && !filterQuery) isSelected = true;
+        if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
+        if (item.title === '지역' && isSelectedInRegion) isSelected = true;
+        if (item.title === '인기계열' && isSelectedInDepartment) isSelected = true;
+
+        return <UniversityCategoryListItem key={index} isSelected={isSelected} onClick={handleItemClick} {...item} />;
+      })}
     </Container>
   );
 };
@@ -41,12 +52,12 @@ const UniversityCategoryList = (props: Props) => {
 export default UniversityCategoryList;
 UniversityCategoryList.defaultProps = {
   lists: [
-    { total: '전체보기', title: '', text: '' },
+    { text: '전체보기' },
     { title: '모집군', icon: <Stickynote />, text: '가군' },
     { title: '모집군', icon: <Stickynote />, text: '나군' },
     { title: '모집군', icon: <Stickynote />, text: '다군' },
     { title: '지역', icon: <Location />, text: '서울권' },
-    { title: '지역', icon: <Location />, text: '수도권' },
+    { title: '지역', icon: <Location />, text: '경기권' },
     { title: '인기계열', icon: <School />, text: '체육교육과' },
   ],
 };

@@ -20,7 +20,7 @@ const useScores = () => {
   const isBeforeScoreEnteredOnBackend = !isEmpty(beforeScore.data);
   const isAfterScoreEnteredOnBackend = !isEmpty(afterScore.data);
   // TODO: 백엔드에서 데이터 받아와서 구분하기
-  const 가채점기간 = false;
+  const 가채점기간 = true;
   const 성적발표후 = !가채점기간;
 
   const step = useSelector((state: RootState) => state.scores.step);

@@ -14,7 +14,9 @@ const Update = (props: VersionsModel) => {
     <Container>
       <TitleWrapper>
         <Title>업데이트 일시 & Comment</Title>
-        <Select size="mini" options={props.options} defaultValue={props.options?.[0]} name="version" setValue={setValue} register={props.register} />
+        <SelectWrapper>
+          <Select height={28} border="8px" isNoBorder options={props.options} defaultValue={props.options?.[0]} name="version" setValue={setValue} register={props.register} />
+        </SelectWrapper>
       </TitleWrapper>
       <ContentWrapper>
         <Avatar src="/images/icons/avatar.svg" alt="avatar" />
@@ -60,14 +62,8 @@ const Title = styled.div`
   color: ${props => props.theme.colors.grayBlack};
 `;
 
-const SelectUpdate = styled.select`
-  width: 148px;
-  height: 28px;
-  border-radius: 8px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+const SelectWrapper = styled.div`
+  min-width: 148px;
 `;
 
 const ContentWrapper = styled.div`

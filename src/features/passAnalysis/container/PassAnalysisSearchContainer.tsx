@@ -17,8 +17,8 @@ const PassAnalysisSearchContainer = () => {
       </InputContainer>
       <SelectContainer>
         <Select
-          size="sm"
-          width="112px"
+          height={40}
+          border="10px"
           options={[{ value: '가나다', label: '가나다 순' }, { value: '모집군', label: '모집군 순' }, , { value: '지원가능', label: '지원가능 순' }]}
           defaultValue={{ value: '가나다', label: '가나다 순' }}
           name="AnalysisSortng"

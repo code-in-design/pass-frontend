@@ -20,12 +20,25 @@ class TokenUtil {
   };
 
   refreshAccessTokenByRefreshToken = async (refreshToken: string) => {
+    let accessToken;
     try {
       const result = await axios({
         method: 'get',
         url: `${urls.baseUrl}/auth/token/${refreshToken}`,
-      });
-      const accessToken = result?.data?.access_token as string;
+      })
+        .then(e => {
+          if (e.status === 200) {
+            accessToken = e.data.access_token as string;
+            return accessToken;
+          }
+        })
+        .catch(e => {
+          if (e.response.status === 400) {
+            window.location.assign('/signIn');
+          }
+        });
+      // const accessToken = result?.data?.access_token as string;
+      // console.log(accessToken);
       return accessToken;
     } catch (e) {
       console.error(e);
@@ -50,7 +63,6 @@ class TokenUtil {
         window.location.assign('/signIn');
       }
     }
-
     // // 제대로 된 액세스토큰 다시 받아서 다시 저장하고
     // // 원래 호출 실패했던 API호출을 새로운 액세스토큰으로 재호출
     return response.text();

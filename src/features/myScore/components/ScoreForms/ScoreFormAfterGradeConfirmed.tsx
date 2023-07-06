@@ -144,7 +144,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
             <SelectWrapper>
               <SubjectTitle>선택 1</SubjectTitle>
               <SelectMargin>
-                <Select size="md" width="211px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required="과목을 선택해주세요" />
+                <Select height={44} border="16px" options={props.inquiry1} placeholder="과목 선택" name="inquiry1OptionalSubject" setValue={props.setValue} register={props.register} required="과목을 선택해주세요" />
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput title="표준점수" width="88px" margintTop="12px" titleAlign="center">
@@ -197,7 +197,7 @@ const ScoreFormAfterGradeConfirmed = (props: ScoreFormAfterGradeConfirmedProps) 
             <SelectWrapper>
               <SubjectTitle>선택 2</SubjectTitle>
               <SelectMargin>
-                <Select size="md" width="211px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
+                <Select height={44} border="16px" options={props.inquiry2} placeholder="과목 선택" name="inquiry2OptionalSubject" setValue={props.setValue} register={props.register} required={'과목을 선택해주세요'} />
               </SelectMargin>
               <GradeScoreInputWrapper>
                 <GradeScoreInput width="88px" margintTop="12px">
@@ -398,4 +398,5 @@ const GradeScoreInputWrapper = styled.div`
 
 const SelectMargin = styled.div`
   margin-right: 12px;
+  width: 211px;
 `;

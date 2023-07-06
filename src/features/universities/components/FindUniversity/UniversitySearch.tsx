@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
 import InputFindIcon from '../../../../../public/images/icons/search.svg';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { useQueryParam } from 'use-query-params';
 
 const UniversitySearch = () => {
   const [searchUniversity, setSearchUniversity] = useQueryParam('searchUniversity');

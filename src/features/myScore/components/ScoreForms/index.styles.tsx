@@ -89,7 +89,6 @@ export const Informations = styled.div``;
 export const Information = styled.div`
   display: flex;
   align-items: center;
-  width: 445px;
   height: 40px;
   border-radius: 16px;
   padding: 8px 16px;

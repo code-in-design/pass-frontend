@@ -43,20 +43,26 @@ const FinalSelectionUniversity = (props: Props) => {
               <IconWrapper>
                 <InfoIcon />
               </IconWrapper>
-              <InfoText>실기 기록 변경 횟수는 제한되어 있습니다.</InfoText>
+              <InfoText>체육대학이 아닐 경우, - 를 선택해주세요.</InfoText>
             </Info>
             <SelectSection>
               <SelectWrapper>
                 <SelectText>가군 지원대학</SelectText>
-                <Select name="first" size="md" options={props.first} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                <SelcetWrapper>
+                  <Select name="first" height={44} border="16px" options={props.first} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                </SelcetWrapper>
               </SelectWrapper>
               <SelectWrapper>
                 <SelectText>나군 지원대학</SelectText>
-                <Select name="second" size="md" options={props.second} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                <SelcetWrapper>
+                  <Select name="second" height={44} border="16px" options={props.second} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                </SelcetWrapper>
               </SelectWrapper>
               <SelectWrapper>
                 <SelectText>다군 지원대학</SelectText>
-                <Select name="third" size="md" options={props.third} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                <SelcetWrapper>
+                  <Select name="third" height={44} border="16px" options={props.third} placeholder="대학·학과 선택" setValue={setValue} register={props.register} />
+                </SelcetWrapper>
               </SelectWrapper>
             </SelectSection>
             <Button type="submit">선택 완료</Button>
@@ -183,4 +189,8 @@ const IconWrapper = styled.div`
   margin-right: 10px;
   width: 20px;
   height: 20px;
+`;
+
+const SelcetWrapper = styled.div`
+  min-width: 315px;
 `;
