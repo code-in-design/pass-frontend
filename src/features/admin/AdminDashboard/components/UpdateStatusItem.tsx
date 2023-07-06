@@ -4,25 +4,25 @@ import Attachment from '../../../../../public/images/icons/attachment.svg';
 import Percent from '../../../../../public/images/icons/percent.svg';
 import theme from '@/theme/theme';
 
-export interface UpdateItemProps {
-  iconType: 'comment' | 'attachment' | 'percent';
+export interface UpdateStatusItemProps {
+  iconType: keyof typeof UpdateStatusItemIcons;
   name: string;
   status: '업로드 완료' | '작성 완료' | '미완료';
   isActive?: boolean;
 }
 
-const UpdateItemIcons = {
+const UpdateStatusItemIcons = {
   comment: <MarkUnreadChat />,
   attachment: <Attachment />,
   percent: <Percent />,
 };
 
-export const UpdateItem = (props: UpdateItemProps) => {
+export const UpdateStatusItem = (props: UpdateStatusItemProps) => {
   const { iconType, name, status, isActive } = props;
   return (
     <Container>
       <Wrapper>
-        {UpdateItemIcons[iconType]}
+        {UpdateStatusItemIcons[iconType]}
         <Content>{name}</Content>
       </Wrapper>
       {/* <Badge>sdfds</Badge> */}

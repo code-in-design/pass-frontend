@@ -1,18 +1,18 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
-import { FieldValues, UseFormHandleSubmit, useForm } from 'react-hook-form';
+import { FieldValues, UseFormHandleSubmit } from 'react-hook-form';
 
-interface ConfirmModalProps {
+interface UpdateConfirmModalProps {
   isOpen?: boolean;
-  onPrev?: () => void;
+  onClickPreviousButton?: () => void;
   onReset: () => void;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   version: string;
 }
 
-export const ConfirmModal = (props: ConfirmModalProps) => {
-  const { onPrev, onReset, version, handleSubmit } = props;
+export const UpdateConfirmModal = (props: UpdateConfirmModalProps) => {
+  const { onClickPreviousButton, onReset, version, handleSubmit } = props;
 
   const onSubmit = data => {
     console.log('제출', data);
@@ -20,7 +20,7 @@ export const ConfirmModal = (props: ConfirmModalProps) => {
   };
 
   return (
-    <ModalLayout isCloseButton={false}>
+    <ModalLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Title>업데이트 확인</Title>
@@ -32,7 +32,7 @@ export const ConfirmModal = (props: ConfirmModalProps) => {
             </VersionDisplay>
           </VersionDisplaySection>
           <ButtonSection>
-            <Button type="button" fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onPrev}>
+            <Button type="button" fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onClickPreviousButton}>
               이전
             </Button>
             <Button type="submit" fontColor={theme.colors.white} backgroundColor={theme.colors.blue}>
@@ -45,7 +45,7 @@ export const ConfirmModal = (props: ConfirmModalProps) => {
   );
 };
 
-ConfirmModal.defaultProps = {
+UpdateConfirmModal.defaultProps = {
   version: '2.1.03.0',
 };
 

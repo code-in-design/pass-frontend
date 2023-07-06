@@ -6,18 +6,23 @@ interface HeaderProps {
   name: string;
   email: string;
   children: ReactNode;
+  version?: string;
+  isAdmin: boolean;
 }
 
 const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
-      {/* <AlertWrapper>
-        <Alert src="/images/icons/notifications.svg" alt="notifications" />
-        <AlertDot />
-      </AlertWrapper> */}
-      <VersionBadge>
-        <VersionText>{'user ver. 2.3.2'}</VersionText>
-      </VersionBadge>
+      {!props.isAdmin ? (
+        <AlertWrapper>
+          <Alert src="/images/icons/notifications.svg" alt="notifications" />
+          <AlertDot />
+        </AlertWrapper>
+      ) : (
+        <VersionBadge>
+          <VersionText>{props.version}</VersionText>
+        </VersionBadge>
+      )}
       <UserWrapper>
         <UserImage src={props.avatar} alt="user" />
         <UserInfo>
@@ -39,6 +44,8 @@ Header.defaultProps = {
   avatar: '/images/user/user.png',
   membership: 'Basic',
   userEmail: 'gks3628@naver.com',
+  version: 'user ver. 2.3.2',
+  isAdmin: false,
 };
 
 const HeaderWrapper = styled.header`

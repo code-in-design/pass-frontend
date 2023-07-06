@@ -3,11 +3,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UpdateIcon from '../../../../../public/images/icons/sync.svg';
 import theme from '@/theme/theme';
-import ModalLayout from '@/components/Modal/ModalLayout';
-import { VersionUpdateModal } from '../components/VersionUpdateModal';
-import { ConfirmModal } from '../components/ConfirmModal';
-import { UpdateItemProps } from '../components/UpdateItem';
+import { VersionUpdateModal } from '../components/modal/VersionUpdateModal';
+import { UpdateConfirmModal } from '../components/modal/UpdateConfirmModal';
+import { UpdateStatusItemProps } from '../components/UpdateStatusItem';
 import dayjs from 'dayjs';
+import lodash from 'lodash';
 
 export interface UpdateInputs {
   version?: string;
@@ -27,7 +27,7 @@ export const DashboardModalContainer = () => {
   console.log('watch', watch());
   const selectedVersion = watch('versionSorting', '');
   const toBeUpdatedDate = watch('toBeUpdatedDate', '');
-  const formattedDate = dayjs(toBeUpdatedDate).format('YYYY.MM.DD HH:mm');
+  const formattedDate = lodash.isEmpty(toBeUpdatedDate) ? '' : dayjs(toBeUpdatedDate).format('YYYY.MM.DD HH:mm');
   useEffect(() => {
     console.log(selectedVersion);
   }, [selectedVersion]);
@@ -40,7 +40,7 @@ export const DashboardModalContainer = () => {
       }),
     [versions],
   );
-  const updateItems: UpdateItemProps[] = [
+  const updateItems: UpdateStatusItemProps[] = [
     {
       iconType: 'comment',
       name: '업데이트 코멘트',
@@ -82,11 +82,11 @@ export const DashboardModalContainer = () => {
   return (
     <>
       <UpdateButton onClick={goNextStep}>
-        <UpdateIcon />
+        <UpdateIcon width={24} height={24} />
         <UpdateButtonText>업데이트</UpdateButtonText>
       </UpdateButton>
-      {step === 1 && <VersionUpdateModal onNext={goNextStep} onPrev={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} />}
-      {step === 2 && <ConfirmModal onPrev={goPrevStep} onReset={resetStep} version={selectedVersion} handleSubmit={handleSubmit} />}
+      {step === 1 && <VersionUpdateModal onClickNextButton={goNextStep} onClickPreviousButton={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} />}
+      {step === 2 && <UpdateConfirmModal onClickPreviousButton={goPrevStep} onReset={resetStep} version={selectedVersion} handleSubmit={handleSubmit} />}
     </>
   );
 };

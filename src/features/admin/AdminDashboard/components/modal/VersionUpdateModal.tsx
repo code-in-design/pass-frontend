@@ -2,10 +2,10 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import Select from '@/components/Select';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
-import { VersionBadge } from './VersionBadge';
-import { UpdateItem, UpdateItemProps } from './UpdateItem';
+import { VersionBadge } from '../VersionBadge';
+import { UpdateStatusItem, UpdateStatusItemProps } from '../UpdateStatusItem';
 import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
-import CalenderIcon from '../../../../../public/images/icons/calendarMonth.svg';
+import CalenderIcon from '../../../../../../public/images/icons/calendarMonth.svg';
 
 interface SelectProps {
   label: string;
@@ -13,20 +13,20 @@ interface SelectProps {
 }
 
 interface VersionUpdateModalProps {
-  onNext?: () => void;
-  onPrev?: () => void;
+  onClickNextButton?: () => void;
+  onClickPreviousButton?: () => void;
   options: SelectProps[];
-  updateItems?: UpdateItemProps[];
+  updateItems?: UpdateStatusItemProps[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   date: string;
 }
 
 export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
-  const { onNext, onPrev, options, updateItems, setValue, register, date } = props;
+  const { onClickNextButton, onClickPreviousButton, options, updateItems, setValue, register, date } = props;
 
   return (
-    <ModalLayout onClose={onPrev} isCloseButton={false}>
+    <ModalLayout onClose={onClickPreviousButton}>
       <Container>
         <TitleSection>
           <Title>버전 업데이트</Title>
@@ -43,7 +43,7 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
           <CalendarWrapper>
             <Label htmlFor="calendar">
               <Date>{date}</Date>
-              <CalenderIcon />
+              <CalenderIcon width={20} height={20} />
             </Label>
             <Calendar id="calendar" type="datetime-local" {...register('toBeUpdatedDate')} />
           </CalendarWrapper>
@@ -52,15 +52,15 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
           <SectionTitle>업데이트 요소 상태</SectionTitle>
           <UpdateItemBox>
             {updateItems?.map((item, index) => {
-              return <UpdateItem key={index} iconType={item.iconType} name={item.name} status={item.status} isActive={item.isActive} />;
+              return <UpdateStatusItem key={index} iconType={item.iconType} name={item.name} status={item.status} isActive={item.isActive} />;
             })}
           </UpdateItemBox>
         </Section>
         <ButtonSection>
-          <Button fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onPrev}>
+          <Button fontColor={theme.colors.gray1} backgroundColor={theme.colors.gray4} onClick={onClickPreviousButton}>
             취소
           </Button>
-          <Button fontColor={theme.colors.white} backgroundColor={theme.colors.blue} onClick={onNext}>
+          <Button fontColor={theme.colors.white} backgroundColor={theme.colors.blue} onClick={onClickNextButton}>
             업데이트하기
           </Button>
         </ButtonSection>
