@@ -15,7 +15,7 @@ const UniversityFilterModalContainer = (props: Props) => {
   const { register, handleSubmit, setValue, watch, reset, getValues } = useForm();
   const formData = watch();
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
-  const [filterQuery, setFilterQuery] = useQueryParam('filter');
+  const [filterQuery, setFilterQuery] = useQueryParam<any>('filter');
   const [query, setQuery] = useQueryParams({
     applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
     region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
