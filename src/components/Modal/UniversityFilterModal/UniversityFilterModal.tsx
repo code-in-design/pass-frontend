@@ -37,13 +37,13 @@ const UniversityFilterModal = (props: Props) => {
               <Left>
                 <FindUniversityFilterModalItem title="모집시기" subtitle="* 중복 선택 가능합니다">
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup" defaultChecked={router.query.applyGroup === '가군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup">
                       가군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup" defaultChecked={router.query.applyGroup === '나군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup">
                       나군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup" defaultChecked={router.query.applyGroup === '다군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup">
                       다군
                     </Checkbox>
                   </FlexContainer>

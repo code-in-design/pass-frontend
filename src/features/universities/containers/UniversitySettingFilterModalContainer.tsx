@@ -5,6 +5,7 @@ import UniversitySettingFilterModal from '../../../components/Modal/UniversityFi
 import { useLazyFetchUniversityCountQuery } from '../apis/universityApi';
 import { ArrayParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 import { flatten, isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
 
 interface Props {
   size: 'sm' | 'md';
@@ -14,6 +15,7 @@ const UniversityFilterModalContainer = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, setValue, watch, reset, getValues } = useForm();
   const formData = watch();
+  const router = useRouter();
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
   const [filterQuery, setFilterQuery] = useQueryParam<any>('filter');
   const [query, setQuery] = useQueryParams({
@@ -22,9 +24,9 @@ const UniversityFilterModalContainer = (props: Props) => {
     department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
   });
   const initialValues = {
-    applyGroup: false,
+    applyGroup: [],
     completionTeaching: false,
-    department: false,
+    department: [],
     exceptionPractical: false,
     isEnglishRequired: false,
     isInquiryRequired: false,
@@ -32,7 +34,7 @@ const UniversityFilterModalContainer = (props: Props) => {
     isMathRequired: false,
     oneSubject: false,
     practicalContribution: false,
-    region: false,
+    region: [],
     testContribution: false,
   };
 
@@ -48,7 +50,7 @@ const UniversityFilterModalContainer = (props: Props) => {
     console.log(data);
     if (!isEmpty(formData)) {
       // formData에 false인 값은 제거한다.
-      const filteredData = Object.entries(formData)
+      const filteredData = Object.entries(data)
         .filter(([_, value]) => value !== false)
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
@@ -67,6 +69,7 @@ const UniversityFilterModalContainer = (props: Props) => {
     const { applyGroup, region, department } = query;
 
     if (!isEmpty(filterQuery)) {
+      console.log(result);
       setValue('applyGroup', result.applyGroup || false);
       setValue('department', result.department || false);
       setValue('exceptionPractical', result.exceptionPractical || false);
@@ -78,7 +81,6 @@ const UniversityFilterModalContainer = (props: Props) => {
       setValue('testContribution', result.testContribution || false);
       setValue('region', result.region || false);
     }
-
     if (!isEmpty(flatten([applyGroup, region, department]))) {
       reset(initialValues);
       setValue('applyGroup', applyGroup || false);
@@ -86,6 +88,12 @@ const UniversityFilterModalContainer = (props: Props) => {
       setValue('department', department || false);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isEmpty(router.query)) {
+      reset(initialValues);
+    }
+  }, [router]);
 
   return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} searchResultNumber={data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
 };
