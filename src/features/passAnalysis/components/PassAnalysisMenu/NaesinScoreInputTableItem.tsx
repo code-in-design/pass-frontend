@@ -43,8 +43,8 @@ const NaesinScoreInputTableItem = (props: Props) => {
           })}
         />
       </TableBodyTd>
-      <TableBodyTd>
-        <Select size="miniBorder" register={props.register} setValue={props.setValue} name={`naesinScores.${props.title}.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
+      <TableBodyTd width="100px">
+        <Select height={24} border="8px" register={props.register} setValue={props.setValue} name={`naesinScores.${props.title}.${props.index}.subjectGroup`} placeholder="선택" options={subjectGroup} />
       </TableBodyTd>
       <TableBodyTd>
         <Input type="text" {...props.register(`naesinScores.${props.title}.${props.index}.subject`)} placeholder="과목명 입력" width={'100px'} />
@@ -78,15 +78,15 @@ export default NaesinScoreInputTableItem;
 
 const TableBodyTr = styled.tr``;
 
-const TableBodyTd = styled.td`
+const TableBodyTd = styled.td<{ width?: string }>`
+  width: ${props => props.width};
   height: 48px;
   vertical-align: middle;
-  padding: 4px;
   text-align: center;
 `;
 
 const Input = styled.input<{ width?: string }>`
-  width: ${props => (props.width ? '100px' : '72px')};
+  width: ${props => (props.width ? props.width : '72px')};
   height: 24px;
   border-radius: 8px;
   padding: 4px 12px;
