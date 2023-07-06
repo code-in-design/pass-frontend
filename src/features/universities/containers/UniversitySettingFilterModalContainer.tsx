@@ -6,6 +6,7 @@ import { useLazyFetchUniversityCountQuery } from '../apis/universityApi';
 import { ArrayParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 import { flatten, isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
+import { UniversityFilterModel } from '../../../models/UniversityFilterModel';
 
 interface Props {
   size: 'sm' | 'md';
@@ -13,30 +14,16 @@ interface Props {
 
 const UniversityFilterModalContainer = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit, setValue, watch, reset, getValues } = useForm();
+
+  const universityFilterModel = new UniversityFilterModel();
+  const [query, setQuery] = useQueryParams(universityFilterModel.toQueryParams());
+  const initialValues = universityFilterModel.toJSON();
+
+  const { register, handleSubmit, setValue, watch, reset } = useForm({ defaultValues: query });
   const formData = watch();
   const router = useRouter();
+
   const [universityCount, { data }] = useLazyFetchUniversityCountQuery();
-  // const [filterQuery, setFilterQuery] = useQueryParam<any>('filter');
-  const [query, setQuery] = useQueryParams({
-    applyGroup: withDefault(ArrayParam, []), // 모집군 (가군, 나군, 다군)
-    region: withDefault(ArrayParam, []), // 지역 (서울권, 수도권)
-    department: withDefault(ArrayParam, []), // 인기계열 (체육교육과)
-  });
-  const initialValues = {
-    applyGroup: [],
-    completionTeaching: false,
-    department: [],
-    exceptionPractical: [],
-    isEnglishRequired: [],
-    isInquiryRequired: [],
-    isKoreanRequired: [],
-    isMathRequired: [],
-    oneSubject: false,
-    practicalContribution: [],
-    region: [],
-    testContribution: [],
-  };
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -54,45 +41,16 @@ const UniversityFilterModalContainer = (props: Props) => {
         .filter(([_, value]) => value !== false)
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
-      const query = queryString.stringify(filteredData);
-      // setFilterQuery(query, 'replace');
+      setQuery(filteredData);
     }
     setIsOpen(false);
   };
 
-  // useEffect(() => {
-  //   universityCount();
-  // }, [filterQuery]);
-
   useEffect(() => {
-    const { applyGroup, region, department } = query;
-    // const result = queryString.parse(filterQuery);
-
-    // if (!isEmpty(filterQuery)) {
-    //   setValue('applyGroup', result.applyGroup);
-    //   setValue('department', result.department);
-    //   setValue('exceptionPractical', result.exceptionPractical);
-    //   setValue('isEnglishRequired', result.isEnglishRequired);
-    //   setValue('isInquiryRequired', result.isInquiryRequired);
-    //   setValue('isKoreanRequired', result.isKoreanRequired);
-    //   setValue('isMathRequired', result.isMathRequired);
-    //   setValue('practicalContribution', result.practicalContribution);
-    //   setValue('testContribution', result.testContribution);
-    //   setValue('region', result.region);
-    // }
-    if (!isEmpty(flatten([applyGroup, region, department]))) {
-      reset(initialValues);
-      setValue('applyGroup', applyGroup);
-      setValue('region', region);
-      setValue('department', department);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isEmpty(router.query)) {
-      reset(initialValues);
-    }
-  }, [router]);
+    // query-string과 react-hook-form의 데이터를 일치시킴(싱크)
+    reset(query);
+    // universityCount();
+  }, [router.query]);
 
   return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} searchResultNumber={data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
 };

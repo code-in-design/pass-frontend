@@ -24,9 +24,10 @@ export const universityApi = createApi({
         try {
           const data = JSON.parse(res);
           const universityData = data?.result?.map((item: any) => {
-            return universityModel.setModelFromData(item);
+            universityModel.setModelFromData(item);
+            return universityModel.toJSON();
           });
-          return universityModel.toJSON(universityData);
+          return universityData;
         } catch (e) {
           console.error(e);
         }
