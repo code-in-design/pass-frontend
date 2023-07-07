@@ -17,7 +17,6 @@ export const DashboardModalContainer = () => {
   const [step, setStep] = useState(0);
   const { register, handleSubmit, setValue, watch, formState } = useForm();
   const { errors } = formState;
-  console.log(watch());
 
   const selectedVersion = watch('version', '');
   const toBeUpdatedDate = watch('toBeUpdatedDate', '');
@@ -66,16 +65,17 @@ export const DashboardModalContainer = () => {
     setStep(prev => prev + 1);
   };
 
-  const onSubmit = handleSubmit(
-    data => {
-      console.log('제출', data);
-      setStep(prev => 0);
-      setValue('version', '');
-    },
-    () => {
-      if (errors.version) console.log('버전을 입력해주세요');
-    },
-  );
+  const onSubmit = (data => {
+    console.log('제출', data);
+    setStep(prev => 0);
+    setValue('version', '');
+  });
+
+  const onError = () => {
+    if (errors.version) console.log('버전을 입력해주세요');
+  };
+
+  const handleSubmitForm = handleSubmit(onSubmit, onError);
 
   return (
     <>
@@ -84,7 +84,7 @@ export const DashboardModalContainer = () => {
         <UpdateButtonText>업데이트</UpdateButtonText>
       </UpdateButton>
       {step === 1 && <VersionUpdateModal onClickNextButton={goNextStep} onClickPreviousButton={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} formState={formState} />}
-      {step === 2 && <UpdateConfirmModal onClickPreviousButton={goPrevStep} version={selectedVersion} onSubmit={onSubmit} />}
+      {step === 2 && <UpdateConfirmModal onClickPreviousButton={goPrevStep} version={selectedVersion} onSubmit={handleSubmitForm} />}
     </>
   );
 };
