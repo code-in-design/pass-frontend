@@ -30,7 +30,7 @@ export class UniversityFilterModel {
 
   completionTeaching = false; // 교직 이수 가능한 대학만 보기
 
-  searchUniversity = '';
+  searchKeyword = ''; // 검색 (대학명 or 학과명)
 
   constructor(data?: Partial<UniversityFilterModel>) {
     return plainToClass(UniversityFilterModel, data, { excludeExtraneousValues: true });

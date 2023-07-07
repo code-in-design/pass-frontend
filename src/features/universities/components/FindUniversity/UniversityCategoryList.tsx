@@ -12,7 +12,7 @@ interface Props {
   applyGroup: any;
   region: any;
   department: any;
-  searchUniversity: any;
+  searchKeyword: any;
   handleItemClick: (item: UniversityCategoryItem) => void;
 }
 
@@ -28,13 +28,13 @@ const UniversityCategoryList = (props: Props) => {
         const isSelectedInApplyGroup = includes(props.applyGroup, item.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
         const isSelectedInRegion = includes(props.region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
         const isSelectedInDepartment = includes(props.department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
-        const filterApply = remove(keys(query), removeItem => removeItem !== 'searchUniversity');
+        const filterApplyList = remove(keys(query), removeItem => removeItem !== 'searchKeyword');
 
         if (item.text === '전체보기' && isNotFilterApplied) isSelected = true;
         if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
         if (item.title === '지역' && isSelectedInRegion) isSelected = true;
         if (item.title === '인기계열' && isSelectedInDepartment) isSelected = true;
-        if (filterApply.length >= 2) isSelected = false;
+        if (filterApplyList.length >= 2) isSelected = false;
 
         return <UniversityCategoryListItem key={index} isSelected={isSelected} onClick={props.handleItemClick} {...item} />;
       })}

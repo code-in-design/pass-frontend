@@ -4,7 +4,7 @@ import InfoIcon from '../../../../../public/images/icons/info.svg';
 import InputFindIcon from '../../../../../public/images/icons/search.svg';
 
 interface UniversitySearchProps {
-  onInputChange: (e) => void;
+  onInputChange: (e: React.ChangeEvent) => void;
 }
 
 const UniversitySearch = (props: UniversitySearchProps) => {

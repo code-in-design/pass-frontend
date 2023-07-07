@@ -5,11 +5,11 @@ import UniversitySearch from '../components/FindUniversity/UniversitySearch';
 
 const UniversitySearchContainer = () => {
   const [query, setQuery] = useQueryParams({
-    searchUniversity: withDefault(StringParam, null),
+    searchKeyword: withDefault(StringParam, null),
   });
 
   const onInputChange = debounce(event => {
-    setQuery({ searchUniversity: event.target.value });
+    setQuery({ searchKeyword: event.target.value });
   }, 300);
 
   return <UniversitySearch onInputChange={onInputChange} />;
