@@ -48,8 +48,8 @@ const TranscriptTable = (props: TranscriptTableProps) => {
             placement="top-end"
             offset={[0, 26]}
             css={{
-              '.chakra-tooltip__arrow-wrapper': { width: '24px !important', height: '24px !important', transform: 'none !important', left: '302px !important', bottom: '-12px !important' },
-              '.chakra-tooltip__arrow-wrapper .chakra-tooltip__arrow': { borderRadius: '6px' },
+              '.chakra-tooltip__arrow-wrapper': { width: '19px !important', height: '19px !important', transform: 'none !important', left: '326px !important', bottom: '-8px !important' },
+              '.chakra-tooltip__arrow-wrapper .chakra-tooltip__arrow': { borderRadius: '4px' },
             }}
             label={
               <TooltipContainer>
