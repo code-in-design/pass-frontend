@@ -24,8 +24,8 @@ const TwoThumbsRange = (props: Props) => {
       <Range
         values={values}
         step={STEP}
-        min={MIN}
-        max={MAX}
+        min={0}
+        max={100}
         onChange={values => {
           setValues(values);
           props.setValue('competitionMinRate', values[0]);
@@ -51,8 +51,8 @@ const TwoThumbsRange = (props: Props) => {
                 background: getTrackBackground({
                   values,
                   colors: ['#e4e6f0', '#6B77F8', '#e4e6f0'],
-                  min: MIN,
-                  max: MAX,
+                  min: 0,
+                  max: 100,
                 }),
                 alignSelf: 'center',
               }}

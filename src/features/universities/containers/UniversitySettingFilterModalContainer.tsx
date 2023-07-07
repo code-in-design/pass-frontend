@@ -53,7 +53,21 @@ const UniversityFilterModalContainer = (props: Props) => {
     countData;
   }, [formData]);
 
-  return <UniversitySettingFilterModal openModal={openModal} closeModal={closeModal} isOpen={isOpen} searchResultNumber={countData.data} register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} setValue={setValue} size={props.size} />;
+  return (
+    <UniversitySettingFilterModal
+      openModal={openModal}
+      closeModal={closeModal}
+      isOpen={isOpen}
+      searchResultNumber={countData.data}
+      register={register}
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      setValue={setValue}
+      size={props.size}
+      min={query?.competitionMinRate || 0}
+      max={query?.competitionMaxRate || 100}
+    />
+  );
 };
 
 export default UniversityFilterModalContainer;

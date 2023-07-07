@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Checkbox } from '@chakra-ui/react';
-import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormHandleSubmit } from 'react-hook-form';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import TwoThumbsRange from '@/components/Range/TwoThumbsRange';
 import FindUniversityFilterModalItem from './UniversityFilterModalItem';
 import Filter from '../../../../public/images/icons/filter.svg';
-import { useRouter } from 'next/router';
 
 interface Props {
   size: 'sm' | 'md';
@@ -20,11 +19,11 @@ interface Props {
   openModal: () => void;
   closeModal: () => void;
   isOpen: boolean;
+  min: number;
+  max: number;
 }
 
 const UniversityFilterModal = (props: Props) => {
-  const router = useRouter();
-
   return (
     <>
       <FileterButton size={props.size} onClick={props.openModal}>
@@ -147,7 +146,7 @@ const UniversityFilterModal = (props: Props) => {
                 </FindUniversityFilterModalItem>
 
                 <FindUniversityFilterModalItem title="경쟁률 범위 설정" subtitle="* 2023학년도 기준입니다">
-                  <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} register={props.register} setValue={props.setValue} />
+                  <TwoThumbsRange STEP={0.01} MAX={props.max} MIN={props.min} register={props.register} setValue={props.setValue} />
                 </FindUniversityFilterModalItem>
               </Left>
 
