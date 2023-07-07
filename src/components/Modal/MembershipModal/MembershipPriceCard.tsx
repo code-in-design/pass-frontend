@@ -14,7 +14,7 @@ const MembershipPriceCard = (props: CardProps) => {
         <ColorText color={props.name}>{props.colorText}</ColorText>
         {props.text}
       </MembershipText>
-      <MembershipButton color={props.name}>{props.button}</MembershipButton>
+      <MembershipButton id={`activationOf${props.name}Plan`} color={props.name}>{props.button}</MembershipButton>
       <CardDescription>
         <DescriptionTitle>{props.name}의 기본 기능 +</DescriptionTitle>
         {props.descriptions.map((item, index) => (
