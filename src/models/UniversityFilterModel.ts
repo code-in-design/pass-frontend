@@ -1,5 +1,5 @@
 import { instanceToPlain, plainToClass } from 'class-transformer';
-import { withDefault, ArrayParam, BooleanParam, NumberParam } from 'use-query-params';
+import { withDefault, ArrayParam, BooleanParam, NumberParam, StringParam } from 'use-query-params';
 
 export class UniversityFilterModel {
   applyGroup = []; // 모집시기 (가나다군)
@@ -30,6 +30,8 @@ export class UniversityFilterModel {
 
   completionTeaching = false; // 교직 이수 가능한 대학만 보기
 
+  searchUniversity = '';
+
   constructor(data?: Partial<UniversityFilterModel>) {
     return plainToClass(UniversityFilterModel, data, { excludeExtraneousValues: true });
   }
@@ -54,6 +56,7 @@ export class UniversityFilterModel {
       testContribution: withDefault(ArrayParam, []),
       exceptionPractical: withDefault(ArrayParam, []),
       completionTeaching: withDefault(BooleanParam, false),
+      searchUniversity: withDefault(StringParam, null),
     };
   }
 

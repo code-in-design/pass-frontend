@@ -5,13 +5,14 @@ import UniversityCategoryList from '@/features/universities/components/FindUnive
 import UniversitySearchContainer from '@/features/universities/containers/UniversitySearchContainer';
 import UniversityTableContainer from '@/features/universities/containers/UniversityTableContainer';
 import UniversityFilterModalContainer from '@/features/universities/containers/UniversitySettingFilterModalContainer';
+import UniversityCategoryContainer from '@/features/universities/containers/UniversityCategoryContainer';
 
 const FindUniversityPage = () => {
   return (
     <Layout>
       <Container>
         <Title>대학 찾기</Title>
-        <UniversityCategoryList />
+        <UniversityCategoryContainer />
         <Wrapper>
           <UniversitySearchContainer />
           <UniversityFilterModalContainer size="md" />

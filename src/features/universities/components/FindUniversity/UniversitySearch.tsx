@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
 import InputFindIcon from '../../../../../public/images/icons/search.svg';
 import { useQueryParam } from 'use-query-params';
+import { debounce } from 'lodash';
 
 const UniversitySearch = () => {
   const [searchUniversity, setSearchUniversity] = useQueryParam('searchUniversity');
 
-  function onInputChange(event) {
+  const onInputChange = debounce(event => {
     setSearchUniversity(event.target.value);
-  }
+  }, 300);
 
   return (
     <SearchWrapper>
