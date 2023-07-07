@@ -4,6 +4,8 @@ import Table from '@/components/Table';
 import { TranscriptModel } from '../../../models/TranscriptModel';
 import TooltipImg from '../../../../public/images/icons/ExclamationMark.svg';
 import MyTooltip from '../../../components/Tooltip';
+import { Tooltip } from '@chakra-ui/react';
+import AppTooltip from '@/components/Tooltip/AppTooltip';
 
 export interface TranscriptTableProps {
   // onClickEditGrades: () => void;
@@ -41,17 +43,27 @@ const TranscriptTable = (props: TranscriptTableProps) => {
       {props?.hasButtons && (
         <Buttons>
           <Button onClick={props.onModify}>성적 수정하기</Button>
-          <ConfirmButton type="button" data-tooltip-id="tooltip-myScore" data-tooltip-offset={16} onClick={props?.onSubmit}>
-            확인
-            <MyTooltip id="tooltip-myScore" width="371px">
+          <AppTooltip
+            isOpen={true}
+            placement="top-end"
+            offset={[0, 26]}
+            customStyle={{
+              '.chakra-tooltip__arrow-wrapper': { width: '19px !important', height: '19px !important', transform: 'none !important', left: '326px !important', bottom: '-8px !important' },
+              '.chakra-tooltip__arrow-wrapper .chakra-tooltip__arrow': { borderRadius: '4px' },
+            }}
+            label={
               <TooltipContainer>
                 <TooltipImg />
                 <TooltipText>
-                  위의 가상 성적표와 실제 성적표를 비교한 뒤, <TextEmphasis>점수가 일치하면 ‘확인’</TextEmphasis>을 눌러주세요
+                  위의 가상 성적표와 실제 성적표를 비교한 뒤,
+                  <br />
+                  <TextEmphasis>점수가 일치하면 ‘확인’</TextEmphasis>을 눌러주세요
                 </TooltipText>
               </TooltipContainer>
-            </MyTooltip>
-          </ConfirmButton>
+            }
+          >
+            <ConfirmButton>확인</ConfirmButton>
+          </AppTooltip>
         </Buttons>
       )}
     </Container>
@@ -166,8 +178,8 @@ const TooltipText = styled.div`
   font-size: 18px;
   line-height: 24px;
   color: ${props => props.theme.colors.grayBlack};
-  margin-left: 12px;
   text-align: left;
+  white-space: nowrap;
 `;
 
 const TextEmphasis = styled.span`
@@ -175,8 +187,10 @@ const TextEmphasis = styled.span`
 `;
 
 const TooltipContainer = styled.div`
+  width: 339px;
   display: flex;
   align-items: center;
+  gap: 0 12px;
 `;
 
 const TranscriptTableBackground1 = styled.div`
