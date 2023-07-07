@@ -48,7 +48,6 @@ export const universityApi = createApi({
       query: () => {
         const currentQuery = window.location.search;
         const changeQuery = universityFilterModel.toServer(queryString.parse(currentQuery));
-        console.log(changeQuery);
         return `/count${currentQuery}`;
       },
     }),

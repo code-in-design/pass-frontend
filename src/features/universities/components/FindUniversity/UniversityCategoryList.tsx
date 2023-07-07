@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { flatten, includes, isEmpty, union } from 'lodash';
+import { flatten, includes, isEmpty, keys, remove, union } from 'lodash';
 import UniversityCategoryListItem, { UniversityCategoryItem } from './UniversityCategoryListItem';
 import School from '../../../../../public/images/icons/graduationOutline.svg';
 import Location from '../../../../../public/images/icons/location.svg';
 import Stickynote from '../../../../../public/images/icons/stickynote.svg';
+import { useRouter } from 'next/router';
 
 interface Props {
   lists: UniversityCategoryItem[];
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const UniversityCategoryList = (props: Props) => {
+  const { query } = useRouter();
+
   return (
     <Container>
       {props?.lists?.map((item, index) => {
@@ -25,7 +28,7 @@ const UniversityCategoryList = (props: Props) => {
         const isSelectedInApplyGroup = includes(props.applyGroup, item.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
         const isSelectedInRegion = includes(props.region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
         const isSelectedInDepartment = includes(props.department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
-        const filterApply = union(props?.applyGroup, props?.region, props?.department);
+        const filterApply = remove(keys(query), removeItem => removeItem !== 'searchUniversity');
 
         if (item.text === '전체보기' && isNotFilterApplied) isSelected = true;
         if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
