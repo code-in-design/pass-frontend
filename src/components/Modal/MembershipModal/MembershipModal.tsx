@@ -27,7 +27,7 @@ const MembershipModal = (props: Props) => {
   return (
     <ModalLayout onClose={closeModal} padding="32px 16px">
       <Title>합격할 준비 되었나요?</Title>
-      <SubTitle>여러분에게 딱 맞는 플랜을 선택하세요!</SubTitle>
+      <SubTitle>아래 멤버십은 2024년 2월 28일까지 유효합니다.</SubTitle>
       <ScrollWrapper>
         <ContentWrapper>
           <Container>
