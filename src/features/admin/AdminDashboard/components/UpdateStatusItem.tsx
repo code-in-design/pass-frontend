@@ -5,16 +5,18 @@ import Percent from '../../../../../public/images/icons/percent.svg';
 import theme from '@/theme/theme';
 
 export interface UpdateStatusItemProps {
-  iconType: keyof typeof UpdateStatusItemIcons;
+  iconType: UpdateStatusItemIconType;
   name: string;
   status: '업로드 완료' | '작성 완료' | '미완료';
   isActive?: boolean;
 }
 
+export type UpdateStatusItemIconType = keyof typeof UpdateStatusItemIcons;
+
 const UpdateStatusItemIcons = {
-  comment: <MarkUnreadChat />,
-  attachment: <Attachment />,
-  percent: <Percent />,
+  comment: <MarkUnreadChat width={20} height={20} color={theme.colors.gray1} />,
+  attachment: <Attachment width={20} height={20} color={theme.colors.gray1} />,
+  percent: <Percent width={20} height={20} color={theme.colors.gray1} />,
 };
 
 export const UpdateStatusItem = (props: UpdateStatusItemProps) => {
@@ -25,7 +27,6 @@ export const UpdateStatusItem = (props: UpdateStatusItemProps) => {
         {UpdateStatusItemIcons[iconType]}
         <Content>{name}</Content>
       </Wrapper>
-      {/* <Badge>sdfds</Badge> */}
       <Badge isActive={isActive}>
         <Text isActive={isActive}>{status}</Text>
       </Badge>

@@ -4,7 +4,7 @@ import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import { VersionBadge } from '../VersionBadge';
 import { UpdateStatusItem, UpdateStatusItemProps } from '../UpdateStatusItem';
-import { UseFormRegister, FieldValues, UseFormSetValue } from 'react-hook-form';
+import { UseFormRegister, FieldValues, UseFormSetValue, FormState } from 'react-hook-form';
 import CalenderIcon from '../../../../../../public/images/icons/calendarMonth.svg';
 
 interface SelectProps {
@@ -19,14 +19,15 @@ interface VersionUpdateModalProps {
   updateItems?: UpdateStatusItemProps[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  formState: FormState<FieldValues>;
   date: string;
 }
 
 export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
-  const { onClickNextButton, onClickPreviousButton, options, updateItems, setValue, register, date } = props;
+  const { onClickNextButton, onClickPreviousButton, options, updateItems, setValue, register, date, formState } = props;
 
   return (
-    <ModalLayout onClose={onClickPreviousButton}>
+    <ModalLayout onClose={onClickPreviousButton} hasCloseButton={false}>
       <Container>
         <TitleSection>
           <Title>버전 업데이트</Title>
@@ -35,7 +36,7 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
         <Section>
           <SectionTitle>버전 선택</SectionTitle>
           <SelectWrapper>
-            <Select height={48} border="16px" options={options} placeholder="업데이트할 버전을 선택해주세요" name="versionSorting" setValue={setValue} register={register} />
+            <Select height={48} border="16px" options={options} placeholder="업데이트할 버전을 선택해주세요" name="version" setValue={setValue} register={register} required="버전을 선택해주세요" />
           </SelectWrapper>
         </Section>
         <Section>
@@ -43,7 +44,7 @@ export const VersionUpdateModal = (props: VersionUpdateModalProps) => {
           <CalendarWrapper>
             <Label htmlFor="calendar">
               <Date>{date}</Date>
-              <CalenderIcon width={20} height={20} />
+              <CalenderIcon width={20} height={20} color={theme.colors.gray3} />
             </Label>
             <Calendar id="calendar" type="datetime-local" {...register('toBeUpdatedDate')} />
           </CalendarWrapper>

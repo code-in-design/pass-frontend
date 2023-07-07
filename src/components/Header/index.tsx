@@ -13,12 +13,13 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
-      {!props.isAdmin ? (
+      {!props.isAdmin && (
         <AlertWrapper>
           <Alert src="/images/icons/notifications.svg" alt="notifications" />
           <AlertDot />
         </AlertWrapper>
-      ) : (
+      )}
+      {props.isAdmin && (
         <VersionBadge>
           <VersionText>{props.version}</VersionText>
         </VersionBadge>

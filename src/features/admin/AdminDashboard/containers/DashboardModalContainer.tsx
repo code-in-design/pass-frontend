@@ -7,7 +7,6 @@ import { VersionUpdateModal } from '../components/modal/VersionUpdateModal';
 import { UpdateConfirmModal } from '../components/modal/UpdateConfirmModal';
 import { UpdateStatusItemProps } from '../components/UpdateStatusItem';
 import dayjs from 'dayjs';
-import lodash from 'lodash';
 
 export interface UpdateInputs {
   version?: string;
@@ -16,21 +15,13 @@ export interface UpdateInputs {
 
 export const DashboardModalContainer = () => {
   const [step, setStep] = useState(0);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, setValue, watch, formState } = useForm();
+  const { errors } = formState;
+  console.log(watch());
 
-  console.log('watch', watch());
-  const selectedVersion = watch('versionSorting', '');
+  const selectedVersion = watch('version', '');
   const toBeUpdatedDate = watch('toBeUpdatedDate', '');
-  const formattedDate = lodash.isEmpty(toBeUpdatedDate) ? '' : dayjs(toBeUpdatedDate).format('YYYY.MM.DD HH:mm');
-  useEffect(() => {
-    console.log(selectedVersion);
-  }, [selectedVersion]);
+  const formattedDate = toBeUpdatedDate && dayjs(toBeUpdatedDate).format('YYYY.MM.DD HH:mm');
 
   const versions = ['2.3.0', '2.3.1', '2.3.2'];
   const options = useMemo(
@@ -75,9 +66,16 @@ export const DashboardModalContainer = () => {
     setStep(prev => prev + 1);
   };
 
-  const resetStep = async () => {
-    setStep(prev => 0);
-  };
+  const onSubmit = handleSubmit(
+    data => {
+      console.log('제출', data);
+      setStep(prev => 0);
+      setValue('version', '');
+    },
+    () => {
+      if (errors.version) console.log('버전을 입력해주세요');
+    },
+  );
 
   return (
     <>
@@ -85,8 +83,8 @@ export const DashboardModalContainer = () => {
         <UpdateIcon width={24} height={24} />
         <UpdateButtonText>업데이트</UpdateButtonText>
       </UpdateButton>
-      {step === 1 && <VersionUpdateModal onClickNextButton={goNextStep} onClickPreviousButton={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} />}
-      {step === 2 && <UpdateConfirmModal onClickPreviousButton={goPrevStep} onReset={resetStep} version={selectedVersion} handleSubmit={handleSubmit} />}
+      {step === 1 && <VersionUpdateModal onClickNextButton={goNextStep} onClickPreviousButton={goPrevStep} options={options} updateItems={updateItems} register={register} setValue={setValue} date={formattedDate} formState={formState} />}
+      {step === 2 && <UpdateConfirmModal onClickPreviousButton={goPrevStep} version={selectedVersion} onSubmit={onSubmit} />}
     </>
   );
 };

@@ -1,27 +1,22 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
+import { FormEventHandler } from 'react';
 import { FieldValues, UseFormHandleSubmit } from 'react-hook-form';
 
 interface UpdateConfirmModalProps {
   isOpen?: boolean;
   onClickPreviousButton?: () => void;
-  onReset: () => void;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  onSubmit: FormEventHandler<HTMLFormElement>;
   version: string;
 }
 
 export const UpdateConfirmModal = (props: UpdateConfirmModalProps) => {
-  const { onClickPreviousButton, onReset, version, handleSubmit } = props;
-
-  const onSubmit = data => {
-    console.log('제출', data);
-    onReset();
-  };
+  const { onClickPreviousButton, version, onSubmit } = props;
 
   return (
     <ModalLayout>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <Container>
           <Title>업데이트 확인</Title>
           <VersionDisplaySection>
