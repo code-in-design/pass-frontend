@@ -6,15 +6,24 @@ interface HeaderProps {
   name: string;
   email: string;
   children: ReactNode;
+  version?: string;
+  isAdmin: boolean;
 }
 
 const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
-      <AlertWrapper>
-        <Alert src="/images/icons/notifications.svg" alt="notifications" />
-        <AlertDot />
-      </AlertWrapper>
+      {!props.isAdmin && (
+        <AlertWrapper>
+          <Alert src="/images/icons/notifications.svg" alt="notifications" />
+          <AlertDot />
+        </AlertWrapper>
+      )}
+      {props.isAdmin && (
+        <VersionBadge>
+          <VersionText>{props.version}</VersionText>
+        </VersionBadge>
+      )}
       <UserWrapper>
         <UserImage src={props.avatar} alt="user" />
         <UserInfo>
@@ -36,13 +45,17 @@ Header.defaultProps = {
   avatar: '/images/user/user.png',
   membership: 'Basic',
   userEmail: 'gks3628@naver.com',
+  version: 'user ver. 2.3.2',
+  isAdmin: false,
 };
 
 const HeaderWrapper = styled.header`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 28px 60px;
   background-color: ${props => props.theme.colors.white};
+  gap: 24px;
 `;
 
 const AlertWrapper = styled.div`
@@ -116,4 +129,21 @@ const UserEmail = styled.span`
   font-weight: 500;
   line-height: 20px;
   color: #737c89;
+`;
+
+const VersionBadge = styled.div`
+  display: inline-flex;
+  padding: 8px 16px;
+  height: fit-content;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--gray-black, #353644);
+`;
+
+const VersionText = styled.span`
+  color: var(--gray-white, #fff);
+  font-size: 14px;
+  font-family: Pretendard Regular;
+  line-height: 16px;
 `;

@@ -6,6 +6,7 @@ interface Props {
   isOpen?: boolean;
   padding?: string;
   onClose?: () => void;
+  hasCloseButton?: boolean;
 }
 
 const ModalLayout = (props: Props) => {
@@ -13,7 +14,7 @@ const ModalLayout = (props: Props) => {
     <ModalWrapper>
       <ModalOutside onClick={props.onClose} />
       <Container padding={props?.padding || '32px'}>
-        <Close src="/images/icons/close.svg" alt="close" onClick={props.onClose} />
+        {props.hasCloseButton && <Close src="/images/icons/close.svg" alt="close" onClick={props.onClose} />}
         {props.children}
       </Container>
     </ModalWrapper>
@@ -21,6 +22,10 @@ const ModalLayout = (props: Props) => {
 };
 
 export default ModalLayout;
+
+ModalLayout.defaultProps = {
+  hasCloseButton: true,
+};
 
 const ModalWrapper = styled.div`
   position: fixed;
