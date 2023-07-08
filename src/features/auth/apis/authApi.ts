@@ -34,7 +34,7 @@ export const authApi = createApi({
           // 네이버로 로그인을하고, z-one에 회원가입이 되어있는경우
           const { access_token, refresh_token } = result;
           storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-          window.location.assign('/');
+          window.location.assign('/dashboard');
         }
       },
       transformErrorResponse: response => {
@@ -62,7 +62,7 @@ export const authApi = createApi({
           // 카카오로 로그인을하고, z-one에 회원가입이 되어있는경우
           const { access_token, refresh_token } = result;
           storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-          window.location.assign('/');
+          window.location.assign('/dashboard');
         }
       },
       transformErrorResponse: response => {
@@ -86,7 +86,7 @@ export const authApi = createApi({
       transformResponse: (response: any, meta, arg) => {
         const { access_token, refresh_token } = JSON.parse(response);
         storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-        window.location.assign('/');
+        window.location.assign('/dashboard');
       },
     }),
     // 회원가입

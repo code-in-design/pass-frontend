@@ -21,11 +21,13 @@ export const Navbar = (props: Props) => {
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
       <MenuList>
-        {props?.menuList?.map((item, index) => (
-          <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)}>
-            {item.icon}
-          </NavbarItem>
-        ))}
+        {props?.menuList?.map((item, index) => {
+          return (
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={item.route.includes(router.pathname)}>
+              {item.icon}
+            </NavbarItem>
+          );
+        })}
       </MenuList>
       <LogOut>
         <LogOutImg src="/images/icons/logout.svg" alt="logout" />
@@ -37,11 +39,12 @@ export const Navbar = (props: Props) => {
 
 Navbar.defaultProps = {
   menuList: [
-    { icon: <Home />, title: '메인홈', route: '/' },
+    { icon: <Home />, title: '메인홈', route: '/dashboard' },
     { icon: <EditSquare />, title: '내 점수 입력하기', route: '/myScore' },
     { icon: <School />, title: '대학찾기', route: '/findUniversity' },
     { icon: <Analytics />, title: '합격분석', route: '/passAnalysis' },
     { icon: <Settings />, title: '환경설정', route: '/settings?menu=0' },
+    { icon: <Analytics />, title: '사전예약', route: '/reservations' },
   ],
 };
 
