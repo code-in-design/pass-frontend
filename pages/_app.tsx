@@ -16,14 +16,13 @@ import GoogleSiteVerification from '../src/marketings/GoogleSiteVerification';
 import NextAdapterPages from 'next-query-params/pages';
 import { QueryParamProvider } from 'use-query-params';
 import useAuth from '../src/hooks/useAuth';
-import { useLayoutEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { isLogin, isLoading, silentRefreshAccessToken } = useAuth();
   const mergedPageProps = { isLogin, isLoading, ...pageProps };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     (async () => {
       // 처음으로 웹사이트에 접속했을때 로그인여부를 확인하기 위해 호출함
       await silentRefreshAccessToken();
