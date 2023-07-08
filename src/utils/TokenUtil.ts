@@ -35,7 +35,8 @@ class TokenUtil {
         })
         .catch(e => {
           if (e.response.status === 400) {
-            if (window.location.pathname === '/') return;
+            const pathname = window.location.pathname;
+            if (pathname === '/' || pathname === '/signIn') return;
             window.location.assign('/signIn');
           }
         });
