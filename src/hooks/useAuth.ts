@@ -24,6 +24,7 @@ const useAuth = () => {
       setIsLogin(!isEmpty(userMe));
     } catch (e: any) {
       const isAccessTokenExpired = e?.response?.status === 401;
+      // 액세스토큰이 만료된 경우
       if (isAccessTokenExpired) {
         const newAccessToken = await tokenUtil.refreshAccessTokenByRefreshToken(refreshToken!);
         storageUtil.setTokens({ accessToken: newAccessToken, refreshToken: refreshToken! });
@@ -36,7 +37,7 @@ const useAuth = () => {
     }
   };
 
-  return { silentRefreshAccessToken };
+  return { isLoading, isLogin, silentRefreshAccessToken };
 };
 
 export default useAuth;

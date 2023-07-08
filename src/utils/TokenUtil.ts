@@ -19,6 +19,7 @@ class TokenUtil {
     return axiosHeaders;
   };
 
+  // 리프레스토큰으로 액세스토큰 재발급
   refreshAccessTokenByRefreshToken = async (refreshToken: string) => {
     let accessToken;
     try {
@@ -34,6 +35,7 @@ class TokenUtil {
         })
         .catch(e => {
           if (e.response.status === 400) {
+            console.log(333, window.location);
             window.location.assign('/signIn');
           }
         });
@@ -45,6 +47,7 @@ class TokenUtil {
     }
   };
 
+  // 리프레시토큰으로 액세스토큰 조용히 재발급
   silentRefreshAccessToken = async response => {
     // 기존의 token이 어디에 저장되어있는지 찾기
     const { refreshToken } = storageUtil.getTokens();
@@ -60,6 +63,9 @@ class TokenUtil {
       }
       // 리프레시토큰이 없으면, 재로그인
       if (!isExistRefreshToken) {
+        // 랜딩페이지에서는 로그인이 필요없으므로 로그인창으로 이동하지 않도록 return 처리
+        if (window.location.pathname === '/') return;
+        // 다른페이지에서는 로그인 실패시 로그인창으로 이동
         window.location.assign('/signIn');
       }
     }

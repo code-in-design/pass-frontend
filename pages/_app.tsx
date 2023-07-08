@@ -17,9 +17,11 @@ import NextAdapterPages from 'next-query-params/pages';
 import { QueryParamProvider } from 'use-query-params';
 import useAuth from '../src/hooks/useAuth';
 import { useLayoutEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { silentRefreshAccessToken } = useAuth();
+  const { isLogin, isLoading, silentRefreshAccessToken } = useAuth();
+  const mergedPageProps = { isLogin, isLoading, ...pageProps };
 
   useLayoutEffect(() => {
     (async () => {
@@ -40,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={theme} resetCSS>
         <ThemeProvider theme={emotionTheme}>
           <QueryParamProvider adapter={NextAdapterPages}>
-            <Component {...pageProps} />
+            <Component {...mergedPageProps} />
           </QueryParamProvider>
         </ThemeProvider>
       </ChakraProvider>
