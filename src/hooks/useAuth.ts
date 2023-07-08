@@ -23,7 +23,7 @@ const useAuth = () => {
       const result = await client.get(`${urls.baseUrl}/auth/me`);
       setUserMe(result?.data);
     } catch (e: any) {
-      await tokenUtil.silentRefreshAccessToken(e?.response?.status);
+      console.error(e);
     } finally {
       setIsLoading(false);
     }

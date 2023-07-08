@@ -5,12 +5,14 @@ import CreateReservationContainer from '../../features/reservations/containers/C
 
 interface Props {
   isMobile?: boolean;
+  isLoading?: boolean;
 }
 
-const LandingPage = ({ isMobile }: Props) => {
+const LandingPage = ({ isMobile, isLoading }: Props) => {
   const headerMenus = [{ text: '', isActive: false, href: '/' }];
   const router = useRouter();
 
+  if (isLoading) return null;
   return (
     <div>
       <Header1
