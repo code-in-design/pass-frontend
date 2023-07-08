@@ -17,17 +17,20 @@ import NextAdapterPages from 'next-query-params/pages';
 import { QueryParamProvider } from 'use-query-params';
 import useAuth from '../src/hooks/useAuth';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { isLogin, isLoading, silentRefreshAccessToken } = useAuth();
+  const { isLogin, isLoading, fetchUserMe } = useAuth();
   const mergedPageProps = { isLogin, isLoading, ...pageProps };
+  const router = useRouter();
 
   useEffect(() => {
+    if (router.pathname === '/') return;
     (async () => {
       // 처음으로 웹사이트에 접속했을때 로그인여부를 확인하기 위해 호출함
-      await silentRefreshAccessToken();
+      await fetchUserMe();
     })();
-  }, []);
+  }, [router.query]);
 
   return (
     <Provider store={store}>

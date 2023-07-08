@@ -9,7 +9,10 @@ export const scoresApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${urls.baseUrl}`,
     prepareHeaders: tokenUtil.addTokenToHeader,
-    responseHandler: tokenUtil.silentRefreshAccessToken,
+    responseHandler: async response => {
+      await tokenUtil.silentRefreshAccessToken(response.status);
+      return response.text();
+    },
   }),
   endpoints: builder => ({
     //성적 확정 전 성적 입력하기

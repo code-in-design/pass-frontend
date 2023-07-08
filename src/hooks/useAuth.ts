@@ -1,15 +1,16 @@
 import axios, { AxiosHeaders } from 'axios';
-import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
+import { isEmpty, isNil, omitBy } from 'lodash';
+import React, { useMemo, useState } from 'react';
 import { urls } from '../constants/url';
 import { storageUtil } from '../utils/StorageUtil';
 import tokenUtil from '../utils/TokenUtil';
 
 const useAuth = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLogin, setIsLogin] = useState(false);
+  const [userMe, setUserMe] = useState();
+  const isLogin = useMemo(() => !isEmpty(omitBy(userMe, isNil)), [userMe]);
 
-  const silentRefreshAccessToken = async () => {
+  const fetchUserMe = async () => {
     const { accessToken, refreshToken } = storageUtil.getTokens();
     if (!accessToken) {
       return setIsLoading(false);
@@ -20,24 +21,15 @@ const useAuth = () => {
 
     try {
       const result = await client.get(`${urls.baseUrl}/auth/me`);
-      const userMe = result?.data;
-      setIsLogin(!isEmpty(userMe));
+      setUserMe(result?.data);
     } catch (e: any) {
-      const isAccessTokenExpired = e?.response?.status === 401;
-      // 액세스토큰이 만료된 경우
-      if (isAccessTokenExpired) {
-        const newAccessToken = await tokenUtil.refreshAccessTokenByRefreshToken(refreshToken!);
-        storageUtil.setTokens({ accessToken: newAccessToken, refreshToken: refreshToken! });
-        if (newAccessToken) {
-          setIsLogin(true);
-        }
-      }
+      await tokenUtil.silentRefreshAccessToken(e?.response?.status);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isLogin, silentRefreshAccessToken };
+  return { isLoading, isLogin, userMe, fetchUserMe };
 };
 
 export default useAuth;

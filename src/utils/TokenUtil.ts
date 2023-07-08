@@ -35,31 +35,30 @@ class TokenUtil {
         })
         .catch(e => {
           if (e.response.status === 400) {
-            console.log(333, window.location);
+            if (window.location.pathname === '/') return;
             window.location.assign('/signIn');
           }
         });
-      // const accessToken = result?.data?.access_token as string;
-      // console.log(accessToken);
       return accessToken;
     } catch (e) {
       console.error(e);
     }
   };
 
-  // 리프레시토큰으로 액세스토큰 조용히 재발급
-  silentRefreshAccessToken = async response => {
+  // 액세스토큰 조용히 재발급
+  silentRefreshAccessToken = async (status: number) => {
     // 기존의 token이 어디에 저장되어있는지 찾기
     const { refreshToken } = storageUtil.getTokens();
-    const isAccessTokenExpired = response.status === 401;
+    const isAccessTokenExpired = status === 401;
     const isExistRefreshToken = refreshToken !== null;
 
     // 엑세스 토큰 만료
     if (isAccessTokenExpired) {
       // 리프레시토큰이 있으면, 액세스토큰 재발급
       if (isExistRefreshToken) {
-        const accessToken = await this.refreshAccessTokenByRefreshToken(refreshToken!);
-        storageUtil.setTokens({ accessToken, refreshToken: refreshToken! });
+        const newAccessToken = await this.refreshAccessTokenByRefreshToken(refreshToken!);
+        storageUtil.setTokens({ accessToken: newAccessToken, refreshToken: refreshToken! });
+        return newAccessToken;
       }
       // 리프레시토큰이 없으면, 재로그인
       if (!isExistRefreshToken) {
@@ -69,9 +68,8 @@ class TokenUtil {
         window.location.assign('/signIn');
       }
     }
-    // // 제대로 된 액세스토큰 다시 받아서 다시 저장하고
-    // // 원래 호출 실패했던 API호출을 새로운 액세스토큰으로 재호출
-    return response.text();
+
+    return null;
   };
 }
 
