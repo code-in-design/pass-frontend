@@ -44,4 +44,21 @@ export class UniversitiesModel {
       universityDepartments: UniversityDepartmentsModel.setModelFromData(data),
     };
   };
+
+  setTableData = data => {
+    const department = new UniversityDepartmentsModel(data.universityDepartments);
+    return {
+      id: data.id,
+      group: department.recruitmentGroup,
+      universityName: data.universityName,
+      departmentName: department.departmentName,
+      practicalType: department.practicalApplyType,
+      test: department.testContributions,
+      practical: department.practicalContributions,
+      conversionScore: department.conversionScore,
+      Zvalue: department.zValue,
+      applicationPossibility: department.isApplyPossibility,
+      passPossibility: department.isPassPossibility,
+    };
+  };
 }

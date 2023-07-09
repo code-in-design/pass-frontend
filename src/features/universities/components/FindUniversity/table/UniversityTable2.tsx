@@ -14,6 +14,7 @@ import ExerciseIcon from './ExerciseIcon';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
 import { useFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
+import { UniversitiesModel } from '@/models/UniversitiesModel';
 
 interface Props {
   data: {
@@ -71,10 +72,15 @@ const ContributionRenderer = props => {
 };
 
 const UniversityTable = (props: Props) => {
-  const [rowData] = useState(props.data);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedData, setSelectedData] = useState('');
-  const { data } = useFetchUniversityListQuery();
+  const { data, isSuccess } = useFetchUniversityListQuery();
+  const universityModel = new UniversitiesModel();
+
+  const universityData = data?.map((item: any) => {
+    return universityModel.setTableData(item);
+  });
+  const [rowData] = useState(universityData);
 
   const onRowClick = props => {
     setToggleModal(true);
@@ -91,12 +97,13 @@ const UniversityTable = (props: Props) => {
   };
 
   const [columnDefs, setColumnDefs] = useState([
+    // this row shows the row index, doesn't use any data from the row
     {
-      field: 'id',
-      headerName: '군',
-      sortable: true,
-      minWidth: 48,
-      flex: 1,
+      headerName: 'ID',
+      maxWidth: 100,
+      // it is important to have node.id here, so that when the id changes (which happens
+      // when the row is loaded) then the cell is refreshed.
+      valueGetter: 'node.id',
       cellRenderer: props => {
         if (props.value !== undefined) {
           return props.value;
@@ -104,9 +111,19 @@ const UniversityTable = (props: Props) => {
           return <img src="https://www.ag-grid.com/example-assets/loading.gif" />;
         }
       },
-      cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' },
     },
+    { field: 'athlete', minWidth: 150 },
+    { field: 'age' },
+    { field: 'country', minWidth: 150 },
+    { field: 'year' },
+    { field: 'date', minWidth: 150 },
+    { field: 'sport', minWidth: 150 },
+    { field: 'gold' },
+    { field: 'silver' },
+    { field: 'bronze' },
+    { field: 'total' },
   ]);
+
   const defaultColDef = useMemo(() => {
     return {
       flex: 1,
@@ -140,27 +157,6 @@ const UniversityTable = (props: Props) => {
         };
         params.api.setDatasource(dataSource);
       });
-  }, []);
-
-  const onGridReady2 = useCallback(params => {
-    const { api } = params;
-    const dataSource = {
-      rowCount: undefined,
-      getRows: params => {
-        setTimeout(function () {
-          // take a slice of the total rows
-          // const rowsThisPage = data.slice(params.startRow, params.endRow);
-          // // if on or after the last page, work out the last row.
-          // let lastRow = -1;
-          // if (data.length <= params.endRow) {
-          //   lastRow = data.length;
-          // }
-          // // call the success callback
-          // params.successCallback(rowsThisPage, lastRow);
-        }, 500);
-      },
-    };
-    api.setDatasource(dataSource);
   }, []);
 
   return (
