@@ -7,6 +7,7 @@ import EditSquare from '../../../public/images/icons/editSquare.svg';
 import School from '../../../public/images/icons/graduationOutline.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
+import UserManagement from '../../../public/images/icons/manageAccounts.svg';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -45,6 +46,7 @@ Navbar.defaultProps = {
     { icon: <Analytics />, title: '합격분석', route: '/passAnalysis' },
     { icon: <Settings />, title: '환경설정', route: '/settings?menu=0' },
     { icon: <Analytics />, title: '사전예약', route: '/reservations' },
+    { icon: <UserManagement />, title: '사용자 목록', route: '/userManagement/userList' },
   ],
 };
 

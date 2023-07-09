@@ -5,16 +5,22 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import styled from '@emotion/styled';
 import theme from '@/theme/theme';
 
+export interface TableStyle {
+  headerHeight?: string;
+  rowHeight?: string;
+}
+
 export interface TableProps<RowType> {
   columns: ColDef[];
   options: GridOptions;
   rows: RowType[];
+  styles?: TableStyle;
 }
 
 export const Table = <RowType,>(props: TableProps<RowType>) => {
-  const { rows, columns, options } = props;
+  const { rows, columns, options, styles } = props;
   return (
-    <AgiGridWrapper>
+    <AgiGridWrapper styles={styles}>
       <div className="ag-theme-alpine" style={{ height: '100%', width: '100%' }}>
         <AgGridReact rowData={rows} columnDefs={columns} getRowHeight={() => 32} gridOptions={options}></AgGridReact>
       </div>
@@ -22,8 +28,9 @@ export const Table = <RowType,>(props: TableProps<RowType>) => {
   );
 };
 
-const AgiGridWrapper = styled.div`
+const AgiGridWrapper = styled.div<any>`
   width: 100%;
+  height: 100%;
 
   // 바디 고정 높이 제거
   .ag-center-cols-clipper[role='presentation'] {
@@ -53,6 +60,11 @@ const AgiGridWrapper = styled.div`
   // 헤더 배경
   .ag-header-viewport {
     background-color: ${theme.colors.gray6};
+  }
+
+  // 헤더 셀 스타일
+  .ag-header-cell {
+    padding: 0;
   }
 
   // 헤더 가운데 정렬
