@@ -1,5 +1,5 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
-import ServiceListItem from '@/pages/index/components/ServiceList/ServiceListItem';
+import ServiceListItem from '@/pages/dashBoard/components/ServiceList/ServiceListItem';
 import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';

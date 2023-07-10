@@ -2,13 +2,21 @@ import React, { HTMLProps } from 'react';
 import { Navbar } from '../Navbar';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
+import Home from '../../../public/images/icons/home.svg';
+import Analytics from '../../../public/images/icons/analytics.svg';
+import { ADMIN_PATH } from '../../constants/path';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
-const Layout = (props: LayoutProps) => {
+const AdminLayout = (props: LayoutProps) => {
   return (
     <LayoutWrapper>
-      <Navbar />
+      <Navbar
+        menuList={[
+          { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
+          { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
+        ]}
+      />
       <BodyWrapper>
         <HeaderContainer />
         <ChildrenWrapper>{props.children}</ChildrenWrapper>
@@ -17,7 +25,7 @@ const Layout = (props: LayoutProps) => {
   );
 };
 
-export default Layout;
+export default AdminLayout;
 
 const LayoutWrapper = styled.div`
   display: flex;

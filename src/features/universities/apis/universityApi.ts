@@ -3,8 +3,10 @@ import queryString from 'query-string';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import tokenUtil from '@/utils/TokenUtil';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { UniversityFilterModel } from '@/models/UniversityFilterModel';
 
 const universityModel = new UniversitiesModel();
+const universityFilterModel = new UniversityFilterModel();
 
 export const universityApi = createApi({
   reducerPath: 'universityApi',
@@ -27,9 +29,10 @@ export const universityApi = createApi({
         try {
           const data = JSON.parse(res);
           const universityData = data?.result?.map((item: any) => {
-            return universityModel.setModelFromData(item);
+            universityModel.setModelFromData(item);
+            return universityModel.toJSON();
           });
-          return universityModel.toJSON(universityData);
+          return universityData;
         } catch (e) {
           console.error(e);
         }
@@ -47,7 +50,8 @@ export const universityApi = createApi({
     fetchUniversityCount: builder.query<any, void>({
       query: () => {
         const currentQuery = window.location.search;
-        return `/count?${currentQuery}`;
+        const changeQuery = universityFilterModel.toServer(queryString.parse(currentQuery));
+        return `/count${currentQuery}`;
       },
     }),
   }),

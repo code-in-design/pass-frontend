@@ -8,6 +8,9 @@ import School from '../../../public/images/icons/graduationOutline.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
+import { SERVICE_PATH } from '../../constants/path';
+import { storageUtil } from '@/utils/StorageUtil';
+import { includes, startsWith } from 'lodash';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
@@ -17,19 +20,24 @@ export const Navbar = (props: Props) => {
   const { rootProps } = useNavbar();
   const router = useRouter();
 
+  const logOut = () => {
+    storageUtil.resetTokens();
+    router.push(SERVICE_PATH.SIGNIN);
+  };
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
       <MenuList>
         {props?.menuList?.map((item, index) => {
+          console.log(router.pathname, item.route);
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={item.route.includes(router.pathname)}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={startsWith(item.route, router.pathname)}>
               {item.icon}
             </NavbarItem>
           );
         })}
       </MenuList>
-      <LogOut>
+      <LogOut onClick={logOut}>
         <LogOutImg src="/images/icons/logout.svg" alt="logout" />
         <LogOutText>로그아웃</LogOutText>
       </LogOut>
@@ -39,12 +47,11 @@ export const Navbar = (props: Props) => {
 
 Navbar.defaultProps = {
   menuList: [
-    { icon: <Home />, title: '메인홈', route: '/dashboard' },
-    { icon: <EditSquare />, title: '내 점수 입력하기', route: '/myScore' },
-    { icon: <School />, title: '대학찾기', route: '/findUniversity' },
-    { icon: <Analytics />, title: '합격분석', route: '/passAnalysis' },
-    { icon: <Settings />, title: '환경설정', route: '/settings?menu=0' },
-    { icon: <Analytics />, title: '사전예약', route: '/reservations' },
+    { icon: <Home />, title: '메인홈', route: SERVICE_PATH.HOME },
+    { icon: <EditSquare />, title: '내 점수 입력하기', route: SERVICE_PATH.MY_SCORE },
+    { icon: <School />, title: '대학찾기', route: SERVICE_PATH.FIND_UNIVERSITY },
+    { icon: <Analytics />, title: '합격분석', route: SERVICE_PATH.PASS_ANALYSIS },
+    { icon: <Settings />, title: '환경설정', route: SERVICE_PATH.SETTINGS_MYACCOUNT },
   ],
 };
 

@@ -11,7 +11,7 @@ interface Props {
 
 const SettingsNavbarItem = (props: Props) => {
   return (
-    <MenuListItem id={props.title === '회원 탈퇴' ? 'withdrawalMenuOpen' : ''} isSelected={props.isSelected} onClick={() => props.handleClickItem(props.index)}>
+    <MenuListItem id={props.title === '회원 탈퇴' ? 'withdrawalMenuOpen' : ''} isSelected={props.isSelected} onClick={props.handleClickItem}>
       <ImageWrapper>{props.children}</ImageWrapper>
       <span>{props.title}</span>
     </MenuListItem>

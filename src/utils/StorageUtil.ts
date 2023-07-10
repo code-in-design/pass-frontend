@@ -79,6 +79,13 @@ class StorageUtil {
       this.setItemToSessionStorage(this.kakaoIdKey, kakaoId);
     }
   };
+
+  resetTokens = () => {
+    this.setItemToLocalStorage(this.accessTokenKey, null);
+    this.setItemToLocalStorage(this.refreshTokenKey, null);
+    this.setItemToSessionStorage(this.accessTokenKey, null);
+    this.setItemToSessionStorage(this.refreshTokenKey, null);
+  };
 }
 
 export const storageUtil = new StorageUtil();

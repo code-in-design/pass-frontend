@@ -3,6 +3,7 @@ import { urls } from '@/constants/url';
 import { storageUtil } from '@/utils/StorageUtil';
 import tokenUtil from '../../../utils/TokenUtil';
 import { UserModel } from '@/models/UserModel';
+import { SERVICE_PATH } from './../../../constants/path';
 
 export const authApi = createApi({
   reducerPath: 'auth',
@@ -29,17 +30,17 @@ export const authApi = createApi({
         // 네이버로 로그인을하고, z-one에 회원가입이 되어있지 않은경우
         if (naverId) {
           storageUtil.setOAuthProviderIds({ naverId: naverId });
-          window.location.assign('/signUp');
+          window.location.assign(SERVICE_PATH.SIGNUP);
         } else {
           // 네이버로 로그인을하고, z-one에 회원가입이 되어있는경우
           const { access_token, refresh_token } = result;
           storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-          window.location.assign('/dashboard');
+          window.location.assign(SERVICE_PATH.HOME);
         }
       },
       transformErrorResponse: response => {
         if (response.status === 400) {
-          window.location.assign('/signIn');
+          window.location.assign(SERVICE_PATH.SIGNIN);
         }
       },
     }),
@@ -57,17 +58,17 @@ export const authApi = createApi({
         // 카카오로 로그인을하고, z-one에 회원가입이 되어있지 않은경우
         if (kakaoId) {
           storageUtil.setOAuthProviderIds({ kakaoId: kakaoId });
-          window.location.assign('/signUp');
+          window.location.assign(SERVICE_PATH.SIGNUP);
         } else {
           // 카카오로 로그인을하고, z-one에 회원가입이 되어있는경우
           const { access_token, refresh_token } = result;
           storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-          window.location.assign('/dashboard');
+          window.location.assign(SERVICE_PATH.HOME);
         }
       },
       transformErrorResponse: response => {
         if (response.status === 400) {
-          window.location.assign('/signIn');
+          window.location.assign(SERVICE_PATH.SIGNIN);
         }
       },
     }),
@@ -86,7 +87,7 @@ export const authApi = createApi({
       transformResponse: (response: any, meta, arg) => {
         const { access_token, refresh_token } = JSON.parse(response);
         storageUtil.setTokens({ accessToken: access_token, refreshToken: refresh_token });
-        window.location.assign('/dashboard');
+        window.location.assign(SERVICE_PATH.HOME);
       },
     }),
     // 회원가입

@@ -89,6 +89,7 @@ const WarningText = styled.div`
   line-height: 20px;
   color: ${props => props.theme.colors.gray1};
   margin-bottom: 4px;
+  letter-spacing: -0.32px;
   :last-of-type {
     margin-bottom: 0;
   }

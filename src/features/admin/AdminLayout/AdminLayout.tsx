@@ -1,14 +1,14 @@
 import React, { HTMLProps } from 'react';
 import styled from '@emotion/styled';
 import HeaderContainer from '../../../components/Header/HeaderContainer';
-import { AdminNavbar } from '../AdminNavbar';
+import { Navbar } from '@/components/Navbar';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
 const AdminLayout = (props: LayoutProps) => {
   return (
     <LayoutWrapper>
-      <AdminNavbar />
+      <Navbar />
       <BodyWrapper>
         <HeaderContainer />
         <ChildrenWrapper>{props.children}</ChildrenWrapper>

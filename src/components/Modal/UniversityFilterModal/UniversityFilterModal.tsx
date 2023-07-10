@@ -1,28 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Checkbox } from '@chakra-ui/react';
-import { UseFormRegister, FieldValues, UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormHandleSubmit } from 'react-hook-form';
 import ModalLayout from '@/components/Modal/ModalLayout';
 import TwoThumbsRange from '@/components/Range/TwoThumbsRange';
 import FindUniversityFilterModalItem from './UniversityFilterModalItem';
 import Filter from '../../../../public/images/icons/filter.svg';
-import { useRouter } from 'next/router';
 
 interface Props {
   size: 'sm' | 'md';
-  register: UseFormRegister<FieldValues>;
+  // register: UseFormRegister<FieldValues>;
+  // setValue: UseFormSetValue<FieldValues>;
+  register: any;
+  setValue: any;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
   onSubmit: (data) => void;
   searchResultNumber: any;
   openModal: () => void;
   closeModal: () => void;
   isOpen: boolean;
+  min: number;
+  max: number;
 }
 
 const UniversityFilterModal = (props: Props) => {
-  const router = useRouter();
-
   return (
     <>
       <FileterButton id="universitySearchFilterOpen" size={props.size} onClick={props.openModal}>
@@ -37,13 +38,13 @@ const UniversityFilterModal = (props: Props) => {
               <Left>
                 <FindUniversityFilterModalItem title="모집시기" subtitle="* 중복 선택 가능합니다">
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup" defaultChecked={router.query.applyGroup === '가군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="가군" name="applyGroup">
                       가군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup" defaultChecked={router.query.applyGroup === '나군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="나군" name="applyGroup">
                       나군
                     </Checkbox>
-                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup" defaultChecked={router.query.applyGroup === '다군'}>
+                    <Checkbox size="checkButton" {...props.register('applyGroup')} value="다군" name="applyGroup">
                       다군
                     </Checkbox>
                   </FlexContainer>
@@ -52,54 +53,54 @@ const UniversityFilterModal = (props: Props) => {
                 <FindUniversityFilterModalItem title="과목 반영" subtitle="* 중복 선택 가능합니다">
                   <FlexContainerSmall>
                     <SubTitle>국어</SubTitle>
-                    <Checkbox size="noControlCheckbox" {...props.register('isKoreanRequired')} value="필수반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('koreanTypes')} value="필수반영">
                       필수반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isKoreanRequired')} value="선택반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('koreanTypes')} value="선택반영">
                       선택반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isKoreanRequired')} value="미반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('koreanTypes')} value="미반영">
                       미반영
                     </Checkbox>
                   </FlexContainerSmall>
                   <FlexContainerSmall>
                     <SubTitle>수학</SubTitle>
-                    <Checkbox size="noControlCheckbox" {...props.register('isMathRequired')} value="필수반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('mathTypes')} value="필수반영">
                       필수반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isMathRequired')} value="선택반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('mathTypes')} value="선택반영">
                       선택반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isMathRequired')} value="미반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('mathTypes')} value="미반영">
                       미반영
                     </Checkbox>
                   </FlexContainerSmall>
                   <FlexContainerSmall>
                     <SubTitle>영어</SubTitle>
-                    <Checkbox size="noControlCheckbox" {...props.register('isEnglishRequired')} value="필수반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('englishTypes')} value="필수반영">
                       필수반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isEnglishRequired')} value="선택반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('englishTypes')} value="선택반영">
                       선택반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isEnglishRequired')} value="미반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('englishTypes')} value="미반영">
                       미반영
                     </Checkbox>
                   </FlexContainerSmall>
                   <FlexContainerSmall>
                     <SubTitle>탐구</SubTitle>
-                    <Checkbox size="noControlCheckbox" {...props.register('isInquiryRequired')} value="필수반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('inquiryTypes')} value="필수반영">
                       필수반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isInquiryRequired')} value="선택반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('inquiryTypes')} value="선택반영">
                       선택반영
                     </Checkbox>
-                    <Checkbox size="noControlCheckbox" {...props.register('isInquiryRequired')} value="미반영">
+                    <Checkbox size="noControlCheckbox" {...props.register('inquiryTypes')} value="미반영">
                       미반영
                     </Checkbox>
                   </FlexContainerSmall>
                   <CheckBoxWrapper>
-                    <Checkbox size="greenCheckboxSmall" {...props.register('oneSubject')}>
+                    <Checkbox size="greenCheckboxSmall" {...props.register('inquiryOnlyOne')}>
                       1과목 반영 대학만 보기
                     </Checkbox>
                   </CheckBoxWrapper>
@@ -145,14 +146,14 @@ const UniversityFilterModal = (props: Props) => {
                 </FindUniversityFilterModalItem>
 
                 <FindUniversityFilterModalItem title="경쟁률 범위 설정" subtitle="* 2023학년도 기준입니다">
-                  <TwoThumbsRange STEP={0.01} MAX={100} MIN={0} register={props.register} setValue={props.setValue} />
+                  <TwoThumbsRange STEP={0.01} MAX={props.max} MIN={props.min} register={props.register} setValue={props.setValue} />
                 </FindUniversityFilterModalItem>
               </Left>
 
               <Right>
                 <FindUniversityFilterModalItem title="학과 계열" subtitle="* 학과명에 따른 분류입니다">
                   <FlexContainer>
-                    <Checkbox size="checkButton" {...props.register('department')} value="체육교육·지도">
+                    <Checkbox size="checkButton" {...props.register('department')} value="체육교육과">
                       체육교육 지도
                     </Checkbox>
                     <Checkbox size="checkButton" {...props.register('department')} value="스포츠의학">

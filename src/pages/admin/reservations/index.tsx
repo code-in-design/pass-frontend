@@ -1,12 +1,12 @@
 import React from 'react';
 import ReservationListContainer from '@/features/reservations/containers/ReservationListContainer';
-import Layout from '../../components/Layout/Layout';
+import AdminLayout from '../../../components/Layout/AdminLayout';
 
 const ReservationsPage = () => {
   return (
-    <Layout>
+    <AdminLayout>
       <ReservationListContainer />
-    </Layout>
+    </AdminLayout>
   );
 };
 
