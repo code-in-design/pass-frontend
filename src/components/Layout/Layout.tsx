@@ -3,6 +3,7 @@ import { Navbar } from '../Navbar';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 import { useRouter } from 'next/router';
+import { SERVICE_PATH } from '@/constants/path';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
@@ -14,7 +15,7 @@ const Layout = (props: LayoutProps) => {
       <Navbar />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper isHome={router.pathname === '/dashboard' || router.pathname === '/myScore'}>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === SERVICE_PATH.HOME || router.pathname === SERVICE_PATH.MY_SCORE}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );

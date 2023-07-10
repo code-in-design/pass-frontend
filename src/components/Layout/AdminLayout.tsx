@@ -22,7 +22,7 @@ const AdminLayout = (props: LayoutProps) => {
       />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper isHome={router.pathname === '/adminDashboard'}>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === ADMIN_PATH.HOME}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );
