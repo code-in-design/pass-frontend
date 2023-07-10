@@ -23,11 +23,13 @@ const SettingsNavbar = (props: Props) => {
     <NavbarWrapper>
       <Title>계정</Title>
       <MenuList>
-        {props?.menuList?.map((item, index) => (
-          <SettingsNavbarItem key={item.title} title={item.title} handleClickItem={() => handleClickItem(item)} index={index} isSelected={String(index) === router.query.settingMenu}>
-            {item.icon}
-          </SettingsNavbarItem>
-        ))}
+        {props?.menuList?.map((item, index) => {
+          return (
+            <SettingsNavbarItem key={item.title} title={item.title} handleClickItem={() => handleClickItem(item)} index={index} isSelected={item.path === router.asPath}>
+              {item.icon}
+            </SettingsNavbarItem>
+          );
+        })}
       </MenuList>
     </NavbarWrapper>
   );
