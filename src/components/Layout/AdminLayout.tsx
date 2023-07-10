@@ -5,10 +5,13 @@ import HeaderContainer from '../Header/HeaderContainer';
 import Home from '../../../public/images/icons/home.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import { ADMIN_PATH } from '../../constants/path';
+import { useRouter } from 'next/router';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
 const AdminLayout = (props: LayoutProps) => {
+  const router = useRouter();
+
   return (
     <LayoutWrapper>
       <Navbar
@@ -19,7 +22,7 @@ const AdminLayout = (props: LayoutProps) => {
       />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === ADMIN_PATH.HOME}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );
@@ -38,12 +41,12 @@ const BodyWrapper = styled.div`
   padding-right: 32px;
 `;
 
-const ChildrenWrapper = styled.div`
+const ChildrenWrapper = styled.div<{ isHome: boolean }>`
   width: 100%;
   height: calc(100vh - 144px);
   overflow-y: auto;
   /* height: 880px; */
   border-radius: 24px;
   background-color: ${props => props.theme.colors.gray5};
-  padding: 14px;
+  padding: ${props => (props.isHome ? '30px' : '14px')};
 `;
