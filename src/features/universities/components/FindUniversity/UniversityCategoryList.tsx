@@ -19,22 +19,34 @@ interface Props {
 const UniversityCategoryList = (props: Props) => {
   const { query } = useRouter();
 
+  // 카테고리를 눌렀을때 그 카테고리가 선택되었는지 판단하는 로직
+  const isCategoryItemSelected = (categoryItem: UniversityCategoryItem) => {
+    const isNotFilterApplied = isEmpty(flatten([props.applyGroup, props.region, props.department]));
+    const isSelectedInApplyGroup = includes(props.applyGroup, categoryItem.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
+    const isSelectedInRegion = includes(props.region, categoryItem.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
+    const isSelectedInDepartment = includes(props.department, categoryItem.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
+
+    if (categoryItem.text === '전체보기' && isNotFilterApplied) return true;
+    if (categoryItem.title === '모집군' && isSelectedInApplyGroup) return true;
+    if (categoryItem.title === '지역' && isSelectedInRegion) return true;
+    if (categoryItem.title === '인기계열' && isSelectedInDepartment) return true;
+
+    return false;
+  };
+
+  // 검색어를 제외한 나머지 쿼리의 개수가 2개 이상인 경우 필터가 적용되었다고 보고 카테고리는 선택 해제한다.
+  // 필터가 2개이상 적용되면 카테고리는 선택해제 되어야한다.
+  const isCategoryItemSelectedByFilterQueryCount = () => {
+    const filterApplyList = remove(keys(query), removeItem => removeItem !== 'searchKeyword');
+    if (filterApplyList.length >= 2) return false;
+    return true;
+  };
+
   return (
     <Container>
       {props?.lists?.map((item, index) => {
-        let isSelected = false;
-
-        const isNotFilterApplied = isEmpty(flatten([props.applyGroup, props.region, props.department]));
-        const isSelectedInApplyGroup = includes(props.applyGroup, item.text); // 카테고리 > 모집군의 항목인가 (가,나,다 군 중 1개)
-        const isSelectedInRegion = includes(props.region, item.text); // 카테고리 > 지역의 항목인가 (서울권, 경기권 ...)
-        const isSelectedInDepartment = includes(props.department, item.text); // 카테고리 > 모집군의 인기계열(학과)인가 (체육교육과 등..)
-        const filterApplyList = remove(keys(query), removeItem => removeItem !== 'searchKeyword');
-
-        if (item.text === '전체보기' && isNotFilterApplied) isSelected = true;
-        if (item.title === '모집군' && isSelectedInApplyGroup) isSelected = true;
-        if (item.title === '지역' && isSelectedInRegion) isSelected = true;
-        if (item.title === '인기계열' && isSelectedInDepartment) isSelected = true;
-        if (filterApplyList.length >= 2) isSelected = false;
+        let isSelected = isCategoryItemSelected(item);
+        isSelected = isCategoryItemSelectedByFilterQueryCount();
 
         return <UniversityCategoryListItem key={index} isSelected={isSelected} onClick={props.handleItemClick} {...item} />;
       })}
