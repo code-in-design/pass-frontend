@@ -14,7 +14,7 @@ const Layout = (props: LayoutProps) => {
       <Navbar />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper isHome={router.pathname === '/dashboard'}>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === '/dashboard' || router.pathname === '/myScore'}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );
