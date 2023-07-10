@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Layout from '@/components/Layout/Layout';
 import UniversityCategoryList from '@/features/universities/components/FindUniversity/UniversityCategoryList';
 import UniversitySearchContainer from '@/features/universities/containers/UniversitySearchContainer';
 import UniversityTableContainer from '@/features/universities/containers/UniversityTableContainer';
 import UniversityFilterModalContainer from '@/features/universities/containers/UniversitySettingFilterModalContainer';
+import Layout from '../../components/Layout/Layout';
 
 const FindUniversityPage = () => {
   return (

@@ -26,7 +26,7 @@ const ReservationList = (props: Props) => {
   ];
 
   return (
-    <AdminLayout>
+    <>
       <ButtonWrapper>
         <Button onClick={props.nextPageChange}>이전</Button>
         <Button onClick={props.prevPageChange}>다음</Button>
@@ -34,7 +34,7 @@ const ReservationList = (props: Props) => {
       <div className="ag-theme-balham" style={{ height: '100%', width: '100%' }}>
         <AgGridReact columnDefs={columnDefs} rowData={props.rowData} pagination={true} paginationPageSize={props.limit} suppressPaginationPanel={true} />
       </div>
-    </AdminLayout>
+    </>
   );
 };
 
