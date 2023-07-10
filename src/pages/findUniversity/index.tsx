@@ -30,7 +30,7 @@ const Container = styled.div`
   height: auto;
   background-color: ${props => props.theme.colors.white};
   border-radius: 24px;
-  padding: 24px 8px 24px 24px;
+  padding: 24px;
   overflow: auto;
 `;
 

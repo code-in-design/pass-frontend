@@ -18,7 +18,7 @@ export class UniversitiesModel {
 
   @Expose()
   @Type(() => UniversityDepartmentsModel)
-  universityDepartments?: UniversityDepartmentsModel; // 학과 종류
+  universityDepartments?: UniversityDepartmentsModel; // 학과
 
   @Expose()
   region?: RegionType; //지역

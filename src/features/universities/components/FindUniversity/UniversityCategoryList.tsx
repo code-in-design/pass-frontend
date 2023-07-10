@@ -70,5 +70,4 @@ const Container = styled.div`
   gap: 0 7px;
   width: 100%;
   margin-bottom: 32px;
-  padding-right: 16px;
 `;

@@ -10,10 +10,15 @@ interface Props {
 
 const ExerciseIcon = (props: Props) => {
   const exercise = exerciseType[props.type] || null;
+
   return (
-    <Tooltip hasArrow label={props.type} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
-      <ExerciseIconWrapper>{exercise.icon}</ExerciseIconWrapper>
-    </Tooltip>
+    <>
+      {exercise ? (
+        <Tooltip hasArrow label={props.type} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
+          <ExerciseIconWrapper>{exercise.icon}</ExerciseIconWrapper>
+        </Tooltip>
+      ) : null}
+    </>
   );
 };
 

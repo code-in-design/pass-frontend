@@ -1,5 +1,6 @@
 import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
 import _ from 'lodash';
+import { ApplyPossibilityModel } from './ApplyPossibility';
 import { EnglishSubjectModel } from './EnglishSubjectModel';
 import { HistorySubjectModel } from './HistorySubjectModel';
 import { InquirySubjectModel } from './InquirySubjectModel';
@@ -13,13 +14,83 @@ export class UniversityDepartmentsModel {
   departmentName?: string; //학과이름
 
   @Expose()
+  recruitmentGroup?: string; //모집군
+
+  @Expose()
+  applyTypeDetail?: string; //세부 전형 : 일반학생 전형, 수능 일반전형
+
+  @Expose()
+  departmentAffiliation?: string; //학과 계열
+
+  @Expose()
+  recruitNumber?: number; //모집정원
+
+  @Expose()
+  lastYearCompetitionRate?: number; //작년 경쟁률
+
+  @Expose()
+  practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  testContributions?: string; //수능 기여도 : 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  applyType?: string; //전형 : 수능,교과,실기
+
+  @Expose()
+  isApplyPossibility?: boolean; //지원가능성 분석 여부
+
+  @Expose()
+  @Type(() => ApplyPossibilityModel)
+  possibilityOfApply?: string; //지원가능성
+
+  @Expose()
+  isPassPossibility?: boolean; //합격확률 분석 여부
+
+  @Expose()
   conversionScore?: number; //수능환산점수
 
   @Expose()
-  possibilityOfSupport?: string; //지원가능성
+  isMultistage?: boolean; //다단계 여부
 
   @Expose()
-  recruitmentGroup?: string; //모집군
+  MultistageDetail?: string; //다단계 세부사항
+
+  @Expose()
+  testRate?: number; //수능 전형반영비율
+
+  @Expose()
+  naesinRate?: number; //내신 전형반영비율
+
+  @Expose()
+  practicalRate?: number; //실기 전형반영비율
+
+  @Expose()
+  etcRate?: number; //기타 전형빈영비율
+
+  @Expose()
+  inquiryNumber?: number; // 탐구 반영 개수
+
+  @Expose()
+  exceptionRateDescription?: string; //예외 반영 비율 설명
+
+  @Expose()
+  UniversityDepartmentHomepage?: string; //학과 홈페이지
+
+  @Expose()
+  recruitmentGuideline?: string; //모집요강 홈페이지
+
+  @Expose()
+  isEndAnalysis?: boolean; //분석 종료 여부
+
+  @Expose()
+  practicalTestDate?: string; //실기고사 일정
+
+  @Expose()
+  successfulApplicantDate?: string; //합격자 발표일
+
+  @Expose()
+  isTeachingPossibility?: boolean; //교직이수 가능 여부
 
   @Expose()
   zValue?: number; //z-지수
@@ -29,75 +100,6 @@ export class UniversityDepartmentsModel {
 
   @Expose()
   competitionMaxRate?: number; //경쟁률 최대
-
-  @Expose()
-  recruitNumber?: number; //모집정원
-
-  @Expose()
-  practicalTestDate?: string; //실기고사 일정
-
-  @Expose()
-  successfulApplicantDate?: string; //합격자 발표일
-
-  @Expose()
-  recruitmentGuideline?: string; //모집요강 홈페이지
-
-  @Expose()
-  testRate?: number; //수능 전형반영비율
-
-  @Expose()
-  practicalRate?: number; //실기 전형반영비율
-
-  @Expose()
-  naesinRate?: number; //내신 전형반영비율
-
-  @Expose()
-  etcRate?: number; //기타 전형빈영비율
-
-  @Expose()
-  inquiryNumber?: number; // 탐구 반영 개수
-
-  @Expose()
-  lastYearCompetitionRate?: number; //작년 경쟁률
-
-  @Expose()
-  isApplyPossibility?: boolean; //지원가능성 분석 여부
-
-  @Expose()
-  isPassPossibility?: boolean; //합격확률 분석 여부
-
-  @Expose()
-  isMultistage?: boolean; //다단계 여부
-
-  @Expose()
-  MultistageDetail?: string; //다단계 세부사항
-
-  @Expose()
-  UniversityDepartmentHomepage?: string; //학과 홈페이지
-
-  @Expose()
-  isTeachingPossibility?: boolean; //교직이수 가능 여부
-
-  @Expose()
-  exceptionRateDescription?: string; //예외 반영 비율 설명
-
-  @Expose()
-  applyType?: string; //전형 : 수능,교과
-
-  @Expose()
-  applyTypeDetail?: string; //세부 전형 : 일반학생 전형, 수능 일반전형
-
-  @Expose()
-  departmentAffiliation?: string; //학과 계열
-
-  @Expose()
-  isEndAnalysis?: boolean; //분석 종료 여부
-
-  @Expose()
-  testContributions?: string; //수능 기여도 : 최상, 상, 중, 하 , 최하
-
-  @Expose()
-  practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
 
   @Expose()
   @Type(() => PracticalApplyModel)
@@ -160,6 +162,8 @@ export class UniversityDepartmentsModel {
     universityDepartment.lastYearCompetitionRate = data.작년_경쟁률; //작년 경쟁률
 
     universityDepartment.isApplyPossibility = data.지원_가능성_준석_여부; //지원가능성 분석 여부
+
+    universityDepartment.possibilityOfApply = ApplyPossibilityModel.setModelFromData([data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가]);
 
     universityDepartment.isPassPossibility = data.합격_확률_분석_여부; //합격확률 분석 여부
 
