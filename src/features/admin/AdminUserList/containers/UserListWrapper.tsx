@@ -6,7 +6,6 @@ import SearchIcon from '../../../../../public/images/icons/searchUser.svg';
 import { ExportButton } from '../components/ExportButton';
 import { UserSearch } from '../components/UserSearch';
 import { UserTable } from '../components/UserTable';
-import styled from '@emotion/styled';
 
 export const UserListContainer = () => {
   const totalUserCount = 0;
