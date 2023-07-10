@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@/components/Layout/Layout';
 import UpdateManagementContainer from '@/features/admin/AdminUpdateManagement/containers/UpdateManagementContainer';
 
-const UserListPage = () => {
+const UpdateManagementPage = () => {
   return (
     <Layout>
       <UpdateManagementContainer />
@@ -10,4 +10,4 @@ const UserListPage = () => {
   );
 };
 
-export default UserListPage;
+export default UpdateManagementPage;

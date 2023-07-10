@@ -6,22 +6,28 @@ import _ from 'lodash';
 
 const UpdateManagementContainer = () => {
   const { register, handleSubmit, setValue, watch, formState } = useForm();
-  const version = watch('version', '');
+  const id = watch('id', '');
   const serverData = [
     {
+      id: 1,
       version: '2.3.5',
       date: '2023.01.02 11:00',
+      comment: '2.3.5 버전 업데이트입니다.',
     },
     {
+      id: 2,
       version: '2.3.6',
       date: '2023.01.03 11:00',
+      comment: '2.3.6 버전 업데이트입니다.',
     },
   ];
 
-  const updateDate = _.find(serverData, { version: version })?.date || '';
+  const selectedItem = _.find(serverData, { id: id });
+  const scheduledUpdateDate = selectedItem?.date || '';
+  const comment = selectedItem?.comment || '';
 
   const options: OptionType[] = serverData.map(data => {
-    return { value: data.version, label: 'ver ' + data.version };
+    return { value: data.id, label: 'ver ' + data.version };
   });
 
   const onSubmit = data => {
@@ -33,7 +39,7 @@ const UpdateManagementContainer = () => {
     if (error?.version) alert(error.version.message);
   };
 
-  return <UpdateForm date={updateDate} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} />;
+  return <UpdateForm date={scheduledUpdateDate} comment={comment} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} formState={formState}/>;
 };
 
 export default UpdateManagementContainer;

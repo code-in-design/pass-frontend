@@ -2,16 +2,18 @@ import Select from '@/components/Select';
 import theme from '@/theme/theme';
 import { Flex, Stack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FieldValues, FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { isEmpty } from 'lodash';
 
 export type OptionType = {
+  value: number;
   label: string;
-  value: string;
 };
 
 interface Props {
   date: string;
+  comment: string;
   options: OptionType[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
@@ -20,12 +22,7 @@ interface Props {
 }
 
 const UpdateForm = (props: Props) => {
-  const [isCommentEmpty, setIsCommentEmpty] = useState(true);
-
-  const handleCommentChange = event => {
-    const commentValue = event.target.value;
-    setIsCommentEmpty(commentValue === '');
-  };
+  const isCommentModified = props.formState?.dirtyFields.comment;
 
   return (
     <Container onSubmit={props.handleSubmit}>
@@ -35,7 +32,7 @@ const UpdateForm = (props: Props) => {
           <Flex width="100%" gap="24px">
             <Flex maxWidth="145px" direction="column" gap="12px">
               <Text>UPDATE COMMENT</Text>
-              <Select height={40} border="10px" options={props.options} name="version" setValue={props.setValue} register={props.register} required="버전을 입력하세요" />
+              <Select height={40} border="10px" options={props.options} name="id" setValue={props.setValue} register={props.register} required="버전을 입력하세요" />
             </Flex>
             <Flex maxWidth="145px" direction="column" gap="12px">
               <Text>업데이트 예정일</Text>
@@ -44,11 +41,11 @@ const UpdateForm = (props: Props) => {
           </Flex>
           <Flex maxWidth="145px" direction="column" gap="12px">
             <Text>COMMENT 내용</Text>
-            <TextInput placeholder="COMMENT 내용을 적어주세요" {...props.register('comment')} onChange={handleCommentChange} />
+            <TextInput defaultValue={props.comment} placeholder="COMMENT 내용을 적어주세요" {...props.register('comment')} />
           </Flex>
         </Flex>
         <Flex width="100%" justifyContent="right">
-          <StyledButton type="submit" disabled={isCommentEmpty}>
+          <StyledButton type="submit" disabled={!isCommentModified}>
             저장
           </StyledButton>
         </Flex>
