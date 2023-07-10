@@ -4,9 +4,9 @@ import RecommendationModal from '@/features/recommendations/components/Recommend
 import MembershipModal from '@/components/Modal/MembershipModal/MembershipModal';
 import PrivacyModal from './PrivacyModal';
 import { useForm } from 'react-hook-form';
-import ServiceListItem from './ServiceListItem';
 import Badge from '../../../../../public/images/icons/badge.svg';
 import { useState } from 'react';
+import ServiceListItem from './ServiceListItem';
 
 const ServiceList = props => {
   const { register } = useForm();

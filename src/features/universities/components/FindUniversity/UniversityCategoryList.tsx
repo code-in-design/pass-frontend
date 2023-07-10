@@ -18,6 +18,8 @@ interface Props {
 
 const UniversityCategoryList = (props: Props) => {
   const { query } = useRouter();
+  // 검색어를 제외한 나머지 쿼리의 개수가 2개 이상인 경우 필터가 적용되었다고 보고 카테고리는 선택 해제한다.
+  const filterApplyList = remove(keys(query), removeItem => removeItem !== 'searchKeyword');
 
   // 카테고리를 눌렀을때 그 카테고리가 선택되었는지 판단하는 로직
   const isCategoryItemSelected = (categoryItem: UniversityCategoryItem) => {
@@ -34,19 +36,14 @@ const UniversityCategoryList = (props: Props) => {
     return false;
   };
 
-  // 검색어를 제외한 나머지 쿼리의 개수가 2개 이상인 경우 필터가 적용되었다고 보고 카테고리는 선택 해제한다.
-  // 필터가 2개이상 적용되면 카테고리는 선택해제 되어야한다.
-  const isCategoryItemSelectedByFilterQueryCount = () => {
-    const filterApplyList = remove(keys(query), removeItem => removeItem !== 'searchKeyword');
-    if (filterApplyList.length >= 2) return false;
-    return true;
-  };
-
   return (
     <Container>
       {props?.lists?.map((item, index) => {
-        let isSelected = isCategoryItemSelected(item);
-        isSelected = isCategoryItemSelectedByFilterQueryCount();
+        let isSelected = false;
+        isSelected = isCategoryItemSelected(item);
+
+        // 필터가 2개이상 적용되면 카테고리는 선택해제 되어야한다.
+        if (filterApplyList.length >= 2) isSelected = false;
 
         return <UniversityCategoryListItem key={index} isSelected={isSelected} onClick={props.handleItemClick} {...item} />;
       })}

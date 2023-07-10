@@ -37,7 +37,7 @@ export const Navbar = (props: Props) => {
           );
         })}
       </MenuList>
-      <LogOut onClick={() => logOut()}>
+      <LogOut onClick={logOut}>
         <LogOutImg src="/images/icons/logout.svg" alt="logout" />
         <LogOutText>로그아웃</LogOutText>
       </LogOut>

@@ -81,16 +81,10 @@ class StorageUtil {
   };
 
   resetTokens = () => {
-    const isAutoLogin: any = this.getItemFromLocalStorage(this.autoLoginKey);
-
-    if (JSON.parse(isAutoLogin)) {
-      this.setItemToLocalStorage(this.accessTokenKey, null);
-      this.setItemToLocalStorage(this.refreshTokenKey, null);
-    }
-    if (!JSON.parse(isAutoLogin)) {
-      this.setItemToSessionStorage(this.accessTokenKey, null);
-      this.setItemToSessionStorage(this.refreshTokenKey, null);
-    }
+    this.setItemToLocalStorage(this.accessTokenKey, null);
+    this.setItemToLocalStorage(this.refreshTokenKey, null);
+    this.setItemToSessionStorage(this.accessTokenKey, null);
+    this.setItemToSessionStorage(this.refreshTokenKey, null);
   };
 }
 
