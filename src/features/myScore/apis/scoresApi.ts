@@ -1,18 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { addTokenToHeader, fetchAccessToken } from '../../../app/api';
 import { urls } from '@/constants/url';
 import { ScoreModel } from '@/models/ScoreModel';
-import { useDispatch } from 'react-redux';
-import { scoresActions } from '../slices/scoresSlice';
-import useScores from '../hooks/useScores';
+import tokenUtil from '../../../utils/TokenUtil';
 
 const scoreModel = new ScoreModel();
 export const scoresApi = createApi({
   reducerPath: 'scoresApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${urls.baseUrl}`,
-    prepareHeaders: addTokenToHeader,
-    responseHandler: fetchAccessToken,
+    prepareHeaders: tokenUtil.addTokenToHeader,
+    responseHandler: async response => {
+      await tokenUtil.silentRefreshAccessToken(response.status);
+      return response.text();
+    },
   }),
   endpoints: builder => ({
     //성적 확정 전 성적 입력하기

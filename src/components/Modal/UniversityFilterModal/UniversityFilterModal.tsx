@@ -26,7 +26,7 @@ interface Props {
 const UniversityFilterModal = (props: Props) => {
   return (
     <>
-      <FileterButton size={props.size} onClick={props.openModal}>
+      <FileterButton id="universitySearchFilterOpen" size={props.size} onClick={props.openModal}>
         <Filter />
         필터 열기
       </FileterButton>

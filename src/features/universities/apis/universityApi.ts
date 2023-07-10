@@ -13,7 +13,10 @@ export const universityApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${urls.baseUrl}/university`,
     prepareHeaders: tokenUtil.addTokenToHeader,
-    responseHandler: tokenUtil.silentRefreshAccessToken,
+    responseHandler: async response => {
+      await tokenUtil.silentRefreshAccessToken(response.status);
+      return response.text();
+    },
   }),
 
   endpoints: builder => ({

@@ -32,7 +32,7 @@ const Withdrawal = () => {
         <Reason placeholder="탈퇴 사유를 적어주세요" />
       </ReasonBox>
 
-      <WithdrawlButton type="button" disabled={withdrawalButtonDisabled}>
+      <WithdrawlButton id="withdrawalComplete" type="button" disabled={withdrawalButtonDisabled}>
         회원 탈퇴
       </WithdrawlButton>
     </Container>

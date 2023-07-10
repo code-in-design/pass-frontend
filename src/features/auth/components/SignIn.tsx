@@ -20,6 +20,7 @@ const SignIn = (props: Props) => {
         <Image src="/images/logos/logo.svg" alt="Z-ONE" w="150px" h="60px" margin="0 auto" />
         <VStack margin="80px 0 24px">
           <Button
+            id="signUpWithKakao"
             onClick={() => {
               props.setAutoLoginChecked();
               location.href = `${urls.baseUrl}${urls.authKakao}?redirect_uri=http://localhost:3000/oauth/kakao/kakaoVerify`;
@@ -37,6 +38,7 @@ const SignIn = (props: Props) => {
             카카오로 시작하기
           </Button>
           <Button
+            id="signUpWithNaver"
             onClick={() => {
               props.setAutoLoginChecked();
               location.href = `${urls.baseUrl}${urls.authNaver}?redirect_uri=http://localhost:3000/oauth/naver/naverVerify`;
@@ -110,6 +112,7 @@ const SignIn = (props: Props) => {
               로그인
             </Button>
             <Button
+              id="signUpwithEmail"
               w="100%"
               h="56px"
               borderRadius="16px"
