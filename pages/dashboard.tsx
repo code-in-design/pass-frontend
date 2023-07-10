@@ -1,5 +1,5 @@
 import React from 'react';
-import ServiceDashboardPage from '../src/pages/dashboard';
+import ServiceDashboardPage from '@/pages/dashBoard';
 
 const ServiceDashboard = () => {
   return <ServiceDashboardPage />;

@@ -45,5 +45,5 @@ const ChildrenWrapper = styled.div`
   /* height: 880px; */
   border-radius: 24px;
   background-color: ${props => props.theme.colors.gray5};
-  padding: 40px;
+  padding: 14px;
 `;

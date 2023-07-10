@@ -1,5 +1,5 @@
+import ReservationsPage from '@/pages/admin/reservations';
 import React from 'react';
-import ReservationsPage from '../../../src/pages/admin/reservations';
 
 const ReservationListPage = () => {
   return <ReservationsPage />;

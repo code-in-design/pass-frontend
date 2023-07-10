@@ -9,6 +9,8 @@ import Analytics from '../../../public/images/icons/analytics.svg';
 import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
 import { SERVICE_PATH } from '../../constants/path';
+import { storageUtil } from '@/utils/StorageUtil';
+import { includes, startsWith } from 'lodash';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
@@ -18,6 +20,10 @@ export const Navbar = (props: Props) => {
   const { rootProps } = useNavbar();
   const router = useRouter();
 
+  const logOut = () => {
+    storageUtil.resetTokens();
+    router.push(SERVICE_PATH.SIGNIN);
+  };
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
@@ -25,13 +31,13 @@ export const Navbar = (props: Props) => {
         {props?.menuList?.map((item, index) => {
           console.log(router.pathname, item.route);
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={item.route === router.pathname}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={startsWith(item.route, router.pathname)}>
               {item.icon}
             </NavbarItem>
           );
         })}
       </MenuList>
-      <LogOut>
+      <LogOut onClick={logOut}>
         <LogOutImg src="/images/icons/logout.svg" alt="logout" />
         <LogOutText>로그아웃</LogOutText>
       </LogOut>
