@@ -18,7 +18,7 @@ export class UniversitiesModel {
 
   @Expose()
   @Type(() => UniversityDepartmentsModel)
-  universityDepartments?: UniversityDepartmentsModel[]; // 학과 종류
+  universityDepartments?: UniversityDepartmentsModel; // 학과 종류
 
   @Expose()
   region?: RegionType; //지역
@@ -35,28 +35,27 @@ export class UniversitiesModel {
   };
 
   setModelFromData = data => {
-    this.id = data.id;
+    this.id = data?.id;
     this.universityName = data.대학명;
     this.universityHomepage = data.대학_홈페이지;
     this.type = data.운영;
     this.region = data.지역;
-    // this.universityDepartments = UniversityDepartmentsModel.setModelFromData(data);
+    this.universityDepartments = UniversityDepartmentsModel.setModelFromData(data);
   };
 
   setTableData = data => {
-    const department = new UniversityDepartmentsModel(data.universityDepartments);
     return {
-      id: data.id,
-      group: department.recruitmentGroup,
-      universityName: data.universityName,
-      departmentName: department.departmentName,
-      practicalType: department.practicalApplyType,
-      test: department.testContributions,
-      practical: department.practicalContributions,
-      conversionScore: department.conversionScore,
-      Zvalue: department.zValue,
-      applicationPossibility: department.isApplyPossibility,
-      passPossibility: department.isPassPossibility,
+      id: data?.id,
+      group: data?.universityDepartments.recruitmentGroup,
+      universityName: data?.universityName,
+      departmentName: data?.universityDepartments.departmentName,
+      practicalType: data?.universityDepartments.practicalApplyType,
+      test: data?.universityDepartments.testContributions,
+      practical: data?.universityDepartments.practicalContributions,
+      conversionScore: data?.universityDepartments.conversionScore,
+      Zvalue: data?.universityDepartments.zValue,
+      // applicationPossibility: data?.universityDepartments.,
+      // passPossibility: data?.universityDepartments.,
     };
   };
 }

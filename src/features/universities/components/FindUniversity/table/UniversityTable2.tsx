@@ -78,8 +78,11 @@ const UniversityTable = (props: Props) => {
   const universityModel = new UniversitiesModel();
 
   const universityData = data?.map((item: any) => {
+    console.log(item);
     return universityModel.setTableData(item);
   });
+  console.log(universityData);
+
   const [rowData] = useState(universityData);
 
   const onRowClick = props => {

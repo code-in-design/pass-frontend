@@ -127,13 +127,13 @@ export class UniversityDepartmentsModel {
     const subjectArray = _.compact(filteredSubjects);
 
     universityDepartment.departmentName = data.학과명; //학과이름
-    // universityDepartment.conversionScore= data.수능환산점수; //수능환산점수
+    universityDepartment.conversionScore = data.수능환산점수; //수능환산점수
 
-    // universityDepartment.possibilityOfSupport= String; //지원가능성
+    // universityDepartment.possibilityOfSupport= data.; //지원가능성
 
     universityDepartment.recruitmentGroup = data.모집군; //모집군
 
-    // universityDepartment.zValue= numberString; //z-지수
+    universityDepartment.zValue = data.z_지수; //z-지수
 
     // universityDepartment.competitionMinRate= numberString; //경쟁률 최소
 

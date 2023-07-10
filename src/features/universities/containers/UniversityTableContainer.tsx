@@ -8,14 +8,14 @@ const UniversityTableContainer = () => {
   const { data } = useFetchUniversityListQuery();
   const universityModel = new UniversitiesModel();
 
-  const universityData = data?.map((item: any) => {
-    return universityModel.setTableData(item);
-  });
+  // const universityData = data?.map((item: any) => {
+  //   return universityModel.setTableData(item);
+  // });
 
   return (
     <>
-      <UniversityTable data={universityData} />
-      {/* <UniversityTable2 /> */}
+      {/* <UniversityTable data={universityData} /> */}
+      <UniversityTable2 />
     </>
   );
 };
