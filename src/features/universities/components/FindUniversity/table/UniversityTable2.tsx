@@ -13,7 +13,7 @@ import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 import ExerciseIcon from './ExerciseIcon';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
-import { useFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
+import { useFetchUniversityListQuery, useLazyFetchUniversityDetailQuery } from '@/features/universities/apis/universityApi';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
 
 interface Props {
@@ -77,6 +77,7 @@ const UniversityTable = (props: Props) => {
   const { data, isSuccess } = useFetchUniversityListQuery();
   const universityModel = new UniversitiesModel();
   const [rowData, setRowData] = useState([]);
+  const [getDepartmentDetail, { data: departmentDetailData }] = useLazyFetchUniversityDetailQuery();
 
   const universityData = data?.map((item: any) => {
     return universityModel.setTableData(item);
@@ -90,8 +91,8 @@ const UniversityTable = (props: Props) => {
 
   const onRowClick = props => {
     setToggleModal(true);
-    console.log(props);
-    setSelectedData(props.data.universityName);
+    getDepartmentDetail(props.data.id);
+    setSelectedData(departmentDetailData);
   };
   const onCellClicked = props => {
     if (props.colDef.field === '합격가능성보기') {

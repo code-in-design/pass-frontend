@@ -57,4 +57,4 @@ export const universityApi = createApi({
   }),
 });
 
-export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;
+export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useLazyFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;

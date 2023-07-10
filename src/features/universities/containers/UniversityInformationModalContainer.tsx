@@ -7,7 +7,8 @@ interface Props {
 }
 
 const UniversityInfoModalContainer = (props: Props) => {
-  return <UniversityInformationModal name={props.data} subTitle="수능 일반 전형" competition="14.05:1" onClose={props.onClose} />;
+  const data = JSON.parse(props.data);
+  return <UniversityInformationModal name={data.대학명} subTitle="수능 일반 전형" competition="14.05:1" onClose={props.onClose} />;
 };
 
 export default UniversityInfoModalContainer;
