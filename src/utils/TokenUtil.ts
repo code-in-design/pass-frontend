@@ -1,6 +1,7 @@
 import axios, { AxiosHeaders } from 'axios';
 import { storageUtil } from './StorageUtil';
 import { urls } from '../constants/url';
+import { SERVICE_PATH } from '../constants/path';
 
 class TokenUtil {
   addTokenToHeader = (headers: Headers) => {
@@ -36,8 +37,8 @@ class TokenUtil {
         .catch(e => {
           if (e.response.status === 400) {
             const pathname = window.location.pathname;
-            if (pathname === '/' || pathname === '/signIn') return;
-            window.location.assign('/signIn');
+            if (pathname === SERVICE_PATH.LANDING || pathname === SERVICE_PATH.SIGNIN) return;
+            window.location.assign(SERVICE_PATH.SIGNIN);
           }
         });
       return accessToken;
@@ -64,9 +65,9 @@ class TokenUtil {
       // 리프레시토큰이 없으면, 재로그인
       if (!isExistRefreshToken) {
         // 랜딩페이지에서는 로그인이 필요없으므로 로그인창으로 이동하지 않도록 return 처리
-        if (window.location.pathname === '/') return;
+        if (window.location.pathname === SERVICE_PATH.LANDING) return;
         // 다른페이지에서는 로그인 실패시 로그인창으로 이동
-        window.location.assign('/signIn');
+        window.location.assign(SERVICE_PATH.SIGNIN);
       }
     }
 
