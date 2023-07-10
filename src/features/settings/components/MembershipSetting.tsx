@@ -24,7 +24,9 @@ const MembershipSetting = () => {
                 <MembershipText>Z-ONE을 시작하는 모든 분들께 제공되는 플랜입니다.</MembershipText>
               </div>
             </Wrapper>
-            <MembershipButton id="membershipView" onClick={() => setOpenModal(true)}>멤버십 안내</MembershipButton>
+            <MembershipButton id="membershipView" onClick={() => setOpenModal(true)}>
+              멤버십 안내
+            </MembershipButton>
           </MembershipWrapper>
         </div>
 
@@ -125,6 +127,7 @@ const MembershipButton = styled.div`
   color: #fff;
   padding: 12px 28px;
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 const SecondSection = styled.div`

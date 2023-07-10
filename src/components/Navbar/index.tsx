@@ -10,7 +10,7 @@ import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
 import { SERVICE_PATH } from '../../constants/path';
 import { storageUtil } from '@/utils/StorageUtil';
-import { includes, isEmpty } from 'lodash';
+import { includes, startsWith } from 'lodash';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string }[];
@@ -24,21 +24,14 @@ export const Navbar = (props: Props) => {
     storageUtil.resetTokens();
     router.push(SERVICE_PATH.SIGNIN);
   };
-
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
       <MenuList>
         {props?.menuList?.map((item, index) => {
-          let isActive = false;
-          if (router.query) {
-            isActive = includes(item.route, router.pathname);
-          }
-          if (isEmpty(router.query)) {
-            isActive = item.route === router.pathname;
-          }
+          console.log(router.pathname, item.route);
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isActive}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={startsWith(item.route, router.pathname)}>
               {item.icon}
             </NavbarItem>
           );
