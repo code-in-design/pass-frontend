@@ -1,0 +1,19 @@
+export const SERVICE_PATH = {
+  LANDING: '/', // 랜딩페이지
+  HOME: '/dashboard', // 서비스 대시보드
+  MY_SCORE: '/myScore', // 내 점수 입력하기
+  FIND_UNIVERSITY: '/findUniversity', // 대학찾기
+  PASS_ANALYSIS: '/passAnalysis', // 합격분석
+  SIGNUP: '/signUp', // 회원가입
+  SIGNIN: '/signIn', // 로그인
+  SETTINGS: '/settings', // 환경설정
+  SETTINGS_MYACCOUNT: '/settings?menu=myAccount', // 환경설정 > 나의계정
+  SETTINGS_ALARM: '/settings?menu=alarm', // 환경설정 > 알림
+  SETTINGS_MEMBERSHIP: '/settings?menu=membership', // 환경설정 > 멤버십
+  SETTINGS_WITHDRAWL: '/settings?menu=withdrawl', // 환경설정 > 회원탈퇴
+};
+
+export const ADMIN_PATH = {
+  HOME: '/admin', // 대시보드
+  RESERVATION: '/admin/reservations', // 사전예약
+};

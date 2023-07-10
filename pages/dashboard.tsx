@@ -1,8 +1,8 @@
 import React from 'react';
-import AdminDashBoardPage from '../src/pages/dashBoard';
+import ServiceDashboardPage from '../src/pages/dashboard';
 
-const DashboardPage = () => {
-  return <AdminDashBoardPage />;
+const ServiceDashboard = () => {
+  return <ServiceDashboardPage />;
 };
 
-export default DashboardPage;
+export default ServiceDashboard;

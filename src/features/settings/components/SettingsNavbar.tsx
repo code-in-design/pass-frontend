@@ -6,19 +6,17 @@ import Person from '../../../../public/images/icons/person.svg';
 import NotificationActive from '../../../../public/images/icons/notificationsActive.svg';
 import Membership from '../../../../public/images/icons/membership.svg';
 import Withdrawal from '../../../../public/images/icons/withdrawal.svg';
+import { SERVICE_PATH } from '../../../constants/path';
 
 interface Props {
-  menuList: { icon: ReactNode; title: string }[];
+  menuList: { icon: ReactNode; title: string; path: string }[];
 }
 
 const SettingsNavbar = (props: Props) => {
   const router = useRouter();
 
   const handleClickItem = item => {
-    router.push({
-      pathname: '/settings',
-      query: { menu: item },
-    });
+    router.push(item.path);
   };
 
   return (
@@ -26,7 +24,7 @@ const SettingsNavbar = (props: Props) => {
       <Title>계정</Title>
       <MenuList>
         {props?.menuList?.map((item, index) => (
-          <SettingsNavbarItem key={item.title} title={item.title} handleClickItem={handleClickItem} index={index} isSelected={String(index) === router.query.settingMenu}>
+          <SettingsNavbarItem key={item.title} title={item.title} handleClickItem={() => handleClickItem(item)} index={index} isSelected={String(index) === router.query.settingMenu}>
             {item.icon}
           </SettingsNavbarItem>
         ))}
@@ -37,10 +35,10 @@ const SettingsNavbar = (props: Props) => {
 
 SettingsNavbar.defaultProps = {
   menuList: [
-    { icon: <Person />, title: '나의 계정' },
-    { icon: <NotificationActive />, title: '알림' },
-    { icon: <Membership />, title: '멤버십 설정' },
-    { icon: <Withdrawal />, title: '회원 탈퇴' },
+    { icon: <Person />, title: '나의 계정', path: SERVICE_PATH.SETTINGS_MYACCOUNT },
+    { icon: <NotificationActive />, title: '알림', path: SERVICE_PATH.SETTINGS_ALARM },
+    { icon: <Membership />, title: '멤버십 설정', path: SERVICE_PATH.SETTINGS_MEMBERSHIP },
+    { icon: <Withdrawal />, title: '회원 탈퇴', path: SERVICE_PATH.SETTINGS_WITHDRAWL },
   ],
 };
 

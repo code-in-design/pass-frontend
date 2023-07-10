@@ -40,7 +40,7 @@ export const AdminNavbar = (props: Props) => {
 
 AdminNavbar.defaultProps = {
   menuList: [
-    { icon: <Home />, title: '대시보드', route: '/dashboard' },
+    { icon: <Home />, title: '대시보드', route: '/admin' },
     { icon: <Home />, title: '대학찾기', route: '/findUniversity' },
     { icon: <Analytics />, title: '사전예약', route: '/reservations' },
   ],
