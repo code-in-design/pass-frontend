@@ -2,16 +2,19 @@ import React, { HTMLProps } from 'react';
 import { Navbar } from '../Navbar';
 import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
+import { useRouter } from 'next/router';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
 const Layout = (props: LayoutProps) => {
+  const router = useRouter();
+
   return (
     <LayoutWrapper>
       <Navbar />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === '/dashboard'}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );
@@ -30,12 +33,12 @@ const BodyWrapper = styled.div`
   padding-right: 32px;
 `;
 
-const ChildrenWrapper = styled.div`
+const ChildrenWrapper = styled.div<{ isHome: boolean }>`
   width: 100%;
   height: calc(100vh - 144px);
   overflow-y: auto;
   /* height: 880px; */
   border-radius: 24px;
   background-color: ${props => props.theme.colors.gray5};
-  padding: 14px;
+  padding: ${props => (props.isHome ? '30px' : '14px')};
 `;

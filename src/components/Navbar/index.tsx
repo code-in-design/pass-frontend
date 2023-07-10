@@ -26,10 +26,9 @@ export const Navbar = (props: Props) => {
   };
   return (
     <NavWrapper>
-      <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push('/')} />
+      <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push(SERVICE_PATH.HOME)} />
       <MenuList>
         {props?.menuList?.map((item, index) => {
-          console.log(router.pathname, item.route);
           return (
             <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={startsWith(item.route, router.pathname)}>
               {item.icon}
@@ -69,7 +68,7 @@ const Logo = styled.img`
   display: block;
   width: 110px;
   height: 44px;
-  margin-bottom: 34px;
+  margin: 0 auto 34px;
   cursor: pointer;
 `;
 

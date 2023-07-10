@@ -53,7 +53,7 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 28px 60px;
+  padding: 20px 60px;
   background-color: ${props => props.theme.colors.white};
   gap: 24px;
 `;
