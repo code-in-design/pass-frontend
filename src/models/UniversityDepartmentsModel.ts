@@ -8,7 +8,6 @@ import { KoreanSubjectModel } from './KoreanSubjectModel';
 import { MathSubjectModel } from './MathSubjectModel';
 import { PracticalApplyModel, PracticalType } from './PracticalApplyModel';
 import { SubjectModel } from './SubjectModel';
-import { TranscriptModel } from './TranscriptModel';
 
 export class UniversityDepartmentsModel {
   @Expose()

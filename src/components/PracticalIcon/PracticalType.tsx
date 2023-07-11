@@ -91,7 +91,7 @@ export const exerciseType = {
     text: '사이드스텝',
     icon: <사이드스텝 />,
   },
-  서전트점프: {
+  서전트: {
     text: '서전트점프',
     icon: <서전트점프 />,
   },

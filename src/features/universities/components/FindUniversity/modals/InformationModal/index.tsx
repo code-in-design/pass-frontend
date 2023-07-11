@@ -21,8 +21,9 @@ interface Props {
 
 const UniversityInformationModal = (props: Props) => {
   const [openModal, setOpenModal] = useState(false);
-  console.log(props.data);
   const department = props?.data?.universityDepartments;
+  const subject = props?.data?.universityDepartments?.subjects;
+
   return (
     <>
       <ModalLayout onClose={() => props.onClose(false)}>
@@ -122,13 +123,13 @@ const UniversityInformationModal = (props: Props) => {
           </GradeTableThead>
           <GradeTableTbody>
             <GradeTableTBodyTr>
-              <TableTd>40%</TableTd>
-              <TableTd>-</TableTd>
-              <TableTd>20%</TableTd>
+              <TableTd>{10}%</TableTd>
+              <TableTd>{10}%</TableTd>
+              <TableTd>{40}%</TableTd>
               <TableTd>
-                40% <span>(상위1과목)</span>
+                {20}%{department?.inquiryNumber === 1 && <span>(상위1과목)</span>}
               </TableTd>
-              <TableTd>가산점</TableTd>
+              <TableTd>{10}%</TableTd>
             </GradeTableTBodyTr>
           </GradeTableTbody>
         </GradeTable>
@@ -180,7 +181,7 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
-      {/* {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.data.name} subTitle={props.data.subTitle} />} */}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props?.data?.universityName} subTitle={department?.applyTypeDetail} exercise={department?.practicalApplyType} />}
     </>
   );
 };
@@ -341,7 +342,8 @@ const GraphTitle = styled.div`
 `;
 
 const GraphScore = styled.div<{ width: string; bgColor: string }>`
-  width: ${props => (props.width === '0%' ? '0px' : props.width)};
+  display: ${props => (props.width === '0%' ? 'none' : 'bolck')};
+  width: ${props => props.width};
   font-size: 10px;
   line-height: 16px;
   font-weight: 700;

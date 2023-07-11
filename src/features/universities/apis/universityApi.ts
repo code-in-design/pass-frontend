@@ -21,9 +21,9 @@ export const universityApi = createApi({
 
   endpoints: builder => ({
     //대학 리스트 조회
-    fetchUniversityList: builder.query<any, void>({
-      query: () => {
-        return `/?page=${1}&limit=${20}&range=${10}`;
+    fetchUniversityList: builder.query({
+      query: (startRow: number) => {
+        return `?page=${startRow}&limit=${20}&range=${10}`;
       },
       transformResponse: (res: any) => {
         try {
@@ -64,4 +64,4 @@ export const universityApi = createApi({
   }),
 });
 
-export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useLazyFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;
+export const { useFetchUniversityListQuery, useLazyFetchUniversityListQuery, useFetchUniversityDetailQuery, useLazyFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;

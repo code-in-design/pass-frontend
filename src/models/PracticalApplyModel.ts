@@ -43,6 +43,8 @@ export class PracticalApplyModel {
   }
 
   static practicalType(...types: PracticalType[]) {
-    return types;
+    const sortedTypes = [...types].sort((a, b) => (a === null ? 1 : -1));
+
+    return sortedTypes;
   }
 }

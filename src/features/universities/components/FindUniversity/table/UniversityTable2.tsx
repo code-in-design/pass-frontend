@@ -13,8 +13,9 @@ import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 import ExerciseIcon from './ExerciseIcon';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
-import { useFetchUniversityListQuery, useLazyFetchUniversityDetailQuery } from '@/features/universities/apis/universityApi';
+import { useLazyFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { GridApi } from 'ag-grid-community';
 
 interface Props {
   data: {
@@ -35,7 +36,7 @@ interface Props {
 
 const ImageRenderer = props => {
   const { value } = props;
-  const id = props.data.id;
+  const id = props?.data?.id;
   return (
     <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
       {value?.map((icon, index) => {
@@ -75,19 +76,8 @@ const UniversityTable = (props: Props) => {
   const [rowData, setRowData] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedID, setSelectedID] = useState(0);
-  const { data, isSuccess } = useFetchUniversityListQuery();
-
-  const universityData = data?.map((item: any) => {
-    const universityModel = new UniversitiesModel();
-    universityModel.getTableRowData(item);
-    return universityModel;
-  });
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setRowData(universityData);
-    }
-  }, [data]);
+  const [gridApi, setGridApi] = useState<GridApi | null>(null);
+  const [getUniversityList] = useLazyFetchUniversityListQuery();
 
   const onRowClick = props => {
     setToggleModal(true);
@@ -103,11 +93,41 @@ const UniversityTable = (props: Props) => {
     return { padding: '12px 16px' };
   };
 
+  const onGridReady = params => {
+    setGridApi(params.api);
+
+    params.api.setDatasource({
+      getRows: async params => {
+        try {
+          const result = await getUniversityList(params.startRow);
+          if (result.isSuccess) {
+            const universityData = result?.data?.map((item: any) => {
+              const universityModel = new UniversitiesModel();
+              const row = universityModel.getTableRowData(item);
+              return row;
+            });
+            params.successCallback(universityData, result.data.length);
+          }
+        } catch (error) {
+          console.error(error);
+          params.failCallback();
+        }
+      },
+    });
+  };
+
   const [columnDefs] = useState([
     { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'practicalType', headerName: '실기종목', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'left', display: 'flex', alignItems: 'center', height: '24px' } },
+    {
+      field: 'practicalType',
+      headerName: '실기종목',
+      cellRendererFramework: ImageRenderer,
+      minWidth: 122,
+      flex: 2.5,
+      cellStyle: { justifyContent: 'left', display: 'flex', alignItems: 'center', height: '24px' },
+    },
     {
       field: 'contribution',
       headerName: '기여도',
@@ -126,7 +146,18 @@ const UniversityTable = (props: Props) => {
   return (
     <>
       <AgGridWrapper className={customThemes.table}>
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClick} onCellClicked={onCellClicked} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
+        <AgGridReact
+          onGridReady={onGridReady}
+          rowModelType="infinite"
+          paginationPageSize={20}
+          columnDefs={columnDefs}
+          onRowClicked={onRowClick}
+          onCellClicked={onCellClicked}
+          getRowHeight={() => 48}
+          getRowStyle={getRowStyle}
+          headerHeight={48}
+          groupHeaderHeight={48}
+        ></AgGridReact>
       </AgGridWrapper>
       {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedID} />}
     </>

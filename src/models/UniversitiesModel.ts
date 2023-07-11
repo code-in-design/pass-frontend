@@ -47,7 +47,17 @@ export class UniversitiesModel {
   };
 
   getTableRowData = (row: UniversitiesModel) => {
-    this.id = row.id;
-    this.universityName = row.universityName;
+    return {
+      id: row?.id,
+      group: row?.universityDepartments?.recruitmentGroup,
+      universityName: row?.universityName,
+      departmentName: row?.universityDepartments?.departmentName,
+      practicalType: row?.universityDepartments?.practicalApplyType,
+      test: row?.universityDepartments?.testContributions,
+      practical: row?.universityDepartments?.practicalContributions,
+      conversionScore: row?.universityDepartments?.conversionScore,
+      Zvalue: row?.universityDepartments?.zValue,
+      applicationPossibility: row?.universityDepartments?.possibilityOfApply,
+    };
   };
 }

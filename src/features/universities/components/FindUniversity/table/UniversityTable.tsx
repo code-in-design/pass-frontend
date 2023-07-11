@@ -34,7 +34,7 @@ interface Props {
 const UniversityTable = (props: Props) => {
   const [rowData] = useState(props.data);
   const [toggleModal, setToggleModal] = useState(false);
-  const [selectedData, setSelectedData] = useState('');
+  const [selectedData, setSelectedData] = useState(0);
 
   const ImageRenderer = props => {
     const { value } = props;
