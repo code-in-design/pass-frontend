@@ -15,7 +15,7 @@ type Props = {
   title: string;
   children: ReactNode;
   onClick: () => void;
-  isActive?: boolean;
+  isActive: boolean;
   subMenus?: SubMenu[];
 };
 
@@ -39,7 +39,7 @@ const NavbarItem = (props: Props) => {
         <SubMenuList>
           {props.subMenus?.map((menu, index) => {
             return (
-              <SubMenuListItem key={index} onClick={() => router.push(menu.route)} isSelected={startsWith(router.pathname, menu.route)}>
+              <SubMenuListItem key={index} onClick={() => router.push(menu.route)} isSelected={router.pathname === menu.route}>
                 <Ellipse width="4px" height="4px" />
                 <div>{menu.title}</div>
               </SubMenuListItem>
