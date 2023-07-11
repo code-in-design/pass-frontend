@@ -1,8 +1,8 @@
 import React from 'react';
 import AdminUpdateManagement from '@/pages/updateManagement';
 
-const UserListPage = () => {
+const UpdateManagementPage = () => {
   return <AdminUpdateManagement />;
 };
 
-export default UserListPage;
+export default UpdateManagementPage;
