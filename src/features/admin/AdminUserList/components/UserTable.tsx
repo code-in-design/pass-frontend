@@ -35,10 +35,7 @@ const rowData = {
   preferredUniversity3: '한양대학교<br/> 스포츠사이언스',
 };
 
-const defaultRows: any = [];
-for (let i = 0; i < 50; i++) {
-  defaultRows.push(rowData);
-}
+const defaultRows = Array(50).fill(rowData);
 
 UserTable.defaultProps = {
   columns: [
