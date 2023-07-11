@@ -2,7 +2,7 @@ import Select from '@/components/Select';
 import theme from '@/theme/theme';
 import { Flex, Stack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { FieldValues, FormState, UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 export type OptionType = {
   value: number;
@@ -15,9 +15,7 @@ interface Props {
   options: OptionType[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  setError: UseFormSetError<FieldValues>;
   handleSubmit: () => void;
-  formState?: FormState<FieldValues>;
 }
 
 const UpdateForm = (props: Props) => {

@@ -1,11 +1,10 @@
-import { Flex } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import UpdateForm, { OptionType } from '../components/UpdateForm';
 import { useForm } from 'react-hook-form';
 import _ from 'lodash';
 
 const UpdateManagementContainer = () => {
-  const { register, handleSubmit, setValue, watch, formState, setError } = useForm();
+  const { register, handleSubmit, setValue, watch, formState } = useForm();
   const isCommentModified = formState?.dirtyFields.comment;
   const id = watch('id', '');
   const serverData = [
@@ -33,20 +32,22 @@ const UpdateManagementContainer = () => {
 
   const onSubmit = data => {
     if (!isCommentModified) {
-      alert('COMMENT 내용을 수정하세요');
+      alert('COMMENT 변경 사항이 없습니다.');
       return;
     }
     console.log('제출', data);
     alert('저장되었습니다.');
-    setValue('id', '');
-    setValue('comment', '');
   };
 
   const onError = error => {
-    if (error) alert(error[Object.keys(error)[0]].message);
+    const firstError = error[Object.keys(error)[0]];
+    const firstErrorMessage = firstError?.message;
+    if (firstErrorMessage) {
+      alert(firstErrorMessage);
+    }
   };
 
-  return <UpdateForm date={scheduledUpdateDate} comment={comment} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} formState={formState} setError={setError} />;
+  return <UpdateForm date={scheduledUpdateDate} comment={comment} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} />;
 };
 
 export default UpdateManagementContainer;
