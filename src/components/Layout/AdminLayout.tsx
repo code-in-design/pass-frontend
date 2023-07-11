@@ -20,6 +20,21 @@ const AdminLayout = (props: LayoutProps) => {
           { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
           { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
           { icon: <Management />, title: '사용자 관리', route: ADMIN_PATH.USERLIST },
+          {
+            icon: <Management />,
+            title: '사용자 관리',
+            route: ADMIN_PATH.USERLIST,
+            subMenu: [
+              {
+                title: '사용자 목록',
+                route: ADMIN_PATH.USERLIST,
+              },
+              {
+                title: 'UPDATE 관리',
+                route: ADMIN_PATH.UPDATE_MANAGEMENT,
+              },
+            ],
+          },
         ]}
       />
       <BodyWrapper>

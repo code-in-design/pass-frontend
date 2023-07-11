@@ -1,5 +1,11 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+
+export type SubMenu = {
+  title: string;
+  route: string;
+};
 
 type Props = {
   title: string;
@@ -9,11 +15,26 @@ type Props = {
 };
 
 const NavbarItem = (props: Props) => {
+  const router = useRouter();
   return (
-    <MenuListItem onClick={props.onClick} isActive={props?.isActive}>
-      <ImageWrapper>{props.children}</ImageWrapper>
-      <MenuTitle>{props.title}</MenuTitle>
-    </MenuListItem>
+    <MenuListItemContainer>
+      <MenuListItem onClick={props.onClick} isActive={props?.isActive}>
+        <ImageWrapper>{props.children}</ImageWrapper>
+        <MenuTitle>{props.title}</MenuTitle>
+      </MenuListItem>
+      {props.subMenu && props.isActive && (
+        <SubMenuList>
+          {props.subMenu.map((menu, index) => {
+            return (
+              <SubMenuListItem key={index} onClick={() => router.push(menu.route)} isSelected={startsWith(router.pathname, menu.route)}>
+                <Ellipse width="4px" height="4px" />
+                <div>{menu.title}</div>
+              </SubMenuListItem>
+            );
+          })}
+        </SubMenuList>
+      )}
+    </MenuListItemContainer>
   );
 };
 
