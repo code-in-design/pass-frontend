@@ -29,9 +29,11 @@ const NavbarItem = (props: Props) => {
           <ImageWrapper>{props.children}</ImageWrapper>
           <MenuTitle>{props.title}</MenuTitle>
         </TitleWrapper>
-        <ArrowDropDownWrapper isActive={props?.isActive}>
-          <ArrowDropDown width="24px" height="24px" />
-        </ArrowDropDownWrapper>
+        {props?.subMenu && (
+          <ArrowDropDownWrapper isActive={props?.isActive}>
+            <ArrowDropDown width="24px" height="24px" />
+          </ArrowDropDownWrapper>
+        )}
       </MenuListItem>
       {props.subMenu && props.isActive && (
         <SubMenuList>
