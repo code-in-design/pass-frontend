@@ -38,7 +38,7 @@ export const Navbar = (props: Props) => {
       <MenuList>
         {props?.menuList?.map((item, index) => {
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenu={item?.subMenus}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenus={item?.subMenus}>
               {item.icon}
             </NavbarItem>
           );

@@ -4,7 +4,7 @@ import Ellipse from '../../../public/images/icons/ellipse.svg';
 import ArrowDropDown from '../../../public/images/icons/arrow_drop_down.svg';
 import theme from '@/theme/theme';
 import { useRouter } from 'next/router';
-import { startsWith } from 'lodash';
+import { isEmpty, startsWith } from 'lodash';
 
 export type SubMenu = {
   title: string;
@@ -16,7 +16,7 @@ type Props = {
   children: ReactNode;
   onClick: () => void;
   isActive?: boolean;
-  subMenu?: SubMenu[];
+  subMenus?: SubMenu[];
 };
 
 const NavbarItem = (props: Props) => {
@@ -29,15 +29,15 @@ const NavbarItem = (props: Props) => {
           <ImageWrapper>{props.children}</ImageWrapper>
           <MenuTitle>{props.title}</MenuTitle>
         </TitleWrapper>
-        {props?.subMenu && (
+        {!isEmpty(props.subMenus) && (
           <ArrowDropDownWrapper isActive={props?.isActive}>
             <ArrowDropDown width="24px" height="24px" />
           </ArrowDropDownWrapper>
         )}
       </MenuListItem>
-      {props.subMenu && props.isActive && (
+      {!isEmpty(props.subMenus) && props.isActive && (
         <SubMenuList>
-          {props.subMenu.map((menu, index) => {
+          {props.subMenus?.map((menu, index) => {
             return (
               <SubMenuListItem key={index} onClick={() => router.push(menu.route)} isSelected={startsWith(router.pathname, menu.route)}>
                 <Ellipse width="4px" height="4px" />
