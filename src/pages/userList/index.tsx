@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from '@/components/Layout/Layout';
 import { UserListContainer } from '@/features/admin/AdminUserList/containers/UserListContainer';
+import AdminLayout from '@/components/Layout/AdminLayout';
 
 const UserListPage = () => {
   return (
-    <Layout>
+    <AdminLayout>
       <UserListContainer />
-    </Layout>
+    </AdminLayout>
   );
 };
 

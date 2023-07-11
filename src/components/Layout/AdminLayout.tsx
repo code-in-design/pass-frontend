@@ -4,22 +4,27 @@ import styled from '@emotion/styled';
 import HeaderContainer from '../Header/HeaderContainer';
 import Home from '../../../public/images/icons/home.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
+import Management from '../../../public/images/icons/manageAccounts.svg';
 import { ADMIN_PATH } from '../../constants/path';
+import { useRouter } from 'next/router';
 
 type LayoutProps = HTMLProps<HTMLElement>;
 
 const AdminLayout = (props: LayoutProps) => {
+  const router = useRouter();
+
   return (
     <LayoutWrapper>
       <Navbar
         menuList={[
           { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
           { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
+          { icon: <Management />, title: '사용자 관리', route: ADMIN_PATH.USERLIST },
         ]}
       />
       <BodyWrapper>
         <HeaderContainer />
-        <ChildrenWrapper>{props.children}</ChildrenWrapper>
+        <ChildrenWrapper isHome={router.pathname === ADMIN_PATH.HOME}>{props.children}</ChildrenWrapper>
       </BodyWrapper>
     </LayoutWrapper>
   );
@@ -38,12 +43,12 @@ const BodyWrapper = styled.div`
   padding-right: 32px;
 `;
 
-const ChildrenWrapper = styled.div`
+const ChildrenWrapper = styled.div<{ isHome: boolean }>`
   width: 100%;
   height: calc(100vh - 144px);
   overflow-y: auto;
   /* height: 880px; */
   border-radius: 24px;
   background-color: ${props => props.theme.colors.gray5};
-  padding: 40px;
+  padding: ${props => (props.isHome ? '30px' : '14px')};
 `;

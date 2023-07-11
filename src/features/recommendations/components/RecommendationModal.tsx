@@ -1,10 +1,10 @@
 import ModalLayout from '@/components/Modal/ModalLayout';
+import ServiceListItem from '@/pages/dashBoard/components/ServiceList/ServiceListItem';
 import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import InfoIcon from '../../../../public/images/icons/info.svg';
 import ThumbUp from '../../../../public/images/icons/thumbUp.svg';
-import ServiceListItem from '../../../pages/dashboard/components/ServiceList/ServiceListItem';
 
 const RecommendationModal = props => {
   const [myCode, setMyCode] = useState('ABCD10');

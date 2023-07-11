@@ -5,7 +5,7 @@ import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import { useCallback, useState } from 'react';
 import InfoIcon from '../../../../../public/images/icons/info.svg';
 import Help from '../../../../../public/images/icons/help.svg';
-import ServiceListItem from '../../../../pages/dashboard/components/ServiceList/ServiceListItem';
+import ServiceListItem from '@/pages/dashBoard/components/ServiceList/ServiceListItem';
 
 interface Props {
   first: { value: string; label: string }[];
