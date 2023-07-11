@@ -23,7 +23,7 @@ const AdminLayout = (props: LayoutProps) => {
             icon: <Management />,
             title: '사용자 관리',
             route: ADMIN_PATH.USERLIST,
-            subMenu: [
+            subMenus: [
               {
                 title: '사용자 목록',
                 route: ADMIN_PATH.USERLIST,

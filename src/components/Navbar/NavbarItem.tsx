@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Ellipse from '../../../public/images/icons/ellipse.svg';
+import ArrowDropDown from '../../../public/images/icons/arrow_drop_down.svg';
 import theme from '@/theme/theme';
 import { useRouter } from 'next/router';
 import { startsWith } from 'lodash';
@@ -24,8 +25,13 @@ const NavbarItem = (props: Props) => {
   return (
     <MenuListItemContainer>
       <MenuListItem onClick={props.onClick} isActive={props?.isActive}>
-        <ImageWrapper>{props.children}</ImageWrapper>
-        <MenuTitle>{props.title}</MenuTitle>
+        <TitleWrapper>
+          <ImageWrapper>{props.children}</ImageWrapper>
+          <MenuTitle>{props.title}</MenuTitle>
+        </TitleWrapper>
+        <ArrowDropDownWrapper isActive={props?.isActive}>
+          <ArrowDropDown width="24px" height="24px" />
+        </ArrowDropDownWrapper>
       </MenuListItem>
       {props.subMenu && props.isActive && (
         <SubMenuList>
@@ -79,9 +85,9 @@ const SubMenuListItem = styled.li<any>`
 
 const MenuListItem = styled.li<any>`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 56px;
-  // margin-bottom: 16px;
   border-radius: 16px;
   padding: 16px;
   color: #737c89;
@@ -111,9 +117,22 @@ const ImageWrapper = styled.div`
   margin-right: 8px;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
 const MenuTitle = styled.span`
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.04em;
+`;
+
+const ArrowDropDownWrapper = styled.div<any>`
+  ${({ isActive }) =>
+    isActive &&
+    `
+    transform: rotate(180deg);
+  `};
 `;

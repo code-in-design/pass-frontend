@@ -13,7 +13,7 @@ import { storageUtil } from '@/utils/StorageUtil';
 import { startsWith } from 'lodash';
 
 interface Props {
-  menuList: { icon: ReactNode; title: string; route: string; subMenu?: SubMenu[] }[];
+  menuList: { icon: ReactNode; title: string; route: string; subMenus?: SubMenu[] }[];
 }
 
 export const Navbar = (props: Props) => {
@@ -26,9 +26,9 @@ export const Navbar = (props: Props) => {
   };
 
   const isPathActive = (currentPath, route) => {
-    const parentPath = route.split('/').slice(0, -1).join('/');
     if (startsWith(currentPath, route)) return true;
-    else if (parentPath !== '' && startsWith(currentPath, parentPath)) return true;
+    const parentPath = route.split('/').slice(0, -1).join('/');
+    if (parentPath !== '' && startsWith(currentPath, parentPath)) return true;
     return false;
   };
 
@@ -38,7 +38,7 @@ export const Navbar = (props: Props) => {
       <MenuList>
         {props?.menuList?.map((item, index) => {
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenu={item?.subMenu}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenu={item?.subMenus}>
               {item.icon}
             </NavbarItem>
           );
