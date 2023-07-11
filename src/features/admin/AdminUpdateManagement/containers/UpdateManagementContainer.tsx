@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 import _ from 'lodash';
 
 const UpdateManagementContainer = () => {
-  const { register, handleSubmit, setValue, watch, formState } = useForm();
+  const { register, handleSubmit, setValue, watch, formState, setError } = useForm();
+  const isCommentModified = formState?.dirtyFields.comment;
   const id = watch('id', '');
   const serverData = [
     {
@@ -31,15 +32,21 @@ const UpdateManagementContainer = () => {
   });
 
   const onSubmit = data => {
+    if (!isCommentModified) {
+      alert('COMMENT 내용을 수정하세요');
+      return;
+    }
     console.log('제출', data);
     alert('저장되었습니다.');
+    setValue('id', '');
+    setValue('comment', '');
   };
 
   const onError = error => {
-    if (error?.version) alert(error.version.message);
+    if (error) alert(error[Object.keys(error)[0]].message);
   };
 
-  return <UpdateForm date={scheduledUpdateDate} comment={comment} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} formState={formState}/>;
+  return <UpdateForm date={scheduledUpdateDate} comment={comment} options={options} register={register} setValue={setValue} handleSubmit={handleSubmit(onSubmit, onError)} formState={formState} setError={setError} />;
 };
 
 export default UpdateManagementContainer;

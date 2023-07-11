@@ -2,9 +2,7 @@ import Select from '@/components/Select';
 import theme from '@/theme/theme';
 import { Flex, Stack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { FieldValues, FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { isEmpty } from 'lodash';
+import { FieldValues, FormState, UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
 
 export type OptionType = {
   value: number;
@@ -17,13 +15,12 @@ interface Props {
   options: OptionType[];
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  setError: UseFormSetError<FieldValues>;
   handleSubmit: () => void;
   formState?: FormState<FieldValues>;
 }
 
 const UpdateForm = (props: Props) => {
-  const isCommentModified = props.formState?.dirtyFields.comment;
-
   return (
     <Container onSubmit={props.handleSubmit}>
       <Stack width="100%" direction="column" justifyContent="space-between">
@@ -45,9 +42,7 @@ const UpdateForm = (props: Props) => {
           </Flex>
         </Flex>
         <Flex width="100%" justifyContent="right">
-          <StyledButton type="submit" disabled={!isCommentModified}>
-            저장
-          </StyledButton>
+          <StyledButton type="submit">저장</StyledButton>
         </Flex>
       </Stack>
     </Container>
