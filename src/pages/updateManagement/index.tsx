@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from '@/components/Layout/Layout';
 import UpdateManagementContainer from '@/features/admin/AdminUpdateManagement/containers/UpdateManagementContainer';
+import AdminLayout from '@/components/Layout/AdminLayout';
 
 const UpdateManagementPage = () => {
   return (
-    <Layout>
+    <AdminLayout>
       <UpdateManagementContainer />
-    </Layout>
+    </AdminLayout>
   );
 };
 
