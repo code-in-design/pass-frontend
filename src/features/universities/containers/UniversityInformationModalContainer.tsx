@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLazyFetchUniversityDetailQuery } from '../apis/universityApi';
 import UniversityInformationModal from '../components/FindUniversity/modals/InformationModal';
 
 interface Props {
-  data: string;
+  data: number;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UniversityInfoModalContainer = (props: Props) => {
-  const data = JSON.parse(props.data);
-  return <UniversityInformationModal name={data.대학명} subTitle="수능 일반 전형" competition="14.05:1" onClose={props.onClose} />;
+  const [getDepartmentDetail, { data }] = useLazyFetchUniversityDetailQuery();
+
+  useEffect(() => {
+    getDepartmentDetail(props.data);
+  }, [props.data]);
+
+  return <UniversityInformationModal data={data} onClose={props.onClose} />;
 };
 
 export default UniversityInfoModalContainer;

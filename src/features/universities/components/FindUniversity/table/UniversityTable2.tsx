@@ -72,15 +72,15 @@ const ContributionRenderer = props => {
 };
 
 const UniversityTable = (props: Props) => {
-  const [toggleModal, setToggleModal] = useState(false);
-  const [selectedData, setSelectedData] = useState('');
-  const { data, isSuccess } = useFetchUniversityListQuery();
-  const universityModel = new UniversitiesModel();
   const [rowData, setRowData] = useState([]);
-  const [getDepartmentDetail, { data: departmentDetailData }] = useLazyFetchUniversityDetailQuery();
+  const [toggleModal, setToggleModal] = useState(false);
+  const [selectedID, setSelectedID] = useState(0);
+  const { data, isSuccess } = useFetchUniversityListQuery();
 
   const universityData = data?.map((item: any) => {
-    return universityModel.setTableData(item);
+    const universityModel = new UniversitiesModel();
+    universityModel.getTableRowData(item);
+    return universityModel;
   });
 
   useEffect(() => {
@@ -91,8 +91,7 @@ const UniversityTable = (props: Props) => {
 
   const onRowClick = props => {
     setToggleModal(true);
-    getDepartmentDetail(props.data.id);
-    setSelectedData(departmentDetailData);
+    setSelectedID(props.data.id);
   };
   const onCellClicked = props => {
     if (props.colDef.field === '합격가능성보기') {
@@ -108,7 +107,7 @@ const UniversityTable = (props: Props) => {
     { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
     { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'practicalType', headerName: '실기종목', cellRendererFramework: ImageRenderer, minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'left', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'practicalType', headerName: '실기종목', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'left', display: 'flex', alignItems: 'center', height: '24px' } },
     {
       field: 'contribution',
       headerName: '기여도',
@@ -129,7 +128,7 @@ const UniversityTable = (props: Props) => {
       <AgGridWrapper className={customThemes.table}>
         <AgGridReact rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClick} onCellClicked={onCellClicked} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
       </AgGridWrapper>
-      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedData} />}
+      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedID} />}
     </>
   );
 };

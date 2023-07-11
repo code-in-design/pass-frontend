@@ -34,28 +34,20 @@ export class UniversitiesModel {
     return instanceToPlain(this, { excludeExtraneousValues: true });
   };
 
-  setModelFromData = data => {
-    this.id = data?.id;
-    this.universityName = data.대학명;
-    this.universityHomepage = data.대학_홈페이지;
-    this.type = data.운영;
-    this.region = data.지역;
-    this.universityDepartments = UniversityDepartmentsModel.setModelFromData(data);
+  fromApiResponse = data => {
+    const university = new UniversitiesModel();
+    const universityDepartment = new UniversityDepartmentsModel();
+    university.id = data?.id;
+    university.universityName = data.대학명;
+    university.universityHomepage = data.대학_홈페이지;
+    university.type = data.운영;
+    university.region = data.지역;
+    university.universityDepartments = universityDepartment.fromApiResponse(data);
+    return university;
   };
 
-  setTableData = data => {
-    return {
-      id: data?.id,
-      group: data?.universityDepartments.recruitmentGroup,
-      universityName: data?.universityName,
-      departmentName: data?.universityDepartments.departmentName,
-      practicalType: data?.universityDepartments.practicalApplyType,
-      test: data?.universityDepartments.testContributions,
-      practical: data?.universityDepartments.practicalContributions,
-      conversionScore: data?.universityDepartments.conversionScore,
-      Zvalue: data?.universityDepartments.zValue,
-      // applicationPossibility: data?.universityDepartments.,
-      // passPossibility: data?.universityDepartments.,
-    };
+  getTableRowData = (row: UniversitiesModel) => {
+    this.id = row.id;
+    this.universityName = row.universityName;
   };
 }

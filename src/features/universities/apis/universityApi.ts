@@ -29,8 +29,7 @@ export const universityApi = createApi({
         try {
           const data = JSON.parse(res);
           const universityData = data?.result?.map((item: any) => {
-            universityModel.setModelFromData(item);
-            return universityModel.toJSON();
+            return universityModel.fromApiResponse(item).toJSON();
           });
           return universityData;
         } catch (e) {
@@ -43,6 +42,14 @@ export const universityApi = createApi({
     fetchUniversityDetail: builder.query({
       query: (id: number) => {
         return `/${id}`;
+      },
+      transformResponse: (res: any) => {
+        try {
+          const data = JSON.parse(res);
+          return universityModel.fromApiResponse(data).toJSON();
+        } catch (e) {
+          console.error(e);
+        }
       },
     }),
 

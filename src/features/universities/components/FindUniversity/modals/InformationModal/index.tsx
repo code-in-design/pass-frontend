@@ -11,28 +11,28 @@ import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.sv
 import MyTooltip from '@/components/Tooltip';
 import ExerciseType from '../../ExerciseType';
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import { UniversitiesModel } from '@/models/UniversitiesModel';
 
 interface Props {
-  name: string;
-  subTitle: string;
-  competition: string;
+  data: any;
   exercise: string[];
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UniversityInformationModal = (props: Props) => {
   const [openModal, setOpenModal] = useState(false);
-
+  console.log(props.data);
+  const department = props?.data?.universityDepartments;
   return (
     <>
       <ModalLayout onClose={() => props.onClose(false)}>
         <Header>
           <TitleWrapper>
-            <Title>{props.name}</Title>
-            <SubTitle>{props.subTitle}</SubTitle>
+            <Title>{props?.data?.universityName}</Title>
+            <SubTitle>{department?.applyTypeDetail}</SubTitle>
           </TitleWrapper>
           <CompetitionRate>
-            2023 경쟁률 <span>{props.competition}</span>
+            2023 경쟁률 <span>{department?.lastYearCompetitionRate}</span>
           </CompetitionRate>
         </Header>
         <InformationWrapper>
@@ -41,7 +41,7 @@ const UniversityInformationModal = (props: Props) => {
             <Information>
               <InformationBox>
                 <InformationBoxTitle>모집군</InformationBoxTitle>
-                <InformationBoxText>가군</InformationBoxText>
+                <InformationBoxText>{department?.recruitmentGroup}</InformationBoxText>
               </InformationBox>
               <InformationBox>
                 <InformationBoxTitle>
@@ -53,53 +53,55 @@ const UniversityInformationModal = (props: Props) => {
                     <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
                   </MyTooltip>
                 </InformationBoxTitle>
-                <InformationBoxText>33</InformationBoxText>
+                <InformationBoxText>{department?.recruitNumber}</InformationBoxText>
               </InformationBox>
             </Information>
           </InformationWrapperItem>
           <InformationWrapperItem>
             <Wrapper>
               <MenuTitle>전형 방법</MenuTitle>
-              <InformationMethodTitle>
-                다단계 전형 세부사항
-                <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
-                  <HelpOutline />
-                </HelpIconWrapper>
-                <MyTooltip id="tooltip-universityDetail" width="180px">
-                  <TooltipText>다단계 반영 비율 나타내기</TooltipText>
-                </MyTooltip>
-              </InformationMethodTitle>
+              {department?.isMultistage && (
+                <InformationMethodTitle>
+                  다단계 전형 세부사항
+                  <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
+                    <HelpOutline />
+                  </HelpIconWrapper>
+                  <MyTooltip id="tooltip-universityDetail" width="180px">
+                    <TooltipText>{department?.multistageDetail}</TooltipText>
+                  </MyTooltip>
+                </InformationMethodTitle>
+              )}
             </Wrapper>
             <InformationMethod>
               <GraphWrapper>
                 <GraphTitle>수능</GraphTitle>
                 <Graph>
-                  <GraphScore width={'10%'} bgColor={'#6B77F8'}>
-                    10%
+                  <GraphScore width={`${department?.testRate}%`} bgColor={'#6B77F8'}>
+                    {department?.testRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>내신</GraphTitle>
                 <Graph>
-                  <GraphScore width={'30%'} bgColor={'#AA83FF'}>
-                    30%
+                  <GraphScore width={`${department?.naesinRate}%`} bgColor={'#AA83FF'}>
+                    {department?.naesinRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>실기</GraphTitle>
                 <Graph>
-                  <GraphScore width={'60%'} bgColor={'#60C8DE'}>
-                    60%
+                  <GraphScore width={`${department?.practicalRate}%`} bgColor={'#60C8DE'}>
+                    {department?.practicalRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>기타</GraphTitle>
                 <Graph>
-                  <GraphScore width={'90%'} bgColor={'#9395a6'}>
-                    90%
+                  <GraphScore width={`${department?.etcRate}%`} bgColor={'#9395a6'}>
+                    {department?.etcRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
@@ -130,7 +132,6 @@ const UniversityInformationModal = (props: Props) => {
             </GradeTableTBodyTr>
           </GradeTableTbody>
         </GradeTable>
-
         <MenuTitle>
           <Wrapper>
             실기 반영 종목
@@ -141,7 +142,7 @@ const UniversityInformationModal = (props: Props) => {
           </Wrapper>
         </MenuTitle>
         <ExerciseWrapper>
-          {props?.exercise?.map((item, index) => {
+          {department?.practicalApplyType?.map((item, index) => {
             return <ExerciseType key={index} type={item} />;
           })}
         </ExerciseWrapper>
@@ -150,14 +151,14 @@ const UniversityInformationModal = (props: Props) => {
             <Calendar />
             <DateContainer>
               <DateName>실기고사 일정</DateName>
-              <Date>2024년 1월 23일</Date>
+              <Date>{department?.practicalTestDate}</Date>
             </DateContainer>
           </DateBox>
           <DateBox>
             <LoudSpeaker />
             <DateContainer>
               <DateName>최초 합격자 발표일</DateName>
-              <Date>2024년 1월 23일</Date>
+              <Date>{department?.successfulApplicantDate}</Date>
             </DateContainer>
           </DateBox>
         </Wrapper>
@@ -179,7 +180,7 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {/* {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.data.name} subTitle={props.data.subTitle} />} */}
     </>
   );
 };
@@ -340,7 +341,7 @@ const GraphTitle = styled.div`
 `;
 
 const GraphScore = styled.div<{ width: string; bgColor: string }>`
-  width: ${props => props.width};
+  width: ${props => (props.width === '0%' ? '0px' : props.width)};
   font-size: 10px;
   line-height: 16px;
   font-weight: 700;

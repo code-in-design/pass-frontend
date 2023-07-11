@@ -8,6 +8,7 @@ import { KoreanSubjectModel } from './KoreanSubjectModel';
 import { MathSubjectModel } from './MathSubjectModel';
 import { PracticalApplyModel, PracticalType } from './PracticalApplyModel';
 import { SubjectModel } from './SubjectModel';
+import { TranscriptModel } from './TranscriptModel';
 
 export class UniversityDepartmentsModel {
   @Expose()
@@ -54,7 +55,7 @@ export class UniversityDepartmentsModel {
   isMultistage?: boolean; //다단계 여부
 
   @Expose()
-  MultistageDetail?: string; //다단계 세부사항
+  multistageDetail?: string; //다단계 세부사항
 
   @Expose()
   testRate?: number; //수능 전형반영비율
@@ -75,7 +76,7 @@ export class UniversityDepartmentsModel {
   exceptionRateDescription?: string; //예외 반영 비율 설명
 
   @Expose()
-  UniversityDepartmentHomepage?: string; //학과 홈페이지
+  universityDepartmentHomepage?: string; //학과 홈페이지
 
   @Expose()
   recruitmentGuideline?: string; //모집요강 홈페이지
@@ -117,7 +118,7 @@ export class UniversityDepartmentsModel {
     return classToPlain(data);
   };
 
-  static setModelFromData(data) {
+  fromApiResponse(data) {
     const universityDepartment = new UniversityDepartmentsModel();
     const filteredSubjects: SubjectModel[] = [
       data.국어_반영_비율 && KoreanSubjectModel.setModelFromData(data),
@@ -163,15 +164,17 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.isApplyPossibility = data.지원_가능성_준석_여부; //지원가능성 분석 여부
 
-    universityDepartment.possibilityOfApply = ApplyPossibilityModel.setModelFromData([data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가]);
+    const filteredPossibilityOfApply: ApplyPossibilityModel[] = [data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가];
+
+    universityDepartment.possibilityOfApply = ApplyPossibilityModel.setModelFromData(filteredPossibilityOfApply);
 
     universityDepartment.isPassPossibility = data.합격_확률_분석_여부; //합격확률 분석 여부
 
     universityDepartment.isMultistage = data.다단계_여부; //다단계 여부
 
-    universityDepartment.MultistageDetail = data.다단계_세부사항; //다단계 세부사항
+    universityDepartment.multistageDetail = data.다단계_세부사항; //다단계 세부사항
 
-    universityDepartment.UniversityDepartmentHomepage = data.학과_홈페이지; //학과 홈페이지
+    universityDepartment.universityDepartmentHomepage = data.학과_홈페이지; //학과 홈페이지
 
     universityDepartment.isTeachingPossibility = data.교직_이수_가능_여부; //교직이수 가능 여부
 

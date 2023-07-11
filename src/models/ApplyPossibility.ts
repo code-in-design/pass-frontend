@@ -1,17 +1,6 @@
-import { Expose, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
 
 export class ApplyPossibilityModel {
-  @Expose()
-  stability?: string; // 지원 가능성 기준 : 안정
-  @Expose()
-  adequacy?: string; // 지원 가능성 기준 : 적정
-  @Expose()
-  belief?: string; // 지원 가능성 기준 : 소신
-  @Expose()
-  aspirationalApplication?: string; // 지원 가능성 기준 : 우주상향
-  @Expose()
-  impossible?: string; // 지원 가능성 기준 : 지원불가
-
   constructor(data?: Partial<ApplyPossibilityModel>) {
     return plainToClass(ApplyPossibilityModel, data, { excludeExtraneousValues: true });
   }
