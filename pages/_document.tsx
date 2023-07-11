@@ -41,8 +41,9 @@ export default function Document() {
         <meta property="og:title" content={title} />
         <meta property="og:url" content={url} />
         <meta property="og:description" content={description} />
+        
         {/* <meta property="og:image" content="" key="ogimage" /> */}
-
+        <meta name="keywords" content="체대입시,체대입시플랫폼,체육대학,체대,합격,입시정보,모집요강,입시결과,경쟁률,대학정보,학과정보,수능,수시,정시,대학진학,입시정보사이트,배치표,입시일정,수능문제,입시분석,고3입시정보,"/>
         <meta name="naver-site-verification" content="6fc614587fc636493325df49b27cf6cb6694c546" />
       </Head>
       <body>
