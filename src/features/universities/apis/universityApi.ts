@@ -23,7 +23,7 @@ export const universityApi = createApi({
     //대학 리스트 조회
     fetchUniversityList: builder.query({
       query: (startRow: number) => {
-        return `?page=${startRow}&limit=${20}&range=${10}`;
+        return `?page=${startRow}&limit=${10}&range=${10}`;
       },
       transformResponse: (res: any) => {
         try {

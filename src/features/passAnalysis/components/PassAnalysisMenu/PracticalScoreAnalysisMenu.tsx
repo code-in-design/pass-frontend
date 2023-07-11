@@ -12,6 +12,7 @@ interface Props {
   name: string;
   subTitle: string;
   remainChange: number;
+  exercise: string[];
   data: { title: string; record: string; score: string }[];
 }
 
@@ -71,7 +72,7 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
           })}
         </ItemWrapper>
       </Container>
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} exercise={props.exercise} />}
     </>
   );
 };

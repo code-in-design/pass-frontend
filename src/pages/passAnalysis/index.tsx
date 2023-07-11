@@ -102,7 +102,7 @@ const PassAnalysisPage = () => {
                   <UniversityInfoWrapper>
                     <PassProbabilityContainer />
                     <TestScoreAnalysisContainer />
-                    <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} />
+                    <PracticalScoreAnalysisContainer name={String(selectedUniversity)} subTitle="수능 일반 전형" remainChange={1} exercise={[]} />
                     <LastYearPassCaseContainer />
                   </UniversityInfoWrapper>
                 )}

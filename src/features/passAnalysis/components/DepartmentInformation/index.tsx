@@ -166,7 +166,7 @@ const DepartmentInformation = (props: Props) => {
           <InfoTitle>모집 요강</InfoTitle>
         </InfoItem>
       </Wrapper>
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} exercise={props.exercise} />}
     </>
   );
 };

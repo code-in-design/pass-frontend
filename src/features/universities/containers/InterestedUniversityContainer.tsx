@@ -3,7 +3,7 @@ import { useFetchUniversityListQuery } from '../apis/universityApi';
 import InterestedUniversities from '../components/InterestedUniversities';
 
 const InterestedUniversityContainer = () => {
-  const { data } = useFetchUniversityListQuery();
+  const { data } = useFetchUniversityListQuery(0);
   return <InterestedUniversities data={data} />;
 };
 

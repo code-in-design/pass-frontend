@@ -1,18 +1,18 @@
 import React, { ReactNode, useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
 import styled from '@emotion/styled';
+import { AgGridReact } from 'ag-grid-react';
+import { GridApi } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
-import customThemes from './UniversityTable.module.css';
-import UniversityInfoModalContainer from '../../../containers/UniversityInformationModalContainer';
-import Search from '../../../../../../public/images/icons/search.svg';
-import ArrowDown from '../../../../../../public/images/icons/arrowDropDown.svg';
-import ArrowUp from '../../../../../../public/images/icons/arrowDropUp.svg';
-import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoubleDown.svg';
-import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
-import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
-import ExerciseIcon from './ExerciseIcon';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
+import { useLazyFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
+import { UniversitiesModel } from '@/models/UniversitiesModel';
+import UniversityInfoModalContainer from '../../../containers/UniversityInformationModalContainer';
+import customThemes from './UniversityTable.module.css';
+import { ExerciseRenderer } from './ExerciseRenderer';
+import { SearchImageRenderer } from './SearchImageRenderer';
+import { ContributionRenderer } from './ContributionRenderer';
+import Search from '../../../../../../public/images/icons/search.svg';
 
 interface Props {
   data: {
@@ -32,88 +32,96 @@ interface Props {
 }
 
 const UniversityTable = (props: Props) => {
-  const [rowData] = useState(props.data);
+  const [rowData, setRowData] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
-  const [selectedData, setSelectedData] = useState(0);
-
-  const ImageRenderer = props => {
-    const { value } = props;
-    const id = props.data.id;
-    return (
-      <div style={{ display: 'flex', gap: '0 4px', alignItems: 'center' }}>
-        {value?.map((icon, index) => {
-          return (
-            <ImageWrapper key={index}>
-              <ExerciseIcon type={icon} id={id} />
-            </ImageWrapper>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const SearchImageRenderer = () => {
-    return (
-      <IconWrapper>
-        <Search />
-      </IconWrapper>
-    );
-  };
-
-  const ContributionRenderer = props => {
-    const { value } = props;
-    return (
-      <ContributionContainer>
-        {value === '최하' && <ArrowDoubleDown />}
-        {value === '하' && <ArrowDown />}
-        {value === '중' && <Hyphen />}
-        {value === '상' && <ArrowUp />}
-        {value === '최상' && <ArrowDoubleUp />}
-        <ContributionText type={value}>{value}</ContributionText>
-      </ContributionContainer>
-    );
-  };
+  const [selectedID, setSelectedID] = useState(0);
+  const [gridApi, setGridApi] = useState<GridApi | null>(null);
+  const [getUniversityList] = useLazyFetchUniversityListQuery();
 
   const onRowClick = props => {
     setToggleModal(true);
-    setSelectedData(props.data.universityName);
+    setSelectedID(props.data.id);
   };
+
   const onCellClicked = props => {
     if (props.colDef.field === '합격가능성보기') {
       console.log(props);
     }
   };
 
-  const getRowStyle = params => {
-    return { padding: '12px 16px' };
+  const onGridReady = params => {
+    setGridApi(params.api);
+
+    const pageSize = 10;
+    const lastPage = 11;
+    const dataSource = {
+      getRows: async params => {
+        const page = Math.floor(params.startRow / pageSize);
+
+        if (page === lastPage) {
+          return params.failCallback();
+        }
+
+        try {
+          const result = await getUniversityList(page);
+          if (result.isSuccess) {
+            const universityData = result?.data?.map((item: any) => {
+              const universityModel = new UniversitiesModel();
+              const row = universityModel.getTableRowData(item);
+              return row;
+            });
+
+            params.successCallback(universityData, -1);
+          }
+        } catch (error) {
+          console.error(error);
+          params.failCallback();
+        }
+      },
+    };
+    params.api.setDatasource(dataSource);
   };
 
   const [columnDefs] = useState([
-    { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'practicalType', headerName: '실기종목', cellRendererFramework: ImageRenderer, minWidth: 122, flex: 2.5, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1 },
+    { field: 'universityName', headerName: '대학명', minWidth: 122, flex: 2.5 },
+    { field: 'departmentName', headerName: '학과명', minWidth: 122, flex: 2.5 },
+    {
+      field: 'practicalType',
+      headerName: '실기종목',
+      cellRendererFramework: ExerciseRenderer,
+      minWidth: 122,
+      flex: 2.5,
+    },
     {
       field: 'contribution',
       headerName: '기여도',
       children: [
-        { field: 'test', headerName: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-        { field: 'practical', headerName: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+        { field: 'test', headerName: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
+        { field: 'practical', headerName: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
       ],
       headerGroupComponent: TableHeaderTooltip,
     },
-    { field: 'conversionScore', headerName: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
-    { field: 'Zvalue', headerName: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TableHeaderTooltip, cellStyle: { justifyContent: 'center', display: 'flex', alignItems: 'center', height: '24px' } },
+    { field: 'conversionScore', headerName: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TableHeaderTooltip },
+    { field: 'Zvalue', headerName: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TableHeaderTooltip },
     { field: 'applicationPossibility', headerName: '지원가능성', sortable: true, cellRendererFramework: ApplicationPossibilityTag, minWidth: 104, flex: 2.1 },
     { field: 'passPossibility', headerName: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
   ]);
 
+  const gridOptions = {
+    columnDefs: columnDefs,
+    rowHeight: 48, // 모든 행의 높이를 50으로 지정
+    onGridReady: onGridReady,
+    onRowClick: onRowClick,
+    onCellClicked: onCellClicked,
+  };
+
   return (
     <>
       <AgGridWrapper className={customThemes.table}>
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClick} onCellClicked={onCellClicked} getRowHeight={() => 48} getRowStyle={getRowStyle} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
+        <AgGridReact gridOptions={gridOptions} rowModelType="infinite" paginationPageSize={10} cacheBlockSize={10} maxBlocksInCache={30} infiniteInitialRowCount={10} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
       </AgGridWrapper>
-      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedData} />}
+      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedID} />}
     </>
   );
 };
@@ -281,29 +289,4 @@ export default UniversityTable;
 const AgGridWrapper = styled.div`
   height: 548px;
   width: 100%;
-`;
-
-const ContributionContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const ContributionText = styled.span<{ type: string }>`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16px;
-  color: ${props => (props.type === '최하' || props.type === '하') && '#45BFD9'};
-  color: ${props => props.type === '중' && '#626474'};
-  color: ${props => (props.type === '상' || props.type === '최상') && '#FF4444'};
-`;
-
-const IconWrapper = styled.div`
-  width: 20px;
-  height: 20px;
-  color: '#626474';
-  margin: auto;
-`;
-
-const ImageWrapper = styled.div`
-  color: ${props => props.theme.colors.blue};
 `;
