@@ -16,4 +16,5 @@ export const SERVICE_PATH = {
 export const ADMIN_PATH = {
   HOME: '/adminDashboard', // 대시보드
   RESERVATION: '/reservations', // 사전예약
+  USERLIST: '/userManagement/userList', // 사용자 목록
 };
