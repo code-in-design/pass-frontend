@@ -44,8 +44,8 @@ const UniversityTable = (props: Props) => {
   };
 
   const onCellClicked = props => {
-    if (props.colDef.field === '합격가능성보기') {
-      console.log(props);
+    if (props.colDef.field === '"passPossibility"') {
+      setToggleModal(false);
     }
   };
 
@@ -111,15 +111,24 @@ const UniversityTable = (props: Props) => {
   const gridOptions = {
     columnDefs: columnDefs,
     rowHeight: 48, // 모든 행의 높이를 50으로 지정
-    onGridReady: onGridReady,
-    onRowClick: onRowClick,
-    onCellClicked: onCellClicked,
   };
 
   return (
     <>
       <AgGridWrapper className={customThemes.table}>
-        <AgGridReact gridOptions={gridOptions} rowModelType="infinite" paginationPageSize={10} cacheBlockSize={10} maxBlocksInCache={30} infiniteInitialRowCount={10} headerHeight={48} groupHeaderHeight={48}></AgGridReact>
+        <AgGridReact
+          gridOptions={gridOptions}
+          rowModelType="infinite"
+          onGridReady={onGridReady}
+          onRowClicked={onRowClick}
+          onCellClicked={onCellClicked}
+          paginationPageSize={10}
+          cacheBlockSize={10}
+          maxBlocksInCache={30}
+          infiniteInitialRowCount={10}
+          headerHeight={48}
+          groupHeaderHeight={48}
+        ></AgGridReact>
       </AgGridWrapper>
       {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedID} />}
     </>
