@@ -10,7 +10,7 @@ import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
 import { SERVICE_PATH } from '../../constants/path';
 import { storageUtil } from '@/utils/StorageUtil';
-import { includes, startsWith } from 'lodash';
+import { startsWith } from 'lodash';
 
 interface Props {
   menuList: { icon: ReactNode; title: string; route: string; subMenu?: SubMenu[] }[];
@@ -25,10 +25,11 @@ export const Navbar = (props: Props) => {
     router.push(SERVICE_PATH.SIGNIN);
   };
 
-  const isParentPathSame = (currentPath, route) => {
+  const isPathActive = (currentPath, route) => {
     const parentPath = route.split('/').slice(0, -1).join('/');
     if (startsWith(currentPath, route)) return true;
     else if (parentPath !== '' && startsWith(currentPath, parentPath)) return true;
+    return false;
   };
 
   return (
@@ -37,7 +38,7 @@ export const Navbar = (props: Props) => {
       <MenuList>
         {props?.menuList?.map((item, index) => {
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isParentPathSame(router.pathname, item.route)} subMenu={item?.subMenu}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenu={item?.subMenu}>
               {item.icon}
             </NavbarItem>
           );

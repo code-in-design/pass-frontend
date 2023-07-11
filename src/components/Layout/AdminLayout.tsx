@@ -19,7 +19,6 @@ const AdminLayout = (props: LayoutProps) => {
         menuList={[
           { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
           { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
-          { icon: <Management />, title: '사용자 관리', route: ADMIN_PATH.USERLIST },
           {
             icon: <Management />,
             title: '사용자 관리',

@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
+import Ellipse from '../../../public/images/icons/ellipse.svg';
+import theme from '@/theme/theme';
 import { useRouter } from 'next/router';
+import { startsWith } from 'lodash';
 
 export type SubMenu = {
   title: string;
@@ -12,10 +15,12 @@ type Props = {
   children: ReactNode;
   onClick: () => void;
   isActive?: boolean;
+  subMenu?: SubMenu[];
 };
 
 const NavbarItem = (props: Props) => {
   const router = useRouter();
+
   return (
     <MenuListItemContainer>
       <MenuListItem onClick={props.onClick} isActive={props?.isActive}>
@@ -40,11 +45,43 @@ const NavbarItem = (props: Props) => {
 
 export default NavbarItem;
 
+const MenuListItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+`;
+
+const SubMenuList = styled.div`
+  display: flex;
+  padding: 10px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  color: ${theme.colors.gray3};
+  font-family: Pretendard Regular;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.32px;
+`;
+
+const SubMenuListItem = styled.li<any>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  color: ${({ isSelected }) => (isSelected ? theme.colors.blue : theme.colors.gray3)};
+  font-family: ${({ isSelected }) => (isSelected ? 'Pretendard SemiBold' : 'Pretendard Regular')};
+`;
+
 const MenuListItem = styled.li<any>`
   display: flex;
   align-items: center;
   height: 56px;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
   border-radius: 16px;
   padding: 16px;
   color: #737c89;
