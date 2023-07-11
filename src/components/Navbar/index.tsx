@@ -25,10 +25,15 @@ export const Navbar = (props: Props) => {
     router.push(SERVICE_PATH.SIGNIN);
   };
 
-  const isPathActive = (currentPath, route) => {
-    if (startsWith(currentPath, route)) return true;
-    const parentPath = route.split('/').slice(0, -1).join('/');
-    if (parentPath !== '' && startsWith(currentPath, parentPath)) return true;
+  // 현재 페이지 경로와 메뉴에 지정된 라우트 경로를 비교하는 함수
+  const isPathActive = (currentPagePath, menuItemRoutePath) => {
+    // 현재 페이지가 메뉴에 지정된 라우트 경로를 포함하는 경우 해당 메뉴로부터 라우팅 되었으므로 true 리턴
+    if (startsWith(currentPagePath, menuItemRoutePath)) return true;
+    // 현재 페이지가 메뉴에 지정된 라우트 경로를 포함하지 않는 경우, 상위 경로 확인하기
+    const menuRouteParentPath = menuItemRoutePath.split('/').slice(0, -1).join('/');
+    // 메뉴에 지정된 라우트 경로의 상위 경로가 루트가 아닌 경우, 현재 페이지가 이 경로를 포함하면 해당 경로로부터 라우팅 되었으므로 true 리턴
+    if (menuRouteParentPath !== '' && startsWith(currentPagePath, menuRouteParentPath)) return true;
+    // 그 외 false 리턴
     return false;
   };
 
