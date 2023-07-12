@@ -1,17 +1,28 @@
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { createContext } from 'react';
+import VersionDropDownContainer from './VersionDropDownContainer';
+import RadioButtonGroupContainer from './RadioButtonGroupContainer';
+import ScoreSheetUploaderContainer from './ScoreSheetUploaderContainer';
+import DataUnifierOptionContainer from '../components/DataUnifierOptionContainer';
+import FormButtonGroupContainer from './FormButtonGroupContainer';
+import { Flex } from '@chakra-ui/react';
+import ScoreSheetFormProvider from '../context/ScoreSheetFormContext';
 
-interface Props {
-  children: ReactNode;
-}
-
-const ScoreSheetContainer = (props: Props) => {
+const ScoreSheetContainer = () => {
   return (
-    <Container>
-      <Title>수능 점수 분석</Title>
-      {props.children}
-    </Container>
+    <ScoreSheetFormProvider>
+      <Container>
+        <Title>수능 점수 분석</Title>
+        <VersionDropDownContainer />
+        <RadioButtonGroupContainer />
+        <Flex flex="1" gap="24px">
+          <ScoreSheetUploaderContainer />
+          <DataUnifierOptionContainer />
+        </Flex>
+        <FormButtonGroupContainer />
+      </Container>
+    </ScoreSheetFormProvider>
   );
 };
 

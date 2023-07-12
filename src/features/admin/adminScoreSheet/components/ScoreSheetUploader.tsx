@@ -2,31 +2,22 @@ import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import FolderUploadIcon from '../../../../../public/images/icons/drive_folder_upload.svg';
 import SuccessIcon from '../../../../../public/images/icons/check_circle.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-
-function isOkForUploading(allowedExtensions, file) {
-  const fileExtension = file.name.split('.').pop().toLowerCase();
-  console.log(fileExtension);
-
-  const isOkForUploading = allowedExtensions.includes(fileExtension);
-
-  if (isOkForUploading) {
-    return true;
-  }
-  return false;
-}
+import UploadErrorMessage from './UploadErrorMessage';
+import { isEmpty, isNull } from 'lodash';
+// import useScoreSheetForm from '../hooks/useScoreSheetForm';
 
 interface Props {
-  fileList: File;
+  file: File;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
 }
 
 const ScoreSheetUploader = (props: Props) => {
-  const { fileList, register, setValue } = props;
-  const [isUploaded, setIsUploaded] = useState(false);
-  const isCSV = fileList?.type === 'text/csv';
+  const { file, register, setValue } = props;
+  const isCSV = file?.type === 'text/csv';
+  const [isUploaded, setIsisUploaded] = useState(true);
 
   const handleFileUpload = event => {
     const file = event.target.files[0];
@@ -36,6 +27,7 @@ const ScoreSheetUploader = (props: Props) => {
 
     if (isAllowed) {
       setValue('uploadedFile', file);
+      setIsisUploaded(true);
     }
   };
 
@@ -53,32 +45,56 @@ const ScoreSheetUploader = (props: Props) => {
 
     if (isAllowed) {
       setValue('uploadedFile', file);
+      setIsisUploaded(true);
       return;
     }
     console.log('업로드 실패');
+    setIsisUploaded(false);
   };
 
   return (
-    <ScoreSheetUploaderWrapper isUploaded={isUploaded}>
-      {!isCSV && (
-        <UploadArea htmlFor="fileUpload" onDrop={handleDrop} onDragOver={handleDragOver}>
-          <FileUploadInput type="file" id="fileUpload" {...register('uploadedFile')} onChange={handleFileUpload} />
-          <FolderUploadIcon width="80px" height="80px" color={theme.colors.gray3} />
-          <BoldText>점수표를 업로드해주세요</BoldText>
-          <Text>파일을 드래그 & 드롭하거나 영역을 클릭하여 파일을 등록해 주세요</Text>
-        </UploadArea>
-      )}
-      {isCSV && (
-        <UploadSuccess>
-          <SuccessIcon width="64px" height="64px" color={theme.colors.deepGreen} />
-          <SuccessMessage>업로드 완료!</SuccessMessage>
-        </UploadSuccess>
-      )}
-    </ScoreSheetUploaderWrapper>
+    <Container>
+      <ScoreSheetUploaderWrapper isUploaded={isCSV}>
+        {!isCSV && (
+          <UploadArea htmlFor="fileUpload" onDrop={handleDrop} onDragOver={handleDragOver}>
+            <FileUploadInput defaultValue={undefined} type="file" id="fileUpload" {...register('uploadedFile')} onChange={handleFileUpload} />
+            <FolderUploadIcon width="80px" height="80px" color={theme.colors.gray3} />
+            <BoldText>점수표를 업로드해주세요</BoldText>
+            <Text>파일을 드래그 & 드롭하거나 영역을 클릭하여 파일을 등록해 주세요</Text>
+          </UploadArea>
+        )}
+        {isCSV && (
+          <UploadSuccess>
+            <SuccessIcon width="64px" height="64px" color={theme.colors.deepGreen} />
+            <SuccessMessage>업로드 완료!</SuccessMessage>
+          </UploadSuccess>
+        )}
+      </ScoreSheetUploaderWrapper>
+      <UploadErrorMessage isHidden={isUploaded} />
+    </Container>
   );
 };
 
+function isOkForUploading(allowedExtensions, file) {
+  const fileExtension = file.name.split('.').pop().toLowerCase();
+  console.log(fileExtension);
+
+  const isOkForUploading = allowedExtensions.includes(fileExtension);
+
+  if (isOkForUploading) {
+    return true;
+  }
+  return false;
+}
+
 export default ScoreSheetUploader;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 24px;
+`;
 
 const ScoreSheetUploaderWrapper = styled.div<any>`
   display: flex;
@@ -145,4 +161,8 @@ const SuccessMessage = styled.span`
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.4px;
+`;
+
+const UploadErrorMessageWrapper = styled.div`
+  height: 56px;
 `;

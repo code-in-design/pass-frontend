@@ -1,11 +1,12 @@
 import ScoreSheetUploader from '../components/ScoreSheetUploader';
-import useScoreSheetForm from '../hooks/useScoreSheetForm';
+import useScoreSheetFormContext from '../hooks/useScoreSheetFormContext';
+// import useScoreSheetForm from '../hooks/useScoreSheetForm';
 
 const ScoreSheetUploaderContainer = () => {
-  const { register, setValue, watch } = useScoreSheetForm();
-  const fileList = watch('uploadedFile');
+  const { register, setValue, watch } = useScoreSheetFormContext();
+  const file = watch('uploadedFile');
 
-  return <ScoreSheetUploader fileList={fileList} register={register} setValue={setValue} />;
+  return <ScoreSheetUploader file={file} register={register} setValue={setValue} />;
 };
 
 export default ScoreSheetUploaderContainer;

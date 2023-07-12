@@ -1,12 +1,19 @@
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
-const FormButtonGroup = () => {
+const FormButtonGroup = ({ file, reset, handleSubmit }) => {
+  const isUploaded = file;
+
   return (
     <FormButtonGroupWrapper>
       <ButtonWrapper>
-        <Button color={theme.colors.gray1}>재업로드</Button>
-        <Button color={theme.colors.blue}>저장</Button>
+        <Button color={theme.colors.gray1} disabled={!isUploaded} onClick={() => console.log('클릭')}>
+          재업로드
+        </Button>
+        <Button color={theme.colors.blue} onClick={handleSubmit}>
+          저장
+        </Button>
       </ButtonWrapper>
     </FormButtonGroupWrapper>
   );

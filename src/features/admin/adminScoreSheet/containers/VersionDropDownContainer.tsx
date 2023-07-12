@@ -1,10 +1,16 @@
 import { find } from 'lodash';
 import VersionDropDown, { OptionType } from '../components/VersionDropDown';
-import useScoreSheetForm from '../hooks/useScoreSheetForm';
+// import useScoreSheetForm from '../hooks/useScoreSheetForm';
+import useScoreSheetFormContext from '../hooks/useScoreSheetFormContext';
+import { useEffect } from 'react';
 
 const VersionDropDownContainer = () => {
-  const { register, setValue, watch } = useScoreSheetForm();
+  const { register, setValue, watch } = useScoreSheetFormContext();
   const selectedId = watch('id', '');
+
+  useEffect(() => {
+    console.log(selectedId);
+  });
 
   const serverData = [
     {

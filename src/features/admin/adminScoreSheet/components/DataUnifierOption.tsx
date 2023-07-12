@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import CheckBox from './CheckBox';
 import Select from '@/components/Select';
-import useScoreSheetForm from '../hooks/useScoreSheetForm';
+// import useScoreSheetForm from '../hooks/useScoreSheetForm';
 import { find } from 'lodash';
 import { OptionType } from './VersionDropDown';
+import useScoreSheetFormContext from '../hooks/useScoreSheetFormContext';
 
 const DataUnifierOption = () => {
-  const { register, setValue, watch } = useScoreSheetForm();
+  const { register, setValue, watch } = useScoreSheetFormContext();
   const selectedId = watch('id', '');
 
   const serverData = [
