@@ -1,5 +1,6 @@
 import { plainToClass } from 'class-transformer';
 
+// TODO: 정보가 분산됨
 export type PracticalType =
   | '제자리멀리뛰기'
   | '서전트'
@@ -56,9 +57,9 @@ export class PracticalApplyModel {
     return plainToClass(PracticalApplyModel, data, { excludeExtraneousValues: true });
   }
 
-  static practicalType(...types: PracticalType[]) {
-    const sortedTypes = [...types].sort((a, b) => (a === null ? 1 : -1));
-
+  // TODO: 함수 이름 변경, set함수 or 초기화 함수 아닌이상 인자로 외부에서 데이터 받으면 안됨
+  static practicalType(types: PracticalType[]) {
+    const sortedTypes = types.sort();
     return sortedTypes;
   }
 }

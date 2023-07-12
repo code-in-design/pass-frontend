@@ -30,6 +30,7 @@ import 축구 from '../../../public/images/icons/exerciseIcon/축구.svg';
 import 핸드볼공던지기 from '../../../public/images/icons/exerciseIcon/핸드볼공던지기.svg';
 import 허들 from '../../../public/images/icons/exerciseIcon/허들.svg';
 
+// TODO: 이 객체의 key를 타입으로 추출해서 export
 export const exerciseType = {
   '10m왕복달리기': {
     text: '10m왕복달리기',

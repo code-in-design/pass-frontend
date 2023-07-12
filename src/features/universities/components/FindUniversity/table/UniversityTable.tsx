@@ -12,22 +12,25 @@ import { SearchImageRenderer } from './SearchImageRenderer';
 import { ContributionRenderer } from './ContributionRenderer';
 import Search from '../../../../../../public/images/icons/search.svg';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { RowClickedEvent } from 'ag-grid-community';
+
+export interface UniversityTableRowData {
+  id: number;
+  group: string;
+  universityName: string;
+  departmentName: string;
+  practicalType: string[];
+  contribution: string;
+  test: string;
+  practical: string;
+  conversionScore: number;
+  Zvalue: number;
+  applicationPossibility: string;
+  passPossibility: ReactNode;
+}
 
 interface Props {
-  data: {
-    id: number;
-    group: string;
-    universityName: string;
-    departmentName: string;
-    practicalType: string[];
-    contribution: string;
-    test: string;
-    practical: string;
-    conversionScore: number;
-    Zvalue: number;
-    applicationPossibility: string;
-    passPossibility: ReactNode;
-  }[];
+  data: UniversityTableRowData[];
 }
 
 const UniversityTable = (props: Props) => {
@@ -35,15 +38,17 @@ const UniversityTable = (props: Props) => {
   const [selectedID, setSelectedID] = useState(0);
   const [getUniversityList] = useLazyFetchUniversityListQuery();
 
-  const onRowClick = props => {
-    setToggleModal(true);
+  // onCellClicked보다 먼저 호출됨
+  const onRowClick = (props: RowClickedEvent) => {
     setSelectedID(props.data.id);
   };
 
   const onCellClicked = props => {
-    if (props.colDef.field === '"passPossibility"') {
-      setToggleModal(false);
+    if (props.colDef.field === 'passPossibility') {
+      return setToggleModal(false);
     }
+
+    setToggleModal(true);
   };
 
   const onGridReady = useInfiniteScroll({ api: getUniversityList, model: UniversitiesModel });
@@ -268,4 +273,40 @@ export default UniversityTable;
 const AgGridWrapper = styled.div`
   height: 548px;
   width: 100%;
+  .ag-header-row {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+    color: #353644 !important;
+  }
+
+  .ag-header-cell-label {
+    justify-content: center;
+  }
+
+  div[col-id='practicalType'] {
+    justify-content: left !important;
+  }
+
+  .ag-ltr .ag-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ag-row {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #353644 !important;
+  }
+
+  .ag-row:hover {
+    cursor: pointer;
+    background-color: #f3f4fa;
+  }
+
+  .ag-header-cell-comp-wrapper {
+    justify-content: center;
+  }
 `;

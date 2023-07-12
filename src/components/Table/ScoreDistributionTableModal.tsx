@@ -16,8 +16,10 @@ interface Props {
 }
 
 const DistributionTableModal = (props: Props) => {
+  // TODO: selectedItem
   const [toggleItem, setToggleItem] = useState(props.exercise[0]);
 
+  // TODO: 타입정의
   const handleItemClick = item => {
     setToggleItem(item);
   };
@@ -31,6 +33,7 @@ const DistributionTableModal = (props: Props) => {
       <MenuTitle>실기 반영 종목</MenuTitle>
       <Wrapper>
         {props?.exercise?.map((item, index) => {
+          // TODO: 네이밍 변경
           return <ExerciseType key={index} type={item} isSelected={toggleItem === item} onClick={handleItemClick} />;
         })}
       </Wrapper>
