@@ -43,15 +43,13 @@ const DateDisplay = styled.div`
   display: flex;
   min-width: 140px;
   padding: 12px 16px;
-  justify-content: space-between;
   align-items: center;
-  align-self: stretch;
 
   border-radius: 10px;
   border: 1px solid ${theme.colors.gray4};
   background: ${theme.colors.white};
 
-  color: ${theme.colors.grayBlack}
+  color: ${theme.colors.grayBlack};
   font-family: Pretendard SemiBold;
   font-size: 14px;
   line-height: 16px;
