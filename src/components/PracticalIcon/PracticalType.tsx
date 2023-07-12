@@ -31,36 +31,52 @@ import 핸드볼공던지기 from '../../../public/images/icons/exerciseIcon/핸
 import 허들 from '../../../public/images/icons/exerciseIcon/허들.svg';
 
 export const exerciseType = {
-  달리기10m: {
-    text: '10m 달리기',
+  '10m왕복달리기': {
+    text: '10m왕복달리기',
     icon: <Run10m />,
   },
-  달리기20m: {
-    text: '20m 달리기',
+  '10m반복달리기': {
+    text: '10m반복달리기',
+    icon: <Run10m />,
+  },
+  '20m왕복달리기': {
+    text: '20m왕복달리기',
     icon: <Run20m />,
   },
-  달리기25m: {
-    text: '25m 달리기',
+  '25m왕복달리기': {
+    text: '25m왕복달리기',
     icon: <Run25m />,
   },
-  달리기50m: {
-    text: '50m 달리기',
+  '50m달리기': {
+    text: '50m달리기',
     icon: <Run50m />,
   },
-  달리기80m: {
-    text: '80m 달리기',
+  '80m달리기': {
+    text: '80m달리기',
     icon: <Run80m />,
   },
-  달리기100m: {
-    text: '100m 달리기',
+  '100m달리기': {
+    text: '100m달리기',
     icon: <Run100m />,
   },
-  달리기800m: {
-    text: '800m 달리기',
+  '800m달리기': {
+    text: '800m달리기',
     icon: <Run800m />,
   },
   농구: {
     text: '농구',
+    icon: <농구 />,
+  },
+  농구레이업: {
+    text: '농구레이업',
+    icon: <농구 />,
+  },
+  농구골밑슛: {
+    text: '농구골밑슛',
+    icon: <농구 />,
+  },
+  농구왕복레이업슛: {
+    text: '농구왕복레이업슛(1분)',
     icon: <농구 />,
   },
   농구공던지기: {
@@ -71,8 +87,16 @@ export const exerciseType = {
     text: '높이뛰기',
     icon: <높이뛰기 />,
   },
+  육상: {
+    text: '육상(허들/높이뛰기)',
+    icon: <높이뛰기 />,
+  },
   매달리기: {
     text: '매달리기',
+    icon: <매달리기 />,
+  },
+  턱걸이: {
+    text: '턱걸이',
     icon: <매달리기 />,
   },
   메디신볼던지기: {
@@ -81,6 +105,22 @@ export const exerciseType = {
   },
   배구: {
     text: '배구',
+    icon: <배구 />,
+  },
+  공벽치기: {
+    text: '공벽치기',
+    icon: <배구 />,
+  },
+  배구스킬테스트: {
+    text: '배구스킬테스트',
+    icon: <배구 />,
+  },
+  배구브라디: {
+    text: '배구브라디',
+    icon: <배구 />,
+  },
+  배구토스: {
+    text: '배구토스',
     icon: <배구 />,
   },
   배근력: {
@@ -103,8 +143,16 @@ export const exerciseType = {
     text: '순환식계측',
     icon: <순환식계측 />,
   },
+  '60m달리기': {
+    text: '60m달리기',
+    icon: <순환식계측 />,
+  },
   십자런: {
     text: '십자런',
+    icon: <십자런 />,
+  },
+  'Z런(지그재그런)': {
+    text: 'Z런(지그재그런)',
     icon: <십자런 />,
   },
   싯업: {
@@ -143,8 +191,20 @@ export const exerciseType = {
     text: '체조',
     icon: <체조 />,
   },
+  핸드스프링: {
+    text: '핸드스프링',
+    icon: <체조 />,
+  },
+  물구나무앞구르기: {
+    text: '물구나무앞구르기',
+    icon: <체조 />,
+  },
   축구: {
     text: '축구',
+    icon: <축구 />,
+  },
+  축구장애물드리블: {
+    text: '축구장애물드리블',
     icon: <축구 />,
   },
   핸드볼공던지기: {

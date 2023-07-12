@@ -1,18 +1,17 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import { AgGridReact } from 'ag-grid-react';
-import { GridApi } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
 import { useLazyFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
 import UniversityInfoModalContainer from '../../../containers/UniversityInformationModalContainer';
-import customThemes from './UniversityTable.module.css';
 import { ExerciseRenderer } from './ExerciseRenderer';
 import { SearchImageRenderer } from './SearchImageRenderer';
 import { ContributionRenderer } from './ContributionRenderer';
 import Search from '../../../../../../public/images/icons/search.svg';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 interface Props {
   data: {
@@ -32,10 +31,8 @@ interface Props {
 }
 
 const UniversityTable = (props: Props) => {
-  const [rowData, setRowData] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedID, setSelectedID] = useState(0);
-  const [gridApi, setGridApi] = useState<GridApi | null>(null);
   const [getUniversityList] = useLazyFetchUniversityListQuery();
 
   const onRowClick = props => {
@@ -49,40 +46,7 @@ const UniversityTable = (props: Props) => {
     }
   };
 
-  const onGridReady = params => {
-    setGridApi(params.api);
-
-    const pageSize = 10;
-    const lastPage = 11;
-    const dataSource = {
-      getRows: async params => {
-        const firstIndex = params.startRow;
-        const pageNumber = Math.floor(firstIndex / pageSize);
-
-        if (pageNumber === lastPage) {
-          params.failCallback();
-          return;
-        }
-
-        try {
-          const result = await getUniversityList(pageNumber);
-          if (result.isSuccess) {
-            const universityList = result?.data?.map((item: any) => {
-              const universityModel = new UniversitiesModel(item);
-              const row = universityModel.getTableRowData();
-              return row;
-            });
-
-            params.successCallback(universityList);
-          }
-        } catch (error) {
-          console.error(error);
-          params.failCallback();
-        }
-      },
-    };
-    params.api.setDatasource(dataSource);
-  };
+  const onGridReady = useInfiniteScroll({ api: getUniversityList, model: UniversitiesModel });
 
   const [columnDefs] = useState([
     { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1 },
@@ -115,9 +79,13 @@ const UniversityTable = (props: Props) => {
     rowHeight: 48, // 모든 행의 높이를 50으로 지정
   };
 
+  const rowStyle = {
+    textAlign: 'center',
+  };
+
   return (
     <>
-      <AgGridWrapper className={customThemes.table}>
+      <AgGridWrapper>
         <AgGridReact
           gridOptions={gridOptions}
           rowModelType="infinite"
@@ -129,10 +97,10 @@ const UniversityTable = (props: Props) => {
           maxBlocksInCache={30}
           infiniteInitialRowCount={10}
           headerHeight={48}
-          groupHeaderHeight={48}
+          rowStyle={rowStyle}
         ></AgGridReact>
       </AgGridWrapper>
-      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} data={selectedID} />}
+      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} id={selectedID} />}
     </>
   );
 };

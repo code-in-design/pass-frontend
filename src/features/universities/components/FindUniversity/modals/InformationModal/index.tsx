@@ -22,7 +22,6 @@ interface Props {
 const UniversityInformationModal = (props: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const department = props?.data?.universityDepartments;
-  const subject = props?.data?.universityDepartments?.subjects;
 
   return (
     <>

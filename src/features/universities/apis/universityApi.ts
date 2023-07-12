@@ -31,7 +31,7 @@ export const universityApi = createApi({
           const universityData = data?.result?.map((item: any) => {
             return universityModel.fromApiResponse(item).toJSON();
           });
-          return universityData;
+          return { data, universityData };
         } catch (e) {
           console.error(e);
         }
