@@ -1,4 +1,4 @@
-import NavbarItem from './NavbarItem';
+import NavbarItem, { SubMenu } from './NavbarItem';
 import { useNavbar } from './useNavbar';
 import { ReactNode } from 'react';
 import styled from '@emotion/styled';
@@ -10,10 +10,10 @@ import Settings from '../../../public/images/icons/settings.svg';
 import { useRouter } from 'next/router';
 import { SERVICE_PATH } from '../../constants/path';
 import { storageUtil } from '@/utils/StorageUtil';
-import { includes, startsWith } from 'lodash';
+import { startsWith } from 'lodash';
 
 interface Props {
-  menuList: { icon: ReactNode; title: string; route: string }[];
+  menuList: { icon: ReactNode; title: string; route: string; subMenus?: SubMenu[] }[];
 }
 
 export const Navbar = (props: Props) => {
@@ -24,13 +24,18 @@ export const Navbar = (props: Props) => {
     storageUtil.resetTokens();
     router.push(SERVICE_PATH.SIGNIN);
   };
+
+  const isPathActive = (currentPagePath, menuItemRoutePath) => {
+    return startsWith(currentPagePath, menuItemRoutePath);
+  };
+
   return (
     <NavWrapper>
       <Logo src="/images/logos/logo.svg" alt="Logo" onClick={() => router.push(SERVICE_PATH.HOME)} />
       <MenuList>
         {props?.menuList?.map((item, index) => {
           return (
-            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={startsWith(item.route, router.pathname)}>
+            <NavbarItem key={index} title={item.title} onClick={() => router.push(item.route)} isActive={isPathActive(router.pathname, item.route)} subMenus={item?.subMenus}>
               {item.icon}
             </NavbarItem>
           );
