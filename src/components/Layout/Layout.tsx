@@ -30,15 +30,16 @@ const LayoutWrapper = styled.div`
 const BodyWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  padding-bottom: 32px;
+  padding-bottom: 20px;
   padding-right: 32px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ChildrenWrapper = styled.div<{ isHome: boolean }>`
   width: 100%;
-  height: calc(100vh - 144px);
+  flex: 1;
   overflow-y: auto;
-  /* height: 880px; */
   border-radius: 24px;
   background-color: ${props => props.theme.colors.gray5};
   padding: ${props => (props.isHome ? '30px' : '14px')};
