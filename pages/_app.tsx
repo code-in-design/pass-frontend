@@ -1,4 +1,5 @@
 import '../public/styles/globals.css';
+import '../public/styles/agGrid.css';
 import 'reflect-metadata';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';

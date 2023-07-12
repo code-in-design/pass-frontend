@@ -1,3 +1,4 @@
+import { UniversitiesModel } from '@/models/UniversitiesModel';
 import React, { useEffect } from 'react';
 import { useLazyFetchUniversityDetailQuery } from '../apis/universityApi';
 import UniversityInformationModal from '../components/FindUniversity/modals/InformationModal';
@@ -9,7 +10,6 @@ interface Props {
 
 const UniversityInfoModalContainer = (props: Props) => {
   const [getDepartmentDetail, { data }] = useLazyFetchUniversityDetailQuery();
-  console.log(data);
 
   useEffect(() => {
     getDepartmentDetail(props.id);

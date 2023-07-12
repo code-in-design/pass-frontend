@@ -120,11 +120,11 @@ export class UniversityDepartmentsModel {
   fromApiResponse(data) {
     const universityDepartment = new UniversityDepartmentsModel();
     const filteredSubjects: SubjectModel[] = [
-      data.국어_반영_비율 && KoreanSubjectModel.setModelFromData(data),
-      data.수학_반영_비율 && MathSubjectModel.setModelFromData(data),
-      data.영어_반영_비율 && EnglishSubjectModel.setModelFromData(data),
-      data.탐구_반영_비율 && InquirySubjectModel.setModelFromData(data),
-      data.한국사_반영_비율 && HistorySubjectModel.setModelFromData(data),
+      KoreanSubjectModel.setModelFromData(data),
+      MathSubjectModel.setModelFromData(data),
+      EnglishSubjectModel.setModelFromData(data),
+      InquirySubjectModel.setModelFromData(data),
+      HistorySubjectModel.setModelFromData(data),
     ];
     const subjectArray = _.compact(filteredSubjects);
 

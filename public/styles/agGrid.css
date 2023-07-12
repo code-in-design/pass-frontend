@@ -1,0 +1,36 @@
+.ag-header-row {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  color: #353644 !important;
+}
+
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+div[col-id='practicalType'] {
+  justify-content: left !important;
+}
+
+.ag-ltr .ag-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ag-row {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #353644 !important;
+}
+
+.ag-row:hover {
+  cursor: pointer;
+  background-color: #f3f4fa;
+}
+
+.ag-header-cell-comp-wrapper {
+  justify-content: center;
+}

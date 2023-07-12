@@ -11,7 +11,6 @@ import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.sv
 import MyTooltip from '@/components/Tooltip';
 import ExerciseType from '../../ExerciseType';
 import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
-import { UniversitiesModel } from '@/models/UniversitiesModel';
 
 interface Props {
   data: any;
@@ -122,13 +121,19 @@ const UniversityInformationModal = (props: Props) => {
           </GradeTableThead>
           <GradeTableTbody>
             <GradeTableTBodyTr>
-              <TableTd>{10}%</TableTd>
-              <TableTd>{10}%</TableTd>
-              <TableTd>{40}%</TableTd>
-              <TableTd>
-                {20}%{department?.inquiryNumber === 1 && <span>(상위1과목)</span>}
-              </TableTd>
-              <TableTd>{10}%</TableTd>
+              {department?.subjects?.map((subject, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    {subject.subjectRate ? (
+                      <TableTd>
+                        {subject.subjectRate}%{department?.inquiryNumber === 1 && subject.subjectName === '탐구' && <span>(상위1과목)</span>}
+                      </TableTd>
+                    ) : (
+                      <TableTd>-</TableTd>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </GradeTableTBodyTr>
           </GradeTableTbody>
         </GradeTable>
