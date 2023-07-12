@@ -56,22 +56,24 @@ const UniversityTable = (props: Props) => {
     const lastPage = 11;
     const dataSource = {
       getRows: async params => {
-        const page = Math.floor(params.startRow / pageSize);
+        const firstIndex = params.startRow;
+        const pageNumber = Math.floor(firstIndex / pageSize);
 
-        if (page === lastPage) {
-          return params.failCallback();
+        if (pageNumber === lastPage) {
+          params.failCallback();
+          return;
         }
 
         try {
-          const result = await getUniversityList(page);
+          const result = await getUniversityList(pageNumber);
           if (result.isSuccess) {
-            const universityData = result?.data?.map((item: any) => {
-              const universityModel = new UniversitiesModel();
-              const row = universityModel.getTableRowData(item);
+            const universityList = result?.data?.map((item: any) => {
+              const universityModel = new UniversitiesModel(item);
+              const row = universityModel.getTableRowData();
               return row;
             });
 
-            params.successCallback(universityData, -1);
+            params.successCallback(universityList);
           }
         } catch (error) {
           console.error(error);

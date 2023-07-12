@@ -46,18 +46,18 @@ export class UniversitiesModel {
     return university;
   };
 
-  getTableRowData = (row: UniversitiesModel) => {
+  getTableRowData = () => {
     return {
-      id: row?.id,
-      group: row?.universityDepartments?.recruitmentGroup,
-      universityName: row?.universityName,
-      departmentName: row?.universityDepartments?.departmentName,
-      practicalType: row?.universityDepartments?.practicalApplyType,
-      test: row?.universityDepartments?.testContributions,
-      practical: row?.universityDepartments?.practicalContributions,
-      conversionScore: row?.universityDepartments?.conversionScore,
-      Zvalue: row?.universityDepartments?.zValue,
-      applicationPossibility: row?.universityDepartments?.possibilityOfApply,
+      id: this.id,
+      group: this?.universityDepartments?.recruitmentGroup,
+      universityName: this?.universityName,
+      departmentName: this?.universityDepartments?.departmentName,
+      practicalType: this?.universityDepartments?.practicalApplyType,
+      test: this?.universityDepartments?.testContributions,
+      practical: this?.universityDepartments?.practicalContributions,
+      conversionScore: this?.universityDepartments?.conversionScore,
+      Zvalue: this?.universityDepartments?.zValue,
+      applicationPossibility: this?.universityDepartments?.possibilityOfApply,
     };
   };
 }

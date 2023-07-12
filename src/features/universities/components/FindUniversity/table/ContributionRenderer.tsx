@@ -5,9 +5,14 @@ import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoub
 import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
 import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 
+type ContributionType = {
+  value: '최하' | '하' | '중' | '상' | '최상';
+};
+
 //기여도에 따라 아이콘과 글자 색을 다르게 보여준다. (수능기여도, 실기 기여도)
-export const ContributionRenderer = props => {
+export const ContributionRenderer = (props: ContributionType) => {
   const { value } = props;
+
   return (
     <ContributionContainer>
       {value === '최하' && <ArrowDoubleDown />}
