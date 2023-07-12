@@ -1,21 +1,25 @@
 import AdminLayout from '@/components/Layout/AdminLayout';
-import RadioButtonGroup from '@/features/admin/adminScoreSheet/components/RadionButtonGroup';
-import VersionDropDown, { OptionType } from '@/features/admin/adminScoreSheet/components/VersionDropDown';
-import RadioButtonGroupContainer from '@/features/admin/adminScoreSheet/containers/RadiobuttonGroupContainer';
+import RadioButtonGroupContainer from '@/features/admin/adminScoreSheet/containers/RadioButtonGroupContainer';
 import ScoreSheetContainer from '@/features/admin/adminScoreSheet/containers/ScoreSheetContainer';
 import VersionDropDownContainer from '@/features/admin/adminScoreSheet/containers/VersionDropDownContainer';
-import useScoreSheetForm from '@/features/admin/adminScoreSheet/hooks/useScoreSheetForm';
-import { find } from 'lodash';
-import { useForm } from 'react-hook-form';
+import ScoreSheetUploaderContainer from '@/features/admin/adminScoreSheet/containers/ScoreSheetUploaderContainer';
+import DataUnifierOptionContainer from '@/features/admin/adminScoreSheet/components/DataUnifierOptionContainer';
+import { Flex } from '@chakra-ui/react';
+import UploadErrorMessage from '@/features/admin/adminScoreSheet/components/UploadErrorMessage';
+import FormButtonGroupContainer from '@/features/admin/adminScoreSheet/containers/FormButtonGroupContainer';
 
 const AdminScoreSheetPage = () => {
-  const { register, setValue, watch } = useScoreSheetForm();
-
   return (
     <AdminLayout>
       <ScoreSheetContainer>
         <VersionDropDownContainer />
         <RadioButtonGroupContainer />
+        <Flex flex="1" gap="24px">
+          <ScoreSheetUploaderContainer />
+          <DataUnifierOptionContainer />
+        </Flex>
+        <UploadErrorMessage />
+        <FormButtonGroupContainer />
       </ScoreSheetContainer>
     </AdminLayout>
   );
