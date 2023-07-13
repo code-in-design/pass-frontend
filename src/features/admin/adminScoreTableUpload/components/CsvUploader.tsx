@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
@@ -8,16 +9,8 @@ import SuccessIcon from '../../../../../public/images/icons/check_circle.svg';
 import { isEmpty } from 'lodash';
 import UploadErrorMessage from './UploadErrorMessage';
 
-interface Props {
-  file: File;
-}
-
-const CsvUploader = (props: Props) => {
-  const { file } = props;
-  const isUploaded = file;
-
-  console.log(isUploaded);
-  const { register, setValue } = useFormContext();
+const CsvUploader = () => {
+  const { register, setValue, formState } = useFormContext();
   const { getRootProps } = useDropzone({
     accept: {
       'text/csv': ['.csv'],
@@ -30,15 +23,14 @@ const CsvUploader = (props: Props) => {
       [setValue],
     ),
   });
-
-  console.log(file);
+  const isUploaded = false;
 
   return (
     <Container>
       <CsvUploaderWrapper>
         {!isUploaded && (
           <UploadArea htmlFor="fileUpload" {...getRootProps({ className: 'dropzone' })}>
-            <FileUploadInput type="file" {...register('uploadedFile')} />
+            <FileUploadInput type="file" {...register('uploadFile')} />
             <FolderUploadIcon width="80px" height="80px" color={theme.colors.gray3} />
             <BoldText>점수표를 업로드해주세요</BoldText>
             <Text>파일을 드래그 & 드롭하거나 영역을 클릭하여 파일을 등록해 주세요</Text>
@@ -51,7 +43,7 @@ const CsvUploader = (props: Props) => {
           </UploadSuccess>
         )}
       </CsvUploaderWrapper>
-      <UploadErrorMessage isHidden={isUploaded} />
+      <ErrorMessageWrapper>{formState.errors?.upload?.message && <UploadErrorMessage message={formState.errors.upload?.message as string} />}</ErrorMessageWrapper>
     </Container>
   );
 };
@@ -130,4 +122,9 @@ const SuccessMessage = styled.span`
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.4px;
+`;
+
+const ErrorMessageWrapper = styled.div`
+  width: 100%;
+  min-height: 56px;
 `;

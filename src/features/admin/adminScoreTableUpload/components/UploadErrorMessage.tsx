@@ -2,11 +2,15 @@ import styled from '@emotion/styled';
 import WarningIcon from '../../../../../public/images/icons/warningSignal.svg';
 import theme from '@/theme/theme';
 
-const UploadErrorMessage = ({ isHidden }) => {
+interface Props {
+  message: string;
+}
+
+const UploadErrorMessage = (props: Props) => {
   return (
-    <UploadErrorMessageWrapper isHidden={isHidden}>
+    <UploadErrorMessageWrapper>
       <WarningIcon width="20px" height="20px" color={theme.colors.red} />
-      <Text>업로드에 실패했습니다</Text>
+      <Text>{props.message}</Text>
     </UploadErrorMessageWrapper>
   );
 };

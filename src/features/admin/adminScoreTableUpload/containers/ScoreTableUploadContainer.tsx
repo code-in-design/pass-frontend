@@ -2,34 +2,37 @@ import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import VersionDropDownContainer from './VersionSelectionContainer';
 import DataUnifierOptionContainer from './VersionToApplyTestScoreSheetContainer';
-import { Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import RadioButtonGroup from '../components/RadionButtonGroup';
 import CsvUploader from '../components/CsvUploader';
+import UploadErrorMessage from '../components/UploadErrorMessage';
 // import ScoreSheetFormProvider from '../context/ScoreSheetFormContext';
 
 const ScoreTableUploadContainer = () => {
   const methods = useForm();
-  const { register, setValue, watch, handleSubmit, resetField } = methods;
+  const { register, setValue, formState, setError, clearErrors, watch, handleSubmit, resetField } = methods;
 
-  // csv 업로드 여부 판단
-  const file = watch('uploadedFile', undefined);
+  const file = watch('uploadFile', undefined);
   const isUploaded = !file?.type;
 
   const grade = watch('grade');
   console.log(watch());
 
-  // 서버로 넘길 데이터
-  /*
-   * 예상 점수표 업로드 반영되는 버전
-   * 적용되는 학년
-   * 업로드 예상 점수표 (데이터) or
-   * 이전에 업로드한 예상 점수표
-   */
-
   const onSubmit = data => {
-    console.log('제출', data);
+    // post 요청
+    const response = {
+      success: false,
+      message: '업로드에 실패했습니다',
+    };
+
+    // 서버 에러 시
+    setError('upload', {
+      type: 'manual',
+      message: typeof response.message === 'string' ? response.message : '',
+    });
   };
+  console.log(formState.errors);
 
   const onError = error => {
     if (error) alert(error);
@@ -37,39 +40,37 @@ const ScoreTableUploadContainer = () => {
 
   const onReset = () => {
     resetField('uploadedFile');
+    clearErrors('upload');
   };
 
   return (
     <FormProvider {...methods}>
-      <Container>
+      <StyledForm onSubmit={handleSubmit(onSubmit, onError)}>
         <Title>수능 점수 분석</Title>
         <VersionDropDownContainer />
         <RadioButtonGroup grade={grade} />
         <Flex flex="1" gap="24px">
-          {/* <ScoreSheetUploaderContainer /> */}
-          <CsvUploader file={file} />
+          <CsvUploader />
           <DataUnifierOptionContainer />
         </Flex>
-        <form onSubmit={handleSubmit(onSubmit, onError)}>
-          <Flex minH="56px" justifyContent="right">
-            <Flex minW="432px" gap="12px" fontFamily="Pretendard Bold" fontSize="16px" lineHeight="20px" letterSpacing="-0.32px">
-              <Button isDisabled={isUploaded} onClick={() => onReset()} flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.gray1} borderRadius="16px">
-                재업로드
-              </Button>
-              <Button type="submit" flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.blue} borderRadius="16px">
-                저장
-              </Button>
-            </Flex>
+        <Flex minH="56px" justifyContent="right">
+          <Flex minW="432px" gap="12px" fontFamily="Pretendard Bold" fontSize="16px" lineHeight="20px" letterSpacing="-0.32px">
+            <Button isDisabled={isUploaded} onClick={() => onReset()} flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.gray1} borderRadius="16px">
+              재업로드
+            </Button>
+            <Button type="submit" name="upload" flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.blue} borderRadius="16px">
+              저장
+            </Button>
           </Flex>
-        </form>
-      </Container>
+        </Flex>
+      </StyledForm>
     </FormProvider>
   );
 };
 
 export default ScoreTableUploadContainer;
 
-const Container = styled.div`
+const StyledForm = styled.form`
   display: flex;
   height: 100%;
   padding: 24px;
