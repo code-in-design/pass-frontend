@@ -10,7 +10,7 @@ import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
 import ExerciseType from '../../ExerciseType';
-import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 
 interface Props {
   data: any; // TODO: any 제거
