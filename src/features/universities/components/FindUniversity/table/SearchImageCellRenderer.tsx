@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import Search from '../../../../../../public/images/icons/search.svg';
 
-// 표 header에 있는 아이콘을 보여준다 (기여도와 수능환산점수, z-지수)
-export const SearchImageRenderer = () => {
+// 합격 가능성 보기에서 사용되는 검색 아이콘
+export const SearchImageCellRenderer = () => {
   return (
     <IconWrapper>
       <Search />

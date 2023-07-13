@@ -5,32 +5,32 @@ import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoub
 import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
 import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 
-type ContributionType = {
+type ImpactLevelType = {
   value: '최하' | '하' | '중' | '상' | '최상';
 };
 
 //기여도에 따라 아이콘과 글자 색을 다르게 보여준다. (수능기여도, 실기 기여도)
-export const ContributionRenderer = (props: ContributionType) => {
+export const ImpactLevelCellRenderer = (props: ImpactLevelType) => {
   const { value } = props;
 
   return (
-    <ContributionContainer>
+    <ImpactLevelContainer>
       {value === '최하' && <ArrowDoubleDown />}
       {value === '하' && <ArrowDown />}
       {value === '중' && <Hyphen />}
       {value === '상' && <ArrowUp />}
       {value === '최상' && <ArrowDoubleUp />}
-      <ContributionText type={value}>{value}</ContributionText>
-    </ContributionContainer>
+      <ImpactLevelText type={value}>{value}</ImpactLevelText>
+    </ImpactLevelContainer>
   );
 };
 
-const ContributionContainer = styled.div`
+const ImpactLevelContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const ContributionText = styled.span<{ type: string }>`
+const ImpactLevelText = styled.span<{ type: string }>`
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
