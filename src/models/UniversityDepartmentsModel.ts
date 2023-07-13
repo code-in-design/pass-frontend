@@ -191,7 +191,7 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalContributions = data.실기_기여도; //실기 기여도= 최상; 상; 중; 하 ; 최하
 
-    universityDepartment.practicalApplyType = PracticalApplyModel.sortPracticalList([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
+    universityDepartment.practicalApplyType = PracticalApplyModel.setModelFromData([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
 
     universityDepartment.subjects = subjectArray;
 
