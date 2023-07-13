@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { Tooltip } from '@chakra-ui/react';
 import PracticalScoreAnalysisMenuItem from './PracticalScoreAnalysisMenuItem';
-import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 import Info from '../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
 import ChangePracticalScoreModal from '../modal/ChangePracticalScoreModal';
@@ -12,6 +12,7 @@ interface Props {
   name: string;
   subTitle: string;
   remainChange: number;
+  exercise: string[];
   data: { title: string; record: string; score: string }[];
 }
 
@@ -71,7 +72,7 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
           })}
         </ItemWrapper>
       </Container>
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} exercise={props.exercise} />}
     </>
   );
 };

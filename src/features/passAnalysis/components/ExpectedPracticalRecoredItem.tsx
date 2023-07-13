@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 import ThumbUp from '../../../../public/images/icons/thumbUp.svg';
 import BarChart from '../../../../public/images/icons/barChart.svg';
 import Star from '../../../../public/images/icons/star.svg';
@@ -15,12 +15,12 @@ interface Props {
 }
 
 const ExpectedPracticalRecoredItem = (props: Props) => {
-  const exerciseIcon = exerciseType[props.type] || { text: '-', icon: '' };
+  const practicalIcon = practicalType[props.type] || { text: '-', icon: '' };
   return (
     <Container>
       <TitleWrapper>
-        <IconWrapper>{exerciseIcon.icon}</IconWrapper>
-        <Title>{exerciseIcon.text}</Title>
+        <IconWrapper>{practicalIcon.icon}</IconWrapper>
+        <Title>{practicalIcon.text}</Title>
       </TitleWrapper>
       <Box>
         <ScoreWrapper>

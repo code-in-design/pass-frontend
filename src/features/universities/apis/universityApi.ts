@@ -2,10 +2,10 @@ import { urls } from '@/constants/url';
 import queryString from 'query-string';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import tokenUtil from '@/utils/TokenUtil';
-import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { UniversityModel } from '@/models/UniversityModel';
 import { UniversityFilterModel } from '@/models/UniversityFilterModel';
 
-const universityModel = new UniversitiesModel();
+const universityModel = new UniversityModel();
 const universityFilterModel = new UniversityFilterModel();
 
 export const universityApi = createApi({
@@ -21,18 +21,17 @@ export const universityApi = createApi({
 
   endpoints: builder => ({
     //대학 리스트 조회
-    fetchUniversityList: builder.query<any, void>({
-      query: () => {
-        return `/?page=${1}&limit=${20}&range=${10}`;
+    fetchUniversityList: builder.query({
+      query: (pageNumber: number) => {
+        return `?page=${pageNumber}&limit=${10}&range=${10}`;
       },
       transformResponse: (res: any) => {
         try {
           const data = JSON.parse(res);
           const universityData = data?.result?.map((item: any) => {
-            universityModel.setModelFromData(item);
-            return universityModel.toJSON();
+            return universityModel.fromApiResponse(item).toJSON();
           });
-          return universityData;
+          return { data, universityData };
         } catch (e) {
           console.error(e);
         }
@@ -43,6 +42,14 @@ export const universityApi = createApi({
     fetchUniversityDetail: builder.query({
       query: (id: number) => {
         return `/${id}`;
+      },
+      transformResponse: (res: any) => {
+        try {
+          const data = JSON.parse(res);
+          return universityModel.fromApiResponse(data).toJSON();
+        } catch (e) {
+          console.error(e);
+        }
       },
     }),
 
@@ -57,4 +64,4 @@ export const universityApi = createApi({
   }),
 });
 
-export const { useFetchUniversityListQuery, useFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;
+export const { useFetchUniversityListQuery, useLazyFetchUniversityListQuery, useFetchUniversityDetailQuery, useLazyFetchUniversityDetailQuery, useFetchUniversityCountQuery, useLazyFetchUniversityCountQuery } = universityApi;

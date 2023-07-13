@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
 import { FieldValues, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const PracticalScoreInputForm = (props: Props) => {
-  const exerciseIcon = exerciseType[props.types[props.step].name] || { text: '-', icon: '' };
+  const practical = practicalType[props.types[props.step].name] || { text: '-', icon: '' };
 
   return (
     <Container>
@@ -30,21 +30,21 @@ const PracticalScoreInputForm = (props: Props) => {
         </Information>
         <React.Fragment key={props.step}>
           <PracticalName>
-            <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
-            {exerciseIcon.text}
+            <PracticalIconWrapper>{practical.icon}</PracticalIconWrapper>
+            {practical.text}
           </PracticalName>
           {props.types[props.step]?.multipleChoice ? (
             // 객관식 입력
             <Content>
-              <RadioGroup defaultValue={props.getValues(exerciseIcon.text)}>
+              <RadioGroup defaultValue={props.getValues(practical.text)}>
                 <Stack direction="column">
                   {props.types[props.step].multipleChoice?.map((item, index) => {
                     return (
                       <Radio
-                        {...props.register(exerciseIcon.text, {
+                        {...props.register(practical.text, {
                           required: '점수를 선택해주세요',
                           onChange: e => {
-                            props.setValue(exerciseIcon.text, e.target.value);
+                            props.setValue(practical.text, e.target.value);
                           },
                         })}
                         key={item}
@@ -62,7 +62,7 @@ const PracticalScoreInputForm = (props: Props) => {
             // 주관식 입력
             <Content>
               <InputWrapper>
-                <Input {...props.register(exerciseIcon.text, { value: '', required: '점수를 입력해주세요' })} />
+                <Input {...props.register(practical.text, { value: '', required: '점수를 입력해주세요' })} />
                 <MetricUnits>cm</MetricUnits>
               </InputWrapper>
             </Content>
@@ -137,7 +137,7 @@ const PracticalName = styled.div`
   margin-bottom: 8px;
 `;
 
-const ExerciseIconWrapper = styled.div`
+const PracticalIconWrapper = styled.div`
   width: 20px;
   height: 20px;
   color: ${props => props.theme.colors.blue};

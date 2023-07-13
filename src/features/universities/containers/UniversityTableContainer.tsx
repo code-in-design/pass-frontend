@@ -1,14 +1,15 @@
-import React from 'react';
-import { useFetchUniversityListQuery } from '../apis/universityApi';
+import React, { useState } from 'react';
 import UniversityTable from '../components/FindUniversity/table/UniversityTable';
-import UniversityTable2 from '../components/FindUniversity/table/UniversityTable2';
+import UniversityInfoModalContainer from './UniversityInformationModalContainer';
 
 const UniversityTableContainer = () => {
-  const { data } = useFetchUniversityListQuery();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [DataId, setDataId] = useState(0);
+
   return (
     <>
-      {/* <UniversityTable data={data} /> */}
-      <UniversityTable2 />
+      <UniversityTable setIsModalOpen={setIsModalOpen} setDataId={setDataId} />
+      {isModalOpen && <UniversityInfoModalContainer onClose={setIsModalOpen} id={DataId} />}
     </>
   );
 };

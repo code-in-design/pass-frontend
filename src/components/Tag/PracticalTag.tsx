@@ -1,32 +1,34 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { PracticalType, practicalType } from '@/components/PracticalIcon';
 
 interface Props {
   type: string;
   isSelected?: boolean;
-  onClick?: (item?: string) => void;
+  onClick?: (item: PracticalType) => void;
 }
 
-const ExerciseType = (props: Props) => {
-  const exercise = exerciseType[props.type] || { text: '-', icon: '' };
-  const Component = props.isSelected ? SelectExerciseItem : ExerciseItem;
+const PracticalTag = (props: Props) => {
+  const practical = practicalType[props.type] || { text: '-', icon: '' };
+  const Component = props.isSelected ? SelectPracticalItem : PracticalItem;
+
   const handleClick = () => {
     if (props.onClick) {
-      props.onClick(exercise.text);
+      props.onClick(practical.text);
     }
   };
+
   return (
     <Component onClick={handleClick}>
-      {exercise.icon}
-      <ExerciseTitle isSelected={props.isSelected || false}>{exercise.text}</ExerciseTitle>
+      {practical.icon}
+      <PracticalTitle isSelected={props.isSelected || false}>{practical.text}</PracticalTitle>
     </Component>
   );
 };
 
-export default ExerciseType;
+export default PracticalTag;
 
-const ExerciseItem = styled.div`
+const PracticalItem = styled.div`
   display: flex;
   width: 100%;
   gap: 0 10px;
@@ -43,7 +45,7 @@ const ExerciseItem = styled.div`
   }
 `;
 
-const SelectExerciseItem = styled.div`
+const SelectPracticalItem = styled.div`
   display: flex;
   width: 100%;
   gap: 0 10px;
@@ -60,7 +62,7 @@ const SelectExerciseItem = styled.div`
   }
 `;
 
-const ExerciseTitle = styled.div<{ isSelected: boolean }>`
+const PracticalTitle = styled.div<{ isSelected: boolean }>`
   font-size: 12px;
   line-height: 16px;
   color: ${props => (props.isSelected ? props.theme.colors.white : props.theme.colors.gray1)};

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import MyTooltip from '@/components/Tooltip';
-import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
-import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 import LoudSpeaker from '../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../public/images/icons/calendar.svg';
 import School from '../../../../../public/images/icons/graduation.svg';
@@ -10,6 +9,7 @@ import Book from '../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../public/images/icons/noticeBoard.svg';
 import Info from '../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
+import PracticalTag from '@/components/Tag/PracticalTag';
 
 interface Props {
   name: string;
@@ -128,7 +128,7 @@ const DepartmentInformation = (props: Props) => {
       </MenuTitle>
       <ExerciseWrapper>
         {props?.exercise?.map((item, index) => {
-          return <ExerciseType key={index} type={item} />;
+          return <PracticalTag key={index} type={item} />;
         })}
       </ExerciseWrapper>
 
@@ -173,7 +173,7 @@ const DepartmentInformation = (props: Props) => {
 
 export default DepartmentInformation;
 DepartmentInformation.defaultProps = {
-  exercise: ['제자리 멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
+  exercise: ['제자리멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
 };
 
 const MenuTitle = styled.div`

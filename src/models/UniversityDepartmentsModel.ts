@@ -1,11 +1,12 @@
 import { classToPlain, Expose, plainToClass, Type } from 'class-transformer';
 import _ from 'lodash';
+import { ApplyPossibilityModel } from './ApplyPossibility';
 import { EnglishSubjectModel } from './EnglishSubjectModel';
 import { HistorySubjectModel } from './HistorySubjectModel';
 import { InquirySubjectModel } from './InquirySubjectModel';
 import { KoreanSubjectModel } from './KoreanSubjectModel';
 import { MathSubjectModel } from './MathSubjectModel';
-import { PracticalApplyModel, PracticalType } from './PracticalApplyModel';
+import { PracticalApplyModel } from './PracticalApplyModel';
 import { SubjectModel } from './SubjectModel';
 
 export class UniversityDepartmentsModel {
@@ -13,13 +14,83 @@ export class UniversityDepartmentsModel {
   departmentName?: string; //학과이름
 
   @Expose()
+  recruitmentGroup?: string; //모집군
+
+  @Expose()
+  applyTypeDetail?: string; //세부 전형 : 일반학생 전형, 수능 일반전형
+
+  @Expose()
+  departmentAffiliation?: string; //학과 계열
+
+  @Expose()
+  recruitNumber?: number; //모집정원
+
+  @Expose()
+  lastYearCompetitionRate?: number; //작년 경쟁률
+
+  @Expose()
+  practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  testContributions?: string; //수능 기여도 : 최상, 상, 중, 하 , 최하
+
+  @Expose()
+  applyType?: string; //전형 : 수능,교과,실기
+
+  @Expose()
+  isApplyPossibility?: boolean; //지원가능성 분석 여부
+
+  @Expose()
+  @Type(() => ApplyPossibilityModel)
+  possibilityOfApply?: string; //지원가능성
+
+  @Expose()
+  isPassPossibility?: boolean; //합격확률 분석 여부
+
+  @Expose()
   conversionScore?: number; //수능환산점수
 
   @Expose()
-  possibilityOfSupport?: string; //지원가능성
+  isMultistage?: boolean; //다단계 여부
 
   @Expose()
-  recruitmentGroup?: string; //모집군
+  multistageDetail?: string; //다단계 세부사항
+
+  @Expose()
+  testRate?: number; //수능 전형반영비율
+
+  @Expose()
+  naesinRate?: number; //내신 전형반영비율
+
+  @Expose()
+  practicalRate?: number; //실기 전형반영비율
+
+  @Expose()
+  etcRate?: number; //기타 전형빈영비율
+
+  @Expose()
+  inquiryNumber?: number; // 탐구 반영 개수
+
+  @Expose()
+  exceptionRateDescription?: string; //예외 반영 비율 설명
+
+  @Expose()
+  universityDepartmentHomepage?: string; //학과 홈페이지
+
+  @Expose()
+  recruitmentGuideline?: string; //모집요강 홈페이지
+
+  @Expose()
+  isEndAnalysis?: boolean; //분석 종료 여부
+
+  @Expose()
+  practicalTestDate?: string; //실기고사 일정
+
+  @Expose()
+  successfulApplicantDate?: string; //합격자 발표일
+
+  @Expose()
+  isTeachingPossibility?: boolean; //교직이수 가능 여부
 
   @Expose()
   zValue?: number; //z-지수
@@ -31,77 +102,8 @@ export class UniversityDepartmentsModel {
   competitionMaxRate?: number; //경쟁률 최대
 
   @Expose()
-  recruitNumber?: number; //모집정원
-
-  @Expose()
-  practicalTestDate?: string; //실기고사 일정
-
-  @Expose()
-  successfulApplicantDate?: string; //합격자 발표일
-
-  @Expose()
-  recruitmentGuideline?: string; //모집요강 홈페이지
-
-  @Expose()
-  testRate?: number; //수능 전형반영비율
-
-  @Expose()
-  practicalRate?: number; //실기 전형반영비율
-
-  @Expose()
-  naesinRate?: number; //내신 전형반영비율
-
-  @Expose()
-  etcRate?: number; //기타 전형빈영비율
-
-  @Expose()
-  inquiryNumber?: number; // 탐구 반영 개수
-
-  @Expose()
-  lastYearCompetitionRate?: number; //작년 경쟁률
-
-  @Expose()
-  isApplyPossibility?: boolean; //지원가능성 분석 여부
-
-  @Expose()
-  isPassPossibility?: boolean; //합격확률 분석 여부
-
-  @Expose()
-  isMultistage?: boolean; //다단계 여부
-
-  @Expose()
-  MultistageDetail?: string; //다단계 세부사항
-
-  @Expose()
-  UniversityDepartmentHomepage?: string; //학과 홈페이지
-
-  @Expose()
-  isTeachingPossibility?: boolean; //교직이수 가능 여부
-
-  @Expose()
-  exceptionRateDescription?: string; //예외 반영 비율 설명
-
-  @Expose()
-  applyType?: string; //전형 : 수능,교과
-
-  @Expose()
-  applyTypeDetail?: string; //세부 전형 : 일반학생 전형, 수능 일반전형
-
-  @Expose()
-  departmentAffiliation?: string; //학과 계열
-
-  @Expose()
-  isEndAnalysis?: boolean; //분석 종료 여부
-
-  @Expose()
-  testContributions?: string; //수능 기여도 : 최상, 상, 중, 하 , 최하
-
-  @Expose()
-  practicalContributions?: string; //실기 기여도: 최상, 상, 중, 하 , 최하
-
-  @Expose()
   @Type(() => PracticalApplyModel)
-  practicalApplyType?: PracticalType[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
+  practicalApplyType?: PracticalApplyModel[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
 
   @Expose()
   @Type(() => SubjectModel)
@@ -115,25 +117,25 @@ export class UniversityDepartmentsModel {
     return classToPlain(data);
   };
 
-  static setModelFromData(data) {
+  fromApiResponse(data) {
     const universityDepartment = new UniversityDepartmentsModel();
     const filteredSubjects: SubjectModel[] = [
-      data.국어_반영_비율 && KoreanSubjectModel.setModelFromData(data),
-      data.수학_반영_비율 && MathSubjectModel.setModelFromData(data),
-      data.영어_반영_비율 && EnglishSubjectModel.setModelFromData(data),
-      data.탐구_반영_비율 && InquirySubjectModel.setModelFromData(data),
-      data.한국사_반영_비율 && HistorySubjectModel.setModelFromData(data),
+      KoreanSubjectModel.fromApiResponse(data),
+      MathSubjectModel.fromApiResponse(data),
+      EnglishSubjectModel.fromApiResponse(data),
+      InquirySubjectModel.fromApiResponse(data),
+      HistorySubjectModel.fromApiResponse(data),
     ];
     const subjectArray = _.compact(filteredSubjects);
 
     universityDepartment.departmentName = data.학과명; //학과이름
-    // universityDepartment.conversionScore= data.수능환산점수; //수능환산점수
+    universityDepartment.conversionScore = data.수능환산점수; //수능환산점수
 
-    // universityDepartment.possibilityOfSupport= String; //지원가능성
+    // universityDepartment.possibilityOfSupport= data.; //지원가능성
 
     universityDepartment.recruitmentGroup = data.모집군; //모집군
 
-    // universityDepartment.zValue= numberString; //z-지수
+    universityDepartment.zValue = data.z_지수; //z-지수
 
     // universityDepartment.competitionMinRate= numberString; //경쟁률 최소
 
@@ -161,13 +163,17 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.isApplyPossibility = data.지원_가능성_준석_여부; //지원가능성 분석 여부
 
+    const filteredPossibilityOfApply: ApplyPossibilityModel[] = [data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가];
+
+    universityDepartment.possibilityOfApply = ApplyPossibilityModel.fromApiResponse(filteredPossibilityOfApply);
+
     universityDepartment.isPassPossibility = data.합격_확률_분석_여부; //합격확률 분석 여부
 
     universityDepartment.isMultistage = data.다단계_여부; //다단계 여부
 
-    universityDepartment.MultistageDetail = data.다단계_세부사항; //다단계 세부사항
+    universityDepartment.multistageDetail = data.다단계_세부사항; //다단계 세부사항
 
-    universityDepartment.UniversityDepartmentHomepage = data.학과_홈페이지; //학과 홈페이지
+    universityDepartment.universityDepartmentHomepage = data.학과_홈페이지; //학과 홈페이지
 
     universityDepartment.isTeachingPossibility = data.교직_이수_가능_여부; //교직이수 가능 여부
 
@@ -185,7 +191,7 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalContributions = data.실기_기여도; //실기 기여도= 최상; 상; 중; 하 ; 최하
 
-    universityDepartment.practicalApplyType = PracticalApplyModel.practicalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
+    universityDepartment.practicalApplyType = PracticalApplyModel.fromApiResponse([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
 
     universityDepartment.subjects = subjectArray;
 

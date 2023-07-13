@@ -1,24 +1,26 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Tooltip } from '@chakra-ui/react';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 
 interface Props {
   type: string;
   id: number;
 }
 
-const ExerciseIcon = (props: Props) => {
-  const exercise = exerciseType[props.type] || null;
+const PracticalIcon = (props: Props) => {
+  const practical = practicalType[props.type] || null;
+
+  if (!practical) return null;
   return (
     <Tooltip hasArrow label={props.type} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
-      <ExerciseIconWrapper>{exercise.icon}</ExerciseIconWrapper>
+      <PracticalIconWrapper>{practical.icon}</PracticalIconWrapper>
     </Tooltip>
   );
 };
 
-export default ExerciseIcon;
+export default PracticalIcon;
 
-const ExerciseIconWrapper = styled.div`
+const PracticalIconWrapper = styled.div`
   color: ${props => props.theme.colors.blue};
 `;

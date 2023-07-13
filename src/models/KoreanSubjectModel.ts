@@ -5,7 +5,7 @@ export class KoreanSubjectModel extends SubjectModel {
     super(data);
   }
 
-  static setModelFromData(data) {
+  static fromApiResponse(data) {
     const korean = new KoreanSubjectModel(data);
     korean.subjectName = '국어';
     korean.subjectRate = data.국어_반영_비율;
