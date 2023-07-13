@@ -20,7 +20,17 @@ const AdminLayout = (props: LayoutProps) => {
         menuList={[
           { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
           { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
-          { icon: <EditNote width="24px" height="24px" />, title: '수능 점수표', route: ADMIN_PATH.SCORESHEET },
+          {
+            icon: <EditNote width="24px" height="24px" />,
+            title: '수능 분석',
+            route: ADMIN_PATH.TEST_ANALYSIS,
+            subMenus: [
+              {
+                title: '수능 점수표',
+                route: ADMIN_PATH.SCORETABLE_UPLOAD,
+              },
+            ],
+          },
           {
             icon: <Management width="24px" height="24px" />,
             title: '사용자 관리',

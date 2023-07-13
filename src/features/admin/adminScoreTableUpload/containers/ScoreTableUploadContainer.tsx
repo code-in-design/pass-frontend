@@ -8,7 +8,7 @@ import RadioButtonGroup from '../components/RadionButtonGroup';
 import CsvUploader from '../components/CsvUploader';
 // import ScoreSheetFormProvider from '../context/ScoreSheetFormContext';
 
-const ScoreSheetContainer = () => {
+const ScoreTableUploadContainer = () => {
   const methods = useForm();
   const { register, setValue, watch, handleSubmit, resetField } = methods;
 
@@ -67,7 +67,7 @@ const ScoreSheetContainer = () => {
   );
 };
 
-export default ScoreSheetContainer;
+export default ScoreTableUploadContainer;
 
 const Container = styled.div`
   display: flex;

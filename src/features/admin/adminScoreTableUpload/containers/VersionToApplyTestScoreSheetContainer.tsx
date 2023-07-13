@@ -24,7 +24,7 @@ const VersionToApplyTestScoreSheetContainer = () => {
     return { value: data.id, label: 'ver ' + data.version };
   });
 
-  return <VersionToApplyTestScoreSheet options={options} register={register} setValue={setValue} watch={watch}/>;
+  return <VersionToApplyTestScoreSheet options={options} register={register} setValue={setValue} watch={watch} />;
 };
 
 export default VersionToApplyTestScoreSheetContainer;
