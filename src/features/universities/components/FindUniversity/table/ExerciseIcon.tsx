@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Tooltip } from '@chakra-ui/react';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 
 interface Props {
   type: string;
@@ -9,13 +9,13 @@ interface Props {
 }
 
 const ExerciseIcon = (props: Props) => {
-  const exercise = exerciseType[props.type] || null;
+  const practical = practicalType[props.type] || null;
 
   return (
     <>
-      {exercise ? (
+      {practical ? (
         <Tooltip hasArrow label={props.type} bg="#fff" color="#353644" borderRadius="16px" padding="16px">
-          <ExerciseIconWrapper>{exercise.icon}</ExerciseIconWrapper>
+          <ExerciseIconWrapper>{practical.icon}</ExerciseIconWrapper>
         </Tooltip>
       ) : null}
     </>

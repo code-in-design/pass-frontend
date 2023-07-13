@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 import ExclamationMark from '../../../../../public/images/icons/exclamation.svg';
 import { UseFormGetValues, FieldValues } from 'react-hook-form';
 
@@ -26,12 +26,12 @@ const PracticalScoreCheckForm = (props: Props) => {
           입력한 실기 기록이 정확한지 다시 한 번 확인해주세요!
         </Information>
         {props.types.map((type, index) => {
-          const exerciseIcon = exerciseType[type.name] || { text: '-', icon: '' };
+          const practical = practicalType[type.name] || { text: '-', icon: '' };
           return (
             <React.Fragment key={index}>
               <PracticalName>
-                <ExerciseIconWrapper>{exerciseIcon.icon}</ExerciseIconWrapper>
-                {exerciseIcon.text}
+                <ExerciseIconWrapper>{practical.icon}</ExerciseIconWrapper>
+                {practical.text}
               </PracticalName>
               <Content>
                 <InputWrapper>

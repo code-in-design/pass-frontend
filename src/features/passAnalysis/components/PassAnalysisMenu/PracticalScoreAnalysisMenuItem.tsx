@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 
 interface Props {
   title: string;
@@ -9,12 +9,12 @@ interface Props {
 }
 
 const PracticalScoreAnalysisMenuItem = (props: Props) => {
-  const exerciseIcon = exerciseType[props.title] || { text: '-', icon: '' };
+  const practical = practicalType[props.title] || { text: '-', icon: '' };
   return (
     <Container>
       <Wrapper>
         <TitleWrapper>
-          <IconWrapper>{exerciseIcon.icon}</IconWrapper>
+          <IconWrapper>{practical.icon}</IconWrapper>
           <Title>{props.title}</Title>
         </TitleWrapper>
         <Record>{props.record}</Record>
