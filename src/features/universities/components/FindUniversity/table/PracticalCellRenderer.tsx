@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ExerciseIcon from './ExerciseIcon';
+import PracticalIcon from './PracticalIcon';
 
 // 실기종목 아이콘을 보여준다.
 export const PracticalCellRenderer = props => {
@@ -10,7 +10,7 @@ export const PracticalCellRenderer = props => {
       {value?.map((icon, index) => {
         return (
           <ImageWrapper key={index}>
-            <ExerciseIcon type={icon} id={id} />
+            <PracticalIcon type={icon} id={id} />
           </ImageWrapper>
         );
       })}
