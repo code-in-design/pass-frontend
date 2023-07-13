@@ -4,7 +4,7 @@ import PracticalTag from '../Tag/PracticalTag';
 import { ExerciseWrapper, MenuTitle, ShowTable, Wrapper } from './index.styles';
 import Info from '../../../public/images/icons/info.svg';
 
-const PracticalRate = () => {
+const PracticalReflectSubjects = () => {
   return (
     <>
       <MenuTitle>
@@ -25,4 +25,4 @@ const PracticalRate = () => {
   );
 };
 
-export default PracticalRate;
+export default PracticalReflectSubjects;

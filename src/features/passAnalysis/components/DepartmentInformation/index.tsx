@@ -128,7 +128,6 @@ const DepartmentInformation = (props: Props) => {
       </MenuTitle>
       <ExerciseWrapper>
         {props?.exercise?.map((item, index) => {
-          console.log(item);
           return <PracticalTag key={index} type={item} />;
         })}
       </ExerciseWrapper>

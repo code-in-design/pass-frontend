@@ -1,26 +1,21 @@
-import React from 'react';
-import { DateBox, DateContainer, DateName, Wrapper, Date } from './index.styles';
-import LoudSpeaker from '../../../public/images/icons/Loudspeaker.svg';
-import Calendar from '../../../public/images/icons/calendar.svg';
+import React, { ReactNode } from 'react';
+import { DateBox, DateContainer, DateName, Date } from './index.styles';
 
-const DepartmentDate = () => {
+interface DepartmentDateProps {
+  icon: ReactNode;
+  title: string;
+  date: string;
+}
+
+const DepartmentDate = (props: DepartmentDateProps) => {
   return (
-    <Wrapper>
-      <DateBox>
-        <Calendar />
-        <DateContainer>
-          <DateName>실기고사 일정</DateName>
-          <Date>{props.department?.practicalTestDate}</Date>
-        </DateContainer>
-      </DateBox>
-      <DateBox>
-        <LoudSpeaker />
-        <DateContainer>
-          <DateName>최초 합격자 발표일</DateName>
-          <Date>{props.department?.successfulApplicantDate}</Date>
-        </DateContainer>
-      </DateBox>
-    </Wrapper>
+    <DateBox>
+      {props.icon}
+      <DateContainer>
+        <DateName>{props.title}</DateName>
+        <Date>{props.date}</Date>
+      </DateContainer>
+    </DateBox>
   );
 };
 

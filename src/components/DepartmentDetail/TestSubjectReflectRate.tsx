@@ -1,7 +1,7 @@
 import React from 'react';
 import { GradeTable, GradeTableTbody, GradeTableTBodyTr, GradeTableThead, GradeTableTheadTr, MenuTitle, TableTd } from './index.styles';
 
-const TestSubjectRate = () => {
+const TestSubjectReflectRate = () => {
   return (
     <>
       <MenuTitle>수능 과목별 반영 비율</MenuTitle>
@@ -45,4 +45,4 @@ const TestSubjectRate = () => {
   );
 };
 
-export default TestSubjectRate;
+export default TestSubjectReflectRate;

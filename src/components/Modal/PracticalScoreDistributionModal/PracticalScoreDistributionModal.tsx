@@ -17,10 +17,10 @@ interface Props {
 }
 
 const PracticalScoreDistributionModal = (props: Props) => {
-  const [selectedItem, setSelectedItem] = useState(props.practicals[0]);
+  const [selectedPractical, setSelectedPractical] = useState(props.practicals[0]);
 
   const handleItemClick = (item: PracticalType) => {
-    setSelectedItem(item);
+    setSelectedPractical(item);
   };
 
   return (
@@ -31,12 +31,12 @@ const PracticalScoreDistributionModal = (props: Props) => {
       </TitleWrapper>
       <MenuTitle>실기 반영 종목</MenuTitle>
       <Wrapper>
-        {props?.practicals?.map((item, index) => {
-          return <PracticalTag key={index} type={item} isSelected={selectedItem === item} onClick={handleItemClick} />;
+        {props?.practicals?.map((practicalType, index) => {
+          return <PracticalTag key={index} type={practicalType} isSelected={selectedPractical === practicalType} onClick={handleItemClick} />;
         })}
       </Wrapper>
       <TableWrapper>
-        <PracticalScoreDistributionChart title={selectedItem} data={props.data} />
+        <PracticalScoreDistributionChart title={selectedPractical} data={props.data} />
       </TableWrapper>
     </ModalLayout>
   );
