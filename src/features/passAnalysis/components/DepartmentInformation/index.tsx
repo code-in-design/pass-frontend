@@ -10,7 +10,6 @@ import NoticeBoard from '../../../../../public/images/icons/noticeBoard.svg';
 import Info from '../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../public/images/icons/helpOutline.svg';
 import PracticalTag from '@/components/Tag/PracticalTag';
-import { PracticalType } from '@/components/PracticalIcon';
 
 interface Props {
   name: string;
