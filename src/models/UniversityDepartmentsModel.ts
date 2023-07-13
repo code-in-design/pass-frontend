@@ -120,11 +120,11 @@ export class UniversityDepartmentsModel {
   fromApiResponse(data) {
     const universityDepartment = new UniversityDepartmentsModel();
     const filteredSubjects: SubjectModel[] = [
-      KoreanSubjectModel.setModelFromData(data),
-      MathSubjectModel.setModelFromData(data),
-      EnglishSubjectModel.setModelFromData(data),
-      InquirySubjectModel.setModelFromData(data),
-      HistorySubjectModel.setModelFromData(data),
+      KoreanSubjectModel.fromApiResponse(data),
+      MathSubjectModel.fromApiResponse(data),
+      EnglishSubjectModel.fromApiResponse(data),
+      InquirySubjectModel.fromApiResponse(data),
+      HistorySubjectModel.fromApiResponse(data),
     ];
     const subjectArray = _.compact(filteredSubjects);
 
@@ -165,7 +165,7 @@ export class UniversityDepartmentsModel {
 
     const filteredPossibilityOfApply: ApplyPossibilityModel[] = [data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가];
 
-    universityDepartment.possibilityOfApply = ApplyPossibilityModel.setModelFromData(filteredPossibilityOfApply);
+    universityDepartment.possibilityOfApply = ApplyPossibilityModel.fromApiResponse(filteredPossibilityOfApply);
 
     universityDepartment.isPassPossibility = data.합격_확률_분석_여부; //합격확률 분석 여부
 
@@ -191,7 +191,7 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalContributions = data.실기_기여도; //실기 기여도= 최상; 상; 중; 하 ; 최하
 
-    universityDepartment.practicalApplyType = PracticalApplyModel.setModelFromData([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
+    universityDepartment.practicalApplyType = PracticalApplyModel.fromApiResponse([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
 
     universityDepartment.subjects = subjectArray;
 

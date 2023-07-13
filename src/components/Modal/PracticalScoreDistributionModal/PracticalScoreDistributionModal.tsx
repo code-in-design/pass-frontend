@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
-import ScoreDistributionTable from '@/components/Table/ScoreDistributionTable';
-import ModalLayout from '../Modal/ModalLayout';
+import PracticalScoreDistributionChart from '@/components/Table/PracticalScoreDistributionChart';
+import ModalLayout from '../ModalLayout';
 
 interface Props {
   name: string;
@@ -15,9 +15,11 @@ interface Props {
   }[];
 }
 
-const DistributionTableModal = (props: Props) => {
+const PracticalScoreDistributionModal = (props: Props) => {
+  // TODO: selectedItem
   const [toggleItem, setToggleItem] = useState(props.exercise[0]);
 
+  // TODO: 타입정의
   const handleItemClick = item => {
     setToggleItem(item);
   };
@@ -31,39 +33,18 @@ const DistributionTableModal = (props: Props) => {
       <MenuTitle>실기 반영 종목</MenuTitle>
       <Wrapper>
         {props?.exercise?.map((item, index) => {
+          // TODO: 네이밍 변경
           return <ExerciseType key={index} type={item} isSelected={toggleItem === item} onClick={handleItemClick} />;
         })}
       </Wrapper>
       <TableWrapper>
-        <ScoreDistributionTable title={toggleItem} data={props.data} />
+        <PracticalScoreDistributionChart title={toggleItem} data={props.data} />
       </TableWrapper>
     </ModalLayout>
   );
 };
 
-export default DistributionTableModal;
-
-DistributionTableModal.defaultProps = {
-  exercise: ['제자리 멀리뛰기', '배근력', '사이드스텝', '메디신볼던지기', '매달리기'],
-  data: [
-    { men: '300이상', women: '250이상' },
-    { men: '297-299', women: '247-249' },
-    ,
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-    { men: '300이상', women: '250이상' },
-    { men: '297-299', women: '247-249' },
-    ,
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-
-    { men: '294-296', women: '244-246' },
-    { men: '291-293', women: '241-243' },
-    { men: '288-290', women: '238-240' },
-  ],
-};
+export default PracticalScoreDistributionModal;
 
 const Wrapper = styled.div`
   display: grid;

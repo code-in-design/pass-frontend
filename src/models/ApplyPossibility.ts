@@ -5,7 +5,7 @@ export class ApplyPossibilityModel {
     return plainToClass(ApplyPossibilityModel, data, { excludeExtraneousValues: true });
   }
 
-  static setModelFromData(data) {
+  static fromApiResponse(data) {
     if (data?.[0]) return '안정';
     if (data?.[1]) return '적정';
     if (data?.[2]) return '소신';

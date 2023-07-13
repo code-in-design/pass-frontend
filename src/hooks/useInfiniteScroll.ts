@@ -6,6 +6,13 @@ const useInfiniteScroll = ({ api, model }) => {
   const page = usePaging(10, 11);
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
 
+  /** TODO
+   * 인자로 필요한것만 받아서 공통로직을 실행하고 리턴한다.
+   * 페이지관련 메타데이터,모델, 데이터호출함수를 인자로 받아서
+   * 공통 인피니티 로직을 처리하고
+   * 결과값 배열만 리턴해야한다.
+   */
+
   const onGridReady = params => {
     setGridApi(params.api);
 
@@ -42,6 +49,7 @@ const useInfiniteScroll = ({ api, model }) => {
     };
     params.api.setDatasource(dataSource);
   };
+
   return onGridReady;
 };
 

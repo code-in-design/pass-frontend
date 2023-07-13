@@ -6,7 +6,7 @@ export class PracticalApplyModel {
     return plainToClass(PracticalApplyModel, data, { excludeExtraneousValues: true });
   }
 
-  static setModelFromData(data: PracticalType[]) {
+  static fromApiResponse(data: PracticalType[]) {
     const practicalApply = data?.sort();
     return practicalApply;
   }

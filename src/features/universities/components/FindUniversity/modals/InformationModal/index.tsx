@@ -10,18 +10,20 @@ import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
 import MyTooltip from '@/components/Tooltip';
 import ExerciseType from '../../ExerciseType';
-import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 
 interface Props {
-  data: any;
-  exercise: string[];
+  data: any; // TODO: any 제거
+  exercise: string[]; // TODO: 어떤? 데이터가 들어오는거지?
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UniversityInformationModal = (props: Props) => {
+  // TODO: 명사로 네이밍 수정
   const [openModal, setOpenModal] = useState(false);
   const department = props?.data?.universityDepartments;
 
+  // TODO: 코드 라인수 줄이기, 파일 분리
   return (
     <>
       <ModalLayout onClose={() => props.onClose(false)}>
@@ -122,17 +124,25 @@ const UniversityInformationModal = (props: Props) => {
           <GradeTableTbody>
             <GradeTableTBodyTr>
               {department?.subjects?.map((subject, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    {subject.subjectRate ? (
-                      <TableTd>
-                        {subject.subjectRate}%{department?.inquiryNumber === 1 && subject.subjectName === '탐구' && <span>(상위1과목)</span>}
-                      </TableTd>
-                    ) : (
-                      <TableTd>-</TableTd>
-                    )}
-                  </React.Fragment>
-                );
+                const { subjectRate, subjectName } = subject;
+                const 과목반영여부 = !!subjectRate;
+                const 탐구과목반영개수 = department?.inquiryNumber;
+                const 탐구1과목반영 = subjectName === '탐구' && 탐구과목반영개수 === 1;
+
+                if (과목반영여부 && !탐구1과목반영) {
+                  return <TableTd key={index}>{`${subjectRate}%`}</TableTd>;
+                }
+
+                if (과목반영여부 && 탐구1과목반영) {
+                  return (
+                    <TableTd key={index}>
+                      {`${subjectRate}%`}
+                      <span>(상위1과목)</span>
+                    </TableTd>
+                  );
+                }
+
+                return <TableTd key={index}>-</TableTd>;
               })}
             </GradeTableTBodyTr>
           </GradeTableTbody>
@@ -148,6 +158,7 @@ const UniversityInformationModal = (props: Props) => {
         </MenuTitle>
         <ExerciseWrapper>
           {department?.practicalApplyType?.map((item, index) => {
+            // TODO: item에 마우스 hover시 union 타입 쭉 나오게 하기
             return <ExerciseType key={index} type={item} />;
           })}
         </ExerciseWrapper>
@@ -185,6 +196,7 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
+      {/** TODO: 모달안에 Container가 들어가있음 -> 구조 변경 */}
       {openModal && <DistributionTableContainer onClose={setOpenModal} name={props?.data?.universityName} subTitle={department?.applyTypeDetail} exercise={department?.practicalApplyType} />}
     </>
   );
