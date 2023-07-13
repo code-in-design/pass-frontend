@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import UniversityItem from './UniversityItem';
-import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { UniversityModel } from '@/models/UniversityModel';
 
 interface Props {
-  data: Array<UniversitiesModel>;
+  data: Array<UniversityModel>;
 }
 
 const InterestedUniversities = (props: Props) => {

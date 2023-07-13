@@ -30,7 +30,7 @@ const PracticalScoreCheckForm = (props: Props) => {
           return (
             <React.Fragment key={index}>
               <PracticalName>
-                <ExerciseIconWrapper>{practical.icon}</ExerciseIconWrapper>
+                <PracticalIconWrapper>{practical.icon}</PracticalIconWrapper>
                 {practical.text}
               </PracticalName>
               <Content>
@@ -120,7 +120,7 @@ const PracticalName = styled.div`
   }
 `;
 
-const ExerciseIconWrapper = styled.div`
+const PracticalIconWrapper = styled.div`
   width: 20px;
   height: 20px;
   color: ${props => props.theme.colors.blue};

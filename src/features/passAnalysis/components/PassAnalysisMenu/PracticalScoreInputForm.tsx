@@ -30,7 +30,7 @@ const PracticalScoreInputForm = (props: Props) => {
         </Information>
         <React.Fragment key={props.step}>
           <PracticalName>
-            <ExerciseIconWrapper>{practical.icon}</ExerciseIconWrapper>
+            <PracticalIconWrapper>{practical.icon}</PracticalIconWrapper>
             {practical.text}
           </PracticalName>
           {props.types[props.step]?.multipleChoice ? (
@@ -137,7 +137,7 @@ const PracticalName = styled.div`
   margin-bottom: 8px;
 `;
 
-const ExerciseIconWrapper = styled.div`
+const PracticalIconWrapper = styled.div`
   width: 20px;
   height: 20px;
   color: ${props => props.theme.colors.blue};

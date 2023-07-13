@@ -3,8 +3,7 @@ import { UniversityDepartmentsModel } from './UniversityDepartmentsModel';
 
 type RegionType = '서울권' | '경기권' | '인천권' | '경남권' | '경북권' | '강원제주권' | '광주권' | '전라권' | '충청권';
 
-// TODO: 네이밍 수정
-export class UniversitiesModel {
+export class UniversityModel {
   @Expose()
   id?: string; //대학교 아이디
 
@@ -27,8 +26,8 @@ export class UniversitiesModel {
   @Expose()
   logo?: string;
 
-  constructor(data?: Partial<UniversitiesModel>) {
-    return plainToClass(UniversitiesModel, data, { excludeExtraneousValues: true });
+  constructor(data?: Partial<UniversityModel>) {
+    return plainToClass(UniversityModel, data, { excludeExtraneousValues: true });
   }
 
   toJSON = () => {
@@ -36,7 +35,7 @@ export class UniversitiesModel {
   };
 
   fromApiResponse = data => {
-    const university = new UniversitiesModel();
+    const university = new UniversityModel();
     const universityDepartment = new UniversityDepartmentsModel();
     university.id = data?.id;
     university.universityName = data.대학명;

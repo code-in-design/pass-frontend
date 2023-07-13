@@ -2,10 +2,10 @@ import { urls } from '@/constants/url';
 import queryString from 'query-string';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import tokenUtil from '@/utils/TokenUtil';
-import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { UniversityModel } from '@/models/UniversityModel';
 import { UniversityFilterModel } from '@/models/UniversityFilterModel';
 
-const universityModel = new UniversitiesModel();
+const universityModel = new UniversityModel();
 const universityFilterModel = new UniversityFilterModel();
 
 export const universityApi = createApi({
@@ -22,8 +22,8 @@ export const universityApi = createApi({
   endpoints: builder => ({
     //대학 리스트 조회
     fetchUniversityList: builder.query({
-      query: (startRow: number) => {
-        return `?page=${startRow}&limit=${10}&range=${10}`;
+      query: (pageNumber: number) => {
+        return `?page=${pageNumber}&limit=${10}&range=${10}`;
       },
       transformResponse: (res: any) => {
         try {

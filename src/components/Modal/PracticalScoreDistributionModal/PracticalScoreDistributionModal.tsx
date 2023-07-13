@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
 import PracticalScoreDistributionChart from '@/components/Table/PracticalScoreDistributionChart';
 import ModalLayout from '../ModalLayout';
+import PracticalTag from '@/components/Tag/PracticalTag';
+import { PracticalType } from '@/components/PracticalIcon';
 
 interface Props {
   name: string;
   subTitle: string;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
-  exercise: string[];
+  practicals: PracticalType[];
   data?: {
     men: string;
     women: string;
@@ -16,12 +17,10 @@ interface Props {
 }
 
 const PracticalScoreDistributionModal = (props: Props) => {
-  // TODO: selectedItem
-  const [toggleItem, setToggleItem] = useState(props.exercise[0]);
+  const [selectedItem, setSelectedItem] = useState(props.practicals[0]);
 
-  // TODO: 타입정의
-  const handleItemClick = item => {
-    setToggleItem(item);
+  const handleItemClick = (item: PracticalType) => {
+    setSelectedItem(item);
   };
 
   return (
@@ -32,13 +31,12 @@ const PracticalScoreDistributionModal = (props: Props) => {
       </TitleWrapper>
       <MenuTitle>실기 반영 종목</MenuTitle>
       <Wrapper>
-        {props?.exercise?.map((item, index) => {
-          // TODO: 네이밍 변경
-          return <ExerciseType key={index} type={item} isSelected={toggleItem === item} onClick={handleItemClick} />;
+        {props?.practicals?.map((item, index) => {
+          return <PracticalTag key={index} type={item} isSelected={selectedItem === item} onClick={handleItemClick} />;
         })}
       </Wrapper>
       <TableWrapper>
-        <PracticalScoreDistributionChart title={toggleItem} data={props.data} />
+        <PracticalScoreDistributionChart title={selectedItem} data={props.data} />
       </TableWrapper>
     </ModalLayout>
   );

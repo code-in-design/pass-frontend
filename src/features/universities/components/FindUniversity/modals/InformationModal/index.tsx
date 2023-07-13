@@ -1,6 +1,9 @@
+import React from 'react';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
 import ModalLayout from '@/components/Modal/ModalLayout';
+import MyTooltip from '@/components/Tooltip';
+import PracticalTag from '@/components/Tag/PracticalTag';
+import { PracticalType } from '@/components/PracticalIcon';
 import Info from '../../../../../../../public/images/icons/info.svg';
 import HelpOutline from '../../../../../../../public/images/icons/helpOutline.svg';
 import LoudSpeaker from '../../../../../../../public/images/icons/Loudspeaker.svg';
@@ -8,21 +11,16 @@ import Calendar from '../../../../../../../public/images/icons/calendar.svg';
 import School from '../../../../../../../public/images/icons/graduation.svg';
 import Book from '../../../../../../../public/images/icons/book.svg';
 import NoticeBoard from '../../../../../../../public/images/icons/noticeBoard.svg';
-import MyTooltip from '@/components/Tooltip';
-import ExerciseType from '../../ExerciseType';
-import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 
 interface Props {
   data: any; // TODO: any 제거
+  department: any;
   exercise: string[]; // TODO: 어떤? 데이터가 들어오는거지?
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UniversityInformationModal = (props: Props) => {
-  // TODO: 명사로 네이밍 수정
-  const [openModal, setOpenModal] = useState(false);
-  const department = props?.data?.universityDepartments;
-
   // TODO: 코드 라인수 줄이기, 파일 분리
   return (
     <>
@@ -30,10 +28,10 @@ const UniversityInformationModal = (props: Props) => {
         <Header>
           <TitleWrapper>
             <Title>{props?.data?.universityName}</Title>
-            <SubTitle>{department?.applyTypeDetail}</SubTitle>
+            <SubTitle>{props.department?.applyTypeDetail}</SubTitle>
           </TitleWrapper>
           <CompetitionRate>
-            2023 경쟁률 <span>{department?.lastYearCompetitionRate}</span>
+            2023 경쟁률 <span>{props.department?.lastYearCompetitionRate}</span>
           </CompetitionRate>
         </Header>
         <InformationWrapper>
@@ -42,7 +40,7 @@ const UniversityInformationModal = (props: Props) => {
             <Information>
               <InformationBox>
                 <InformationBoxTitle>모집군</InformationBoxTitle>
-                <InformationBoxText>{department?.recruitmentGroup}</InformationBoxText>
+                <InformationBoxText>{props.department?.recruitmentGroup}</InformationBoxText>
               </InformationBox>
               <InformationBox>
                 <InformationBoxTitle>
@@ -54,21 +52,21 @@ const UniversityInformationModal = (props: Props) => {
                     <TooltipText>수시 이월을 포함한 정시 모집 인원입니다.</TooltipText>
                   </MyTooltip>
                 </InformationBoxTitle>
-                <InformationBoxText>{department?.recruitNumber}</InformationBoxText>
+                <InformationBoxText>{props.department?.recruitNumber}</InformationBoxText>
               </InformationBox>
             </Information>
           </InformationWrapperItem>
           <InformationWrapperItem>
             <Wrapper>
               <MenuTitle>전형 방법</MenuTitle>
-              {department?.isMultistage && (
+              {props.department?.isMultistage && (
                 <InformationMethodTitle>
                   다단계 전형 세부사항
                   <HelpIconWrapper data-tooltip-id="tooltip-universityDetail">
                     <HelpOutline />
                   </HelpIconWrapper>
                   <MyTooltip id="tooltip-universityDetail" width="180px">
-                    <TooltipText>{department?.multistageDetail}</TooltipText>
+                    <TooltipText>{props.department?.multistageDetail}</TooltipText>
                   </MyTooltip>
                 </InformationMethodTitle>
               )}
@@ -77,32 +75,32 @@ const UniversityInformationModal = (props: Props) => {
               <GraphWrapper>
                 <GraphTitle>수능</GraphTitle>
                 <Graph>
-                  <GraphScore width={`${department?.testRate}%`} bgColor={'#6B77F8'}>
-                    {department?.testRate}%
+                  <GraphScore width={`${props.department?.testRate}%`} bgColor={'#6B77F8'}>
+                    {props.department?.testRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>내신</GraphTitle>
                 <Graph>
-                  <GraphScore width={`${department?.naesinRate}%`} bgColor={'#AA83FF'}>
-                    {department?.naesinRate}%
+                  <GraphScore width={`${props.department?.naesinRate}%`} bgColor={'#AA83FF'}>
+                    {props.department?.naesinRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>실기</GraphTitle>
                 <Graph>
-                  <GraphScore width={`${department?.practicalRate}%`} bgColor={'#60C8DE'}>
-                    {department?.practicalRate}%
+                  <GraphScore width={`${props.department?.practicalRate}%`} bgColor={'#60C8DE'}>
+                    {props.department?.practicalRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
               <GraphWrapper>
                 <GraphTitle>기타</GraphTitle>
                 <Graph>
-                  <GraphScore width={`${department?.etcRate}%`} bgColor={'#9395a6'}>
-                    {department?.etcRate}%
+                  <GraphScore width={`${props.department?.etcRate}%`} bgColor={'#9395a6'}>
+                    {props.department?.etcRate}%
                   </GraphScore>
                 </Graph>
               </GraphWrapper>
@@ -123,10 +121,10 @@ const UniversityInformationModal = (props: Props) => {
           </GradeTableThead>
           <GradeTableTbody>
             <GradeTableTBodyTr>
-              {department?.subjects?.map((subject, index) => {
+              {props.department?.subjects?.map((subject, index) => {
                 const { subjectRate, subjectName } = subject;
                 const 과목반영여부 = !!subjectRate;
-                const 탐구과목반영개수 = department?.inquiryNumber;
+                const 탐구과목반영개수 = props.department?.inquiryNumber;
                 const 탐구1과목반영 = subjectName === '탐구' && 탐구과목반영개수 === 1;
 
                 if (과목반영여부 && !탐구1과목반영) {
@@ -150,16 +148,15 @@ const UniversityInformationModal = (props: Props) => {
         <MenuTitle>
           <Wrapper>
             실기 반영 종목
-            <ShowTable onClick={() => setOpenModal(true)}>
+            <ShowTable onClick={() => props.setIsModalOpen(true)}>
               <Info />
               배점표 보기
             </ShowTable>
           </Wrapper>
         </MenuTitle>
         <ExerciseWrapper>
-          {department?.practicalApplyType?.map((item, index) => {
-            // TODO: item에 마우스 hover시 union 타입 쭉 나오게 하기
-            return <ExerciseType key={index} type={item} />;
+          {props.department?.practicalApplyType?.map((item: PracticalType, index) => {
+            return <PracticalTag key={index} type={item} />;
           })}
         </ExerciseWrapper>
         <Wrapper>
@@ -167,14 +164,14 @@ const UniversityInformationModal = (props: Props) => {
             <Calendar />
             <DateContainer>
               <DateName>실기고사 일정</DateName>
-              <Date>{department?.practicalTestDate}</Date>
+              <Date>{props.department?.practicalTestDate}</Date>
             </DateContainer>
           </DateBox>
           <DateBox>
             <LoudSpeaker />
             <DateContainer>
               <DateName>최초 합격자 발표일</DateName>
-              <Date>{department?.successfulApplicantDate}</Date>
+              <Date>{props.department?.successfulApplicantDate}</Date>
             </DateContainer>
           </DateBox>
         </Wrapper>
@@ -196,8 +193,6 @@ const UniversityInformationModal = (props: Props) => {
           </InfoItem>
         </Wrapper>
       </ModalLayout>
-      {/** TODO: 모달안에 Container가 들어가있음 -> 구조 변경 */}
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props?.data?.universityName} subTitle={department?.applyTypeDetail} exercise={department?.practicalApplyType} />}
     </>
   );
 };

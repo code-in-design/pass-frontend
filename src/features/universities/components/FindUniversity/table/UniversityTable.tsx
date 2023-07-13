@@ -6,7 +6,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
 import { useLazyFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
-import { UniversitiesModel } from '@/models/UniversitiesModel';
+import { UniversityModel } from '@/models/UniversityModel';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { PracticalCellRenderer } from './PracticalCellRenderer';
 import { SearchImageCellRenderer } from './SearchImageCellRenderer';
@@ -50,7 +50,7 @@ const UniversityTable = (props: Props) => {
     props.setIsModalOpen(true);
   };
 
-  const onGridReady = useInfiniteScroll({ api: getUniversityList, model: UniversitiesModel });
+  const onGridReady = useInfiniteScroll({ api: getUniversityList, model: UniversityModel });
 
   const [columnDefs] = useState([
     { field: 'group', headerName: '군', sortable: true, minWidth: 48, flex: 1 },
