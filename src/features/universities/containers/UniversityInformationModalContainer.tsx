@@ -11,16 +11,16 @@ interface Props {
 const UniversityInfoModalContainer = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getDepartmentDetail, { data }] = useLazyFetchUniversityDetailQuery();
-  const department = data?.universityDepartments;
 
   useEffect(() => {
     getDepartmentDetail(props.id);
+    console.log(data);
   }, [props.id]);
 
   return (
     <>
-      <UniversityInformationModal data={data} onClose={props.onClose} setIsModalOpen={setIsModalOpen} department={department} />
-      {isModalOpen && <DistributionTableContainer onClose={setIsModalOpen} name={data?.universityName} subTitle={department.applyTypeDetail} />}
+      <UniversityInformationModal data={data} onClose={props.onClose} setIsModalOpen={setIsModalOpen} />
+      {isModalOpen && <DistributionTableContainer onClose={setIsModalOpen} name={data?.universityName} subTitle={data?.universityDepartments?.applyTypeDetail} />}
     </>
   );
 };

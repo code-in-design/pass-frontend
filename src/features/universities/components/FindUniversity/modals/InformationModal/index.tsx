@@ -4,9 +4,7 @@ import ModalLayout from '@/components/Modal/ModalLayout';
 import DepartmentDetail from '@/components/DepartmentDetail';
 
 interface Props {
-  data: any; // TODO: any 제거
-  department: any;
-  exercise: string[]; // TODO: 어떤? 데이터가 들어오는거지?
+  data: Record<string, any> | undefined;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,13 +16,13 @@ const UniversityInformationModal = (props: Props) => {
         <Header>
           <TitleWrapper>
             <Title>{props?.data?.universityName}</Title>
-            <SubTitle>{props.department?.applyTypeDetail}</SubTitle>
+            <SubTitle>{props?.data?.universityDepartments?.applyTypeDetail}</SubTitle>
           </TitleWrapper>
           <CompetitionRate>
-            2023 경쟁률 <span>{props.department?.lastYearCompetitionRate}</span>
+            2023 경쟁률 <span>{props?.data?.universityDepartments?.lastYearCompetitionRate}</span>
           </CompetitionRate>
         </Header>
-        <DepartmentDetail />
+        {/* <DepartmentDetail /> */}
       </ModalLayout>
     </>
   );
