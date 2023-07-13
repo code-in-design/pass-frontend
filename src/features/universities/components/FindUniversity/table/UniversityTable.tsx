@@ -1,18 +1,17 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import { AgGridReact } from 'ag-grid-react';
+import { RowClickedEvent } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import TableHeaderTooltip from '@/components/Tooltip/TableHeaderTooltip';
 import ApplicationPossibilityTag from '@/components/Tag/ApplicationPossibilityTag';
 import { useLazyFetchUniversityListQuery } from '@/features/universities/apis/universityApi';
 import { UniversitiesModel } from '@/models/UniversitiesModel';
-import UniversityInfoModalContainer from '../../../containers/UniversityInformationModalContainer';
-import { ExerciseRenderer } from './ExerciseRenderer';
-import { SearchImageRenderer } from './SearchImageRenderer';
-import { ContributionRenderer } from './ContributionRenderer';
-import Search from '../../../../../../public/images/icons/search.svg';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { RowClickedEvent } from 'ag-grid-community';
+import { PracticalCellRenderer } from './PracticalCellRenderer';
+import { SearchImageCellRenderer } from './SearchImageCellRenderer';
+import { ImpactLevelCellRenderer } from './ImpactLevelCellRenderer';
+import Search from '../../../../../../public/images/icons/search.svg';
 
 export interface UniversityTableRowData {
   id: number;
@@ -31,24 +30,24 @@ export interface UniversityTableRowData {
 
 interface Props {
   data: UniversityTableRowData[];
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setDataId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const UniversityTable = (props: Props) => {
-  const [toggleModal, setToggleModal] = useState(false);
-  const [selectedID, setSelectedID] = useState(0);
   const [getUniversityList] = useLazyFetchUniversityListQuery();
 
   // onCellClicked보다 먼저 호출됨
-  const onRowClick = (props: RowClickedEvent) => {
-    setSelectedID(props.data.id);
+  const onRowClick = (row: RowClickedEvent) => {
+    props.setDataId(row.data.id);
   };
 
-  const onCellClicked = props => {
-    if (props.colDef.field === 'passPossibility') {
-      return setToggleModal(false);
+  const onCellClicked = cell => {
+    if (cell.colDef.field === 'passPossibility') {
+      return props.setIsModalOpen(false);
     }
 
-    setToggleModal(true);
+    props.setIsModalOpen(true);
   };
 
   const onGridReady = useInfiniteScroll({ api: getUniversityList, model: UniversitiesModel });
@@ -60,7 +59,7 @@ const UniversityTable = (props: Props) => {
     {
       field: 'practicalType',
       headerName: '실기종목',
-      cellRendererFramework: ExerciseRenderer,
+      cellRendererFramework: PracticalCellRenderer,
       minWidth: 122,
       flex: 2.5,
     },
@@ -68,15 +67,15 @@ const UniversityTable = (props: Props) => {
       field: 'contribution',
       headerName: '기여도',
       children: [
-        { field: 'test', headerName: '수능', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
-        { field: 'practical', headerName: '실기', cellRendererFramework: ContributionRenderer, minWidth: 61, flex: 1.2 },
+        { field: 'test', headerName: '수능', cellRendererFramework: ImpactLevelCellRenderer, minWidth: 61, flex: 1.2 },
+        { field: 'practical', headerName: '실기', cellRendererFramework: ImpactLevelCellRenderer, minWidth: 61, flex: 1.2 },
       ],
       headerGroupComponent: TableHeaderTooltip,
     },
     { field: 'conversionScore', headerName: '수능환산점수', minWidth: 120, flex: 2.5, headerComponent: TableHeaderTooltip },
     { field: 'Zvalue', headerName: 'Z-지수', sortable: true, minWidth: 104, flex: 2.1, headerComponent: TableHeaderTooltip },
     { field: 'applicationPossibility', headerName: '지원가능성', sortable: true, cellRendererFramework: ApplicationPossibilityTag, minWidth: 104, flex: 2.1 },
-    { field: 'passPossibility', headerName: '합격가능성보기', cellRendererFramework: SearchImageRenderer, minWidth: 96, flex: 2 },
+    { field: 'passPossibility', headerName: '합격가능성보기', cellRendererFramework: SearchImageCellRenderer, minWidth: 96, flex: 2 },
   ]);
 
   const gridOptions = {
@@ -84,29 +83,22 @@ const UniversityTable = (props: Props) => {
     rowHeight: 48, // 모든 행의 높이를 50으로 지정
   };
 
-  const rowStyle = {
-    textAlign: 'center',
-  };
-
   return (
-    <>
-      <AgGridWrapper>
-        <AgGridReact
-          gridOptions={gridOptions}
-          rowModelType="infinite"
-          onGridReady={onGridReady}
-          onRowClicked={onRowClick}
-          onCellClicked={onCellClicked}
-          paginationPageSize={10}
-          cacheBlockSize={10}
-          maxBlocksInCache={30}
-          infiniteInitialRowCount={10}
-          headerHeight={48}
-          rowStyle={rowStyle}
-        ></AgGridReact>
-      </AgGridWrapper>
-      {toggleModal && <UniversityInfoModalContainer onClose={setToggleModal} id={selectedID} />}
-    </>
+    <AgGridWrapper>
+      <AgGridReact
+        gridOptions={gridOptions}
+        rowModelType="infinite"
+        onGridReady={onGridReady}
+        onRowClicked={onRowClick}
+        onCellClicked={onCellClicked}
+        paginationPageSize={10}
+        cacheBlockSize={10}
+        maxBlocksInCache={30}
+        infiniteInitialRowCount={10}
+        headerHeight={48}
+        suppressMovableColumns={true} // cell의 위치이동 비활성화
+      ></AgGridReact>
+    </AgGridWrapper>
   );
 };
 
