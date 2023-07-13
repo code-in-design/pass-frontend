@@ -5,7 +5,7 @@ export class InquirySubjectModel extends SubjectModel {
     super(data);
   }
 
-  static setModelFromData(data) {
+  static fromApiResponse(data) {
     const inquiry = new InquirySubjectModel(data);
     inquiry.subjectName = '탐구';
     inquiry.subjectRate = data.탐구_반영_비율;

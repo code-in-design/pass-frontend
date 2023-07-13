@@ -120,11 +120,11 @@ export class UniversityDepartmentsModel {
   fromApiResponse(data) {
     const universityDepartment = new UniversityDepartmentsModel();
     const filteredSubjects: SubjectModel[] = [
-      KoreanSubjectModel.setModelFromData(data),
-      MathSubjectModel.setModelFromData(data),
-      EnglishSubjectModel.setModelFromData(data),
-      InquirySubjectModel.setModelFromData(data),
-      HistorySubjectModel.setModelFromData(data),
+      KoreanSubjectModel.fromApiResponse(data),
+      MathSubjectModel.fromApiResponse(data),
+      EnglishSubjectModel.fromApiResponse(data),
+      InquirySubjectModel.fromApiResponse(data),
+      HistorySubjectModel.fromApiResponse(data),
     ];
     const subjectArray = _.compact(filteredSubjects);
 
@@ -165,7 +165,7 @@ export class UniversityDepartmentsModel {
 
     const filteredPossibilityOfApply: ApplyPossibilityModel[] = [data.지원_가능성_기준_안정, data.지원_가능성_기준_적정, data.지원_가능성_기준_소신, data.지원_가능성_기준_우주_상향, data.지원_가능성_지원_불가];
 
-    universityDepartment.possibilityOfApply = ApplyPossibilityModel.setModelFromData(filteredPossibilityOfApply);
+    universityDepartment.possibilityOfApply = ApplyPossibilityModel.fromApiResponse(filteredPossibilityOfApply);
 
     universityDepartment.isPassPossibility = data.합격_확률_분석_여부; //합격확률 분석 여부
 
