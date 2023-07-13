@@ -2,29 +2,27 @@ import styled from '@emotion/styled';
 import UnCheckedRadioIcon from '../../../../../public/images/icons/radio_button_unchecked.svg';
 import CheckedRadioIcon from '../../../../../public/images/icons/radio_button_checked.svg';
 import theme from '@/theme/theme';
-import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface Props {
   options: string[];
+  grade: string;
 }
 
 const RadioButtonGroup = (props: Props) => {
-  const [selectedId, setSelectedId] = useState<number>(-1);
-
-  const handleClick = (index: number) => {
-    setSelectedId(index);
-  };
+  const { register } = useFormContext();
 
   return (
     <RadioButtonGroupWrapper>
       {props.options?.map((option, index) => {
-        const isChecked = index === selectedId;
+        const isChecked = option === props.grade;
 
         return (
-          <RadioItem key={index} onClick={() => handleClick(index)}>
+          <RadioItem htmlFor={`grade ${index}`} key={index}>
             {isChecked || <UnCheckedRadioIcon width="20px" height="20px" color={theme.colors.gray3} />}
             {isChecked && <CheckedRadioIcon width="20px" height="20px" color={theme.colors.blue} />}
             <Title isChecked={isChecked}>{option}</Title>
+            <HiddenRadioInput id={`grade ${index}`} value={option} type="radio" {...register('grade')} />
           </RadioItem>
         );
       })}
@@ -43,7 +41,7 @@ const RadioButtonGroupWrapper = styled.div`
   gap: 24px;
 `;
 
-const RadioItem = styled.div`
+const RadioItem = styled.label`
   display: flex;
   align-items: center;
   gap: 4px;
@@ -55,4 +53,8 @@ const Title = styled.span<any>`
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.28px;
+`;
+
+const HiddenRadioInput = styled.input`
+  visibility: hidden;
 `;

@@ -1,16 +1,12 @@
 import { find } from 'lodash';
 import VersionDropDown, { OptionType } from '../components/VersionDropDown';
-// import useScoreSheetForm from '../hooks/useScoreSheetForm';
-import useScoreSheetFormContext from '../hooks/useScoreSheetFormContext';
-import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { Flex } from '@chakra-ui/react';
+import UpdateDateDisplay from '../components/UpdateDateDisplay';
 
-const VersionDropDownContainer = () => {
-  const { register, setValue, watch } = useScoreSheetFormContext();
-  const selectedId = watch('id', '');
-
-  useEffect(() => {
-    console.log(selectedId);
-  });
+const VersionSelectionContainer = () => {
+  const { register, setValue, watch } = useFormContext();
+  const selectedId = watch('updateVersionId', '');
 
   const serverData = [
     {
@@ -34,7 +30,12 @@ const VersionDropDownContainer = () => {
     return { value: data.id, label: 'ver ' + data.version };
   });
 
-  return <VersionDropDown options={options} register={register} setValue={setValue} scheduledUpdateDate={scheduledUpdateDate} />;
+  return (
+    <Flex maxH="40px" gap="24px">
+      <VersionDropDown options={options} register={register} setValue={setValue} />
+      <UpdateDateDisplay scheduledUpdateDate={scheduledUpdateDate} />
+    </Flex>
+  );
 };
 
-export default VersionDropDownContainer;
+export default VersionSelectionContainer;
