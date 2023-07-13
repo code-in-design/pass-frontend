@@ -5,7 +5,7 @@ export class MathSubjectModel extends SubjectModel {
     super(data);
   }
 
-  static setModelFromData(data) {
+  static fromApiResponse(data) {
     const math = new MathSubjectModel(data);
     math.subjectName = '수학';
     math.subjectRate = data.수학_반영_비율;
