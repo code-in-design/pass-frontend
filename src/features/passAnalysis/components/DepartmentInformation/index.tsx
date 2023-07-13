@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import MyTooltip from '@/components/Tooltip';
 import ExerciseType from '@/features/universities/components/FindUniversity/ExerciseType';
-import DistributionTableContainer from '@/components/Table/ScoreDistributionTableContainer';
+import DistributionTableContainer from '@/container/PracticalScoreDistributionChartContainer';
 import LoudSpeaker from '../../../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../../../public/images/icons/calendar.svg';
 import School from '../../../../../public/images/icons/graduation.svg';

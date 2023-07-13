@@ -10,7 +10,7 @@ interface Props {
   }[];
 }
 
-const ScoreDistributionTable = (props: Props) => {
+const PracticalScoreDistributionChart = (props: Props) => {
   return (
     <>
       {props.data ? (
@@ -63,7 +63,7 @@ const ScoreDistributionTable = (props: Props) => {
   );
 };
 
-export default ScoreDistributionTable;
+export default PracticalScoreDistributionChart;
 
 const GradeTable = styled.table`
   width: 100%;
