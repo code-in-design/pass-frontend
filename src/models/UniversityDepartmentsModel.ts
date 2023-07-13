@@ -6,7 +6,7 @@ import { HistorySubjectModel } from './HistorySubjectModel';
 import { InquirySubjectModel } from './InquirySubjectModel';
 import { KoreanSubjectModel } from './KoreanSubjectModel';
 import { MathSubjectModel } from './MathSubjectModel';
-import { PracticalApplyModel, PracticalType } from './PracticalApplyModel';
+import { PracticalApplyModel } from './PracticalApplyModel';
 import { SubjectModel } from './SubjectModel';
 
 export class UniversityDepartmentsModel {
@@ -103,7 +103,7 @@ export class UniversityDepartmentsModel {
 
   @Expose()
   @Type(() => PracticalApplyModel)
-  practicalApplyType?: PracticalType[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
+  practicalApplyType?: PracticalApplyModel[]; // 반영 실기 종목: [제자리멀리뛰기, 서전트, 좌전굴, 체전굴]
 
   @Expose()
   @Type(() => SubjectModel)
@@ -191,7 +191,7 @@ export class UniversityDepartmentsModel {
 
     universityDepartment.practicalContributions = data.실기_기여도; //실기 기여도= 최상; 상; 중; 하 ; 최하
 
-    universityDepartment.practicalApplyType = PracticalApplyModel.practicalType(data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6);
+    universityDepartment.practicalApplyType = PracticalApplyModel.sortPracticalList([data.반영_실기_종목_1, data.반영_실기_종목_2, data.반영_실기_종목_3, data.반영_실기_종목_4, data.반영_실기_종목_5, data.반영_실기_종목_6]);
 
     universityDepartment.subjects = subjectArray;
 

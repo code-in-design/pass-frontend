@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { exerciseType } from '@/components/PracticalIcon/PracticalType';
+import { practicalType } from '@/components/PracticalIcon';
 
 interface Props {
   type: string;
@@ -9,17 +9,17 @@ interface Props {
 }
 
 const ExerciseType = (props: Props) => {
-  const exercise = exerciseType[props.type] || { text: '-', icon: '' };
+  const practical = practicalType[props.type] || { text: '-', icon: '' };
   const Component = props.isSelected ? SelectExerciseItem : ExerciseItem;
   const handleClick = () => {
     if (props.onClick) {
-      props.onClick(exercise.text);
+      props.onClick(practical.text);
     }
   };
   return (
     <Component onClick={handleClick}>
-      {exercise.icon}
-      <ExerciseTitle isSelected={props.isSelected || false}>{exercise.text}</ExerciseTitle>
+      {practical.icon}
+      <ExerciseTitle isSelected={props.isSelected || false}>{practical.text}</ExerciseTitle>
     </Component>
   );
 };

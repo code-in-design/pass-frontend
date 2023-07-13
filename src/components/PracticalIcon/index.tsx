@@ -30,7 +30,7 @@ import 축구 from '../../../public/images/icons/exerciseIcon/축구.svg';
 import 핸드볼공던지기 from '../../../public/images/icons/exerciseIcon/핸드볼공던지기.svg';
 import 허들 from '../../../public/images/icons/exerciseIcon/허들.svg';
 
-export const exerciseType = {
+export const practicalType = {
   '10m왕복달리기': {
     text: '10m왕복달리기',
     icon: <Run10m />,
@@ -216,3 +216,5 @@ export const exerciseType = {
     icon: <허들 />,
   },
 };
+
+export type PracticalType = keyof typeof practicalType;
