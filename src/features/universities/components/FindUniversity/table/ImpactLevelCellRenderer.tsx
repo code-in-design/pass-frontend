@@ -5,6 +5,7 @@ import ArrowDoubleDown from '../../../../../../public/images/icons/arrowDropDoub
 import ArrowDoubleUp from '../../../../../../public/images/icons/arrowDropDoubleUp.svg';
 import Hyphen from '../../../../../../public/images/icons/hyphen.svg';
 
+// 수능 or 실기가 해당 대학 합격에 미치는 중요도 (기여도)
 type ImpactLevelType = {
   value: '최하' | '하' | '중' | '상' | '최상';
 };
