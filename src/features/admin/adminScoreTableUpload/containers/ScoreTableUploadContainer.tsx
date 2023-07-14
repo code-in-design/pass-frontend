@@ -2,58 +2,50 @@ import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import VersionDropDownContainer from './VersionSelectionContainer';
 import VersionToApplyTestScoreTableContainer from './VersionToApplyTestScoreTableContainer';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import RadioButtonGroup from '../components/RadionButtonGroup';
 import CsvUploader from '../components/CsvUploader';
-import UploadErrorMessage from '../components/UploadErrorMessage';
 import { isEmpty } from 'lodash';
-// import ScoreSheetFormProvider from '../context/ScoreSheetFormContext';
+import { useState } from 'react';
 
 const ScoreTableUploadContainer = () => {
+  const [isUploaded, setIsUploaded] = useState(false);
   const methods = useForm();
-  const { register, setValue, formState, setError, clearErrors, watch, handleSubmit, resetField } = methods;
-  register('isApplyPreviousVersion');
-
-  const file = watch('uploadFile', undefined);
-  const isUploaded = !file?.type;
-
-  const grade = watch('grade');
-  console.log(watch());
+  const { formState, setError, clearErrors, handleSubmit, resetField } = methods;
+  const { errors } = formState;
 
   const onSubmit = async data => {
-    // post 요청
     const formData = new FormData();
-    console.log('업로드 파일', data.uploadFile);
-    console.log('선택한 파일', data.TobeAppliedVersionId);
-    console.log(isEmpty(data.uploadFile));
+    // 업로드 파일 없거나 이전 버전 선택 안한 경우
     if (isEmpty(data.uploadFile) && !data.versionToApply && !data.TobeAppliedVersionId) {
-      alert('점수표를 적용할 파일을 선택하세요.');
+      alert('점수표를 적용할 파일을 업로드하거나 선택해주세요');
+      return;
     } else {
       formData.append('uploadFile', data.uploadFile);
       formData.append('updateVersionId', data.updateVersionId);
       formData.append('grade', data.grade);
     }
 
-    // const response = {
-    //   success: false,
-    //   message: '업로드에 실패했습니다',
-    // };
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
 
-    // // 서버 에러 시
-    // setError('upload', {
-    //   type: 'manual',
-    //   message: typeof response.message === 'string' ? response.message : '',
-    // });
+    // 성공한 경우
+    setIsUploaded(true);
+    // 실패한 경우 에러 만들기
+    // setError('upload', { type: 'manual', message: '업로드 실패했습니다.' });
   };
-  console.log(formState.errors);
+  console.log(errors);
 
-  const onError = error => {
-    if (error) alert(error);
+  const onError = errors => {
+    if (errors) alert(errors[Object.keys(errors)[0]]?.message);
   };
 
   const onReset = () => {
-    resetField('uploadedFile');
+    resetField('uploadFile');
+    setIsUploaded(false);
     clearErrors('upload');
   };
 
@@ -62,17 +54,17 @@ const ScoreTableUploadContainer = () => {
       <StyledForm onSubmit={handleSubmit(onSubmit, onError)}>
         <Title>수능 점수 분석</Title>
         <VersionDropDownContainer />
-        <RadioButtonGroup grade={grade} />
+        <RadioButtonGroup />
         <Flex flex="1" gap="24px">
-          <CsvUploader />
+          <CsvUploader isUploaded={isUploaded} />
           <VersionToApplyTestScoreTableContainer />
         </Flex>
         <Flex minH="56px" justifyContent="right">
           <Flex minW="432px" gap="12px" fontFamily="Pretendard Bold" fontSize="16px" lineHeight="20px" letterSpacing="-0.32px">
-            <Button isDisabled={isUploaded} onClick={() => onReset()} flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.gray1} borderRadius="16px">
+            <Button isDisabled={!isUploaded} onClick={() => onReset()} flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.gray1} borderRadius="16px">
               재업로드
             </Button>
-            <Button type="submit" name="upload" flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.blue} borderRadius="16px">
+            <Button isDisabled={isUploaded} type="submit" name="upload" flex={1} height="56px" padding="16px 10px" backgroundColor={theme.colors.blue} borderRadius="16px">
               저장
             </Button>
           </Flex>

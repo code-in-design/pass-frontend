@@ -6,23 +6,23 @@ import { useFormContext } from 'react-hook-form';
 
 interface Props {
   options: string[];
-  grade: string;
 }
 
 const RadioButtonGroup = (props: Props) => {
-  const { register } = useFormContext();
+  const { register, getValues } = useFormContext();
+  const grade = getValues('grade');
 
   return (
     <RadioButtonGroupWrapper>
       {props.options?.map((option, index) => {
-        const isChecked = option === props.grade;
+        const isChecked = option === grade;
 
         return (
           <RadioItem htmlFor={`grade ${index}`} key={index}>
             {isChecked || <UnCheckedRadioIcon width="20px" height="20px" color={theme.colors.gray3} />}
             {isChecked && <CheckedRadioIcon width="20px" height="20px" color={theme.colors.blue} />}
             <Title isChecked={isChecked}>{option}</Title>
-            <HiddenRadioInput id={`grade ${index}`} value={option} type="radio" {...register('grade')} />
+            <HiddenRadioInput id={`grade ${index}`} value={option} type="radio" {...register('grade', { required: '학년을 선택하세요' })} />
           </RadioItem>
         );
       })}

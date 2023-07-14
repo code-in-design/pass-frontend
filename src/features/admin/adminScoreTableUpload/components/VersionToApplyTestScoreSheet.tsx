@@ -16,10 +16,10 @@ interface Props {
 }
 
 const VersionToApplyTestScoreSheet = (props: Props) => {
-  const { options, register, setValue, watch } = props;
+  const { options, register, setValue } = props;
   return (
     <VersionToApplyTestScoreSheetOptionWrapper>
-      <Checkbox size="blueCheckBox" onChange={() => setValue('isApplyPreviousVersion', !watch('isApplyPreviousVersion'))}>
+      <Checkbox size="blueCheckBox" {...register('isApplyPreviousVersion')}>
         데이터 통일
       </Checkbox>
       <SelectWrapper>

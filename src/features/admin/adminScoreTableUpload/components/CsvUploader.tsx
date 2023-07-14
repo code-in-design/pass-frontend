@@ -1,16 +1,15 @@
-import { useEffect } from 'react';
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { FieldValues, UseFormRegister, UseFormSetValue, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import FolderUploadIcon from '../../../../../public/images/icons/drive_folder_upload.svg';
 import SuccessIcon from '../../../../../public/images/icons/check_circle.svg';
-import { isEmpty } from 'lodash';
 import UploadErrorMessage from './UploadErrorMessage';
 
-const CsvUploader = () => {
+const CsvUploader = ({ isUploaded }) => {
   const { register, setValue, formState } = useFormContext();
+  console.log('isUpload', isUploaded);
   const { getRootProps } = useDropzone({
     accept: {
       'text/csv': ['.csv'],
@@ -23,7 +22,6 @@ const CsvUploader = () => {
       [setValue],
     ),
   });
-  const isUploaded = false;
 
   return (
     <Container>

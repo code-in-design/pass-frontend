@@ -17,7 +17,7 @@ const VersionDropDown = (props: Props) => {
   const { options, register, setValue } = props;
   return (
     <SelectWrapper>
-      <Select height={40} border="10px" options={options} name="updateVersionId" register={register} setValue={setValue} />
+      <Select height={40} border="10px" options={options} name="updateVersionId" register={register} setValue={setValue} required="수능 점수표 업로드할 버전을 선택해주세요" />
     </SelectWrapper>
   );
 };
