@@ -1,9 +1,8 @@
 import { useFormContext } from 'react-hook-form';
-import VersionToApplyTestScoreSheet, { OptionType } from '../components/VersionToApplyTestScoreSheet';
+import VersionToApplyTestScoreTable, { OptionType } from '../components/VersionToApplyTestScoreSheet';
 
 const VersionToApplyTestScoreSheetContainer = () => {
   const { register, setValue, watch } = useFormContext();
-  register('isApplyPreviousVersion');
 
   const serverData = [
     {
@@ -24,7 +23,7 @@ const VersionToApplyTestScoreSheetContainer = () => {
     return { value: data.id, label: 'ver ' + data.version };
   });
 
-  return <VersionToApplyTestScoreSheet options={options} register={register} setValue={setValue} watch={watch} />;
+  return <VersionToApplyTestScoreTable options={options} register={register} setValue={setValue} watch={watch} />;
 };
 
 export default VersionToApplyTestScoreSheetContainer;

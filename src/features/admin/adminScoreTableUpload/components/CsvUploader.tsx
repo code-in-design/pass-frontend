@@ -18,7 +18,7 @@ const CsvUploader = () => {
     multiple: false,
     onDrop: useCallback(
       acceptedFiles => {
-        setValue('uploadedFile', acceptedFiles[0]);
+        setValue('uploadFile', acceptedFiles[0]);
       },
       [setValue],
     ),

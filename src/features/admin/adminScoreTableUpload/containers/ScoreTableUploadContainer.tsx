@@ -1,17 +1,19 @@
 import theme from '@/theme/theme';
 import styled from '@emotion/styled';
 import VersionDropDownContainer from './VersionSelectionContainer';
-import DataUnifierOptionContainer from './VersionToApplyTestScoreSheetContainer';
+import VersionToApplyTestScoreTableContainer from './VersionToApplyTestScoreTableContainer';
 import { Box, Button, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import RadioButtonGroup from '../components/RadionButtonGroup';
 import CsvUploader from '../components/CsvUploader';
 import UploadErrorMessage from '../components/UploadErrorMessage';
+import { isEmpty } from 'lodash';
 // import ScoreSheetFormProvider from '../context/ScoreSheetFormContext';
 
 const ScoreTableUploadContainer = () => {
   const methods = useForm();
   const { register, setValue, formState, setError, clearErrors, watch, handleSubmit, resetField } = methods;
+  register('isApplyPreviousVersion');
 
   const file = watch('uploadFile', undefined);
   const isUploaded = !file?.type;
@@ -19,18 +21,30 @@ const ScoreTableUploadContainer = () => {
   const grade = watch('grade');
   console.log(watch());
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     // post 요청
-    const response = {
-      success: false,
-      message: '업로드에 실패했습니다',
-    };
+    const formData = new FormData();
+    console.log('업로드 파일', data.uploadFile);
+    console.log('선택한 파일', data.TobeAppliedVersionId);
+    console.log(isEmpty(data.uploadFile));
+    if (isEmpty(data.uploadFile) && !data.versionToApply && !data.TobeAppliedVersionId) {
+      alert('점수표를 적용할 파일을 선택하세요.');
+    } else {
+      formData.append('uploadFile', data.uploadFile);
+      formData.append('updateVersionId', data.updateVersionId);
+      formData.append('grade', data.grade);
+    }
 
-    // 서버 에러 시
-    setError('upload', {
-      type: 'manual',
-      message: typeof response.message === 'string' ? response.message : '',
-    });
+    // const response = {
+    //   success: false,
+    //   message: '업로드에 실패했습니다',
+    // };
+
+    // // 서버 에러 시
+    // setError('upload', {
+    //   type: 'manual',
+    //   message: typeof response.message === 'string' ? response.message : '',
+    // });
   };
   console.log(formState.errors);
 
@@ -51,7 +65,7 @@ const ScoreTableUploadContainer = () => {
         <RadioButtonGroup grade={grade} />
         <Flex flex="1" gap="24px">
           <CsvUploader />
-          <DataUnifierOptionContainer />
+          <VersionToApplyTestScoreTableContainer />
         </Flex>
         <Flex minH="56px" justifyContent="right">
           <Flex minW="432px" gap="12px" fontFamily="Pretendard Bold" fontSize="16px" lineHeight="20px" letterSpacing="-0.32px">

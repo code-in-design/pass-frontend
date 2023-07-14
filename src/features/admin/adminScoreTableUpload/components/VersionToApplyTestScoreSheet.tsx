@@ -23,7 +23,7 @@ const VersionToApplyTestScoreSheet = (props: Props) => {
         데이터 통일
       </Checkbox>
       <SelectWrapper>
-        <Select height={40} border="10px" name="appliedVersionId" options={options} register={register} setValue={setValue} />
+        <Select height={40} border="10px" name="TobeAppliedVersionId" options={options} register={register} setValue={setValue} />
       </SelectWrapper>
     </VersionToApplyTestScoreSheetOptionWrapper>
   );
