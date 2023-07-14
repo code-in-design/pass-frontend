@@ -9,26 +9,31 @@ import UniversityInformation from './UniversityInformation';
 import LoudSpeaker from '../../../public/images/icons/Loudspeaker.svg';
 import Calendar from '../../../public/images/icons/calendar.svg';
 
-const DepartmentDetail = () => {
+interface DepartmentDetailProps {
+  data: Record<string, any> | undefined;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DepartmentDetail = (props: DepartmentDetailProps) => {
   return (
     <>
       <Wrapper>
         {/* 학과정보 */}
-        <DepartmentInformation />
+        <DepartmentInformation data={props.data} />
         {/* 전형방법 */}
-        <ApplicationRate />
+        <ApplicationRate data={props.data} />
       </Wrapper>
 
       {/*수능 과목별 반영 비율 */}
-      <TestSubjectReflectRate />
+      <TestSubjectReflectRate data={props.data?.subjects} inquiryNumber={props.data?.inquiryNumber} />
 
       {/* 실기 반영 종목 */}
-      <PracticalReflectSubjects />
+      <PracticalReflectSubjects data={props.data?.practicalApplyType} setIsModalOpen={props.setIsModalOpen} />
 
       {/* 실기고사일정 & 최초 합격자 발표일 */}
       <Wrapper>
-        <DepartmentDate icon={<Calendar />} title="실기고사 일정" date="2024년 1월 23일" />
-        <DepartmentDate icon={<LoudSpeaker />} title="최초 합격자 발표일" date="2024년 1월 23일" />
+        <DepartmentDate icon={<Calendar />} title="실기고사 일정" date={props.data?.practicalTestDate} />
+        <DepartmentDate icon={<LoudSpeaker />} title="최초 합격자 발표일" date={props.data?.successfulApplicantDate} />
       </Wrapper>
 
       {/* 학교 정보 바로가기 */}

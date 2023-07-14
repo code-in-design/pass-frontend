@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const usePaging = (page: number, lastPage: number) => {
+const usePaging = ({ page, lastPage }) => {
   const [pageLimit, setPageLimit] = useState(page);
   const [lastPageNumber, setLastPageNumber] = useState(lastPage);
-
-  useEffect(() => {
-    setPageLimit(page);
-    setLastPageNumber(lastPage);
-  }, [page, lastPage]);
 
   return { pageLimit, lastPageNumber, setPageLimit, setLastPageNumber };
 };

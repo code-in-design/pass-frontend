@@ -72,7 +72,7 @@ const PracticalScoreAnalysisMenu = (props: Props) => {
           })}
         </ItemWrapper>
       </Container>
-      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} exercise={props.exercise} />}
+      {openModal && <DistributionTableContainer onClose={setOpenModal} name={props.name} subTitle={props.subTitle} />}
     </>
   );
 };

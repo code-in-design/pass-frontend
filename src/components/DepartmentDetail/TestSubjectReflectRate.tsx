@@ -1,7 +1,12 @@
 import React from 'react';
 import { GradeTable, GradeTableTbody, GradeTableTBodyTr, GradeTableThead, GradeTableTheadTr, MenuTitle, TableTd } from './index.styles';
 
-const TestSubjectReflectRate = () => {
+interface TestSubjectReflectRateProps {
+  data: Record<string, any> | undefined;
+  inquiryNumber: number;
+}
+
+const TestSubjectReflectRate = (props: TestSubjectReflectRateProps) => {
   return (
     <>
       <MenuTitle>수능 과목별 반영 비율</MenuTitle>
@@ -17,10 +22,10 @@ const TestSubjectReflectRate = () => {
         </GradeTableThead>
         <GradeTableTbody>
           <GradeTableTBodyTr>
-            {props.department?.subjects?.map((subject, index) => {
+            {props.data?.map((subject, index) => {
               const { subjectRate, subjectName } = subject;
               const 과목반영여부 = !!subjectRate;
-              const 탐구과목반영개수 = props.department?.inquiryNumber;
+              const 탐구과목반영개수 = props?.inquiryNumber;
               const 탐구1과목반영 = subjectName === '탐구' && 탐구과목반영개수 === 1;
 
               if (과목반영여부 && !탐구1과목반영) {

@@ -4,7 +4,12 @@ import PracticalTag from '../Tag/PracticalTag';
 import { ExerciseWrapper, MenuTitle, ShowTable, Wrapper } from './index.styles';
 import Info from '../../../public/images/icons/info.svg';
 
-const PracticalReflectSubjects = () => {
+interface PracticalReflectSubjectsProps {
+  data: PracticalType[];
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PracticalReflectSubjects = (props: PracticalReflectSubjectsProps) => {
   return (
     <>
       <MenuTitle>
@@ -17,7 +22,7 @@ const PracticalReflectSubjects = () => {
         </Wrapper>
       </MenuTitle>
       <ExerciseWrapper>
-        {props.department?.practicalApplyType?.map((item: PracticalType, index) => {
+        {props.data?.map((item: PracticalType, index) => {
           return <PracticalTag key={index} type={item} />;
         })}
       </ExerciseWrapper>
