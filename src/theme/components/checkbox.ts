@@ -1,5 +1,7 @@
 import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/react';
 import { checkboxAnatomy } from '@chakra-ui/anatomy';
+import theme from '../theme';
+import { Bottom } from '@/features/myScore/components/ScoreForms/index.styles';
 
 const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(checkboxAnatomy.keys);
 
@@ -167,6 +169,31 @@ const sizes = {
       _checked: {
         color: '#fff',
       },
+    }),
+  }),
+
+  blueCheckBox: definePartsStyle({
+    control: defineStyle({
+      width: '15px',
+      height: '15px',
+      padding: '2.5px',
+      borderColor: theme.colors.gray3,
+      margin: '0',
+      _checked: {
+        backgroundColor: theme.colors.blue,
+        borderColor: theme.colors.blue,
+      },
+    }),
+    icon: defineStyle({
+      height: '8px',
+    }),
+    label: defineStyle({
+      fontFamily: 'Pretendard Bold',
+      fontSize: '14px',
+      lineHeight: '16px',
+      letterSpacing: '-0.28px',
+      color: theme.colors.grayBlack,
+      marginLeft: '6.5px',
     }),
   }),
 };

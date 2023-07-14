@@ -19,4 +19,6 @@ export const ADMIN_PATH = {
   USER_MANAGEMENT: '/userManagement', //사용자 관리
   USERLIST: '/userManagement/userList', // 사용자 관리 > 사용자 목록
   UPDATE_MANAGEMENT: '/userManagement/updateManagement', // 사용자 관리 > 업데이트 관리
+  TEST_ANALYSIS: '/testAnalysis', // 수능 분석
+  SCORETABLE_UPLOAD: '/testAnalysis/scoreTableUpload', // 수능 분석 > 수능 점수표
 };

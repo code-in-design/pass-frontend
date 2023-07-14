@@ -5,6 +5,7 @@ import HeaderContainer from '../Header/HeaderContainer';
 import Home from '../../../public/images/icons/home.svg';
 import Analytics from '../../../public/images/icons/analytics.svg';
 import Management from '../../../public/images/icons/manageAccounts.svg';
+import EditNote from '../../../public/images/icons/editNote.svg';
 import { ADMIN_PATH } from '../../constants/path';
 import { useRouter } from 'next/router';
 
@@ -19,6 +20,17 @@ const AdminLayout = (props: LayoutProps) => {
         menuList={[
           { icon: <Home />, title: '대시보드', route: ADMIN_PATH.HOME },
           { icon: <Analytics />, title: '사전예약', route: ADMIN_PATH.RESERVATION },
+          {
+            icon: <EditNote width="24px" height="24px" />,
+            title: '수능 분석',
+            route: ADMIN_PATH.TEST_ANALYSIS,
+            subMenus: [
+              {
+                title: '수능 점수표',
+                route: ADMIN_PATH.SCORETABLE_UPLOAD,
+              },
+            ],
+          },
           {
             icon: <Management width="24px" height="24px" />,
             title: '사용자 관리',
