@@ -15,14 +15,16 @@ const UniversityInformationModal = (props: Props) => {
       <ModalLayout onClose={() => props.onClose(false)}>
         <Header>
           <TitleWrapper>
-            <Title>{props?.data?.universityName}</Title>
+            <Title>
+              {props?.data?.universityName} {props?.data?.universityDepartments?.departmentName}
+            </Title>
             <SubTitle>{props?.data?.universityDepartments?.applyTypeDetail}</SubTitle>
           </TitleWrapper>
           <CompetitionRate>
             2023 경쟁률 <span>{props?.data?.universityDepartments?.lastYearCompetitionRate}</span>
           </CompetitionRate>
         </Header>
-        {/* <DepartmentDetail /> */}
+        <DepartmentDetail data={props?.data?.universityDepartments} setIsModalOpen={props.setIsModalOpen} />
       </ModalLayout>
     </>
   );

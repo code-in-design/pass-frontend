@@ -3,7 +3,7 @@ import { useState } from 'react';
 import usePaging from './usePaging';
 
 const useInfiniteScroll = ({ api, model }) => {
-  const page = usePaging(10, 11);
+  const page = usePaging({ page: 10, lastPage: 11 });
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
 
   /** TODO
@@ -16,14 +16,13 @@ const useInfiniteScroll = ({ api, model }) => {
   const onGridReady = params => {
     setGridApi(params.api);
 
-    const pageSize = page.pageLimit;
-    const lastPage = page.lastPageNumber;
+    const { pageLimit, lastPageNumber } = page;
     const dataSource = {
       getRows: async params => {
         const firstIndex = params.startRow;
-        const pageNumber = Math.floor(firstIndex / pageSize);
+        const pageNumber = Math.floor(firstIndex / pageLimit);
 
-        if (pageNumber === lastPage) {
+        if (pageNumber === lastPageNumber) {
           params.failCallback();
           return;
         }

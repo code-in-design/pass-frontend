@@ -107,7 +107,7 @@ export const GraphTitle = styled.div`
   white-space: nowrap;
 `;
 
-export const GraphScore = styled.div<{ width: string; bgColor: string }>`
+export const GraphScore = styled.div<{ width: string; bgColor: '#6B77F8' | '#AA83FF' | '#60C8DE' | '#9395A6' }>`
   display: ${props => (props.width === '0%' ? 'none' : 'bolck')};
   width: ${props => props.width};
   font-size: 10px;
